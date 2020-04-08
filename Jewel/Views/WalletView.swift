@@ -46,12 +46,14 @@ struct WalletView: View {
                 )
                 }
             }
-            .navigationBarTitle(Text("Wallet"))
-            .animation(.easeInOut)
+            .padding(6)
+            .navigationBarTitle("Wallet")
         }
         .gridStyle (
             ModularGridStyle(columns: 2, rows: 4)
         )
+        .statusBar(hidden: true)
+        
     }
 }
 

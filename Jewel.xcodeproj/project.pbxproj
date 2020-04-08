@@ -18,6 +18,7 @@
 		D22C4552243DDE490001481D /* WalletView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22C4551243DDE490001481D /* WalletView.swift */; };
 		D22C4556243DE6F00001481D /* ReleaseButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22C4555243DE6F00001481D /* ReleaseButtonView.swift */; };
 		D26B5622243E80450098E9E4 /* ReleaseDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26B5621243E80450098E9E4 /* ReleaseDetailView.swift */; };
+		D26B5624243E8DB00098E9E4 /* PlaybackControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26B5623243E8DB00098E9E4 /* PlaybackControlsView.swift */; };
 		D2DCDA4B243E048000D0756C /* ReleaseMetadataOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2DCDA4A243E048000D0756C /* ReleaseMetadataOverlayView.swift */; };
 /* End PBXBuildFile section */
 
@@ -55,6 +56,7 @@
 		D22C4551243DDE490001481D /* WalletView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletView.swift; sourceTree = "<group>"; };
 		D22C4555243DE6F00001481D /* ReleaseButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReleaseButtonView.swift; sourceTree = "<group>"; };
 		D26B5621243E80450098E9E4 /* ReleaseDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReleaseDetailView.swift; sourceTree = "<group>"; };
+		D26B5623243E8DB00098E9E4 /* PlaybackControlsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackControlsView.swift; sourceTree = "<group>"; };
 		D2DCDA4A243E048000D0756C /* ReleaseMetadataOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReleaseMetadataOverlayView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -150,6 +152,7 @@
 				D22C4551243DDE490001481D /* WalletView.swift */,
 				D22C4555243DE6F00001481D /* ReleaseButtonView.swift */,
 				D26B5621243E80450098E9E4 /* ReleaseDetailView.swift */,
+				D26B5623243E8DB00098E9E4 /* PlaybackControlsView.swift */,
 				D2DCDA4A243E048000D0756C /* ReleaseMetadataOverlayView.swift */,
 			);
 			path = Views;
@@ -293,6 +296,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D22C4522243DD8B00001481D /* AppDelegate.swift in Sources */,
+				D26B5624243E8DB00098E9E4 /* PlaybackControlsView.swift in Sources */,
 				D26B5622243E80450098E9E4 /* ReleaseDetailView.swift in Sources */,
 				D22C4552243DDE490001481D /* WalletView.swift in Sources */,
 				D2DCDA4B243E048000D0756C /* ReleaseMetadataOverlayView.swift in Sources */,

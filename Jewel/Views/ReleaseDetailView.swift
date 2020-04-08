@@ -29,6 +29,7 @@ struct ReleaseDetailView: View {
             Text(artist)
                 .font(.title)
             Spacer()
+            PlaybackControlsView()
         }
         .padding(.all)
         .background(Image(artwork)
@@ -38,7 +39,6 @@ struct ReleaseDetailView: View {
             .blur(radius: 20)
             .edgesIgnoringSafeArea(.all)
         )
-        .statusBar(hidden: true)
     }
 }
 
