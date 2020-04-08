@@ -18,8 +18,6 @@ struct Releases: Identifiable {
 
 struct WalletView: View {
     
-    let wallet: String
-    
     let releases: [Releases] = [
         Releases(title: "All That Must Be", artist: "George Fitzgerald", artwork: "allthatmustbe"),
         Releases(title: "Based On A True Story", artist: "Fat Freddy's Drop", artwork: "basedonatruestory"),
@@ -32,19 +30,33 @@ struct WalletView: View {
     ]
     
     var body: some View {
-        Grid(releases) { release in
-            ReleaseView(title: release.title, artist: release.artist, artwork: release.artwork)
-                .scaledToFill()
+        NavigationView {
+            Grid(releases) { release in
+                NavigationLink(
+                    destination: ReleaseDetailView (
+                        title: release.title,
+                        artist: release.artist,
+                        artwork: release.artwork
+                    )
+                ) {
+                ReleaseButtonView (
+                    title: release.title,
+                    artist: release.artist,
+                    artwork: release.artwork
+                )
+                }
+            }
+            .navigationBarTitle(Text("Wallet"))
+            .animation(.easeInOut)
         }
-        .gridStyle(
-            ModularGridStyle(columns: 2, rows: 4, spacing: 16)
+        .gridStyle (
+            ModularGridStyle(columns: 2, rows: 4)
         )
-        .navigationBarTitle(Text(wallet), displayMode: .inline)
     }
 }
 
 struct CircleImage_Previews: PreviewProvider {
     static var previews: some View {
-        WalletView(wallet: "Road Trip")
+        WalletView()
     }
 }

@@ -21,11 +21,13 @@ struct ReleaseMetadataOverlayView: View {
                 .foregroundColor(.white)
                 .padding(.top, 4)
                 .padding(.horizontal, 6)
+                .lineLimit(1)
             Text(artist)
                 .font(.footnote)
                 .foregroundColor(.white)
                 .padding(.horizontal, 6)
                 .padding(.bottom, 4)
+                .lineLimit(1)
         }
         .background(Color.black)
         .cornerRadius(2.0)
