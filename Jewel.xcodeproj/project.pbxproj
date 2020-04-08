@@ -3,18 +3,22 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D2129C5D243E2E6A009F5B23 /* Grid in Frameworks */ = {isa = PBXBuildFile; productRef = D2129C5C243E2E6A009F5B23 /* Grid */; };
 		D22C4522243DD8B00001481D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22C4521243DD8B00001481D /* AppDelegate.swift */; };
 		D22C4524243DD8B00001481D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22C4523243DD8B00001481D /* SceneDelegate.swift */; };
-		D22C4526243DD8B00001481D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22C4525243DD8B00001481D /* ContentView.swift */; };
 		D22C4528243DD8B10001481D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D22C4527243DD8B10001481D /* Assets.xcassets */; };
 		D22C452B243DD8B10001481D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D22C452A243DD8B10001481D /* Preview Assets.xcassets */; };
 		D22C452E243DD8B10001481D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D22C452C243DD8B10001481D /* LaunchScreen.storyboard */; };
 		D22C4539243DD8B10001481D /* JewelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22C4538243DD8B10001481D /* JewelTests.swift */; };
 		D22C4544243DD8B20001481D /* JewelUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22C4543243DD8B20001481D /* JewelUITests.swift */; };
+		D22C4552243DDE490001481D /* WalletView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22C4551243DDE490001481D /* WalletView.swift */; };
+		D22C4556243DE6F00001481D /* ReleaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22C4555243DE6F00001481D /* ReleaseView.swift */; };
+		D22C4558243DF0BC0001481D /* WalletListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22C4557243DF0BC0001481D /* WalletListView.swift */; };
+		D2DCDA4B243E048000D0756C /* ReleaseMetadataOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2DCDA4A243E048000D0756C /* ReleaseMetadataOverlayView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,7 +42,6 @@
 		D22C451E243DD8B00001481D /* Jewel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jewel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D22C4521243DD8B00001481D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D22C4523243DD8B00001481D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		D22C4525243DD8B00001481D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		D22C4527243DD8B10001481D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D22C452A243DD8B10001481D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D22C452D243DD8B10001481D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -49,6 +52,10 @@
 		D22C453F243DD8B20001481D /* JewelUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JewelUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D22C4543243DD8B20001481D /* JewelUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JewelUITests.swift; sourceTree = "<group>"; };
 		D22C4545243DD8B20001481D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D22C4551243DDE490001481D /* WalletView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletView.swift; sourceTree = "<group>"; };
+		D22C4555243DE6F00001481D /* ReleaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReleaseView.swift; sourceTree = "<group>"; };
+		D22C4557243DF0BC0001481D /* WalletListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletListView.swift; sourceTree = "<group>"; };
+		D2DCDA4A243E048000D0756C /* ReleaseMetadataOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReleaseMetadataOverlayView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +63,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2129C5D243E2E6A009F5B23 /* Grid in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -99,9 +107,9 @@
 		D22C4520243DD8B00001481D /* Jewel */ = {
 			isa = PBXGroup;
 			children = (
+				D22C4559243DFDD60001481D /* Views */,
 				D22C4521243DD8B00001481D /* AppDelegate.swift */,
 				D22C4523243DD8B00001481D /* SceneDelegate.swift */,
-				D22C4525243DD8B00001481D /* ContentView.swift */,
 				D22C4527243DD8B10001481D /* Assets.xcassets */,
 				D22C452C243DD8B10001481D /* LaunchScreen.storyboard */,
 				D22C452F243DD8B10001481D /* Info.plist */,
@@ -136,6 +144,17 @@
 			path = JewelUITests;
 			sourceTree = "<group>";
 		};
+		D22C4559243DFDD60001481D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D22C4551243DDE490001481D /* WalletView.swift */,
+				D22C4555243DE6F00001481D /* ReleaseView.swift */,
+				D2DCDA4A243E048000D0756C /* ReleaseMetadataOverlayView.swift */,
+				D22C4557243DF0BC0001481D /* WalletListView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -152,6 +171,9 @@
 			dependencies = (
 			);
 			name = Jewel;
+			packageProductDependencies = (
+				D2129C5C243E2E6A009F5B23 /* Grid */,
+			);
 			productName = Jewel;
 			productReference = D22C451E243DD8B00001481D /* Jewel.app */;
 			productType = "com.apple.product-type.application";
@@ -224,6 +246,9 @@
 				Base,
 			);
 			mainGroup = D22C4515243DD8B00001481D;
+			packageReferences = (
+				D2129C5B243E2E6A009F5B23 /* XCRemoteSwiftPackageReference "swiftui-grid" */,
+			);
 			productRefGroup = D22C451F243DD8B00001481D /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -268,8 +293,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				D22C4522243DD8B00001481D /* AppDelegate.swift in Sources */,
+				D22C4552243DDE490001481D /* WalletView.swift in Sources */,
+				D2DCDA4B243E048000D0756C /* ReleaseMetadataOverlayView.swift in Sources */,
+				D22C4558243DF0BC0001481D /* WalletListView.swift in Sources */,
 				D22C4524243DD8B00001481D /* SceneDelegate.swift in Sources */,
-				D22C4526243DD8B00001481D /* ContentView.swift in Sources */,
+				D22C4556243DE6F00001481D /* ReleaseView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -588,6 +616,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D2129C5B243E2E6A009F5B23 /* XCRemoteSwiftPackageReference "swiftui-grid" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/spacenation/swiftui-grid";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D2129C5C243E2E6A009F5B23 /* Grid */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D2129C5B243E2E6A009F5B23 /* XCRemoteSwiftPackageReference "swiftui-grid" */;
+			productName = Grid;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = D22C4516243DD8B00001481D /* Project object */;
 }
