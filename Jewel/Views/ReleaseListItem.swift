@@ -10,15 +10,13 @@ import SwiftUI
 
 struct ReleaseListItem: View {
     
-    var title: String
-    var artist: String
-    var artwork: String
+    var release: Release
     
     var body: some View {
         Rectangle()
         .foregroundColor(.clear)
         .background(
-            Image(artwork)
+            release.artwork
                 .renderingMode(.original)
                 .resizable()
                 .scaledToFill()
@@ -27,8 +25,8 @@ struct ReleaseListItem: View {
         .clipShape(RoundedRectangle(cornerRadius: 4))
         .overlay(
             ReleaseMetadataOverlay(
-                title: title,
-                artist: artist
+                title: release.title,
+                artist: release.artist
             ), alignment: .bottomLeading
         )
     }
@@ -36,6 +34,6 @@ struct ReleaseListItem: View {
 
 struct Album_Previews: PreviewProvider {
     static var previews: some View {
-        ReleaseListItem(title: "The Fat Of The Land", artist: "The Prodigy", artwork: "fatoftheland")
+        ReleaseListItem(release: releasesData[0])
     }
 }

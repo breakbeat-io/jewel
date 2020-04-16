@@ -10,29 +10,28 @@ import SwiftUI
 
 struct ReleaseDetail: View {
     
-    var title: String
-    var artist: String
-    var artwork: String
+   var release: Release
     
     var body: some View {
         VStack(alignment: .leading) {
-            Image(artwork)
+            release.artwork
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .clipped()
                 .clipShape(RoundedRectangle(cornerRadius: 6))
                 .shadow(radius: 5)
-            Text(title)
+            Text(release.title)
                 .font(.title)
                 .fontWeight(.bold)
-                
-            Text(artist)
+                .lineLimit(1)
+            Text(release.artist)
                 .font(.title)
+                .lineLimit(1)
             Spacer()
             PlaybackControls()
         }
         .padding(.all)
-        .background(Image(artwork)
+        .background(release.artwork
             .resizable()
             .scaledToFill()
             .brightness(0.4)
@@ -44,6 +43,6 @@ struct ReleaseDetail: View {
 
 struct ReleaseDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        ReleaseDetail(title: "My Album", artist: "My Artist", artwork: "fatoftheland")
+        ReleaseDetail(release: releasesData[0])
     }
 }
