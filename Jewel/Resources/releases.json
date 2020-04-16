@@ -1,0 +1,51 @@
+[
+    {
+        "id": 1001,
+        "title": "All That Must Be",
+        "artist": "George Fitzgerald",
+        "artwork": "allthatmustbe"
+    },
+    {
+        "id": 1002,
+        "title": "Based On A True Story",
+        "artist": "Fat Freddy's Drop",
+        "artwork": "basedonatruestory"
+    },
+    {
+        "id": 1003,
+        "title": "Fat Of The Land",
+        "artist": "The Prodigy",
+        "artwork": "fatoftheland"
+    },
+    {
+        "id": 1004,
+        "title": "Journey Inwards",
+        "artist": "LTJ Bukem",
+        "artwork": "journeyinwards"
+    },
+    {
+        "id": 1005,
+        "title": "Live At The Social, Volume 1",
+        "artist": "Mixed by the Chemical Brothers",
+        "artwork": "liveathesocial"
+    },
+    {
+        "id": 1006,
+        "title": "OK Computer",
+        "artist": "Radiohead",
+        "artwork": "okcomputer"
+    },
+    {
+        "id": 1007,
+        "title": "Psyence Fiction",
+        "artist": "UNKLE",
+        "artwork": "psyencefiction"
+    },
+    {
+        "id": 1008,
+        "title": "Sincere",
+        "artist": "MJ Cole",
+        "artwork": "sincere"
+    }
+]
+
