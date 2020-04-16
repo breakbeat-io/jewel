@@ -2,6 +2,15 @@
   "object": {
     "pins": [
       {
+        "package": "HMV",
+        "repositoryURL": "https://github.com/hepto/HMV",
+        "state": {
+          "branch": "master",
+          "revision": "adbea9594eeb7eee034df108698c39e227f00a1b",
+          "version": null
+        }
+      },
+      {
         "package": "Grid",
         "repositoryURL": "https://github.com/spacenation/swiftui-grid",
         "state": {

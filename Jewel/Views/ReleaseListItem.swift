@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import HMV
 
 struct ReleaseListItem: View {
     

@@ -1,5 +1,5 @@
 //
-//  Release.swift
+//  Release+Image.swift
 //  Jewel
 //
 //  Created by Greg Hepworth on 16/04/2020.
@@ -7,14 +7,7 @@
 //
 
 import SwiftUI
-
-struct Release: Hashable, Codable, Identifiable {
-    var id: Int
-    var title: String
-    var artist: String
-    fileprivate var artworkFileName: String
-    
-}
+import HMV
 
 extension Release {
     var artwork: Image {
