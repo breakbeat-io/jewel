@@ -16,10 +16,10 @@
 		D22C4539243DD8B10001481D /* JewelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22C4538243DD8B10001481D /* JewelTests.swift */; };
 		D22C4544243DD8B20001481D /* JewelUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22C4543243DD8B20001481D /* JewelUITests.swift */; };
 		D22C4552243DDE490001481D /* WalletView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22C4551243DDE490001481D /* WalletView.swift */; };
-		D22C4556243DE6F00001481D /* ReleaseButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22C4555243DE6F00001481D /* ReleaseButtonView.swift */; };
-		D26B5622243E80450098E9E4 /* ReleaseDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26B5621243E80450098E9E4 /* ReleaseDetailView.swift */; };
-		D26B5624243E8DB00098E9E4 /* PlaybackControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26B5623243E8DB00098E9E4 /* PlaybackControlsView.swift */; };
-		D2DCDA4B243E048000D0756C /* ReleaseMetadataOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2DCDA4A243E048000D0756C /* ReleaseMetadataOverlayView.swift */; };
+		D22C4556243DE6F00001481D /* ReleaseListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22C4555243DE6F00001481D /* ReleaseListItem.swift */; };
+		D26B5622243E80450098E9E4 /* ReleaseDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26B5621243E80450098E9E4 /* ReleaseDetail.swift */; };
+		D26B5624243E8DB00098E9E4 /* PlaybackControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26B5623243E8DB00098E9E4 /* PlaybackControls.swift */; };
+		D2DCDA4B243E048000D0756C /* ReleaseMetadataOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2DCDA4A243E048000D0756C /* ReleaseMetadataOverlay.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,10 +54,10 @@
 		D22C4543243DD8B20001481D /* JewelUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JewelUITests.swift; sourceTree = "<group>"; };
 		D22C4545243DD8B20001481D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D22C4551243DDE490001481D /* WalletView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletView.swift; sourceTree = "<group>"; };
-		D22C4555243DE6F00001481D /* ReleaseButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReleaseButtonView.swift; sourceTree = "<group>"; };
-		D26B5621243E80450098E9E4 /* ReleaseDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReleaseDetailView.swift; sourceTree = "<group>"; };
-		D26B5623243E8DB00098E9E4 /* PlaybackControlsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackControlsView.swift; sourceTree = "<group>"; };
-		D2DCDA4A243E048000D0756C /* ReleaseMetadataOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReleaseMetadataOverlayView.swift; sourceTree = "<group>"; };
+		D22C4555243DE6F00001481D /* ReleaseListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReleaseListItem.swift; sourceTree = "<group>"; };
+		D26B5621243E80450098E9E4 /* ReleaseDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReleaseDetail.swift; sourceTree = "<group>"; };
+		D26B5623243E8DB00098E9E4 /* PlaybackControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackControls.swift; sourceTree = "<group>"; };
+		D2DCDA4A243E048000D0756C /* ReleaseMetadataOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReleaseMetadataOverlay.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,10 +150,10 @@
 			isa = PBXGroup;
 			children = (
 				D22C4551243DDE490001481D /* WalletView.swift */,
-				D22C4555243DE6F00001481D /* ReleaseButtonView.swift */,
-				D26B5621243E80450098E9E4 /* ReleaseDetailView.swift */,
-				D26B5623243E8DB00098E9E4 /* PlaybackControlsView.swift */,
-				D2DCDA4A243E048000D0756C /* ReleaseMetadataOverlayView.swift */,
+				D22C4555243DE6F00001481D /* ReleaseListItem.swift */,
+				D26B5621243E80450098E9E4 /* ReleaseDetail.swift */,
+				D26B5623243E8DB00098E9E4 /* PlaybackControls.swift */,
+				D2DCDA4A243E048000D0756C /* ReleaseMetadataOverlay.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -296,12 +296,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				D22C4522243DD8B00001481D /* AppDelegate.swift in Sources */,
-				D26B5624243E8DB00098E9E4 /* PlaybackControlsView.swift in Sources */,
-				D26B5622243E80450098E9E4 /* ReleaseDetailView.swift in Sources */,
+				D26B5624243E8DB00098E9E4 /* PlaybackControls.swift in Sources */,
+				D26B5622243E80450098E9E4 /* ReleaseDetail.swift in Sources */,
 				D22C4552243DDE490001481D /* WalletView.swift in Sources */,
-				D2DCDA4B243E048000D0756C /* ReleaseMetadataOverlayView.swift in Sources */,
+				D2DCDA4B243E048000D0756C /* ReleaseMetadataOverlay.swift in Sources */,
 				D22C4524243DD8B00001481D /* SceneDelegate.swift in Sources */,
-				D22C4556243DE6F00001481D /* ReleaseButtonView.swift in Sources */,
+				D22C4556243DE6F00001481D /* ReleaseListItem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

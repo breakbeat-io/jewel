@@ -33,13 +33,13 @@ struct WalletView: View {
         NavigationView {
             Grid(releases) { release in
                 NavigationLink(
-                    destination: ReleaseDetailView (
+                    destination: ReleaseDetail (
                         title: release.title,
                         artist: release.artist,
                         artwork: release.artwork
                     )
                 ) {
-                ReleaseButtonView (
+                ReleaseListItem (
                     title: release.title,
                     artist: release.artist,
                     artwork: release.artwork

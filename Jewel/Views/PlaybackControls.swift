@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct PlaybackControlsView: View {
+struct PlaybackControls: View {
     var body: some View {
         HStack {
             Image(systemName: "shuffle")
@@ -36,6 +36,6 @@ struct PlaybackControlsView: View {
 
 struct PlaybackControlsView_Previews: PreviewProvider {
     static var previews: some View {
-        PlaybackControlsView()
+        PlaybackControls()
     }
 }

@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct ReleaseDetailView: View {
+struct ReleaseDetail: View {
     
     var title: String
     var artist: String
@@ -29,7 +29,7 @@ struct ReleaseDetailView: View {
             Text(artist)
                 .font(.title)
             Spacer()
-            PlaybackControlsView()
+            PlaybackControls()
         }
         .padding(.all)
         .background(Image(artwork)
@@ -44,6 +44,6 @@ struct ReleaseDetailView: View {
 
 struct ReleaseDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        ReleaseDetailView(title: "My Album", artist: "My Artist", artwork: "fatoftheland")
+        ReleaseDetail(title: "My Album", artist: "My Artist", artwork: "fatoftheland")
     }
 }

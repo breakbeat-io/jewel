@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct ReleaseMetadataOverlayView: View {
+struct ReleaseMetadataOverlay: View {
     
     let title: String
     let artist: String
@@ -37,6 +37,6 @@ struct ReleaseMetadataOverlayView: View {
 
 struct ReleaseMetadataOverlayView_Previews: PreviewProvider {
     static var previews: some View {
-        ReleaseMetadataOverlayView(title: "The Fat of the Land", artist: "The Prodigy")
+        ReleaseMetadataOverlay(title: "The Fat of the Land", artist: "The Prodigy")
     }
 }

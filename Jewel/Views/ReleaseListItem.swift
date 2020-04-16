@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct ReleaseButtonView: View {
+struct ReleaseListItem: View {
     
     var title: String
     var artist: String
@@ -26,7 +26,7 @@ struct ReleaseButtonView: View {
         .clipped()
         .clipShape(RoundedRectangle(cornerRadius: 4))
         .overlay(
-            ReleaseMetadataOverlayView(
+            ReleaseMetadataOverlay(
                 title: title,
                 artist: artist
             ), alignment: .bottomLeading
@@ -36,6 +36,6 @@ struct ReleaseButtonView: View {
 
 struct Album_Previews: PreviewProvider {
     static var previews: some View {
-        ReleaseButtonView(title: "The Fat Of The Land", artist: "The Prodigy", artwork: "fatoftheland")
+        ReleaseListItem(title: "The Fat Of The Land", artist: "The Prodigy", artwork: "fatoftheland")
     }
 }
