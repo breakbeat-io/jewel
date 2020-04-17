@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 import HMV
 
 struct ReleaseDetail: View {
@@ -15,7 +16,7 @@ struct ReleaseDetail: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            release.artwork
+            WebImage(url: URL(string: release.artworkURL))
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .clipped()
@@ -32,12 +33,13 @@ struct ReleaseDetail: View {
             PlaybackControls()
         }
         .padding(.all)
-        .background(release.artwork
-            .resizable()
-            .scaledToFill()
-            .brightness(0.4)
-            .blur(radius: 20)
-            .edgesIgnoringSafeArea(.all)
+        .background(
+            WebImage(url: URL(string: release.artworkURL))
+                .resizable()
+                .scaledToFill()
+                .brightness(0.4)
+                .blur(radius: 20)
+                .edgesIgnoringSafeArea(.all)
         )
     }
 }

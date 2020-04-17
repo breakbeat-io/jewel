@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 import HMV
 
 struct ReleaseListItem: View {
@@ -17,7 +18,7 @@ struct ReleaseListItem: View {
         Rectangle()
         .foregroundColor(.clear)
         .background(
-            release.artwork
+            WebImage(url: URL(string: release.artworkURL))
                 .renderingMode(.original)
                 .resizable()
                 .scaledToFill()
