@@ -9,33 +9,37 @@
 import SwiftUI
 
 struct PlaybackControls: View {
+    var playbackUrl: String
+    
     var body: some View {
-        HStack {
-            Image(systemName: "shuffle")
-            Spacer()
-            Image(systemName: "backward.end.fill")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 30)
-            Spacer()
-            Image(systemName: "playpause.fill")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 60)
-            Spacer()
-            Image(systemName: "forward.end.fill")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 30)
-            Spacer()
-            Image(systemName: "repeat")
+        Button(action: {
+            // TODO: change this to take an <URL> directly so that the partent view can hide the button if the <URL> is nil
+            guard let url = URL(string: self.playbackUrl) else {
+                return
+            }
+            UIApplication.shared.open(url)
+        }) {
+            HStack {
+                Image(systemName: "play.fill")
+                    .font(.headline)
+                Text("Play in Apple Music")
+                    .font(.headline)
+                    
+            }
+            .padding()
+            .foregroundColor(.black)
+            .cornerRadius(40)
+            .overlay(
+                RoundedRectangle(cornerRadius: 40)
+                    .stroke(Color.black, lineWidth: 2)
+                    .shadow(radius: 5)
+            )
         }
-        .padding(50)
     }
 }
 
 struct PlaybackControlsView_Previews: PreviewProvider {
     static var previews: some View {
-        PlaybackControls()
+        PlaybackControls(playbackUrl: releasesData[0].appleMusicShareURL)
     }
 }

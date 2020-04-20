@@ -31,7 +31,7 @@ struct WalletView: View {
             ModularGridStyle(columns: 2, rows: 4)
         )
         .statusBar(hidden: true)
-        
+        .accentColor(.black)
     }
 }
 
