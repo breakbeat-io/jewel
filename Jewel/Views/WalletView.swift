@@ -11,9 +11,11 @@ import Grid
 
 struct WalletView: View {
     
+    @EnvironmentObject var wallet: Wallet
+    
     var body: some View {
         NavigationView {
-            Grid(releasesData) { release in
+            Grid(wallet.releases) { release in
                 NavigationLink(
                     destination: ReleaseDetail (
                         release: release
@@ -36,7 +38,9 @@ struct WalletView: View {
 }
 
 struct CircleImage_Previews: PreviewProvider {
+    static let wallet = Wallet()
+    
     static var previews: some View {
-        WalletView()
+        WalletView().environmentObject(wallet)
     }
 }

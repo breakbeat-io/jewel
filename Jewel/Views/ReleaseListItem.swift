@@ -35,7 +35,10 @@ struct ReleaseListItem: View {
 }
 
 struct Album_Previews: PreviewProvider {
+    
+    static let wallet = Wallet()
+    
     static var previews: some View {
-        ReleaseListItem(release: releasesData[0])
+        ReleaseListItem(release: wallet.releases[0])
     }
 }
