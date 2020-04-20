@@ -32,7 +32,6 @@ struct ReleaseDetail: View {
             Spacer()
             HStack {
                 Spacer()
-                //TODO: create the <URL> in here and pass it in rather than as a String, then do an `if` on whether the URL is nil or not.
                 PlaybackControls(playbackUrl: release.appleMusicShareURL)
                 Spacer()
             }
