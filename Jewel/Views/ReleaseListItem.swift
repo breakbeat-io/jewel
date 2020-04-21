@@ -17,7 +17,7 @@ struct ReleaseListItem: View {
         Rectangle()
         .foregroundColor(.clear)
         .background(
-            WebImage(url: URL(string: release.artworkURL))
+            WebImage(url: release.artworkURL)
                 .renderingMode(.original)
                 .resizable()
                 .scaledToFill()

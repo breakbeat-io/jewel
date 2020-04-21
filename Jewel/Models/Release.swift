@@ -14,6 +14,6 @@ public struct Release: Identifiable {
     public var appleMusicShareURL: URL
     public var title: String
     public var artist: String
-    public var artworkURL: String
+    public var artworkURL: URL
     
 }

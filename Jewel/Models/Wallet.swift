@@ -32,9 +32,7 @@ class Wallet: ObservableObject {
                 DispatchQueue.main.async {
                     let attributes = album?.attributes
                     
-                    let artworkUrl = attributes?.artwork.url.replacingOccurrences(of: "{w}", with: "1000").replacingOccurrences(of: "{h}", with: "1000")
-                    
-                    let release = Release(id: album!.id, appleMusicShareURL: attributes!.url, title: attributes!.name, artist: attributes!.artistName, artworkURL: artworkUrl ?? "")
+                    let release = Release(id: album!.id, appleMusicShareURL: attributes!.url, title: attributes!.name, artist: attributes!.artistName, artworkURL: (attributes?.artwork.url(forWidth: 1000))!)
                     
                     self.add(release: release)
                 }

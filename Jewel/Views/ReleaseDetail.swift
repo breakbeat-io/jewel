@@ -15,7 +15,7 @@ struct ReleaseDetail: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            WebImage(url: URL(string: release.artworkURL))
+            WebImage(url: release.artworkURL)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .clipped()
@@ -40,7 +40,7 @@ struct ReleaseDetail: View {
         }
         .padding(.all)
         .background(
-            WebImage(url: URL(string: release.artworkURL))
+            WebImage(url: release.artworkURL)
                 .resizable()
                 .scaledToFill()
                 .brightness(0.4)
