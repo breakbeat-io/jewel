@@ -8,7 +8,6 @@
 
 import SwiftUI
 import SDWebImageSwiftUI
-import HMV
 
 struct ReleaseDetail: View {
     
