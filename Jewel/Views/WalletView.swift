@@ -27,7 +27,7 @@ struct WalletView: View {
                 }
             }
             .padding(6)
-            .navigationBarTitle(Text("Wallet"))
+            .navigationBarTitle(Text("My Releases"))
         }
         .gridStyle (
             ModularGridStyle(columns: 2, rows: 4)
