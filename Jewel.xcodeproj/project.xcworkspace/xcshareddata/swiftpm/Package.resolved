@@ -2,12 +2,12 @@
   "object": {
     "pins": [
       {
-        "package": "HMV",
-        "repositoryURL": "https://github.com/hepto/HMV",
+        "package": "Cider",
+        "repositoryURL": "https://github.com/HackingGate/Cider",
         "state": {
-          "branch": "master",
-          "revision": "e079bc6cd17d86f17fd0d49e14d7a3996ac60140",
-          "version": null
+          "branch": null,
+          "revision": "47240b9bcf6ec867770f37e2a6921bc2e04e40b0",
+          "version": "0.11.0"
         }
       },
       {

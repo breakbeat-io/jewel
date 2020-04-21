@@ -17,10 +17,11 @@
 		D22C4544243DD8B20001481D /* JewelUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22C4543243DD8B20001481D /* JewelUITests.swift */; };
 		D22C4552243DDE490001481D /* WalletView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22C4551243DDE490001481D /* WalletView.swift */; };
 		D22C4556243DE6F00001481D /* ReleaseListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22C4555243DE6F00001481D /* ReleaseListItem.swift */; };
-		D230DAF5244907BB00EA5A4E /* HMV in Frameworks */ = {isa = PBXBuildFile; productRef = D230DAF4244907BB00EA5A4E /* HMV */; };
 		D24F8A472449ABF8002FF071 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = D24F8A462449ABF8002FF071 /* SDWebImageSwiftUI */; };
+		D2543A94244EEE1B0064B183 /* Cider in Frameworks */ = {isa = PBXBuildFile; productRef = D2543A93244EEE1B0064B183 /* Cider */; };
 		D26B5622243E80450098E9E4 /* ReleaseDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26B5621243E80450098E9E4 /* ReleaseDetail.swift */; };
 		D26B5624243E8DB00098E9E4 /* PlaybackControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26B5623243E8DB00098E9E4 /* PlaybackControls.swift */; };
+		D28AF83D244F356500AD6614 /* Release.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28AF83C244F356500AD6614 /* Release.swift */; };
 		D2D5875E244E391200E982E8 /* Wallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D5875D244E391200E982E8 /* Wallet.swift */; };
 		D2DCDA4B243E048000D0756C /* ReleaseMetadataOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2DCDA4A243E048000D0756C /* ReleaseMetadataOverlay.swift */; };
 /* End PBXBuildFile section */
@@ -60,6 +61,10 @@
 		D22C4555243DE6F00001481D /* ReleaseListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReleaseListItem.swift; sourceTree = "<group>"; };
 		D26B5621243E80450098E9E4 /* ReleaseDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReleaseDetail.swift; sourceTree = "<group>"; };
 		D26B5623243E8DB00098E9E4 /* PlaybackControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackControls.swift; sourceTree = "<group>"; };
+		D28AF83C244F356500AD6614 /* Release.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Release.swift; sourceTree = "<group>"; };
+		D28AF840244F464500AD6614 /* apple-music-api-token.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "apple-music-api-token.xcconfig"; path = "../apple-music-api-token.xcconfig"; sourceTree = "<group>"; };
+		D28AF841244F46A700AD6614 /* debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = debug.xcconfig; sourceTree = "<group>"; };
+		D28AF842244F46D700AD6614 /* release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = release.xcconfig; sourceTree = "<group>"; };
 		D2D5875D244E391200E982E8 /* Wallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wallet.swift; sourceTree = "<group>"; };
 		D2DCDA4A243E048000D0756C /* ReleaseMetadataOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReleaseMetadataOverlay.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -69,8 +74,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2543A94244EEE1B0064B183 /* Cider in Frameworks */,
 				D24F8A472449ABF8002FF071 /* SDWebImageSwiftUI in Frameworks */,
-				D230DAF5244907BB00EA5A4E /* HMV in Frameworks */,
 				D2129C5D243E2E6A009F5B23 /* Grid in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -98,6 +103,7 @@
 				D22C4520243DD8B00001481D /* Jewel */,
 				D22C4537243DD8B10001481D /* JewelTests */,
 				D22C4542243DD8B20001481D /* JewelUITests */,
+				D28AF843244F46EC00AD6614 /* BuildConfigs */,
 				D22C451F243DD8B00001481D /* Products */,
 			);
 			sourceTree = "<group>";
@@ -165,10 +171,21 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		D28AF843244F46EC00AD6614 /* BuildConfigs */ = {
+			isa = PBXGroup;
+			children = (
+				D28AF841244F46A700AD6614 /* debug.xcconfig */,
+				D28AF842244F46D700AD6614 /* release.xcconfig */,
+				D28AF840244F464500AD6614 /* apple-music-api-token.xcconfig */,
+			);
+			path = BuildConfigs;
+			sourceTree = "<group>";
+		};
 		D2B1E6322448635D004D474F /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				D2D5875D244E391200E982E8 /* Wallet.swift */,
+				D28AF83C244F356500AD6614 /* Release.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -191,8 +208,8 @@
 			name = Jewel;
 			packageProductDependencies = (
 				D2129C5C243E2E6A009F5B23 /* Grid */,
-				D230DAF4244907BB00EA5A4E /* HMV */,
 				D24F8A462449ABF8002FF071 /* SDWebImageSwiftUI */,
+				D2543A93244EEE1B0064B183 /* Cider */,
 			);
 			productName = Jewel;
 			productReference = D22C451E243DD8B00001481D /* Jewel.app */;
@@ -268,8 +285,8 @@
 			mainGroup = D22C4515243DD8B00001481D;
 			packageReferences = (
 				D2129C5B243E2E6A009F5B23 /* XCRemoteSwiftPackageReference "swiftui-grid" */,
-				D230DAF3244907BB00EA5A4E /* XCRemoteSwiftPackageReference "HMV" */,
 				D24F8A452449ABF8002FF071 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
+				D2543A92244EEE1B0064B183 /* XCRemoteSwiftPackageReference "Cider" */,
 			);
 			productRefGroup = D22C451F243DD8B00001481D /* Products */;
 			projectDirPath = "";
@@ -315,6 +332,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D22C4522243DD8B00001481D /* AppDelegate.swift in Sources */,
+				D28AF83D244F356500AD6614 /* Release.swift in Sources */,
 				D26B5624243E8DB00098E9E4 /* PlaybackControls.swift in Sources */,
 				D26B5622243E80450098E9E4 /* ReleaseDetail.swift in Sources */,
 				D22C4552243DDE490001481D /* WalletView.swift in Sources */,
@@ -370,6 +388,7 @@
 /* Begin XCBuildConfiguration section */
 		D22C4546243DD8B20001481D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D28AF841244F46A700AD6614 /* debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -430,6 +449,7 @@
 		};
 		D22C4547243DD8B20001481D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D28AF842244F46D700AD6614 /* release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -652,20 +672,20 @@
 				kind = branch;
 			};
 		};
-		D230DAF3244907BB00EA5A4E /* XCRemoteSwiftPackageReference "HMV" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/hepto/HMV";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
 		D24F8A452449ABF8002FF071 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 1.3.3;
+			};
+		};
+		D2543A92244EEE1B0064B183 /* XCRemoteSwiftPackageReference "Cider" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/HackingGate/Cider";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.11.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -676,15 +696,15 @@
 			package = D2129C5B243E2E6A009F5B23 /* XCRemoteSwiftPackageReference "swiftui-grid" */;
 			productName = Grid;
 		};
-		D230DAF4244907BB00EA5A4E /* HMV */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = D230DAF3244907BB00EA5A4E /* XCRemoteSwiftPackageReference "HMV" */;
-			productName = HMV;
-		};
 		D24F8A462449ABF8002FF071 /* SDWebImageSwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = D24F8A452449ABF8002FF071 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
 			productName = SDWebImageSwiftUI;
+		};
+		D2543A93244EEE1B0064B183 /* Cider */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D2543A92244EEE1B0064B183 /* XCRemoteSwiftPackageReference "Cider" */;
+			productName = Cider;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

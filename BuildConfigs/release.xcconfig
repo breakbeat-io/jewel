@@ -1,0 +1,12 @@
+//
+//  release.xcconfig
+//  Jewel
+//
+//  Created by Greg Hepworth on 21/04/2020.
+//  Copyright © 2020 Breakbeat Limited. All rights reserved.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+#include "apple-music-api-token.xcconfig"
