@@ -12,6 +12,7 @@ import Grid
 struct WalletView: View {
     
     @EnvironmentObject var wallet: Wallet
+    @State private var showingAlert = false
     
     var body: some View {
         NavigationView {
@@ -28,12 +29,24 @@ struct WalletView: View {
             }
             .padding(6)
             .navigationBarTitle(Text("My Releases"))
+            .navigationBarItems(trailing:
+                Button(action: {
+                    self.showingAlert = true
+                }) {
+                    Text("Load")
+                }
+            )
         }
         .gridStyle (
             ModularGridStyle(columns: 2, rows: 4)
         )
         .statusBar(hidden: true)
         .accentColor(.black)
+        .alert(isPresented: $showingAlert) {
+            Alert(title: Text("Do you want to load the example albums?"), primaryButton: .cancel(Text("Cancel")), secondaryButton: .default(Text("Load").bold()) {
+                    self.wallet.loadExampleWallet()
+                })
+        }
     }
 }
 
