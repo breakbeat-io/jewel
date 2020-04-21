@@ -62,11 +62,11 @@
 		D26B5621243E80450098E9E4 /* ReleaseDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReleaseDetail.swift; sourceTree = "<group>"; };
 		D26B5623243E8DB00098E9E4 /* PlaybackControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackControls.swift; sourceTree = "<group>"; };
 		D28AF83C244F356500AD6614 /* Release.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Release.swift; sourceTree = "<group>"; };
-		D28AF840244F464500AD6614 /* apple-music-api-token.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "apple-music-api-token.xcconfig"; path = "../apple-music-api-token.xcconfig"; sourceTree = "<group>"; };
 		D28AF841244F46A700AD6614 /* debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = debug.xcconfig; sourceTree = "<group>"; };
 		D28AF842244F46D700AD6614 /* release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = release.xcconfig; sourceTree = "<group>"; };
 		D2D5875D244E391200E982E8 /* Wallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wallet.swift; sourceTree = "<group>"; };
 		D2DCDA4A243E048000D0756C /* ReleaseMetadataOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReleaseMetadataOverlay.swift; sourceTree = "<group>"; };
+		D2FE406F244FAA4500623280 /* apple-music-api-token.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "apple-music-api-token.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,7 +176,7 @@
 			children = (
 				D28AF841244F46A700AD6614 /* debug.xcconfig */,
 				D28AF842244F46D700AD6614 /* release.xcconfig */,
-				D28AF840244F464500AD6614 /* apple-music-api-token.xcconfig */,
+				D2FE406F244FAA4500623280 /* apple-music-api-token.xcconfig */,
 			);
 			path = BuildConfigs;
 			sourceTree = "<group>";
@@ -515,6 +515,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = io.breakbeat.Jewel;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -535,6 +536,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = io.breakbeat.Jewel;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
