@@ -3,10 +3,10 @@
     "pins": [
       {
         "package": "Cider",
-        "repositoryURL": "https://github.com/HackingGate/Cider",
+        "repositoryURL": "https://github.com/hepto/Cider",
         "state": {
           "branch": null,
-          "revision": "47240b9bcf6ec867770f37e2a6921bc2e04e40b0",
+          "revision": "5fb06be9f71feb182718feca6ac5e2edd6bfef48",
           "version": "0.11.0"
         }
       },
