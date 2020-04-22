@@ -17,7 +17,7 @@ struct WalletView: View {
     var body: some View {
         NavigationView {
             Grid(wallet.slots) { slot in
-                slot.album?.attributes.map { albumAttributes in
+                Unwrap(slot.album?.attributes) { albumAttributes in
                     NavigationLink(
                         destination: ReleaseDetail (
                             albumAttributes: albumAttributes
