@@ -2,12 +2,12 @@
   "object": {
     "pins": [
       {
-        "package": "Cider",
-        "repositoryURL": "https://github.com/hepto/Cider",
+        "package": "HMV",
+        "repositoryURL": "https://github.com/hepto/HMV",
         "state": {
           "branch": null,
-          "revision": "5fb06be9f71feb182718feca6ac5e2edd6bfef48",
-          "version": "0.11.0"
+          "revision": "db8aab94e82f53185628763f0e52e9cf5db8aaa8",
+          "version": "0.12.0"
         }
       },
       {
@@ -15,8 +15,8 @@
         "repositoryURL": "https://github.com/SDWebImage/SDWebImage.git",
         "state": {
           "branch": null,
-          "revision": "74ae21337c415bb542eb901803f3e84799265c34",
-          "version": "5.7.2"
+          "revision": "39370d1af85734dffe0e3f89b389976da461be3f",
+          "version": "5.7.3"
         }
       },
       {

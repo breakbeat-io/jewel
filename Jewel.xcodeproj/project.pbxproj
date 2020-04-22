@@ -23,7 +23,7 @@
 		D28AF83D244F356500AD6614 /* Release.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28AF83C244F356500AD6614 /* Release.swift */; };
 		D2D5875E244E391200E982E8 /* Wallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D5875D244E391200E982E8 /* Wallet.swift */; };
 		D2DCDA4B243E048000D0756C /* ReleaseMetadataOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2DCDA4A243E048000D0756C /* ReleaseMetadataOverlay.swift */; };
-		D2FE407224503DAE00623280 /* Cider in Frameworks */ = {isa = PBXBuildFile; productRef = D2FE407124503DAE00623280 /* Cider */; };
+		D2FE407824504F2700623280 /* HMV in Frameworks */ = {isa = PBXBuildFile; productRef = D2FE407724504F2700623280 /* HMV */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,7 +74,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D2FE407224503DAE00623280 /* Cider in Frameworks */,
+				D2FE407824504F2700623280 /* HMV in Frameworks */,
 				D24F8A472449ABF8002FF071 /* SDWebImageSwiftUI in Frameworks */,
 				D2129C5D243E2E6A009F5B23 /* Grid in Frameworks */,
 			);
@@ -209,7 +209,7 @@
 			packageProductDependencies = (
 				D2129C5C243E2E6A009F5B23 /* Grid */,
 				D24F8A462449ABF8002FF071 /* SDWebImageSwiftUI */,
-				D2FE407124503DAE00623280 /* Cider */,
+				D2FE407724504F2700623280 /* HMV */,
 			);
 			productName = Jewel;
 			productReference = D22C451E243DD8B00001481D /* Jewel.app */;
@@ -286,7 +286,7 @@
 			packageReferences = (
 				D2129C5B243E2E6A009F5B23 /* XCRemoteSwiftPackageReference "swiftui-grid" */,
 				D24F8A452449ABF8002FF071 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
-				D2FE407024503DAE00623280 /* XCRemoteSwiftPackageReference "Cider" */,
+				D2FE407324504E2200623280 /* XCRemoteSwiftPackageReference "HMV" */,
 			);
 			productRefGroup = D22C451F243DD8B00001481D /* Products */;
 			projectDirPath = "";
@@ -682,12 +682,12 @@
 				minimumVersion = 1.3.3;
 			};
 		};
-		D2FE407024503DAE00623280 /* XCRemoteSwiftPackageReference "Cider" */ = {
+		D2FE407324504E2200623280 /* XCRemoteSwiftPackageReference "HMV" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/hepto/Cider";
+			repositoryURL = "https://github.com/hepto/HMV";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 0.11.0;
+				minimumVersion = 0.12.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -703,10 +703,10 @@
 			package = D24F8A452449ABF8002FF071 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
 			productName = SDWebImageSwiftUI;
 		};
-		D2FE407124503DAE00623280 /* Cider */ = {
+		D2FE407724504F2700623280 /* HMV */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D2FE407024503DAE00623280 /* XCRemoteSwiftPackageReference "Cider" */;
-			productName = Cider;
+			package = D2FE407324504E2200623280 /* XCRemoteSwiftPackageReference "HMV" */;
+			productName = HMV;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

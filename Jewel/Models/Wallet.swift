@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import Cider
+import HMV
 
 class Wallet: ObservableObject {
     @Published var releases = [Release]()
@@ -17,14 +17,14 @@ class Wallet: ObservableObject {
     func loadExampleWallet() {
         if let developerToken = Bundle.main.infoDictionary?["APPLE_MUSIC_API_TOKEN"] as? String {
             
-            let cider = CiderClient(storefront: .unitedKingdom, developerToken: developerToken)
+            let hmv = HMV(storefront: .unitedKingdom, developerToken: developerToken)
             
             releases.removeAll()
             
             let releases = ["1322664114", "1241281467", "1450123945", "595779873", "723670972", "1097861387", "1440922148", "1440230518"]
             
             for release in releases {
-                cider.album(id: release, completion: {
+                hmv.album(id: release, completion: {
                     (album: Album?, error: Error?) -> Void in
                     DispatchQueue.main.async {
                         let attributes = album?.attributes
