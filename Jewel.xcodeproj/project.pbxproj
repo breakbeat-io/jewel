@@ -20,7 +20,6 @@
 		D24F8A472449ABF8002FF071 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = D24F8A462449ABF8002FF071 /* SDWebImageSwiftUI */; };
 		D26B5622243E80450098E9E4 /* ReleaseDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26B5621243E80450098E9E4 /* ReleaseDetail.swift */; };
 		D26B5624243E8DB00098E9E4 /* PlaybackControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26B5623243E8DB00098E9E4 /* PlaybackControls.swift */; };
-		D28AF83D244F356500AD6614 /* Release.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28AF83C244F356500AD6614 /* Release.swift */; };
 		D2D5875E244E391200E982E8 /* Wallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D5875D244E391200E982E8 /* Wallet.swift */; };
 		D2DCDA4B243E048000D0756C /* ReleaseMetadataOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2DCDA4A243E048000D0756C /* ReleaseMetadataOverlay.swift */; };
 		D2FE407824504F2700623280 /* HMV in Frameworks */ = {isa = PBXBuildFile; productRef = D2FE407724504F2700623280 /* HMV */; };
@@ -61,7 +60,6 @@
 		D22C4555243DE6F00001481D /* ReleaseListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReleaseListItem.swift; sourceTree = "<group>"; };
 		D26B5621243E80450098E9E4 /* ReleaseDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReleaseDetail.swift; sourceTree = "<group>"; };
 		D26B5623243E8DB00098E9E4 /* PlaybackControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackControls.swift; sourceTree = "<group>"; };
-		D28AF83C244F356500AD6614 /* Release.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Release.swift; sourceTree = "<group>"; };
 		D28AF841244F46A700AD6614 /* debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = debug.xcconfig; sourceTree = "<group>"; };
 		D28AF842244F46D700AD6614 /* release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = release.xcconfig; sourceTree = "<group>"; };
 		D2D5875D244E391200E982E8 /* Wallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wallet.swift; sourceTree = "<group>"; };
@@ -185,7 +183,6 @@
 			isa = PBXGroup;
 			children = (
 				D2D5875D244E391200E982E8 /* Wallet.swift */,
-				D28AF83C244F356500AD6614 /* Release.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -332,7 +329,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D22C4522243DD8B00001481D /* AppDelegate.swift in Sources */,
-				D28AF83D244F356500AD6614 /* Release.swift in Sources */,
 				D26B5624243E8DB00098E9E4 /* PlaybackControls.swift in Sources */,
 				D26B5622243E80450098E9E4 /* ReleaseDetail.swift in Sources */,
 				D22C4552243DDE490001481D /* WalletView.swift in Sources */,

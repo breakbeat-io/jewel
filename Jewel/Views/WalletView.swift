@@ -16,15 +16,17 @@ struct WalletView: View {
     
     var body: some View {
         NavigationView {
-            Grid(wallet.releases) { release in
-                NavigationLink(
-                    destination: ReleaseDetail (
-                        release: release
+            Grid(wallet.albums, id: \.id) { album in
+                if album.attributes != nil {
+                    NavigationLink(
+                        destination: ReleaseDetail (
+                            albumAttributes: album.attributes!
+                        )
+                    ) {
+                    ReleaseListItem (
+                        albumAttributes: album.attributes!
                     )
-                ) {
-                ReleaseListItem (
-                    release: release
-                )
+                    }
                 }
             }
             .padding(6)

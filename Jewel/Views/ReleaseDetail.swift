@@ -8,39 +8,40 @@
 
 import SwiftUI
 import SDWebImageSwiftUI
+import HMV
 
 struct ReleaseDetail: View {
     
-   var release: Release
+   var albumAttributes: AlbumAttributes
     
     var body: some View {
         VStack(alignment: .leading) {
-            WebImage(url: release.artworkURL)
+            WebImage(url: albumAttributes.artwork.url(forWidth: 1000))
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .clipped()
                 .clipShape(RoundedRectangle(cornerRadius: 6))
                 .shadow(radius: 5)
-            Text(release.title)
+            Text(albumAttributes.name)
                 .fontWeight(.bold)
                 .font(.title)
                 .foregroundColor(.black)
                 .lineLimit(1)
-            Text(release.artist)
+            Text(albumAttributes.artistName)
                 .font(.title)
                 .foregroundColor(.black)
                 .lineLimit(1)
             Spacer()
             HStack {
                 Spacer()
-                PlaybackControls(playbackUrl: release.appleMusicShareURL)
+                PlaybackControls(playbackUrl: albumAttributes.url)
                 Spacer()
             }
             Spacer()
         }
         .padding(.all)
         .background(
-            WebImage(url: release.artworkURL)
+            WebImage(url: albumAttributes.artwork.url(forWidth: 1000))
                 .resizable()
                 .scaledToFill()
                 .brightness(0.4)
@@ -54,6 +55,6 @@ struct ReleaseDetailView_Previews: PreviewProvider {
     static let wallet = Wallet()
     
     static var previews: some View {
-        ReleaseDetail(release: wallet.releases[0])
+        ReleaseDetail(albumAttributes: wallet.albums[0].attributes!)
     }
 }

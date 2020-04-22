@@ -8,16 +8,17 @@
 
 import SwiftUI
 import SDWebImageSwiftUI
+import HMV
 
 struct ReleaseListItem: View {
     
-    var release: Release
+    var albumAttributes: AlbumAttributes
     
     var body: some View {
         Rectangle()
         .foregroundColor(.clear)
         .background(
-            WebImage(url: release.artworkURL)
+            WebImage(url: albumAttributes.artwork.url(forWidth: 1000))
                 .renderingMode(.original)
                 .resizable()
                 .scaledToFill()
@@ -26,8 +27,8 @@ struct ReleaseListItem: View {
         .clipShape(RoundedRectangle(cornerRadius: 4))
         .overlay(
             ReleaseMetadataOverlay(
-                title: release.title,
-                artist: release.artist
+                title: albumAttributes.name,
+                artist: albumAttributes.artistName
             ), alignment: .bottomLeading
         )
     }
@@ -38,6 +39,6 @@ struct Album_Previews: PreviewProvider {
     static let wallet = Wallet()
     
     static var previews: some View {
-        ReleaseListItem(release: wallet.releases[0])
+        ReleaseListItem(albumAttributes: wallet.albums[0].attributes!)
     }
 }
