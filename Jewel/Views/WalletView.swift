@@ -16,15 +16,15 @@ struct WalletView: View {
     
     var body: some View {
         NavigationView {
-            Grid(wallet.albums, id: \.id) { album in
-                if album.attributes != nil {
+            Grid(wallet.slots) { slot in
+                slot.album?.attributes.map { albumAttributes in
                     NavigationLink(
                         destination: ReleaseDetail (
-                            albumAttributes: album.attributes!
+                            albumAttributes: albumAttributes
                         )
                     ) {
                     ReleaseListItem (
-                        albumAttributes: album.attributes!
+                        albumAttributes: albumAttributes
                     )
                     }
                 }

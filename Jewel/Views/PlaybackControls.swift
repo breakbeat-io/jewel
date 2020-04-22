@@ -37,6 +37,6 @@ struct PlaybackControlsView_Previews: PreviewProvider {
     static let wallet = Wallet()
     
     static var previews: some View {
-        PlaybackControls(playbackUrl: wallet.albums[0].attributes!.url)
+        PlaybackControls(playbackUrl: (wallet.slots[0].album?.attributes!.url)!)
     }
 }
