@@ -24,6 +24,8 @@
 		D2DCDA4B243E048000D0756C /* ReleaseMetadataOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2DCDA4A243E048000D0756C /* ReleaseMetadataOverlay.swift */; };
 		D2E690F62450E36800B981F2 /* Slot.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E690F52450E36800B981F2 /* Slot.swift */; };
 		D2E690F82450E98E00B981F2 /* Unwrap.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E690F72450E98E00B981F2 /* Unwrap.swift */; };
+		D2E690FA2450ECBB00B981F2 /* EmptySlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E690F92450ECBB00B981F2 /* EmptySlot.swift */; };
+		D2E690FC2450EF9A00B981F2 /* FilledSlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E690FB2450EF9A00B981F2 /* FilledSlot.swift */; };
 		D2FE407824504F2700623280 /* HMV in Frameworks */ = {isa = PBXBuildFile; productRef = D2FE407724504F2700623280 /* HMV */; };
 /* End PBXBuildFile section */
 
@@ -68,6 +70,8 @@
 		D2DCDA4A243E048000D0756C /* ReleaseMetadataOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReleaseMetadataOverlay.swift; sourceTree = "<group>"; };
 		D2E690F52450E36800B981F2 /* Slot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Slot.swift; sourceTree = "<group>"; };
 		D2E690F72450E98E00B981F2 /* Unwrap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Unwrap.swift; sourceTree = "<group>"; };
+		D2E690F92450ECBB00B981F2 /* EmptySlot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptySlot.swift; sourceTree = "<group>"; };
+		D2E690FB2450EF9A00B981F2 /* FilledSlot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilledSlot.swift; sourceTree = "<group>"; };
 		D2FE406F244FAA4500623280 /* apple-music-api-token.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "apple-music-api-token.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -170,6 +174,8 @@
 				D26B5623243E8DB00098E9E4 /* PlaybackControls.swift */,
 				D2DCDA4A243E048000D0756C /* ReleaseMetadataOverlay.swift */,
 				D2E690F72450E98E00B981F2 /* Unwrap.swift */,
+				D2E690F92450ECBB00B981F2 /* EmptySlot.swift */,
+				D2E690FB2450EF9A00B981F2 /* FilledSlot.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -335,10 +341,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				D2E690F82450E98E00B981F2 /* Unwrap.swift in Sources */,
+				D2E690FC2450EF9A00B981F2 /* FilledSlot.swift in Sources */,
 				D22C4522243DD8B00001481D /* AppDelegate.swift in Sources */,
 				D2E690F62450E36800B981F2 /* Slot.swift in Sources */,
 				D26B5624243E8DB00098E9E4 /* PlaybackControls.swift in Sources */,
 				D26B5622243E80450098E9E4 /* ReleaseDetail.swift in Sources */,
+				D2E690FA2450ECBB00B981F2 /* EmptySlot.swift in Sources */,
 				D22C4552243DDE490001481D /* WalletView.swift in Sources */,
 				D2DCDA4B243E048000D0756C /* ReleaseMetadataOverlay.swift in Sources */,
 				D2D5875E244E391200E982E8 /* Wallet.swift in Sources */,

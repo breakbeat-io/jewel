@@ -12,6 +12,14 @@ import HMV
 class Wallet: ObservableObject {
 
     @Published var slots = [Slot]()
+    
+    init() {
+        let numberOfSlots = 8
+        for slotId in 1...numberOfSlots {
+            let slot = Slot(id: slotId, album: nil)
+            slots.append(slot)
+        }
+    }
 
     func loadExampleWallet() {
         if let developerToken = Bundle.main.infoDictionary?["APPLE_MUSIC_API_TOKEN"] as? String {

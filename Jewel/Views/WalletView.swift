@@ -16,19 +16,14 @@ struct WalletView: View {
     
     var body: some View {
         NavigationView {
-            Grid(wallet.slots) { slot in
-                Unwrap(slot.album?.attributes) { albumAttributes in
-                    NavigationLink(
-                        destination: ReleaseDetail (
-                            albumAttributes: albumAttributes
-                        )
-                    ) {
-                    ReleaseListItem (
-                        albumAttributes: albumAttributes
-                    )
-                    }
+            List(self.wallet.slots) { slot in
+                if slot.album == nil {
+                    EmptySlot()
+                } else {
+                    FilledSlot(slot: slot)
                 }
             }
+            .environment(\.defaultMinListRowHeight, 75)
             .padding(6)
             .navigationBarTitle(Text("My Releases"))
             .navigationBarItems(trailing:
@@ -39,9 +34,6 @@ struct WalletView: View {
                 }
             )
         }
-        .gridStyle (
-            ModularGridStyle(columns: 2, rows: 4)
-        )
         .statusBar(hidden: true)
         .accentColor(.black)
         .alert(isPresented: $showingAlert) {
