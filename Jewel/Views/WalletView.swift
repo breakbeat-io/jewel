@@ -7,7 +7,6 @@
 //
 
 import SwiftUI
-import Grid
 
 struct WalletView: View {
     
@@ -16,28 +15,31 @@ struct WalletView: View {
     
     var body: some View {
         NavigationView {
-            List(self.wallet.slots) { slot in
-                if slot.album == nil {
-                    EmptySlot()
-                } else {
-                    FilledSlot(slot: slot)
+            VStack {
+                ForEach(self.wallet.slots) { slot in
+                    if slot.album == nil {
+                        EmptySlot()
+                    } else {
+                        FilledSlot(slot: slot)
+                    }
                 }
             }
-            .environment(\.defaultMinListRowHeight, 75)
-            .padding(6)
+            .padding(.horizontal)
+            .padding(.bottom)
             .navigationBarTitle(Text("My Releases"))
             .navigationBarItems(trailing:
                 Button(action: {
                     self.showingAlert = true
                 }) {
-                    Text("Load")
+                    Text("Demo")
                 }
             )
         }
+        
         .statusBar(hidden: true)
         .accentColor(.black)
         .alert(isPresented: $showingAlert) {
-            Alert(title: Text("Do you want to load the example albums?"), primaryButton: .cancel(Text("Cancel")), secondaryButton: .default(Text("Load").bold()) {
+            Alert(title: Text("Do you want to load the demo albums?"), primaryButton: .cancel(Text("Cancel")), secondaryButton: .default(Text("Load").bold()) {
                     self.wallet.loadExampleWallet()
                 })
         }

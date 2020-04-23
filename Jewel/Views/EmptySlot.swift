@@ -9,13 +9,24 @@
 import SwiftUI
 
 struct EmptySlot: View {
+    
+    @State private var showingAlert = false
+    
     var body: some View {
-        RoundedRectangle(cornerRadius: 10)
-        .stroke(style: StrokeStyle(lineWidth: 3.0, lineCap: .round, dash: [5, 10]))
-        .overlay(
-            Image(systemName: "plus.app")
-                .font(.largeTitle)
-        )
+        Button(action: {
+            self.showingAlert = true
+        }) {
+            RoundedRectangle(cornerRadius: 4)
+                .stroke(Color.gray, style: StrokeStyle(lineWidth: 2, dash: [4, 6]))
+            .overlay(
+                Image(systemName: "plus.app")
+                    .font(.title)
+                    .foregroundColor(Color.gray)
+            )
+        }
+        .alert(isPresented: $showingAlert) {
+            Alert(title: Text("Soon you'll be adding your own albums!"), dismissButton: .cancel(Text("Can't wait!")))
+        }
     }
 }
 

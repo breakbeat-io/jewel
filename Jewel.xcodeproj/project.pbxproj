@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D2129C5D243E2E6A009F5B23 /* Grid in Frameworks */ = {isa = PBXBuildFile; productRef = D2129C5C243E2E6A009F5B23 /* Grid */; };
 		D22C4522243DD8B00001481D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22C4521243DD8B00001481D /* AppDelegate.swift */; };
 		D22C4524243DD8B00001481D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22C4523243DD8B00001481D /* SceneDelegate.swift */; };
 		D22C4528243DD8B10001481D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D22C4527243DD8B10001481D /* Assets.xcassets */; };
@@ -82,7 +81,6 @@
 			files = (
 				D2FE407824504F2700623280 /* HMV in Frameworks */,
 				D24F8A472449ABF8002FF071 /* SDWebImageSwiftUI in Frameworks */,
-				D2129C5D243E2E6A009F5B23 /* Grid in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -216,7 +214,6 @@
 			);
 			name = Jewel;
 			packageProductDependencies = (
-				D2129C5C243E2E6A009F5B23 /* Grid */,
 				D24F8A462449ABF8002FF071 /* SDWebImageSwiftUI */,
 				D2FE407724504F2700623280 /* HMV */,
 			);
@@ -293,7 +290,6 @@
 			);
 			mainGroup = D22C4515243DD8B00001481D;
 			packageReferences = (
-				D2129C5B243E2E6A009F5B23 /* XCRemoteSwiftPackageReference "swiftui-grid" */,
 				D24F8A452449ABF8002FF071 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 				D2FE407324504E2200623280 /* XCRemoteSwiftPackageReference "HMV" */,
 			);
@@ -678,14 +674,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		D2129C5B243E2E6A009F5B23 /* XCRemoteSwiftPackageReference "swiftui-grid" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/spacenation/swiftui-grid";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
 		D24F8A452449ABF8002FF071 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI";
@@ -705,11 +693,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		D2129C5C243E2E6A009F5B23 /* Grid */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = D2129C5B243E2E6A009F5B23 /* XCRemoteSwiftPackageReference "swiftui-grid" */;
-			productName = Grid;
-		};
 		D24F8A462449ABF8002FF071 /* SDWebImageSwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = D24F8A452449ABF8002FF071 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
