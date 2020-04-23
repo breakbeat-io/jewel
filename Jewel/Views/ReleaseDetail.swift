@@ -15,22 +15,24 @@ struct ReleaseDetail: View {
    var albumAttributes: AlbumAttributes
     
     var body: some View {
-        VStack(alignment: .leading) {
-            WebImage(url: albumAttributes.artwork.url(forWidth: 1000))
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .clipped()
-                .clipShape(RoundedRectangle(cornerRadius: 6))
-                .shadow(radius: 5)
-            Text(albumAttributes.name)
-                .fontWeight(.bold)
-                .font(.title)
-                .foregroundColor(.black)
-                .lineLimit(1)
-            Text(albumAttributes.artistName)
-                .font(.title)
-                .foregroundColor(.black)
-                .lineLimit(1)
+        VStack {
+            VStack(alignment: .leading) {
+                WebImage(url: albumAttributes.artwork.url(forWidth: 1000))
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .clipped()
+                    .clipShape(RoundedRectangle(cornerRadius: 6))
+                    .shadow(radius: 5)
+                Text(albumAttributes.name)
+                    .fontWeight(.bold)
+                    .font(.title)
+                    .foregroundColor(.black)
+                    .lineLimit(1)
+                Text(albumAttributes.artistName)
+                    .font(.title)
+                    .foregroundColor(.black)
+                    .lineLimit(1)
+            }
             Spacer()
             HStack {
                 Spacer()
