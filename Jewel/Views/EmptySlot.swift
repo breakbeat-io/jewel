@@ -10,11 +10,11 @@ import SwiftUI
 
 struct EmptySlot: View {
     
-    @State private var showingAlert = false
+    @State private var showSearch = false
     
     var body: some View {
         Button(action: {
-            self.showingAlert = true
+            self.showSearch = true
         }) {
             RoundedRectangle(cornerRadius: 4)
                 .stroke(Color.gray, style: StrokeStyle(lineWidth: 2, dash: [4, 6]))
@@ -24,8 +24,8 @@ struct EmptySlot: View {
                     .foregroundColor(Color.gray)
             )
         }
-        .alert(isPresented: $showingAlert) {
-            Alert(title: Text("Soon you'll be adding your own albums!"), dismissButton: .cancel(Text("Can't wait!")))
+        .sheet(isPresented: $showSearch) {
+            Search()
         }
     }
 }
