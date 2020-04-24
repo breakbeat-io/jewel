@@ -15,7 +15,7 @@ class Wallet: ObservableObject {
     
     init() {
         let numberOfSlots = 8
-        for slotId in 0...numberOfSlots - 1 {
+        for slotId in 0..<numberOfSlots {
             let slot = Slot(id: slotId, album: nil)
             slots.append(slot)
         }
