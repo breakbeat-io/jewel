@@ -23,13 +23,6 @@ struct Search: View {
             hmv.search(term: searchTerm, types: [.albums]) { results, error in
               DispatchQueue.main.async {
                 self.searchResults = results?.albums?.data
-                for i in 0...self.searchResults!.count - 1 {
-                    print(self.searchResults![i].id)
-                    let attributes = self.searchResults?[i].attributes
-                    print(attributes!.artistName)
-                    print(attributes!.name)
-                    print(attributes!.artwork.url)
-                }
               }
             }
         }
@@ -52,7 +45,25 @@ struct Search: View {
             TextField("Search Apple Music", text: $searchTerm, onCommit: search)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding(.horizontal)
-            SearchResultsList()
+            if searchResults != nil {
+                List(0...self.searchResults!.count - 1, id: \.self) { i in
+                    HStack {
+                        VStack(alignment: .leading) {
+                            Text(self.searchResults![i].attributes!.artistName)
+                                .font(.headline)
+                            Text(self.searchResults![i].attributes!.name)
+                                .font(.subheadline)
+                        }
+                        Spacer()
+                        WebImage(url: self.searchResults![i].attributes!.artwork.url(forWidth: 50))
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .clipped()
+                            .clipShape(RoundedRectangle(cornerRadius: 4))
+                            .frame(width: 50)
+                    }
+                }
+            }
             Spacer()
         }
     }
