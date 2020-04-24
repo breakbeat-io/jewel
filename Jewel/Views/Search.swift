@@ -14,8 +14,8 @@ struct Search: View {
     
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var wallet: Wallet
-    @State var searchTerm: String = ""
-    @State var searchResults: [Album]?
+    @State private var searchTerm: String = ""
+    @State private var searchResults: [Album]?
     
     func search() {
         if let developerToken = Bundle.main.infoDictionary?["APPLE_MUSIC_API_TOKEN"] as? String {

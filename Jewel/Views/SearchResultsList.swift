@@ -16,16 +16,11 @@ struct SearchResultsList: View {
     @EnvironmentObject var wallet: Wallet
     @Binding var searchResults: [Album]?
     
-    func addAlbumToSlot(id: String) {
-//        wallet.loadExampleWallet()
-        print("Adding album to slot: " + id)
-        
-    }
-    
     var body: some View {
         List(0...self.searchResults!.count - 1, id: \.self) { i in
             Button(action: {
-                self.addAlbumToSlot(id: self.searchResults![i].id)
+//                self.wallet.objectWillChange.send()
+                self.wallet.addAlbumToSlot(albumId: self.searchResults![i].id, slotId: 1)
                 self.presentationMode.wrappedValue.dismiss()
             }, label: {
                 HStack {
