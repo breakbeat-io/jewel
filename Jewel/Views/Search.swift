@@ -16,6 +16,7 @@ struct Search: View {
     @EnvironmentObject var wallet: Wallet
     @State private var searchTerm: String = ""
     @State private var searchResults: [Album]?
+    var slotId: Int
     
     func search() {
         if let developerToken = Bundle.main.infoDictionary?["APPLE_MUSIC_API_TOKEN"] as? String {
@@ -46,7 +47,7 @@ struct Search: View {
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding(.horizontal)
             if searchResults != nil {
-                SearchResultsList(searchResults: $searchResults).environmentObject(wallet)
+                SearchResultsList(searchResults: $searchResults, slotId: slotId).environmentObject(wallet)
             }
             Spacer()
         }
@@ -55,6 +56,6 @@ struct Search: View {
 
 struct Search_Previews: PreviewProvider {
     static var previews: some View {
-        Search()
+        Search(slotId: 1)
     }
 }

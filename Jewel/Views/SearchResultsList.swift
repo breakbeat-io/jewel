@@ -15,12 +15,12 @@ struct SearchResultsList: View {
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var wallet: Wallet
     @Binding var searchResults: [Album]?
+    var slotId: Int
     
     var body: some View {
         List(0...self.searchResults!.count - 1, id: \.self) { i in
             Button(action: {
-//                self.wallet.objectWillChange.send()
-                self.wallet.addAlbumToSlot(albumId: self.searchResults![i].id, slotId: 1)
+                self.wallet.addAlbumToSlot(albumId: self.searchResults![i].id, slotId: self.slotId)
                 self.presentationMode.wrappedValue.dismiss()
             }, label: {
                 HStack {

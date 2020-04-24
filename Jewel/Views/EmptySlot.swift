@@ -12,6 +12,7 @@ struct EmptySlot: View {
     
     @EnvironmentObject var wallet: Wallet
     @State private var showSearch = false
+    var slotId: Int
     
     var body: some View {
         Button(action: {
@@ -26,13 +27,13 @@ struct EmptySlot: View {
             )
         }
         .sheet(isPresented: $showSearch) {
-            Search().environmentObject(self.wallet)
+            Search(slotId: self.slotId).environmentObject(self.wallet)
         }
     }
 }
 
 struct EmptySlot_Previews: PreviewProvider {
     static var previews: some View {
-        EmptySlot()
+        EmptySlot(slotId: 1)
     }
 }

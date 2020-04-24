@@ -18,7 +18,7 @@ struct WalletView: View {
             VStack {
                 ForEach(self.wallet.slots) { slot in
                     if slot.album == nil {
-                        EmptySlot().environmentObject(self.wallet)
+                        EmptySlot(slotId: slot.id).environmentObject(self.wallet)
                     } else {
                         FilledSlot(slot: slot)
                     }
