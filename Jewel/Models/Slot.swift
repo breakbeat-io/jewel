@@ -11,5 +11,5 @@ import HMV
 
 public struct Slot: Identifiable {
     public let id: Int
-    public let album: Album?
+    public var album: Album?
 }

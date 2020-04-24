@@ -11,38 +11,25 @@ import SwiftUI
 struct WalletView: View {
     
     @EnvironmentObject var wallet: Wallet
-    @State private var showingAlert = false
     
     var body: some View {
         NavigationView {
             VStack {
                 ForEach(self.wallet.slots) { slot in
                     if slot.album == nil {
-                        EmptySlot()
+                        EmptySlot(slotId: slot.id).environmentObject(self.wallet)
                     } else {
-                        FilledSlot(slot: slot)
+                        FilledSlot(slot: slot).environmentObject(self.wallet)
                     }
                 }
             }
             .padding(.horizontal)
             .padding(.bottom)
-            .navigationBarTitle(Text("My Releases"))
-            .navigationBarItems(trailing:
-                Button(action: {
-                    self.showingAlert = true
-                }) {
-                    Text("Demo")
-                }
-            )
+            .navigationBarTitle(Text("My Collection"))
         }
         
         .statusBar(hidden: true)
         .accentColor(.black)
-        .alert(isPresented: $showingAlert) {
-            Alert(title: Text("Do you want to load the demo albums?"), primaryButton: .cancel(Text("Cancel")), secondaryButton: .default(Text("Load").bold()) {
-                    self.wallet.loadExampleWallet()
-                })
-        }
     }
 }
 

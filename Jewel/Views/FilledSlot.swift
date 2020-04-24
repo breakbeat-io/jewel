@@ -10,6 +10,10 @@ import SwiftUI
 
 struct FilledSlot: View {
     
+    @EnvironmentObject var wallet: Wallet
+    @State private var selection: Int? = 0
+    @State private var showSearch = false
+    
     var slot: Slot
     
     var body: some View {
@@ -17,12 +21,21 @@ struct FilledSlot: View {
             NavigationLink(
                 destination: ReleaseDetail (
                     albumAttributes: albumAttributes
-                )
+                ), tag: 1, selection: self.$selection
             ) {
                 ReleaseListItem (
                     albumAttributes: albumAttributes
                 )
+                .onTapGesture {
+                    self.selection = 1
+                }
+                .onLongPressGesture() {
+                    self.showSearch = true
+                }
             }
+        }
+        .sheet(isPresented: $showSearch) {
+            Search(slotId: self.slot.id).environmentObject(self.wallet)
         }
     }
 }
