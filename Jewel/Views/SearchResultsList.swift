@@ -20,8 +20,10 @@ struct SearchResultsList: View {
                 VStack(alignment: .leading) {
                     Text(self.searchResults![i].attributes!.artistName)
                         .font(.headline)
+                        .lineLimit(1)
                     Text(self.searchResults![i].attributes!.name)
                         .font(.subheadline)
+                        .lineLimit(1)
                 }
                 Spacer()
                 WebImage(url: self.searchResults![i].attributes!.artwork.url(forWidth: 50))
