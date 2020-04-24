@@ -44,6 +44,13 @@ struct Search: View {
                 .padding()
                 Spacer()
                 Button(action: {
+                    self.wallet.delete(slotId: self.slotId)
+                }) {
+                    Image(systemName: "trash")
+                        .padding()
+                }
+                Spacer()
+                Button(action: {
                     self.showingAlert = true
                 }) {
                     Text("Demo Content")

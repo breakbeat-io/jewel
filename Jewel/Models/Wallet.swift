@@ -40,15 +40,20 @@ class Wallet: ObservableObject {
 
         } else {
             print("No Apple Music API Token Found!")
+            
         }
+    }
+    
+    func delete(slotId: Int) {
+        print("would delete \(slotId)")
+        let emptySlot = Slot(id: slotId)
+        self.slots[slotId] = emptySlot
     }
 
     func loadExampleWallet() {
         if let developerToken = Bundle.main.infoDictionary?["APPLE_MUSIC_API_TOKEN"] as? String {
             
             let hmv = HMV(storefront: .unitedKingdom, developerToken: developerToken)
-            
-            slots.removeAll()
             
             let exampleAlbums = ["1322664114", "1241281467", "1450123945", "595779873", "723670972", "1097861387", "1440922148", "1440230518"]
             
@@ -58,7 +63,7 @@ class Wallet: ObservableObject {
                     DispatchQueue.main.async {
                         if album != nil {
                             let slot = Slot(id: index, album: album!)
-                            self.slots.append(slot)
+                            self.slots[index] = slot
                         }
                     }
                 })
