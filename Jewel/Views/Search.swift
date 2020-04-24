@@ -39,21 +39,15 @@ struct Search: View {
                 Button(action: {
                     self.presentationMode.wrappedValue.dismiss()
                 }) {
-                    Text("Cancel")       
+                    Text("Cancel")
+                        .fontWeight(.bold)
                 }
                 .padding()
                 Spacer()
                 Button(action: {
-                    self.wallet.delete(slotId: self.slotId)
-                }) {
-                    Image(systemName: "trash")
-                        .padding()
-                }
-                Spacer()
-                Button(action: {
                     self.showingAlert = true
                 }) {
-                    Text("Demo Content")
+                    Text("Our Selection")
                 }
                 .padding()
             }
@@ -64,9 +58,17 @@ struct Search: View {
                 SearchResultsList(searchResults: $searchResults, slotId: slotId).environmentObject(wallet)
             }
             Spacer()
+            Button(action: {
+                self.wallet.delete(slotId: self.slotId)
+                self.presentationMode.wrappedValue.dismiss()
+            }) {
+                Image(systemName: "trash")
+                    .padding()
+                    .foregroundColor(.red)
+            }
         }
         .alert(isPresented: $showingAlert) {
-            Alert(title: Text("Do you want to load the demo albums?"), primaryButton: .cancel(Text("Cancel")), secondaryButton: .default(Text("Load").bold()) {
+            Alert(title: Text("Do you want to load our current selection of albums?"), primaryButton: .cancel(Text("Cancel")), secondaryButton: .default(Text("Load").bold()) {
                     self.wallet.loadExampleWallet()
                 })
         }
