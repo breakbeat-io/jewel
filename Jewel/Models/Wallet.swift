@@ -14,16 +14,39 @@ class Wallet: ObservableObject {
     @Published var slots = [Slot]()
     
     init() {
+        
+        //create an empty wallet
         let numberOfSlots = 8
         for slotId in 0..<numberOfSlots {
             let slot = Slot(id: slotId, album: nil)
             slots.append(slot)
         }
+        
+        //load it with any saved albums
+        let userDefaults = UserDefaults.standard
+        if let savedWallet = userDefaults.dictionary(forKey: "savedWallet") {
+            for slotId in 0..<numberOfSlots {
+                if let albumId = savedWallet[String(slotId)] {
+                    addAlbumToSlot(albumId: albumId as! String, slotId: slotId)
+                }
+            }
+        } else {
+            print("No wallet saved! Starting fresh")
+        }
+    }
+    
+    func saveWallet() {
+        let userDefaults = UserDefaults.standard
+        var savedWallet = [String: String]()
+        for (index, slot) in slots.enumerated() {
+            if let album = slot.album {
+                savedWallet[String(index)] = album.id
+            }
+        }
+        userDefaults.set(savedWallet, forKey: "savedWallet")
     }
     
     func addAlbumToSlot(albumId: String, slotId: Int) {
-        
-        
         if let developerToken = Bundle.main.infoDictionary?["APPLE_MUSIC_API_TOKEN"] as? String {
 
             let hmv = HMV(storefront: .unitedKingdom, developerToken: developerToken)
@@ -34,6 +57,7 @@ class Wallet: ObservableObject {
                     if album != nil {
                         let newSlot = Slot(id: slotId, album: album)
                         self.slots[slotId] = newSlot
+                        self.saveWallet()
                     }
                 }
             })
@@ -61,6 +85,7 @@ class Wallet: ObservableObject {
                         if album != nil {
                             let slot = Slot(id: index, album: album!)
                             self.slots[index] = slot
+                            self.saveWallet()
                         }
                     }
                 })
