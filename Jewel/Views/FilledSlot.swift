@@ -26,6 +26,7 @@ struct FilledSlot: View {
                 ReleaseListItem (
                     albumAttributes: albumAttributes
                 )
+                .shadow(radius: 3)
                 .onTapGesture {
                     self.selection = 1
                 }
