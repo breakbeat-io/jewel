@@ -10,6 +10,7 @@ import SwiftUI
 
 struct EmptySlot: View {
     
+    @EnvironmentObject var wallet: Wallet
     @State private var showSearch = false
     
     var body: some View {
@@ -25,7 +26,7 @@ struct EmptySlot: View {
             )
         }
         .sheet(isPresented: $showSearch) {
-            Search()
+            Search().environmentObject(self.wallet)
         }
     }
 }

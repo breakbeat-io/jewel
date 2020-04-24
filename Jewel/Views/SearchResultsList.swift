@@ -12,12 +12,21 @@ import HMV
 
 struct SearchResultsList: View {
     
+    @Environment(\.presentationMode) var presentationMode
+    @EnvironmentObject var wallet: Wallet
     @Binding var searchResults: [Album]?
+    
+    func addAlbumToSlot(id: String) {
+//        wallet.loadExampleWallet()
+        print("Adding album to slot: " + id)
+        
+    }
     
     var body: some View {
         List(0...self.searchResults!.count - 1, id: \.self) { i in
             Button(action: {
-                
+                self.addAlbumToSlot(id: self.searchResults![i].id)
+                self.presentationMode.wrappedValue.dismiss()
             }, label: {
                 HStack {
                     VStack(alignment: .leading) {
@@ -36,8 +45,8 @@ struct SearchResultsList: View {
                         .clipShape(RoundedRectangle(cornerRadius: 4))
                         .frame(width: 50)
                 }
-            }
-        )}
+            })
+        }
     }
 }
 

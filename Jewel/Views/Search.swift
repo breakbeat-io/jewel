@@ -13,6 +13,7 @@ import HMV
 struct Search: View {
     
     @Environment(\.presentationMode) var presentationMode
+    @EnvironmentObject var wallet: Wallet
     @State var searchTerm: String = ""
     @State var searchResults: [Album]?
     
@@ -45,7 +46,7 @@ struct Search: View {
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding(.horizontal)
             if searchResults != nil {
-                SearchResultsList(searchResults: $searchResults)
+                SearchResultsList(searchResults: $searchResults).environmentObject(wallet)
             }
             Spacer()
         }
