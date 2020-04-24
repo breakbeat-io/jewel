@@ -19,7 +19,7 @@ struct WalletView: View {
                     if slot.album == nil {
                         EmptySlot(slotId: slot.id).environmentObject(self.wallet)
                     } else {
-                        FilledSlot(slot: slot)
+                        FilledSlot(slot: slot).environmentObject(self.wallet)
                     }
                 }
             }
