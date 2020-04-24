@@ -36,8 +36,7 @@ struct Search: View {
                 Button(action: {
                     self.presentationMode.wrappedValue.dismiss()
                 }) {
-                    Text("Cancel")
-                    
+                    Text("Cancel")       
                 }
                 .padding()
                 Spacer()

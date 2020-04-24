@@ -16,24 +16,28 @@ struct SearchResultsList: View {
     
     var body: some View {
         List(0...self.searchResults!.count - 1, id: \.self) { i in
-            HStack {
-                VStack(alignment: .leading) {
-                    Text(self.searchResults![i].attributes!.artistName)
-                        .font(.headline)
-                        .lineLimit(1)
-                    Text(self.searchResults![i].attributes!.name)
-                        .font(.subheadline)
-                        .lineLimit(1)
+            Button(action: {
+                
+            }, label: {
+                HStack {
+                    VStack(alignment: .leading) {
+                        Text(self.searchResults![i].attributes!.artistName)
+                            .font(.headline)
+                            .lineLimit(1)
+                        Text(self.searchResults![i].attributes!.name)
+                            .font(.subheadline)
+                            .lineLimit(1)
+                    }
+                    Spacer()
+                    WebImage(url: self.searchResults![i].attributes!.artwork.url(forWidth: 50))
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .clipped()
+                        .clipShape(RoundedRectangle(cornerRadius: 4))
+                        .frame(width: 50)
                 }
-                Spacer()
-                WebImage(url: self.searchResults![i].attributes!.artwork.url(forWidth: 50))
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .clipped()
-                    .clipShape(RoundedRectangle(cornerRadius: 4))
-                    .frame(width: 50)
             }
-        }
+        )}
     }
 }
 
