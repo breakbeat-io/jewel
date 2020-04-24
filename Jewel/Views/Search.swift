@@ -46,23 +46,7 @@ struct Search: View {
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding(.horizontal)
             if searchResults != nil {
-                List(0...self.searchResults!.count - 1, id: \.self) { i in
-                    HStack {
-                        VStack(alignment: .leading) {
-                            Text(self.searchResults![i].attributes!.artistName)
-                                .font(.headline)
-                            Text(self.searchResults![i].attributes!.name)
-                                .font(.subheadline)
-                        }
-                        Spacer()
-                        WebImage(url: self.searchResults![i].attributes!.artwork.url(forWidth: 50))
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .clipped()
-                            .clipShape(RoundedRectangle(cornerRadius: 4))
-                            .frame(width: 50)
-                    }
-                }
+                SearchResultsList(searchResults: $searchResults)
             }
             Spacer()
         }

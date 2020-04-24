@@ -8,19 +8,23 @@
 
 import SwiftUI
 import SDWebImageSwiftUI
+import HMV
 
 struct SearchResultsList: View {
+    
+    @Binding var searchResults: [Album]?
+    
     var body: some View {
-        List(0...6, id: \.self) { _ in
+        List(0...self.searchResults!.count - 1, id: \.self) { i in
             HStack {
                 VStack(alignment: .leading) {
-                    Text("The Fat Of The Land")
+                    Text(self.searchResults![i].attributes!.artistName)
                         .font(.headline)
-                    Text("The Prodigy")
+                    Text(self.searchResults![i].attributes!.name)
                         .font(.subheadline)
                 }
                 Spacer()
-                WebImage(url: URL(string: "https://via.placeholder.com/50"))
+                WebImage(url: self.searchResults![i].attributes!.artwork.url(forWidth: 50))
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .clipped()
@@ -31,8 +35,8 @@ struct SearchResultsList: View {
     }
 }
 
-struct SearchResultsList_Previews: PreviewProvider {
-    static var previews: some View {
-        SearchResultsList()
-    }
-}
+//struct SearchResultsList_Previews: PreviewProvider {
+//    static var previews: some View {
+//        SearchResultsList()
+//    }
+//}
