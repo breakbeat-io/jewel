@@ -16,6 +16,7 @@ struct Search: View {
     @EnvironmentObject var wallet: Wallet
     @State private var searchTerm: String = ""
     @State private var searchResults: [Album]?
+    @State private var showingAlert = false
     var slotId: Int
     
     func search() {
@@ -42,6 +43,12 @@ struct Search: View {
                 }
                 .padding()
                 Spacer()
+                Button(action: {
+                    self.showingAlert = true
+                }) {
+                    Text("Demo Content")
+                }
+                .padding()
             }
             TextField("Search Apple Music", text: $searchTerm, onCommit: search)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -50,6 +57,11 @@ struct Search: View {
                 SearchResultsList(searchResults: $searchResults, slotId: slotId).environmentObject(wallet)
             }
             Spacer()
+        }
+        .alert(isPresented: $showingAlert) {
+            Alert(title: Text("Do you want to load the demo albums?"), primaryButton: .cancel(Text("Cancel")), secondaryButton: .default(Text("Load").bold()) {
+                    self.wallet.loadExampleWallet()
+                })
         }
     }
 }
