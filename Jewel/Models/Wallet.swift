@@ -37,15 +37,12 @@ class Wallet: ObservableObject {
                     }
                 }
             })
-
         } else {
             print("No Apple Music API Token Found!")
-            
         }
     }
     
     func delete(slotId: Int) {
-        print("would delete \(slotId)")
         let emptySlot = Slot(id: slotId)
         self.slots[slotId] = emptySlot
     }
