@@ -19,12 +19,16 @@ struct ReleaseListItem: View {
         .foregroundColor(.clear)
         .background(
             KFImage(albumAttributes.artwork.url(forWidth: 1000))
+                .placeholder {
+                    RoundedRectangle(cornerRadius: 4, style: .continuous)
+                        .fill(Color.gray)
+                }
                 .renderingMode(.original)
                 .resizable()
                 .scaledToFill()
         )
         .clipped()
-        .clipShape(RoundedRectangle(cornerRadius: 4))
+        .clipShape(RoundedRectangle(cornerRadius: 4, style: .continuous))
         .overlay(
             ReleaseMetadataOverlay(
                 title: albumAttributes.name,

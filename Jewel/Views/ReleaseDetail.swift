@@ -18,10 +18,14 @@ struct ReleaseDetail: View {
         VStack {
             VStack(alignment: .leading) {
                 KFImage(albumAttributes.artwork.url(forWidth: 1000))
+                    .placeholder {
+                        RoundedRectangle(cornerRadius: 4, style: .continuous)
+                            .fill(Color.gray)
+                    }
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .clipped()
-                    .clipShape(RoundedRectangle(cornerRadius: 4))
+                    .clipShape(RoundedRectangle(cornerRadius: 4, style: .continuous))
                     .shadow(radius: 4)
                 Text(albumAttributes.name)
                     .fontWeight(.bold)
@@ -44,6 +48,10 @@ struct ReleaseDetail: View {
         .padding(.all)
         .background(
             KFImage(albumAttributes.artwork.url(forWidth: 1000))
+                .placeholder {
+                    RoundedRectangle(cornerRadius: 4, style: .continuous)
+                        .fill(Color.gray)
+                }
                 .resizable()
                 .scaledToFill()
                 .brightness(0.4)

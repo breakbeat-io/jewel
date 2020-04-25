@@ -34,6 +34,10 @@ struct SearchResultsList: View {
                     }
                     Spacer()
                     KFImage(self.searchResults![i].attributes!.artwork.url(forWidth: 50))
+                        .placeholder {
+                            RoundedRectangle(cornerRadius: 4, style: .continuous)
+                                .fill(Color.gray)
+                        }
                         .renderingMode(.original)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
@@ -50,3 +54,9 @@ struct SearchResultsList: View {
 //        SearchResultsList()
 //    }
 //}
+
+struct SearchResultsList_Previews: PreviewProvider {
+    static var previews: some View {
+        /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/
+    }
+}
