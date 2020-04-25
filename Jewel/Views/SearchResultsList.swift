@@ -35,7 +35,7 @@ struct SearchResultsList: View {
                     Spacer()
                     KFImage(self.searchResults![i].attributes!.artwork.url(forWidth: 50))
                         .placeholder {
-                            RoundedRectangle(cornerRadius: 4, style: .continuous)
+                            RoundedRectangle(cornerRadius: 4)
                                 .fill(Color.gray)
                         }
                         .renderingMode(.original)

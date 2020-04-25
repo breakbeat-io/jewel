@@ -25,7 +25,7 @@ struct PlaybackControls: View {
             .foregroundColor(.black)
             .cornerRadius(40)
             .overlay(
-                RoundedRectangle(cornerRadius: 40, style: .continuous)
+                RoundedRectangle(cornerRadius: 40)
                     .stroke(Color.black, lineWidth: 2)
                     .shadow(radius: 5)
             )

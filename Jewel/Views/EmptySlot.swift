@@ -18,7 +18,7 @@ struct EmptySlot: View {
         Button(action: {
             self.showSearch = true
         }) {
-            RoundedRectangle(cornerRadius: 4, style: .continuous)
+            RoundedRectangle(cornerRadius: 4)
                 .stroke(Color.gray, style: StrokeStyle(lineWidth: 2, dash: [4, 6]))
             .overlay(
                 Image(systemName: "plus.app")
