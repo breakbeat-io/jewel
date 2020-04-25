@@ -7,7 +7,7 @@
 //
 
 import SwiftUI
-import SDWebImageSwiftUI
+import KingfisherSwiftUI
 import HMV
 
 struct ReleaseDetail: View {
@@ -17,7 +17,7 @@ struct ReleaseDetail: View {
     var body: some View {
         VStack {
             VStack(alignment: .leading) {
-                WebImage(url: albumAttributes.artwork.url(forWidth: 1000))
+                KFImage(albumAttributes.artwork.url(forWidth: 1000))
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .clipped()
@@ -43,7 +43,7 @@ struct ReleaseDetail: View {
         }
         .padding(.all)
         .background(
-            WebImage(url: albumAttributes.artwork.url(forWidth: 1000))
+            KFImage(albumAttributes.artwork.url(forWidth: 1000))
                 .resizable()
                 .scaledToFill()
                 .brightness(0.4)

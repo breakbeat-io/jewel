@@ -7,7 +7,7 @@
 //
 
 import SwiftUI
-import SDWebImageSwiftUI
+import KingfisherSwiftUI
 import HMV
 
 struct SearchResultsList: View {
@@ -33,11 +33,11 @@ struct SearchResultsList: View {
                             .lineLimit(1)
                     }
                     Spacer()
-                    WebImage(url: self.searchResults![i].attributes!.artwork.url(forWidth: 50))
+                    KFImage(self.searchResults![i].attributes!.artwork.url(forWidth: 50))
+                        .renderingMode(.original)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .clipped()
-                        .clipShape(RoundedRectangle(cornerRadius: 4))
+                        .cornerRadius(4)
                         .frame(width: 50)
                 }
             })

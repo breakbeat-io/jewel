@@ -7,7 +7,7 @@
 //
 
 import SwiftUI
-import SDWebImageSwiftUI
+import KingfisherSwiftUI
 import HMV
 
 struct ReleaseListItem: View {
@@ -18,7 +18,7 @@ struct ReleaseListItem: View {
         Rectangle()
         .foregroundColor(.clear)
         .background(
-            WebImage(url: albumAttributes.artwork.url(forWidth: 1000))
+            KFImage(albumAttributes.artwork.url(forWidth: 1000))
                 .renderingMode(.original)
                 .resizable()
                 .scaledToFill()
