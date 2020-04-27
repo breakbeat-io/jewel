@@ -12,7 +12,7 @@ import HMV
 struct Search: View {
     
     @Environment(\.presentationMode) var presentationMode
-    @EnvironmentObject var wallet: Wallet
+    @EnvironmentObject var wallet: WalletStore
     @State private var searchTerm: String = ""
     @State private var searchResults: [Album]?
     @State private var showingAlert = false

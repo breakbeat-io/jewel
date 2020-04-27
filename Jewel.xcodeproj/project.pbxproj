@@ -14,14 +14,14 @@
 		D22C452E243DD8B10001481D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D22C452C243DD8B10001481D /* LaunchScreen.storyboard */; };
 		D22C4539243DD8B10001481D /* JewelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22C4538243DD8B10001481D /* JewelTests.swift */; };
 		D22C4544243DD8B20001481D /* JewelUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22C4543243DD8B20001481D /* JewelUITests.swift */; };
-		D22C4552243DDE490001481D /* WalletView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22C4551243DDE490001481D /* WalletView.swift */; };
+		D22C4552243DDE490001481D /* Wallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22C4551243DDE490001481D /* Wallet.swift */; };
 		D22C4556243DE6F00001481D /* ReleaseListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22C4555243DE6F00001481D /* ReleaseListItem.swift */; };
 		D2501E102454272E006A6E2D /* KingfisherSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = D2501E0F2454272E006A6E2D /* KingfisherSwiftUI */; };
 		D26B5622243E80450098E9E4 /* ReleaseDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26B5621243E80450098E9E4 /* ReleaseDetail.swift */; };
 		D26B5624243E8DB00098E9E4 /* PlaybackControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26B5623243E8DB00098E9E4 /* PlaybackControls.swift */; };
 		D28358832451D3C700411AC9 /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28358822451D3C700411AC9 /* Search.swift */; };
 		D28358872452D3CF00411AC9 /* SearchResultsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28358862452D3CF00411AC9 /* SearchResultsList.swift */; };
-		D2D5875E244E391200E982E8 /* Wallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D5875D244E391200E982E8 /* Wallet.swift */; };
+		D2D5875E244E391200E982E8 /* WalletStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D5875D244E391200E982E8 /* WalletStore.swift */; };
 		D2DCDA4B243E048000D0756C /* ReleaseMetadataOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2DCDA4A243E048000D0756C /* ReleaseMetadataOverlay.swift */; };
 		D2E690F62450E36800B981F2 /* Slot.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E690F52450E36800B981F2 /* Slot.swift */; };
 		D2E690F82450E98E00B981F2 /* Unwrap.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E690F72450E98E00B981F2 /* Unwrap.swift */; };
@@ -61,7 +61,7 @@
 		D22C453F243DD8B20001481D /* JewelUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JewelUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D22C4543243DD8B20001481D /* JewelUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JewelUITests.swift; sourceTree = "<group>"; };
 		D22C4545243DD8B20001481D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D22C4551243DDE490001481D /* WalletView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletView.swift; sourceTree = "<group>"; };
+		D22C4551243DDE490001481D /* Wallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wallet.swift; sourceTree = "<group>"; };
 		D22C4555243DE6F00001481D /* ReleaseListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReleaseListItem.swift; sourceTree = "<group>"; };
 		D26B5621243E80450098E9E4 /* ReleaseDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReleaseDetail.swift; sourceTree = "<group>"; };
 		D26B5623243E8DB00098E9E4 /* PlaybackControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackControls.swift; sourceTree = "<group>"; };
@@ -69,7 +69,7 @@
 		D28358862452D3CF00411AC9 /* SearchResultsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsList.swift; sourceTree = "<group>"; };
 		D28AF841244F46A700AD6614 /* debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = debug.xcconfig; sourceTree = "<group>"; };
 		D28AF842244F46D700AD6614 /* release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = release.xcconfig; sourceTree = "<group>"; };
-		D2D5875D244E391200E982E8 /* Wallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wallet.swift; sourceTree = "<group>"; };
+		D2D5875D244E391200E982E8 /* WalletStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletStore.swift; sourceTree = "<group>"; };
 		D2DCDA4A243E048000D0756C /* ReleaseMetadataOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReleaseMetadataOverlay.swift; sourceTree = "<group>"; };
 		D2E690F52450E36800B981F2 /* Slot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Slot.swift; sourceTree = "<group>"; };
 		D2E690F72450E98E00B981F2 /* Unwrap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Unwrap.swift; sourceTree = "<group>"; };
@@ -172,7 +172,7 @@
 		D22C4559243DFDD60001481D /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				D22C4551243DDE490001481D /* WalletView.swift */,
+				D22C4551243DDE490001481D /* Wallet.swift */,
 				D22C4555243DE6F00001481D /* ReleaseListItem.swift */,
 				D26B5621243E80450098E9E4 /* ReleaseDetail.swift */,
 				D26B5623243E8DB00098E9E4 /* PlaybackControls.swift */,
@@ -199,7 +199,7 @@
 		D2B1E6322448635D004D474F /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				D2D5875D244E391200E982E8 /* Wallet.swift */,
+				D2D5875D244E391200E982E8 /* WalletStore.swift */,
 				D2E690F52450E36800B981F2 /* Slot.swift */,
 			);
 			path = Models;
@@ -353,9 +353,9 @@
 				D26B5624243E8DB00098E9E4 /* PlaybackControls.swift in Sources */,
 				D26B5622243E80450098E9E4 /* ReleaseDetail.swift in Sources */,
 				D2E690FA2450ECBB00B981F2 /* EmptySlot.swift in Sources */,
-				D22C4552243DDE490001481D /* WalletView.swift in Sources */,
+				D22C4552243DDE490001481D /* Wallet.swift in Sources */,
 				D2DCDA4B243E048000D0756C /* ReleaseMetadataOverlay.swift in Sources */,
-				D2D5875E244E391200E982E8 /* Wallet.swift in Sources */,
+				D2D5875E244E391200E982E8 /* WalletStore.swift in Sources */,
 				D22C4524243DD8B00001481D /* SceneDelegate.swift in Sources */,
 				D22C4556243DE6F00001481D /* ReleaseListItem.swift in Sources */,
 			);

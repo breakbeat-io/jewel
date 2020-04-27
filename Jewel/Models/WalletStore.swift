@@ -9,7 +9,7 @@
 import Foundation
 import HMV
 
-class Wallet: ObservableObject {
+class WalletStore : ObservableObject {
 
     @Published var slots = [Slot]()
     

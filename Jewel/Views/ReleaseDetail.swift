@@ -61,7 +61,7 @@ struct ReleaseDetail: View {
 }
 
 struct ReleaseDetailView_Previews: PreviewProvider {
-    static let wallet = Wallet()
+    static let wallet = WalletStore()
     
     static var previews: some View {
         ReleaseDetail(albumAttributes: (wallet.slots[0].album?.attributes)!)

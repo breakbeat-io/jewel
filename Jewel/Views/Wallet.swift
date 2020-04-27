@@ -8,9 +8,9 @@
 
 import SwiftUI
 
-struct WalletView: View {
+struct Wallet: View {
     
-    @EnvironmentObject var wallet: Wallet
+    @EnvironmentObject var wallet: WalletStore
     
     var body: some View {
         NavigationView {
@@ -34,9 +34,9 @@ struct WalletView: View {
 }
 
 struct CircleImage_Previews: PreviewProvider {
-    static let wallet = Wallet()
+    static let wallet = WalletStore()
     
     static var previews: some View {
-        WalletView().environmentObject(wallet)
+        Wallet().environmentObject(wallet)
     }
 }
