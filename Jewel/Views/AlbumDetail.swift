@@ -16,52 +16,55 @@ struct AlbumDetail: View {
     var slotId: Int
     
     var body: some View {
-        VStack {
-            VStack(alignment: .leading) {
-                Unwrap(wallet.slots[slotId].album?.attributes) { attributes in
-                    KFImage(attributes.artwork.url(forWidth: 1000))
+        ScrollView {
+            VStack {
+                VStack(alignment: .leading) {
+                    Unwrap(wallet.slots[slotId].album?.attributes) { attributes in
+                        KFImage(attributes.artwork.url(forWidth: 1000))
+                            .placeholder {
+                                RoundedRectangle(cornerRadius: 4)
+                                    .fill(Color.gray)
+                            }
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .cornerRadius(4)
+                            .shadow(radius: 4)
+                        Text(attributes.name)
+                            .fontWeight(.bold)
+                            .font(.title)
+                            .foregroundColor(.black)
+                            .lineLimit(1)
+                        Text(attributes.artistName)
+                            .font(.title)
+                            .foregroundColor(.black)
+                            .lineLimit(1)
+                    }
+                }
+                Spacer()
+                HStack {
+                    Spacer()
+                    PlaybackControls(slotId: slotId)
+                    Spacer()
+                }
+                Spacer()
+                TrackList(slotId: slotId)
+            }
+            .padding(.all)
+            .background(
+                Unwrap(wallet.slots[slotId].album?.attributes?.artwork) { artwork in
+                    KFImage(artwork.url(forWidth: 1000))
                         .placeholder {
                             RoundedRectangle(cornerRadius: 4)
                                 .fill(Color.gray)
                         }
                         .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .cornerRadius(4)
-                        .shadow(radius: 4)
-                    Text(attributes.name)
-                        .fontWeight(.bold)
-                        .font(.title)
-                        .foregroundColor(.black)
-                        .lineLimit(1)
-                    Text(attributes.artistName)
-                        .font(.title)
-                        .foregroundColor(.black)
-                        .lineLimit(1)
+                        .scaledToFill()
+                        .brightness(0.4)
+                        .blur(radius: 20)
+                        .edgesIgnoringSafeArea(.all)
                 }
-            }
-            Spacer()
-            HStack {
-                Spacer()
-                PlaybackControls(slotId: slotId)
-                Spacer()
-            }
-            Spacer()
+            )
         }
-        .padding(.all)
-        .background(
-            Unwrap(wallet.slots[slotId].album?.attributes?.artwork) { artwork in
-                KFImage(artwork.url(forWidth: 1000))
-                    .placeholder {
-                        RoundedRectangle(cornerRadius: 4)
-                            .fill(Color.gray)
-                    }
-                    .resizable()
-                    .scaledToFill()
-                    .brightness(0.4)
-                    .blur(radius: 20)
-                    .edgesIgnoringSafeArea(.all)
-            }
-        )
     }
 }
 
