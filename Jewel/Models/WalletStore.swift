@@ -9,7 +9,7 @@
 import Foundation
 import HMV
 
-class WalletStore : ObservableObject {
+class WalletStore: ObservableObject {
 
     @Published var slots = [Slot]()
     
@@ -69,6 +69,7 @@ class WalletStore : ObservableObject {
     func deleteAlbumFromSlot(slotId: Int) {
         let emptySlot = Slot(id: slotId)
         self.slots[slotId] = emptySlot
+        self.saveWallet()
     }
 
     func loadExampleWallet() {
