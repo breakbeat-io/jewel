@@ -12,6 +12,7 @@ import HMV
 class WalletStore: ObservableObject {
 
     @Published var slots = [Slot]()
+    private var userDefaults = UserDefaults.standard
     
     init() {
         
@@ -23,7 +24,6 @@ class WalletStore: ObservableObject {
         }
         
         //load it with any saved albums
-        let userDefaults = UserDefaults.standard
         if let savedWallet = userDefaults.dictionary(forKey: "savedWallet") {
             for slotId in 0..<numberOfSlots {
                 if let albumId = savedWallet[String(slotId)] {
@@ -36,7 +36,6 @@ class WalletStore: ObservableObject {
     }
     
     func saveWallet() {
-        let userDefaults = UserDefaults.standard
         var savedWallet = [String: String]()
         for (index, slot) in slots.enumerated() {
             if let album = slot.album {
