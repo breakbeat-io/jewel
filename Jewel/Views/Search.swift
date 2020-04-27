@@ -22,7 +22,7 @@ struct Search: View {
         if let developerToken = Bundle.main.infoDictionary?["APPLE_MUSIC_API_TOKEN"] as? String {
             let hmv = HMV(storefront: .unitedKingdom, developerToken: developerToken)
 
-            hmv.search(term: searchTerm, types: [.albums]) { results, error in
+            hmv.search(term: searchTerm, limit: 20, types: [.albums]) { results, error in
               DispatchQueue.main.async {
                 self.searchResults = results?.albums?.data
               }

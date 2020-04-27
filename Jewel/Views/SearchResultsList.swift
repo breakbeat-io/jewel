@@ -18,7 +18,7 @@ struct SearchResultsList: View {
     var slotId: Int
     
     var body: some View {
-        List(0...self.searchResults!.count - 1, id: \.self) { i in
+        List(0..<self.searchResults!.count, id: \.self) { i in
             Button(action: {
                 self.wallet.addAlbumToSlot(albumId: self.searchResults![i].id, slotId: self.slotId)
                 self.presentationMode.wrappedValue.dismiss()
