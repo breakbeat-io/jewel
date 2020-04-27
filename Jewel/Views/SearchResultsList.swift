@@ -13,7 +13,7 @@ import HMV
 struct SearchResultsList: View {
     
     @Environment(\.presentationMode) var presentationMode
-    @EnvironmentObject var wallet: WalletStore
+    @EnvironmentObject var wallet: WalletViewModel
     @Binding var searchResults: [Album]?
     var slotId: Int
     

@@ -10,7 +10,7 @@ import SwiftUI
 
 struct Wallet: View {
     
-    @EnvironmentObject var wallet: WalletStore
+    @EnvironmentObject var wallet: WalletViewModel
     
     var body: some View {
         NavigationView {
@@ -34,7 +34,7 @@ struct Wallet: View {
 }
 
 struct CircleImage_Previews: PreviewProvider {
-    static let wallet = WalletStore()
+    static let wallet = WalletViewModel()
     
     static var previews: some View {
         Wallet().environmentObject(wallet)

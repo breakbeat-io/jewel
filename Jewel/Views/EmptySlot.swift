@@ -10,7 +10,7 @@ import SwiftUI
 
 struct EmptySlot: View {
     
-    @EnvironmentObject var wallet: WalletStore
+    @EnvironmentObject var wallet: WalletViewModel
     @State private var showSearch = false
     var slotId: Int
     

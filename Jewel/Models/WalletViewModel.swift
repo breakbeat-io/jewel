@@ -9,7 +9,7 @@
 import Foundation
 import HMV
 
-class WalletStore: ObservableObject {
+class WalletViewModel: ObservableObject {
 
     @Published var slots = [Slot]()
     private var userDefaults = UserDefaults.standard
