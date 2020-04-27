@@ -10,24 +10,26 @@ import SwiftUI
 
 struct ReleaseMetadataOverlay: View {
     
-    let title: String
-    let artist: String
+    @EnvironmentObject var wallet: WalletViewModel
+    var slotId: Int
     
     var body: some View {
         VStack(alignment: .leading) {
-            Text(title)
-                .font(.callout)
-                .fontWeight(.bold)
-                .foregroundColor(.white)
-                .padding(.top, 4)
-                .padding(.horizontal, 6)
-                .lineLimit(1)
-            Text(artist)
-                .font(.footnote)
-                .foregroundColor(.white)
-                .padding(.horizontal, 6)
-                .padding(.bottom, 4)
-                .lineLimit(1)
+            Unwrap(wallet.slots[slotId].album?.attributes) { attributes in
+                Text(attributes.name)
+                    .font(.callout)
+                    .fontWeight(.bold)
+                    .foregroundColor(.white)
+                    .padding(.top, 4)
+                    .padding(.horizontal, 6)
+                    .lineLimit(1)
+                Text(attributes.artistName)
+                    .font(.footnote)
+                    .foregroundColor(.white)
+                    .padding(.horizontal, 6)
+                    .padding(.bottom, 4)
+                    .lineLimit(1)
+            }
         }
         .background(Color.black)
         .cornerRadius(2.0)
@@ -35,8 +37,8 @@ struct ReleaseMetadataOverlay: View {
     }
 }
 
-struct ReleaseMetadataOverlayView_Previews: PreviewProvider {
+struct ReleaseMetadataOverlay_Previews: PreviewProvider {
     static var previews: some View {
-        ReleaseMetadataOverlay(title: "The Fat of the Land", artist: "The Prodigy")
+        ReleaseMetadataOverlay(slotId: 0)
     }
 }

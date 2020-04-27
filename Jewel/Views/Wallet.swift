@@ -17,9 +17,9 @@ struct Wallet: View {
             VStack {
                 ForEach(self.wallet.slots) { slot in
                     if slot.album == nil {
-                        EmptySlot(slotId: slot.id).environmentObject(self.wallet)
+                        EmptySlot(slotId: slot.id)
                     } else {
-                        FilledSlot(slot: slot).environmentObject(self.wallet)
+                        FilledSlot(slotId: slot.id)
                     }
                 }
             }
@@ -27,13 +27,12 @@ struct Wallet: View {
             .padding(.bottom)
             .navigationBarTitle(Text("My Collection"))
         }
-        
         .statusBar(hidden: true)
         .accentColor(.black)
     }
 }
 
-struct CircleImage_Previews: PreviewProvider {
+struct Wallet_Previews: PreviewProvider {
     static let wallet = WalletViewModel()
     
     static var previews: some View {

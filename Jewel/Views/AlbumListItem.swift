@@ -19,8 +19,8 @@ struct AlbumListItem: View {
         Rectangle()
         .foregroundColor(.clear)
         .background(
-            Unwrap(wallet.slots[slotId].album?.attributes?.artwork.url(forWidth: 1000)) { artworkUrl in
-                KFImage(artworkUrl)
+            Unwrap(wallet.slots[slotId].album?.attributes?.artwork) { artwork in
+                KFImage(artwork.url(forWidth: 1000))
                     .placeholder {
                         RoundedRectangle(cornerRadius: 4)
                             .fill(Color.gray)
@@ -31,8 +31,7 @@ struct AlbumListItem: View {
             })
         .cornerRadius(4)
         .overlay(
-            ReleaseMetadataOverlay(slotId: slotId
-            ), alignment: .bottomLeading
+            ReleaseMetadataOverlay(slotId: slotId), alignment: .bottomLeading
         )
     }
 }

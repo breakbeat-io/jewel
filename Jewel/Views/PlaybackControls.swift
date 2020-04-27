@@ -9,11 +9,13 @@
 import SwiftUI
 
 struct PlaybackControls: View {
-    var playbackUrl: URL
+    
+    @EnvironmentObject var wallet: WalletViewModel
+    var slotId: Int
     
     var body: some View {
         Button(action: {
-            UIApplication.shared.open(self.playbackUrl)
+            UIApplication.shared.open(self.wallet.slots[self.slotId].album!.attributes!.url)
         }) {
             HStack {
                 Image(systemName: "play.fill")
@@ -37,6 +39,6 @@ struct PlaybackControlsView_Previews: PreviewProvider {
     static let wallet = WalletViewModel()
     
     static var previews: some View {
-        PlaybackControls(playbackUrl: (wallet.slots[0].album?.attributes!.url)!)
+        PlaybackControls(slotId: 0)
     }
 }

@@ -11,32 +11,27 @@ import SwiftUI
 struct FilledSlot: View {
     
     @EnvironmentObject var wallet: WalletViewModel
-    @State private var selection: Int? = 0
+    @State private var tapped: Int? = 0
     @State private var showSearch = false
     
-    var slot: Slot
+    var slotId: Int
     
     var body: some View {
-        Unwrap(slot.album?.attributes) { albumAttributes in
-            NavigationLink(
-                destination: ReleaseDetail (
-                    albumAttributes: albumAttributes
-                ), tag: 1, selection: self.$selection
-            ) {
-                ReleaseListItem (
-                    albumAttributes: albumAttributes
-                )
-                .shadow(radius: 3)
-                .onTapGesture {
-                    self.selection = 1
-                }
-                .onLongPressGesture() {
-                    self.showSearch = true
-                }
+        NavigationLink(
+            destination: AlbumDetail(slotId: self.slotId), tag: 1, selection: self.$tapped
+        ) {
+            AlbumListItem(slotId: self.slotId)
+            .environmentObject(self.wallet)
+            .shadow(radius: 3)
+            .onTapGesture {
+                self.tapped = 1
+            }
+            .onLongPressGesture() {
+                self.showSearch = true
             }
         }
         .sheet(isPresented: $showSearch) {
-            Search(slotId: self.slot.id).environmentObject(self.wallet)
+            Search(slotId: self.slotId).environmentObject(self.wallet)
         }
     }
 }
@@ -46,6 +41,6 @@ struct FilledSlot_Previews: PreviewProvider {
     static let wallet = WalletViewModel()
     
     static var previews: some View {
-        FilledSlot(slot: wallet.slots[0])
+        FilledSlot(slotId: 0)
     }
 }
