@@ -31,7 +31,7 @@ struct AlbumListItem: View {
             })
         .cornerRadius(4)
         .overlay(
-            ReleaseMetadataOverlay(slotId: slotId), alignment: .bottomLeading
+            MetadataOverlay(slotId: slotId), alignment: .bottomLeading
         )
     }
 }
