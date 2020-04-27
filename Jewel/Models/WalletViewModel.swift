@@ -13,8 +13,22 @@ class WalletViewModel: ObservableObject {
 
     @Published var slots = [Slot]()
     private var userDefaults = UserDefaults.standard
+    private var store: HMV?
+    
+    fileprivate func openStore() throws {
+        let appleMusicApiToken = Bundle.main.infoDictionary?["APPLE_MUSIC_API_TOKEN"] as! String
+        if appleMusicApiToken == "" {
+            print("No Apple Music API Token Found!")
+            throw WalletError.noAppleMusicApiToken
+        } else {
+            store = HMV(storefront: .unitedKingdom, developerToken: appleMusicApiToken)
+        }
+    }
     
     init() {
+        
+        //basically if we can't open the store we're dead in the water so for now may as well crash!
+        try! openStore()
         
         //create an empty wallet
         let numberOfSlots = 8
@@ -46,23 +60,16 @@ class WalletViewModel: ObservableObject {
     }
     
     func addAlbumToSlot(albumId: String, slotId: Int) {
-        if let developerToken = Bundle.main.infoDictionary?["APPLE_MUSIC_API_TOKEN"] as? String {
-
-            let hmv = HMV(storefront: .unitedKingdom, developerToken: developerToken)
-
-            hmv.album(id: albumId, completion: {
-                (album: Album?, error: Error?) -> Void in
-                DispatchQueue.main.async {
-                    if album != nil {
-                        let newSlot = Slot(id: slotId, album: album)
-                        self.slots[slotId] = newSlot
-                        self.saveWallet()
-                    }
+        store!.album(id: albumId, completion: {
+            (album: Album?, error: Error?) -> Void in
+            DispatchQueue.main.async {
+                if album != nil {
+                    let newSlot = Slot(id: slotId, album: album)
+                    self.slots[slotId] = newSlot
+                    self.saveWallet()
                 }
-            })
-        } else {
-            print("No Apple Music API Token Found!")
-        }
+            }
+        })
     }
     
     func deleteAlbumFromSlot(slotId: Int) {
@@ -72,26 +79,19 @@ class WalletViewModel: ObservableObject {
     }
 
     func loadExampleWallet() {
-        if let developerToken = Bundle.main.infoDictionary?["APPLE_MUSIC_API_TOKEN"] as? String {
-            
-            let hmv = HMV(storefront: .unitedKingdom, developerToken: developerToken)
-            
-            let exampleAlbums = ["1322664114", "1241281467", "1450123945", "595779873", "723670972", "1097861387", "1440922148", "1440230518"]
-            
-            for (index, album) in exampleAlbums.enumerated() {
-                hmv.album(id: album, completion: {
-                    (album: Album?, error: Error?) -> Void in
-                    DispatchQueue.main.async {
-                        if album != nil {
-                            let slot = Slot(id: index, album: album!)
-                            self.slots[index] = slot
-                            self.saveWallet()
-                        }
+        let exampleAlbums = ["1322664114", "1241281467", "1450123945", "595779873", "723670972", "1097861387", "1440922148", "1440230518"]
+        
+        for (index, album) in exampleAlbums.enumerated() {
+            store!.album(id: album, completion: {
+                (album: Album?, error: Error?) -> Void in
+                DispatchQueue.main.async {
+                    if album != nil {
+                        let slot = Slot(id: index, album: album!)
+                        self.slots[index] = slot
+                        self.saveWallet()
                     }
-                })
-            }
-        } else {
-            print("No Apple Music API Token Found!")
+                }
+            })
         }
     }
 }
