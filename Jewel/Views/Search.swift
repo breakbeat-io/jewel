@@ -57,13 +57,15 @@ struct Search: View {
                 SearchResultsList(searchResults: $searchResults, slotId: slotId).environmentObject(wallet)
             }
             Spacer()
-            Button(action: {
-                self.wallet.deleteAlbumFromSlot(slotId: self.slotId)
-                self.presentationMode.wrappedValue.dismiss()
-            }) {
-                Image(systemName: "trash")
-                    .padding()
-                    .foregroundColor(.red)
+            if wallet.slots[slotId].album != nil {
+                Button(action: {
+                    self.wallet.deleteAlbumFromSlot(slotId: self.slotId)
+                    self.presentationMode.wrappedValue.dismiss()
+                }) {
+                    Image(systemName: "trash")
+                        .padding()
+                        .foregroundColor(.red)
+                }
             }
         }
         .alert(isPresented: $showingAlert) {
