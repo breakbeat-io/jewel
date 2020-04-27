@@ -66,7 +66,7 @@ class WalletStore : ObservableObject {
         }
     }
     
-    func delete(slotId: Int) {
+    func deleteAlbumFromSlot(slotId: Int) {
         let emptySlot = Slot(id: slotId)
         self.slots[slotId] = emptySlot
     }

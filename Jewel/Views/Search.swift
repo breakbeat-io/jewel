@@ -58,7 +58,7 @@ struct Search: View {
             }
             Spacer()
             Button(action: {
-                self.wallet.delete(slotId: self.slotId)
+                self.wallet.deleteAlbumFromSlot(slotId: self.slotId)
                 self.presentationMode.wrappedValue.dismiss()
             }) {
                 Image(systemName: "trash")
