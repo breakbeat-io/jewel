@@ -16,6 +16,9 @@ struct DiscTrackList: View {
     
     var body: some View {
         
+        // Specifying String here to help the compiler
+        let albumArtist: String = self.wallet.slots[self.slotId].album?.attributes?.artistName ?? ""
+        
         let discTrackList = Unwrap(wallet.slots[slotId].album?.relationships?.tracks.data) { tracks in
             ForEach(0..<tracks.count) { i in
                 Unwrap(tracks[i].attributes) { track in
@@ -30,7 +33,7 @@ struct DiscTrackList: View {
                                 .font(.callout)
                                 .fontWeight(.medium)
                                 .lineLimit(1)
-                            if track.artistName as String != self.wallet.slots[self.slotId].album?.attributes?.artistName {
+                            if track.artistName as String != albumArtist {
                                 Text(track.artistName)
                                     .font(.callout)
                                     .fontWeight(.light)
