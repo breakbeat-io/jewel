@@ -20,7 +20,7 @@ struct FilledSlot: View {
         NavigationLink(
             destination: AlbumDetail(slotId: self.slotId), tag: 1, selection: self.$tapped
         ) {
-            AlbumListItem(slotId: self.slotId)
+            AlbumCard(slotId: self.slotId)
             .environmentObject(self.wallet)
             .shadow(radius: 3)
             .onTapGesture {

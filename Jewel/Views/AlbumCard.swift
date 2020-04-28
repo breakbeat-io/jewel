@@ -10,7 +10,7 @@ import SwiftUI
 import KingfisherSwiftUI
 import HMV
 
-struct AlbumListItem: View {
+struct AlbumCard: View {
     
     @EnvironmentObject var wallet: WalletViewModel
     var slotId: Int
@@ -41,6 +41,6 @@ struct ReleaseListItem_Previews: PreviewProvider {
     static let wallet = WalletViewModel()
     
     static var previews: some View {
-        AlbumListItem(slotId: 0)
+        AlbumCard(slotId: 0)
     }
 }
