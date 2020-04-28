@@ -40,12 +40,11 @@ struct AlbumDetail: View {
                             .lineLimit(1)
                     }
                 }
-                HStack {
-                    Spacer()
+                HStack(alignment: .center) {
                     PlaybackControls(slotId: slotId)
-                    Spacer()
                 }
                 .padding()
+                Divider()
                 TrackList(slotId: slotId)
             }
             .padding(.all)
