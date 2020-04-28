@@ -16,7 +16,7 @@ struct DiscTrackList: View {
     
     var body: some View {
         
-        Unwrap(wallet.slots[slotId].album?.relationships?.tracks.data) { tracks in
+        let discTrackList = Unwrap(wallet.slots[slotId].album?.relationships?.tracks.data) { tracks in
             ForEach(0..<tracks.count) { i in
                 Unwrap(tracks[i].attributes) { track in
                     HStack {
@@ -48,6 +48,8 @@ struct DiscTrackList: View {
                 }
             }
         }
+        
+        return discTrackList
     }
 }
 
