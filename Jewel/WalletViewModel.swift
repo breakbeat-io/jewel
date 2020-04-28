@@ -83,10 +83,9 @@ class WalletViewModel: ObservableObject {
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             if let data = data {
-                if let decodedResponse = try? JSONDecoder().decode(RecommendationResponse.self, from: data) {
+                if let decodedResponse = try? JSONDecoder().decode([String].self, from: data) {
                     // we have good data – go back to the main thread
-                    
-                    for (index, album) in decodedResponse.recommendations.enumerated() {
+                    for (index, album) in decodedResponse.enumerated() {
                         self.store!.album(id: album, completion: {
                             (album: Album?, error: Error?) -> Void in
                             DispatchQueue.main.async {
@@ -108,8 +107,4 @@ class WalletViewModel: ObservableObject {
             print("Fetch failed: \(error?.localizedDescription ?? "Unknown error")")
         }.resume()
     }
-}
-
-struct RecommendationResponse: Codable {
-    var recommendations: [String]
 }
