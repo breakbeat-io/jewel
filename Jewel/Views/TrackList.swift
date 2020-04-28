@@ -14,7 +14,28 @@ struct TrackList: View {
     var slotId: Int
     
     var body: some View {
-        TrackListItem(slotId: slotId)
+        
+        let tracks = wallet.slots[slotId].album?.relationships?.tracks.data!
+        var discs = [Int]()
+        
+        for i in 0..<tracks!.count {
+            discs.append(tracks![i].attributes!.discNumber)
+        }
+        
+        let numberOfDiscs = discs.max()
+        
+        let tracklist = VStack(alignment: .leading) {
+            ForEach(1..<numberOfDiscs! + 1) { i in
+                if numberOfDiscs! > 1 {
+                    Text("Disc \(i)")
+                        .fontWeight(.bold)
+                        .padding(.vertical)
+                }
+                TrackListItem(slotId: self.slotId, discNumber: i)
+            }
+        }
+        
+        return tracklist
     }
 }
 
