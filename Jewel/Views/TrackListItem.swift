@@ -24,7 +24,9 @@ struct TrackListItem: View {
                 HStack {
                     Text(String(tracks![i].attributes!.trackNumber))
                         .font(.footnote)
-                        .padding()
+                        .frame(width: 20, alignment: .center)
+                        .padding(.vertical)
+                        .padding(.trailing)
                     VStack(alignment: .leading) {
                         Text(tracks![i].attributes!.name)
                             .font(.callout)
@@ -41,11 +43,11 @@ struct TrackListItem: View {
                     Spacer()
                     Text(tracks![i].attributes!.duration()!)
                         .font(.footnote)
-                        .padding()
                         .opacity(0.7)
                 }
             }
         }
+        
         return item
     }
 }
