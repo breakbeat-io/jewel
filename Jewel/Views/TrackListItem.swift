@@ -17,6 +17,7 @@ struct TrackListItem: View {
     var body: some View {
         
         let tracks = wallet.slots[slotId].album?.relationships?.tracks.data!
+        let albumArtist = wallet.slots[self.slotId].album?.attributes?.artistName
 
         let item = ForEach(0..<(tracks!.count)) { i in
             if tracks![i].attributes!.discNumber == self.discNumber {
@@ -29,16 +30,19 @@ struct TrackListItem: View {
                             .font(.callout)
                             .fontWeight(.medium)
                             .lineLimit(1)
-                        Text(tracks![i].attributes!.artistName)
-                            .font(.callout)
-                            .fontWeight(.light)
-                            .lineLimit(1)
+                        if tracks![i].attributes!.artistName != albumArtist {
+                            Text(tracks![i].attributes!.artistName)
+                                .font(.callout)
+                                .fontWeight(.light)
+                                .opacity(0.7)
+                                .lineLimit(1)
+                        }
                     }
                     Spacer()
                     Text(tracks![i].attributes!.duration()!)
                         .font(.footnote)
-                        .foregroundColor(.gray)
                         .padding()
+                        .opacity(0.7)
                 }
             }
         }
