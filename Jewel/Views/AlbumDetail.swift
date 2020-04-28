@@ -44,7 +44,7 @@ struct AlbumDetail: View {
                     PlaybackControls(slotId: slotId)
                 }
                 .padding()
-                TrackList(slotId: slotId)
+                AlbumTrackList(slotId: slotId)
             }
             .padding(.all)
             .background(

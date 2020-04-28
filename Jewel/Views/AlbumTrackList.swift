@@ -34,7 +34,7 @@ struct AlbumTrackList: View {
                         .fontWeight(.bold)
                         .padding(.vertical)
                 }
-                TrackListItem(slotId: self.slotId, discNumber: i)
+                DiscTrackList(slotId: self.slotId, discNumber: i)
             }.foregroundColor(Color.black)
         }
         

@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct TrackListItem: View {
+struct DiscTrackList: View {
     
     @EnvironmentObject var wallet: WalletViewModel
     var slotId: Int
@@ -54,6 +54,6 @@ struct TrackListItem: View {
 
 struct TrackListItem_Previews: PreviewProvider {
     static var previews: some View {
-        TrackListItem(slotId: 1, discNumber: 1)
+        DiscTrackList(slotId: 1, discNumber: 1)
     }
 }
