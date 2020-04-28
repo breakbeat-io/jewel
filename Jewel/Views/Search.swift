@@ -46,7 +46,8 @@ struct Search: View {
                 Button(action: {
                     self.showingAlert = true
                 }) {
-                    Text("Our Selection")
+                    Image(systemName: "square.and.arrow.down.on.square")
+                        .padding()
                 }
                 .padding()
             }
@@ -69,8 +70,8 @@ struct Search: View {
             }
         }
         .alert(isPresented: $showingAlert) {
-            Alert(title: Text("Do you want to load our current selection of albums?"), primaryButton: .cancel(Text("Cancel")), secondaryButton: .default(Text("Load").bold()) {
-                    self.wallet.loadExampleWallet()
+            Alert(title: Text("Do you want to load our recommendations?"), primaryButton: .cancel(Text("Cancel")), secondaryButton: .default(Text("Load").bold()) {
+                    self.wallet.loadRecommendations()
                 })
         }
     }

@@ -77,21 +77,39 @@ class WalletViewModel: ObservableObject {
         self.slots[slotId] = emptySlot
         self.saveWallet()
     }
-
-    func loadExampleWallet() {
-        let exampleAlbums = ["1322664114", "1241281467", "1450123945", "595779873", "723670972", "1097861387", "1440922148", "1440230518"]
+    
+    func loadRecommendations() {
+        let request = URLRequest(url: URL(string: "https://breakbeat.io/jewel/recommendations.json")!)
         
-        for (index, album) in exampleAlbums.enumerated() {
-            store!.album(id: album, completion: {
-                (album: Album?, error: Error?) -> Void in
-                DispatchQueue.main.async {
-                    if album != nil {
-                        let slot = Slot(id: index, album: album!)
-                        self.slots[index] = slot
-                        self.saveWallet()
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let data = data {
+                if let decodedResponse = try? JSONDecoder().decode(RecommendationResponse.self, from: data) {
+                    // we have good data – go back to the main thread
+                    
+                    for (index, album) in decodedResponse.recommendations.enumerated() {
+                        self.store!.album(id: album, completion: {
+                            (album: Album?, error: Error?) -> Void in
+                            DispatchQueue.main.async {
+                                if album != nil {
+                                    let slot = Slot(id: index, album: album!)
+                                    self.slots[index] = slot
+                                    self.saveWallet()
+                                }
+                            }
+                        })
                     }
+
+                    // everything is good, so we can exit
+                    return
                 }
-            })
-        }
+            }
+
+            // if we're still here it means there was a problem
+            print("Fetch failed: \(error?.localizedDescription ?? "Unknown error")")
+        }.resume()
     }
+}
+
+struct RecommendationResponse: Codable {
+    var recommendations: [String]
 }
