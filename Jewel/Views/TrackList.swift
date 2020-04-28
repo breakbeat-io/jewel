@@ -7,8 +7,6 @@
 //
 
 import SwiftUI
-import KingfisherSwiftUI
-import HMV
 
 struct TrackList: View {
     
@@ -16,29 +14,12 @@ struct TrackList: View {
     var slotId: Int
     
     var body: some View {
-        
-        ForEach(0..<(wallet.slots[slotId].album?.relationships?.tracks.data!.count)!) { i in
-            HStack {
-                Text("x")
-                    .padding()
-                VStack(alignment: .leading) {
-                    Text(self.wallet.slots[self.slotId].album!.relationships!.tracks.data![i].attributes!.name)
-                        .fontWeight(.medium)
-                        .lineLimit(1)
-                    Text(self.wallet.slots[self.slotId].album!.relationships!.tracks.data![i].attributes!.artistName)
-                        .fontWeight(.light)
-                        .lineLimit(1)
-                }
-                Spacer()
-                Text("--:--")
-                    .padding()
-            }
-        }
+        TrackListItem(slotId: slotId)
     }
 }
 
-//struct TrackList_Previews: PreviewProvider {
-//    static var previews: some View {
-//        TrackList()
-//    }
-//}
+struct TrackList_Previews: PreviewProvider {
+    static var previews: some View {
+        TrackList(slotId: 0)
+    }
+}
