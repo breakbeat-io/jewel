@@ -33,7 +33,7 @@ struct TrackList: View {
                         .padding(.vertical)
                 }
                 TrackListItem(slotId: self.slotId, discNumber: i)
-            }
+            }.foregroundColor(Color.black)
         }
         
         return tracklist
