@@ -28,6 +28,8 @@ struct Wallet: View {
             .navigationBarTitle(Text("My Collection"))
         }
         .statusBar(hidden: true)
+        .navigationViewStyle(DoubleColumnNavigationViewStyle())
+        .padding()
         .accentColor(.black)
     }
 }
