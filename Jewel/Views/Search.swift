@@ -58,16 +58,6 @@ struct Search: View {
                 SearchResultsList(searchResults: $searchResults, slotId: slotId).environmentObject(wallet)
             }
             Spacer()
-            if wallet.slots[slotId].album != nil {
-                Button(action: {
-                    self.wallet.deleteAlbumFromSlot(slotId: self.slotId)
-                    self.presentationMode.wrappedValue.dismiss()
-                }) {
-                    Image(systemName: "trash")
-                        .padding()
-                        .foregroundColor(.red)
-                }
-            }
         }
         .alert(isPresented: $showingAlert) {
             Alert(title: Text("Do you want to load our recommendations?"), primaryButton: .cancel(Text("Cancel")), secondaryButton: .default(Text("Load").bold()) {

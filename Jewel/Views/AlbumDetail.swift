@@ -61,7 +61,15 @@ struct AlbumDetail: View {
                         .edgesIgnoringSafeArea(.all)
                 }
             )
-        }
+        }.navigationBarItems(trailing:
+            Button(action: {
+                self.wallet.deleteAlbumFromSlot(slotId: self.slotId)
+            }) {
+            Image(systemName: "trash")
+                .padding()
+                .foregroundColor(.red)
+            }
+        )
     }
 }
 
