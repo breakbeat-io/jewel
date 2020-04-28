@@ -20,9 +20,11 @@ struct TrackList: View {
         if let tracks = wallet.slots[slotId].album?.relationships?.tracks.data {
             var discs = [Int]()
             for i in 0..<tracks.count {
-                discs.append(tracks[i].attributes!.discNumber)
+                if let trackDiscNumber = tracks[i].attributes?.discNumber {
+                    discs.append(trackDiscNumber)
+                }
             }
-            numberOfDiscs = discs.max()!
+            numberOfDiscs = discs.max() ?? 0
         }
         
         let tracklist = VStack(alignment: .leading) {
