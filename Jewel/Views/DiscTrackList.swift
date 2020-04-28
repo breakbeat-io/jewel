@@ -1,5 +1,5 @@
 //
-//  TrackListItem.swift
+//  DiscTrackList.swift
 //  Jewel
 //
 //  Created by Greg Hepworth on 28/04/2020.
@@ -47,13 +47,11 @@ struct DiscTrackList: View {
                     }
                 }
             }
-            
-            
         }
     }
 }
 
-struct TrackListItem_Previews: PreviewProvider {
+struct DiscTrackList_Previews: PreviewProvider {
     static var previews: some View {
         DiscTrackList(slotId: 1, discNumber: 1)
     }
