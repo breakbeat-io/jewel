@@ -33,6 +33,7 @@ struct AlbumCard: View {
         .overlay(
             MetadataOverlay(slotId: slotId), alignment: .bottomLeading
         )
+        .shadow(radius: 3)
     }
 }
 

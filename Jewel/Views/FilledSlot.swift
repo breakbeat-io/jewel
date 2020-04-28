@@ -21,8 +21,6 @@ struct FilledSlot: View {
             destination: AlbumDetail(slotId: self.slotId), tag: 1, selection: self.$tapped
         ) {
             AlbumCard(slotId: self.slotId)
-            .environmentObject(self.wallet)
-            .shadow(radius: 3)
             .onTapGesture {
                 self.tapped = 1
             }
