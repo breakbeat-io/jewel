@@ -16,39 +16,40 @@ struct DiscTrackList: View {
     
     var body: some View {
         
-        let tracks = wallet.slots[slotId].album?.relationships?.tracks.data!
-        let albumArtist = wallet.slots[self.slotId].album?.attributes?.artistName
-
-        let item = ForEach(0..<(tracks!.count)) { i in
-            if tracks![i].attributes!.discNumber == self.discNumber {
-                HStack {
-                    Text(String(tracks![i].attributes!.trackNumber))
-                        .font(.footnote)
-                        .frame(width: 20, alignment: .center)
-                        .padding(.vertical)
-                        .padding(.trailing)
-                    VStack(alignment: .leading) {
-                        Text(tracks![i].attributes!.name)
-                            .font(.callout)
-                            .fontWeight(.medium)
-                            .lineLimit(1)
-                        if tracks![i].attributes!.artistName != albumArtist {
-                            Text(tracks![i].attributes!.artistName)
+        Unwrap(wallet.slots[slotId].album?.relationships?.tracks.data) { tracks in
+            ForEach(0..<tracks.count) { i in
+                Unwrap(tracks[i].attributes) { track in
+                    HStack {
+                        Text(String(track.trackNumber))
+                            .font(.footnote)
+                            .frame(width: 20, alignment: .center)
+                            .padding(.vertical)
+                            .padding(.trailing)
+                        VStack(alignment: .leading) {
+                            Text(track.name)
                                 .font(.callout)
-                                .fontWeight(.light)
-                                .opacity(0.7)
+                                .fontWeight(.medium)
                                 .lineLimit(1)
+                            if track.artistName as String != self.wallet.slots[self.slotId].album?.attributes?.artistName {
+                                Text(track.artistName)
+                                    .font(.callout)
+                                    .fontWeight(.light)
+                                    .opacity(0.7)
+                                    .lineLimit(1)
+                            }
+                        }
+                        Spacer()
+                        Unwrap(track.duration()) { duration in
+                            Text(duration)
+                                .font(.footnote)
+                                .opacity(0.7)
                         }
                     }
-                    Spacer()
-                    Text(tracks![i].attributes!.duration()!)
-                        .font(.footnote)
-                        .opacity(0.7)
                 }
             }
+            
+            
         }
-        
-        return item
     }
 }
 
