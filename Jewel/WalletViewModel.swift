@@ -85,17 +85,10 @@ class WalletViewModel: ObservableObject {
             if let data = data {
                 if let decodedResponse = try? JSONDecoder().decode([String].self, from: data) {
                     // we have good data – go back to the main thread
-                    for (index, album) in decodedResponse.enumerated() {
-                        self.store!.album(id: album, completion: {
-                            (album: Album?, error: Error?) -> Void in
-                            DispatchQueue.main.async {
-                                if album != nil {
-                                    let slot = Slot(id: index, album: album!)
-                                    self.slots[index] = slot
-                                    self.saveWallet()
-                                }
-                            }
-                        })
+                    for (index, albumId) in decodedResponse.enumerated() {
+                        for (index, albumId) in decodedResponse.enumerated() {
+                            self.addAlbumToSlot(albumId: albumId, slotId: index)
+                        }
                     }
 
                     // everything is good, so we can exit
