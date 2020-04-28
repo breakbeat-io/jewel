@@ -86,9 +86,7 @@ class WalletViewModel: ObservableObject {
                 if let decodedResponse = try? JSONDecoder().decode([String].self, from: data) {
                     // we have good data – go back to the main thread
                     for (index, albumId) in decodedResponse.enumerated() {
-                        for (index, albumId) in decodedResponse.enumerated() {
-                            self.addAlbumToSlot(albumId: albumId, slotId: index)
-                        }
+                        self.addAlbumToSlot(albumId: albumId, slotId: index)
                     }
 
                     // everything is good, so we can exit
