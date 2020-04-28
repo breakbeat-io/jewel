@@ -15,18 +15,19 @@ struct TrackList: View {
     
     var body: some View {
         
-        let tracks = wallet.slots[slotId].album?.relationships?.tracks.data!
-        var discs = [Int]()
+        var numberOfDiscs = 0
         
-        for i in 0..<tracks!.count {
-            discs.append(tracks![i].attributes!.discNumber)
+        if let tracks = wallet.slots[slotId].album?.relationships?.tracks.data {
+            var discs = [Int]()
+            for i in 0..<tracks.count {
+                discs.append(tracks[i].attributes!.discNumber)
+            }
+            numberOfDiscs = discs.max()!
         }
         
-        let numberOfDiscs = discs.max()
-        
         let tracklist = VStack(alignment: .leading) {
-            ForEach(1..<numberOfDiscs! + 1) { i in
-                if numberOfDiscs! > 1 {
+            ForEach(1..<numberOfDiscs + 1) { i in
+                if numberOfDiscs > 1 {
                     Text("Disc \(i)")
                         .fontWeight(.bold)
                         .padding(.vertical)
