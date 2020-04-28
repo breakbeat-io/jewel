@@ -18,13 +18,13 @@ struct DiscTrackList: View {
         
         let discTrackList = Unwrap(wallet.slots[slotId].album?.relationships?.tracks.data) { tracks in
             ForEach(0..<tracks.count) { i in
-                // unwrap this properly!
-                if tracks[i].attributes!.discNumber == self.discNumber {
-                    TrackListItem(slotId: self.slotId, trackId: i)
+                Unwrap(tracks[i].attributes?.discNumber) { trackDiscNumber in
+                    if trackDiscNumber == self.discNumber {
+                        TrackListItem(slotId: self.slotId, trackId: i)
+                    }
                 }
             }
         }
-        
         return discTrackList
     }
 }

@@ -45,7 +45,6 @@ struct TrackListItem: View {
                 }
             }
         }
-        
         return trackListItem
     }
 }
