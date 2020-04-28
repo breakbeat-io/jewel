@@ -20,17 +20,22 @@ struct TrackListItem: View {
         let item = ForEach(0..<(tracks!.count)) { i in
             HStack {
                 Text(String(tracks![i].attributes!.trackNumber))
+                    .font(.footnote)
                     .padding()
                 VStack(alignment: .leading) {
                     Text(tracks![i].attributes!.name)
+                        .font(.callout)
                         .fontWeight(.medium)
                         .lineLimit(1)
                     Text(tracks![i].attributes!.artistName)
+                        .font(.callout)
                         .fontWeight(.light)
                         .lineLimit(1)
                 }
                 Spacer()
                 Text(tracks![i].attributes!.duration()!)
+                    .font(.footnote)
+                    .foregroundColor(.gray)
                     .padding()
             }
         }
