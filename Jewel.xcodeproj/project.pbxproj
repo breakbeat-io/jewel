@@ -31,6 +31,7 @@
 		D2E690FA2450ECBB00B981F2 /* EmptySlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E690F92450ECBB00B981F2 /* EmptySlot.swift */; };
 		D2E690FC2450EF9A00B981F2 /* FilledSlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E690FB2450EF9A00B981F2 /* FilledSlot.swift */; };
 		D2EC216E2458AC6900658BF0 /* Zephyr in Frameworks */ = {isa = PBXBuildFile; productRef = D2EC216D2458AC6900658BF0 /* Zephyr */; };
+		D2FD3B772458E731008A071F /* TrackListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FD3B762458E731008A071F /* TrackListItem.swift */; };
 		D2FE407824504F2700623280 /* HMV in Frameworks */ = {isa = PBXBuildFile; productRef = D2FE407724504F2700623280 /* HMV */; };
 /* End PBXBuildFile section */
 
@@ -83,6 +84,7 @@
 		D2E690F92450ECBB00B981F2 /* EmptySlot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptySlot.swift; sourceTree = "<group>"; };
 		D2E690FB2450EF9A00B981F2 /* FilledSlot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilledSlot.swift; sourceTree = "<group>"; };
 		D2EAB323245192F000AC9CC3 /* Jewel.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Jewel.entitlements; sourceTree = "<group>"; };
+		D2FD3B762458E731008A071F /* TrackListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackListItem.swift; sourceTree = "<group>"; };
 		D2FE406F244FAA4500623280 /* apple-music-api-token.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "apple-music-api-token.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -192,6 +194,7 @@
 				D26B5623243E8DB00098E9E4 /* PlaybackControls.swift */,
 				D2D40B4E245738220018E066 /* AlbumTrackList.swift */,
 				D279E53124581AA800DFBDD4 /* DiscTrackList.swift */,
+				D2FD3B762458E731008A071F /* TrackListItem.swift */,
 				D28358822451D3C700411AC9 /* Search.swift */,
 				D28358862452D3CF00411AC9 /* SearchResultsList.swift */,
 				D2E690F72450E98E00B981F2 /* Unwrap.swift */,
@@ -381,6 +384,7 @@
 				D2DCDA4B243E048000D0756C /* MetadataOverlay.swift in Sources */,
 				D2D5875E244E391200E982E8 /* WalletViewModel.swift in Sources */,
 				D22C4524243DD8B00001481D /* SceneDelegate.swift in Sources */,
+				D2FD3B772458E731008A071F /* TrackListItem.swift in Sources */,
 				D22C4556243DE6F00001481D /* AlbumCard.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

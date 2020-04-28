@@ -16,38 +16,11 @@ struct DiscTrackList: View {
     
     var body: some View {
         
-        let albumArtist = self.wallet.slots[self.slotId].album?.attributes?.artistName ?? ""
-        
         let discTrackList = Unwrap(wallet.slots[slotId].album?.relationships?.tracks.data) { tracks in
             ForEach(0..<tracks.count) { i in
-                Unwrap(tracks[i].attributes) { track in
-                    HStack {
-                        Text(String(track.trackNumber))
-                            .font(.footnote)
-                            .frame(width: 20, alignment: .center)
-                            .padding(.vertical)
-                            .padding(.trailing)
-                        VStack(alignment: .leading) {
-                            Text(track.name)
-                                .font(.callout)
-                                .fontWeight(.medium)
-                                .lineLimit(1)
-                            // Specifying String here to help the compiler
-                            if track.artistName as String != albumArtist as String {
-                                Text(track.artistName)
-                                    .font(.callout)
-                                    .fontWeight(.light)
-                                    .opacity(0.7)
-                                    .lineLimit(1)
-                            }
-                        }
-                        Spacer()
-                        Unwrap(track.duration()) { duration in
-                            Text(duration)
-                                .font(.footnote)
-                                .opacity(0.7)
-                        }
-                    }
+                // unwrap this properly!
+                if tracks[i].attributes!.discNumber == self.discNumber {
+                    TrackListItem(slotId: self.slotId, trackId: i)
                 }
             }
         }
