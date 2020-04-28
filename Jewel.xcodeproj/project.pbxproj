@@ -30,6 +30,7 @@
 		D2E690F82450E98E00B981F2 /* Unwrap.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E690F72450E98E00B981F2 /* Unwrap.swift */; };
 		D2E690FA2450ECBB00B981F2 /* EmptySlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E690F92450ECBB00B981F2 /* EmptySlot.swift */; };
 		D2E690FC2450EF9A00B981F2 /* FilledSlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E690FB2450EF9A00B981F2 /* FilledSlot.swift */; };
+		D2EC216E2458AC6900658BF0 /* Zephyr in Frameworks */ = {isa = PBXBuildFile; productRef = D2EC216D2458AC6900658BF0 /* Zephyr */; };
 		D2FE407824504F2700623280 /* HMV in Frameworks */ = {isa = PBXBuildFile; productRef = D2FE407724504F2700623280 /* HMV */; };
 /* End PBXBuildFile section */
 
@@ -91,6 +92,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D2501E102454272E006A6E2D /* KingfisherSwiftUI in Frameworks */,
+				D2EC216E2458AC6900658BF0 /* Zephyr in Frameworks */,
 				D2FE407824504F2700623280 /* HMV in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -233,6 +235,7 @@
 			packageProductDependencies = (
 				D2FE407724504F2700623280 /* HMV */,
 				D2501E0F2454272E006A6E2D /* KingfisherSwiftUI */,
+				D2EC216D2458AC6900658BF0 /* Zephyr */,
 			);
 			productName = Jewel;
 			productReference = D22C451E243DD8B00001481D /* Jewel.app */;
@@ -309,6 +312,7 @@
 			packageReferences = (
 				D2FE407324504E2200623280 /* XCRemoteSwiftPackageReference "HMV" */,
 				D2501E0E2454272E006A6E2D /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				D2EC216C2458AC6900658BF0 /* XCRemoteSwiftPackageReference "Zephyr" */,
 			);
 			productRefGroup = D22C451F243DD8B00001481D /* Products */;
 			projectDirPath = "";
@@ -708,6 +712,14 @@
 				minimumVersion = 5.13.4;
 			};
 		};
+		D2EC216C2458AC6900658BF0 /* XCRemoteSwiftPackageReference "Zephyr" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ArtSabintsev/Zephyr";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.5.0;
+			};
+		};
 		D2FE407324504E2200623280 /* XCRemoteSwiftPackageReference "HMV" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/hepto/HMV";
@@ -723,6 +735,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D2501E0E2454272E006A6E2D /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = KingfisherSwiftUI;
+		};
+		D2EC216D2458AC6900658BF0 /* Zephyr */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D2EC216C2458AC6900658BF0 /* XCRemoteSwiftPackageReference "Zephyr" */;
+			productName = Zephyr;
 		};
 		D2FE407724504F2700623280 /* HMV */ = {
 			isa = XCSwiftPackageProductDependency;
