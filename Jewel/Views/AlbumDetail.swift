@@ -44,7 +44,6 @@ struct AlbumDetail: View {
                     PlaybackControls(slotId: slotId)
                 }
                 .padding()
-                Divider()
                 TrackList(slotId: slotId)
             }
             .padding(.all)
