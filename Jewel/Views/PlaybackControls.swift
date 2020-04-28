@@ -15,7 +15,9 @@ struct PlaybackControls: View {
     
     var body: some View {
         Button(action: {
-            UIApplication.shared.open(self.wallet.slots[self.slotId].album!.attributes!.url)
+            if let url = self.wallet.slots[self.slotId].album?.attributes?.url {
+                UIApplication.shared.open(url)
+            }
         }) {
             HStack {
                 Image(systemName: "play.fill")
