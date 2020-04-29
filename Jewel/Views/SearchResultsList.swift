@@ -25,11 +25,20 @@ struct SearchResultsList: View {
         let searchResultsList = Unwrap(searchResults) { albums in
             List(0..<albums.count, id: \.self) { i in
                 Button(action: {
-                    self.wallet.addAlbumToSlot(albumId: albums[i].id, slotId: self.slotId)
-                    self.presentationMode.wrappedValue.dismiss()
+                    //not yet active, will show album details
                 }, label: {
                     Unwrap(albums[i].attributes) { album in
                         HStack {
+                            KFImage(album.artwork.url(forWidth: 50))
+                              .placeholder {
+                                  RoundedRectangle(cornerRadius: 4)
+                                      .fill(Color.gray)
+                              }
+                              .renderingMode(.original)
+                              .resizable()
+                              .aspectRatio(contentMode: .fit)
+                              .cornerRadius(4)
+                              .frame(width: 50)
                             VStack(alignment: .leading) {
                                 Text(album.artistName)
                                     .font(.headline)
@@ -39,16 +48,13 @@ struct SearchResultsList: View {
                                     .lineLimit(1)
                             }
                             Spacer()
-                            KFImage(album.artwork.url(forWidth: 50))
-                                .placeholder {
-                                    RoundedRectangle(cornerRadius: 4)
-                                        .fill(Color.gray)
-                                }
-                                .renderingMode(.original)
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .cornerRadius(4)
-                                .frame(width: 50)
+                            Button(action: {
+                                self.wallet.addAlbumToSlot(albumId: albums[i].id, slotId: self.slotId)
+                                self.presentationMode.wrappedValue.dismiss()
+                            }, label:{
+                                Image(systemName: "plus.circle")
+                                    .padding()
+                            })
                         }
                     }
                 })
