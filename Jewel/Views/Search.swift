@@ -13,9 +13,12 @@ struct Search: View {
     
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var wallet: WalletViewModel
+    
+    @State private var showCancelButton: Bool = false
     @State private var searchTerm: String = ""
     @State private var searchResults: [Album]?
     @State private var showingAlert = false
+    
     var slotId: Int
     
     func search() {
@@ -34,6 +37,8 @@ struct Search: View {
     var body: some View {
         
         VStack(alignment: .leading) {
+            
+            // action buttons
             HStack {
                 Button(action: {
                     self.presentationMode.wrappedValue.dismiss()
@@ -41,21 +46,56 @@ struct Search: View {
                     Text("Cancel")
                         .fontWeight(.bold)
                 }
-                .padding()
                 Spacer()
                 Button(action: {
                     self.showingAlert = true
                 }) {
                     Image(systemName: "square.and.arrow.down.on.square")
-                        .padding()
                 }
-                .padding()
+            }.padding()
+            
+            //search box
+            HStack {
+                HStack {
+                    Image(systemName: "magnifyingglass")
+                    TextField(
+                        "Search Apple Music",
+                        text: $searchTerm,
+                        onEditingChanged: { isEditing in
+                            self.showCancelButton = true
+                        },
+                        onCommit: {
+                            self.search()
+                        }
+                    ).foregroundColor(.primary)
+                    Button(action: {
+                        self.searchTerm = ""
+                    }) {
+                        Image(systemName: "xmark.circle.fill")
+                            .opacity(searchTerm == "" ? 0 : 1)
+                    }
+                }
+                .padding(EdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8))
+                .foregroundColor(.secondary)
+                .background(Color(.secondarySystemBackground))
+                .cornerRadius(8.0)
+
+                if showCancelButton  {
+                    Button("Cancel") {
+                            self.searchTerm = ""
+                            self.searchResults?.removeAll()
+                            self.showCancelButton = false
+                    }
+                }
             }
-            TextField("Search Apple Music", text: $searchTerm, onCommit: search)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .padding(.horizontal)
+            .padding()
+            
+            // results
             if searchResults != nil {
-                SearchResultsList(searchResults: $searchResults, slotId: slotId).environmentObject(wallet)
+                SearchResultsList(
+                    searchResults: $searchResults,
+                    slotId: slotId
+                ).environmentObject(wallet)
             }
             Spacer()
         }
