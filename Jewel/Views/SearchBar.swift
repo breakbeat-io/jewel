@@ -27,6 +27,7 @@ struct SearchBar: View {
                         self.searchProvider.search(searchTerm: self.searchTerm)
                     }
                 ).foregroundColor(.primary)
+                .keyboardType(.webSearch)
                 Button(action: {
                     self.searchTerm = ""
                     self.searchProvider.results?.removeAll()
