@@ -23,11 +23,9 @@ struct Wallet: View {
                     }
                 }
             }
-            .padding(.horizontal)
-            .padding(.bottom)
-            .navigationBarTitle(Text("My Collection"))
+            .padding()
+            .navigationBarTitle("", displayMode: .inline)
         }
-        .statusBar(hidden: true)
     }
 }
 

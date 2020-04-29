@@ -42,26 +42,23 @@ struct AlbumDetail: View {
                 }
                 HStack(alignment: .center) {
                     PlaybackControls(slotId: slotId)
+                    .padding()
                 }
-                .padding()
                 AlbumTrackList(slotId: slotId)
             }
-            .padding(.all)
-            .background(
-                Unwrap(wallet.slots[slotId].album?.attributes?.artwork) { artwork in
-                    KFImage(artwork.url(forWidth: 1000))
-                        .placeholder {
-                            RoundedRectangle(cornerRadius: 4)
-                                .fill(Color.gray)
-                        }
-                        .resizable()
-                        .scaledToFill()
-                        .brightness(0.4)
-                        .blur(radius: 20)
-                        .edgesIgnoringSafeArea(.all)
-                }
-            )
-        }.navigationBarItems(trailing:
+            .padding()
+        }
+        .background(
+            Unwrap(wallet.slots[slotId].album?.attributes?.artwork) { artwork in
+                KFImage(artwork.url(forWidth: 1000))
+                .resizable()
+                .scaledToFill()
+                .brightness(0.4)
+                .blur(radius: 20)
+                .edgesIgnoringSafeArea(.all)
+            }
+        )
+        .navigationBarItems(trailing:
             Button(action: {
                 self.wallet.deleteAlbumFromSlot(slotId: self.slotId)
             }) {
