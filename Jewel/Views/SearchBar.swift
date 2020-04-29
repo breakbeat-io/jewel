@@ -14,7 +14,6 @@ struct SearchBar: View {
     @EnvironmentObject var searchProvider: SearchProvider
     
     @State private var searchTerm: String = ""
-    @State private var showCancelButton: Bool = false
     
     var body: some View {
 
@@ -24,15 +23,13 @@ struct SearchBar: View {
                 TextField(
                     "Search Apple Music",
                     text: $searchTerm,
-                    onEditingChanged: { isEditing in
-                        self.showCancelButton = true
-                    },
                     onCommit: {
                         self.searchProvider.search(searchTerm: self.searchTerm)
                     }
                 ).foregroundColor(.primary)
                 Button(action: {
                     self.searchTerm = ""
+                    self.searchProvider.results?.removeAll()
                 }) {
                     Image(systemName: "xmark.circle.fill")
                         .opacity(searchTerm == "" ? 0 : 1)
@@ -42,14 +39,6 @@ struct SearchBar: View {
             .foregroundColor(.secondary)
             .background(Color(.secondarySystemBackground))
             .cornerRadius(8.0)
-
-            if showCancelButton  {
-                Button("Cancel") {
-                        self.searchTerm = ""
-                        self.searchProvider.results?.removeAll()
-                        self.showCancelButton = false
-                }
-            }
         }
         .padding()
     }
