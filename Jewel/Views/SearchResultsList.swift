@@ -19,38 +19,41 @@ struct SearchResultsList: View {
     var slotId: Int
     
     var body: some View {
-        
+
         let searchResults = searchProvider.results
         
-        let searchResultsList = List(0..<searchResults!.count, id: \.self) { i in
-            Button(action: {
-                self.wallet.addAlbumToSlot(albumId: searchResults![i].id, slotId: self.slotId)
-                self.presentationMode.wrappedValue.dismiss()
-            }, label: {
-                HStack {
-                    VStack(alignment: .leading) {
-                        Text(searchResults![i].attributes!.artistName)
-                            .font(.headline)
-                            .lineLimit(1)
-                        Text(searchResults![i].attributes!.name)
-                            .font(.subheadline)
-                            .lineLimit(1)
-                    }
-                    Spacer()
-                    KFImage(searchResults![i].attributes!.artwork.url(forWidth: 50))
-                        .placeholder {
-                            RoundedRectangle(cornerRadius: 4)
-                                .fill(Color.gray)
+        let searchResultsList = Unwrap(searchResults) { albums in
+            List(0..<albums.count, id: \.self) { i in
+                Button(action: {
+                    self.wallet.addAlbumToSlot(albumId: albums[i].id, slotId: self.slotId)
+                    self.presentationMode.wrappedValue.dismiss()
+                }, label: {
+                    Unwrap(albums[i].attributes) { album in
+                        HStack {
+                            VStack(alignment: .leading) {
+                                Text(album.artistName)
+                                    .font(.headline)
+                                    .lineLimit(1)
+                                Text(album.name)
+                                    .font(.subheadline)
+                                    .lineLimit(1)
+                            }
+                            Spacer()
+                            KFImage(album.artwork.url(forWidth: 50))
+                                .placeholder {
+                                    RoundedRectangle(cornerRadius: 4)
+                                        .fill(Color.gray)
+                                }
+                                .renderingMode(.original)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .cornerRadius(4)
+                                .frame(width: 50)
                         }
-                        .renderingMode(.original)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .cornerRadius(4)
-                        .frame(width: 50)
-                }
-            })
+                    }
+                })
+            }
         }
-        
         return searchResultsList
     }
 }
