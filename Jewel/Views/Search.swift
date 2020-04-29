@@ -56,6 +56,9 @@ struct Search: View {
                     self.wallet.loadRecommendations()
                 })
         }
+        .onDisappear(perform: {
+            self.searchProvider.results?.removeAll()
+        })
     }
 }
 
