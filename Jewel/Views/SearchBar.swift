@@ -11,22 +11,10 @@ import HMV
 
 struct SearchBar: View {
     
-    @Binding var searchResults: [Album]?
+    @EnvironmentObject var searchProvider: SearchProvider
     
     @State private var searchTerm: String = ""
     @State private var showCancelButton: Bool = false
-
-    func search() {
-        if let developerToken = Bundle.main.infoDictionary?["APPLE_MUSIC_API_TOKEN"] as? String {
-            let hmv = HMV(storefront: .unitedKingdom, developerToken: developerToken)
-
-            hmv.search(term: searchTerm, limit: 20, types: [.albums]) { results, error in
-              DispatchQueue.main.async {
-                self.searchResults = results?.albums?.data
-              }
-            }
-        }
-    }
     
     var body: some View {
 
@@ -40,7 +28,7 @@ struct SearchBar: View {
                         self.showCancelButton = true
                     },
                     onCommit: {
-                        self.search()
+                        self.searchProvider.search(searchTerm: self.searchTerm)
                     }
                 ).foregroundColor(.primary)
                 Button(action: {
@@ -58,7 +46,7 @@ struct SearchBar: View {
             if showCancelButton  {
                 Button("Cancel") {
                         self.searchTerm = ""
-                        self.searchResults?.removeAll()
+                        self.searchProvider.results?.removeAll()
                         self.showCancelButton = false
                 }
             }

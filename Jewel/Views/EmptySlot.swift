@@ -11,7 +11,10 @@ import SwiftUI
 struct EmptySlot: View {
     
     @EnvironmentObject var wallet: WalletViewModel
+    @EnvironmentObject var searchProvider: SearchProvider
+    
     @State private var showSearch = false
+    
     var slotId: Int
     
     var body: some View {
@@ -27,7 +30,7 @@ struct EmptySlot: View {
             )
         }
         .sheet(isPresented: $showSearch) {
-            Search(slotId: self.slotId).environmentObject(self.wallet)
+            Search(slotId: self.slotId).environmentObject(self.wallet).environmentObject(self.searchProvider)
         }
     }
 }

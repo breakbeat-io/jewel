@@ -24,6 +24,7 @@
 		D28358832451D3C700411AC9 /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28358822451D3C700411AC9 /* Search.swift */; };
 		D28358872452D3CF00411AC9 /* SearchResultsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28358862452D3CF00411AC9 /* SearchResultsList.swift */; };
 		D29C76002459662F005BE357 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29C75FF2459662F005BE357 /* SearchBar.swift */; };
+		D29C760224598F06005BE357 /* SearchProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29C760124598F06005BE357 /* SearchProvider.swift */; };
 		D2D40B4F245738220018E066 /* AlbumTrackList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D40B4E245738220018E066 /* AlbumTrackList.swift */; };
 		D2D5875E244E391200E982E8 /* WalletViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D5875D244E391200E982E8 /* WalletViewModel.swift */; };
 		D2DCDA4B243E048000D0756C /* MetadataOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2DCDA4A243E048000D0756C /* MetadataOverlay.swift */; };
@@ -78,6 +79,7 @@
 		D28AF841244F46A700AD6614 /* debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = debug.xcconfig; sourceTree = "<group>"; };
 		D28AF842244F46D700AD6614 /* release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = release.xcconfig; sourceTree = "<group>"; };
 		D29C75FF2459662F005BE357 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
+		D29C760124598F06005BE357 /* SearchProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchProvider.swift; sourceTree = "<group>"; };
 		D2D40B4E245738220018E066 /* AlbumTrackList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumTrackList.swift; sourceTree = "<group>"; };
 		D2D5875D244E391200E982E8 /* WalletViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletViewModel.swift; sourceTree = "<group>"; };
 		D2DCDA4A243E048000D0756C /* MetadataOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetadataOverlay.swift; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 			isa = PBXGroup;
 			children = (
 				D2EAB323245192F000AC9CC3 /* Jewel.entitlements */,
+				D29C760124598F06005BE357 /* SearchProvider.swift */,
 				D2D5875D244E391200E982E8 /* WalletViewModel.swift */,
 				D27371C224571828005CC5EF /* WalletError.swift */,
 				D2B1E6322448635D004D474F /* Models */,
@@ -387,6 +390,7 @@
 				D2DCDA4B243E048000D0756C /* MetadataOverlay.swift in Sources */,
 				D2D5875E244E391200E982E8 /* WalletViewModel.swift in Sources */,
 				D29C76002459662F005BE357 /* SearchBar.swift in Sources */,
+				D29C760224598F06005BE357 /* SearchProvider.swift in Sources */,
 				D22C4524243DD8B00001481D /* SceneDelegate.swift in Sources */,
 				D2FD3B772458E731008A071F /* TrackListItem.swift in Sources */,
 				D22C4556243DE6F00001481D /* AlbumCard.swift in Sources */,

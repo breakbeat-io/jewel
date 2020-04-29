@@ -13,9 +13,9 @@ struct Search: View {
     
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var wallet: WalletViewModel
+    @EnvironmentObject var searchProvider: SearchProvider
     
     @State private var showCancelButton: Bool = false
-    @State private var searchResults: [Album]?
     @State private var showingAlert = false
     
     var slotId: Int
@@ -41,14 +41,13 @@ struct Search: View {
             }.padding()
             
             //search box
-            SearchBar(searchResults: $searchResults)
+            SearchBar()
             
             // results
-            if searchResults != nil {
+            if searchProvider.results != nil {
                 SearchResultsList(
-                    searchResults: $searchResults,
                     slotId: slotId
-                ).environmentObject(wallet)
+                )
             }
             Spacer()
         }

@@ -14,26 +14,30 @@ struct SearchResultsList: View {
     
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var wallet: WalletViewModel
-    @Binding var searchResults: [Album]?
+    @EnvironmentObject var searchProvider: SearchProvider
+    
     var slotId: Int
     
     var body: some View {
-        List(0..<self.searchResults!.count, id: \.self) { i in
+        
+        let searchResults = searchProvider.results
+        
+        let searchResultsList = List(0..<searchResults!.count, id: \.self) { i in
             Button(action: {
-                self.wallet.addAlbumToSlot(albumId: self.searchResults![i].id, slotId: self.slotId)
+                self.wallet.addAlbumToSlot(albumId: searchResults![i].id, slotId: self.slotId)
                 self.presentationMode.wrappedValue.dismiss()
             }, label: {
                 HStack {
                     VStack(alignment: .leading) {
-                        Text(self.searchResults![i].attributes!.artistName)
+                        Text(searchResults![i].attributes!.artistName)
                             .font(.headline)
                             .lineLimit(1)
-                        Text(self.searchResults![i].attributes!.name)
+                        Text(searchResults![i].attributes!.name)
                             .font(.subheadline)
                             .lineLimit(1)
                     }
                     Spacer()
-                    KFImage(self.searchResults![i].attributes!.artwork.url(forWidth: 50))
+                    KFImage(searchResults![i].attributes!.artwork.url(forWidth: 50))
                         .placeholder {
                             RoundedRectangle(cornerRadius: 4)
                                 .fill(Color.gray)
@@ -46,6 +50,8 @@ struct SearchResultsList: View {
                 }
             })
         }
+        
+        return searchResultsList
     }
 }
 
@@ -54,9 +60,3 @@ struct SearchResultsList: View {
 //        SearchResultsList()
 //    }
 //}
-
-struct SearchResultsList_Previews: PreviewProvider {
-    static var previews: some View {
-        /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/
-    }
-}
