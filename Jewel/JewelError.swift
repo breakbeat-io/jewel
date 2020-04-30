@@ -8,6 +8,6 @@
 
 import Foundation
 
-enum WalletError: Error {
+enum JewelError: Error {
     case noAppleMusicApiToken
 }

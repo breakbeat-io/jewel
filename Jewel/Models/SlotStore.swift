@@ -19,7 +19,7 @@ class SlotStore: ObservableObject {
         let appleMusicApiToken = Bundle.main.infoDictionary?["APPLE_MUSIC_API_TOKEN"] as! String
         if appleMusicApiToken == "" {
             print("No Apple Music API Token Found!")
-            throw WalletError.noAppleMusicApiToken
+            throw JewelError.noAppleMusicApiToken
         } else {
             store = HMV(storefront: .unitedKingdom, developerToken: appleMusicApiToken)
         }
