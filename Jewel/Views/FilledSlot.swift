@@ -10,7 +10,7 @@ import SwiftUI
 
 struct FilledSlot: View {
     
-    @EnvironmentObject var wallet: WalletViewModel
+    @EnvironmentObject var wallet: SlotStore
     @EnvironmentObject var searchProvider: SearchProvider
     @State private var tapped: Int? = 0
     @State private var showSearch = false
@@ -37,7 +37,7 @@ struct FilledSlot: View {
 
 struct FilledSlot_Previews: PreviewProvider {
     
-    static let wallet = WalletViewModel()
+    static let wallet = SlotStore()
     
     static var previews: some View {
         FilledSlot(slotId: 0)

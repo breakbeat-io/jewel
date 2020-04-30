@@ -10,7 +10,7 @@ import SwiftUI
 
 struct PlaybackControls: View {
     
-    @EnvironmentObject var wallet: WalletViewModel
+    @EnvironmentObject var wallet: SlotStore
     var slotId: Int
     
     var body: some View {
@@ -38,7 +38,7 @@ struct PlaybackControls: View {
 }
 
 struct PlaybackControlsView_Previews: PreviewProvider {
-    static let wallet = WalletViewModel()
+    static let wallet = SlotStore()
     
     static var previews: some View {
         PlaybackControls(slotId: 0)

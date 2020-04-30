@@ -12,7 +12,7 @@ import HMV
 struct Search: View {
     
     @Environment(\.presentationMode) var presentationMode
-    @EnvironmentObject var wallet: WalletViewModel
+    @EnvironmentObject var wallet: SlotStore
     @EnvironmentObject var searchProvider: SearchProvider
     
     @State private var showCancelButton: Bool = false

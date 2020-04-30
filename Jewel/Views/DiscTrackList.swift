@@ -10,7 +10,7 @@ import SwiftUI
 
 struct DiscTrackList: View {
     
-    @EnvironmentObject var wallet: WalletViewModel
+    @EnvironmentObject var wallet: SlotStore
     var slotId: Int
     var discNumber: Int
     

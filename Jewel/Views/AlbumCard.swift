@@ -12,7 +12,7 @@ import HMV
 
 struct AlbumCard: View {
     
-    @EnvironmentObject var wallet: WalletViewModel
+    @EnvironmentObject var wallet: SlotStore
     var slotId: Int
     
     var body: some View {
@@ -39,7 +39,7 @@ struct AlbumCard: View {
 
 struct ReleaseListItem_Previews: PreviewProvider {
     
-    static let wallet = WalletViewModel()
+    static let wallet = SlotStore()
     
     static var previews: some View {
         AlbumCard(slotId: 0)
