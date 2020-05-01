@@ -40,11 +40,15 @@ struct AlbumDetail: View {
                             .lineLimit(1)
                     }
                 }
-                HStack(alignment: .center) {
-                    PlaybackControls(slotId: slotId)
-                    .padding()
+                if (wallet.slots[slotId].album?.attributes?.url != nil) {
+                    HStack(alignment: .center) {
+                        PlaybackControls(slotId: slotId)
+                        .padding()
+                    }
                 }
-                AlbumTrackList(slotId: slotId)
+                if (wallet.slots[slotId].album != nil) {
+                    AlbumTrackList(slotId: slotId)
+                }
             }
             .padding()
         }
@@ -62,9 +66,11 @@ struct AlbumDetail: View {
             Button(action: {
                 self.wallet.deleteAlbumFromSlot(slotId: self.slotId)
             }) {
-            Image(systemName: "trash")
-                .padding()
-                .foregroundColor(.red)
+                if (wallet.slots[slotId].album != nil) {
+                    Image(systemName: "trash")
+                        .padding()
+                        .foregroundColor(.red)
+                    }
             }
         )
     }
