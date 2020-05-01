@@ -12,23 +12,28 @@ struct Wallet: View {
     
     @EnvironmentObject var wallet: SlotStore
     
+    private func slotViewForId(slotId: Int) -> some View {
+        if wallet.slots[slotId].album == nil {
+            return AnyView(EmptySlot(slotId: slotId))
+        } else {
+            return AnyView(FilledSlot(slotId: slotId))
+        }
+    }
+    
     var body: some View {
         NavigationView {
-            List(self.wallet.slots) { slot in
-                if slot.album == nil {
-                    EmptySlot(slotId: slot.id)
-                        .frame(height: 60)
-                } else {
-                    FilledSlot(slotId: slot.id)
-                        .frame(height: 60)
+            GeometryReader { geo in
+                List(self.wallet.slots) { slot in
+                    self.slotViewForId(slotId: slot.id)
+                        .frame(height: (geo.size.height - geo.safeAreaInsets.top - geo.safeAreaInsets.bottom) / CGFloat(self.wallet.slots.count))
                 }
+                .onAppear {
+                    UITableView.appearance().separatorStyle = .none
+                }
+                .navigationBarTitle("My Wallet")
             }
-            .onAppear {
-                UITableView.appearance().separatorStyle = .none
-            }
-            .navigationBarTitle("", displayMode: .inline)
-            .navigationBarHidden(true)
         }
+        .statusBar(hidden: true)
     }
 }
 
