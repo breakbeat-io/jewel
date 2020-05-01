@@ -18,18 +18,18 @@ struct FilledSlot: View {
     var slotId: Int
     
     var body: some View {
-        NavigationLink(
-            destination: AlbumDetail(slotId: self.slotId), tag: 1, selection: self.$tapped
-        ) {
+        ZStack {
             AlbumCard(slotId: self.slotId)
-            .onTapGesture {
-                self.tapped = 1
-            }
-            .onLongPressGesture() {
-                self.showSearch = true
-            }
-        }
-        .sheet(isPresented: $showSearch) {
+                .onTapGesture {
+                    self.tapped = 1
+                }
+                .onLongPressGesture() {
+                    self.showSearch = true
+                }
+            NavigationLink(destination: AlbumDetail(slotId: self.slotId), tag: 1, selection: self.$tapped) {
+                    EmptyView()
+            }.buttonStyle(PlainButtonStyle())
+        }.sheet(isPresented: $showSearch) {
             Search(slotId: self.slotId).environmentObject(self.wallet).environmentObject(self.searchProvider)
         }
     }

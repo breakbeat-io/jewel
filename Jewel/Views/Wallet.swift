@@ -14,17 +14,20 @@ struct Wallet: View {
     
     var body: some View {
         NavigationView {
-            VStack {
-                ForEach(self.wallet.slots) { slot in
-                    if slot.album == nil {
-                        EmptySlot(slotId: slot.id)
-                    } else {
-                        FilledSlot(slotId: slot.id)
-                    }
+            List(self.wallet.slots) { slot in
+                if slot.album == nil {
+                    EmptySlot(slotId: slot.id)
+                        .frame(height: 60)
+                } else {
+                    FilledSlot(slotId: slot.id)
+                        .frame(height: 60)
                 }
             }
-            .padding()
+            .onAppear {
+                UITableView.appearance().separatorStyle = .none
+            }
             .navigationBarTitle("", displayMode: .inline)
+            .navigationBarHidden(true)
         }
     }
 }
