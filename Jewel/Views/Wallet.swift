@@ -42,7 +42,7 @@ struct Wallet: View {
                     }
                 )
                     .sheet(isPresented: self.$showUserSettings) {
-                    EmptyView()
+                    UserSettings()
                 }
             }
         }

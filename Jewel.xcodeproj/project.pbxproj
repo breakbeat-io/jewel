@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D20968912460106300496674 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20968902460106300496674 /* UserSettings.swift */; };
 		D22C4522243DD8B00001481D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22C4521243DD8B00001481D /* AppDelegate.swift */; };
 		D22C4524243DD8B00001481D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22C4523243DD8B00001481D /* SceneDelegate.swift */; };
 		D22C4528243DD8B10001481D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D22C4527243DD8B10001481D /* Assets.xcassets */; };
@@ -54,6 +55,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D20968902460106300496674 /* UserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
 		D22C451E243DD8B00001481D /* Jewel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jewel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D22C4521243DD8B00001481D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D22C4523243DD8B00001481D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -200,6 +202,7 @@
 				D29C75FF2459662F005BE357 /* SearchBar.swift */,
 				D28358862452D3CF00411AC9 /* SearchResultsList.swift */,
 				D2E690F72450E98E00B981F2 /* Unwrap.swift */,
+				D20968902460106300496674 /* UserSettings.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -374,6 +377,7 @@
 				D28358832451D3C700411AC9 /* Search.swift in Sources */,
 				D2E690F82450E98E00B981F2 /* Unwrap.swift in Sources */,
 				D279E53224581AA800DFBDD4 /* DiscTrackList.swift in Sources */,
+				D20968912460106300496674 /* UserSettings.swift in Sources */,
 				D27371C324571828005CC5EF /* JewelError.swift in Sources */,
 				D2E690FC2450EF9A00B981F2 /* FilledSlot.swift in Sources */,
 				D22C4522243DD8B00001481D /* AppDelegate.swift in Sources */,
