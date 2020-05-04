@@ -39,11 +39,18 @@ class UserData: ObservableObject {
             slots.append(slot)
         }
         
-        loadSavedUserData()
+        loadUserData()
         
-        //load it with any saved albums
+    }
+    
+    func loadUserData() {
+        
+        // load the wallet name
+        walletName = userDefaults.string(forKey: "walletName") ?? "My Wallet"
+        
+        // load the wallet
         if let savedWallet = userDefaults.dictionary(forKey: "savedWallet") {
-            for slotId in 0..<numberOfSlots {
+            for slotId in 0..<slots.count {
                 if let albumId = savedWallet[String(slotId)] {
                     addAlbumToSlot(albumId: albumId as! String, slotId: slotId)
                 }
@@ -53,13 +60,12 @@ class UserData: ObservableObject {
         }
     }
     
-    func loadSavedUserData() {
+    func saveUserData() {
         
-        walletName = userDefaults.string(forKey: "walletName") ?? "My Wallet"
+        // save the wallet name
+        userDefaults.set(walletName, forKey: "walletName")
         
-    }
-    
-    func saveWallet() {
+        // save the wallet
         var savedWallet = [String: String]()
         for (index, slot) in slots.enumerated() {
             if let album = slot.album {
@@ -67,6 +73,7 @@ class UserData: ObservableObject {
             }
         }
         userDefaults.set(savedWallet, forKey: "savedWallet")
+
     }
     
     func addAlbumToSlot(albumId: String, slotId: Int) {
@@ -76,7 +83,7 @@ class UserData: ObservableObject {
                 if album != nil {
                     let newSlot = Slot(id: slotId, album: album)
                     self.slots[slotId] = newSlot
-                    self.saveWallet()
+                    self.saveUserData()
                 }
             }
         })
@@ -85,7 +92,7 @@ class UserData: ObservableObject {
     func deleteAlbumFromSlot(slotId: Int) {
         let emptySlot = Slot(id: slotId)
         self.slots[slotId] = emptySlot
-        self.saveWallet()
+        self.saveUserData()
     }
     
     func loadRecommendations() {

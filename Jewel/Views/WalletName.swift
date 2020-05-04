@@ -23,6 +23,7 @@ struct WalletName: View {
                     text: $newWalletName,
                     onCommit: {
                         self.userData.walletName = self.newWalletName
+                        self.userData.saveUserData()
                         self.shouldPopToRootView = false
                     }
                 ).padding()
