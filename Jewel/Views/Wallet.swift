@@ -12,6 +12,8 @@ struct Wallet: View {
     
     @EnvironmentObject var wallet: SlotStore
     
+    @State private var showUserSettings = false
+    
     private func slotViewForId(slotId: Int) -> some View {
         if wallet.slots[slotId].album == nil {
             return AnyView(EmptySlot(slotId: slotId))
@@ -33,12 +35,15 @@ struct Wallet: View {
                 .navigationBarTitle("My Wallet")
                 .navigationBarItems(trailing:
                     Button(action: {
-                        // will open user settings
+                        self.showUserSettings = true
                     }) {
                         Image(systemName: "gear")
                             .padding()
                     }
                 )
+                    .sheet(isPresented: self.$showUserSettings) {
+                    EmptyView()
+                }
             }
         }
         .statusBar(hidden: true)
