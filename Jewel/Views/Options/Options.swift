@@ -69,12 +69,7 @@ struct Options: View {
                     }
                 }
                 Spacer()
-                Text("🎵 + 📱 = 🙌")
-                    .font(.footnote)
-                    .padding(.bottom)
-                Text("© 2020 Breakbeat Ltd.")
-                    .font(.footnote)
-                
+                Footer()
             }
             .navigationBarTitle("Options", displayMode: .inline)
             .navigationBarItems(trailing:
