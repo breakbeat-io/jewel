@@ -55,6 +55,9 @@ struct UserSettings: View {
                                 self.presentationMode.wrappedValue.dismiss()
                             })
                     }
+                    Spacer()
+                    Text("© & ♥️ Breakbeat Ltd., 2020")
+                        .font(.footnote)
                 }
                 .navigationBarTitle("Settings")
                 .navigationBarItems(trailing:
