@@ -56,7 +56,7 @@ struct UserSettings: View {
                             })
                     }
                     Spacer()
-                    Text("© & ♥️ Breakbeat Ltd., 2020")
+                    Text("🎵 + 📱 = 🙌\n© Breakbeat Ltd., 2020")
                         .font(.footnote)
                 }
                 .navigationBarTitle("Settings")
