@@ -21,42 +21,40 @@ struct AlbumDetail: View {
     @State private var showDeleteWarning = false
     
     var body: some View {
-        ScrollView {
-            VStack {
-                VStack(alignment: .leading) {
-                    Unwrap(userData.slots[slotId].album?.attributes) { attributes in
-                        KFImage(attributes.artwork.url(forWidth: 1000))
-                            .placeholder {
-                                RoundedRectangle(cornerRadius: 4)
-                                    .fill(Color.gray)
-                            }
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .cornerRadius(4)
-                            .shadow(radius: 4)
-                        Text(attributes.name)
-                            .fontWeight(.bold)
-                            .font(.title)
-                            .foregroundColor(.black)
-                            .lineLimit(1)
-                        Text(attributes.artistName)
-                            .font(.title)
-                            .foregroundColor(.black)
-                            .lineLimit(1)
-                    }
-                }
-                if (userData.slots[slotId].album?.attributes?.url != nil) {
-                    HStack(alignment: .center) {
-                        PlaybackControls(slotId: slotId)
-                        .padding()
-                    }
-                }
-                if (userData.slots[slotId].album != nil) {
-                    AlbumTrackList(slotId: slotId)
+        VStack {
+            VStack(alignment: .leading) {
+                Unwrap(userData.slots[slotId].album?.attributes) { attributes in
+                    KFImage(attributes.artwork.url(forWidth: 1000))
+                        .placeholder {
+                            RoundedRectangle(cornerRadius: 4)
+                                .fill(Color.gray)
+                        }
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .cornerRadius(4)
+                        .shadow(radius: 4)
+                    Text(attributes.name)
+                        .fontWeight(.bold)
+                        .font(.title)
+                        .foregroundColor(.black)
+                        .lineLimit(1)
+                    Text(attributes.artistName)
+                        .font(.title)
+                        .foregroundColor(.black)
+                        .lineLimit(1)
                 }
             }
-            .padding()
+            if (userData.slots[slotId].album?.attributes?.url != nil) {
+                HStack(alignment: .center) {
+                    PlaybackControls(slotId: slotId)
+                    .padding()
+                }
+            }
+            if (userData.slots[slotId].album != nil) {
+                AlbumTrackList(slotId: slotId)
+            }
         }
+        .padding()
         .background(
             Unwrap(userData.slots[slotId].album?.attributes?.artwork) { artwork in
                 KFImage(artwork.url(forWidth: 1000))
@@ -65,33 +63,6 @@ struct AlbumDetail: View {
                 .brightness(0.4)
                 .blur(radius: 20)
                 .edgesIgnoringSafeArea(.all)
-            }
-        )
-        .navigationBarItems(trailing:
-            HStack {
-                Button(action: {
-                    self.showSearch = true
-                }) {
-                    if (userData.slots[slotId].album != nil) {
-                        Image(systemName: "arrow.swap")
-                    }
-                }
-                .sheet(isPresented: $showSearch) {
-                    Search(slotId: self.slotId).environmentObject(self.userData).environmentObject(self.searchProvider)
-                }
-                
-                Button(action: {
-                    self.showDeleteWarning = true
-                }) {
-                    if (userData.slots[slotId].album != nil) {
-                    Image(systemName: "trash")
-                        .foregroundColor(.red)
-                    }
-                }.alert(isPresented: $showDeleteWarning) {
-                    Alert(title: Text("Are you sure you want to delete this album from your wallet?"), primaryButton: .cancel(Text("Cancel")), secondaryButton: .destructive(Text("Delete")) {
-                            self.userData.deleteAlbumFromSlot(slotId: self.slotId)
-                        })
-                }
             }
         )
     }

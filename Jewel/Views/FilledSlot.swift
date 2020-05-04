@@ -28,7 +28,7 @@ struct FilledSlot: View {
                 self.showSearch = true
             }
             NavigationLink(
-                destination: AlbumDetail(slotId: self.slotId),
+                destination: SlotDetail(slotId: self.slotId),
                 tag: 1,
                 selection: self.$tapped
             ){
