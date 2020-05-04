@@ -40,7 +40,7 @@ struct Home: View {
                     Button(action: {
                         self.showUserSettings = true
                     }) {
-                        Image(systemName: "gear")
+                        Image(systemName: "slider.horizontal.3")
                     }
                 )
             }
