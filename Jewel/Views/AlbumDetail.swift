@@ -13,7 +13,11 @@ import HMV
 struct AlbumDetail: View {
     
     @EnvironmentObject var wallet: UserData
+    @EnvironmentObject var searchProvider: SearchProvider
+    
     var slotId: Int
+    
+    @State private var showSearch = false
     
     var body: some View {
         ScrollView {
@@ -63,14 +67,26 @@ struct AlbumDetail: View {
             }
         )
         .navigationBarItems(trailing:
-            Button(action: {
-                self.wallet.deleteAlbumFromSlot(slotId: self.slotId)
-            }) {
-                if (wallet.slots[slotId].album != nil) {
-                    Image(systemName: "trash")
-                        .padding()
-                        .foregroundColor(.red)
+            HStack {
+                Button(action: {
+                    self.showSearch = true
+                }) {
+                    if (wallet.slots[slotId].album != nil) {
+                        Image(systemName: "arrow.swap")
                     }
+                }
+                .sheet(isPresented: $showSearch) {
+                    Search(slotId: self.slotId).environmentObject(self.wallet).environmentObject(self.searchProvider)
+                }
+                
+                Button(action: {
+                    self.wallet.deleteAlbumFromSlot(slotId: self.slotId)
+                }) {
+                    if (wallet.slots[slotId].album != nil) {
+                        Image(systemName: "trash")
+                            .foregroundColor(.red)
+                        }
+                }
             }
         )
     }
