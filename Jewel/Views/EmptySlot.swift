@@ -24,8 +24,8 @@ struct EmptySlot: View {
             RoundedRectangle(cornerRadius: 4)
                 .stroke(Color.gray, style: StrokeStyle(lineWidth: 2, dash: [4, 6]))
             .overlay(
-                Image(systemName: "plus.app")
-                    .font(.title)
+                Image(systemName: "plus")
+                    .font(.headline)
                     .foregroundColor(Color.gray)
             )
         }

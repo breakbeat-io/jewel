@@ -31,6 +31,14 @@ struct Wallet: View {
                     UITableView.appearance().separatorStyle = .none
                 }
                 .navigationBarTitle("My Wallet")
+                .navigationBarItems(trailing:
+                    Button(action: {
+                        // will open user settings
+                    }) {
+                        Image(systemName: "gear")
+                            .padding()
+                    }
+                )
             }
         }
         .statusBar(hidden: true)
