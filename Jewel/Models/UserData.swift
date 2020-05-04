@@ -95,6 +95,12 @@ class UserData: ObservableObject {
         self.saveUserData()
     }
     
+    func deleteAll() {
+        for slotId in 0..<slots.count {
+            deleteAlbumFromSlot(slotId: slotId)
+        }
+    }
+    
     func loadRecommendations() {
         let request = URLRequest(url: URL(string: "https://breakbeat.io/jewel/recommendations.json")!)
         

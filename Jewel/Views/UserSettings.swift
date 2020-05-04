@@ -14,7 +14,8 @@ struct UserSettings: View {
     @EnvironmentObject var userData: UserData
     
     @State private var newWalletName = ""
-    @State var isActive : Bool = false
+    @State private var isActive : Bool = false
+    @State private var showDeleteAllWarning = false
     
     
     var body: some View {
@@ -33,6 +34,17 @@ struct UserSettings: View {
                         }
                     }
                     .isDetailLink(false)
+                    Button(action: {
+                        self.showDeleteAllWarning = true
+                    }) {
+                        Text("Delete All")
+                    }
+                }
+                .alert(isPresented: $showDeleteAllWarning) {
+                    Alert(title: Text("Are you sure you want to delete all albums in your wallet?"), primaryButton: .cancel(Text("Cancel")), secondaryButton: .destructive(Text("Delete")) {
+                            self.userData.deleteAll()
+                            self.presentationMode.wrappedValue.dismiss()
+                        })
                 }
                 .navigationBarTitle("Settings")
                 .navigationBarItems(trailing:
