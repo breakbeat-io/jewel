@@ -9,8 +9,41 @@
 import SwiftUI
 
 struct UserSettings: View {
+    
+    @Environment(\.presentationMode) var presentationMode
+    @EnvironmentObject var userData: UserData
+    
+    @State private var newWalletName = ""
+    @State var isActive : Bool = false
+    
+    
     var body: some View {
-        Text("User Settings")
+        VStack(alignment: .leading) {
+            
+            NavigationView {
+                List {
+                    NavigationLink(destination:
+                        WalletName(newWalletName: self.$newWalletName, shouldPopToRootView: self.$isActive),
+                        isActive: self.$isActive) {
+                        HStack {
+                            Text("Wallet Name")
+                            Spacer()
+                            Text(userData.walletName)
+                            .foregroundColor(Color.secondary)
+                        }
+                    }
+                    .isDetailLink(false)
+                }
+                .navigationBarTitle("Settings")
+                .navigationBarItems(trailing:
+                    Button(action: {
+                        self.presentationMode.wrappedValue.dismiss()
+                    }) {
+                        Text("Close")
+                    }
+                )
+            }
+        }
     }
 }
 

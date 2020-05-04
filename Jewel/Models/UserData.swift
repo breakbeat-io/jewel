@@ -11,7 +11,9 @@ import HMV
 
 class UserData: ObservableObject {
 
+    @Published var walletName = ""
     @Published var slots = [Slot]()
+    
     private var userDefaults = UserDefaults.standard
     private var store: HMV?
     
@@ -37,6 +39,8 @@ class UserData: ObservableObject {
             slots.append(slot)
         }
         
+        loadSavedUserData()
+        
         //load it with any saved albums
         if let savedWallet = userDefaults.dictionary(forKey: "savedWallet") {
             for slotId in 0..<numberOfSlots {
@@ -47,6 +51,12 @@ class UserData: ObservableObject {
         } else {
             print("No wallet saved! Starting fresh")
         }
+    }
+    
+    func loadSavedUserData() {
+        
+        walletName = userDefaults.string(forKey: "walletName") ?? "My Wallet"
+        
     }
     
     func saveWallet() {

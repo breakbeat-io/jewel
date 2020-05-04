@@ -18,6 +18,7 @@
 		D22C4552243DDE490001481D /* Wallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22C4551243DDE490001481D /* Wallet.swift */; };
 		D22C4556243DE6F00001481D /* AlbumCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22C4555243DE6F00001481D /* AlbumCard.swift */; };
 		D2501E102454272E006A6E2D /* KingfisherSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = D2501E0F2454272E006A6E2D /* KingfisherSwiftUI */; };
+		D26077BD2460298B005883ED /* WalletName.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26077BC2460298B005883ED /* WalletName.swift */; };
 		D26B5622243E80450098E9E4 /* AlbumDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26B5621243E80450098E9E4 /* AlbumDetail.swift */; };
 		D26B5624243E8DB00098E9E4 /* PlaybackControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26B5623243E8DB00098E9E4 /* PlaybackControls.swift */; };
 		D27371C324571828005CC5EF /* JewelError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27371C224571828005CC5EF /* JewelError.swift */; };
@@ -71,6 +72,7 @@
 		D22C4545243DD8B20001481D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D22C4551243DDE490001481D /* Wallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wallet.swift; sourceTree = "<group>"; };
 		D22C4555243DE6F00001481D /* AlbumCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumCard.swift; sourceTree = "<group>"; };
+		D26077BC2460298B005883ED /* WalletName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletName.swift; sourceTree = "<group>"; };
 		D26B5621243E80450098E9E4 /* AlbumDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumDetail.swift; sourceTree = "<group>"; };
 		D26B5623243E8DB00098E9E4 /* PlaybackControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackControls.swift; sourceTree = "<group>"; };
 		D27371C224571828005CC5EF /* JewelError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JewelError.swift; sourceTree = "<group>"; };
@@ -203,6 +205,7 @@
 				D28358862452D3CF00411AC9 /* SearchResultsList.swift */,
 				D2E690F72450E98E00B981F2 /* Unwrap.swift */,
 				D20968902460106300496674 /* UserSettings.swift */,
+				D26077BC2460298B005883ED /* WalletName.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -388,6 +391,7 @@
 				D22C4552243DDE490001481D /* Wallet.swift in Sources */,
 				D2D40B4F245738220018E066 /* AlbumTrackList.swift in Sources */,
 				D2DCDA4B243E048000D0756C /* MetadataOverlay.swift in Sources */,
+				D26077BD2460298B005883ED /* WalletName.swift in Sources */,
 				D2D5875E244E391200E982E8 /* UserData.swift in Sources */,
 				D29C76002459662F005BE357 /* SearchBar.swift in Sources */,
 				D29C760224598F06005BE357 /* SearchProvider.swift in Sources */,
