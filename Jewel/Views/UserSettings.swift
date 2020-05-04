@@ -16,6 +16,7 @@ struct UserSettings: View {
     @State private var newWalletName = ""
     @State private var isActive : Bool = false
     @State private var showDeleteAllWarning = false
+    @State private var showLoadRecommendationsAlert = false
     
     
     var body: some View {
@@ -38,13 +39,22 @@ struct UserSettings: View {
                         self.showDeleteAllWarning = true
                     }) {
                         Text("Delete All")
+                    }.alert(isPresented: $showDeleteAllWarning) {
+                        Alert(title: Text("Are you sure you want to delete all albums in your wallet?"), primaryButton: .cancel(Text("Cancel")), secondaryButton: .destructive(Text("Delete")) {
+                                self.userData.deleteAll()
+                                self.presentationMode.wrappedValue.dismiss()
+                            })
                     }
-                }
-                .alert(isPresented: $showDeleteAllWarning) {
-                    Alert(title: Text("Are you sure you want to delete all albums in your wallet?"), primaryButton: .cancel(Text("Cancel")), secondaryButton: .destructive(Text("Delete")) {
-                            self.userData.deleteAll()
-                            self.presentationMode.wrappedValue.dismiss()
-                        })
+                    Button(action: {
+                        self.showLoadRecommendationsAlert = true
+                    }) {
+                        Text("Load Recommendations")
+                    }.alert(isPresented: $showLoadRecommendationsAlert) {
+                        Alert(title: Text("Do you want to load our recommendations?"), primaryButton: .cancel(Text("Cancel")), secondaryButton: .default(Text("Load").bold()) {
+                                self.userData.loadRecommendations()
+                                self.presentationMode.wrappedValue.dismiss()
+                            })
+                    }
                 }
                 .navigationBarTitle("Settings")
                 .navigationBarItems(trailing:

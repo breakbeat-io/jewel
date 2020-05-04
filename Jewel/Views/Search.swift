@@ -16,7 +16,6 @@ struct Search: View {
     @EnvironmentObject var searchProvider: SearchProvider
     
     @State private var showCancelButton: Bool = false
-    @State private var showingAlert = false
     
     var slotId: Int
         
@@ -33,11 +32,6 @@ struct Search: View {
                         .fontWeight(.bold)
                 }
                 Spacer()
-                Button(action: {
-                    self.showingAlert = true
-                }) {
-                    Image(systemName: "square.and.arrow.down.on.square")
-                }
             }.padding()
             
             //search box
@@ -51,11 +45,7 @@ struct Search: View {
             }
             Spacer()
         }
-        .alert(isPresented: $showingAlert) {
-            Alert(title: Text("Do you want to load our recommendations?"), primaryButton: .cancel(Text("Cancel")), secondaryButton: .default(Text("Load").bold()) {
-                    self.wallet.loadRecommendations()
-                })
-        }
+        
         .onDisappear(perform: {
             self.searchProvider.results?.removeAll()
         })
