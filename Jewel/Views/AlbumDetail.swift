@@ -40,11 +40,11 @@ struct AlbumDetail: View {
                         .lineLimit(1)
                 }
             }
-            if (userData.slots[slotId].album?.attributes?.url != nil) {
+            Unwrap(userData.slots[slotId].album?.attributes?.url) { url in
                 HStack(alignment: .center) {
-                    PlaybackControls(slotId: slotId)
-                    .padding()
-                }
+                PlaybackLink(playbackUrl: url)
+                .padding()
+            }
             }
             if (userData.slots[slotId].album != nil) {
                 AlbumTrackList(slotId: slotId)
