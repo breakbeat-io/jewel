@@ -18,6 +18,7 @@ struct AlbumDetail: View {
     var slotId: Int
     
     @State private var showSearch = false
+    @State private var showDeleteWarning = false
     
     var body: some View {
         ScrollView {
@@ -80,12 +81,16 @@ struct AlbumDetail: View {
                 }
                 
                 Button(action: {
-                    self.userData.deleteAlbumFromSlot(slotId: self.slotId)
+                    self.showDeleteWarning = true
                 }) {
                     if (userData.slots[slotId].album != nil) {
-                        Image(systemName: "trash")
-                            .foregroundColor(.red)
-                        }
+                    Image(systemName: "trash")
+                        .foregroundColor(.red)
+                    }
+                }.alert(isPresented: $showDeleteWarning) {
+                    Alert(title: Text("Are you sure you want to delete this album from your wallet?"), primaryButton: .cancel(Text("Cancel")), secondaryButton: .destructive(Text("Delete")) {
+                            self.userData.deleteAlbumFromSlot(slotId: self.slotId)
+                        })
                 }
             }
         )
