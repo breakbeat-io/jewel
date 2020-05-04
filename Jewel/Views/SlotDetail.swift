@@ -41,6 +41,7 @@ struct SlotDetail: View {
                         Image(systemName: "arrow.swap")
                     }
                 }
+                .padding(.leading)
                 .sheet(isPresented: $showSearch) {
                     Search(slotId: self.slotId)
                         .environmentObject(self.userData)
@@ -54,7 +55,9 @@ struct SlotDetail: View {
                     Image(systemName: "trash")
                         .foregroundColor(.red)
                     }
-                }.alert(isPresented: $showDeleteWarning) {
+                }
+                .padding(.leading)
+                .alert(isPresented: $showDeleteWarning) {
                     Alert(title: Text("Are you sure you want to delete this album from your wallet?"), primaryButton: .cancel(Text("Cancel")), secondaryButton: .destructive(Text("Delete")) {
                             self.userData.deleteAlbumFromSlot(slotId: self.slotId)
                         })
