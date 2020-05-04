@@ -30,7 +30,7 @@ struct Home: View {
                         .frame(height: (geo.size.height - geo.safeAreaInsets.top - geo.safeAreaInsets.bottom) / CGFloat(self.userData.slots.count))
                 }
                 .sheet(isPresented: self.$showUserSettings) {
-                    UserSettings().environmentObject(self.userData)
+                    Options().environmentObject(self.userData)
                 }
                 .onAppear {
                     UITableView.appearance().separatorStyle = .none
