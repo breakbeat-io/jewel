@@ -10,7 +10,7 @@ import SwiftUI
 
 struct Wallet: View {
     
-    @EnvironmentObject var wallet: SlotStore
+    @EnvironmentObject var wallet: UserData
     
     @State private var showUserSettings = false
     
@@ -51,7 +51,7 @@ struct Wallet: View {
 }
 
 struct Wallet_Previews: PreviewProvider {
-    static let wallet = SlotStore()
+    static let wallet = UserData()
     
     static var previews: some View {
         Wallet().environmentObject(wallet)

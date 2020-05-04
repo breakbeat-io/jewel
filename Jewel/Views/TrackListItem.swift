@@ -10,7 +10,7 @@ import SwiftUI
 
 struct TrackListItem: View {
     
-    @EnvironmentObject var wallet: SlotStore
+    @EnvironmentObject var wallet: UserData
     var slotId: Int
     var trackId: Int
     

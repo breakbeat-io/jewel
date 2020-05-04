@@ -10,7 +10,7 @@ import SwiftUI
 
 struct MetadataOverlay: View {
     
-    @EnvironmentObject var wallet: SlotStore
+    @EnvironmentObject var wallet: UserData
     var slotId: Int
     
     var body: some View {
