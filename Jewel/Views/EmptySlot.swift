@@ -22,7 +22,10 @@ struct EmptySlot: View {
             self.showSearch = true
         }) {
             RoundedRectangle(cornerRadius: 4)
-                .stroke(Color.gray, style: StrokeStyle(lineWidth: 2, dash: [4, 6]))
+            .stroke(
+                Color.gray,
+                style: StrokeStyle(lineWidth: 2, dash: [4, 6])
+            )
             .overlay(
                 Image(systemName: "plus")
                     .font(.headline)
@@ -30,7 +33,9 @@ struct EmptySlot: View {
             )
         }
         .sheet(isPresented: $showSearch) {
-            Search(slotId: self.slotId).environmentObject(self.userData).environmentObject(self.searchProvider)
+            Search(slotId: self.slotId)
+                .environmentObject(self.userData)
+                .environmentObject(self.searchProvider)
         }
     }
 }

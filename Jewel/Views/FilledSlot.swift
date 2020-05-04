@@ -12,6 +12,7 @@ struct FilledSlot: View {
     
     @EnvironmentObject var userData: UserData
     @EnvironmentObject var searchProvider: SearchProvider
+    
     @State private var tapped: Int? = 0
     @State private var showSearch = false
     
@@ -19,18 +20,25 @@ struct FilledSlot: View {
     
     var body: some View {
         ZStack {
-            AlbumCard(slotId: self.slotId)
-                .onTapGesture {
-                    self.tapped = 1
-                }
-                .onLongPressGesture() {
-                    self.showSearch = true
-                }
-            NavigationLink(destination: AlbumDetail(slotId: self.slotId), tag: 1, selection: self.$tapped) {
-                    EmptyView()
-            }.buttonStyle(PlainButtonStyle())
-        }.sheet(isPresented: $showSearch) {
-            Search(slotId: self.slotId).environmentObject(self.userData).environmentObject(self.searchProvider)
+            AlbumCard(album: userData.slots[slotId].album!)
+            .onTapGesture {
+                self.tapped = 1
+            }
+            .onLongPressGesture() {
+                self.showSearch = true
+            }
+            NavigationLink(
+                destination: AlbumDetail(slotId: self.slotId),
+                tag: 1,
+                selection: self.$tapped
+            ){
+                EmptyView()
+            }
+        }
+        .sheet(isPresented: $showSearch) {
+            Search(slotId: self.slotId)
+                .environmentObject(self.userData)
+                .environmentObject(self.searchProvider)
         }
     }
 }
