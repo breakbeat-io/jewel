@@ -20,10 +20,18 @@ struct SlotDetail: View {
     @State private var showSearch = false
     @State private var showDeleteWarning = false
     
-    var body: some View {
-        ScrollView {
-            AlbumDetail(slotId: slotId)
+    private func slotDetail() -> some View {
+        if userData.slots[slotId].album != nil {
+            return AnyView(ScrollView {
+                AlbumDetail(slotId: slotId)
+            })
+        } else {
+            return AnyView(EmptySlot(slotId: slotId))
         }
+    }
+    
+    var body: some View {
+        slotDetail()
         .navigationBarItems(trailing:
             HStack {
                 Button(action: {
