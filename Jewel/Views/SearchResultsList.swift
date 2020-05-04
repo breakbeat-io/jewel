@@ -13,7 +13,7 @@ import HMV
 struct SearchResultsList: View {
     
     @Environment(\.presentationMode) var presentationMode
-    @EnvironmentObject var wallet: UserData
+    @EnvironmentObject var userData: UserData
     @EnvironmentObject var searchProvider: SearchProvider
     
     var slotId: Int
@@ -49,7 +49,7 @@ struct SearchResultsList: View {
                             }
                             Spacer()
                             Button(action: {
-                                self.wallet.addAlbumToSlot(albumId: albums[i].id, slotId: self.slotId)
+                                self.userData.addAlbumToSlot(albumId: albums[i].id, slotId: self.slotId)
                                 self.presentationMode.wrappedValue.dismiss()
                             }, label:{
                                 Image(systemName: "plus.circle")

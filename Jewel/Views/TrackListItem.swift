@@ -10,14 +10,14 @@ import SwiftUI
 
 struct TrackListItem: View {
     
-    @EnvironmentObject var wallet: UserData
+    @EnvironmentObject var userData: UserData
     var slotId: Int
     var trackId: Int
     
     var body: some View {
-        let albumArtist = self.wallet.slots[self.slotId].album?.attributes?.artistName ?? ""
+        let albumArtist = self.userData.slots[self.slotId].album?.attributes?.artistName ?? ""
         
-        let trackListItem = Unwrap(wallet.slots[slotId].album?.relationships?.tracks.data?[trackId].attributes) { track in
+        let trackListItem = Unwrap(userData.slots[slotId].album?.relationships?.tracks.data?[trackId].attributes) { track in
             HStack {
                 Text(String(track.trackNumber))
                     .font(.footnote)

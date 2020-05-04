@@ -10,12 +10,12 @@ import SwiftUI
 
 struct PlaybackControls: View {
     
-    @EnvironmentObject var wallet: UserData
+    @EnvironmentObject var userData: UserData
     var slotId: Int
     
     var body: some View {
         Button(action: {
-            if let url = self.wallet.slots[self.slotId].album?.attributes?.url {
+            if let url = self.userData.slots[self.slotId].album?.attributes?.url {
                 UIApplication.shared.open(url)
             }
         }) {

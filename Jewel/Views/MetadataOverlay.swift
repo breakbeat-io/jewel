@@ -10,12 +10,12 @@ import SwiftUI
 
 struct MetadataOverlay: View {
     
-    @EnvironmentObject var wallet: UserData
+    @EnvironmentObject var userData: UserData
     var slotId: Int
     
     var body: some View {
         VStack(alignment: .leading) {
-            Unwrap(wallet.slots[slotId].album?.attributes) { attributes in
+            Unwrap(userData.slots[slotId].album?.attributes) { attributes in
                 Text(attributes.name)
                     .font(.callout)
                     .fontWeight(.bold)

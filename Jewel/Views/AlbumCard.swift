@@ -12,14 +12,14 @@ import HMV
 
 struct AlbumCard: View {
     
-    @EnvironmentObject var wallet: UserData
+    @EnvironmentObject var userData: UserData
     var slotId: Int
     
     var body: some View {
         Rectangle()
         .foregroundColor(.clear)
         .background(
-            Unwrap(wallet.slots[slotId].album?.attributes?.artwork) { artwork in
+            Unwrap(userData.slots[slotId].album?.attributes?.artwork) { artwork in
                 KFImage(artwork.url(forWidth: 1000))
                     .placeholder {
                         RoundedRectangle(cornerRadius: 4)

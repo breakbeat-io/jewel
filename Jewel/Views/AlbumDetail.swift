@@ -12,7 +12,7 @@ import HMV
 
 struct AlbumDetail: View {
     
-    @EnvironmentObject var wallet: UserData
+    @EnvironmentObject var userData: UserData
     @EnvironmentObject var searchProvider: SearchProvider
     
     var slotId: Int
@@ -23,7 +23,7 @@ struct AlbumDetail: View {
         ScrollView {
             VStack {
                 VStack(alignment: .leading) {
-                    Unwrap(wallet.slots[slotId].album?.attributes) { attributes in
+                    Unwrap(userData.slots[slotId].album?.attributes) { attributes in
                         KFImage(attributes.artwork.url(forWidth: 1000))
                             .placeholder {
                                 RoundedRectangle(cornerRadius: 4)
@@ -44,20 +44,20 @@ struct AlbumDetail: View {
                             .lineLimit(1)
                     }
                 }
-                if (wallet.slots[slotId].album?.attributes?.url != nil) {
+                if (userData.slots[slotId].album?.attributes?.url != nil) {
                     HStack(alignment: .center) {
                         PlaybackControls(slotId: slotId)
                         .padding()
                     }
                 }
-                if (wallet.slots[slotId].album != nil) {
+                if (userData.slots[slotId].album != nil) {
                     AlbumTrackList(slotId: slotId)
                 }
             }
             .padding()
         }
         .background(
-            Unwrap(wallet.slots[slotId].album?.attributes?.artwork) { artwork in
+            Unwrap(userData.slots[slotId].album?.attributes?.artwork) { artwork in
                 KFImage(artwork.url(forWidth: 1000))
                 .resizable()
                 .scaledToFill()
@@ -71,18 +71,18 @@ struct AlbumDetail: View {
                 Button(action: {
                     self.showSearch = true
                 }) {
-                    if (wallet.slots[slotId].album != nil) {
+                    if (userData.slots[slotId].album != nil) {
                         Image(systemName: "arrow.swap")
                     }
                 }
                 .sheet(isPresented: $showSearch) {
-                    Search(slotId: self.slotId).environmentObject(self.wallet).environmentObject(self.searchProvider)
+                    Search(slotId: self.slotId).environmentObject(self.userData).environmentObject(self.searchProvider)
                 }
                 
                 Button(action: {
-                    self.wallet.deleteAlbumFromSlot(slotId: self.slotId)
+                    self.userData.deleteAlbumFromSlot(slotId: self.slotId)
                 }) {
-                    if (wallet.slots[slotId].album != nil) {
+                    if (userData.slots[slotId].album != nil) {
                         Image(systemName: "trash")
                             .foregroundColor(.red)
                         }

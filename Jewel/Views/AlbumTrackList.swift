@@ -10,14 +10,14 @@ import SwiftUI
 
 struct AlbumTrackList: View {
     
-    @EnvironmentObject var wallet: UserData
+    @EnvironmentObject var userData: UserData
     var slotId: Int
     
     var body: some View {
         
         var numberOfDiscs = 0
         
-        if let tracks = wallet.slots[slotId].album?.relationships?.tracks.data {
+        if let tracks = userData.slots[slotId].album?.relationships?.tracks.data {
             var discs = [Int]()
             for i in 0..<tracks.count {
                 if let trackDiscNumber = tracks[i].attributes?.discNumber {

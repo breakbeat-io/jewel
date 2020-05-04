@@ -10,13 +10,13 @@ import SwiftUI
 
 struct DiscTrackList: View {
     
-    @EnvironmentObject var wallet: UserData
+    @EnvironmentObject var userData: UserData
     var slotId: Int
     var discNumber: Int
     
     var body: some View {
         
-        let discTrackList = Unwrap(wallet.slots[slotId].album?.relationships?.tracks.data) { tracks in
+        let discTrackList = Unwrap(userData.slots[slotId].album?.relationships?.tracks.data) { tracks in
             ForEach(0..<tracks.count) { i in
                 Unwrap(tracks[i].attributes?.discNumber) { trackDiscNumber in
                     if trackDiscNumber == self.discNumber {
