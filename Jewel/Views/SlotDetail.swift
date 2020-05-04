@@ -26,7 +26,7 @@ struct SlotDetail: View {
                 AlbumDetail(slotId: slotId)
             })
         } else {
-            return AnyView(EmptySlot(slotId: slotId))
+            return AnyView(EmptySlot(slotId: slotId).padding())
         }
     }
     
