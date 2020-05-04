@@ -24,13 +24,12 @@ struct Search: View {
             
             // action buttons
             HStack {
+                Spacer()
                 Button(action: {
                     self.presentationMode.wrappedValue.dismiss()
                 }) {
                     Text("Cancel")
-                        .fontWeight(.bold)
                 }
-                Spacer()
             }.padding()
             
             //search box
