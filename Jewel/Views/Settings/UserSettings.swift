@@ -23,40 +23,45 @@ struct UserSettings: View {
         VStack(alignment: .leading) {
             
             NavigationView {
-                List {
-                    NavigationLink(destination:
-                        WalletName(newWalletName: self.$newWalletName, shouldPopToRootView: self.$isActive),
-                        isActive: self.$isActive) {
-                        HStack {
-                            Text("Wallet Name")
-                            Spacer()
-                            Text(userData.walletName)
-                            .foregroundColor(Color.secondary)
+                VStack {
+                    List {
+                        NavigationLink(destination:
+                            WalletName(newWalletName: self.$newWalletName, shouldPopToRootView: self.$isActive),
+                            isActive: self.$isActive) {
+                            HStack {
+                                Text("Wallet Name")
+                                Spacer()
+                                Text(userData.walletName)
+                                .foregroundColor(Color.secondary)
+                            }
+                        }
+                        .isDetailLink(false)
+                        Button(action: {
+                            self.showDeleteAllWarning = true
+                        }) {
+                            Text("Delete All")
+                        }.alert(isPresented: $showDeleteAllWarning) {
+                            Alert(title: Text("Are you sure you want to delete all albums in your wallet?"), primaryButton: .cancel(Text("Cancel")), secondaryButton: .destructive(Text("Delete")) {
+                                    self.userData.deleteAll()
+                                    self.presentationMode.wrappedValue.dismiss()
+                                })
+                        }
+                        Button(action: {
+                            self.showLoadRecommendationsAlert = true
+                        }) {
+                            Text("Load Recommendations")
+                        }.alert(isPresented: $showLoadRecommendationsAlert) {
+                            Alert(title: Text("Do you want to load our recommendations?"), primaryButton: .cancel(Text("Cancel")), secondaryButton: .default(Text("Load").bold()) {
+                                    self.userData.loadRecommendations()
+                                    self.presentationMode.wrappedValue.dismiss()
+                                })
                         }
                     }
-                    .isDetailLink(false)
-                    Button(action: {
-                        self.showDeleteAllWarning = true
-                    }) {
-                        Text("Delete All")
-                    }.alert(isPresented: $showDeleteAllWarning) {
-                        Alert(title: Text("Are you sure you want to delete all albums in your wallet?"), primaryButton: .cancel(Text("Cancel")), secondaryButton: .destructive(Text("Delete")) {
-                                self.userData.deleteAll()
-                                self.presentationMode.wrappedValue.dismiss()
-                            })
-                    }
-                    Button(action: {
-                        self.showLoadRecommendationsAlert = true
-                    }) {
-                        Text("Load Recommendations")
-                    }.alert(isPresented: $showLoadRecommendationsAlert) {
-                        Alert(title: Text("Do you want to load our recommendations?"), primaryButton: .cancel(Text("Cancel")), secondaryButton: .default(Text("Load").bold()) {
-                                self.userData.loadRecommendations()
-                                self.presentationMode.wrappedValue.dismiss()
-                            })
-                    }
                     Spacer()
-                    Text("🎵 + 📱 = 🙌\n© Breakbeat Ltd., 2020")
+                    Text("🎵 + 📱 = 🙌")
+                        .font(.footnote)
+                        .padding(.bottom)
+                    Text("© 2020 Breakbeat Ltd.")
                         .font(.footnote)
                 }
                 .navigationBarTitle("Settings")
