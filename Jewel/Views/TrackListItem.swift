@@ -7,30 +7,28 @@
 //
 
 import SwiftUI
+import HMV
 
 struct TrackListItem: View {
     
-    @EnvironmentObject var userData: UserData
-    var slotId: Int
-    var trackId: Int
+    var track: Track
+    var albumArtist: String
     
     var body: some View {
-        let albumArtist = self.userData.slots[self.slotId].album?.attributes?.artistName ?? ""
-        
-        let trackListItem = Unwrap(userData.slots[slotId].album?.relationships?.tracks.data?[trackId].attributes) { track in
+        Unwrap(track.attributes) { trackAttributes in
             HStack {
-                Text(String(track.trackNumber))
+                Text(String(trackAttributes.trackNumber))
                     .font(.footnote)
                     .frame(width: 20, alignment: .center)
                     .padding(.vertical)
                     .padding(.trailing)
                 VStack(alignment: .leading) {
-                    Text(track.name)
+                    Text(trackAttributes.name)
                         .font(.callout)
                         .fontWeight(.medium)
                         .lineLimit(1)
-                    if track.artistName != albumArtist {
-                        Text(track.artistName)
+                    if trackAttributes.artistName != self.albumArtist {
+                        Text(trackAttributes.artistName)
                             .font(.callout)
                             .fontWeight(.light)
                             .opacity(0.7)
@@ -38,19 +36,20 @@ struct TrackListItem: View {
                     }
                 }
                 Spacer()
-                Unwrap(track.duration()) { duration in
+                Unwrap(trackAttributes.duration()) { duration in
                     Text(duration)
                         .font(.footnote)
                         .opacity(0.7)
                 }
             }
         }
-        return trackListItem
     }
 }
 
 struct TrackListItem_Previews: PreviewProvider {
+    static let userData = UserData()
+    
     static var previews: some View {
-        TrackListItem(slotId: 1, trackId: 1)
+        TrackListItem(track: (userData.slots[1].album?.relationships?.tracks.data?[1])!, albumArtist: (userData.slots[1].album?.attributes?.artistName)!)
     }
 }
