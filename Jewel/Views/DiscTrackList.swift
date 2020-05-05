@@ -16,9 +16,9 @@ struct DiscTrackList: View {
     
     var body: some View {
         
-        let discTrackList = Unwrap(userData.slots[slotId].album?.relationships?.tracks.data) { tracks in
+        let discTrackList = IfLet(userData.slots[slotId].album?.relationships?.tracks.data) { tracks in
             ForEach(0..<tracks.count) { i in
-                Unwrap(tracks[i].attributes?.discNumber) { trackDiscNumber in
+                IfLet(tracks[i].attributes?.discNumber) { trackDiscNumber in
                     if trackDiscNumber == self.discNumber {
                         TrackListItem(slotId: self.slotId, trackId: i)
                     }

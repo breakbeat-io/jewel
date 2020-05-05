@@ -37,7 +37,7 @@ struct SlotDetail: View {
         
         slotDetail()
         .navigationBarItems(trailing:
-            Unwrap(userData.slots[slotId].album) { album in
+            IfLet(userData.slots[slotId].album) { album in
                 HStack {
                     Button(action: {
                         self.showSearch = true

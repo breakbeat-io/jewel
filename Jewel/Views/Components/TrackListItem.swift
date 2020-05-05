@@ -18,7 +18,7 @@ struct TrackListItem: View {
         
         let albumArtist = self.userData.slots[self.slotId].album?.attributes?.artistName ?? ""
         
-        let trackListItem = Unwrap(userData.slots[slotId].album?.relationships?.tracks.data?[trackId].attributes) { track in
+        let trackListItem = IfLet(userData.slots[slotId].album?.relationships?.tracks.data?[trackId].attributes) { track in
             HStack {
                 Text(String(track.trackNumber))
                     .font(.footnote)
@@ -39,7 +39,7 @@ struct TrackListItem: View {
                     }
                 }
                 Spacer()
-                Unwrap(track.duration) { duration in
+                IfLet(track.duration) { duration in
                     Text(duration)
                         .font(.footnote)
                         .opacity(0.7)

@@ -19,7 +19,7 @@ struct AlbumDetail: View {
         
         VStack {
             VStack(alignment: .leading) {
-                Unwrap(userData.slots[slotId].album?.attributes) { attributes in
+                IfLet(userData.slots[slotId].album?.attributes) { attributes in
                     KFImage(attributes.artwork.url(forWidth: 1000))
                         .placeholder {
                             RoundedRectangle(cornerRadius: 4)
@@ -40,19 +40,19 @@ struct AlbumDetail: View {
                         .lineLimit(1)
                 }
             }
-            Unwrap(userData.slots[slotId].album?.attributes?.url) { url in
+            IfLet(userData.slots[slotId].album?.attributes?.url) { url in
                 HStack(alignment: .center) {
                     PlaybackLink(slotId: self.slotId)
                     .padding()
                 }
             }
-            Unwrap(userData.slots[slotId].album) { album in
+            IfLet(userData.slots[slotId].album) { album in
                 AlbumTrackList(slotId: self.slotId)
             }
         }
         .padding()
         .background(
-            Unwrap(userData.slots[slotId].album?.attributes?.artwork) { artwork in
+            IfLet(userData.slots[slotId].album?.attributes?.artwork) { artwork in
                 KFImage(artwork.url(forWidth: 1000))
                 .resizable()
                 .scaledToFill()

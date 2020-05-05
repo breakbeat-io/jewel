@@ -21,12 +21,12 @@ struct SearchResultsList: View {
         
         let searchResults = searchProvider.results
         
-        let searchResultsList = Unwrap(searchResults) { albums in
+        let searchResultsList = IfLet(searchResults) { albums in
             List(0..<albums.count, id: \.self) { i in
                 Button(action: {
                     //not yet active, will show album details
                 }, label: {
-                    Unwrap(albums[i].attributes) { album in
+                    IfLet(albums[i].attributes) { album in
                         HStack {
                             KFImage(album.artwork.url(forWidth: 50))
                               .placeholder {
