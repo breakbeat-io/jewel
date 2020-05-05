@@ -36,7 +36,7 @@ struct TrackListItem: View {
                     }
                 }
                 Spacer()
-                Unwrap(trackAttributes.duration()) { duration in
+                Unwrap(trackAttributes.duration) { duration in
                     Text(duration)
                         .font(.footnote)
                         .opacity(0.7)
