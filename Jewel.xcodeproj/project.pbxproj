@@ -197,7 +197,6 @@
 				D26B5621243E80450098E9E4 /* AlbumDetail.swift */,
 				D2D40B4E245738220018E066 /* AlbumTrackList.swift */,
 				D279E53124581AA800DFBDD4 /* DiscTrackList.swift */,
-				D2FD3B762458E731008A071F /* TrackListItem.swift */,
 				D26077C224606711005883ED /* Search */,
 				D26077C1246066EB005883ED /* Options */,
 				D26077C02460668D005883ED /* Components */,
@@ -211,6 +210,7 @@
 				D2E690F72450E98E00B981F2 /* Unwrap.swift */,
 				D22C4555243DE6F00001481D /* AlbumCard.swift */,
 				D26B5623243E8DB00098E9E4 /* PlaybackLink.swift */,
+				D2FD3B762458E731008A071F /* TrackListItem.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
