@@ -1,5 +1,5 @@
 //
-//  Unwrap.swift
+//  IfLet.swift
 //  Jewel
 //
 //  Created by Greg Hepworth on 22/04/2020.
@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct Unwrap<Value, Content: View>: View {
+struct IfLet<Value, Content: View>: View {
     private let value: Value?
     private let contentProvider: (Value) -> Content
 

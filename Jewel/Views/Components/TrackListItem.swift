@@ -10,14 +10,15 @@ import SwiftUI
 
 struct TrackListItem: View {
     
-    @EnvironmentObject var wallet: SlotStore
+    @EnvironmentObject var userData: UserData
     var slotId: Int
     var trackId: Int
     
     var body: some View {
-        let albumArtist = self.wallet.slots[self.slotId].album?.attributes?.artistName ?? ""
         
-        let trackListItem = Unwrap(wallet.slots[slotId].album?.relationships?.tracks.data?[trackId].attributes) { track in
+        let albumArtist = self.userData.slots[self.slotId].album?.attributes?.artistName ?? ""
+        
+        let trackListItem = IfLet(userData.slots[slotId].album?.relationships?.tracks.data?[trackId].attributes) { track in
             HStack {
                 Text(String(track.trackNumber))
                     .font(.footnote)
@@ -38,19 +39,23 @@ struct TrackListItem: View {
                     }
                 }
                 Spacer()
-                Unwrap(track.duration()) { duration in
+                IfLet(track.duration) { duration in
                     Text(duration)
                         .font(.footnote)
                         .opacity(0.7)
                 }
             }
         }
+        
         return trackListItem
     }
 }
 
 struct TrackListItem_Previews: PreviewProvider {
+    
+    static let userData = UserData()
+    
     static var previews: some View {
-        TrackListItem(slotId: 1, trackId: 1)
+        TrackListItem(slotId: 1, trackId: 1).environmentObject(userData)
     }
 }

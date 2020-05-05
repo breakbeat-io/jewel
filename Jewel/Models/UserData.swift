@@ -1,5 +1,5 @@
 //
-//  Wallet.swift
+//  UserData.swift
 //  Jewel
 //
 //  Created by Greg Hepworth on 20/04/2020.
@@ -9,9 +9,11 @@
 import Foundation
 import HMV
 
-class SlotStore: ObservableObject {
+class UserData: ObservableObject {
 
+    @Published var collectionName = ""
     @Published var slots = [Slot]()
+    
     private var userDefaults = UserDefaults.standard
     private var store: HMV?
     
@@ -37,9 +39,18 @@ class SlotStore: ObservableObject {
             slots.append(slot)
         }
         
-        //load it with any saved albums
+        loadUserData()
+        
+    }
+    
+    func loadUserData() {
+        
+        // load the wallet name
+        collectionName = userDefaults.string(forKey: "walletName") ?? "My Wallet"
+        
+        // load the wallet
         if let savedWallet = userDefaults.dictionary(forKey: "savedWallet") {
-            for slotId in 0..<numberOfSlots {
+            for slotId in 0..<slots.count {
                 if let albumId = savedWallet[String(slotId)] {
                     addAlbumToSlot(albumId: albumId as! String, slotId: slotId)
                 }
@@ -49,7 +60,12 @@ class SlotStore: ObservableObject {
         }
     }
     
-    func saveWallet() {
+    func saveUserData() {
+        
+        // save the wallet name
+        userDefaults.set(collectionName, forKey: "walletName")
+        
+        // save the wallet
         var savedWallet = [String: String]()
         for (index, slot) in slots.enumerated() {
             if let album = slot.album {
@@ -57,6 +73,7 @@ class SlotStore: ObservableObject {
             }
         }
         userDefaults.set(savedWallet, forKey: "savedWallet")
+
     }
     
     func addAlbumToSlot(albumId: String, slotId: Int) {
@@ -66,7 +83,7 @@ class SlotStore: ObservableObject {
                 if album != nil {
                     let newSlot = Slot(id: slotId, album: album)
                     self.slots[slotId] = newSlot
-                    self.saveWallet()
+                    self.saveUserData()
                 }
             }
         })
@@ -75,7 +92,13 @@ class SlotStore: ObservableObject {
     func deleteAlbumFromSlot(slotId: Int) {
         let emptySlot = Slot(id: slotId)
         self.slots[slotId] = emptySlot
-        self.saveWallet()
+        self.saveUserData()
+    }
+    
+    func deleteAll() {
+        for slotId in 0..<slots.count {
+            deleteAlbumFromSlot(slotId: slotId)
+        }
     }
     
     func loadRecommendations() {

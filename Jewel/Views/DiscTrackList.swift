@@ -10,27 +10,31 @@ import SwiftUI
 
 struct DiscTrackList: View {
     
-    @EnvironmentObject var wallet: SlotStore
+    @EnvironmentObject var userData: UserData
     var slotId: Int
     var discNumber: Int
     
     var body: some View {
         
-        let discTrackList = Unwrap(wallet.slots[slotId].album?.relationships?.tracks.data) { tracks in
+        let discTrackList = IfLet(userData.slots[slotId].album?.relationships?.tracks.data) { tracks in
             ForEach(0..<tracks.count) { i in
-                Unwrap(tracks[i].attributes?.discNumber) { trackDiscNumber in
+                IfLet(tracks[i].attributes?.discNumber) { trackDiscNumber in
                     if trackDiscNumber == self.discNumber {
                         TrackListItem(slotId: self.slotId, trackId: i)
                     }
                 }
             }
         }
+        
         return discTrackList
     }
 }
 
 struct DiscTrackList_Previews: PreviewProvider {
+    
+    static let userData = UserData()
+    
     static var previews: some View {
-        DiscTrackList(slotId: 1, discNumber: 1)
+        DiscTrackList(slotId: 1, discNumber: 1).environmentObject(userData)
     }
 }

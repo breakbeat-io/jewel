@@ -10,33 +10,39 @@ import SwiftUI
 
 struct EmptySlot: View {
     
-    @EnvironmentObject var wallet: SlotStore
+    @EnvironmentObject var userData: UserData
     @EnvironmentObject var searchProvider: SearchProvider
-    
+    var slotId: Int
     @State private var showSearch = false
     
-    var slotId: Int
-    
     var body: some View {
+        
         Button(action: {
             self.showSearch = true
         }) {
             RoundedRectangle(cornerRadius: 4)
-                .stroke(Color.gray, style: StrokeStyle(lineWidth: 2, dash: [4, 6]))
+            .stroke(
+                Color.gray,
+                style: StrokeStyle(lineWidth: 2, dash: [4, 6])
+            )
             .overlay(
-                Image(systemName: "plus.app")
-                    .font(.title)
+                Image(systemName: "plus")
+                    .font(.headline)
                     .foregroundColor(Color.gray)
             )
         }
         .sheet(isPresented: $showSearch) {
-            Search(slotId: self.slotId).environmentObject(self.wallet).environmentObject(self.searchProvider)
+            Search(slotId: self.slotId)
+                .environmentObject(self.userData)
+                .environmentObject(self.searchProvider)
         }
     }
 }
 
 struct EmptySlot_Previews: PreviewProvider {
+    static let userData = UserData()
+    
     static var previews: some View {
-        EmptySlot(slotId: 1)
+        EmptySlot(slotId: 1).environmentObject(userData)
     }
 }

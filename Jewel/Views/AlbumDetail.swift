@@ -1,5 +1,5 @@
 //
-//  ReleaseDetailView.swift
+//  AlbumDetail.swift
 //  Jewel
 //
 //  Created by Greg Hepworth on 08/04/2020.
@@ -12,48 +12,47 @@ import HMV
 
 struct AlbumDetail: View {
     
-    @EnvironmentObject var wallet: SlotStore
+    @EnvironmentObject var userData: UserData
     var slotId: Int
     
     var body: some View {
-        ScrollView {
-            VStack {
-                VStack(alignment: .leading) {
-                    Unwrap(wallet.slots[slotId].album?.attributes) { attributes in
-                        KFImage(attributes.artwork.url(forWidth: 1000))
-                            .placeholder {
-                                RoundedRectangle(cornerRadius: 4)
-                                    .fill(Color.gray)
-                            }
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .cornerRadius(4)
-                            .shadow(radius: 4)
-                        Text(attributes.name)
-                            .fontWeight(.bold)
-                            .font(.title)
-                            .foregroundColor(.black)
-                            .lineLimit(1)
-                        Text(attributes.artistName)
-                            .font(.title)
-                            .foregroundColor(.black)
-                            .lineLimit(1)
-                    }
-                }
-                if (wallet.slots[slotId].album?.attributes?.url != nil) {
-                    HStack(alignment: .center) {
-                        PlaybackControls(slotId: slotId)
-                        .padding()
-                    }
-                }
-                if (wallet.slots[slotId].album != nil) {
-                    AlbumTrackList(slotId: slotId)
+        
+        VStack {
+            VStack(alignment: .leading) {
+                IfLet(userData.slots[slotId].album?.attributes) { attributes in
+                    KFImage(attributes.artwork.url(forWidth: 1000))
+                        .placeholder {
+                            RoundedRectangle(cornerRadius: 4)
+                                .fill(Color.gray)
+                        }
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .cornerRadius(4)
+                        .shadow(radius: 4)
+                    Text(attributes.name)
+                        .fontWeight(.bold)
+                        .font(.title)
+                        .foregroundColor(.black)
+                        .lineLimit(1)
+                    Text(attributes.artistName)
+                        .font(.title)
+                        .foregroundColor(.black)
+                        .lineLimit(1)
                 }
             }
-            .padding()
+            IfLet(userData.slots[slotId].album?.attributes?.url) { url in
+                HStack(alignment: .center) {
+                    PlaybackLink(slotId: self.slotId)
+                    .padding()
+                }
+            }
+            IfLet(userData.slots[slotId].album) { album in
+                AlbumTrackList(slotId: self.slotId)
+            }
         }
+        .padding()
         .background(
-            Unwrap(wallet.slots[slotId].album?.attributes?.artwork) { artwork in
+            IfLet(userData.slots[slotId].album?.attributes?.artwork) { artwork in
                 KFImage(artwork.url(forWidth: 1000))
                 .resizable()
                 .scaledToFill()
@@ -62,24 +61,14 @@ struct AlbumDetail: View {
                 .edgesIgnoringSafeArea(.all)
             }
         )
-        .navigationBarItems(trailing:
-            Button(action: {
-                self.wallet.deleteAlbumFromSlot(slotId: self.slotId)
-            }) {
-                if (wallet.slots[slotId].album != nil) {
-                    Image(systemName: "trash")
-                        .padding()
-                        .foregroundColor(.red)
-                    }
-            }
-        )
     }
 }
 
-struct ReleaseDetail_Previews: PreviewProvider {
-    static let wallet = SlotStore()
+struct AlbumDetail_Previews: PreviewProvider {
+    
+    static let userData = UserData()
     
     static var previews: some View {
-        AlbumDetail(slotId: 0)
+        AlbumDetail(slotId: 0).environmentObject(userData)
     }
 }

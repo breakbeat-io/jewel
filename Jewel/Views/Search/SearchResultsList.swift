@@ -13,21 +13,20 @@ import HMV
 struct SearchResultsList: View {
     
     @Environment(\.presentationMode) var presentationMode
-    @EnvironmentObject var wallet: SlotStore
+    @EnvironmentObject var userData: UserData
     @EnvironmentObject var searchProvider: SearchProvider
-    
     var slotId: Int
     
     var body: some View {
-
+        
         let searchResults = searchProvider.results
         
-        let searchResultsList = Unwrap(searchResults) { albums in
+        let searchResultsList = IfLet(searchResults) { albums in
             List(0..<albums.count, id: \.self) { i in
                 Button(action: {
                     //not yet active, will show album details
                 }, label: {
-                    Unwrap(albums[i].attributes) { album in
+                    IfLet(albums[i].attributes) { album in
                         HStack {
                             KFImage(album.artwork.url(forWidth: 50))
                               .placeholder {
@@ -49,7 +48,7 @@ struct SearchResultsList: View {
                             }
                             Spacer()
                             Button(action: {
-                                self.wallet.addAlbumToSlot(albumId: albums[i].id, slotId: self.slotId)
+                                self.userData.addAlbumToSlot(albumId: albums[i].id, slotId: self.slotId)
                                 self.presentationMode.wrappedValue.dismiss()
                             }, label:{
                                 Image(systemName: "plus.circle")
@@ -60,12 +59,17 @@ struct SearchResultsList: View {
                 })
             }
         }
+        
         return searchResultsList
     }
 }
 
-//struct SearchResultsList_Previews: PreviewProvider {
-//    static var previews: some View {
-//        SearchResultsList()
-//    }
-//}
+struct SearchResultsList_Previews: PreviewProvider {
+    
+    static let userData = UserData()
+    static let searchProvider = SearchProvider()
+    
+    static var previews: some View {
+        SearchResultsList(slotId: 1).environmentObject(userData).environmentObject(searchProvider)
+    }
+}

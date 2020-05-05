@@ -10,36 +10,43 @@ import SwiftUI
 
 struct FilledSlot: View {
     
-    @EnvironmentObject var wallet: SlotStore
+    @EnvironmentObject var userData: UserData
     @EnvironmentObject var searchProvider: SearchProvider
+    var slotId: Int
     @State private var tapped: Int? = 0
     @State private var showSearch = false
     
-    var slotId: Int
-    
     var body: some View {
+        
         ZStack {
             AlbumCard(slotId: self.slotId)
-                .onTapGesture {
-                    self.tapped = 1
-                }
-                .onLongPressGesture() {
-                    self.showSearch = true
-                }
-            NavigationLink(destination: AlbumDetail(slotId: self.slotId), tag: 1, selection: self.$tapped) {
-                    EmptyView()
-            }.buttonStyle(PlainButtonStyle())
-        }.sheet(isPresented: $showSearch) {
-            Search(slotId: self.slotId).environmentObject(self.wallet).environmentObject(self.searchProvider)
+            .onTapGesture {
+                self.tapped = 1
+            }
+            .onLongPressGesture() {
+                self.showSearch = true
+            }
+            NavigationLink(
+                destination: SlotDetail(slotId: self.slotId),
+                tag: 1,
+                selection: self.$tapped
+            ){
+                EmptyView()
+            }
+        }
+        .sheet(isPresented: $showSearch) {
+            Search(slotId: self.slotId)
+                .environmentObject(self.userData)
+                .environmentObject(self.searchProvider)
         }
     }
 }
 
 struct FilledSlot_Previews: PreviewProvider {
     
-    static let wallet = SlotStore()
+    static let userData = UserData()
     
     static var previews: some View {
-        FilledSlot(slotId: 0)
+        FilledSlot(slotId: 0).environmentObject(userData)
     }
 }

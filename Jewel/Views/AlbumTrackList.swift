@@ -1,5 +1,5 @@
 //
-//  TrackList.swift
+//  AlbumTrackList.swift
 //  Jewel
 //
 //  Created by Greg Hepworth on 24/04/2020.
@@ -10,14 +10,14 @@ import SwiftUI
 
 struct AlbumTrackList: View {
     
-    @EnvironmentObject var wallet: SlotStore
+    @EnvironmentObject var userData: UserData
     var slotId: Int
     
     var body: some View {
         
         var numberOfDiscs = 0
         
-        if let tracks = wallet.slots[slotId].album?.relationships?.tracks.data {
+        if let tracks = userData.slots[slotId].album?.relationships?.tracks.data {
             var discs = [Int]()
             for i in 0..<tracks.count {
                 if let trackDiscNumber = tracks[i].attributes?.discNumber {
@@ -43,7 +43,10 @@ struct AlbumTrackList: View {
 }
 
 struct TrackList_Previews: PreviewProvider {
+    
+    static let userData = UserData()
+    
     static var previews: some View {
-        AlbumTrackList(slotId: 0)
+        AlbumTrackList(slotId: 0).environmentObject(userData)
     }
 }
