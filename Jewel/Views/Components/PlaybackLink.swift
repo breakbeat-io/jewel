@@ -10,11 +10,15 @@ import SwiftUI
 
 struct PlaybackLink: View {
     
-    var playbackUrl: URL
+    @EnvironmentObject var userData: UserData
+    var slotId: Int
+
     
     var body: some View {
         Button(action: {
-            UIApplication.shared.open(self.playbackUrl)
+            if let url = self.userData.slots[self.slotId].album?.attributes?.url {
+                UIApplication.shared.open(url)
+            }
         }) {
         HStack {
             Image(systemName: "play.fill")
@@ -34,9 +38,10 @@ struct PlaybackLink: View {
     }
 }
 
-struct PlaybackControlsView_Previews: PreviewProvider {
-
+struct PlaybackLinkView_Previews: PreviewProvider {
+    
     static var previews: some View {
-        PlaybackLink(playbackUrl: URL(string: "https://music.apple.com/gb/album/based-on-a-true-story/1241281467")!)
+        PlaybackLink(slotId: 0)
     }
+
 }

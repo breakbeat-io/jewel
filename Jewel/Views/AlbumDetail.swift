@@ -42,9 +42,9 @@ struct AlbumDetail: View {
             }
             Unwrap(userData.slots[slotId].album?.attributes?.url) { url in
                 HStack(alignment: .center) {
-                PlaybackLink(playbackUrl: url)
-                .padding()
-            }
+                    PlaybackLink(slotId: self.slotId)
+                    .padding()
+                }
             }
             if (userData.slots[slotId].album != nil) {
                 AlbumTrackList(slotId: slotId)
