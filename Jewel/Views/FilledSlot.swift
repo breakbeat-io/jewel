@@ -17,6 +17,7 @@ struct FilledSlot: View {
     @State private var showSearch = false
     
     var body: some View {
+        
         ZStack {
             AlbumCard(slotId: self.slotId)
             .onTapGesture {

@@ -16,6 +16,7 @@ struct AlbumDetail: View {
     var slotId: Int
     
     var body: some View {
+        
         VStack {
             VStack(alignment: .leading) {
                 Unwrap(userData.slots[slotId].album?.attributes) { attributes in
@@ -45,8 +46,8 @@ struct AlbumDetail: View {
                     .padding()
                 }
             }
-            if (userData.slots[slotId].album != nil) {
-                AlbumTrackList(slotId: slotId)
+            Unwrap(userData.slots[slotId].album) { album in
+                AlbumTrackList(slotId: self.slotId)
             }
         }
         .padding()

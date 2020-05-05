@@ -18,6 +18,7 @@ struct SearchResultsList: View {
     var slotId: Int
     
     var body: some View {
+        
         let searchResults = searchProvider.results
         
         let searchResultsList = Unwrap(searchResults) { albums in
@@ -58,6 +59,7 @@ struct SearchResultsList: View {
                 })
             }
         }
+        
         return searchResultsList
     }
 }

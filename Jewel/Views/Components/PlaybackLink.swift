@@ -14,6 +14,7 @@ struct PlaybackLink: View {
     var slotId: Int
     
     var body: some View {
+        
         Button(action: {
             if let url = self.userData.slots[self.slotId].album?.attributes?.url {
                 UIApplication.shared.open(url)

@@ -11,7 +11,7 @@ import SwiftUI
 struct Home: View {
     
     @EnvironmentObject var userData: UserData
-    @State private var showUserSettings = false
+    @State private var showOptions = false
     
     private func slotViewForId(slotId: Int) -> some View {
         if userData.slots[slotId].album == nil {
@@ -22,22 +22,23 @@ struct Home: View {
     }
     
     var body: some View {
+        
         NavigationView {
             GeometryReader { geo in
                 List(self.userData.slots) { slot in
                     self.slotViewForId(slotId: slot.id)
                         .frame(height: (geo.size.height - geo.safeAreaInsets.top - geo.safeAreaInsets.bottom) / CGFloat(self.userData.slots.count))
                 }
-                .sheet(isPresented: self.$showUserSettings) {
+                .sheet(isPresented: self.$showOptions) {
                     Options().environmentObject(self.userData)
                 }
                 .onAppear {
                     UITableView.appearance().separatorStyle = .none
                 }
-                .navigationBarTitle(self.userData.walletName)
+                .navigationBarTitle(self.userData.collectionName)
                 .navigationBarItems(trailing:
                     Button(action: {
-                        self.showUserSettings = true
+                        self.showOptions = true
                     }) {
                         Image(systemName: "slider.horizontal.3")
                     }

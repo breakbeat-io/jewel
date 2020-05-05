@@ -15,6 +15,7 @@ struct DiscTrackList: View {
     var discNumber: Int
     
     var body: some View {
+        
         let discTrackList = Unwrap(userData.slots[slotId].album?.relationships?.tracks.data) { tracks in
             ForEach(0..<tracks.count) { i in
                 Unwrap(tracks[i].attributes?.discNumber) { trackDiscNumber in
@@ -24,6 +25,7 @@ struct DiscTrackList: View {
                 }
             }
         }
+        
         return discTrackList
     }
 }

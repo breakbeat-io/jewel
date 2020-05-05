@@ -16,6 +16,7 @@ struct EmptySlot: View {
     @State private var showSearch = false
     
     var body: some View {
+        
         Button(action: {
             self.showSearch = true
         }) {

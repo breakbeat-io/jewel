@@ -16,6 +16,7 @@ struct AlbumCard: View {
     var slotId: Int
     
     var body: some View {
+        
         Rectangle()
         .foregroundColor(.clear)
         .background(

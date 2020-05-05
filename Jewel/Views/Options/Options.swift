@@ -24,10 +24,10 @@ struct Options: View {
                         HStack(alignment: .firstTextBaseline) {
                             Text("Collection Name")
                             TextField(
-                                userData.walletName,
+                                userData.collectionName,
                                 text: $newWalletName,
                                 onCommit: {
-                                    self.userData.walletName = self.newWalletName
+                                    self.userData.collectionName = self.newWalletName
                                     self.userData.saveUserData()
                                     self.presentationMode.wrappedValue.dismiss()
                                 }

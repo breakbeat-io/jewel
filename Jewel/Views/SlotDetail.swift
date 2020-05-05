@@ -20,45 +20,49 @@ struct SlotDetail: View {
     
     private func slotDetail() -> some View {
         if userData.slots[slotId].album != nil {
-            return AnyView(ScrollView {
-                AlbumDetail(slotId: slotId)
-            })
+            return AnyView(
+                ScrollView {
+                    AlbumDetail(slotId: slotId)
+                }
+            )
         } else {
-            return AnyView(EmptySlot(slotId: slotId).padding())
+            return AnyView(
+                EmptySlot(slotId: slotId)
+                .padding()
+            )
         }
     }
     
     var body: some View {
+        
         slotDetail()
         .navigationBarItems(trailing:
-            HStack {
-                Button(action: {
-                    self.showSearch = true
-                }) {
-                    if (userData.slots[slotId].album != nil) {
+            Unwrap(userData.slots[slotId].album) { album in
+                HStack {
+                    Button(action: {
+                        self.showSearch = true
+                    }) {
                         Image(systemName: "arrow.swap")
                     }
-                }
-                .padding(.leading)
-                .sheet(isPresented: $showSearch) {
-                    Search(slotId: self.slotId)
-                        .environmentObject(self.userData)
-                        .environmentObject(self.searchProvider)
-                }
-                
-                Button(action: {
-                    self.showDeleteWarning = true
-                }) {
-                    if (userData.slots[slotId].album != nil) {
-                    Image(systemName: "trash")
-                        .foregroundColor(.red)
+                    .padding(.leading)
+                    .sheet(isPresented: self.$showSearch) {
+                        Search(slotId: self.slotId)
+                            .environmentObject(self.userData)
+                            .environmentObject(self.searchProvider)
                     }
-                }
-                .padding(.leading)
-                .alert(isPresented: $showDeleteWarning) {
-                    Alert(title: Text("Are you sure you want to delete this album from your wallet?"), primaryButton: .cancel(Text("Cancel")), secondaryButton: .destructive(Text("Delete")) {
-                            self.userData.deleteAlbumFromSlot(slotId: self.slotId)
-                        })
+                    
+                    Button(action: {
+                        self.showDeleteWarning = true
+                    }) {
+                        Image(systemName: "trash")
+                            .foregroundColor(.red)
+                    }
+                    .padding(.leading)
+                    .alert(isPresented: self.$showDeleteWarning) {
+                        Alert(title: Text("Are you sure you want to delete this album from your wallet?"), primaryButton: .cancel(Text("Cancel")), secondaryButton: .destructive(Text("Delete")) {
+                                self.userData.deleteAlbumFromSlot(slotId: self.slotId)
+                            })
+                    }
                 }
             }
         )

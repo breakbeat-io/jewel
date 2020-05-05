@@ -15,6 +15,7 @@ struct SearchBar: View {
     @State private var searchTerm: String = ""
     
     var body: some View {
+        
         VStack(alignment: .leading) {
             Text("Search")
                 .font(.title)

@@ -15,6 +15,7 @@ struct TrackListItem: View {
     var trackId: Int
     
     var body: some View {
+        
         let albumArtist = self.userData.slots[self.slotId].album?.attributes?.artistName ?? ""
         
         let trackListItem = Unwrap(userData.slots[slotId].album?.relationships?.tracks.data?[trackId].attributes) { track in
@@ -45,6 +46,7 @@ struct TrackListItem: View {
                 }
             }
         }
+        
         return trackListItem
     }
 }
