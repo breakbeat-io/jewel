@@ -12,11 +12,9 @@ struct Options: View {
     
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var userData: UserData
-    
     @State private var newWalletName = ""
     @State private var showDeleteAllWarning = false
     @State private var showLoadRecommendationsAlert = false
-    
     
     var body: some View {
         NavigationView {
@@ -79,7 +77,6 @@ struct Options: View {
                     Text("Close")
                 }
             )
-
         }
     }
 }

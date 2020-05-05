@@ -12,11 +12,9 @@ struct FilledSlot: View {
     
     @EnvironmentObject var userData: UserData
     @EnvironmentObject var searchProvider: SearchProvider
-    
+    var slotId: Int
     @State private var tapped: Int? = 0
     @State private var showSearch = false
-    
-    var slotId: Int
     
     var body: some View {
         ZStack {

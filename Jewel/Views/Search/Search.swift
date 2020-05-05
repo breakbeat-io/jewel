@@ -13,15 +13,11 @@ struct Search: View {
     
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var searchProvider: SearchProvider
-    
     @State private var showCancelButton: Bool = false
-    
     var slotId: Int
         
     var body: some View {
-        
         VStack(alignment: .leading) {
-            
             // action buttons
             HStack {
                 Spacer()
@@ -31,10 +27,8 @@ struct Search: View {
                     Text("Cancel")
                 }
             }.padding()
-            
             //search box
             SearchBar()
-            
             // results
             if searchProvider.results != nil {
                 SearchResultsList(
@@ -43,7 +37,6 @@ struct Search: View {
             }
             Spacer()
         }
-        
         .onDisappear(perform: {
             self.searchProvider.results?.removeAll()
         })

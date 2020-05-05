@@ -12,7 +12,6 @@ struct PlaybackLink: View {
     
     @EnvironmentObject var userData: UserData
     var slotId: Int
-
     
     var body: some View {
         Button(action: {

@@ -14,9 +14,7 @@ struct SlotDetail: View {
     
     @EnvironmentObject var userData: UserData
     @EnvironmentObject var searchProvider: SearchProvider
-    
     var slotId: Int
-    
     @State private var showSearch = false
     @State private var showDeleteWarning = false
     

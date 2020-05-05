@@ -12,10 +12,8 @@ struct EmptySlot: View {
     
     @EnvironmentObject var userData: UserData
     @EnvironmentObject var searchProvider: SearchProvider
-    
-    @State private var showSearch = false
-    
     var slotId: Int
+    @State private var showSearch = false
     
     var body: some View {
         Button(action: {

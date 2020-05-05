@@ -12,7 +12,6 @@ import HMV
 struct SearchBar: View {
     
     @EnvironmentObject var searchProvider: SearchProvider
-    
     @State private var searchTerm: String = ""
     
     var body: some View {
@@ -45,7 +44,6 @@ struct SearchBar: View {
                 .cornerRadius(8.0)
             }
         }
-        
         .padding()
     }
 }

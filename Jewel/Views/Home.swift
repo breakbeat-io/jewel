@@ -11,7 +11,6 @@ import SwiftUI
 struct Home: View {
     
     @EnvironmentObject var userData: UserData
-    
     @State private var showUserSettings = false
     
     private func slotViewForId(slotId: Int) -> some View {

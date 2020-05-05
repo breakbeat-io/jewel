@@ -15,14 +15,11 @@ struct DiscTrackList: View {
     var discNumber: Int
     
     var body: some View {
-        
-        let albumArtist = userData.slots[slotId].album?.attributes?.artistName ?? ""
-        
         let discTrackList = Unwrap(userData.slots[slotId].album?.relationships?.tracks.data) { tracks in
             ForEach(0..<tracks.count) { i in
                 Unwrap(tracks[i].attributes?.discNumber) { trackDiscNumber in
                     if trackDiscNumber == self.discNumber {
-                        TrackListItem(track: tracks[i], albumArtist: albumArtist)
+                        TrackListItem(slotId: self.slotId, trackId: i)
                     }
                 }
             }

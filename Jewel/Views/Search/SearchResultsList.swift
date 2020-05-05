@@ -15,11 +15,9 @@ struct SearchResultsList: View {
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var userData: UserData
     @EnvironmentObject var searchProvider: SearchProvider
-    
     var slotId: Int
     
     var body: some View {
-
         let searchResults = searchProvider.results
         
         let searchResultsList = Unwrap(searchResults) { albums in
