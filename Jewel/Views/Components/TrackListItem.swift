@@ -52,7 +52,10 @@ struct TrackListItem: View {
 }
 
 struct TrackListItem_Previews: PreviewProvider {
+    
+    static let userData = UserData()
+    
     static var previews: some View {
-        TrackListItem(slotId: 1, trackId: 1)
+        TrackListItem(slotId: 1, trackId: 1).environmentObject(userData)
     }
 }

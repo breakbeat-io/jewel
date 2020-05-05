@@ -1,5 +1,5 @@
 //
-//  UserSettings.swift
+//  Options.swift
 //  Jewel
 //
 //  Created by Greg Hepworth on 04/05/2020.
@@ -81,8 +81,11 @@ struct Options: View {
     }
 }
 
-struct UserSettings_Previews: PreviewProvider {
+struct Options_Previews: PreviewProvider {
+    
+    static let userData = UserData()
+    
     static var previews: some View {
-        Options()
+        Options().environmentObject(userData)
     }
 }

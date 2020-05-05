@@ -1,5 +1,5 @@
 //
-//  Album.swift
+//  AlbumCard.swift
 //  Jewel
 //
 //  Created by Greg Hepworth on 08/04/2020.
@@ -57,11 +57,11 @@ struct AlbumCard: View {
     }
 }
 
-struct ReleaseListItem_Previews: PreviewProvider {
+struct AlbumCard_Previews: PreviewProvider {
     
     static let userData = UserData()
     
     static var previews: some View {
-        AlbumCard(slotId: 0)
+        AlbumCard(slotId: 0).environmentObject(userData)
     }
 }

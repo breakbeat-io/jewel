@@ -45,7 +45,11 @@ struct Search: View {
 }
 
 struct Search_Previews: PreviewProvider {
+    
+    static let userData = UserData()
+    static let searchProvider = SearchProvider()
+    
     static var previews: some View {
-        Search(slotId: 1)
+        Search(slotId: 1).environmentObject(userData).environmentObject(searchProvider)
     }
 }

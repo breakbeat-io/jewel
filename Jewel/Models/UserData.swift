@@ -1,5 +1,5 @@
 //
-//  Wallet.swift
+//  UserData.swift
 //  Jewel
 //
 //  Created by Greg Hepworth on 20/04/2020.

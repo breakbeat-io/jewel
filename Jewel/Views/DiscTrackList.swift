@@ -31,7 +31,10 @@ struct DiscTrackList: View {
 }
 
 struct DiscTrackList_Previews: PreviewProvider {
+    
+    static let userData = UserData()
+    
     static var previews: some View {
-        DiscTrackList(slotId: 1, discNumber: 1)
+        DiscTrackList(slotId: 1, discNumber: 1).environmentObject(userData)
     }
 }

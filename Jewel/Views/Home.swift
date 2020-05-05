@@ -1,5 +1,5 @@
 //
-//  Wallet.swift
+//  Home.swift
 //  Jewel
 //
 //  Created by Greg Hepworth on 08/04/2020.
@@ -49,7 +49,8 @@ struct Home: View {
     }
 }
 
-struct Wallet_Previews: PreviewProvider {
+struct Home_Previews: PreviewProvider {
+    
     static let userData = UserData()
     
     static var previews: some View {

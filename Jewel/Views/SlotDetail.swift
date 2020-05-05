@@ -70,7 +70,10 @@ struct SlotDetail: View {
 }
 
 struct SlotDetail_Previews: PreviewProvider {
+    
+    static let userData = UserData()
+    
     static var previews: some View {
-        SlotDetail(slotId: 1)
+        SlotDetail(slotId: 1).environmentObject(userData)
     }
 }

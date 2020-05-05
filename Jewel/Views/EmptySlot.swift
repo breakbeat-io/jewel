@@ -40,7 +40,9 @@ struct EmptySlot: View {
 }
 
 struct EmptySlot_Previews: PreviewProvider {
+    static let userData = UserData()
+    
     static var previews: some View {
-        EmptySlot(slotId: 1)
+        EmptySlot(slotId: 1).environmentObject(userData)
     }
 }

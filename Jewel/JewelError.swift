@@ -1,5 +1,5 @@
 //
-//  WalletError.swift
+//  JewelError.swift
 //  Jewel
 //
 //  Created by Greg Hepworth on 27/04/2020.

@@ -1,5 +1,5 @@
 //
-//  ReleaseDetailView.swift
+//  AlbumDetail.swift
 //  Jewel
 //
 //  Created by Greg Hepworth on 08/04/2020.
@@ -64,10 +64,11 @@ struct AlbumDetail: View {
     }
 }
 
-struct ReleaseDetail_Previews: PreviewProvider {
-    static let wallet = UserData()
+struct AlbumDetail_Previews: PreviewProvider {
+    
+    static let userData = UserData()
     
     static var previews: some View {
-        AlbumDetail(slotId: 0)
+        AlbumDetail(slotId: 0).environmentObject(userData)
     }
 }

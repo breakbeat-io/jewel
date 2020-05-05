@@ -1,5 +1,5 @@
 //
-//  TrackList.swift
+//  AlbumTrackList.swift
 //  Jewel
 //
 //  Created by Greg Hepworth on 24/04/2020.
@@ -43,7 +43,10 @@ struct AlbumTrackList: View {
 }
 
 struct TrackList_Previews: PreviewProvider {
+    
+    static let userData = UserData()
+    
     static var previews: some View {
-        AlbumTrackList(slotId: 0)
+        AlbumTrackList(slotId: 0).environmentObject(userData)
     }
 }

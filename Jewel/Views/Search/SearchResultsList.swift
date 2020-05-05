@@ -64,8 +64,12 @@ struct SearchResultsList: View {
     }
 }
 
-//struct SearchResultsList_Previews: PreviewProvider {
-//    static var previews: some View {
-//        SearchResultsList()
-//    }
-//}
+struct SearchResultsList_Previews: PreviewProvider {
+    
+    static let userData = UserData()
+    static let searchProvider = SearchProvider()
+    
+    static var previews: some View {
+        SearchResultsList(slotId: 1).environmentObject(userData).environmentObject(searchProvider)
+    }
+}

@@ -44,9 +44,9 @@ struct FilledSlot: View {
 
 struct FilledSlot_Previews: PreviewProvider {
     
-    static let wallet = UserData()
+    static let userData = UserData()
     
     static var previews: some View {
-        FilledSlot(slotId: 0)
+        FilledSlot(slotId: 0).environmentObject(userData)
     }
 }

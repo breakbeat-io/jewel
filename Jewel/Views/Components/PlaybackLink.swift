@@ -1,5 +1,5 @@
 //
-//  PlaybackControlsView.swift
+//  PlaybackLink.swift
 //  Jewel
 //
 //  Created by Greg Hepworth on 08/04/2020.
@@ -32,16 +32,17 @@ struct PlaybackLink: View {
         .overlay(
             RoundedRectangle(cornerRadius: 40)
                 .stroke(Color.black, lineWidth: 2)
-                .shadow(radius: 5)
             )
         }
     }
 }
 
-struct PlaybackLinkView_Previews: PreviewProvider {
+struct PlaybackLink_Previews: PreviewProvider {
+    
+    static let userData = UserData()
     
     static var previews: some View {
-        PlaybackLink(slotId: 0)
+        PlaybackLink(slotId: 0).environmentObject(userData)
     }
 
 }
