@@ -1,34 +1,12 @@
 //
-//  AlbumTrackList.swift
+//  DiscTracklist.swift
 //  Jewel
 //
-//  Created by Greg Hepworth on 24/04/2020.
+//  Created by Greg Hepworth on 06/05/2020.
 //  Copyright © 2020 Breakbeat Limited. All rights reserved.
 //
 
 import SwiftUI
-
-struct AlbumTrackList: View {
-    
-    @EnvironmentObject var userData: UserData
-    var slotId: Int
-    
-    var body: some View {
-        
-        let tracks = userData.slots[slotId].album?.relationships?.tracks.data
-        let discCount = tracks?.map { $0.attributes!.discNumber }.max()
-        
-        let albumTrackList = VStack(alignment: .leading) {
-            IfLet(discCount) { discCount in
-                ForEach(1..<discCount + 1, id: \.self) {
-                    DiscTrackList(slotId: self.slotId, discNumber: $0, withTitle: (discCount > 1) ? true : false)
-                }
-            }
-        }
-        
-        return albumTrackList
-    }
-}
 
 struct DiscTrackList: View {
     
@@ -72,9 +50,11 @@ struct DiscTrackList: View {
                                 }
                             }
                             Spacer()
-                            Text(track.attributes!.duration!)
+                            IfLet(attributes.duration) { duration in
+                                Text(duration)
                                 .font(.footnote)
                                 .opacity(0.7)
+                            }
                         }
                     }
                 }
@@ -85,11 +65,11 @@ struct DiscTrackList: View {
     }
 }
 
-struct TrackList_Previews: PreviewProvider {
+struct DiscTracklist_Previews: PreviewProvider {
     
     static let userData = UserData()
     
     static var previews: some View {
-        AlbumTrackList(slotId: 0).environmentObject(userData)
+        DiscTrackList(slotId: 0).environmentObject(userData)
     }
 }
