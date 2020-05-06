@@ -44,6 +44,7 @@ struct Home: View {
                     }
                 )
             }
+            Start()
         }
         .statusBar(hidden: true)
     }
