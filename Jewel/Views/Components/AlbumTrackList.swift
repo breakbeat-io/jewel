@@ -15,34 +15,22 @@ struct AlbumTrackList: View {
     
     var body: some View {
         
-        var numberOfDiscs = 0
+        let tracks = userData.slots[slotId].album?.relationships?.tracks.data
+        let discCount = tracks?.map { $0.attributes!.discNumber }.max()
         
-        if let tracks = userData.slots[slotId].album?.relationships?.tracks.data {
-            var discs = [Int]()
-            for i in 0..<tracks.count {
-                if let trackDiscNumber = tracks[i].attributes?.discNumber {
-                    discs.append(trackDiscNumber)
+        let albumTrackList = VStack(alignment: .leading) {
+            IfLet(discCount) { discCount in
+                ForEach(1..<discCount + 1, id: \.self) {
+                    DiscTrackList(slotId: self.slotId, discNumber: $0, withTitle: (discCount > 1) ? true : false)
                 }
             }
-            numberOfDiscs = discs.max() ?? 0
         }
         
-        let tracklist = VStack(alignment: .leading) {
-            ForEach(1..<numberOfDiscs + 1) { i in
-                if numberOfDiscs > 1 {
-                    Text("Disc \(i)")
-                        .fontWeight(.bold)
-                        .padding(.vertical)
-                }
-                DiscTrackList(slotId: self.slotId, discNumber: i)
-            }.foregroundColor(Color.black)
-        }
-        
-        return tracklist
+        return albumTrackList
     }
 }
 
-struct TrackList_Previews: PreviewProvider {
+struct AlbumTrackList_Previews: PreviewProvider {
     
     static let userData = UserData()
     
