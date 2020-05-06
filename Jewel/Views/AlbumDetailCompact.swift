@@ -10,7 +10,7 @@ import SwiftUI
 import KingfisherSwiftUI
 import HMV
 
-struct AlbumDetail: View {
+struct AlbumDetailCompact: View {
     
     @EnvironmentObject var userData: UserData
     var slotId: Int
@@ -69,6 +69,6 @@ struct AlbumDetail_Previews: PreviewProvider {
     static let userData = UserData()
     
     static var previews: some View {
-        AlbumDetail(slotId: 0).environmentObject(userData)
+        AlbumDetailCompact(slotId: 0).environmentObject(userData)
     }
 }

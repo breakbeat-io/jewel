@@ -12,6 +12,7 @@ import HMV
 
 struct SlotDetail: View {
     
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
     @EnvironmentObject var userData: UserData
     @EnvironmentObject var searchProvider: SearchProvider
     var slotId: Int
@@ -22,7 +23,11 @@ struct SlotDetail: View {
         if userData.slots[slotId].album != nil {
             return AnyView(
                 ScrollView {
-                    AlbumDetail(slotId: slotId)
+                    if horizontalSizeClass == .compact {
+                        AlbumDetailCompact(slotId: slotId)
+                    } else {
+                        AlbumDetailRegular(slotId: slotId)
+                    }
                 }
             )
         } else {
