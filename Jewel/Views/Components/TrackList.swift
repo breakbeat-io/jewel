@@ -42,27 +42,29 @@ struct DiscTrackList: View {
             }
             IfLet(self.userData.slots[self.slotId].album?.tracksForDisc(discNumber: discNumber)) { discTracks in
                 ForEach(discTracks) { track in
-                    HStack {
-                        Text(String(track.attributes!.trackNumber))
-                            .font(.footnote)
-                            .frame(width: 20, alignment: .center)
-                            .padding(.vertical)
-                            .padding(.trailing)
-                        VStack(alignment: .leading) {
-                            Text(track.attributes!.name)
-                                .font(.callout)
-                                .fontWeight(.medium)
-                                .lineLimit(1)
-                            Text(track.attributes!.artistName)
-                                .font(.callout)
-                                .fontWeight(.light)
+                    IfLet(track.attributes) { attributes in
+                        HStack {
+                            Text(String(attributes.trackNumber))
+                                .font(.footnote)
+                                .frame(width: 20, alignment: .center)
+                                .padding(.vertical)
+                                .padding(.trailing)
+                            VStack(alignment: .leading) {
+                                Text(attributes.name)
+                                    .font(.callout)
+                                    .fontWeight(.medium)
+                                    .lineLimit(1)
+                                Text(attributes.artistName)
+                                    .font(.callout)
+                                    .fontWeight(.light)
+                                    .opacity(0.7)
+                                    .lineLimit(1)
+                            }
+                            Spacer()
+                            Text(track.attributes!.duration!)
+                                .font(.footnote)
                                 .opacity(0.7)
-                                .lineLimit(1)
                         }
-                        Spacer()
-                        Text(track.attributes!.duration!)
-                            .font(.footnote)
-                            .opacity(0.7)
                     }
                 }
             }
