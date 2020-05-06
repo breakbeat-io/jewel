@@ -15,13 +15,18 @@ struct AlbumTrackList: View {
     
     var body: some View {
         
-        VStack(alignment: .leading) {
-            IfLet(userData.slots[slotId].album?.discCount()) { numberOfDiscs in
-                ForEach(1..<numberOfDiscs + 1, id: \.self) {
-                    DiscTrackList(slotId: self.slotId, discNumber: $0, withTitle: (numberOfDiscs > 1) ? true : false)
+        let tracks = userData.slots[slotId].album?.relationships?.tracks.data
+        let discCount = tracks?.map { $0.attributes!.discNumber }.max()
+        
+        let albumTrackList = VStack(alignment: .leading) {
+            IfLet(discCount) { discCount in
+                ForEach(1..<discCount + 1, id: \.self) {
+                    DiscTrackList(slotId: self.slotId, discNumber: $0, withTitle: (discCount > 1) ? true : false)
                 }
             }
         }
+        
+        return albumTrackList
     }
 }
 
