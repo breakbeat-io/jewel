@@ -34,13 +34,16 @@ struct DiscTrackList: View {
     
     var body: some View {
         
-        VStack(alignment: .leading) {
+        let discTracks = userData.slots[slotId].album?.tracksForDisc(discNumber: discNumber)
+        let albumArtist = userData.slots[slotId].album?.attributes?.artistName
+        
+        let discTrackList = VStack(alignment: .leading) {
             if withTitle {
                 Text("Disc \(discNumber)")
                     .fontWeight(.bold)
                     .padding(.vertical)
             }
-            IfLet(self.userData.slots[self.slotId].album?.tracksForDisc(discNumber: discNumber)) { discTracks in
+            IfLet(discTracks) { discTracks in
                 ForEach(discTracks) { track in
                     IfLet(track.attributes) { attributes in
                         HStack {
@@ -54,11 +57,13 @@ struct DiscTrackList: View {
                                     .font(.callout)
                                     .fontWeight(.medium)
                                     .lineLimit(1)
-                                Text(attributes.artistName)
-                                    .font(.callout)
-                                    .fontWeight(.light)
-                                    .opacity(0.7)
-                                    .lineLimit(1)
+                                if attributes.artistName != albumArtist {
+                                    Text(attributes.artistName)
+                                        .font(.callout)
+                                        .fontWeight(.light)
+                                        .opacity(0.7)
+                                        .lineLimit(1)
+                                }
                             }
                             Spacer()
                             Text(track.attributes!.duration!)
@@ -69,6 +74,8 @@ struct DiscTrackList: View {
                 }
             }
         }
+        
+        return discTrackList
     }
 }
 
