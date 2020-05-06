@@ -18,7 +18,7 @@ struct AlbumTrackList: View {
         VStack(alignment: .leading) {
             IfLet(userData.slots[slotId].album?.discCount()) { numberOfDiscs in
                 ForEach(1..<numberOfDiscs + 1, id: \.self) {
-                    DiscTrackList(slotId: self.slotId, discNumber: $0)
+                    DiscTrackList(slotId: self.slotId, discNumber: $0, withTitle: (numberOfDiscs > 1) ? true : false)
                 }
             }
         }
@@ -30,13 +30,16 @@ struct DiscTrackList: View {
     @EnvironmentObject var userData: UserData
     var slotId: Int
     var discNumber: Int
+    var withTitle: Bool
     
     var body: some View {
         
         VStack(alignment: .leading) {
-            Text("Disc \(discNumber)")
-                .fontWeight(.bold)
-                .padding(.vertical)
+            if withTitle {
+                Text("Disc \(discNumber)")
+                    .fontWeight(.bold)
+                    .padding(.vertical)
+            }
             IfLet(self.userData.slots[self.slotId].album?.tracksForDisc(discNumber: discNumber)) { discTracks in
                 ForEach(discTracks) { track in
                     HStack {
