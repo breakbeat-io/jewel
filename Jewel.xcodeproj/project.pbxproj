@@ -762,7 +762,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/hepto/HMV";
 			requirement = {
-				branch = identifiable;
+				branch = master;
 				kind = branch;
 			};
 		};

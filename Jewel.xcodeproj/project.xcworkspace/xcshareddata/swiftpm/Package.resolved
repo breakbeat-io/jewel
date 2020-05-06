@@ -5,8 +5,8 @@
         "package": "HMV",
         "repositoryURL": "https://github.com/hepto/HMV",
         "state": {
-          "branch": "identifiable",
-          "revision": "cebccb858c9815cea7aa69b707a5ad99ae0dd706",
+          "branch": "master",
+          "revision": "7f4c748d8a466da4668012b9b3b044200a9bd85c",
           "version": null
         }
       },
