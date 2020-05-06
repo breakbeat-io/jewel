@@ -15,17 +15,7 @@ struct AlbumTrackList: View {
     
     var body: some View {
         
-        var numberOfDiscs = 0
-        
-        if let tracks = userData.slots[slotId].album?.relationships?.tracks.data {
-            var discs = [Int]()
-            for i in 0..<tracks.count {
-                if let trackDiscNumber = tracks[i].attributes?.discNumber {
-                    discs.append(trackDiscNumber)
-                }
-            }
-            numberOfDiscs = discs.max() ?? 0
-        }
+        let numberOfDiscs = userData.slots[slotId].album?.discCount() ?? 1
         
         let tracklist = VStack(alignment: .leading) {
             ForEach(1..<numberOfDiscs + 1) { i in
