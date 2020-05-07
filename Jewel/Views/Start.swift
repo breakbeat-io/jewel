@@ -10,13 +10,15 @@ import SwiftUI
 
 struct Start: View {
     
+    @State private var fadeIn = false
+    
     var body: some View {
         VStack {
             Spacer()
             Image("logo")
                 .resizable()
                 .scaledToFill()
-                .frame(width: 200, height: 200)
+                .frame(width: 150, height: 150)
                 .cornerRadius(20)
                 .shadow(radius: 20)
             Text("Jewel")
@@ -25,9 +27,17 @@ struct Start: View {
                 .font(.headline)
             Spacer()
             HStack(alignment: .firstTextBaseline) {
+                Image(systemName: "chevron.left.2")
                 Image(systemName: "sidebar.left")
                 Text("Manage your collection from the sidebar")
-            }.padding()
+            }
+            .foregroundColor(.secondary)
+            .padding()
+        }
+        .opacity(fadeIn ? 1 : 0)
+        .animation(Animation.easeIn(duration: 2))
+        .onAppear {
+            self.fadeIn = true
         }
     }
 }
