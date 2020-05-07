@@ -45,10 +45,8 @@ class UserData: ObservableObject {
     
     func loadUserData() {
         
-        // load the collection name
         collectionName = userDefaults.string(forKey: "collectionName") ?? "My Collection"
         
-        // load the collection
         if let savedCollection = userDefaults.dictionary(forKey: "savedCollection") {
             for slotId in 0..<slots.count {
                 if let albumId = savedCollection[String(slotId)] {
@@ -62,10 +60,8 @@ class UserData: ObservableObject {
     
     func saveUserData() {
         
-        // save the collection name
         userDefaults.set(collectionName, forKey: "collectionName")
         
-        // save the collection
         var savedCollection = [String: String]()
         for (index, slot) in slots.enumerated() {
             if let album = slot.album {
