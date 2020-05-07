@@ -26,7 +26,7 @@ struct Start: View {
             Spacer()
             HStack(alignment: .firstTextBaseline) {
                 Image(systemName: "sidebar.left")
-                Text("Manage your collection in the sidebar")
+                Text("Manage your collection from the sidebar")
             }.padding()
         }
     }
