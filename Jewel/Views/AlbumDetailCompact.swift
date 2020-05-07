@@ -18,28 +18,7 @@ struct AlbumDetailCompact: View {
     var body: some View {
         
         VStack {
-            VStack(alignment: .leading) {
-                IfLet(userData.slots[slotId].album?.attributes) { attributes in
-                    KFImage(attributes.artwork.url(forWidth: 1000))
-                        .placeholder {
-                            RoundedRectangle(cornerRadius: 4)
-                                .fill(Color.gray)
-                        }
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .cornerRadius(4)
-                        .shadow(radius: 4)
-                    Text(attributes.name)
-                        .fontWeight(.bold)
-                        .font(.title)
-                        .foregroundColor(.black)
-                        .lineLimit(1)
-                    Text(attributes.artistName)
-                        .font(.title)
-                        .foregroundColor(.black)
-                        .lineLimit(1)
-                }
-            }
+            AlbumCover(slotId: slotId)
             IfLet(userData.slots[slotId].album?.attributes?.url) { url in
                 HStack(alignment: .center) {
                     PlaybackLink(slotId: self.slotId)
@@ -51,16 +30,6 @@ struct AlbumDetailCompact: View {
             }
         }
         .padding()
-        .background(
-            IfLet(userData.slots[slotId].album?.attributes?.artwork) { artwork in
-                KFImage(artwork.url(forWidth: 1000))
-                .resizable()
-                .scaledToFill()
-                .brightness(0.4)
-                .blur(radius: 20)
-                .edgesIgnoringSafeArea(.all)
-            }
-        )
     }
 }
 
