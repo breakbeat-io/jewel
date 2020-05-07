@@ -68,6 +68,7 @@ struct Options: View {
                 }
                 Spacer()
                 Footer()
+                .padding()
             }
             .navigationBarTitle("Options", displayMode: .inline)
             .navigationBarItems(trailing:
@@ -78,6 +79,7 @@ struct Options: View {
                 }
             )
         }
+        .navigationViewStyle(StackNavigationViewStyle())
     }
 }
 
