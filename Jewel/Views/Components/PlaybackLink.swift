@@ -27,11 +27,11 @@ struct PlaybackLink: View {
                 .font(.headline)
         }
         .padding()
-        .foregroundColor(.black)
+        .foregroundColor(.primary)
         .cornerRadius(40)
         .overlay(
             RoundedRectangle(cornerRadius: 40)
-                .stroke(Color.black, lineWidth: 2)
+                .stroke(Color.primary, lineWidth: 2)
             )
         }
     }
