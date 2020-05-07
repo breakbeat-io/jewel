@@ -31,7 +31,7 @@ struct Options: View {
                                     self.userData.saveUserData()
                                     self.presentationMode.wrappedValue.dismiss()
                                 }
-                            )
+                            ).foregroundColor(.blue)
                         }
                     }
                     Section(footer: Text("Load a selection of recent and classic releases, chosen by the music lovers that make Jewel.")) {
