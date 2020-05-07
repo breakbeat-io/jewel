@@ -23,40 +23,36 @@ struct SearchResultsList: View {
         
         let searchResultsList = IfLet(searchResults) { albums in
             List(0..<albums.count, id: \.self) { i in
-                Button(action: {
-                    //not yet active, will show album details
-                }, label: {
-                    IfLet(albums[i].attributes) { album in
-                        HStack {
-                            KFImage(album.artwork.url(forWidth: 50))
-                              .placeholder {
-                                  RoundedRectangle(cornerRadius: 4)
-                                      .fill(Color.gray)
-                              }
-                              .renderingMode(.original)
-                              .resizable()
-                              .aspectRatio(contentMode: .fit)
-                              .cornerRadius(4)
-                              .frame(width: 50)
-                            VStack(alignment: .leading) {
-                                Text(album.artistName)
-                                    .font(.headline)
-                                    .lineLimit(1)
-                                Text(album.name)
-                                    .font(.subheadline)
-                                    .lineLimit(1)
-                            }
-                            Spacer()
-                            Button(action: {
-                                self.userData.addAlbumToSlot(albumId: albums[i].id, slotId: self.slotId)
-                                self.presentationMode.wrappedValue.dismiss()
-                            }, label:{
-                                Image(systemName: "plus.circle")
-                                    .padding()
-                            })
+                IfLet(albums[i].attributes) { album in
+                    HStack {
+                        KFImage(album.artwork.url(forWidth: 50))
+                          .placeholder {
+                              RoundedRectangle(cornerRadius: 4)
+                                  .fill(Color.gray)
+                          }
+                          .renderingMode(.original)
+                          .resizable()
+                          .aspectRatio(contentMode: .fit)
+                          .cornerRadius(4)
+                          .frame(width: 50)
+                        VStack(alignment: .leading) {
+                            Text(album.artistName)
+                                .font(.headline)
+                                .lineLimit(1)
+                            Text(album.name)
+                                .font(.subheadline)
+                                .lineLimit(1)
                         }
+                        Spacer()
+                        Button(action: {
+                            self.userData.addAlbumToSlot(albumId: albums[i].id, slotId: self.slotId)
+                            self.presentationMode.wrappedValue.dismiss()
+                        }, label:{
+                            Image(systemName: "plus.circle")
+                                .padding()
+                        })
                     }
-                })
+                }
             }
         }
         
