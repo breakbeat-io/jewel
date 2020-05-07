@@ -64,7 +64,7 @@ struct SlotDetail: View {
                     }
                     .padding(.leading)
                     .alert(isPresented: self.$showDeleteWarning) {
-                        Alert(title: Text("Are you sure you want to delete this album from your wallet?"), primaryButton: .cancel(Text("Cancel")), secondaryButton: .destructive(Text("Delete")) {
+                        Alert(title: Text("Are you sure you want to delete this album from your collection?"), primaryButton: .cancel(Text("Cancel")), secondaryButton: .destructive(Text("Delete")) {
                                 self.userData.deleteAlbumFromSlot(slotId: self.slotId)
                             })
                     }

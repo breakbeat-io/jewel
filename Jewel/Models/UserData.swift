@@ -32,7 +32,7 @@ class UserData: ObservableObject {
         //basically if we can't open the store we're dead in the water so for now may as well crash!
         try! openStore()
         
-        //create an empty wallet
+        //create an empty collection
         let numberOfSlots = 8
         for slotId in 0..<numberOfSlots {
             let slot = Slot(id: slotId, album: nil)
@@ -45,34 +45,34 @@ class UserData: ObservableObject {
     
     func loadUserData() {
         
-        // load the wallet name
-        collectionName = userDefaults.string(forKey: "walletName") ?? "My Wallet"
+        // load the collection name
+        collectionName = userDefaults.string(forKey: "collectionName") ?? "My Collection"
         
-        // load the wallet
-        if let savedWallet = userDefaults.dictionary(forKey: "savedWallet") {
+        // load the collection
+        if let savedCollection = userDefaults.dictionary(forKey: "savedCollection") {
             for slotId in 0..<slots.count {
-                if let albumId = savedWallet[String(slotId)] {
+                if let albumId = savedCollection[String(slotId)] {
                     addAlbumToSlot(albumId: albumId as! String, slotId: slotId)
                 }
             }
         } else {
-            print("No wallet saved! Starting fresh")
+            print("No collection saved! Starting fresh")
         }
     }
     
     func saveUserData() {
         
-        // save the wallet name
-        userDefaults.set(collectionName, forKey: "walletName")
+        // save the collection name
+        userDefaults.set(collectionName, forKey: "collectionName")
         
-        // save the wallet
-        var savedWallet = [String: String]()
+        // save the collection
+        var savedCollection = [String: String]()
         for (index, slot) in slots.enumerated() {
             if let album = slot.album {
-                savedWallet[String(index)] = album.id
+                savedCollection[String(index)] = album.id
             }
         }
-        userDefaults.set(savedWallet, forKey: "savedWallet")
+        userDefaults.set(savedCollection, forKey: "savedCollection")
 
     }
     

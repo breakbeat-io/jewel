@@ -12,7 +12,7 @@ struct Options: View {
     
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var userData: UserData
-    @State private var newWalletName = ""
+    @State private var newCollectionName = ""
     @State private var showDeleteAllWarning = false
     @State private var showLoadRecommendationsAlert = false
     
@@ -25,9 +25,9 @@ struct Options: View {
                             Text("Collection Name")
                             TextField(
                                 userData.collectionName,
-                                text: $newWalletName,
+                                text: $newCollectionName,
                                 onCommit: {
-                                    self.userData.collectionName = self.newWalletName
+                                    self.userData.collectionName = self.newCollectionName
                                     self.userData.saveUserData()
                                     self.presentationMode.wrappedValue.dismiss()
                                 }
