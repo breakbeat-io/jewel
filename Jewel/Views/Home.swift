@@ -42,6 +42,7 @@ struct Home: View {
                     }) {
                         Image(systemName: "slider.horizontal.3")
                             .padding(.leading)
+                            .padding(.bottom)
                     }
                 )
             }
