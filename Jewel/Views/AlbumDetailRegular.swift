@@ -17,7 +17,6 @@ struct AlbumDetailRegular: View {
     var slotId: Int
     
     var body: some View {
-  
         HStack(alignment: .top) {
             VStack {
                 AlbumCover(slotId: slotId)
@@ -26,6 +25,9 @@ struct AlbumDetailRegular: View {
                         PlaybackLink(slotId: self.slotId)
                         .padding()
                     }.padding()
+                }
+                IfLet(userData.slots[slotId].album?.attributes?.editorialNotes?.standard) { notes in
+                    Text(notes)
                 }
             }
             VStack {
