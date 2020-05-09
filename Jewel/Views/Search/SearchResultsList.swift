@@ -36,10 +36,10 @@ struct SearchResultsList: View {
                           .cornerRadius(4)
                           .frame(width: 50)
                         VStack(alignment: .leading) {
-                            Text(album.artistName)
+                            Text(album.name)
                                 .font(.headline)
                                 .lineLimit(1)
-                            Text(album.name)
+                            Text(album.artistName)
                                 .font(.subheadline)
                                 .lineLimit(1)
                         }

@@ -1,27 +1,23 @@
 //
-//  HMV+Screenshots.swift
+//  SearchProvider+Screenshots.swift
 //  Jewel
 //
 //  Created by Greg Hepworth on 09/05/2020.
 //  Copyright © 2020 Breakbeat Ltd. All rights reserved.
 //
-
 #if DEBUG
 import Foundation
 import HMV
 
-extension UserData {
+extension SearchProvider {
     
-    func loadScreenshotCollection() {
+    func exampleSearch() {
         let albums = getScreenshotAlbums()
-        for slotId in 0..<albums!.data!.count {
-            let newSlot = Slot(id: slotId, album: albums!.data![slotId])
-            self.slots[slotId] = newSlot
-        }
+        results = albums?.data
     }
     
     func getScreenshotAlbums() -> ResponseRoot<Album>? {
-        if let url = Bundle.main.url(forResource: "screenshotCollectionAlbums", withExtension: "json") {
+        if let url = Bundle.main.url(forResource: "screenshotSearchAlbums", withExtension: "json") {
             do {
                 let data = try Data(contentsOf: url)
                 let decoder = JSONDecoder()

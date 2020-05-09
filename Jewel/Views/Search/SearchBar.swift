@@ -27,7 +27,11 @@ struct SearchBar: View {
                         "Search Apple Music",
                         text: $searchTerm,
                         onCommit: {
+                            #if DEBUG
+                            self.searchProvider.exampleSearch()
+                            #else
                             self.searchProvider.search(searchTerm: self.searchTerm)
+                            #endif
                         }
                     ).foregroundColor(.primary)
                     .keyboardType(.webSearch)
