@@ -26,9 +26,9 @@ struct AlbumDetailRegular: View {
                         .padding()
                     }.padding()
                 }
-                IfLet(userData.slots[slotId].album?.attributes?.editorialNotes?.standard) { notes in
-                    Text(notes)
-                }
+//                IfLet(userData.slots[slotId].album?.attributes?.editorialNotes?.standard) { notes in
+//                    Text(notes)
+//                }
             }
             VStack {
                 IfLet(userData.slots[slotId].album) { album in
