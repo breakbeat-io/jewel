@@ -26,6 +26,8 @@
 		D27371C324571828005CC5EF /* JewelError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27371C224571828005CC5EF /* JewelError.swift */; };
 		D28358832451D3C700411AC9 /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28358822451D3C700411AC9 /* Search.swift */; };
 		D28358872452D3CF00411AC9 /* SearchResultsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28358862452D3CF00411AC9 /* SearchResultsList.swift */; };
+		D2937DC92466D3A700C252EE /* UserData+Screenshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2937DC82466D3A700C252EE /* UserData+Screenshots.swift */; };
+		D2937DCC2466D96E00C252EE /* screenshotAlbums.json in Resources */ = {isa = PBXBuildFile; fileRef = D2937DCB2466D96E00C252EE /* screenshotAlbums.json */; };
 		D29C76002459662F005BE357 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29C75FF2459662F005BE357 /* SearchBar.swift */; };
 		D29C760224598F06005BE357 /* SearchProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29C760124598F06005BE357 /* SearchProvider.swift */; };
 		D29D8C9E2464039600153D90 /* AlbumCover.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29D8C9D2464039600153D90 /* AlbumCover.swift */; };
@@ -84,6 +86,8 @@
 		D28358862452D3CF00411AC9 /* SearchResultsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsList.swift; sourceTree = "<group>"; };
 		D28AF841244F46A700AD6614 /* debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = debug.xcconfig; sourceTree = "<group>"; };
 		D28AF842244F46D700AD6614 /* release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = release.xcconfig; sourceTree = "<group>"; };
+		D2937DC82466D3A700C252EE /* UserData+Screenshots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserData+Screenshots.swift"; sourceTree = "<group>"; };
+		D2937DCB2466D96E00C252EE /* screenshotAlbums.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = screenshotAlbums.json; sourceTree = "<group>"; };
 		D29C75FF2459662F005BE357 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		D29C760124598F06005BE357 /* SearchProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchProvider.swift; sourceTree = "<group>"; };
 		D29D8C9D2464039600153D90 /* AlbumCover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumCover.swift; sourceTree = "<group>"; };
@@ -250,6 +254,15 @@
 			path = BuildConfigs;
 			sourceTree = "<group>";
 		};
+		D2937DCA2466D94800C252EE /* Screenshots */ = {
+			isa = PBXGroup;
+			children = (
+				D2937DC82466D3A700C252EE /* UserData+Screenshots.swift */,
+				D2937DCB2466D96E00C252EE /* screenshotAlbums.json */,
+			);
+			path = Screenshots;
+			sourceTree = "<group>";
+		};
 		D2B1E6322448635D004D474F /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -262,6 +275,7 @@
 		D2FD3B752458D874008A071F /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				D2937DCA2466D94800C252EE /* Screenshots */,
 				D29C760124598F06005BE357 /* SearchProvider.swift */,
 			);
 			path = Helpers;
@@ -382,6 +396,7 @@
 				D22C452E243DD8B10001481D /* LaunchScreen.storyboard in Resources */,
 				D22C452B243DD8B10001481D /* Preview Assets.xcassets in Resources */,
 				D22C4528243DD8B10001481D /* Assets.xcassets in Resources */,
+				D2937DCC2466D96E00C252EE /* screenshotAlbums.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -411,6 +426,7 @@
 				D28358832451D3C700411AC9 /* Search.swift in Sources */,
 				D2E690F82450E98E00B981F2 /* IfLet.swift in Sources */,
 				D20968912460106300496674 /* Options.swift in Sources */,
+				D2937DC92466D3A700C252EE /* UserData+Screenshots.swift in Sources */,
 				D27371C324571828005CC5EF /* JewelError.swift in Sources */,
 				D2E690FC2450EF9A00B981F2 /* FilledSlot.swift in Sources */,
 				D22C4522243DD8B00001481D /* AppDelegate.swift in Sources */,

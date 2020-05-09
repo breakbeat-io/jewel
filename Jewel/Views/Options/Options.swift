@@ -65,6 +65,16 @@ struct Options: View {
                                 self.presentationMode.wrappedValue.dismiss()
                             })
                     }
+                    #if DEBUG
+                    Section(header: Text("Debug")) {
+                        Button(action: {
+                            self.userData.loadScreenshotCollection()
+                            self.presentationMode.wrappedValue.dismiss()
+                        }) {
+                            Text("Load Screenshot Data")
+                        }
+                    }
+                    #endif
                 }
                 Spacer()
                 Footer()
