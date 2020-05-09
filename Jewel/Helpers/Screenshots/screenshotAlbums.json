@@ -54,7 +54,7 @@
           "data": [
             {
               "attributes": {
-                "artistName": "MVP",
+                "artistName": "Versus",
                 "artwork": {
                   "bgColor": "ffffff",
                   "height": 1500,
@@ -65,7 +65,7 @@
                   "url": "https://example.mzstatic.com/image/thumb/Music3/v4/2d/02/4a/2d024aaa-4547-ca71-7ba1-b8f5e1d98256/source/{w}x{h}bb.jpg",
                   "width": 1500
                 },
-                "composerName": "MVP",
+                "composerName": "Versus",
                 "discNumber": 1,
                 "durationInMillis": 289186,
                 "genreNames": [
@@ -91,7 +91,7 @@
             },
             {
               "attributes": {
-                "artistName": "MVP",
+                "artistName": "Versus",
                 "artwork": {
                   "bgColor": "ffffff",
                   "height": 1500,
@@ -102,7 +102,7 @@
                   "url": "https://example.mzstatic.com/image/thumb/Music3/v4/2d/02/4a/2d024aaa-4547-ca71-7ba1-b8f5e1d98256/source/{w}x{h}bb.jpg",
                   "width": 1500
                 },
-                "composerName": "MVP",
+                "composerName": "Versus",
                 "discNumber": 1,
                 "durationInMillis": 191315,
                 "genreNames": [
@@ -128,7 +128,7 @@
             },
             {
               "attributes": {
-                "artistName": "MVP",
+                "artistName": "Versus",
                 "artwork": {
                   "bgColor": "ffffff",
                   "height": 1500,
@@ -139,7 +139,7 @@
                   "url": "https://example.mzstatic.com/image/thumb/Music3/v4/2d/02/4a/2d024aaa-4547-ca71-7ba1-b8f5e1d98256/source/{w}x{h}bb.jpg",
                   "width": 1500
                 },
-                "composerName": "MVP",
+                "composerName": "Versus",
                 "discNumber": 1,
                 "durationInMillis": 181341,
                 "genreNames": [
@@ -165,7 +165,7 @@
             },
             {
               "attributes": {
-                "artistName": "MVP",
+                "artistName": "Versus",
                 "artwork": {
                   "bgColor": "ffffff",
                   "height": 1500,
@@ -176,7 +176,7 @@
                   "url": "https://example.mzstatic.com/image/thumb/Music3/v4/2d/02/4a/2d024aaa-4547-ca71-7ba1-b8f5e1d98256/source/{w}x{h}bb.jpg",
                   "width": 1500
                 },
-                "composerName": "MVP",
+                "composerName": "Versus",
                 "discNumber": 1,
                 "durationInMillis": 391764,
                 "genreNames": [
@@ -202,7 +202,7 @@
             },
             {
               "attributes": {
-                "artistName": "MVP",
+                "artistName": "Versus",
                 "artwork": {
                   "bgColor": "ffffff",
                   "height": 1500,
@@ -213,7 +213,7 @@
                   "url": "https://example.mzstatic.com/image/thumb/Music3/v4/2d/02/4a/2d024aaa-4547-ca71-7ba1-b8f5e1d98256/source/{w}x{h}bb.jpg",
                   "width": 1500
                 },
-                "composerName": "MVP",
+                "composerName": "Versus",
                 "discNumber": 1,
                 "durationInMillis": 269933,
                 "genreNames": [
@@ -239,7 +239,7 @@
             },
             {
               "attributes": {
-                "artistName": "MVP",
+                "artistName": "Versus",
                 "artwork": {
                   "bgColor": "ffffff",
                   "height": 1500,
@@ -250,7 +250,7 @@
                   "url": "https://example.mzstatic.com/image/thumb/Music3/v4/2d/02/4a/2d024aaa-4547-ca71-7ba1-b8f5e1d98256/source/{w}x{h}bb.jpg",
                   "width": 1500
                 },
-                "composerName": "MVP",
+                "composerName": "Versus",
                 "discNumber": 1,
                 "durationInMillis": 270261,
                 "genreNames": [
@@ -261,7 +261,7 @@
                   "Pop",
                   "Pop/Rock"
                 ],
-                "name": "Haystack",
+                "name": "Say Something",
                 "playParams": {
                   "id": "310730220",
                   "kind": "song"
@@ -276,7 +276,7 @@
             },
             {
               "attributes": {
-                "artistName": "MVP",
+                "artistName": "Versus",
                 "artwork": {
                   "bgColor": "ffffff",
                   "height": 1500,
@@ -287,7 +287,7 @@
                   "url": "https://example.mzstatic.com/image/thumb/Music3/v4/2d/02/4a/2d024aaa-4547-ca71-7ba1-b8f5e1d98256/source/{w}x{h}bb.jpg",
                   "width": 1500
                 },
-                "composerName": "MVP",
+                "composerName": "Versus",
                 "discNumber": 1,
                 "durationInMillis": 198721,
                 "genreNames": [
@@ -313,7 +313,7 @@
             },
             {
               "attributes": {
-                "artistName": "MVP",
+                "artistName": "Versus",
                 "artwork": {
                   "bgColor": "ffffff",
                   "height": 1500,
@@ -324,7 +324,7 @@
                   "url": "https://example.mzstatic.com/image/thumb/Music3/v4/2d/02/4a/2d024aaa-4547-ca71-7ba1-b8f5e1d98256/source/{w}x{h}bb.jpg",
                   "width": 1500
                 },
-                "composerName": "MVP",
+                "composerName": "Versus",
                 "discNumber": 1,
                 "durationInMillis": 573496,
                 "genreNames": [
@@ -615,7 +615,7 @@
                   "Pop",
                   "Pop/Rock"
                 ],
-                "name": "Haystack",
+                "name": "Say Something",
                 "playParams": {
                   "id": "310730220",
                   "kind": "song"
@@ -969,7 +969,7 @@
                   "Pop",
                   "Pop/Rock"
                 ],
-                "name": "Haystack",
+                "name": "Say Something",
                 "playParams": {
                   "id": "310730220",
                   "kind": "song"
@@ -1323,7 +1323,7 @@
                   "Pop",
                   "Pop/Rock"
                 ],
-                "name": "Haystack",
+                "name": "Say Something",
                 "playParams": {
                   "id": "310730220",
                   "kind": "song"
@@ -1677,7 +1677,7 @@
                   "Pop",
                   "Pop/Rock"
                 ],
-                "name": "Haystack",
+                "name": "Say Something",
                 "playParams": {
                   "id": "310730220",
                   "kind": "song"
@@ -2031,7 +2031,7 @@
                   "Pop",
                   "Pop/Rock"
                 ],
-                "name": "Haystack",
+                "name": "Say Something",
                 "playParams": {
                   "id": "310730220",
                   "kind": "song"
@@ -2385,7 +2385,7 @@
                   "Pop",
                   "Pop/Rock"
                 ],
-                "name": "Haystack",
+                "name": "Say Something",
                 "playParams": {
                   "id": "310730220",
                   "kind": "song"
@@ -2739,7 +2739,7 @@
                   "Pop",
                   "Pop/Rock"
                 ],
-                "name": "Haystack",
+                "name": "Say Something",
                 "playParams": {
                   "id": "310730220",
                   "kind": "song"
