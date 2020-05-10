@@ -24,8 +24,4 @@ class SearchProvider: ObservableObject {
             }
         }
     }
-    
-    
 }
-
-

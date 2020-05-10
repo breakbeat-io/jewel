@@ -65,9 +65,22 @@ struct Options: View {
                                 self.presentationMode.wrappedValue.dismiss()
                             })
                     }
+                    if userData.debugMode {
+                        Section(header: Text("Debug")) {
+                            Button(action: {
+                                self.userData.loadScreenshotCollection()
+                                self.presentationMode.wrappedValue.dismiss()
+                            }) {
+                                Text("Load Screenshot Data")
+                            }
+                        }
+                    }
                 }
                 Spacer()
                 Footer()
+                    .onTapGesture(count: 10) {
+                        self.userData.debugMode = true
+                    }
                 .padding()
             }
             .navigationBarTitle("Options", displayMode: .inline)

@@ -13,7 +13,8 @@ class UserData: ObservableObject {
 
     @Published var collectionName = ""
     @Published var slots = [Slot]()
-    
+    @Published var debugMode = false
+    let numberOfSlots = 8
     private var userDefaults = UserDefaults.standard
     private var store: HMV?
     
@@ -33,7 +34,6 @@ class UserData: ObservableObject {
         try! openStore()
         
         //create an empty collection
-        let numberOfSlots = 8
         for slotId in 0..<numberOfSlots {
             let slot = Slot(id: slotId, album: nil)
             slots.append(slot)

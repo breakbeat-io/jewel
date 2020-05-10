@@ -11,6 +11,7 @@ import HMV
 
 struct SearchBar: View {
     
+    @EnvironmentObject var userData: UserData
     @EnvironmentObject var searchProvider: SearchProvider
     @State private var searchTerm: String = ""
     
@@ -27,7 +28,11 @@ struct SearchBar: View {
                         "Search Apple Music",
                         text: $searchTerm,
                         onCommit: {
-                            self.searchProvider.search(searchTerm: self.searchTerm)
+                            if self.userData.debugMode {
+                                self.searchProvider.exampleSearch()
+                            } else {
+                                self.searchProvider.search(searchTerm: self.searchTerm)
+                            }
                         }
                     ).foregroundColor(.primary)
                     .keyboardType(.webSearch)
