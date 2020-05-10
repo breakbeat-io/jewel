@@ -13,6 +13,7 @@ class UserData: ObservableObject {
 
     @Published var collectionName = ""
     @Published var slots = [Slot]()
+    @Published var debugMode = false
     let numberOfSlots = 8
     private var userDefaults = UserDefaults.standard
     private var store: HMV?

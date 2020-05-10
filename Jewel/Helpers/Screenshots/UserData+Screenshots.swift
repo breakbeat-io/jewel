@@ -6,7 +6,6 @@
 //  Copyright © 2020 Breakbeat Ltd. All rights reserved.
 //
 
-#if DEBUG
 import Foundation
 import HMV
 
@@ -34,4 +33,3 @@ extension UserData {
         return nil
     }
 }
-#endif

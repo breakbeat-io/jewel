@@ -5,7 +5,7 @@
 //  Created by Greg Hepworth on 09/05/2020.
 //  Copyright © 2020 Breakbeat Ltd. All rights reserved.
 //
-#if DEBUG
+
 import Foundation
 import HMV
 
@@ -30,4 +30,3 @@ extension SearchProvider {
         return nil
     }
 }
-#endif
