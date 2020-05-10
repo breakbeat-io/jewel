@@ -15,7 +15,12 @@ struct PlaybackLink: View {
     
     var body: some View {
         
-        Button(action: {
+        if let appleMusicUrl = userData.slots[self.slotId].album?.attributes?.url {
+            let links = LinkProvider.getServiceLinks(appleMusicUrl: appleMusicUrl)
+            print(links)
+        }
+        
+        let playbackLink = Button(action: {
             if let url = self.userData.slots[self.slotId].album?.attributes?.url {
                 UIApplication.shared.open(url)
             }
@@ -34,6 +39,8 @@ struct PlaybackLink: View {
                 .stroke(Color.primary, lineWidth: 2)
             )
         }
+        
+        return playbackLink
     }
 }
 

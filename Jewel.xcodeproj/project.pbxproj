@@ -35,6 +35,9 @@
 		D29D8C9E2464039600153D90 /* AlbumCover.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29D8C9D2464039600153D90 /* AlbumCover.swift */; };
 		D2A31B05246308B800D6BF4A /* Start.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A31B04246308B800D6BF4A /* Start.swift */; };
 		D2A31B0924631F5100D6BF4A /* AlbumDetailRegular.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A31B0824631F5100D6BF4A /* AlbumDetailRegular.swift */; };
+		D2A55CCD246838390007CD1F /* LinkProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A55CCC246838390007CD1F /* LinkProvider.swift */; };
+		D2A55CCF246839980007CD1F /* OdesliResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A55CCE246839980007CD1F /* OdesliResponse.swift */; };
+		D2A55CD1246843E00007CD1F /* odesli.json in Resources */ = {isa = PBXBuildFile; fileRef = D2A55CD0246843E00007CD1F /* odesli.json */; };
 		D2D40B4F245738220018E066 /* AlbumTrackList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D40B4E245738220018E066 /* AlbumTrackList.swift */; };
 		D2D5875E244E391200E982E8 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D5875D244E391200E982E8 /* UserData.swift */; };
 		D2E690F62450E36800B981F2 /* Slot.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E690F52450E36800B981F2 /* Slot.swift */; };
@@ -97,6 +100,9 @@
 		D29D8C9D2464039600153D90 /* AlbumCover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumCover.swift; sourceTree = "<group>"; };
 		D2A31B04246308B800D6BF4A /* Start.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Start.swift; sourceTree = "<group>"; };
 		D2A31B0824631F5100D6BF4A /* AlbumDetailRegular.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumDetailRegular.swift; sourceTree = "<group>"; };
+		D2A55CCC246838390007CD1F /* LinkProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkProvider.swift; sourceTree = "<group>"; };
+		D2A55CCE246839980007CD1F /* OdesliResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OdesliResponse.swift; sourceTree = "<group>"; };
+		D2A55CD0246843E00007CD1F /* odesli.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = odesli.json; sourceTree = "<group>"; };
 		D2D40B4E245738220018E066 /* AlbumTrackList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumTrackList.swift; sourceTree = "<group>"; };
 		D2D5875D244E391200E982E8 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		D2E690F52450E36800B981F2 /* Slot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Slot.swift; sourceTree = "<group>"; };
@@ -274,6 +280,7 @@
 			children = (
 				D2D5875D244E391200E982E8 /* UserData.swift */,
 				D2E690F52450E36800B981F2 /* Slot.swift */,
+				D2A55CCE246839980007CD1F /* OdesliResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -283,6 +290,8 @@
 			children = (
 				D2937DCA2466D94800C252EE /* Screenshots */,
 				D29C760124598F06005BE357 /* SearchProvider.swift */,
+				D2A55CCC246838390007CD1F /* LinkProvider.swift */,
+				D2A55CD0246843E00007CD1F /* odesli.json */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -404,6 +413,7 @@
 				D22C4528243DD8B10001481D /* Assets.xcassets in Resources */,
 				D2937DCC2466D96E00C252EE /* screenshotCollectionAlbums.json in Resources */,
 				D2937DD02466ED7B00C252EE /* screenshotSearchAlbums.json in Resources */,
+				D2A55CD1246843E00007CD1F /* odesli.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -442,7 +452,9 @@
 				D26B5622243E80450098E9E4 /* AlbumDetailCompact.swift in Sources */,
 				D2937DCE2466EC7900C252EE /* SearchProvider+Screenshots.swift in Sources */,
 				D29D8C9E2464039600153D90 /* AlbumCover.swift in Sources */,
+				D2A55CCF246839980007CD1F /* OdesliResponse.swift in Sources */,
 				D2E690FA2450ECBB00B981F2 /* EmptySlot.swift in Sources */,
+				D2A55CCD246838390007CD1F /* LinkProvider.swift in Sources */,
 				D22C4552243DDE490001481D /* Home.swift in Sources */,
 				D2A31B05246308B800D6BF4A /* Start.swift in Sources */,
 				D22666132462F5940031C9A8 /* DiscTrackList.swift in Sources */,
