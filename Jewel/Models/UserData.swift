@@ -16,7 +16,7 @@ class UserData: ObservableObject {
             saveUserData(key: "jewelPreferences")
         }
     }
-    @Published var slots = [Slot]() {
+    @Published var collection = [Slot]() {
         didSet {
             saveUserData(key: "jewelCollection")
         }
@@ -56,7 +56,7 @@ class UserData: ObservableObject {
                 print("Saved: \(key)")
             }
         case "jewelCollection":
-            if let encoded = try? encoder.encode(slots) {
+            if let encoded = try? encoder.encode(collection) {
                 userDefaults.set(encoded, forKey: key)
                 print("Saved: \(key)")
             }
@@ -71,27 +71,27 @@ class UserData: ObservableObject {
         if let savedPreferences = userDefaults.object(forKey: "jewelPreferences") as? Data {
             print("Loading user preferences")
             let decoder = JSONDecoder()
-            if let loadedPreferences = try? decoder.decode(JewelPreferences.self, from: savedPreferences) {
-                prefs = loadedPreferences
+            if let decodedPreferences = try? decoder.decode(JewelPreferences.self, from: savedPreferences) {
+                prefs = decodedPreferences
             }
         }
         
         // load saved user collection
-        if let savedSlots = userDefaults.object(forKey: "jewelCollection") as? Data {
+        if let savedCollection = userDefaults.object(forKey: "jewelCollection") as? Data {
             print("Loading saved collection")
             let decoder = JSONDecoder()
-            if let loadedSlots = try? decoder.decode([Slot].self, from: savedSlots) {
-                slots = loadedSlots
+            if let decodedCollection = try? decoder.decode([Slot].self, from: savedCollection) {
+                collection = decodedCollection
             }
         }
         
-        // if no slots, then create an empty collection
-        if slots.count == 0 {
+        // if collection is empty, then initialise with empty slots
+        if collection.count == 0 {
             print("No saved collection found, creating empty one")
             
             for slotId in 0..<prefs.numberOfSlots {
                 let slot = Slot(id: slotId, album: nil)
-                slots.append(slot)
+                collection.append(slot)
             }
         }
     }
@@ -102,7 +102,7 @@ class UserData: ObservableObject {
             DispatchQueue.main.async {
                 if album != nil {
                     let newSlot = Slot(id: slotId, album: album)
-                    self.slots[slotId] = newSlot
+                    self.collection[slotId] = newSlot
                 }
             }
         })
@@ -110,11 +110,11 @@ class UserData: ObservableObject {
     
     func deleteAlbumFromSlot(slotId: Int) {
         let emptySlot = Slot(id: slotId)
-        self.slots[slotId] = emptySlot
+        self.collection[slotId] = emptySlot
     }
     
     func deleteAll() {
-        for slotId in 0..<slots.count {
+        for slotId in 0..<collection.count {
             deleteAlbumFromSlot(slotId: slotId)
         }
     }

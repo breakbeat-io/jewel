@@ -14,7 +14,7 @@ struct Home: View {
     @State private var showOptions = false
     
     private func slotViewForId(slotId: Int) -> some View {
-        if userData.slots[slotId].album == nil {
+        if userData.collection[slotId].album == nil {
             return AnyView(EmptySlot(slotId: slotId))
         } else {
             return AnyView(FilledSlot(slotId: slotId))
@@ -25,9 +25,9 @@ struct Home: View {
         
         NavigationView {
             GeometryReader { geo in
-                List(self.userData.slots) { slot in
+                List(self.userData.collection) { slot in
                     self.slotViewForId(slotId: slot.id)
-                        .frame(height: (geo.size.height - geo.safeAreaInsets.top - geo.safeAreaInsets.bottom) / CGFloat(self.userData.slots.count))
+                        .frame(height: (geo.size.height - geo.safeAreaInsets.top - geo.safeAreaInsets.bottom) / CGFloat(self.userData.collection.count))
                 }
                 .sheet(isPresented: self.$showOptions) {
                     Options().environmentObject(self.userData)
