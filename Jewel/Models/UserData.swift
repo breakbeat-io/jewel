@@ -13,26 +13,17 @@ class UserData: ObservableObject {
 
     @Published var prefs = JewelPreferences() {
         didSet {
-            print("prefs changed / do the store")
+            saveUserData(key: "preferences")
         }
     }
     @Published var slots = [Slot]() {
         didSet {
-            print("slots changed / do the store")
+            saveUserData(key: "slots")
         }
     }
+    
     private var userDefaults = UserDefaults.standard
     private var store: HMV?
-    
-    fileprivate func openStore() throws {
-        let appleMusicApiToken = Bundle.main.infoDictionary?["APPLE_MUSIC_API_TOKEN"] as! String
-        if appleMusicApiToken == "" {
-            print("No Apple Music API Token Found!")
-            throw JewelError.noAppleMusicApiToken
-        } else {
-            store = HMV(storefront: .unitedKingdom, developerToken: appleMusicApiToken)
-        }
-    }
     
     init() {
         
@@ -47,8 +38,36 @@ class UserData: ObservableObject {
         
         loadUserData()
         
-        prefs.collectionName = "greg"
+    }
+    
+    fileprivate func openStore() throws {
+        let appleMusicApiToken = Bundle.main.infoDictionary?["APPLE_MUSIC_API_TOKEN"] as! String
+        if appleMusicApiToken == "" {
+            print("No Apple Music API Token Found!")
+            throw JewelError.noAppleMusicApiToken
+        } else {
+            store = HMV(storefront: .unitedKingdom, developerToken: appleMusicApiToken)
+        }
+    }
+    
+    fileprivate func saveUserData(key: String) {
         
+        let encoder = JSONEncoder()
+        
+        switch key {
+        case "preferences":
+            if let encoded = try? encoder.encode(prefs) {
+                userDefaults.set(encoded, forKey: "jewel\(key)")
+                print("Saved: \(key)")
+            }
+        case "slots":
+            if let encoded = try? encoder.encode(slots) {
+                userDefaults.set(encoded, forKey: "jewel\(key)")
+                print("Saved: \(key)")
+            }
+        default:
+            print("Saving User Data: key unknown, nothing saved.")
+        }
     }
     
     func loadUserData() {
@@ -82,6 +101,8 @@ class UserData: ObservableObject {
         userDefaults.set(savedCollection, forKey: "savedCollection")
 
     }
+    
+    
     
     func addAlbumToSlot(albumId: String, slotId: Int) {
         store!.album(id: albumId, completion: {

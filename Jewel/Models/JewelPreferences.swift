@@ -8,8 +8,8 @@
 
 import Foundation
 
-struct JewelPreferences {
+struct JewelPreferences: Codable {
+    let numberOfSlots = 8
     var collectionName = ""
     var debugMode = false
-    let numberOfSlots = 8
 }

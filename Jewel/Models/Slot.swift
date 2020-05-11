@@ -9,7 +9,7 @@
 import Foundation
 import HMV
 
-public struct Slot: Identifiable {
-    public let id: Int
-    public var album: Album?
+struct Slot: Identifiable, Codable {
+    let id: Int
+    var album: Album?
 }
