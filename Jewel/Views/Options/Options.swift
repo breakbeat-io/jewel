@@ -28,7 +28,6 @@ struct Options: View {
                                 text: $newCollectionName,
                                 onCommit: {
                                     self.userData.prefs.collectionName = self.newCollectionName
-                                    self.userData.saveUserData()
                                     self.presentationMode.wrappedValue.dismiss()
                                 }
                             ).foregroundColor(.blue)
@@ -73,13 +72,19 @@ struct Options: View {
                             }) {
                                 Text("Load Screenshot Data")
                             }
+                            Button(action: {
+                                self.userData.reset()
+                                self.presentationMode.wrappedValue.dismiss()
+                            }) {
+                                Text("Reset Jewel")
+                            }
                         }
                     }
                 }
                 Spacer()
                 Footer()
                     .onTapGesture(count: 10) {
-                        self.userData.prefs.debugMode = true
+                        self.userData.prefs.debugMode.toggle()
                     }
                 .padding()
             }

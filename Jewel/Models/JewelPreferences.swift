@@ -10,6 +10,6 @@ import Foundation
 
 struct JewelPreferences: Codable {
     let numberOfSlots = 8
-    var collectionName = ""
+    var collectionName = "My Collection"
     var debugMode = false
 }
