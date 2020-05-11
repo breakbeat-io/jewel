@@ -24,11 +24,10 @@ struct Options: View {
                         HStack(alignment: .firstTextBaseline) {
                             Text("Collection Name")
                             TextField(
-                                userData.collectionName,
+                                userData.prefs.collectionName,
                                 text: $newCollectionName,
                                 onCommit: {
-                                    self.userData.collectionName = self.newCollectionName
-                                    self.userData.saveUserData()
+                                    self.userData.prefs.collectionName = self.newCollectionName
                                     self.presentationMode.wrappedValue.dismiss()
                                 }
                             ).foregroundColor(.blue)
@@ -65,7 +64,7 @@ struct Options: View {
                                 self.presentationMode.wrappedValue.dismiss()
                             })
                     }
-                    if userData.debugMode {
+                    if userData.prefs.debugMode {
                         Section(header: Text("Debug")) {
                             Button(action: {
                                 self.userData.loadScreenshotCollection()
@@ -73,13 +72,20 @@ struct Options: View {
                             }) {
                                 Text("Load Screenshot Data")
                             }
+                            Button(action: {
+                                self.userData.reset()
+                                self.presentationMode.wrappedValue.dismiss()
+                            }) {
+                                Text("Reset Jewel")
+                                .foregroundColor(.red)
+                            }
                         }
                     }
                 }
                 Spacer()
                 Footer()
                     .onTapGesture(count: 10) {
-                        self.userData.debugMode = true
+                        self.userData.prefs.debugMode.toggle()
                     }
                 .padding()
             }

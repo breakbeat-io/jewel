@@ -11,14 +11,31 @@ import HMV
 
 class UserData: ObservableObject {
 
-    @Published var collectionName = ""
-    @Published var slots = [Slot]()
-    @Published var debugMode = false
-    let numberOfSlots = 8
+    @Published var prefs = JewelPreferences() {
+        didSet {
+            saveUserData(key: "jewelPreferences")
+        }
+    }
+    @Published var collection = [Slot]() {
+        didSet {
+            saveUserData(key: "jewelCollection")
+        }
+    }
+    
     private var userDefaults = UserDefaults.standard
     private var store: HMV?
     
+    init() {
+    
+        // basically if we can't open the store we're dead in the water so for now may as well crash!
+        try! openStore()
+        
+        loadUserData()
+        
+    }
+    
     fileprivate func openStore() throws {
+        
         let appleMusicApiToken = Bundle.main.infoDictionary?["APPLE_MUSIC_API_TOKEN"] as! String
         if appleMusicApiToken == "" {
             print("No Apple Music API Token Found!")
@@ -28,48 +45,78 @@ class UserData: ObservableObject {
         }
     }
     
-    init() {
+    fileprivate func loadUserData() {
         
-        //basically if we can't open the store we're dead in the water so for now may as well crash!
-        try! openStore()
+        migrateV1UserDefaults()
         
-        //create an empty collection
-        for slotId in 0..<numberOfSlots {
-            let slot = Slot(id: slotId, album: nil)
-            slots.append(slot)
+        // load saved user preferences
+        if let savedPreferences = userDefaults.object(forKey: "jewelPreferences") as? Data {
+            print("Loading user preferences")
+            let decoder = JSONDecoder()
+            if let decodedPreferences = try? decoder.decode(JewelPreferences.self, from: savedPreferences) {
+                prefs = decodedPreferences
+            }
         }
         
-        loadUserData()
+        // load saved user collection
+        if let savedCollection = userDefaults.object(forKey: "jewelCollection") as? Data {
+            print("Loading collection")
+            let decoder = JSONDecoder()
+            if let decodedCollection = try? decoder.decode([Slot].self, from: savedCollection) {
+                collection = decodedCollection
+            }
+        }
         
+        // if collection remains empty, then initialise with empty slots
+        if collection.count == 0 {
+            print("No saved collection found, creating empty one")
+            
+            for slotId in 0..<prefs.numberOfSlots {
+                let slot = Slot(id: slotId, album: nil)
+                collection.append(slot)
+            }
+        }
     }
     
-    func loadUserData() {
+    fileprivate func saveUserData(key: String) {
         
-        collectionName = userDefaults.string(forKey: "collectionName") ?? "My Collection"
+        let encoder = JSONEncoder()
+        
+        switch key {
+        case "jewelPreferences":
+            if let encoded = try? encoder.encode(prefs) {
+                userDefaults.set(encoded, forKey: key)
+                print("Saved user preferences")
+            }
+        case "jewelCollection":
+            if let encoded = try? encoder.encode(collection) {
+                userDefaults.set(encoded, forKey: key)
+                print("Saved collection")
+            }
+        default:
+            print("Saving User Data: key unknown, nothing saved.")
+        }
+    }
+    
+    fileprivate func migrateV1UserDefaults() {
+        
+        if let v1CollectionName = userDefaults.string(forKey: "collectionName") {
+            print("v1.0 Collection Name found ... migrating.")
+            prefs.collectionName = v1CollectionName
+            userDefaults.removeObject(forKey: "collectionName")
+        }
         
         if let savedCollection = userDefaults.dictionary(forKey: "savedCollection") {
-            for slotId in 0..<slots.count {
+            print("v1.0 Saved Collection found ... migrating.")
+            for slotId in 0..<prefs.numberOfSlots {
+                let slot = Slot(id: slotId, album: nil)
+                collection.append(slot)
                 if let albumId = savedCollection[String(slotId)] {
                     addAlbumToSlot(albumId: albumId as! String, slotId: slotId)
                 }
             }
-        } else {
-            print("No collection saved! Starting fresh")
+            userDefaults.removeObject(forKey: "savedCollection")
         }
-    }
-    
-    func saveUserData() {
-        
-        userDefaults.set(collectionName, forKey: "collectionName")
-        
-        var savedCollection = [String: String]()
-        for (index, slot) in slots.enumerated() {
-            if let album = slot.album {
-                savedCollection[String(index)] = album.id
-            }
-        }
-        userDefaults.set(savedCollection, forKey: "savedCollection")
-
     }
     
     func addAlbumToSlot(albumId: String, slotId: Int) {
@@ -78,8 +125,7 @@ class UserData: ObservableObject {
             DispatchQueue.main.async {
                 if album != nil {
                     let newSlot = Slot(id: slotId, album: album)
-                    self.slots[slotId] = newSlot
-                    self.saveUserData()
+                    self.collection[slotId] = newSlot
                 }
             }
         })
@@ -87,14 +133,20 @@ class UserData: ObservableObject {
     
     func deleteAlbumFromSlot(slotId: Int) {
         let emptySlot = Slot(id: slotId)
-        self.slots[slotId] = emptySlot
-        self.saveUserData()
+        self.collection[slotId] = emptySlot
     }
     
     func deleteAll() {
-        for slotId in 0..<slots.count {
+        for slotId in 0..<collection.count {
             deleteAlbumFromSlot(slotId: slotId)
         }
+    }
+    
+    func reset() {
+        let domain = Bundle.main.bundleIdentifier!
+        userDefaults.removePersistentDomain(forName: domain)
+        userDefaults.synchronize()
+        exit(1)
     }
     
     func loadRecommendations() {
