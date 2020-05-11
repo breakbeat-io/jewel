@@ -16,32 +16,46 @@ struct PlaybackLink: View {
     
     var body: some View {
         
-        
-        
         if let appleMusicUrl = userData.slots[self.slotId].album?.attributes?.url {
             linkProvider.getServiceLinks(appleMusicUrl: appleMusicUrl)
         }
         
-        let playbackLink = Button(action: {
-            if let links = self.linkProvider.links {
-                UIApplication.shared.open(links.linksByPlatform["youtube"]!.url)
+        let playbackLink =
+            
+        VStack {
+            Button(action: {
+                if let links = self.linkProvider.links {
+                    UIApplication.shared.open(links.linksByPlatform["youtube"]!.url)
+                }
+            }) {
+                HStack {
+                    Image(systemName: "play.fill")
+                        .font(.headline)
+                    Text("Play in Apple Music")
+                        .font(.headline)
+                }
+                .padding()
+                .foregroundColor(.primary)
+                .cornerRadius(40)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 40)
+                        .stroke(Color.primary, lineWidth: 2)
+                )
             }
-        }) {
-        HStack {
-            Image(systemName: "play.fill")
-                .font(.headline)
-            Text("Play in Apple Music")
-                .font(.headline)
+            HStack {
+                Group {
+                    Text(verbatim: "\u{f167}") // youtube
+                    Text(verbatim: "\u{f179}") // apple
+                    Text("T") // TIDAL
+                    Text("D") // Deezer
+                    Text(verbatim: "\u{f3ab}") // google play
+                    Text(verbatim: "\u{f270}") // amazon
+                    Text(verbatim: "\u{f1be}") // soundcloud
+                    Text(verbatim: "\u{f3d2}") // napster
+                }
+                    .font(.custom("FontAwesome5Brands-Regular", size: 24))
+            }
         }
-        .padding()
-        .foregroundColor(.primary)
-        .cornerRadius(40)
-        .overlay(
-            RoundedRectangle(cornerRadius: 40)
-                .stroke(Color.primary, lineWidth: 2)
-            )
-        }
-        
         return playbackLink
     }
 }
