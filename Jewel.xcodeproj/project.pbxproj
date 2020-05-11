@@ -275,8 +275,8 @@
 			isa = PBXGroup;
 			children = (
 				D2D5875D244E391200E982E8 /* UserData.swift */,
-				D2E690F52450E36800B981F2 /* Slot.swift */,
 				D2BD46562469895500AD3F30 /* JewelPreferences.swift */,
+				D2E690F52450E36800B981F2 /* Slot.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";

@@ -27,7 +27,7 @@ struct Home: View {
             GeometryReader { geo in
                 List(self.userData.slots) { slot in
                     self.slotViewForId(slotId: slot.id)
-                        .frame(minHeight: 65, idealHeight: (geo.size.height - geo.safeAreaInsets.top - geo.safeAreaInsets.bottom) / CGFloat(self.userData.slots.count))
+                        .frame(height: (geo.size.height - geo.safeAreaInsets.top - geo.safeAreaInsets.bottom) / CGFloat(self.userData.slots.count))
                 }
                 .sheet(isPresented: self.$showOptions) {
                     Options().environmentObject(self.userData)

@@ -11,8 +11,16 @@ import HMV
 
 class UserData: ObservableObject {
 
-    @Published var prefs = JewelPreferences()
-    @Published var slots = [Slot]()
+    @Published var prefs = JewelPreferences() {
+        didSet {
+            print("prefs changed / do the store")
+        }
+    }
+    @Published var slots = [Slot]() {
+        didSet {
+            print("slots changed / do the store")
+        }
+    }
     private var userDefaults = UserDefaults.standard
     private var store: HMV?
     
@@ -28,16 +36,18 @@ class UserData: ObservableObject {
     
     init() {
         
-        //basically if we can't open the store we're dead in the water so for now may as well crash!
+        // basically if we can't open the store we're dead in the water so for now may as well crash!
         try! openStore()
         
-        //create an empty collection
+        // create an empty collection
         for slotId in 0..<prefs.numberOfSlots {
             let slot = Slot(id: slotId, album: nil)
             slots.append(slot)
         }
         
         loadUserData()
+        
+        prefs.collectionName = "greg"
         
     }
     
