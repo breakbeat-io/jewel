@@ -45,27 +45,7 @@ class UserData: ObservableObject {
         }
     }
     
-    fileprivate func saveUserData(key: String) {
-        
-        let encoder = JSONEncoder()
-        
-        switch key {
-        case "jewelPreferences":
-            if let encoded = try? encoder.encode(prefs) {
-                userDefaults.set(encoded, forKey: key)
-                print("Saved: \(key)")
-            }
-        case "jewelCollection":
-            if let encoded = try? encoder.encode(collection) {
-                userDefaults.set(encoded, forKey: key)
-                print("Saved: \(key)")
-            }
-        default:
-            print("Saving User Data: key unknown, nothing saved.")
-        }
-    }
-    
-    func loadUserData() {
+    fileprivate func loadUserData() {
         
         // load saved user preferences
         if let savedPreferences = userDefaults.object(forKey: "jewelPreferences") as? Data {
@@ -93,6 +73,26 @@ class UserData: ObservableObject {
                 let slot = Slot(id: slotId, album: nil)
                 collection.append(slot)
             }
+        }
+    }
+    
+    fileprivate func saveUserData(key: String) {
+        
+        let encoder = JSONEncoder()
+        
+        switch key {
+        case "jewelPreferences":
+            if let encoded = try? encoder.encode(prefs) {
+                userDefaults.set(encoded, forKey: key)
+                print("Saved: \(key)")
+            }
+        case "jewelCollection":
+            if let encoded = try? encoder.encode(collection) {
+                userDefaults.set(encoded, forKey: key)
+                print("Saved: \(key)")
+            }
+        default:
+            print("Saving User Data: key unknown, nothing saved.")
         }
     }
     
