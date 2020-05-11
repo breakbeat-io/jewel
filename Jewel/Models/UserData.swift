@@ -47,6 +47,8 @@ class UserData: ObservableObject {
     
     fileprivate func loadUserData() {
         
+        migrateV1UserDefaults()
+        
         // load saved user preferences
         if let savedPreferences = userDefaults.object(forKey: "jewelPreferences") as? Data {
             print("Loading user preferences")
@@ -93,6 +95,27 @@ class UserData: ObservableObject {
             }
         default:
             print("Saving User Data: key unknown, nothing saved.")
+        }
+    }
+    
+    fileprivate func migrateV1UserDefaults() {
+        
+        if let v1CollectionName = userDefaults.string(forKey: "collectionName") {
+            print("v1.0 Collection Name found ... migrating.")
+            prefs.collectionName = v1CollectionName
+            userDefaults.removeObject(forKey: "collectionName")
+        }
+        
+        if let savedCollection = userDefaults.dictionary(forKey: "savedCollection") {
+            print("v1.0 Saved Collection found ... migrating.")
+            for slotId in 0..<prefs.numberOfSlots {
+                let slot = Slot(id: slotId, album: nil)
+                collection.append(slot)
+                if let albumId = savedCollection[String(slotId)] {
+                    addAlbumToSlot(albumId: albumId as! String, slotId: slotId)
+                }
+            }
+            userDefaults.removeObject(forKey: "savedCollection")
         }
     }
     
