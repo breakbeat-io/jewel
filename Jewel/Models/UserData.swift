@@ -67,7 +67,7 @@ class UserData: ObservableObject {
             }
         }
         
-        // if collection is empty, then initialise with empty slots
+        // if collection remains empty, then initialise with empty slots
         if collection.count == 0 {
             print("No saved collection found, creating empty one")
             
