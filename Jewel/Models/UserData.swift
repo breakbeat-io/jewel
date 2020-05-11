@@ -58,7 +58,7 @@ class UserData: ObservableObject {
         
         // load saved user collection
         if let savedCollection = userDefaults.object(forKey: "jewelCollection") as? Data {
-            print("Loading saved collection")
+            print("Loading collection")
             let decoder = JSONDecoder()
             if let decodedCollection = try? decoder.decode([Slot].self, from: savedCollection) {
                 collection = decodedCollection
@@ -84,12 +84,12 @@ class UserData: ObservableObject {
         case "jewelPreferences":
             if let encoded = try? encoder.encode(prefs) {
                 userDefaults.set(encoded, forKey: key)
-                print("Saved: \(key)")
+                print("Saved user preferences")
             }
         case "jewelCollection":
             if let encoded = try? encoder.encode(collection) {
                 userDefaults.set(encoded, forKey: key)
-                print("Saved: \(key)")
+                print("Saved collection")
             }
         default:
             print("Saving User Data: key unknown, nothing saved.")

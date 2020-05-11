@@ -77,6 +77,7 @@ struct Options: View {
                                 self.presentationMode.wrappedValue.dismiss()
                             }) {
                                 Text("Reset Jewel")
+                                .foregroundColor(.red)
                             }
                         }
                     }
