@@ -28,7 +28,7 @@ struct SearchBar: View {
                         "Search Apple Music",
                         text: $searchTerm,
                         onCommit: {
-                            if self.userData.debugMode {
+                            if self.userData.prefs.debugMode {
                                 self.searchProvider.exampleSearch()
                             } else {
                                 self.searchProvider.search(searchTerm: self.searchTerm)

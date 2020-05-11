@@ -11,10 +11,8 @@ import HMV
 
 class UserData: ObservableObject {
 
-    @Published var collectionName = ""
+    @Published var prefs = JewelPreferences()
     @Published var slots = [Slot]()
-    @Published var debugMode = false
-    let numberOfSlots = 8
     private var userDefaults = UserDefaults.standard
     private var store: HMV?
     
@@ -34,7 +32,7 @@ class UserData: ObservableObject {
         try! openStore()
         
         //create an empty collection
-        for slotId in 0..<numberOfSlots {
+        for slotId in 0..<prefs.numberOfSlots {
             let slot = Slot(id: slotId, album: nil)
             slots.append(slot)
         }
@@ -45,7 +43,7 @@ class UserData: ObservableObject {
     
     func loadUserData() {
         
-        collectionName = userDefaults.string(forKey: "collectionName") ?? "My Collection"
+        prefs.collectionName = userDefaults.string(forKey: "collectionName") ?? "My Collection"
         
         if let savedCollection = userDefaults.dictionary(forKey: "savedCollection") {
             for slotId in 0..<slots.count {
@@ -56,11 +54,14 @@ class UserData: ObservableObject {
         } else {
             print("No collection saved! Starting fresh")
         }
+        
+//        if let savedUserData = userDefaults.
+        
     }
     
     func saveUserData() {
         
-        userDefaults.set(collectionName, forKey: "collectionName")
+        userDefaults.set(prefs.collectionName, forKey: "collectionName")
         
         var savedCollection = [String: String]()
         for (index, slot) in slots.enumerated() {

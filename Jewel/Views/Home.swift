@@ -35,7 +35,7 @@ struct Home: View {
                 .onAppear {
                     UITableView.appearance().separatorStyle = .none
                 }
-                .navigationBarTitle(self.userData.collectionName)
+                .navigationBarTitle(self.userData.prefs.collectionName)
                 .navigationBarItems(trailing:
                     Button(action: {
                         self.showOptions = true

@@ -35,6 +35,7 @@
 		D29D8C9E2464039600153D90 /* AlbumCover.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29D8C9D2464039600153D90 /* AlbumCover.swift */; };
 		D2A31B05246308B800D6BF4A /* Start.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A31B04246308B800D6BF4A /* Start.swift */; };
 		D2A31B0924631F5100D6BF4A /* AlbumDetailRegular.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A31B0824631F5100D6BF4A /* AlbumDetailRegular.swift */; };
+		D2BD46572469895500AD3F30 /* JewelPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BD46562469895500AD3F30 /* JewelPreferences.swift */; };
 		D2D40B4F245738220018E066 /* AlbumTrackList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D40B4E245738220018E066 /* AlbumTrackList.swift */; };
 		D2D5875E244E391200E982E8 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D5875D244E391200E982E8 /* UserData.swift */; };
 		D2E690F62450E36800B981F2 /* Slot.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E690F52450E36800B981F2 /* Slot.swift */; };
@@ -97,6 +98,7 @@
 		D29D8C9D2464039600153D90 /* AlbumCover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumCover.swift; sourceTree = "<group>"; };
 		D2A31B04246308B800D6BF4A /* Start.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Start.swift; sourceTree = "<group>"; };
 		D2A31B0824631F5100D6BF4A /* AlbumDetailRegular.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumDetailRegular.swift; sourceTree = "<group>"; };
+		D2BD46562469895500AD3F30 /* JewelPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JewelPreferences.swift; sourceTree = "<group>"; };
 		D2D40B4E245738220018E066 /* AlbumTrackList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumTrackList.swift; sourceTree = "<group>"; };
 		D2D5875D244E391200E982E8 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		D2E690F52450E36800B981F2 /* Slot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Slot.swift; sourceTree = "<group>"; };
@@ -274,6 +276,7 @@
 			children = (
 				D2D5875D244E391200E982E8 /* UserData.swift */,
 				D2E690F52450E36800B981F2 /* Slot.swift */,
+				D2BD46562469895500AD3F30 /* JewelPreferences.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -428,6 +431,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2BD46572469895500AD3F30 /* JewelPreferences.swift in Sources */,
 				D2A31B0924631F5100D6BF4A /* AlbumDetailRegular.swift in Sources */,
 				D28358872452D3CF00411AC9 /* SearchResultsList.swift in Sources */,
 				D28358832451D3C700411AC9 /* Search.swift in Sources */,
