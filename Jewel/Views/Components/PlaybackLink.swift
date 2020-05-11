@@ -11,18 +11,20 @@ import SwiftUI
 struct PlaybackLink: View {
     
     @EnvironmentObject var userData: UserData
+    @EnvironmentObject var linkProvider: LinkProvider
     var slotId: Int
     
     var body: some View {
         
+        
+        
         if let appleMusicUrl = userData.slots[self.slotId].album?.attributes?.url {
-            let links = LinkProvider.getServiceLinks(appleMusicUrl: appleMusicUrl)
-            print(links)
+            linkProvider.getServiceLinks(appleMusicUrl: appleMusicUrl)
         }
         
         let playbackLink = Button(action: {
-            if let url = self.userData.slots[self.slotId].album?.attributes?.url {
-                UIApplication.shared.open(url)
+            if let links = self.linkProvider.links {
+                UIApplication.shared.open(links.linksByPlatform["youtube"]!.url)
             }
         }) {
         HStack {

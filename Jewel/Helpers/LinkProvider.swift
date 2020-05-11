@@ -10,19 +10,23 @@ import Foundation
 
 class LinkProvider: ObservableObject {
     
+    @Published var links: OdesliResponse?
     
-    static func getServiceLinks(appleMusicUrl: URL) -> OdesliResponse? {
- 
-        if let url = Bundle.main.url(forResource: "odesli", withExtension: "json") {
-            do {
-                let data = try Data(contentsOf: url)
-                let decoder = JSONDecoder()
-                let links = try decoder.decode(OdesliResponse.self, from: data)
-                return links
-            } catch {
-                print("error:\(error)")
+    func getServiceLinks(appleMusicUrl: URL) {
+        
+        let request = URLRequest(url: URL(string: "https://api.song.link/v1-alpha.1/links?url=\(appleMusicUrl.absoluteString)")!)
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let data = data {
+                if let decodedResponse = try? JSONDecoder().decode(OdesliResponse.self, from: data) {
+                    DispatchQueue.main.async {
+                        self.links = decodedResponse
+                    }
+                }
             }
-        }
-        return nil
+
+            // if we're still here it means there was a problem
+            print("Fetch failed: \(error?.localizedDescription ?? "Unknown error")")
+        }.resume()
     }
 }
