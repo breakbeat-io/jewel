@@ -12,7 +12,6 @@ import HMV
 
 struct AlbumDetailRegular: View {
     
-    @Environment(\.horizontalSizeClass) var horizontalSizeClass
     @EnvironmentObject var userData: UserData
     var slotId: Int
     
@@ -20,12 +19,8 @@ struct AlbumDetailRegular: View {
         HStack(alignment: .top) {
             VStack {
                 AlbumCover(slotId: slotId)
-                IfLet(userData.collection[slotId].album?.attributes?.url) { url in
-                    VStack(alignment: .center) {
-                        PrimaryPlaybackLink(slotId: self.slotId)
-                        AdditionalPlaybackLinks(slotId: self.slotId)
-                    }.padding()
-                }
+                PlaybackLinks(slotId: slotId)
+                    .padding(.bottom)
                 IfLet(userData.collection[slotId].album?.attributes?.editorialNotes?.standard) { notes in
                     Text(notes)
                 }

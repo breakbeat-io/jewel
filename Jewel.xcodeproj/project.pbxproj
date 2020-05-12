@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		D201C460246AAD3800A5FC87 /* AdditionalPlaybackLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = D201C45F246AAD3800A5FC87 /* AdditionalPlaybackLinks.swift */; };
+		D201C465246AE9F700A5FC87 /* PlaybackLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = D201C464246AE9F700A5FC87 /* PlaybackLinks.swift */; };
 		D20968912460106300496674 /* Options.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20968902460106300496674 /* Options.swift */; };
 		D22666132462F5940031C9A8 /* DiscTrackList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22666122462F5940031C9A8 /* DiscTrackList.swift */; };
 		D22C4522243DD8B00001481D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22C4521243DD8B00001481D /* AppDelegate.swift */; };
@@ -67,6 +68,7 @@
 
 /* Begin PBXFileReference section */
 		D201C45F246AAD3800A5FC87 /* AdditionalPlaybackLinks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalPlaybackLinks.swift; sourceTree = "<group>"; };
+		D201C464246AE9F700A5FC87 /* PlaybackLinks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackLinks.swift; sourceTree = "<group>"; };
 		D20968902460106300496674 /* Options.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Options.swift; sourceTree = "<group>"; };
 		D22666122462F5940031C9A8 /* DiscTrackList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscTrackList.swift; sourceTree = "<group>"; };
 		D22C451E243DD8B00001481D /* Jewel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jewel.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -239,6 +241,7 @@
 				D2E690F72450E98E00B981F2 /* IfLet.swift */,
 				D22C4555243DE6F00001481D /* AlbumCard.swift */,
 				D29D8C9D2464039600153D90 /* AlbumCover.swift */,
+				D201C464246AE9F700A5FC87 /* PlaybackLinks.swift */,
 				D26B5623243E8DB00098E9E4 /* PrimaryPlaybackLink.swift */,
 				D201C45F246AAD3800A5FC87 /* AdditionalPlaybackLinks.swift */,
 				D2D40B4E245738220018E066 /* AlbumTrackList.swift */,
@@ -477,6 +480,7 @@
 				D22C4524243DD8B00001481D /* SceneDelegate.swift in Sources */,
 				D26077BF24605D59005883ED /* SlotDetail.swift in Sources */,
 				D230CC562460CC2C00FD811F /* Footer.swift in Sources */,
+				D201C465246AE9F700A5FC87 /* PlaybackLinks.swift in Sources */,
 				D22C4556243DE6F00001481D /* AlbumCard.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

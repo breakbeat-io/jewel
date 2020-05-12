@@ -56,7 +56,7 @@ struct AdditionalPlaybackLinks: View {
                     Text("Platform links powered by Songlink")
                     .foregroundColor(.secondary)
                     .font(.footnote)
-                }.padding(.top)
+                }.padding(.vertical)
             }
             
         return additionalPlaybackLinksView
