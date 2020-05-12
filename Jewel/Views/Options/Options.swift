@@ -33,6 +33,13 @@ struct Options: View {
                             ).foregroundColor(.blue)
                         }
                     }
+                    Section(footer: Text("If available, use this service for playback, otherwise use Apple Music.")) {
+                        Picker(selection: $userData.prefs.preferredMusicPlatform, label: Text("Preferred Playback Service")) {
+                            ForEach(0 ..< OdesliPlatform.allCases.count) {
+                                Text(OdesliPlatform.allCases[$0].friendlyName)
+                            }
+                        }
+                    }
                     Section(footer: Text("Load a selection of recent and classic releases, chosen by the music lovers that make Jewel.")) {
                         Button(action: {
                             self.showLoadRecommendationsAlert = true

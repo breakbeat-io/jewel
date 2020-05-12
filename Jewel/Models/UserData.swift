@@ -126,9 +126,41 @@ class UserData: ObservableObject {
                 if album != nil {
                     let newSlot = Slot(id: slotId, album: album)
                     self.collection[slotId] = newSlot
+                    if let baseUrl = album?.attributes?.url {
+                        self.populatePlaybackLinks(baseUrl: baseUrl, slotId: slotId)
+                    }
                 }
             }
         })
+    }
+    
+    func populatePlaybackLinks(baseUrl: URL, slotId: Int) {
+        print("populating links for \(baseUrl.absoluteString) in slot \(slotId)")
+        
+        let request = URLRequest(url: URL(string: "https://api.song.link/v1-alpha.1/links?url=\(baseUrl.absoluteString)")!)
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let response = response as? HTTPURLResponse {
+                if response.statusCode != 200 {
+                    print(response.statusCode)
+                }
+            }
+            
+            if let data = data {
+                if let decodedResponse = try? JSONDecoder().decode(OdesliResponse.self, from: data) {
+                    DispatchQueue.main.async {
+                        self.collection[slotId].playbackLinks = decodedResponse
+                    }
+                    
+                    return
+                }
+            }
+            
+            if let error = error {
+                print("Error getting playbackLinks: \(error.localizedDescription)")
+            }
+            
+        }.resume()
     }
     
     func deleteAlbumFromSlot(slotId: Int) {
