@@ -33,8 +33,8 @@ struct Options: View {
                             ).foregroundColor(.blue)
                         }
                     }
-                    Section(footer: Text("If available, this provider will be used as the primary playback link, othewise Apple Music will be used.")) {
-                        Picker(selection: $userData.prefs.primaryMusicProvider, label: Text("Primary Music Provider")) {
+                    Section(footer: Text("If available, use this service for playback, otherwise use Apple Music.")) {
+                        Picker(selection: $userData.prefs.preferredMusicPlatform, label: Text("Preferred Playback Service")) {
                             ForEach(0 ..< OdesliPlatform.allCases.count) {
                                 Text(OdesliPlatform.allCases[$0].friendlyName)
                             }
