@@ -15,17 +15,11 @@ struct PlaybackLink: View {
     var slotId: Int
     
     var body: some View {
-        
-        if let appleMusicUrl = userData.slots[self.slotId].album?.attributes?.url {
-            linkProvider.getServiceLinks(appleMusicUrl: appleMusicUrl)
-        }
-        
-        let playbackLink =
             
         VStack {
             Button(action: {
-                if let links = self.linkProvider.links {
-                    UIApplication.shared.open(links.linksByPlatform["youtube"]!.url)
+                if let url = self.userData.collection[self.slotId].album?.attributes?.url {
+                    UIApplication.shared.open(url)
                 }
             }) {
                 HStack {
@@ -44,19 +38,23 @@ struct PlaybackLink: View {
             }
             HStack {
                 Group {
-                    Text(verbatim: "\u{f167}") // youtube
-                    Text(verbatim: "\u{f179}") // apple
-                    Text("T") // TIDAL
-                    Text("D") // Deezer
-                    Text(verbatim: "\u{f3ab}") // google play
-                    Text(verbatim: "\u{f270}") // amazon
-                    Text(verbatim: "\u{f1be}") // soundcloud
-                    Text(verbatim: "\u{f3d2}") // napster
+                    IfLet(userData.collection[slotId].playbackLinks?.linksByPlatform) { playbackLinks in
+                        IfLet(playbackLinks["spotify"]) { spotify in
+                            Text(spotify.url.absoluteString)
+                        }
+                    }
+//                    Text(verbatim: "\u{f167}") // youtube
+//                    Text(verbatim: "\u{f179}") // apple
+//                    Text("T") // TIDAL
+//                    Text("D") // Deezer
+//                    Text(verbatim: "\u{f3ab}") // google play
+//                    Text(verbatim: "\u{f270}") // amazon
+//                    Text(verbatim: "\u{f1be}") // soundcloud
+//                    Text(verbatim: "\u{f3d2}") // napster
                 }
-                    .font(.custom("FontAwesome5Brands-Regular", size: 24))
+//                    .font(.custom("FontAwesome5Brands-Regular", size: 24))
             }
         }
-        return playbackLink
     }
 }
 

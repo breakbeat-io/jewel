@@ -12,4 +12,5 @@ import HMV
 struct Slot: Identifiable, Codable {
     let id: Int
     var album: Album?
+    var playbackLinks: OdesliResponse?
 }
