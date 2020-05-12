@@ -35,7 +35,7 @@ struct OdesliEntity: Codable {
     let platforms: [OdesliPlatform]
 }
 
-enum OdesliApiProvider: String, Codable {
+enum OdesliApiProvider: String, Codable, CaseIterable {
     case spotify
     case itunes
     case youtube
@@ -50,7 +50,7 @@ enum OdesliApiProvider: String, Codable {
     case spinrilla
 }
 
-enum OdesliPlatform: String, Codable {
+enum OdesliPlatform: String, Codable, CaseIterable {
     case spotify
     case itunes
     case appleMusic

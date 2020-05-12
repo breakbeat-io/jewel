@@ -36,13 +36,21 @@ struct PlaybackLink: View {
                         .stroke(Color.primary, lineWidth: 2)
                 )
             }
-            HStack {
+            VStack {
                 Group {
-                    IfLet(userData.collection[slotId].playbackLinks?.linksByPlatform) { playbackLinks in
-                        IfLet(playbackLinks["spotify"]) { spotify in
-                            Text(spotify.url.absoluteString)
+                    ForEach(OdesliPlatform.allCases, id: \.self) { platform in
+                        IfLet(self.userData.collection[self.slotId].playbackLinks?.linksByPlatform[platform.rawValue]?.url) { url in
+                            Button(action: {
+                                UIApplication.shared.open(url)
+                            }) {
+                                HStack {
+                                    Text(platform.rawValue)
+                                }
+                                .padding()
+                            }
                         }
                     }
+                    
 //                    Text(verbatim: "\u{f167}") // youtube
 //                    Text(verbatim: "\u{f179}") // apple
 //                    Text("T") // TIDAL
@@ -52,7 +60,9 @@ struct PlaybackLink: View {
 //                    Text(verbatim: "\u{f1be}") // soundcloud
 //                    Text(verbatim: "\u{f3d2}") // napster
                 }
-//                    .font(.custom("FontAwesome5Brands-Regular", size: 24))
+                .font(.custom("FontAwesome5Brands-Regular", size: 24))
+                .foregroundColor(.primary)
+
             }
         }
     }
