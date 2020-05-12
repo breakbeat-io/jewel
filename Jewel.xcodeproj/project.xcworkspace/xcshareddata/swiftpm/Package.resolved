@@ -18,6 +18,15 @@
           "revision": "349ed06467a6f8a4939bcb83db301542bc84eac9",
           "version": "5.13.4"
         }
+      },
+      {
+        "package": "Grid",
+        "repositoryURL": "https://github.com/spacenation/swiftui-grid",
+        "state": {
+          "branch": null,
+          "revision": "a3441f80bd01029507bc19e463e7c7208ffcf3f9",
+          "version": "1.0.4"
+        }
       }
     ]
   },

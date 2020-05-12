@@ -23,7 +23,7 @@ struct AlbumDetailRegular: View {
                 IfLet(userData.collection[slotId].album?.attributes?.url) { url in
                     VStack(alignment: .center) {
                         PrimaryPlaybackLink(slotId: self.slotId)
-                        AdditionalPlaybackLinks()
+                        AdditionalPlaybackLinks(slotId: self.slotId)
                     }.padding()
                 }
                 IfLet(userData.collection[slotId].album?.attributes?.editorialNotes?.standard) { notes in

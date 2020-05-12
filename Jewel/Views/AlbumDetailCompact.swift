@@ -15,14 +15,32 @@ struct AlbumDetailCompact: View {
     @EnvironmentObject var userData: UserData
     var slotId: Int
     
+    @State private var showAdditionalLinks = false
+    
     var body: some View {
         
         VStack {
             AlbumCover(slotId: slotId)
             IfLet(userData.collection[slotId].album?.attributes?.url) { url in
-                VStack(alignment: .center) {
-                    PrimaryPlaybackLink(slotId: self.slotId)
-                    AdditionalPlaybackLinks()
+                VStack {
+                    ZStack {
+                        HStack {
+                            PrimaryPlaybackLink(slotId: self.slotId)
+                        }
+                        HStack {
+                            Spacer()
+                            Button(action: {
+                                self.showAdditionalLinks.toggle()
+                            }) {
+                                Image(systemName: self.showAdditionalLinks ? "chevron.up" : "chevron.down")
+                                    .foregroundColor(.secondary)
+                            }
+                            .padding()
+                        }
+                    }
+                    if self.showAdditionalLinks {
+                        AdditionalPlaybackLinks(slotId: self.slotId)
+                    }
                 }
             }
             IfLet(userData.collection[slotId].album) { album in

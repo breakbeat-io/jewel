@@ -104,4 +104,42 @@ enum OdesliPlatform: String, Codable, CaseIterable {
             return "Spinrilla"
         }
     }
+    
+    var iconRef: String? {
+        switch self {
+        case .spotify:
+            return "\u{f1bc}"
+        case .itunes:
+            return "\u{f179}"
+        case .appleMusic:
+            return "\u{f179}"
+        case .youtube:
+            return "\u{f167}"
+        case .youtubeMusic:
+            return "\u{f167}"
+        case .google:
+            return "\u{f1a0}"
+        case .googleStore:
+            return "\u{f3ab}"
+        case .pandora:
+            return nil
+        case .deezer:
+            return nil
+        case .tidal:
+            return nil
+        case .amazonStore:
+            return "\u{f270}"
+        case .amazonMusic:
+            return "\u{f270}"
+        case .soundcloud:
+            return "\u{f1be}"
+        case .napster:
+            return "\u{f3d2}"
+        case .yandex:
+            return "\u{f413}"
+        case .spinrilla:
+            return nil
+        }
+    }
+    
 }

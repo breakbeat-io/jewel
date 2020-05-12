@@ -7,43 +7,45 @@
 //
 
 import SwiftUI
+import Grid
 
 struct AdditionalPlaybackLinks: View {
+    
+    @EnvironmentObject var userData: UserData
+    var slotId: Int
+    
     var body: some View {
-        Text("Alternative Playback Links")
-        //            VStack {
-        //                Group {
-        //                    ForEach(OdesliPlatform.allCases, id: \.self) { platform in
-        //                        IfLet(self.userData.collection[self.slotId].playbackLinks?.linksByPlatform[platform.rawValue]?.url) { url in
-        //                            Button(action: {
-        //                                UIApplication.shared.open(url)
-        //                            }) {
-        //                                HStack {
-        //                                    Text(platform.rawValue)
-        //                                }
-        //                                .padding()
-        //                            }
-        //                        }
-        //                    }
-        //
-        ////                    Text(verbatim: "\u{f167}") // youtube
-        ////                    Text(verbatim: "\u{f179}") // apple
-        ////                    Text("T") // TIDAL
-        ////                    Text("D") // Deezer
-        ////                    Text(verbatim: "\u{f3ab}") // google play
-        ////                    Text(verbatim: "\u{f270}") // amazon
-        ////                    Text(verbatim: "\u{f1be}") // soundcloud
-        ////                    Text(verbatim: "\u{f3d2}") // napster
-        //                }
-        //                .font(.custom("FontAwesome5Brands-Regular", size: 24))
-        //                .foregroundColor(.primary)
-        //
-        //            }
+        Grid(OdesliPlatform.allCases, id: \.self) { platform in
+            IfLet(self.userData.collection[self.slotId].playbackLinks?.linksByPlatform[platform.rawValue]?.url) { url in
+                Button(action: {
+                    UIApplication.shared.open(url)
+                }) {
+                    Group {
+                        IfLet(platform.iconRef) { logo in
+                            Text(verbatim: logo)
+                            .font(.custom("FontAwesome5Brands-Regular", size: 16))
+                        }
+                        Text(platform.friendlyName)
+                    }
+                    .font(.callout)
+                    .foregroundColor(.secondary)
+                }
+                .padding()
+                .foregroundColor(.primary)
+            }
+        }
+        .padding(.vertical)
+        .gridStyle(
+            ModularGridStyle(columns: 2, rows: .min(40))
+        )
     }
 }
 
 struct AlternativePlaybackLinks_Previews: PreviewProvider {
+    
+    static let userData = UserData()
+    
     static var previews: some View {
-        AdditionalPlaybackLinks()
+        AdditionalPlaybackLinks(slotId: 0).environmentObject(userData)
     }
 }
