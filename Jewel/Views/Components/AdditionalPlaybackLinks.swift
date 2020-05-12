@@ -7,37 +7,59 @@
 //
 
 import SwiftUI
-import Grid
 
 struct AdditionalPlaybackLinks: View {
     
+    @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var userData: UserData
     var slotId: Int
     
     var body: some View {
-        Grid(OdesliPlatform.allCases, id: \.self) { platform in
-            IfLet(self.userData.collection[self.slotId].playbackLinks?.linksByPlatform[platform.rawValue]?.url) { url in
-                Button(action: {
-                    UIApplication.shared.open(url)
-                }) {
-                    Group {
-                        IfLet(platform.iconRef) { logo in
-                            Text(verbatim: logo)
-                            .font(.custom("FontAwesome5Brands-Regular", size: 16))
-                        }
-                        Text(platform.friendlyName)
+        
+        let availablePlatforms = OdesliPlatform.allCases.filter { userData.collection[slotId].playbackLinks?.linksByPlatform[$0.rawValue] != nil }
+        
+        let additionalPlaybackLinksView =
+            VStack {
+                HStack {
+                    Spacer()
+                    Button(action: {
+                        self.presentationMode.wrappedValue.dismiss()
+                    }) {
+                        Text("Close")
                     }
-                    .font(.callout)
-                    .foregroundColor(.secondary)
+                }.padding()
+                List(availablePlatforms, id: \.self) { platform in
+                    IfLet(self.userData.collection[self.slotId].playbackLinks?.linksByPlatform[platform.rawValue]) { platformLink in
+                        Button(action: {
+                            UIApplication.shared.open(platformLink.url)
+                        }) {
+                            HStack {
+                                Group {
+                                    if platform.iconRef != nil {
+                                        Text(verbatim: platform.iconRef!)
+                                        .font(.custom("FontAwesome5Brands-Regular", size: 16))
+                                    } else {
+                                        Image(systemName: "arrowshape.turn.up.right")
+                                    }
+                                }
+                                .frame(width: 40, alignment: .center)
+                                .foregroundColor(.secondary)
+                                Text(platform.friendlyName)
+                                .foregroundColor(.primary)
+                            }
+                        }
+                    }
                 }
-                .padding()
-                .foregroundColor(.primary)
+                Button(action: {
+                    UIApplication.shared.open(URL(string: "https://odesli.co")!)
+                }) {
+                    Text("Platform links powered by Songlink")
+                    .foregroundColor(.secondary)
+                    .font(.footnote)
+                }.padding(.top)
             }
-        }
-        .padding(.vertical)
-        .gridStyle(
-            ModularGridStyle(columns: 2, rows: .min(40))
-        )
+            
+        return additionalPlaybackLinksView
     }
 }
 

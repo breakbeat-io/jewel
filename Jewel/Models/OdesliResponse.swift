@@ -16,7 +16,7 @@ struct OdesliResponse: Codable {
     let linksByPlatform: [String: OdesliLink]
 }
 
-struct OdesliLink: Codable {
+struct OdesliLink: Codable, Hashable {
     let url: URL
     let nativeAppUriMobile: String?
     let nativeAppUriDesktop: String?

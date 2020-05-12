@@ -140,16 +140,26 @@ class UserData: ObservableObject {
         let request = URLRequest(url: URL(string: "https://api.song.link/v1-alpha.1/links?url=\(baseUrl.absoluteString)")!)
         
         URLSession.shared.dataTask(with: request) { data, response, error in
+            if let response = response as? HTTPURLResponse {
+                if response.statusCode != 200 {
+                    print(response.statusCode)
+                }
+            }
+            
             if let data = data {
                 if let decodedResponse = try? JSONDecoder().decode(OdesliResponse.self, from: data) {
                     DispatchQueue.main.async {
                         self.collection[slotId].playbackLinks = decodedResponse
                     }
+                    
+                    return
                 }
             }
-
-            // if we're still here it means there was a problem
-            print("Fetch failed: \(error?.localizedDescription ?? "Unknown error")")
+            
+            if let error = error {
+                print("Error getting playbackLinks: \(error.localizedDescription)")
+            }
+            
         }.resume()
     }
     

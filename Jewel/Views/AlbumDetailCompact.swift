@@ -27,19 +27,21 @@ struct AlbumDetailCompact: View {
                         HStack {
                             PrimaryPlaybackLink(slotId: self.slotId)
                         }
-                        HStack {
-                            Spacer()
-                            Button(action: {
-                                self.showAdditionalLinks.toggle()
-                            }) {
-                                Image(systemName: self.showAdditionalLinks ? "chevron.up" : "chevron.down")
-                                    .foregroundColor(.secondary)
+                        if self.userData.collection[self.slotId].playbackLinks != nil {
+                            HStack {
+                                Spacer()
+                                Button(action: {
+                                    self.showAdditionalLinks.toggle()
+                                }) {
+                                    Image(systemName: "link")
+                                        .foregroundColor(.secondary)
+                                }
+                                .sheet(isPresented: self.$showAdditionalLinks) {
+                                    AdditionalPlaybackLinks(slotId: self.slotId).environmentObject(self.userData)
+                                }
+                                .padding()
                             }
-                            .padding()
                         }
-                    }
-                    if self.showAdditionalLinks {
-                        AdditionalPlaybackLinks(slotId: self.slotId)
                     }
                 }
             }
