@@ -15,8 +15,8 @@ struct AlbumTrackList: View {
     
     var body: some View {
         
-        let tracks = userData.slots[slotId].album?.relationships?.tracks.data
-        let discCount = tracks?.map { $0.attributes!.discNumber }.max()
+        let tracks = userData.collection[slotId].album?.relationships?.tracks.data
+        let discCount = tracks?.map { $0.attributes?.discNumber ?? 1 }.max()
         
         let albumTrackList = VStack(alignment: .leading) {
             IfLet(discCount) { discCount in

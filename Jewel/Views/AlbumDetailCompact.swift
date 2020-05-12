@@ -19,13 +19,13 @@ struct AlbumDetailCompact: View {
         
         VStack {
             AlbumCover(slotId: slotId)
-            IfLet(userData.slots[slotId].album?.attributes?.url) { url in
+            IfLet(userData.collection[slotId].album?.attributes?.url) { url in
                 HStack(alignment: .center) {
                     PlaybackLink(slotId: self.slotId)
                     .padding()
                 }
             }
-            IfLet(userData.slots[slotId].album) { album in
+            IfLet(userData.collection[slotId].album) { album in
                 AlbumTrackList(slotId: self.slotId)
             }
         }
