@@ -67,4 +67,41 @@ enum OdesliPlatform: String, Codable, CaseIterable {
     case napster
     case yandex
     case spinrilla
+    
+    var friendlyName: String {
+        switch self {
+        case .spotify:
+            return "Spotify"
+        case .itunes:
+            return "iTunes"
+        case .appleMusic:
+            return "Apple Music"
+        case .youtube:
+            return "YouTube"
+        case .youtubeMusic:
+            return "YouTube Music"
+        case .google:
+            return "Google"
+        case .googleStore:
+            return "Google Store"
+        case .pandora:
+            return "Pandora"
+        case .deezer:
+            return "Deezer"
+        case .tidal:
+            return "TIDAL"
+        case .amazonStore:
+            return "Amazon"
+        case .amazonMusic:
+            return "Amazon Music"
+        case .soundcloud:
+            return "SoundCloud"
+        case .napster:
+            return "Napster"
+        case .yandex:
+            return "Yandex"
+        case .spinrilla:
+            return "Spinrilla"
+        }
+    }
 }

@@ -11,5 +11,6 @@ import Foundation
 struct JewelPreferences: Codable {
     let numberOfSlots = 8
     var collectionName = "My Collection"
+    var primaryMusicProvider = 2 // Apple Music
     var debugMode = false
 }

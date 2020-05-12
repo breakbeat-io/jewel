@@ -33,6 +33,13 @@ struct Options: View {
                             ).foregroundColor(.blue)
                         }
                     }
+                    Section(footer: Text("If available, this provider will be used as the primary playback link, othewise Apple Music will be used.")) {
+                        Picker(selection: $userData.prefs.primaryMusicProvider, label: Text("Primary Music Provider")) {
+                            ForEach(0 ..< OdesliPlatform.allCases.count) {
+                                Text(OdesliPlatform.allCases[$0].friendlyName)
+                            }
+                        }
+                    }
                     Section(footer: Text("Load a selection of recent and classic releases, chosen by the music lovers that make Jewel.")) {
                         Button(action: {
                             self.showLoadRecommendationsAlert = true
