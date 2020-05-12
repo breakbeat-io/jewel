@@ -51,9 +51,9 @@ enum OdesliApiProvider: String, Codable, CaseIterable {
 }
 
 enum OdesliPlatform: String, Codable, CaseIterable {
-    case spotify
-    case itunes
     case appleMusic
+    case itunes
+    case spotify
     case youtube
     case youtubeMusic
     case google
@@ -70,12 +70,12 @@ enum OdesliPlatform: String, Codable, CaseIterable {
     
     var friendlyName: String {
         switch self {
-        case .spotify:
-            return "Spotify"
-        case .itunes:
-            return "iTunes"
         case .appleMusic:
             return "Apple Music"
+        case .itunes:
+            return "iTunes"
+        case .spotify:
+            return "Spotify"
         case .youtube:
             return "YouTube"
         case .youtubeMusic:
@@ -107,12 +107,12 @@ enum OdesliPlatform: String, Codable, CaseIterable {
     
     var iconRef: String? {
         switch self {
-        case .spotify:
-            return "\u{f1bc}"
-        case .itunes:
-            return "\u{f179}"
         case .appleMusic:
             return "\u{f179}"
+        case .itunes:
+            return "\u{f179}"
+        case .spotify:
+            return "\u{f1bc}"
         case .youtube:
             return "\u{f167}"
         case .youtubeMusic:
