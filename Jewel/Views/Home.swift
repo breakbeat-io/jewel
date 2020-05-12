@@ -41,8 +41,7 @@ struct Home: View {
                         self.showOptions = true
                     }) {
                         Image(systemName: "slider.horizontal.3")
-                            .padding(.leading)
-                            .padding(.bottom)
+                            .padding()
                     }
                 )
             }
