@@ -21,9 +21,9 @@ struct AlbumDetailRegular: View {
             VStack {
                 AlbumCover(slotId: slotId)
                 IfLet(userData.collection[slotId].album?.attributes?.url) { url in
-                    HStack(alignment: .center) {
-                        PlaybackLink(slotId: self.slotId)
-                        .padding()
+                    VStack(alignment: .center) {
+                        PrimaryPlaybackLink(slotId: self.slotId)
+                        AdditionalPlaybackLinks()
                     }.padding()
                 }
                 IfLet(userData.collection[slotId].album?.attributes?.editorialNotes?.standard) { notes in
