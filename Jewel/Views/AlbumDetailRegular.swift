@@ -13,21 +13,21 @@ import HMV
 struct AlbumDetailRegular: View {
     
     @EnvironmentObject var userData: UserData
-    var slotId: Int
+    var slotIndex: Int
     
     var body: some View {
         HStack(alignment: .top) {
             VStack {
-                AlbumCover(slotId: slotId)
-                PlaybackLinks(slotId: slotId)
+                AlbumCover(slotIndex: slotIndex)
+                PlaybackLinks(slotIndex: slotIndex)
                     .padding(.bottom)
-                IfLet(userData.collection.slots[slotId].source?.album?.attributes?.editorialNotes?.standard) { notes in
+                IfLet(userData.collection.slots[slotIndex].source?.album?.attributes?.editorialNotes?.standard) { notes in
                     Text(notes)
                 }
             }
             VStack {
-                IfLet(userData.collection.slots[slotId].source?.album) { album in
-                    AlbumTrackList(slotId: self.slotId)
+                IfLet(userData.collection.slots[slotIndex].source?.album) { album in
+                    AlbumTrackList(slotIndex: self.slotIndex)
                 }.padding(.horizontal)
                 Spacer()
             }
@@ -41,6 +41,6 @@ struct AlbumDetailRegular_Previews: PreviewProvider {
     static let userData = UserData()
     
     static var previews: some View {
-        AlbumDetailRegular(slotId: 0).environmentObject(userData)
+        AlbumDetailRegular(slotIndex: 0).environmentObject(userData)
     }
 }

@@ -11,7 +11,7 @@ import SwiftUI
 struct PrimaryPlaybackLink: View {
     
     @EnvironmentObject var userData: UserData
-    var slotId: Int
+    var slotIndex: Int
     
     var body: some View {
         
@@ -20,11 +20,11 @@ struct PrimaryPlaybackLink: View {
         
         let preferredProvider = OdesliPlatform.allCases[userData.prefs.preferredMusicPlatform]
         
-        if let providerLink = userData.collection.slots[slotId].playbackLinks?.linksByPlatform[preferredProvider.rawValue] {
+        if let providerLink = userData.collection.slots[slotIndex].playbackLinks?.linksByPlatform[preferredProvider.rawValue] {
             playbackLink = providerLink.url
             playbackName = preferredProvider.friendlyName
         } else {
-            playbackLink = userData.collection.slots[slotId].source?.album?.attributes?.url
+            playbackLink = userData.collection.slots[slotIndex].source?.album?.attributes?.url
             playbackName = OdesliPlatform.appleMusic.friendlyName
         }
             
@@ -58,7 +58,7 @@ struct PlaybackLink_Previews: PreviewProvider {
     static let userData = UserData()
     
     static var previews: some View {
-        PrimaryPlaybackLink(slotId: 0).environmentObject(userData)
+        PrimaryPlaybackLink(slotIndex: 0).environmentObject(userData)
     }
 
 }

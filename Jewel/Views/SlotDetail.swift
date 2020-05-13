@@ -15,24 +15,24 @@ struct SlotDetail: View {
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
     @EnvironmentObject var userData: UserData
     @EnvironmentObject var searchProvider: SearchProvider
-    var slotId: Int
+    var slotIndex: Int
     @State private var showSearch = false
     @State private var showDeleteWarning = false
     
     private func slotDetail() -> some View {
-        if userData.collection.slots[slotId].source?.album != nil {
+        if userData.collection.slots[slotIndex].source?.album != nil {
             return AnyView(
                 ScrollView {
                     if horizontalSizeClass == .compact {
-                        AlbumDetailCompact(slotId: slotId)
+                        AlbumDetailCompact(slotIndex: slotIndex)
                     } else {
-                        AlbumDetailRegular(slotId: slotId)
+                        AlbumDetailRegular(slotIndex: slotIndex)
                     }
                 }
             )
         } else {
             return AnyView(
-                EmptySlot(slotId: slotId)
+                EmptySlot(slotIndex: slotIndex)
                 .padding()
             )
         }
@@ -42,7 +42,7 @@ struct SlotDetail: View {
         
         slotDetail()
         .navigationBarItems(trailing:
-            IfLet(userData.collection.slots[slotId].source?.album) { album in
+            IfLet(userData.collection.slots[slotIndex].source?.album) { album in
                 HStack {
                     Button(action: {
                         self.showSearch = true
@@ -51,7 +51,7 @@ struct SlotDetail: View {
                     }
                     .padding(.vertical)
                     .sheet(isPresented: self.$showSearch) {
-                        Search(slotId: self.slotId)
+                        Search(slotIndex: self.slotIndex)
                             .environmentObject(self.userData)
                             .environmentObject(self.searchProvider)
                     }
@@ -65,7 +65,7 @@ struct SlotDetail: View {
                     .padding()
                     .alert(isPresented: self.$showDeleteWarning) {
                         Alert(title: Text("Are you sure you want to delete this album from your collection?"), primaryButton: .cancel(Text("Cancel")), secondaryButton: .destructive(Text("Delete")) {
-                                self.userData.deleteAlbumFromSlot(slotId: self.slotId)
+                                self.userData.deleteAlbumFromSlot(slotIndex: self.slotIndex)
                             })
                     }
                 }
@@ -79,6 +79,6 @@ struct SlotDetail_Previews: PreviewProvider {
     static let userData = UserData()
     
     static var previews: some View {
-        SlotDetail(slotId: 1).environmentObject(userData)
+        SlotDetail(slotIndex: 1).environmentObject(userData)
     }
 }

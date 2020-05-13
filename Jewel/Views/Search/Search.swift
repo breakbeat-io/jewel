@@ -14,7 +14,7 @@ struct Search: View {
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var searchProvider: SearchProvider
     @State private var showCancelButton: Bool = false
-    var slotId: Int
+    var slotIndex: Int
         
     var body: some View {
         
@@ -33,7 +33,7 @@ struct Search: View {
             // results
             if searchProvider.results != nil {
                 SearchResultsList(
-                    slotId: slotId
+                    slotIndex: slotIndex
                 )
             }
             Spacer()
@@ -50,6 +50,6 @@ struct Search_Previews: PreviewProvider {
     static let searchProvider = SearchProvider()
     
     static var previews: some View {
-        Search(slotId: 1).environmentObject(userData).environmentObject(searchProvider)
+        Search(slotIndex: 1).environmentObject(userData).environmentObject(searchProvider)
     }
 }

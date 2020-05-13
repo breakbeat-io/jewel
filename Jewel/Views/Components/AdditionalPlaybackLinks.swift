@@ -12,17 +12,17 @@ struct AdditionalPlaybackLinks: View {
     
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var userData: UserData
-    var slotId: Int
+    var slotIndex: Int
     
     var body: some View {
         
-        let availablePlatforms = OdesliPlatform.allCases.filter { userData.collection.slots[slotId].playbackLinks?.linksByPlatform[$0.rawValue] != nil }
+        let availablePlatforms = OdesliPlatform.allCases.filter { userData.collection.slots[slotIndex].playbackLinks?.linksByPlatform[$0.rawValue] != nil }
         
         let additionalPlaybackLinksView =
             NavigationView {
                 VStack {
                     List(availablePlatforms, id: \.self) { platform in
-                        IfLet(self.userData.collection.slots[self.slotId].playbackLinks?.linksByPlatform[platform.rawValue]) { platformLink in
+                        IfLet(self.userData.collection.slots[self.slotIndex].playbackLinks?.linksByPlatform[platform.rawValue]) { platformLink in
                             Button(action: {
                                 UIApplication.shared.open(platformLink.url)
                             }) {
@@ -70,6 +70,6 @@ struct AlternativePlaybackLinks_Previews: PreviewProvider {
     static let userData = UserData()
     
     static var previews: some View {
-        AdditionalPlaybackLinks(slotId: 0).environmentObject(userData)
+        AdditionalPlaybackLinks(slotIndex: 0).environmentObject(userData)
     }
 }

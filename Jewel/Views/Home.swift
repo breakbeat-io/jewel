@@ -13,11 +13,11 @@ struct Home: View {
     @EnvironmentObject var userData: UserData
     @State private var showOptions = false
     
-    private func slotViewForId(slotId: Int) -> some View {
-        if userData.collection.slots[slotId].source?.album == nil {
-            return AnyView(EmptySlot(slotId: slotId))
+    private func slotViewForId(slotIndex: Int) -> some View {
+        if userData.collection.slots[slotIndex].source?.album == nil {
+            return AnyView(EmptySlot(slotIndex: slotIndex))
         } else {
-            return AnyView(FilledSlot(slotId: slotId))
+            return AnyView(FilledSlot(slotIndex: slotIndex))
         }
     }
     
@@ -26,7 +26,7 @@ struct Home: View {
         NavigationView {
             GeometryReader { geo in
                 List(self.userData.collection.slots.indices, id: \.self) { index in
-                    self.slotViewForId(slotId: index)
+                    self.slotViewForId(slotIndex: index)
                         .frame(height: (geo.size.height - geo.safeAreaInsets.top - geo.safeAreaInsets.bottom) / CGFloat(self.userData.collection.slots.count))
                 }
                 .sheet(isPresented: self.$showOptions) {

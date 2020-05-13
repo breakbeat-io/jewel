@@ -11,15 +11,15 @@ import SwiftUI
 struct PlaybackLinks: View {
     
     @EnvironmentObject var userData: UserData
-    var slotId: Int
+    var slotIndex: Int
     
     @State private var showAdditionalLinks = false
     
     var body: some View {
-        IfLet(userData.collection.slots[slotId].source?.album?.attributes?.url) { url in
+        IfLet(userData.collection.slots[slotIndex].source?.album?.attributes?.url) { url in
             ZStack {
-                PrimaryPlaybackLink(slotId: self.slotId)
-                if self.userData.collection.slots[self.slotId].playbackLinks != nil {
+                PrimaryPlaybackLink(slotIndex: self.slotIndex)
+                if self.userData.collection.slots[self.slotIndex].playbackLinks != nil {
                     HStack {
                         Spacer()
                         Button(action: {
@@ -29,7 +29,7 @@ struct PlaybackLinks: View {
                                 .foregroundColor(.secondary)
                         }
                         .sheet(isPresented: self.$showAdditionalLinks) {
-                            AdditionalPlaybackLinks(slotId: self.slotId).environmentObject(self.userData)
+                            AdditionalPlaybackLinks(slotIndex: self.slotIndex).environmentObject(self.userData)
                         }
                         .padding()
                     }
@@ -44,6 +44,6 @@ struct PlaybackLinks_Previews: PreviewProvider {
     static let userData = UserData()
     
     static var previews: some View {
-        PlaybackLinks(slotId: 0).environmentObject(userData)
+        PlaybackLinks(slotIndex: 0).environmentObject(userData)
     }
 }

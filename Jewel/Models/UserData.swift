@@ -109,35 +109,35 @@ class UserData: ObservableObject {
         
         if let savedCollection = userDefaults.dictionary(forKey: "savedCollection") {
             print("v1.0 Saved Collection found ... migrating.")
-            for slotId in 0..<numberOfSlots {
+            for slotIndex in 0..<numberOfSlots {
                 let slot = Slot()
                 collection.slots.append(slot)
-                if let albumId = savedCollection[String(slotId)] {
-                    addAlbumToSlot(albumId: albumId as! String, slotId: slotId)
+                if let albumId = savedCollection[String(slotIndex)] {
+                    addAlbumToSlot(albumId: albumId as! String, slotIndex: slotIndex)
                 }
             }
             userDefaults.removeObject(forKey: "savedCollection")
         }
     }
     
-    func addAlbumToSlot(albumId: String, slotId: Int) {
+    func addAlbumToSlot(albumId: String, slotIndex: Int) {
         store!.album(id: albumId, completion: {
             (album: Album?, error: Error?) -> Void in
             DispatchQueue.main.async {
                 if album != nil {
                     let source = Source(album: album)
                     let newSlot = Slot(source: source)
-                    self.collection.slots[slotId] = newSlot
+                    self.collection.slots[slotIndex] = newSlot
                     if let baseUrl = album?.attributes?.url {
-                        self.populatePlatformLinks(baseUrl: baseUrl, slotId: slotId)
+                        self.populatePlatformLinks(baseUrl: baseUrl, slotIndex: slotIndex)
                     }
                 }
             }
         })
     }
     
-    func populatePlatformLinks(baseUrl: URL, slotId: Int) {
-        print("populating links for \(baseUrl.absoluteString) in slot \(slotId)")
+    func populatePlatformLinks(baseUrl: URL, slotIndex: Int) {
+        print("populating links for \(baseUrl.absoluteString) in slot \(slotIndex)")
         
         let request = URLRequest(url: URL(string: "https://api.song.link/v1-alpha.1/links?url=\(baseUrl.absoluteString)")!)
         
@@ -151,7 +151,7 @@ class UserData: ObservableObject {
             if let data = data {
                 if let decodedResponse = try? JSONDecoder().decode(OdesliResponse.self, from: data) {
                     DispatchQueue.main.async {
-                        self.collection.slots[slotId].playbackLinks = decodedResponse
+                        self.collection.slots[slotIndex].playbackLinks = decodedResponse
                     }
                     
                     return
@@ -165,14 +165,14 @@ class UserData: ObservableObject {
         }.resume()
     }
     
-    func deleteAlbumFromSlot(slotId: Int) {
+    func deleteAlbumFromSlot(slotIndex: Int) {
         let emptySlot = Slot()
-        self.collection.slots[slotId] = emptySlot
+        self.collection.slots[slotIndex] = emptySlot
     }
     
     func deleteAll() {
-        for slotId in 0..<collection.slots.count {
-            deleteAlbumFromSlot(slotId: slotId)
+        for slotIndex in 0..<collection.slots.count {
+            deleteAlbumFromSlot(slotIndex: slotIndex)
         }
     }
     
@@ -191,7 +191,7 @@ class UserData: ObservableObject {
                 if let decodedResponse = try? JSONDecoder().decode([String].self, from: data) {
                     // we have good data – go back to the main thread
                     for (index, albumId) in decodedResponse.enumerated() {
-                        self.addAlbumToSlot(albumId: albumId, slotId: index)
+                        self.addAlbumToSlot(albumId: albumId, slotIndex: index)
                     }
 
                     // everything is good, so we can exit

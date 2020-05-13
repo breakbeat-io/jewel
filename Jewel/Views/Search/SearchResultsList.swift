@@ -15,7 +15,7 @@ struct SearchResultsList: View {
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var userData: UserData
     @EnvironmentObject var searchProvider: SearchProvider
-    var slotId: Int
+    var slotIndex: Int
     
     var body: some View {
         
@@ -45,7 +45,7 @@ struct SearchResultsList: View {
                         }
                         Spacer()
                         Button(action: {
-                            self.userData.addAlbumToSlot(albumId: albums[i].id, slotId: self.slotId)
+                            self.userData.addAlbumToSlot(albumId: albums[i].id, slotIndex: self.slotIndex)
                             self.presentationMode.wrappedValue.dismiss()
                         }, label:{
                             Image(systemName: "plus.circle")
@@ -66,6 +66,6 @@ struct SearchResultsList_Previews: PreviewProvider {
     static let searchProvider = SearchProvider()
     
     static var previews: some View {
-        SearchResultsList(slotId: 1).environmentObject(userData).environmentObject(searchProvider)
+        SearchResultsList(slotIndex: 1).environmentObject(userData).environmentObject(searchProvider)
     }
 }
