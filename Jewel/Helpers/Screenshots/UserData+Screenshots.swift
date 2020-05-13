@@ -15,7 +15,7 @@ extension UserData {
         let albums = getScreenshotAlbums()
         for slotId in 0..<albums!.data!.count {
             let source = Source(album: albums!.data![slotId])
-            let newSlot = Slot(id: slotId, source: source)
+            let newSlot = Slot(source: source)
             self.collection.slots[slotId] = newSlot
         }
     }

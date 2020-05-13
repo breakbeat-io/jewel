@@ -9,7 +9,7 @@
 import Foundation
 
 struct Slot: Identifiable, Codable {
-    let id: Int
+    var id = UUID()
     var source: Source?
     var playbackLinks: OdesliResponse?
 }

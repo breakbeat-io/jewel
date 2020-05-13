@@ -25,8 +25,8 @@ struct Home: View {
         
         NavigationView {
             GeometryReader { geo in
-                List(self.userData.collection.slots) { slot in
-                    self.slotViewForId(slotId: slot.id)
+                List(self.userData.collection.slots.indices, id: \.self) { index in
+                    self.slotViewForId(slotId: index)
                         .frame(height: (geo.size.height - geo.safeAreaInsets.top - geo.safeAreaInsets.bottom) / CGFloat(self.userData.collection.slots.count))
                 }
                 .sheet(isPresented: self.$showOptions) {
