@@ -73,7 +73,7 @@ class UserData: ObservableObject {
             print("No saved collection found, creating empty one")
             
             for slotId in 0..<numberOfSlots {
-                let slot = Slot(id: slotId, album: nil)
+                let slot = Slot(id: slotId)
                 collection.slots.append(slot)
             }
         }
@@ -110,7 +110,7 @@ class UserData: ObservableObject {
         if let savedCollection = userDefaults.dictionary(forKey: "savedCollection") {
             print("v1.0 Saved Collection found ... migrating.")
             for slotId in 0..<numberOfSlots {
-                let slot = Slot(id: slotId, album: nil)
+                let slot = Slot(id: slotId)
                 collection.slots.append(slot)
                 if let albumId = savedCollection[String(slotId)] {
                     addAlbumToSlot(albumId: albumId as! String, slotId: slotId)
@@ -125,7 +125,8 @@ class UserData: ObservableObject {
             (album: Album?, error: Error?) -> Void in
             DispatchQueue.main.async {
                 if album != nil {
-                    let newSlot = Slot(id: slotId, album: album)
+                    let source = Source(album: album)
+                    let newSlot = Slot(id: slotId, source: source)
                     self.collection.slots[slotId] = newSlot
                     if let baseUrl = album?.attributes?.url {
                         self.populatePlatformLinks(baseUrl: baseUrl, slotId: slotId)

@@ -14,7 +14,7 @@ struct Home: View {
     @State private var showOptions = false
     
     private func slotViewForId(slotId: Int) -> some View {
-        if userData.collection.slots[slotId].album == nil {
+        if userData.collection.slots[slotId].source?.album == nil {
             return AnyView(EmptySlot(slotId: slotId))
         } else {
             return AnyView(FilledSlot(slotId: slotId))

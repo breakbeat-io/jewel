@@ -16,7 +16,7 @@ struct PlaybackLinks: View {
     @State private var showAdditionalLinks = false
     
     var body: some View {
-        IfLet(userData.collection.slots[slotId].album?.attributes?.url) { url in
+        IfLet(userData.collection.slots[slotId].source?.album?.attributes?.url) { url in
             ZStack {
                 PrimaryPlaybackLink(slotId: self.slotId)
                 if self.userData.collection.slots[self.slotId].playbackLinks != nil {

@@ -21,7 +21,7 @@ struct AlbumDetailCompact: View {
             AlbumCover(slotId: slotId)
             PlaybackLinks(slotId: slotId)
                 .padding(.bottom)
-            IfLet(userData.collection.slots[slotId].album) { album in
+            IfLet(userData.collection.slots[slotId].source?.album) { album in
                 AlbumTrackList(slotId: self.slotId)
             }
         }
