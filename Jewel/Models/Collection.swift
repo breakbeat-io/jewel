@@ -9,5 +9,6 @@
 import Foundation
 
 struct Collection {
+    let numberOfSlots = 8
     var name = "My Collection"
 }
