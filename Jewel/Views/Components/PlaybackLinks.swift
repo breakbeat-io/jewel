@@ -16,10 +16,10 @@ struct PlaybackLinks: View {
     @State private var showAdditionalLinks = false
     
     var body: some View {
-        IfLet(userData.collection[slotId].album?.attributes?.url) { url in
+        IfLet(userData.oldCollection[slotId].album?.attributes?.url) { url in
             ZStack {
                 PrimaryPlaybackLink(slotId: self.slotId)
-                if self.userData.collection[self.slotId].playbackLinks != nil {
+                if self.userData.oldCollection[self.slotId].playbackLinks != nil {
                     HStack {
                         Spacer()
                         Button(action: {

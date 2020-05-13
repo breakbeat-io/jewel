@@ -24,10 +24,10 @@ struct Options: View {
                         HStack(alignment: .firstTextBaseline) {
                             Text("Collection Name")
                             TextField(
-                                userData.prefs.collectionName,
+                                userData.collection.name,
                                 text: $newCollectionName,
                                 onCommit: {
-                                    self.userData.prefs.collectionName = self.newCollectionName
+                                    self.userData.collection.name = self.newCollectionName
                                     self.presentationMode.wrappedValue.dismiss()
                                 }
                             ).foregroundColor(.blue)

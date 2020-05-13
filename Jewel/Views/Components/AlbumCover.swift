@@ -16,7 +16,7 @@ struct AlbumCover: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            IfLet(userData.collection[slotId].album?.attributes) { attributes in
+            IfLet(userData.oldCollection[slotId].album?.attributes) { attributes in
                 KFImage(attributes.artwork.url(forWidth: 1000))
                     .placeholder {
                         RoundedRectangle(cornerRadius: 4)

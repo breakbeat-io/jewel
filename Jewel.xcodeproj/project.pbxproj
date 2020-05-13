@@ -39,13 +39,14 @@
 		D2A31B05246308B800D6BF4A /* Start.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A31B04246308B800D6BF4A /* Start.swift */; };
 		D2A31B0924631F5100D6BF4A /* AlbumDetailRegular.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A31B0824631F5100D6BF4A /* AlbumDetailRegular.swift */; };
 		D2A55CCF246839980007CD1F /* OdesliResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A55CCE246839980007CD1F /* OdesliResponse.swift */; };
-		D2BD46572469895500AD3F30 /* JewelPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BD46562469895500AD3F30 /* JewelPreferences.swift */; };
+		D2BD46572469895500AD3F30 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BD46562469895500AD3F30 /* Preferences.swift */; };
 		D2D40B4F245738220018E066 /* AlbumTrackList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D40B4E245738220018E066 /* AlbumTrackList.swift */; };
 		D2D5875E244E391200E982E8 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D5875D244E391200E982E8 /* UserData.swift */; };
 		D2E690F62450E36800B981F2 /* Slot.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E690F52450E36800B981F2 /* Slot.swift */; };
 		D2E690F82450E98E00B981F2 /* IfLet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E690F72450E98E00B981F2 /* IfLet.swift */; };
 		D2E690FA2450ECBB00B981F2 /* EmptySlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E690F92450ECBB00B981F2 /* EmptySlot.swift */; };
 		D2E690FC2450EF9A00B981F2 /* FilledSlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E690FB2450EF9A00B981F2 /* FilledSlot.swift */; };
+		D2ED2DA6246C2B1A00A6579F /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2ED2DA5246C2B1A00A6579F /* Collection.swift */; };
 		D2FE407824504F2700623280 /* HMV in Frameworks */ = {isa = PBXBuildFile; productRef = D2FE407724504F2700623280 /* HMV */; };
 /* End PBXBuildFile section */
 
@@ -106,7 +107,7 @@
 		D2A31B04246308B800D6BF4A /* Start.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Start.swift; sourceTree = "<group>"; };
 		D2A31B0824631F5100D6BF4A /* AlbumDetailRegular.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumDetailRegular.swift; sourceTree = "<group>"; };
 		D2A55CCE246839980007CD1F /* OdesliResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OdesliResponse.swift; sourceTree = "<group>"; };
-		D2BD46562469895500AD3F30 /* JewelPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JewelPreferences.swift; sourceTree = "<group>"; };
+		D2BD46562469895500AD3F30 /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
 		D2D40B4E245738220018E066 /* AlbumTrackList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumTrackList.swift; sourceTree = "<group>"; };
 		D2D5875D244E391200E982E8 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		D2E690F52450E36800B981F2 /* Slot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Slot.swift; sourceTree = "<group>"; };
@@ -114,6 +115,7 @@
 		D2E690F92450ECBB00B981F2 /* EmptySlot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptySlot.swift; sourceTree = "<group>"; };
 		D2E690FB2450EF9A00B981F2 /* FilledSlot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilledSlot.swift; sourceTree = "<group>"; };
 		D2EAB323245192F000AC9CC3 /* Jewel.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Jewel.entitlements; sourceTree = "<group>"; };
+		D2ED2DA5246C2B1A00A6579F /* Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
 		D2FE406F244FAA4500623280 /* apple-music-api-token.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "apple-music-api-token.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -294,7 +296,8 @@
 			isa = PBXGroup;
 			children = (
 				D2D5875D244E391200E982E8 /* UserData.swift */,
-				D2BD46562469895500AD3F30 /* JewelPreferences.swift */,
+				D2BD46562469895500AD3F30 /* Preferences.swift */,
+				D2ED2DA5246C2B1A00A6579F /* Collection.swift */,
 				D2E690F52450E36800B981F2 /* Slot.swift */,
 				D2A55CCE246839980007CD1F /* OdesliResponse.swift */,
 			);
@@ -452,7 +455,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D2BD46572469895500AD3F30 /* JewelPreferences.swift in Sources */,
+				D2BD46572469895500AD3F30 /* Preferences.swift in Sources */,
 				D2A31B0924631F5100D6BF4A /* AlbumDetailRegular.swift in Sources */,
 				D28358872452D3CF00411AC9 /* SearchResultsList.swift in Sources */,
 				D28358832451D3C700411AC9 /* Search.swift in Sources */,
@@ -461,6 +464,7 @@
 				D2937DC92466D3A700C252EE /* UserData+Screenshots.swift in Sources */,
 				D27371C324571828005CC5EF /* JewelError.swift in Sources */,
 				D201C460246AAD3800A5FC87 /* AdditionalPlaybackLinks.swift in Sources */,
+				D2ED2DA6246C2B1A00A6579F /* Collection.swift in Sources */,
 				D2E690FC2450EF9A00B981F2 /* FilledSlot.swift in Sources */,
 				D22C4522243DD8B00001481D /* AppDelegate.swift in Sources */,
 				D2E690F62450E36800B981F2 /* Slot.swift in Sources */,
