@@ -9,7 +9,6 @@
 import Foundation
 
 struct Collection: Codable {
-    let numberOfSlots = 8
     var name = "My Collection"
     var slots = [Slot]()
 }

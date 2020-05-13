@@ -22,6 +22,7 @@ class UserData: ObservableObject {
         }
     }
     
+    private let numberOfSlots = 8
     private var userDefaults = UserDefaults.standard
     private var store: HMV?
     
@@ -71,7 +72,7 @@ class UserData: ObservableObject {
         if collection.slots.count == 0 {
             print("No saved collection found, creating empty one")
             
-            for slotId in 0..<collection.numberOfSlots {
+            for slotId in 0..<numberOfSlots {
                 let slot = Slot(id: slotId, album: nil)
                 collection.slots.append(slot)
             }
@@ -108,7 +109,7 @@ class UserData: ObservableObject {
         
         if let savedCollection = userDefaults.dictionary(forKey: "savedCollection") {
             print("v1.0 Saved Collection found ... migrating.")
-            for slotId in 0..<collection.numberOfSlots {
+            for slotId in 0..<numberOfSlots {
                 let slot = Slot(id: slotId, album: nil)
                 collection.slots.append(slot)
                 if let albumId = savedCollection[String(slotId)] {
