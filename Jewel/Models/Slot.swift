@@ -10,6 +10,6 @@ import Foundation
 
 struct Slot: Identifiable, Codable {
     var id = UUID()
-    var source: Source?
+    var source: AppleMusicAlbumSource?
     var playbackLinks: OdesliResponse?
 }

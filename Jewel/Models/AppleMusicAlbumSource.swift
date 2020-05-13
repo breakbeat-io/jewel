@@ -9,6 +9,6 @@
 import Foundation
 import HMV
 
-struct Source: Codable {
+struct AppleMusicAlbumSource: Codable {
     var album: Album?
 }
