@@ -127,14 +127,14 @@ class UserData: ObservableObject {
                     let newSlot = Slot(id: slotId, album: album)
                     self.collection.slots[slotId] = newSlot
                     if let baseUrl = album?.attributes?.url {
-                        self.populatePlaybackLinks(baseUrl: baseUrl, slotId: slotId)
+                        self.populatePlatformLinks(baseUrl: baseUrl, slotId: slotId)
                     }
                 }
             }
         })
     }
     
-    func populatePlaybackLinks(baseUrl: URL, slotId: Int) {
+    func populatePlatformLinks(baseUrl: URL, slotId: Int) {
         print("populating links for \(baseUrl.absoluteString) in slot \(slotId)")
         
         let request = URLRequest(url: URL(string: "https://api.song.link/v1-alpha.1/links?url=\(baseUrl.absoluteString)")!)
