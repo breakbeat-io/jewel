@@ -73,7 +73,7 @@ class UserData: ObservableObject {
             print("No saved collection found, creating empty one")
             
             for _ in 0..<numberOfSlots {
-                let slot = Slot()
+                let slot = Slot<AppleMusicAlbumSource>()
                 collection.slots.append(slot)
             }
         }
@@ -110,7 +110,7 @@ class UserData: ObservableObject {
         if let savedCollection = userDefaults.dictionary(forKey: "savedCollection") {
             print("v1.0 Saved Collection found ... migrating.")
             for slotIndex in 0..<numberOfSlots {
-                let slot = Slot()
+                let slot = Slot<AppleMusicAlbumSource>()
                 collection.slots.append(slot)
                 if let albumId = savedCollection[String(slotIndex)] {
                     addAlbumToSlot(albumId: albumId as! String, slotIndex: slotIndex)
@@ -166,7 +166,7 @@ class UserData: ObservableObject {
     }
     
     func deleteAlbumFromSlot(slotIndex: Int) {
-        let emptySlot = Slot()
+        let emptySlot = Slot<AppleMusicAlbumSource>()
         self.collection.slots[slotIndex] = emptySlot
     }
     

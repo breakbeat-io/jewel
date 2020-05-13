@@ -8,8 +8,8 @@
 
 import Foundation
 
-struct Slot: Identifiable, Codable {
+struct Slot<T: Source>: Identifiable, Codable {
     var id = UUID()
-    var source: AppleMusicAlbumSource?
+    var source: T?
     var playbackLinks: OdesliResponse?
 }

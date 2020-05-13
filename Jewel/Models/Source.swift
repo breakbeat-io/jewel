@@ -1,5 +1,5 @@
 //
-//  Collection.swift
+//  Source.swift
 //  Jewel
 //
 //  Created by Greg Hepworth on 13/05/2020.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Collection: Codable {
-    var name = "My Collection"
-    var slots = [Slot<AppleMusicAlbumSource>]()
+protocol Source: Codable {
+    var sourceProvider: SourceProvider { get }
+    var sourceReference: String { get set }
 }

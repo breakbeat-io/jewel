@@ -9,8 +9,8 @@
 import Foundation
 import HMV
 
-struct AppleMusicAlbumSource: Codable {
+struct AppleMusicAlbumSource: Source, Codable {
     let sourceProvider = SourceProvider.appleMusicAlbum
-    let sourceReference: String
+    var sourceReference: String
     var album: Album?
 }
