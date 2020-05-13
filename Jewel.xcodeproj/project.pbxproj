@@ -11,6 +11,7 @@
 		D201C465246AE9F700A5FC87 /* PlaybackLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = D201C464246AE9F700A5FC87 /* PlaybackLinks.swift */; };
 		D20968912460106300496674 /* Options.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20968902460106300496674 /* Options.swift */; };
 		D22318AF246C397A0033B8A5 /* AppleMusicAlbumSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22318AE246C397A0033B8A5 /* AppleMusicAlbumSource.swift */; };
+		D22318B5246C4A810033B8A5 /* SourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22318B4246C4A810033B8A5 /* SourceType.swift */; };
 		D22666132462F5940031C9A8 /* DiscTrackList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22666122462F5940031C9A8 /* DiscTrackList.swift */; };
 		D22C4522243DD8B00001481D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22C4521243DD8B00001481D /* AppDelegate.swift */; };
 		D22C4524243DD8B00001481D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22C4523243DD8B00001481D /* SceneDelegate.swift */; };
@@ -73,6 +74,7 @@
 		D201C464246AE9F700A5FC87 /* PlaybackLinks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackLinks.swift; sourceTree = "<group>"; };
 		D20968902460106300496674 /* Options.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Options.swift; sourceTree = "<group>"; };
 		D22318AE246C397A0033B8A5 /* AppleMusicAlbumSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMusicAlbumSource.swift; sourceTree = "<group>"; };
+		D22318B4246C4A810033B8A5 /* SourceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceType.swift; sourceTree = "<group>"; };
 		D22666122462F5940031C9A8 /* DiscTrackList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscTrackList.swift; sourceTree = "<group>"; };
 		D22C451E243DD8B00001481D /* Jewel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jewel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D22C4521243DD8B00001481D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -303,6 +305,7 @@
 				D2E690F52450E36800B981F2 /* Slot.swift */,
 				D22318AE246C397A0033B8A5 /* AppleMusicAlbumSource.swift */,
 				D2A55CCE246839980007CD1F /* OdesliResponse.swift */,
+				D22318B4246C4A810033B8A5 /* SourceType.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -478,6 +481,7 @@
 				D2A55CCF246839980007CD1F /* OdesliResponse.swift in Sources */,
 				D2E690FA2450ECBB00B981F2 /* EmptySlot.swift in Sources */,
 				D22C4552243DDE490001481D /* Home.swift in Sources */,
+				D22318B5246C4A810033B8A5 /* SourceType.swift in Sources */,
 				D2A31B05246308B800D6BF4A /* Start.swift in Sources */,
 				D22666132462F5940031C9A8 /* DiscTrackList.swift in Sources */,
 				D2D40B4F245738220018E066 /* AlbumTrackList.swift in Sources */,

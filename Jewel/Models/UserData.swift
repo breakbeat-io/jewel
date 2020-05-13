@@ -125,7 +125,7 @@ class UserData: ObservableObject {
             (album: Album?, error: Error?) -> Void in
             DispatchQueue.main.async {
                 if album != nil {
-                    let source = AppleMusicAlbumSource(album: album)
+                    let source = AppleMusicAlbumSource(sourceReference: album!.id, album: album)
                     let newSlot = Slot(source: source)
                     self.collection.slots[slotIndex] = newSlot
                     if let baseUrl = album?.attributes?.url {
