@@ -16,12 +16,11 @@ class UserData: ObservableObject {
             saveUserData(key: "jewelPreferences")
         }
     }
-    @Published var oldCollection = [Slot]() {
+    @Published var collection = Collection() {
         didSet {
             saveUserData(key: "jewelCollection")
         }
     }
-    @Published var collection = Collection()
     
     private var userDefaults = UserDefaults.standard
     private var store: HMV?
@@ -63,18 +62,18 @@ class UserData: ObservableObject {
         if let savedCollection = userDefaults.object(forKey: "jewelCollection") as? Data {
             print("Loading collection")
             let decoder = JSONDecoder()
-            if let decodedCollection = try? decoder.decode([Slot].self, from: savedCollection) {
-                oldCollection = decodedCollection
+            if let decodedCollection = try? decoder.decode(Collection.self, from: savedCollection) {
+                collection = decodedCollection
             }
         }
         
         // if collection remains empty, then initialise with empty slots
-        if oldCollection.count == 0 {
+        if collection.slots.count == 0 {
             print("No saved collection found, creating empty one")
             
             for slotId in 0..<collection.numberOfSlots {
                 let slot = Slot(id: slotId, album: nil)
-                oldCollection.append(slot)
+                collection.slots.append(slot)
             }
         }
     }
@@ -90,7 +89,7 @@ class UserData: ObservableObject {
                 print("Saved user preferences")
             }
         case "jewelCollection":
-            if let encoded = try? encoder.encode(oldCollection) {
+            if let encoded = try? encoder.encode(collection) {
                 userDefaults.set(encoded, forKey: key)
                 print("Saved collection")
             }
@@ -111,7 +110,7 @@ class UserData: ObservableObject {
             print("v1.0 Saved Collection found ... migrating.")
             for slotId in 0..<collection.numberOfSlots {
                 let slot = Slot(id: slotId, album: nil)
-                oldCollection.append(slot)
+                collection.slots.append(slot)
                 if let albumId = savedCollection[String(slotId)] {
                     addAlbumToSlot(albumId: albumId as! String, slotId: slotId)
                 }
@@ -126,7 +125,7 @@ class UserData: ObservableObject {
             DispatchQueue.main.async {
                 if album != nil {
                     let newSlot = Slot(id: slotId, album: album)
-                    self.oldCollection[slotId] = newSlot
+                    self.collection.slots[slotId] = newSlot
                     if let baseUrl = album?.attributes?.url {
                         self.populatePlaybackLinks(baseUrl: baseUrl, slotId: slotId)
                     }
@@ -150,7 +149,7 @@ class UserData: ObservableObject {
             if let data = data {
                 if let decodedResponse = try? JSONDecoder().decode(OdesliResponse.self, from: data) {
                     DispatchQueue.main.async {
-                        self.oldCollection[slotId].playbackLinks = decodedResponse
+                        self.collection.slots[slotId].playbackLinks = decodedResponse
                     }
                     
                     return
@@ -166,11 +165,11 @@ class UserData: ObservableObject {
     
     func deleteAlbumFromSlot(slotId: Int) {
         let emptySlot = Slot(id: slotId)
-        self.oldCollection[slotId] = emptySlot
+        self.collection.slots[slotId] = emptySlot
     }
     
     func deleteAll() {
-        for slotId in 0..<oldCollection.count {
+        for slotId in 0..<collection.slots.count {
             deleteAlbumFromSlot(slotId: slotId)
         }
     }
