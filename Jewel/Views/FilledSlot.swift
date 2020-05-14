@@ -12,14 +12,14 @@ struct FilledSlot: View {
     
     @EnvironmentObject var userData: UserData
     @EnvironmentObject var searchProvider: SearchProvider
-    var slotId: Int
+    var slotIndex: Int
     @State private var tapped: Int? = 0
     @State private var showSearch = false
     
     var body: some View {
         
         ZStack {
-            AlbumCard(slotId: self.slotId)
+            AlbumCard(slotIndex: self.slotIndex)
             .onTapGesture {
                 self.tapped = 1
             }
@@ -27,7 +27,7 @@ struct FilledSlot: View {
                 self.showSearch = true
             }
             NavigationLink(
-                destination: SlotDetail(slotId: self.slotId),
+                destination: SlotDetail(slotIndex: self.slotIndex),
                 tag: 1,
                 selection: self.$tapped
             ){
@@ -35,7 +35,7 @@ struct FilledSlot: View {
             }
         }
         .sheet(isPresented: $showSearch) {
-            Search(slotId: self.slotId)
+            Search(slotIndex: self.slotIndex)
                 .environmentObject(self.userData)
                 .environmentObject(self.searchProvider)
         }
@@ -47,6 +47,6 @@ struct FilledSlot_Previews: PreviewProvider {
     static let userData = UserData()
     
     static var previews: some View {
-        FilledSlot(slotId: 0).environmentObject(userData)
+        FilledSlot(slotIndex: 0).environmentObject(userData)
     }
 }

@@ -11,15 +11,15 @@ import SwiftUI
 struct DiscTrackList: View {
     
     @EnvironmentObject var userData: UserData
-    var slotId: Int
+    var slotIndex: Int
     var discNumber: Int
     var withTitle: Bool
     
     var body: some View {
 
-        let tracks = userData.collection[slotId].album?.relationships?.tracks.data
+        let tracks = userData.collection.slots[slotIndex].source?.album?.relationships?.tracks.data
         let discTracks = tracks?.filter { $0.attributes?.discNumber == discNumber }
-        let albumArtist = userData.collection[slotId].album?.attributes?.artistName
+        let albumArtist = userData.collection.slots[slotIndex].source?.album?.attributes?.artistName
         
         let discTrackList = VStack(alignment: .leading) {
             if withTitle {
@@ -70,6 +70,6 @@ struct DiscTracklist_Previews: PreviewProvider {
     static let userData = UserData()
     
     static var previews: some View {
-        DiscTrackList(slotId: 0, discNumber: 1, withTitle: true).environmentObject(userData)
+        DiscTrackList(slotIndex: 0, discNumber: 1, withTitle: true).environmentObject(userData)
     }
 }

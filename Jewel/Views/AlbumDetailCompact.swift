@@ -13,16 +13,16 @@ import HMV
 struct AlbumDetailCompact: View {
     
     @EnvironmentObject var userData: UserData
-    var slotId: Int
+    var slotIndex: Int
     
     var body: some View {
         
         VStack {
-            AlbumCover(slotId: slotId)
-            PlaybackLinks(slotId: slotId)
+            AlbumCover(slotIndex: slotIndex)
+            PlaybackLinks(slotIndex: slotIndex)
                 .padding(.bottom)
-            IfLet(userData.collection[slotId].album) { album in
-                AlbumTrackList(slotId: self.slotId)
+            IfLet(userData.collection.slots[slotIndex].source?.album) { album in
+                AlbumTrackList(slotIndex: self.slotIndex)
             }
         }
         .padding()
@@ -34,6 +34,6 @@ struct AlbumDetail_Previews: PreviewProvider {
     static let userData = UserData()
     
     static var previews: some View {
-        AlbumDetailCompact(slotId: 0).environmentObject(userData)
+        AlbumDetailCompact(slotIndex: 0).environmentObject(userData)
     }
 }

@@ -13,9 +13,10 @@ extension UserData {
     
     func loadScreenshotCollection() {
         let albums = getScreenshotAlbums()
-        for slotId in 0..<albums!.data!.count {
-            let newSlot = Slot(id: slotId, album: albums!.data![slotId])
-            self.collection[slotId] = newSlot
+        for slotIndex in 0..<albums!.data!.count {
+            let source = Source(sourceReference: albums!.data![slotIndex].id, album: albums!.data![slotIndex])
+            let newSlot = Slot(source: source)
+            self.collection.slots[slotIndex] = newSlot
         }
     }
     

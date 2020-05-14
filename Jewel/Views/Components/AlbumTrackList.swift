@@ -11,17 +11,17 @@ import SwiftUI
 struct AlbumTrackList: View {
     
     @EnvironmentObject var userData: UserData
-    var slotId: Int
+    var slotIndex: Int
     
     var body: some View {
         
-        let tracks = userData.collection[slotId].album?.relationships?.tracks.data
+        let tracks = userData.collection.slots[slotIndex].source?.album?.relationships?.tracks.data
         let discCount = tracks?.map { $0.attributes?.discNumber ?? 1 }.max()
         
         let albumTrackList = VStack(alignment: .leading) {
             IfLet(discCount) { discCount in
                 ForEach(1..<discCount + 1, id: \.self) {
-                    DiscTrackList(slotId: self.slotId, discNumber: $0, withTitle: (discCount > 1) ? true : false)
+                    DiscTrackList(slotIndex: self.slotIndex, discNumber: $0, withTitle: (discCount > 1) ? true : false)
                 }
             }
         }
@@ -35,6 +35,6 @@ struct AlbumTrackList_Previews: PreviewProvider {
     static let userData = UserData()
     
     static var previews: some View {
-        AlbumTrackList(slotId: 0).environmentObject(userData)
+        AlbumTrackList(slotIndex: 0).environmentObject(userData)
     }
 }

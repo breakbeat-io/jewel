@@ -13,14 +13,14 @@ import HMV
 struct AlbumCard: View {
     
     @EnvironmentObject var userData: UserData
-    var slotId: Int
+    var slotIndex: Int
     
     var body: some View {
         
         Rectangle()
         .foregroundColor(.clear)
         .background(
-            IfLet(userData.collection[slotId].album?.attributes?.artwork) { artwork in
+            IfLet(userData.collection.slots[slotIndex].source?.album?.attributes?.artwork) { artwork in
                 KFImage(artwork.url(forWidth: 1000))
                 .placeholder {
                     RoundedRectangle(cornerRadius: 4)
@@ -33,7 +33,7 @@ struct AlbumCard: View {
         .cornerRadius(4)
         .overlay(
             VStack(alignment: .leading) {
-                IfLet(userData.collection[slotId].album?.attributes) { attributes in
+                IfLet(userData.collection.slots[slotIndex].source?.album?.attributes) { attributes in
                     Text(attributes.name)
                         .font(.callout)
                         .fontWeight(.bold)
@@ -62,6 +62,6 @@ struct AlbumCard_Previews: PreviewProvider {
     static let userData = UserData()
     
     static var previews: some View {
-        AlbumCard(slotId: 0).environmentObject(userData)
+        AlbumCard(slotIndex: 0).environmentObject(userData)
     }
 }

@@ -12,11 +12,11 @@ import KingfisherSwiftUI
 struct AlbumCover: View {
     
     @EnvironmentObject var userData: UserData
-    var slotId: Int
+    var slotIndex: Int
     
     var body: some View {
         VStack(alignment: .leading) {
-            IfLet(userData.collection[slotId].album?.attributes) { attributes in
+            IfLet(userData.collection.slots[slotIndex].source?.album?.attributes) { attributes in
                 KFImage(attributes.artwork.url(forWidth: 1000))
                     .placeholder {
                         RoundedRectangle(cornerRadius: 4)
@@ -40,6 +40,6 @@ struct AlbumCover: View {
 
 struct AlbumCover_Previews: PreviewProvider {
     static var previews: some View {
-        AlbumCover(slotId: 1)
+        AlbumCover(slotIndex: 1)
     }
 }

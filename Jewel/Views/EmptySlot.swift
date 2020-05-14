@@ -12,7 +12,7 @@ struct EmptySlot: View {
     
     @EnvironmentObject var userData: UserData
     @EnvironmentObject var searchProvider: SearchProvider
-    var slotId: Int
+    var slotIndex: Int
     @State private var showSearch = false
     
     var body: some View {
@@ -32,7 +32,7 @@ struct EmptySlot: View {
             )
         }
         .sheet(isPresented: $showSearch) {
-            Search(slotId: self.slotId)
+            Search(slotIndex: self.slotIndex)
                 .environmentObject(self.userData)
                 .environmentObject(self.searchProvider)
         }
@@ -43,6 +43,6 @@ struct EmptySlot_Previews: PreviewProvider {
     static let userData = UserData()
     
     static var previews: some View {
-        EmptySlot(slotId: 1).environmentObject(userData)
+        EmptySlot(slotIndex: 1).environmentObject(userData)
     }
 }
