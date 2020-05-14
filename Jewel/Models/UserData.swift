@@ -31,6 +31,7 @@ class UserData: ObservableObject {
         // basically if we can't open the store we're dead in the water so for now may as well crash!
         try! openStore()
         
+        migrateV1UserDefaults()
         loadUserData()
         
     }
@@ -47,8 +48,6 @@ class UserData: ObservableObject {
     }
     
     fileprivate func loadUserData() {
-        
-        migrateV1UserDefaults()
         
         // load saved user preferences
         if let savedPreferences = userDefaults.object(forKey: "jewelPreferences") as? Data {
