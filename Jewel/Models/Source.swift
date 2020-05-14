@@ -7,8 +7,10 @@
 //
 
 import Foundation
+import HMV
 
-protocol Source: Codable {
-    var sourceProvider: SourceProvider { get }
-    var sourceReference: String { get set }
+struct Source: Codable {
+    let sourceProvider = SourceProvider.appleMusicAlbum
+    var sourceReference: String
+    var album: Album?
 }

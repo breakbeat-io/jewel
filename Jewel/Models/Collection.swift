@@ -10,5 +10,5 @@ import Foundation
 
 struct Collection: Codable {
     var name = "My Collection"
-    var slots = [Slot<AppleMusicAlbumSource>]()
+    var slots = [Slot]()
 }
