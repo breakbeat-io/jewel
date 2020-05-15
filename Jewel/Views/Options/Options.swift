@@ -12,7 +12,6 @@ struct Options: View {
     
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var userData: UserData
-    @State private var newCollectionName = ""
     @State private var showDeleteAllWarning = false
     @State private var showLoadRecommendationsAlert = false
     
@@ -25,9 +24,8 @@ struct Options: View {
                             Text("Collection Name")
                             TextField(
                                 userData.collection.name,
-                                text: $newCollectionName,
+                                text: $userData.collection.name,
                                 onCommit: {
-                                    self.userData.collection.name = self.newCollectionName
                                     self.presentationMode.wrappedValue.dismiss()
                                 }
                             ).foregroundColor(.blue)
@@ -106,6 +104,10 @@ struct Options: View {
             )
         }
         .navigationViewStyle(StackNavigationViewStyle())
+        .onDisappear {
+            self.userData.collectionChanged()
+            self.userData.preferencesChanged()
+        }
     }
 }
 

@@ -11,16 +11,8 @@ import HMV
 
 class UserData: ObservableObject {
 
-    @Published var prefs = Preferences() {
-        didSet {
-            saveUserData(key: "jewelPreferences")
-        }
-    }
-    @Published var collection = Collection() {
-        didSet {
-            saveUserData(key: "jewelCollection")
-        }
-    }
+    @Published var prefs = Preferences()
+    @Published var collection = Collection()
     
     private let numberOfSlots = 8
     private var userDefaults = UserDefaults.standard
@@ -98,12 +90,23 @@ class UserData: ObservableObject {
         }
     }
     
+    func collectionChanged() {
+        self.objectWillChange.send()
+        self.saveUserData(key: "jewelCollection")
+    }
+    
+    func preferencesChanged() {
+        self.objectWillChange.send()
+        self.saveUserData(key: "jewelPreferences")
+    }
+    
     fileprivate func migrateV1UserDefaults() {
         
         if let v1CollectionName = userDefaults.string(forKey: "collectionName") {
             print("v1.0 Collection Name found ... migrating.")
             collection.name = v1CollectionName
             userDefaults.removeObject(forKey: "collectionName")
+            saveUserData(key: "jewelCollection")
         }
         
         if let savedCollection = userDefaults.dictionary(forKey: "savedCollection") {
@@ -116,7 +119,9 @@ class UserData: ObservableObject {
                 }
             }
             userDefaults.removeObject(forKey: "savedCollection")
+            saveUserData(key: "jewelCollection")
         }
+
     }
     
     func addAlbumToSlot(albumId: String, slotIndex: Int) {
@@ -130,7 +135,7 @@ class UserData: ObservableObject {
                     if let baseUrl = album?.attributes?.url {
                         self.populatePlatformLinks(baseUrl: baseUrl, slotIndex: slotIndex)
                     }
-                    self.objectWillChange.send()
+                    self.collectionChanged()
                 }
             }
         })
@@ -152,6 +157,7 @@ class UserData: ObservableObject {
                 if let decodedResponse = try? JSONDecoder().decode(OdesliResponse.self, from: data) {
                     DispatchQueue.main.async {
                         self.collection.slots[slotIndex].playbackLinks = decodedResponse
+                        self.collectionChanged()
                     }
                     
                     return
@@ -168,7 +174,7 @@ class UserData: ObservableObject {
     func deleteAlbumFromSlot(slotIndex: Int) {
         let emptySlot = Slot()
         self.collection.slots[slotIndex] = emptySlot
-        self.objectWillChange.send()
+        self.collectionChanged()
     }
     
     func deleteAll() {
