@@ -17,7 +17,7 @@ struct SlotDetail: View {
     @EnvironmentObject var searchProvider: SearchProvider
     var slotIndex: Int
     @State private var showSearch = false
-    @State private var showDeleteWarning = false
+    @State private var showEjectWarning = false
     
     private func slotDetail() -> some View {
         if userData.activeCollection.slots[slotIndex].source?.album != nil {
@@ -44,29 +44,31 @@ struct SlotDetail: View {
         .navigationBarItems(trailing:
             IfLet(userData.activeCollection.slots[slotIndex].source?.album) { album in
                 HStack {
-                    Button(action: {
-                        self.showSearch = true
-                    }) {
-                        Image(systemName: "arrow.swap")
-                    }
-                    .padding(.vertical)
-                    .sheet(isPresented: self.$showSearch) {
-                        Search(slotIndex: self.slotIndex)
-                            .environmentObject(self.userData)
-                            .environmentObject(self.searchProvider)
-                    }
-                    
-                    Button(action: {
-                        self.showDeleteWarning = true
-                    }) {
-                        Image(systemName: "trash")
-                            .foregroundColor(.red)
-                    }
-                    .padding()
-                    .alert(isPresented: self.$showDeleteWarning) {
-                        Alert(title: Text("Are you sure you want to delete this album from your collection?"), primaryButton: .cancel(Text("Cancel")), secondaryButton: .destructive(Text("Delete")) {
-                                self.userData.deleteAlbumFromSlot(slotIndex: self.slotIndex)
-                            })
+                    if self.userData.activeCollection.editable {
+                        Button(action: {
+                            self.showSearch = true
+                        }) {
+                            Image(systemName: "arrow.swap")
+                        }
+                        .padding(.vertical)
+                        .sheet(isPresented: self.$showSearch) {
+                            Search(slotIndex: self.slotIndex)
+                                .environmentObject(self.userData)
+                                .environmentObject(self.searchProvider)
+                        }
+                        
+                        Button(action: {
+                            self.showEjectWarning = true
+                        }) {
+                            Image(systemName: "eject")
+                                .foregroundColor(.red)
+                        }
+                        .padding()
+                        .alert(isPresented: self.$showEjectWarning) {
+                            Alert(title: Text("Are you sure you want to eject this album from your collection?"), primaryButton: .cancel(Text("Cancel")), secondaryButton: .destructive(Text("Eject")) {
+                                    self.userData.ejectSourceFromSlot(slotIndex: self.slotIndex)
+                                })
+                        }
                     }
                 }
             }

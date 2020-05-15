@@ -222,7 +222,7 @@ class UserData: ObservableObject {
         }.resume()
     }
     
-    func deleteAlbumFromSlot(slotIndex: Int) {
+    func ejectSourceFromSlot(slotIndex: Int) {
         let emptySlot = Slot()
         self.activeCollection.slots[slotIndex] = emptySlot
         self.collectionChanged()
@@ -230,7 +230,7 @@ class UserData: ObservableObject {
     
     func deleteAll() {
         for slotIndex in 0..<activeCollection.slots.count {
-            deleteAlbumFromSlot(slotIndex: slotIndex)
+            ejectSourceFromSlot(slotIndex: slotIndex)
         }
     }
     
