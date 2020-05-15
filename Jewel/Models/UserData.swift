@@ -7,11 +7,12 @@
 //
 
 // TODO
-// * How can I not initialise activeCollection seeing as it just points to somethign else.
+// * How can I not initialise activeCollection seeing as it just points to somethign else? make it optional
+
 // * loadUserData should be able to be reduce to one loop instead of three identical calls
 // * when leaving options I am saving everything - seems heavy handed - how can I be smarter and only save what changed?!?
 // * should i do additonal checks on an non-editable collection?  Currently I just hide the buttons, but the func itself isn't disabled
-// Load a shared collection into sharedCollection!
+// do all the renaming - album to content, etc
 
 // disable share on their collection - OR BETTER SOMEHOW MARK IT AS RESHARED?
 // when sharing, if name is set to my Collection, change it to something else
@@ -246,6 +247,32 @@ class UserData: ObservableObject {
         userDefaults.synchronize()
         exit(1)
     }
+    
+    func createShareUrl() -> URL {
+          
+          var shareableSlots = [ShareableSlot?]()
+
+          for slot in activeCollection.slots {
+              if let content = slot.source?.album {
+                let slot = ShareableSlot(sourceProvider: slot.source!.sourceProvider, sourceRef: content.id)
+                  shareableSlots.append(slot)
+              } else {
+                  shareableSlots.append(nil)
+              }
+          }
+
+          let shareableCollection = ShareableCollection(
+              collectionName: activeCollection.name,
+              collectionCurator: prefs.curatorName,
+              collection: shareableSlots
+          )
+
+          let encoder = JSONEncoder()
+          let shareableCollectionJson = try! encoder.encode(shareableCollection)
+          
+          return URL(string: "https://jewel.breakbeat.io/share/?c=\(shareableCollectionJson.base64EncodedString())")!
+          
+      }
     
     func loadRecommendations() {
         

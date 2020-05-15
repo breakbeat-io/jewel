@@ -12,6 +12,7 @@ struct Home: View {
     
     @EnvironmentObject var userData: UserData
     @State private var showOptions = false
+    @State private var showShareSheet = false
     
     private func slotViewForId(slotIndex: Int) -> some View {
         if userData.activeCollection.slots[slotIndex].source?.album == nil {
@@ -45,15 +46,15 @@ struct Home: View {
                     }
                     ,trailing:
                     HStack {
-//                        Button(action: {
-//                            self.showShareSheet = true
-//                        }) {
-//                            Image(systemName: "square.and.arrow.up")
-//                                .padding()
-//                        }
-//                        .sheet(isPresented: self.$showShareSheet) {
-//                            ShareSheet(activityItems: [self.userData.createShareUrl()])
-//                        }
+                        Button(action: {
+                            self.showShareSheet = true
+                        }) {
+                            Image(systemName: "square.and.arrow.up")
+                                .padding()
+                        }
+                        .sheet(isPresented: self.$showShareSheet) {
+                            ShareSheet(activityItems: [self.userData.createShareUrl()])
+                        }
                         Button(action: {
                             self.userData.switchActiveCollection()
                         }) {
