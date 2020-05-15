@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Collection: Codable {
+class Collection: Codable {
     var name = "My Collection"
     var slots = [Slot]()
 }
