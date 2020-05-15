@@ -11,7 +11,7 @@ import HMV
 
 class UserData: ObservableObject {
 
-    @Published var prefs = Preferences()
+    @Published var prefs = Preferences.default
     @Published var collection = Collection()
     
     private let numberOfSlots = 8

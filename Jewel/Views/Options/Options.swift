@@ -21,10 +21,22 @@ struct Options: View {
                 Form {
                     Section {
                         HStack(alignment: .firstTextBaseline) {
-                            Text("Collection Name")
+                            Text("My Collection Name")
                             TextField(
                                 userData.collection.name,
                                 text: $userData.collection.name,
+                                onCommit: {
+                                    self.presentationMode.wrappedValue.dismiss()
+                                }
+                            ).foregroundColor(.blue)
+                        }
+                    }
+                    Section(footer: Text("Choose a name to represent the curator when sharing the collection.")) {
+                        HStack(alignment: .firstTextBaseline) {
+                            Text("Curator Name")
+                            TextField(
+                                userData.prefs.curatorName,
+                                text: $userData.prefs.curatorName,
                                 onCommit: {
                                     self.presentationMode.wrappedValue.dismiss()
                                 }
