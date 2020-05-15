@@ -6,15 +6,19 @@
 //  Copyright © 2020 Breakbeat Limited. All rights reserved.
 //
 
+// TODO
+// * How can I not initialise activeCollection seeing as it just points to somethign else.
+
+
 import Foundation
 import HMV
 
 class UserData: ObservableObject {
 
     @Published var prefs = Preferences.default
-    @Published var activeCollection = Collection()
+    @Published var myCollection = Collection(name: "My Collection", editable: true)
+    @Published var activeCollection = Collection(name: "My Collection", editable: true) // TODO: Make this optional so I don't haev to give it a crap one just to instantly get rid of it.
     
-    private let numberOfSlots = 8
     private var userDefaults = UserDefaults.standard
     private var store: HMV?
     
@@ -25,6 +29,8 @@ class UserData: ObservableObject {
         
         migrateV1UserDefaults()
         loadUserData()
+        
+        activeCollection = myCollection
         
     }
     
@@ -55,17 +61,7 @@ class UserData: ObservableObject {
             print("Loading collection")
             let decoder = JSONDecoder()
             if let decodedCollection = try? decoder.decode(Collection.self, from: savedCollection) {
-                activeCollection = decodedCollection
-            }
-        }
-        
-        // if collection remains empty, then initialise with empty slots
-        if activeCollection.slots.count == 0 {
-            print("No saved collection found, creating empty one")
-            
-            for _ in 0..<numberOfSlots {
-                let slot = Slot()
-                activeCollection.slots.append(slot)
+                myCollection = decodedCollection
             }
         }
     }
@@ -81,7 +77,7 @@ class UserData: ObservableObject {
                 print("Saved user preferences")
             }
         case "jewelCollection":
-            if let encoded = try? encoder.encode(activeCollection) {
+            if let encoded = try? encoder.encode(myCollection) {
                 userDefaults.set(encoded, forKey: key)
                 print("Saved collection")
             }
@@ -104,16 +100,16 @@ class UserData: ObservableObject {
         
         if let v1CollectionName = userDefaults.string(forKey: "collectionName") {
             print("v1.0 Collection Name found ... migrating.")
-            activeCollection.name = v1CollectionName
+            myCollection.name = v1CollectionName
             userDefaults.removeObject(forKey: "collectionName")
             saveUserData(key: "jewelCollection")
         }
         
         if let savedCollection = userDefaults.dictionary(forKey: "savedCollection") {
             print("v1.0 Saved Collection found ... migrating.")
-            for slotIndex in 0..<numberOfSlots {
+            for slotIndex in 0..<myCollection.slots.count {
                 let slot = Slot()
-                activeCollection.slots.append(slot)
+                myCollection.slots.append(slot)
                 if let albumId = savedCollection[String(slotIndex)] {
                     addAlbumToSlot(albumId: albumId as! String, slotIndex: slotIndex)
                 }
@@ -131,7 +127,7 @@ class UserData: ObservableObject {
                 if album != nil {
                     let source = Source(sourceReference: album!.id, album: album)
                     let newSlot = Slot(source: source)
-                    self.activeCollection.slots[slotIndex] = newSlot
+                    self.myCollection.slots[slotIndex] = newSlot
                     if let baseUrl = album?.attributes?.url {
                         self.populatePlatformLinks(baseUrl: baseUrl, slotIndex: slotIndex)
                     }
@@ -156,7 +152,7 @@ class UserData: ObservableObject {
             if let data = data {
                 if let decodedResponse = try? JSONDecoder().decode(OdesliResponse.self, from: data) {
                     DispatchQueue.main.async {
-                        self.activeCollection.slots[slotIndex].playbackLinks = decodedResponse
+                        self.myCollection.slots[slotIndex].playbackLinks = decodedResponse
                         self.collectionChanged()
                     }
                     
@@ -173,12 +169,12 @@ class UserData: ObservableObject {
     
     func deleteAlbumFromSlot(slotIndex: Int) {
         let emptySlot = Slot()
-        self.activeCollection.slots[slotIndex] = emptySlot
+        self.myCollection.slots[slotIndex] = emptySlot
         self.collectionChanged()
     }
     
     func deleteAll() {
-        for slotIndex in 0..<activeCollection.slots.count {
+        for slotIndex in 0..<myCollection.slots.count {
             deleteAlbumFromSlot(slotIndex: slotIndex)
         }
     }
