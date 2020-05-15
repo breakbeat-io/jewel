@@ -57,7 +57,7 @@ struct Home: View {
                             ShareSheet(activityItems: [self.userData.createShareUrl()])
                         }
                         Button(action: {
-                            self.userData.switchActiveCollection()
+                            self.userData.userCollectionActive.toggle()
                         }) {
                             Image(systemName: "arrow.2.squarepath")
                                 .padding()

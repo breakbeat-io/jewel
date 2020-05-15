@@ -35,14 +35,26 @@ import HMV
 class UserData: ObservableObject {
 
     @Published var prefs = Preferences.default
+    
     @Published var userCollection = Collection(name: "My Collection", editable: true)
+    @Published var userCollectionActive = true {
+        didSet {
+            if userCollectionActive {
+                print("Activating User Collection")
+                activeCollection = userCollection
+            } else {
+                print("Activating Shared Collection")
+                activeCollection = sharedCollection
+            }
+        }
+    }
     @Published var sharedCollection = Collection(name: "Their Collection", editable: false)
     
-    @Published var activeCollectionRef = "user"
     @Published var activeCollection = Collection(name: "My Collection", editable: true) // TODO: Make this optional so I don't haev to give it a crap one just to instantly get rid of it.
     
     @Published var candidateCollection: Collection?
     @Published var sharedCollectionCued = false
+    
     
     private var userDefaults = UserDefaults.standard
     private var store: HMV?
@@ -58,37 +70,6 @@ class UserData: ObservableObject {
         activeCollection = userCollection
         
     }
-    
-    func switchActiveCollection() {
-        switch activeCollectionRef {
-        case "user":
-            print("Switching to Shared Collection")
-            activeCollectionRef = "shared"
-            activeCollection = sharedCollection
-        case "shared":
-            print("Switching to User Collection")
-            activeCollectionRef = "user"
-            activeCollection = userCollection
-        default:
-            return
-        }
-    }
-    
-    fileprivate func switchCollectionTo(collectionRef: String) {
-        switch collectionRef {
-        case "user":
-            print("Switching to User Collection")
-            activeCollectionRef = "user"
-            activeCollection = userCollection
-        case "shared":
-            print("Switching to Shared Collection")
-            activeCollectionRef = "shared"
-            activeCollection = sharedCollection
-        default:
-            return
-        }
-    }
-
     
     fileprivate func openStore() throws {
         
@@ -304,16 +285,14 @@ class UserData: ObservableObject {
             }
         }
         
-        self.switchCollectionTo(collectionRef: "shared")
+        self.userCollectionActive = false
         sharedCollectionCued = true
         
     }
     
     func loadCandidateCollection() {
-        
         if candidateCollection != nil {
             sharedCollection = candidateCollection!
-            self.switchCollectionTo(collectionRef: "shared")
         }
     }
     
@@ -325,12 +304,14 @@ class UserData: ObservableObject {
             if let data = data {
                 if let decodedResponse = try? JSONDecoder().decode([String].self, from: data) {
                     // we have good data – go back to the main thread
-                    for (index, albumId) in decodedResponse.enumerated() {
-                        self.addAlbumToSlot(albumId: albumId, collection: self.sharedCollection, slotIndex: index)
-                    }
+                    DispatchQueue.main.async {
+                        for (index, albumId) in decodedResponse.enumerated() {
+                            self.addAlbumToSlot(albumId: albumId, collection: self.sharedCollection, slotIndex: index)
+                        }
 
-                    // everything is good, so we can exit
-                    self.switchCollectionTo(collectionRef: "shared")
+                        // everything is good, so we can exit
+                        self.userCollectionActive = false
+                    }
                     return
                 }
             }
