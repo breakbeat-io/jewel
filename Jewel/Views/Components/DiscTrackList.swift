@@ -17,9 +17,9 @@ struct DiscTrackList: View {
     
     var body: some View {
 
-        let tracks = userData.collection.slots[slotIndex].source?.album?.relationships?.tracks.data
+        let tracks = userData.activeCollection.slots[slotIndex].source?.album?.relationships?.tracks.data
         let discTracks = tracks?.filter { $0.attributes?.discNumber == discNumber }
-        let albumArtist = userData.collection.slots[slotIndex].source?.album?.attributes?.artistName
+        let albumArtist = userData.activeCollection.slots[slotIndex].source?.album?.attributes?.artistName
         
         let discTrackList = VStack(alignment: .leading) {
             if withTitle {

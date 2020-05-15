@@ -20,7 +20,7 @@ struct SlotDetail: View {
     @State private var showDeleteWarning = false
     
     private func slotDetail() -> some View {
-        if userData.collection.slots[slotIndex].source?.album != nil {
+        if userData.activeCollection.slots[slotIndex].source?.album != nil {
             return AnyView(
                 ScrollView {
                     if horizontalSizeClass == .compact {
@@ -42,7 +42,7 @@ struct SlotDetail: View {
         
         slotDetail()
         .navigationBarItems(trailing:
-            IfLet(userData.collection.slots[slotIndex].source?.album) { album in
+            IfLet(userData.activeCollection.slots[slotIndex].source?.album) { album in
                 HStack {
                     Button(action: {
                         self.showSearch = true

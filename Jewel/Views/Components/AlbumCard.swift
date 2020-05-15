@@ -20,7 +20,7 @@ struct AlbumCard: View {
         Rectangle()
         .foregroundColor(.clear)
         .background(
-            IfLet(userData.collection.slots[slotIndex].source?.album?.attributes?.artwork) { artwork in
+            IfLet(userData.activeCollection.slots[slotIndex].source?.album?.attributes?.artwork) { artwork in
                 KFImage(artwork.url(forWidth: 1000))
                 .placeholder {
                     RoundedRectangle(cornerRadius: 4)
@@ -33,7 +33,7 @@ struct AlbumCard: View {
         .cornerRadius(4)
         .overlay(
             VStack(alignment: .leading) {
-                IfLet(userData.collection.slots[slotIndex].source?.album?.attributes) { attributes in
+                IfLet(userData.activeCollection.slots[slotIndex].source?.album?.attributes) { attributes in
                     Text(attributes.name)
                         .font(.callout)
                         .fontWeight(.bold)
