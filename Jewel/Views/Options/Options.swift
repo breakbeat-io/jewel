@@ -23,8 +23,8 @@ struct Options: View {
                         HStack(alignment: .firstTextBaseline) {
                             Text("My Collection Name")
                             TextField(
-                                userData.activeCollection.name,
-                                text: $userData.activeCollection.name,
+                                userData.userCollection.name,
+                                text: $userData.userCollection.name,
                                 onCommit: {
                                     self.presentationMode.wrappedValue.dismiss()
                                 }

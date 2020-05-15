@@ -8,7 +8,8 @@
 
 // TODO
 // * How can I not initialise activeCollection seeing as it just points to somethign else.
-// * lodUserData should be able to be reduce to one loop instead of three identical calls
+// * loadUserData should be able to be reduce to one loop instead of three identical calls
+// * when leaving options I am saving everything - seems heavy handed - how can I be smarter and only save what changed?!?
 
 
 import Foundation
@@ -121,14 +122,9 @@ class UserData: ObservableObject {
     
     func collectionChanged() {
         self.objectWillChange.send()
-        switch activeCollectionRef {
-            case "user":
-                self.saveUserData(key: "jewelCollection")
-            case "shared":
-                self.saveUserData(key: "jewelSharedCollection")
-            default:
-                return
-        }
+        // just save everything at the moment even if not active - the whole repetition of stuff needs to be changed anyway!
+        self.saveUserData(key: "jewelCollection")
+        self.saveUserData(key: "jewelSharedCollection")
     }
     
     func preferencesChanged() {

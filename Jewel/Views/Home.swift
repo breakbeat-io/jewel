@@ -36,12 +36,30 @@ struct Home: View {
                     UITableView.appearance().separatorStyle = .none
                 }
                 .navigationBarTitle(self.userData.activeCollection.name)
-                .navigationBarItems(trailing:
+                .navigationBarItems(leading:
                     Button(action: {
                         self.showOptions = true
                     }) {
                         Image(systemName: "slider.horizontal.3")
                             .padding()
+                    }
+                    ,trailing:
+                    HStack {
+//                        Button(action: {
+//                            self.showShareSheet = true
+//                        }) {
+//                            Image(systemName: "square.and.arrow.up")
+//                                .padding()
+//                        }
+//                        .sheet(isPresented: self.$showShareSheet) {
+//                            ShareSheet(activityItems: [self.userData.createShareUrl()])
+//                        }
+                        Button(action: {
+                            self.userData.switchActiveCollection()
+                        }) {
+                            Image(systemName: "arrow.2.squarepath")
+                                .padding()
+                        }
                     }
                 )
             }
