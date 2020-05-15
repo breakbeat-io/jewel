@@ -12,6 +12,25 @@
 // * when leaving options I am saving everything - seems heavy handed - how can I be smarter and only save what changed?!?
 
 
+// re-enable platform links
+// disable share on their collection - OR BETTER SOMEHOW MARK IT AS RESHARED?
+// when sharing, if name is set to my Collection, change it to something else
+// hide/disable the their collection tab if it is empty - or show some kind of overlay?
+// clear the shared collection url once loaded
+// when recieved a URL, switch to their collection then apply it
+// check button position on navbar
+// ability to change colletion name by tapping title instead of going to options
+// not nice that when changing collectionname need to then also update the activeCollection - be nice if it just updated.  Maybe on the didSet could refresh the active collection for changes that happen in the background?  how will platformLinks work?  (presumably if they are applied to teh activeCollection then they proliforate through ....
+// when recieving the shared collection, can i decode and create it into a collection so it can be queired then the alerts can be much nicer?
+//
+// DONE their collection restrictions
+// DONE if their collcetion is active, then disable things!
+// DONE disable '+' on an empty slot
+// DONE disable the 'swap' and 'eject' buttons
+// DONE in options, make sure Collcetion Name is only bound to My Collcetion
+// NONEED - check size on iphone 8 - withotu segmented control, no changes have been made
+// WONTDO - why doesn't the segmented control move off the screen? - moved it to a 'switch' button instead
+
 import Foundation
 import HMV
 
@@ -19,7 +38,7 @@ class UserData: ObservableObject {
 
     @Published var prefs = Preferences.default
     @Published var userCollection = Collection(name: "My Collection", editable: true)
-    @Published var sharedCollection = Collection(name: "Their Collection", editable: true)
+    @Published var sharedCollection = Collection(name: "Their Collection", editable: false)
     
     @Published var activeCollectionRef = "user"
     @Published var activeCollection = Collection(name: "My Collection", editable: true) // TODO: Make this optional so I don't haev to give it a crap one just to instantly get rid of it.

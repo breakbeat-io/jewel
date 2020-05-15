@@ -16,25 +16,31 @@ struct EmptySlot: View {
     @State private var showSearch = false
     
     var body: some View {
-        
-        Button(action: {
-            self.showSearch = true
-        }) {
-            RoundedRectangle(cornerRadius: 4)
-            .stroke(
-                Color.gray,
-                style: StrokeStyle(lineWidth: 2, dash: [4, 6])
-            )
-            .overlay(
-                Image(systemName: "plus")
-                    .font(.headline)
-                    .foregroundColor(Color.gray)
-            )
-        }
-        .sheet(isPresented: $showSearch) {
-            Search(slotIndex: self.slotIndex)
-                .environmentObject(self.userData)
-                .environmentObject(self.searchProvider)
+        HStack {
+            if userData.activeCollection.editable {
+                Button(action: {
+                    self.showSearch = true
+                }) {
+                    RoundedRectangle(cornerRadius: 4)
+                    .stroke(
+                        Color.gray,
+                        style: StrokeStyle(lineWidth: 2, dash: [4, 6])
+                    )
+                    .overlay(
+                        Image(systemName: "plus")
+                            .font(.headline)
+                            .foregroundColor(Color.gray)
+                    )
+                }
+                .sheet(isPresented: $showSearch) {
+                    Search(slotIndex: self.slotIndex)
+                        .environmentObject(self.userData)
+                        .environmentObject(self.searchProvider)
+                }
+            } else {
+                RoundedRectangle(cornerRadius: 4)
+                    .fill(Color.gray)
+            }
         }
     }
 }
