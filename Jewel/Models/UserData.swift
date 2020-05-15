@@ -8,6 +8,7 @@
 
 // TODO
 // * How can I not initialise activeCollection seeing as it just points to somethign else.
+// * lodUserData should be able to be reduce to one loop instead of three identical calls
 
 
 import Foundation
@@ -16,7 +17,10 @@ import HMV
 class UserData: ObservableObject {
 
     @Published var prefs = Preferences.default
-    @Published var myCollection = Collection(name: "My Collection", editable: true)
+    @Published var userCollection = Collection(name: "My Collection", editable: true)
+    @Published var sharedCollection = Collection(name: "Their Collection", editable: true)
+    
+    @Published var activeCollectionRef = "user"
     @Published var activeCollection = Collection(name: "My Collection", editable: true) // TODO: Make this optional so I don't haev to give it a crap one just to instantly get rid of it.
     
     private var userDefaults = UserDefaults.standard
@@ -30,9 +34,25 @@ class UserData: ObservableObject {
         migrateV1UserDefaults()
         loadUserData()
         
-        activeCollection = myCollection
+        activeCollection = userCollection
         
     }
+    
+    func switchActiveCollection() {
+        switch activeCollectionRef {
+        case "user":
+            print("Switching to Shared Collection")
+            activeCollectionRef = "shared"
+            activeCollection = sharedCollection
+        case "shared":
+            print("Switching to User Collection")
+            activeCollectionRef = "user"
+            activeCollection = userCollection
+        default:
+            return
+        }
+    }
+
     
     fileprivate func openStore() throws {
         
@@ -47,10 +67,11 @@ class UserData: ObservableObject {
     
     fileprivate func loadUserData() {
         
+        let decoder = JSONDecoder()
+        
         // load saved user preferences
         if let savedPreferences = userDefaults.object(forKey: "jewelPreferences") as? Data {
             print("Loading user preferences")
-            let decoder = JSONDecoder()
             if let decodedPreferences = try? decoder.decode(Preferences.self, from: savedPreferences) {
                 prefs = decodedPreferences
             }
@@ -59,9 +80,16 @@ class UserData: ObservableObject {
         // load saved user collection
         if let savedCollection = userDefaults.object(forKey: "jewelCollection") as? Data {
             print("Loading collection")
-            let decoder = JSONDecoder()
             if let decodedCollection = try? decoder.decode(Collection.self, from: savedCollection) {
-                myCollection = decodedCollection
+                userCollection = decodedCollection
+            }
+        }
+        
+        // load saved user collection
+        if let savedSharedCollection = userDefaults.object(forKey: "jewelSharedCollection") as? Data {
+            print("Loading shared collection")
+            if let decodedCollection = try? decoder.decode(Collection.self, from: savedSharedCollection) {
+                sharedCollection = decodedCollection
             }
         }
     }
@@ -77,9 +105,14 @@ class UserData: ObservableObject {
                 print("Saved user preferences")
             }
         case "jewelCollection":
-            if let encoded = try? encoder.encode(myCollection) {
+            if let encoded = try? encoder.encode(userCollection) {
                 userDefaults.set(encoded, forKey: key)
                 print("Saved collection")
+            }
+        case "jewelSharedCollection":
+            if let encoded = try? encoder.encode(sharedCollection) {
+                userDefaults.set(encoded, forKey: key)
+                print("Saved shared collection")
             }
         default:
             print("Saving User Data: key unknown, nothing saved.")
@@ -88,7 +121,14 @@ class UserData: ObservableObject {
     
     func collectionChanged() {
         self.objectWillChange.send()
-        self.saveUserData(key: "jewelCollection")
+        switch activeCollectionRef {
+            case "user":
+                self.saveUserData(key: "jewelCollection")
+            case "shared":
+                self.saveUserData(key: "jewelSharedCollection")
+            default:
+                return
+        }
     }
     
     func preferencesChanged() {
@@ -100,16 +140,16 @@ class UserData: ObservableObject {
         
         if let v1CollectionName = userDefaults.string(forKey: "collectionName") {
             print("v1.0 Collection Name found ... migrating.")
-            myCollection.name = v1CollectionName
+            userCollection.name = v1CollectionName
             userDefaults.removeObject(forKey: "collectionName")
             saveUserData(key: "jewelCollection")
         }
         
         if let savedCollection = userDefaults.dictionary(forKey: "savedCollection") {
             print("v1.0 Saved Collection found ... migrating.")
-            for slotIndex in 0..<myCollection.slots.count {
+            for slotIndex in 0..<userCollection.slots.count {
                 let slot = Slot()
-                myCollection.slots.append(slot)
+                userCollection.slots.append(slot)
                 if let albumId = savedCollection[String(slotIndex)] {
                     addAlbumToSlot(albumId: albumId as! String, slotIndex: slotIndex)
                 }
@@ -127,7 +167,7 @@ class UserData: ObservableObject {
                 if album != nil {
                     let source = Source(sourceReference: album!.id, album: album)
                     let newSlot = Slot(source: source)
-                    self.myCollection.slots[slotIndex] = newSlot
+                    self.activeCollection.slots[slotIndex] = newSlot
                     if let baseUrl = album?.attributes?.url {
                         self.populatePlatformLinks(baseUrl: baseUrl, slotIndex: slotIndex)
                     }
@@ -152,7 +192,7 @@ class UserData: ObservableObject {
             if let data = data {
                 if let decodedResponse = try? JSONDecoder().decode(OdesliResponse.self, from: data) {
                     DispatchQueue.main.async {
-                        self.myCollection.slots[slotIndex].playbackLinks = decodedResponse
+                        self.activeCollection.slots[slotIndex].playbackLinks = decodedResponse
                         self.collectionChanged()
                     }
                     
@@ -169,12 +209,12 @@ class UserData: ObservableObject {
     
     func deleteAlbumFromSlot(slotIndex: Int) {
         let emptySlot = Slot()
-        self.myCollection.slots[slotIndex] = emptySlot
+        self.activeCollection.slots[slotIndex] = emptySlot
         self.collectionChanged()
     }
     
     func deleteAll() {
-        for slotIndex in 0..<myCollection.slots.count {
+        for slotIndex in 0..<activeCollection.slots.count {
             deleteAlbumFromSlot(slotIndex: slotIndex)
         }
     }
