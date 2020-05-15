@@ -12,6 +12,10 @@
 // * loadUserData should be able to be reduce to one loop instead of three identical calls
 // * when leaving options I am saving everything - seems heavy handed - how can I be smarter and only save what changed?!?
 // * should i do additonal checks on an non-editable collection?  Currently I just hide the buttons, but the func itself isn't disabled
+// * split out the platofrm links so it can be executed seperately from loading an album - e.g. when curing a candidate collection, no need to waste time getting htem at that point
+// * need an eject all for the shared album
+
+
 // do all the renaming - album to content, etc
 // get rid of loadRecommendations - merge with loadRecievedCollection
 // disable share on their collection - OR BETTER SOMEHOW MARK IT AS RESHARED?
@@ -38,6 +42,7 @@ class UserData: ObservableObject {
     @Published var activeCollection = Collection(name: "My Collection", editable: true) // TODO: Make this optional so I don't haev to give it a crap one just to instantly get rid of it.
     
     @Published var candidateCollection: Collection?
+    @Published var sharedCollectionCued = false
     
     private var userDefaults = UserDefaults.standard
     private var store: HMV?
@@ -192,9 +197,9 @@ class UserData: ObservableObject {
                     let source = Source(sourceReference: album!.id, album: album)
                     let newSlot = Slot(source: source)
                     collection.slots[slotIndex] = newSlot
-                    if let baseUrl = album?.attributes?.url {
-                        self.populatePlatformLinks(baseUrl: baseUrl, slotIndex: slotIndex)
-                    }
+//                    if let baseUrl = album?.attributes?.url {
+//                        self.populatePlatformLinks(baseUrl: baseUrl, slotIndex: slotIndex)
+//                    }
                     self.collectionChanged()
                 }
             }
@@ -282,23 +287,32 @@ class UserData: ObservableObject {
             if let recievedCollectionEncoded = Data(base64Encoded: (params!.first(where: { $0.name == "c" })?.value!)!) {
                 let decoder = JSONDecoder()
                 if let recievedCollection = try? decoder.decode(ShareableCollection.self, from: recievedCollectionEncoded) {
-                    loadRecievedCollection(recievedCollection: recievedCollection)
+                    cueCandidateCollection(recievedCollection: recievedCollection)
                 }
             }
         }
     }
     
-    func loadRecievedCollection(recievedCollection: ShareableCollection) {
+    func cueCandidateCollection(recievedCollection: ShareableCollection) {
         
-        self.switchCollectionTo(collectionRef: "shared")
-        
-        sharedCollection.name = recievedCollection.collectionName
-        sharedCollection.curator = recievedCollection.collectionCurator
+        candidateCollection = Collection(name: recievedCollection.collectionName, editable: false)
+        candidateCollection!.curator = recievedCollection.collectionCurator
 
         for (index, slot) in recievedCollection.collection.enumerated() {
             if slot?.sourceProvider == SourceProvider.appleMusicAlbum {
-                addAlbumToSlot(albumId: slot!.sourceRef, collection: sharedCollection, slotIndex: index)
+                addAlbumToSlot(albumId: slot!.sourceRef, collection: candidateCollection!, slotIndex: index)
             }
+        }
+        
+        sharedCollectionCued = true
+        
+    }
+    
+    func loadCandidateCollection() {
+        
+        if candidateCollection != nil {
+            sharedCollection = candidateCollection!
+            self.switchCollectionTo(collectionRef: "shared")
         }
     }
     
