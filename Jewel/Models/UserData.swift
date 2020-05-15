@@ -10,9 +10,9 @@
 // * How can I not initialise activeCollection seeing as it just points to somethign else.
 // * loadUserData should be able to be reduce to one loop instead of three identical calls
 // * when leaving options I am saving everything - seems heavy handed - how can I be smarter and only save what changed?!?
+// * should i do additonal checks on an non-editable collection?  Currently I just hide the buttons, but the func itself isn't disabled
+// Load a shared collection into sharedCollection!
 
-
-// re-enable platform links
 // disable share on their collection - OR BETTER SOMEHOW MARK IT AS RESHARED?
 // when sharing, if name is set to my Collection, change it to something else
 // hide/disable the their collection tab if it is empty - or show some kind of overlay?
@@ -22,14 +22,7 @@
 // ability to change colletion name by tapping title instead of going to options
 // not nice that when changing collectionname need to then also update the activeCollection - be nice if it just updated.  Maybe on the didSet could refresh the active collection for changes that happen in the background?  how will platformLinks work?  (presumably if they are applied to teh activeCollection then they proliforate through ....
 // when recieving the shared collection, can i decode and create it into a collection so it can be queired then the alerts can be much nicer?
-//
-// DONE their collection restrictions
-// DONE if their collcetion is active, then disable things!
-// DONE disable '+' on an empty slot
-// DONE disable the 'swap' and 'eject' buttons
-// DONE in options, make sure Collcetion Name is only bound to My Collcetion
-// NONEED - check size on iphone 8 - withotu segmented control, no changes have been made
-// WONTDO - why doesn't the segmented control move off the screen? - moved it to a 'switch' button instead
+
 
 import Foundation
 import HMV
@@ -68,6 +61,21 @@ class UserData: ObservableObject {
             print("Switching to User Collection")
             activeCollectionRef = "user"
             activeCollection = userCollection
+        default:
+            return
+        }
+    }
+    
+    fileprivate func switchCollectionTo(collectionRef: String) {
+        switch collectionRef {
+        case "user":
+            print("Switching to User Collection")
+            activeCollectionRef = "user"
+            activeCollection = userCollection
+        case "shared":
+            print("Switching to Shared Collection")
+            activeCollectionRef = "shared"
+            activeCollection = sharedCollection
         default:
             return
         }
@@ -163,10 +171,8 @@ class UserData: ObservableObject {
         if let savedCollection = userDefaults.dictionary(forKey: "savedCollection") {
             print("v1.0 Saved Collection found ... migrating.")
             for slotIndex in 0..<userCollection.slots.count {
-                let slot = Slot()
-                userCollection.slots.append(slot)
                 if let albumId = savedCollection[String(slotIndex)] {
-                    addAlbumToSlot(albumId: albumId as! String, slotIndex: slotIndex)
+                    addAlbumToSlot(albumId: albumId as! String, collection: userCollection, slotIndex: slotIndex)
                 }
             }
             userDefaults.removeObject(forKey: "savedCollection")
@@ -175,14 +181,14 @@ class UserData: ObservableObject {
 
     }
     
-    func addAlbumToSlot(albumId: String, slotIndex: Int) {
+    func addAlbumToSlot(albumId: String, collection: Collection, slotIndex: Int) {
         store!.album(id: albumId, completion: {
             (album: Album?, error: Error?) -> Void in
             DispatchQueue.main.async {
                 if album != nil {
                     let source = Source(sourceReference: album!.id, album: album)
                     let newSlot = Slot(source: source)
-                    self.activeCollection.slots[slotIndex] = newSlot
+                    collection.slots[slotIndex] = newSlot
                     if let baseUrl = album?.attributes?.url {
                         self.populatePlatformLinks(baseUrl: baseUrl, slotIndex: slotIndex)
                     }
@@ -242,6 +248,7 @@ class UserData: ObservableObject {
     }
     
     func loadRecommendations() {
+        
         let request = URLRequest(url: URL(string: "https://breakbeat.io/jewel/recommendations.json")!)
         
         URLSession.shared.dataTask(with: request) { data, response, error in
@@ -249,10 +256,11 @@ class UserData: ObservableObject {
                 if let decodedResponse = try? JSONDecoder().decode([String].self, from: data) {
                     // we have good data – go back to the main thread
                     for (index, albumId) in decodedResponse.enumerated() {
-                        self.addAlbumToSlot(albumId: albumId, slotIndex: index)
+                        self.addAlbumToSlot(albumId: albumId, collection: self.sharedCollection, slotIndex: index)
                     }
 
                     // everything is good, so we can exit
+                    self.switchCollectionTo(collectionRef: "shared")
                     return
                 }
             }

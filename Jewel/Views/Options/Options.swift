@@ -58,7 +58,7 @@ struct Options: View {
                         }
                         .alert(isPresented: $showLoadRecommendationsAlert) {
                             Alert(title: Text("Are you sure you want to load our recommendations?"),
-                                  message: Text("This will remove your current collection."),
+                                  message: Text("This will replace your current shared collection."),
                                   primaryButton: .cancel(Text("Cancel")),
                                   secondaryButton: .default(Text("Load").bold()) {
                                     self.userData.loadRecommendations()
