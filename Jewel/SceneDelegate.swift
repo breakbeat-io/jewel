@@ -32,6 +32,22 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             self.window = window
             window.makeKeyAndVisible()
         }
+        
+        //  Handle the incoming Universal Link from cold
+        if let userActivity = connectionOptions.userActivities.first {
+            self.scene(scene, continue: userActivity)
+        }
+    }
+    
+    // Handle the incoming Universal Link from warm
+    func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {
+        guard userActivity.activityType == NSUserActivityTypeBrowsingWeb,
+            let urlToOpen = userActivity.webpageURL else {
+                return
+                
+        }
+        userData.processSharedCollection(sharedCollectionUrl: urlToOpen)
+        
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

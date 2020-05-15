@@ -274,6 +274,10 @@ class UserData: ObservableObject {
           
       }
     
+    func processSharedCollection(sharedCollectionUrl: URL) {
+        print(sharedCollectionUrl.absoluteString)
+    }
+    
     func loadRecommendations() {
         
         let request = URLRequest(url: URL(string: "https://breakbeat.io/jewel/recommendations.json")!)
