@@ -130,6 +130,7 @@ class UserData: ObservableObject {
                     if let baseUrl = album?.attributes?.url {
                         self.populatePlatformLinks(baseUrl: baseUrl, slotIndex: slotIndex)
                     }
+                    self.objectWillChange.send()
                 }
             }
         })
@@ -167,6 +168,7 @@ class UserData: ObservableObject {
     func deleteAlbumFromSlot(slotIndex: Int) {
         let emptySlot = Slot()
         self.collection.slots[slotIndex] = emptySlot
+        self.objectWillChange.send()
     }
     
     func deleteAll() {
