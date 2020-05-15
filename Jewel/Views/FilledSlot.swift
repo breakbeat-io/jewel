@@ -24,7 +24,9 @@ struct FilledSlot: View {
                 self.tapped = 1
             }
             .onLongPressGesture() {
-                self.showSearch = true
+                if self.userData.activeCollection.editable {
+                    self.showSearch = true
+                }
             }
             NavigationLink(
                 destination: SlotDetail(slotIndex: self.slotIndex),
