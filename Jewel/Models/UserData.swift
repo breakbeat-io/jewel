@@ -14,7 +14,7 @@
 // * should i do additonal checks on an non-editable collection?  Currently I just hide the buttons, but the func itself isn't disabled
 // * split out the platofrm links so it can be executed seperately from loading an album - e.g. when curing a candidate collection, no need to waste time getting htem at that point
 // * need an eject all for the shared album
-
+// * is it possible to switch to the shared collection view if a universal link is clicked so that user can see waht the might be replaceing?
 
 // do all the renaming - album to content, etc
 // get rid of loadRecommendations - merge with loadRecievedCollection
@@ -304,6 +304,7 @@ class UserData: ObservableObject {
             }
         }
         
+        self.switchCollectionTo(collectionRef: "shared")
         sharedCollectionCued = true
         
     }
