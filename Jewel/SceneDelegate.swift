@@ -46,7 +46,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 return
                 
         }
-        userData.processSharedCollection(sharedCollectionUrl: urlToOpen)
+        userData.processRecievedCollection(recievedCollectionUrl: urlToOpen)
         
     }
 

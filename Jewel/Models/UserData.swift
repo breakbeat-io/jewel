@@ -8,12 +8,12 @@
 
 // TODO
 // * How can I not initialise activeCollection seeing as it just points to somethign else? make it optional
-
+// switch the activeCollectionRef to a Bool rather than a string.
 // * loadUserData should be able to be reduce to one loop instead of three identical calls
 // * when leaving options I am saving everything - seems heavy handed - how can I be smarter and only save what changed?!?
 // * should i do additonal checks on an non-editable collection?  Currently I just hide the buttons, but the func itself isn't disabled
 // do all the renaming - album to content, etc
-
+// get rid of loadRecommendations - merge with loadRecievedCollection
 // disable share on their collection - OR BETTER SOMEHOW MARK IT AS RESHARED?
 // when sharing, if name is set to my Collection, change it to something else
 // hide/disable the their collection tab if it is empty - or show some kind of overlay?
@@ -36,6 +36,8 @@ class UserData: ObservableObject {
     
     @Published var activeCollectionRef = "user"
     @Published var activeCollection = Collection(name: "My Collection", editable: true) // TODO: Make this optional so I don't haev to give it a crap one just to instantly get rid of it.
+    
+    @Published var candidateCollection: Collection?
     
     private var userDefaults = UserDefaults.standard
     private var store: HMV?
@@ -274,8 +276,30 @@ class UserData: ObservableObject {
           
       }
     
-    func processSharedCollection(sharedCollectionUrl: URL) {
-        print(sharedCollectionUrl.absoluteString)
+    func processRecievedCollection(recievedCollectionUrl: URL) {
+        if let urlComponents = URLComponents(url: recievedCollectionUrl, resolvingAgainstBaseURL: true) {
+            let params = urlComponents.queryItems
+            if let recievedCollectionEncoded = Data(base64Encoded: (params!.first(where: { $0.name == "c" })?.value!)!) {
+                let decoder = JSONDecoder()
+                if let recievedCollection = try? decoder.decode(ShareableCollection.self, from: recievedCollectionEncoded) {
+                    loadRecievedCollection(recievedCollection: recievedCollection)
+                }
+            }
+        }
+    }
+    
+    func loadRecievedCollection(recievedCollection: ShareableCollection) {
+        
+        self.switchCollectionTo(collectionRef: "shared")
+        
+        sharedCollection.name = recievedCollection.collectionName
+        sharedCollection.curator = recievedCollection.collectionCurator
+
+        for (index, slot) in recievedCollection.collection.enumerated() {
+            if slot?.sourceProvider == SourceProvider.appleMusicAlbum {
+                addAlbumToSlot(albumId: slot!.sourceRef, collection: sharedCollection, slotIndex: index)
+            }
+        }
     }
     
     func loadRecommendations() {
