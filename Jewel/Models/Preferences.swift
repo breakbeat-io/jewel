@@ -10,10 +10,7 @@ import Foundation
 
 struct Preferences: Codable {
     
-    var preferredMusicPlatform: Int
-    var curatorName: String
+    var preferredMusicPlatform = 0
     var debugMode = false
-    
-    static let `default` = Self(preferredMusicPlatform: 0, curatorName: "A Music Lover")
     
 }

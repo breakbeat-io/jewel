@@ -8,18 +8,12 @@
 
 // TODO
 // * How can I not initialise activeCollection seeing as it just points to somethign else? make it optional
-// switch the activeCollectionRef to a Bool rather than a string.
 // * loadUserData should be able to be reduce to one loop instead of three identical calls
 // * when leaving options I am saving everything - seems heavy handed - how can I be smarter and only save what changed?!?
 // * should i do additonal checks on an non-editable collection?  Currently I just hide the buttons, but the func itself isn't disabled
 // * split out the platofrm links so it can be executed seperately from loading an album - e.g. when curing a candidate collection, no need to waste time getting htem at that point
-// * need an eject all for the shared album
-// * is it possible to switch to the shared collection view if a universal link is clicked so that user can see waht the might be replaceing?
-// * remove the candidate collection when no longer needed
-// * tidy it all up - including the names!
-// * Don't share an empty album! duh
 
-// do all the renaming - album to content, etc
+// * tidy it all up - including the names!
 
 // disable share on their collection - OR BETTER SOMEHOW MARK IT AS RESHARED?
 
@@ -32,7 +26,7 @@ import HMV
 
 class UserData: ObservableObject {
     
-    @Published var prefs = Preferences.default
+    @Published var prefs = Preferences()
     
     @Published var userCollection = Collection(name: "My Collection", editable: true)
     @Published var userCollectionActive = true {
@@ -255,8 +249,8 @@ class UserData: ObservableObject {
         }
         
         let shareableCollection = ShareableCollection(
-            collectionName: activeCollection.name == "My Collection" ? "\(prefs.curatorName)'s Collection" : activeCollection.name,
-            collectionCurator: prefs.curatorName,
+            collectionName: activeCollection.name == "My Collection" ? "\(activeCollection.curator)'s Collection" : activeCollection.name,
+            collectionCurator: activeCollection.curator,
             collection: shareableSlots
         )
         

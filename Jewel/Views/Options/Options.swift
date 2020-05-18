@@ -20,32 +20,30 @@ struct Options: View {
         NavigationView {
             VStack {
                 Form {
-                    Section {
+                    Section(footer: Text("Choose a name for your collection, and to represent the curator when sharing the collection.")) {
                         HStack(alignment: .firstTextBaseline) {
-                            Text("My Collection Name")
+                            Text("Collection Name")
                             TextField(
                                 userData.userCollection.name,
                                 text: $userData.userCollection.name,
                                 onCommit: {
                                     self.presentationMode.wrappedValue.dismiss()
                             }
-                            ).foregroundColor(.blue)
+                            ).foregroundColor(.accentColor)
                         }
-                    }
-                    Section(footer: Text("Choose a name to represent the curator when sharing the collection.")) {
                         HStack(alignment: .firstTextBaseline) {
-                            Text("Curator Name")
+                            Text("Curator")
                             TextField(
-                                userData.prefs.curatorName,
-                                text: $userData.prefs.curatorName,
+                                userData.userCollection.curator,
+                                text: $userData.userCollection.curator,
                                 onCommit: {
                                     self.presentationMode.wrappedValue.dismiss()
                             }
-                            ).foregroundColor(.blue)
+                            ).foregroundColor(.accentColor)
                         }
                     }
                     Section(footer: Text("If available, use this service for playback, otherwise use Apple Music.")) {
-                        Picker(selection: $userData.prefs.preferredMusicPlatform, label: Text("Preferred Playback Service")) {
+                        Picker(selection: $userData.prefs.preferredMusicPlatform, label: Text("Playback Service")) {
                             ForEach(0 ..< OdesliPlatform.allCases.count, id: \.self) {
                                 Text(OdesliPlatform.allCases[$0].friendlyName)
                             }
@@ -67,35 +65,37 @@ struct Options: View {
                                 })
                         }
                     }
-                    Button(action: {
-                        self.showEjectMyCollectionWarning = true
-                    }) {
-                        Text("Eject My Collection")
-                    }
-                    .foregroundColor(.red)
-                    .alert(isPresented: $showEjectMyCollectionWarning) {
-                        Alert(title: Text("Are you sure you want to eject all the albums in your collection?"),
-                              message: Text("You cannot undo this operation."),
-                              primaryButton: .cancel(Text("Cancel")),
-                              secondaryButton: .destructive(Text("Eject All")) {
-                                self.userData.ejectUserCollection()
-                                self.presentationMode.wrappedValue.dismiss()
-                            })
-                    }
-                    Button(action: {
-                        self.showEjectSharedCollectionWarning = true
-                    }) {
-                        Text("Eject Shared Collection")
-                    }
-                    .foregroundColor(.red)
-                    .alert(isPresented: $showEjectSharedCollectionWarning) {
-                        Alert(title: Text("Are you sure you want to eject your current shared collection?"),
-                              message: Text("You cannot undo this operation."),
-                              primaryButton: .cancel(Text("Cancel")),
-                              secondaryButton: .destructive(Text("Eject Shared")) {
-                                self.userData.ejectSharedCollection()
-                                self.presentationMode.wrappedValue.dismiss()
-                            })
+                    Section(header: Text("SYSTEM")) {
+                        Button(action: {
+                            self.showEjectMyCollectionWarning = true
+                        }) {
+                            Text("Eject My Collection")
+                        }
+                        .foregroundColor(.red)
+                        .alert(isPresented: $showEjectMyCollectionWarning) {
+                            Alert(title: Text("Are you sure you want to eject all the albums in your collection?"),
+                                  message: Text("You cannot undo this operation."),
+                                  primaryButton: .cancel(Text("Cancel")),
+                                  secondaryButton: .destructive(Text("Eject All")) {
+                                    self.userData.ejectUserCollection()
+                                    self.presentationMode.wrappedValue.dismiss()
+                                })
+                        }
+                        Button(action: {
+                            self.showEjectSharedCollectionWarning = true
+                        }) {
+                            Text("Eject Shared Collection")
+                        }
+                        .foregroundColor(.red)
+                        .alert(isPresented: $showEjectSharedCollectionWarning) {
+                            Alert(title: Text("Are you sure you want to eject your current shared collection?"),
+                                  message: Text("You cannot undo this operation."),
+                                  primaryButton: .cancel(Text("Cancel")),
+                                  secondaryButton: .destructive(Text("Eject Shared")) {
+                                    self.userData.ejectSharedCollection()
+                                    self.presentationMode.wrappedValue.dismiss()
+                                })
+                        }
                     }
                     if userData.prefs.debugMode {
                         Section(header: Text("Debug")) {
