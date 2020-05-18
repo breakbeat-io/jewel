@@ -30,7 +30,7 @@ struct AdditionalPlaybackLinks: View {
                                     Group {
                                         if platform.iconRef != nil {
                                             Text(verbatim: platform.iconRef!)
-                                            .font(.custom("FontAwesome5Brands-Regular", size: 16))
+                                                .font(.custom("FontAwesome5Brands-Regular", size: 16))
                                         } else {
                                             Image(systemName: "arrowshape.turn.up.right")
                                         }
@@ -38,7 +38,7 @@ struct AdditionalPlaybackLinks: View {
                                     .frame(width: 40, alignment: .center)
                                     .foregroundColor(.secondary)
                                     Text(platform.friendlyName)
-                                    .foregroundColor(.primary)
+                                        .foregroundColor(.primary)
                                 }
                             }
                         }
@@ -47,8 +47,8 @@ struct AdditionalPlaybackLinks: View {
                         UIApplication.shared.open(URL(string: "https://odesli.co")!)
                     }) {
                         Text("Platform links powered by Songlink")
-                        .foregroundColor(.secondary)
-                        .font(.footnote)
+                            .foregroundColor(.secondary)
+                            .font(.footnote)
                     }.padding(.vertical)
                 }
                 .navigationBarTitle("Play in ...", displayMode: .inline)

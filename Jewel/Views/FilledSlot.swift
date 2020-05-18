@@ -20,8 +20,8 @@ struct FilledSlot: View {
         
         ZStack {
             AlbumCard(slotIndex: self.slotIndex)
-            .onTapGesture {
-                self.tapped = 1
+                .onTapGesture {
+                    self.tapped = 1
             }
             .onLongPressGesture() {
                 if self.userData.activeCollection.editable {

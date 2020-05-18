@@ -21,11 +21,11 @@ struct AlbumCover: View {
                     .placeholder {
                         RoundedRectangle(cornerRadius: 4)
                             .fill(Color.gray)
-                    }
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .cornerRadius(4)
-                    .shadow(radius: 4)
+                }
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .cornerRadius(4)
+                .shadow(radius: 4)
                 Group {
                     Text(attributes.name)
                         .fontWeight(.bold)

@@ -27,7 +27,7 @@ struct PrimaryPlaybackLink: View {
             playbackLink = userData.activeCollection.slots[slotIndex].source?.album?.attributes?.url
             playbackName = OdesliPlatform.appleMusic.friendlyName
         }
-            
+        
         let playbackLinkView =
             IfLet(playbackLink) { url in
                 Button(action: {
@@ -47,7 +47,7 @@ struct PrimaryPlaybackLink: View {
                             .stroke(Color.primary, lineWidth: 2)
                     )
                 }
-            }
+        }
         
         return playbackLinkView
     }
@@ -60,5 +60,5 @@ struct PlaybackLink_Previews: PreviewProvider {
     static var previews: some View {
         PrimaryPlaybackLink(slotIndex: 0).environmentObject(userData)
     }
-
+    
 }

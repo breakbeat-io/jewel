@@ -18,42 +18,42 @@ struct AlbumCard: View {
     var body: some View {
         
         Rectangle()
-        .foregroundColor(.clear)
-        .background(
-            IfLet(userData.activeCollection.slots[slotIndex].source?.album?.attributes?.artwork) { artwork in
-                KFImage(artwork.url(forWidth: 1000))
-                .placeholder {
-                    RoundedRectangle(cornerRadius: 4)
-                    .fill(Color.gray)
-                }
-                .renderingMode(.original)
-                .resizable()
-                .scaledToFill()
+            .foregroundColor(.clear)
+            .background(
+                IfLet(userData.activeCollection.slots[slotIndex].source?.album?.attributes?.artwork) { artwork in
+                    KFImage(artwork.url(forWidth: 1000))
+                        .placeholder {
+                            RoundedRectangle(cornerRadius: 4)
+                                .fill(Color.gray)
+                    }
+                    .renderingMode(.original)
+                    .resizable()
+                    .scaledToFill()
             })
-        .cornerRadius(4)
-        .overlay(
-            VStack(alignment: .leading) {
-                IfLet(userData.activeCollection.slots[slotIndex].source?.album?.attributes) { attributes in
-                    Text(attributes.name)
-                        .font(.callout)
-                        .fontWeight(.bold)
-                        .foregroundColor(.white)
-                        .padding(.top, 4)
-                        .padding(.horizontal, 6)
-                        .lineLimit(1)
-                    Text(attributes.artistName)
-                        .font(.footnote)
-                        .foregroundColor(.white)
-                        .padding(.horizontal, 6)
-                        .padding(.bottom, 4)
-                        .lineLimit(1)
-                }
-            }
-            .background(Color.black)
             .cornerRadius(4)
-            .padding(4)
-        , alignment: .bottomLeading)
-        .shadow(radius: 3)
+            .overlay(
+                VStack(alignment: .leading) {
+                    IfLet(userData.activeCollection.slots[slotIndex].source?.album?.attributes) { attributes in
+                        Text(attributes.name)
+                            .font(.callout)
+                            .fontWeight(.bold)
+                            .foregroundColor(.white)
+                            .padding(.top, 4)
+                            .padding(.horizontal, 6)
+                            .lineLimit(1)
+                        Text(attributes.artistName)
+                            .font(.footnote)
+                            .foregroundColor(.white)
+                            .padding(.horizontal, 6)
+                            .padding(.bottom, 4)
+                            .lineLimit(1)
+                    }
+                }
+                .background(Color.black)
+                .cornerRadius(4)
+                .padding(4)
+                , alignment: .bottomLeading)
+            .shadow(radius: 3)
     }
 }
 

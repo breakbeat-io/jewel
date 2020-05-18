@@ -16,7 +16,7 @@ struct DiscTrackList: View {
     var withTitle: Bool
     
     var body: some View {
-
+        
         let tracks = userData.activeCollection.slots[slotIndex].source?.album?.relationships?.tracks.data
         let discTracks = tracks?.filter { $0.attributes?.discNumber == discNumber }
         let albumArtist = userData.activeCollection.slots[slotIndex].source?.album?.attributes?.artistName
@@ -52,8 +52,8 @@ struct DiscTrackList: View {
                             Spacer()
                             IfLet(attributes.duration) { duration in
                                 Text(duration)
-                                .font(.footnote)
-                                .opacity(0.7)
+                                    .font(.footnote)
+                                    .opacity(0.7)
                             }
                         }
                     }

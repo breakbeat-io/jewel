@@ -22,14 +22,14 @@ struct EmptySlot: View {
                     self.showSearch = true
                 }) {
                     RoundedRectangle(cornerRadius: 4)
-                    .stroke(
-                        Color.gray,
-                        style: StrokeStyle(lineWidth: 2, dash: [4, 6])
+                        .stroke(
+                            Color.gray,
+                            style: StrokeStyle(lineWidth: 2, dash: [4, 6])
                     )
-                    .overlay(
-                        Image(systemName: "plus")
-                            .font(.headline)
-                            .foregroundColor(Color.gray)
+                        .overlay(
+                            Image(systemName: "plus")
+                                .font(.headline)
+                                .foregroundColor(Color.gray)
                     )
                 }
                 .sheet(isPresented: $showSearch) {
