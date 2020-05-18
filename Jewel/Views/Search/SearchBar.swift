@@ -33,9 +33,9 @@ struct SearchBar: View {
                             } else {
                                 self.searchProvider.search(searchTerm: self.searchTerm)
                             }
-                        }
+                    }
                     ).foregroundColor(.primary)
-                    .keyboardType(.webSearch)
+                        .keyboardType(.webSearch)
                     Button(action: {
                         self.searchTerm = ""
                         self.searchProvider.results?.removeAll()

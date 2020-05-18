@@ -8,7 +8,14 @@
 
 import Foundation
 
-struct Collection: Codable {
-    var name = "My Collection"
-    var slots = [Slot]()
+class Collection: Codable {
+    var name: String
+    var curator = "A Music Lover"
+    var slots = [Slot](repeating: Slot(), count: 8)
+    var editable: Bool
+    
+    init(name: String, editable: Bool) {
+        self.name = name
+        self.editable = editable
+    }
 }

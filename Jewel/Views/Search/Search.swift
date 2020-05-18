@@ -15,7 +15,7 @@ struct Search: View {
     @EnvironmentObject var searchProvider: SearchProvider
     @State private var showCancelButton: Bool = false
     var slotIndex: Int
-        
+    
     var body: some View {
         
         VStack(alignment: .leading) {

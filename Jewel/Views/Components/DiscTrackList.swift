@@ -16,10 +16,10 @@ struct DiscTrackList: View {
     var withTitle: Bool
     
     var body: some View {
-
-        let tracks = userData.collection.slots[slotIndex].source?.album?.relationships?.tracks.data
+        
+        let tracks = userData.activeCollection.slots[slotIndex].source?.album?.relationships?.tracks.data
         let discTracks = tracks?.filter { $0.attributes?.discNumber == discNumber }
-        let albumArtist = userData.collection.slots[slotIndex].source?.album?.attributes?.artistName
+        let albumArtist = userData.activeCollection.slots[slotIndex].source?.album?.attributes?.artistName
         
         let discTrackList = VStack(alignment: .leading) {
             if withTitle {
@@ -52,8 +52,8 @@ struct DiscTrackList: View {
                             Spacer()
                             IfLet(attributes.duration) { duration in
                                 Text(duration)
-                                .font(.footnote)
-                                .opacity(0.7)
+                                    .font(.footnote)
+                                    .opacity(0.7)
                             }
                         }
                     }

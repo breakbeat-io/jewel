@@ -27,6 +27,8 @@
 		D26077BF24605D59005883ED /* SlotDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26077BE24605D59005883ED /* SlotDetail.swift */; };
 		D26B5622243E80450098E9E4 /* AlbumDetailCompact.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26B5621243E80450098E9E4 /* AlbumDetailCompact.swift */; };
 		D26B5624243E8DB00098E9E4 /* PrimaryPlaybackLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26B5623243E8DB00098E9E4 /* PrimaryPlaybackLink.swift */; };
+		D26BAFC1246F3F3F00F226CD /* ShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26BAFC0246F3F3F00F226CD /* ShareSheet.swift */; };
+		D26BAFC3246F404700F226CD /* ShareableSlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26BAFC2246F404700F226CD /* ShareableSlot.swift */; };
 		D27371C324571828005CC5EF /* JewelError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27371C224571828005CC5EF /* JewelError.swift */; };
 		D28358832451D3C700411AC9 /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28358822451D3C700411AC9 /* Search.swift */; };
 		D28358872452D3CF00411AC9 /* SearchResultsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28358862452D3CF00411AC9 /* SearchResultsList.swift */; };
@@ -95,6 +97,8 @@
 		D26077BE24605D59005883ED /* SlotDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlotDetail.swift; sourceTree = "<group>"; };
 		D26B5621243E80450098E9E4 /* AlbumDetailCompact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumDetailCompact.swift; sourceTree = "<group>"; };
 		D26B5623243E8DB00098E9E4 /* PrimaryPlaybackLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryPlaybackLink.swift; sourceTree = "<group>"; };
+		D26BAFC0246F3F3F00F226CD /* ShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheet.swift; sourceTree = "<group>"; };
+		D26BAFC2246F404700F226CD /* ShareableSlot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareableSlot.swift; sourceTree = "<group>"; };
 		D27371C224571828005CC5EF /* JewelError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JewelError.swift; sourceTree = "<group>"; };
 		D28358822451D3C700411AC9 /* Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Search.swift; sourceTree = "<group>"; };
 		D28358862452D3CF00411AC9 /* SearchResultsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsList.swift; sourceTree = "<group>"; };
@@ -252,6 +256,7 @@
 				D201C45F246AAD3800A5FC87 /* AdditionalPlaybackLinks.swift */,
 				D2D40B4E245738220018E066 /* AlbumTrackList.swift */,
 				D22666122462F5940031C9A8 /* DiscTrackList.swift */,
+				D26BAFC0246F3F3F00F226CD /* ShareSheet.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -306,6 +311,7 @@
 				D22318BC246C5B5C0033B8A5 /* Source.swift */,
 				D2BF19C4246D4F1E008B09D3 /* SourceProvider.swift */,
 				D2A55CCE246839980007CD1F /* OdesliResponse.swift */,
+				D26BAFC2246F404700F226CD /* ShareableSlot.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -482,6 +488,7 @@
 				D2A55CCF246839980007CD1F /* OdesliResponse.swift in Sources */,
 				D2E690FA2450ECBB00B981F2 /* EmptySlot.swift in Sources */,
 				D22C4552243DDE490001481D /* Home.swift in Sources */,
+				D26BAFC1246F3F3F00F226CD /* ShareSheet.swift in Sources */,
 				D2A31B05246308B800D6BF4A /* Start.swift in Sources */,
 				D22666132462F5940031C9A8 /* DiscTrackList.swift in Sources */,
 				D2D40B4F245738220018E066 /* AlbumTrackList.swift in Sources */,
@@ -489,6 +496,7 @@
 				D2D5875E244E391200E982E8 /* UserData.swift in Sources */,
 				D29C76002459662F005BE357 /* SearchBar.swift in Sources */,
 				D29C760224598F06005BE357 /* SearchProvider.swift in Sources */,
+				D26BAFC3246F404700F226CD /* ShareableSlot.swift in Sources */,
 				D22C4524243DD8B00001481D /* SceneDelegate.swift in Sources */,
 				D26077BF24605D59005883ED /* SlotDetail.swift in Sources */,
 				D230CC562460CC2C00FD811F /* Footer.swift in Sources */,

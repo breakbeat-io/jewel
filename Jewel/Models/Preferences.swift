@@ -9,6 +9,8 @@
 import Foundation
 
 struct Preferences: Codable {
-    var preferredMusicPlatform = 0 // Apple Music
+    
+    var preferredMusicPlatform = 0
     var debugMode = false
+    
 }

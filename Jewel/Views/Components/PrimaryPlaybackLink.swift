@@ -20,14 +20,14 @@ struct PrimaryPlaybackLink: View {
         
         let preferredProvider = OdesliPlatform.allCases[userData.prefs.preferredMusicPlatform]
         
-        if let providerLink = userData.collection.slots[slotIndex].playbackLinks?.linksByPlatform[preferredProvider.rawValue] {
+        if let providerLink = userData.activeCollection.slots[slotIndex].playbackLinks?.linksByPlatform[preferredProvider.rawValue] {
             playbackLink = providerLink.url
             playbackName = preferredProvider.friendlyName
         } else {
-            playbackLink = userData.collection.slots[slotIndex].source?.album?.attributes?.url
+            playbackLink = userData.activeCollection.slots[slotIndex].source?.album?.attributes?.url
             playbackName = OdesliPlatform.appleMusic.friendlyName
         }
-            
+        
         let playbackLinkView =
             IfLet(playbackLink) { url in
                 Button(action: {
@@ -47,7 +47,7 @@ struct PrimaryPlaybackLink: View {
                             .stroke(Color.primary, lineWidth: 2)
                     )
                 }
-            }
+        }
         
         return playbackLinkView
     }
@@ -60,5 +60,5 @@ struct PlaybackLink_Previews: PreviewProvider {
     static var previews: some View {
         PrimaryPlaybackLink(slotIndex: 0).environmentObject(userData)
     }
-
+    
 }

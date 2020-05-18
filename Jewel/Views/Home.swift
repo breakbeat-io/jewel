@@ -10,11 +10,13 @@ import SwiftUI
 
 struct Home: View {
     
+    @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var userData: UserData
     @State private var showOptions = false
+    @State private var showShareSheet = false
     
     private func slotViewForId(slotIndex: Int) -> some View {
-        if userData.collection.slots[slotIndex].source?.album == nil {
+        if userData.activeCollection.slots[slotIndex].source?.album == nil {
             return AnyView(EmptySlot(slotIndex: slotIndex))
         } else {
             return AnyView(FilledSlot(slotIndex: slotIndex))
@@ -25,9 +27,9 @@ struct Home: View {
         
         NavigationView {
             GeometryReader { geo in
-                List(self.userData.collection.slots.indices, id: \.self) { index in
+                List(self.userData.activeCollection.slots.indices, id: \.self) { index in
                     self.slotViewForId(slotIndex: index)
-                        .frame(height: (geo.size.height - geo.safeAreaInsets.top - geo.safeAreaInsets.bottom) / CGFloat(self.userData.collection.slots.count))
+                        .frame(height: (geo.size.height - geo.safeAreaInsets.top - geo.safeAreaInsets.bottom) / CGFloat(self.userData.activeCollection.slots.count))
                 }
                 .sheet(isPresented: self.$showOptions) {
                     Options().environmentObject(self.userData)
@@ -35,15 +37,47 @@ struct Home: View {
                 .onAppear {
                     UITableView.appearance().separatorStyle = .none
                 }
-                .navigationBarTitle(self.userData.collection.name)
-                .navigationBarItems(trailing:
+                .navigationBarTitle(self.userData.activeCollection.name)
+                .navigationBarItems(leading:
                     Button(action: {
                         self.showOptions = true
                     }) {
                         Image(systemName: "slider.horizontal.3")
-                            .padding()
+                    }
+                    .padding(.trailing)
+                    .padding(.vertical)
+                    ,trailing:
+                    HStack {
+                        Button(action: {
+                            self.showShareSheet = true
+                        }) {
+                            Image(systemName: "square.and.arrow.up")
+                        }
+                        .padding(.leading)
+                        .padding(.vertical)
+                        .disabled(self.userData.activeCollection.slots.filter( { $0.source != nil }).count == 0)
+                        .sheet(isPresented: self.$showShareSheet) {
+                            ShareSheet(activityItems: [self.userData.createShareUrl()])
+                        }
+                        Button(action: {
+                            self.userData.userCollectionActive.toggle()
+                        }) {
+                            Image(systemName: "arrow.2.squarepath")
+                        }
+                        .padding(.leading)
+                        .padding(.vertical)
+                        .disabled(self.userData.sharedCollection.slots.filter( { $0.source != nil }).count == 0)
                     }
                 )
+            }
+            .alert(isPresented: $userData.sharedCollectionCued) {
+                Alert(title: Text("Shared collection received from \(userData.candidateCollection?.curator ?? "another music lover")!"),
+                      message: Text("Would you like to replace your current shared collection?"),
+                      primaryButton: .cancel(Text("Cancel")),
+                      secondaryButton: .default(Text("Replace").bold()) {
+                        self.userData.loadCandidateCollection()
+                        self.presentationMode.wrappedValue.dismiss()
+                    })
             }
             Start()
         }

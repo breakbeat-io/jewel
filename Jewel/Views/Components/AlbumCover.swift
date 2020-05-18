@@ -16,16 +16,16 @@ struct AlbumCover: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            IfLet(userData.collection.slots[slotIndex].source?.album?.attributes) { attributes in
+            IfLet(userData.activeCollection.slots[slotIndex].source?.album?.attributes) { attributes in
                 KFImage(attributes.artwork.url(forWidth: 1000))
                     .placeholder {
                         RoundedRectangle(cornerRadius: 4)
                             .fill(Color.gray)
-                    }
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .cornerRadius(4)
-                    .shadow(radius: 4)
+                }
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .cornerRadius(4)
+                .shadow(radius: 4)
                 Group {
                     Text(attributes.name)
                         .fontWeight(.bold)

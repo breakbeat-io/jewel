@@ -26,15 +26,15 @@ struct SearchResultsList: View {
                 IfLet(albums[i].attributes) { album in
                     HStack {
                         KFImage(album.artwork.url(forWidth: 50))
-                          .placeholder {
-                              RoundedRectangle(cornerRadius: 4)
-                                  .fill(Color.gray)
-                          }
-                          .renderingMode(.original)
-                          .resizable()
-                          .aspectRatio(contentMode: .fit)
-                          .cornerRadius(4)
-                          .frame(width: 50)
+                            .placeholder {
+                                RoundedRectangle(cornerRadius: 4)
+                                    .fill(Color.gray)
+                        }
+                        .renderingMode(.original)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .cornerRadius(4)
+                        .frame(width: 50)
                         VStack(alignment: .leading) {
                             Text(album.name)
                                 .font(.headline)
@@ -45,7 +45,7 @@ struct SearchResultsList: View {
                         }
                         Spacer()
                         Button(action: {
-                            self.userData.addAlbumToSlot(albumId: albums[i].id, slotIndex: self.slotIndex)
+                            self.userData.addAlbumToSlot(albumId: albums[i].id, collection: self.userData.activeCollection, slotIndex: self.slotIndex)
                             self.presentationMode.wrappedValue.dismiss()
                         }, label:{
                             Image(systemName: "plus.circle")
