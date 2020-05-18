@@ -27,7 +27,7 @@ struct Options: View {
                                 text: $userData.userCollection.name,
                                 onCommit: {
                                     self.presentationMode.wrappedValue.dismiss()
-                                }
+                            }
                             ).foregroundColor(.blue)
                         }
                     }
@@ -39,7 +39,7 @@ struct Options: View {
                                 text: $userData.prefs.curatorName,
                                 onCommit: {
                                     self.presentationMode.wrappedValue.dismiss()
-                                }
+                            }
                             ).foregroundColor(.blue)
                         }
                     }
@@ -94,7 +94,7 @@ struct Options: View {
                                 self.presentationMode.wrappedValue.dismiss()
                             }) {
                                 Text("Reset Jewel")
-                                .foregroundColor(.red)
+                                    .foregroundColor(.red)
                             }
                         }
                     }
@@ -103,7 +103,7 @@ struct Options: View {
                 Footer()
                     .onTapGesture(count: 10) {
                         self.userData.prefs.debugMode.toggle()
-                    }
+                }
                 .padding()
             }
             .navigationBarTitle("Options", displayMode: .inline)

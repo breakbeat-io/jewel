@@ -295,7 +295,6 @@ class UserData: ObservableObject {
     
     func loadCandidateCollection() {
         if candidateCollection != nil {
-            print("applying candidate collection to shared")
             sharedCollection = candidateCollection!
             userCollectionActive = false
             collectionChanged()
@@ -304,21 +303,16 @@ class UserData: ObservableObject {
     
     func loadRecommendations() {
         
-        let request = URLRequest(url: URL(string: "https://breakbeat.io/jewel/recommendations.json")!)
+        let request = URLRequest(url: URL(string: "https://jewel.breakbeat.io/recommendations.json")!)
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             if let data = data {
-                if let decodedResponse = try? JSONDecoder().decode([String].self, from: data) {
+                if let decodedResponse = try? JSONDecoder().decode(ShareableCollection.self, from: data) {
                     // we have good data – go back to the main thread
                     DispatchQueue.main.async {
-                        for (index, albumId) in decodedResponse.enumerated() {
-                            self.addAlbumToSlot(albumId: albumId, collection: self.sharedCollection, slotIndex: index)
-                        }
-
-                        // everything is good, so we can exit
-                        self.userCollectionActive = false
+                        self.cueCandidateCollection(recievedCollection: decodedResponse)
+                        return
                     }
-                    return
                 }
             }
 
