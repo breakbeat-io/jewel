@@ -23,13 +23,8 @@
 
 // disable share on their collection - OR BETTER SOMEHOW MARK IT AS RESHARED?
 
-// hide/disable the their collection tab if it is empty - or show some kind of overlay?
-// clear the shared collection url once loaded
-// when recieved a URL, switch to their collection then apply it
-// check button position on navbar
 // ability to change colletion name by tapping title instead of going to options
 // not nice that when changing collectionname need to then also update the activeCollection - be nice if it just updated.  Maybe on the didSet could refresh the active collection for changes that happen in the background?  how will platformLinks work?  (presumably if they are applied to teh activeCollection then they proliforate through ....
-// when recieving the shared collection, can i decode and create it into a collection so it can be queired then the alerts can be much nicer?
 
 
 import Foundation
@@ -303,6 +298,7 @@ class UserData: ObservableObject {
     func loadCandidateCollection() {
         if candidateCollection != nil {
             sharedCollection = candidateCollection!
+            candidateCollection = nil
             userCollectionActive = false
             collectionChanged()
         }

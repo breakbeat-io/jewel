@@ -55,6 +55,7 @@ struct Home: View {
                         }
                         .padding(.leading)
                         .padding(.vertical)
+                        .disabled(self.userData.activeCollection.slots.filter( { $0.source != nil }).count == 0)
                         .sheet(isPresented: self.$showShareSheet) {
                             ShareSheet(activityItems: [self.userData.createShareUrl()])
                         }
