@@ -288,14 +288,17 @@ class UserData: ObservableObject {
             }
         }
         
-        self.userCollectionActive = false
+        userCollectionActive = false
         sharedCollectionCued = true
         
     }
     
     func loadCandidateCollection() {
         if candidateCollection != nil {
+            print("applying candidate collection to shared")
             sharedCollection = candidateCollection!
+            userCollectionActive = false
+            collectionChanged()
         }
     }
     

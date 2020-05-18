@@ -70,9 +70,9 @@ struct Home: View {
             }
             .alert(isPresented: $userData.sharedCollectionCued) {
                 Alert(title: Text("Shared collection received from \(userData.candidateCollection?.curator ?? "another music lover")!"),
-                      message: Text("Would you like to replace your current shared collection?"),
-                      primaryButton: .cancel(Text("Cancel")),
-                      secondaryButton: .default(Text("Replace").bold()) {
+                    message: Text("Would you like to replace your current shared collection?"),
+                    primaryButton: .cancel(Text("Cancel")),
+                    secondaryButton: .default(Text("Replace").bold()) {
                         self.userData.loadCandidateCollection()
                         self.presentationMode.wrappedValue.dismiss()
                     })
