@@ -43,16 +43,18 @@ struct Home: View {
                         self.showOptions = true
                     }) {
                         Image(systemName: "slider.horizontal.3")
-                            .padding()
                     }
+                    .padding(.trailing)
+                    .padding(.vertical)
                     ,trailing:
                     HStack {
                         Button(action: {
                             self.showShareSheet = true
                         }) {
                             Image(systemName: "square.and.arrow.up")
-                                .padding()
                         }
+                        .padding(.leading)
+                        .padding(.vertical)
                         .sheet(isPresented: self.$showShareSheet) {
                             ShareSheet(activityItems: [self.userData.createShareUrl()])
                         }
@@ -60,8 +62,9 @@ struct Home: View {
                             self.userData.userCollectionActive.toggle()
                         }) {
                             Image(systemName: "arrow.2.squarepath")
-                                .padding()
                         }
+                        .padding(.leading)
+                        .padding(.vertical)
                     }
                 )
             }

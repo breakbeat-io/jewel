@@ -50,6 +50,7 @@ struct SlotDetail: View {
                         }) {
                             Image(systemName: "arrow.swap")
                         }
+                        .padding(.leading)
                         .padding(.vertical)
                         .sheet(isPresented: self.$showSearch) {
                             Search(slotIndex: self.slotIndex)
@@ -61,9 +62,9 @@ struct SlotDetail: View {
                             self.showEjectWarning = true
                         }) {
                             Image(systemName: "eject")
-                                .foregroundColor(.red)
                         }
-                        .padding()
+                        .padding(.leading)
+                        .padding(.vertical)
                         .alert(isPresented: self.$showEjectWarning) {
                             Alert(title: Text("Are you sure you want to eject this album from your collection?"), primaryButton: .cancel(Text("Cancel")), secondaryButton: .destructive(Text("Eject")) {
                                     self.userData.ejectSourceFromSlot(slotIndex: self.slotIndex)

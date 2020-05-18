@@ -15,6 +15,9 @@
 // * split out the platofrm links so it can be executed seperately from loading an album - e.g. when curing a candidate collection, no need to waste time getting htem at that point
 // * need an eject all for the shared album
 // * is it possible to switch to the shared collection view if a universal link is clicked so that user can see waht the might be replaceing?
+// * remove the candidate collection when no longer needed
+// * tidy it all up - including the names!
+// * Don't share an empty album! duh
 
 // do all the renaming - album to content, etc
 // get rid of loadRecommendations - merge with loadRecievedCollection
