@@ -6,21 +6,6 @@
 //  Copyright © 2020 Breakbeat Limited. All rights reserved.
 //
 
-// TODO
-// * How can I not initialise activeCollection seeing as it just points to somethign else? make it optional
-// * loadUserData should be able to be reduce to one loop instead of three identical calls
-// * when leaving options I am saving everything - seems heavy handed - how can I be smarter and only save what changed?!?
-// * should i do additonal checks on an non-editable collection?  Currently I just hide the buttons, but the func itself isn't disabled
-// * split out the platofrm links so it can be executed seperately from loading an album - e.g. when curing a candidate collection, no need to waste time getting htem at that point
-
-// * tidy it all up - including the names!
-
-// disable share on their collection - OR BETTER SOMEHOW MARK IT AS RESHARED?
-
-// ability to change colletion name by tapping title instead of going to options
-// not nice that when changing collectionname need to then also update the activeCollection - be nice if it just updated.  Maybe on the didSet could refresh the active collection for changes that happen in the background?  how will platformLinks work?  (presumably if they are applied to teh activeCollection then they proliforate through ....
-
-
 import Foundation
 import HMV
 
@@ -170,9 +155,9 @@ class UserData: ObservableObject {
                     let source = Source(sourceReference: album!.id, album: album)
                     let newSlot = Slot(source: source)
                     collection.slots[slotIndex] = newSlot
-                    //                    if let baseUrl = album?.attributes?.url {
-                    //                        self.populatePlatformLinks(baseUrl: baseUrl, slotIndex: slotIndex)
-                    //                    }
+                    if let baseUrl = album?.attributes?.url {
+                        self.populatePlatformLinks(baseUrl: baseUrl, slotIndex: slotIndex)
+                    }
                     self.collectionChanged()
                 }
             }
