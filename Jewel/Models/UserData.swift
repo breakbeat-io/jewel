@@ -20,7 +20,7 @@
 // * Don't share an empty album! duh
 
 // do all the renaming - album to content, etc
-// get rid of loadRecommendations - merge with loadRecievedCollection
+
 // disable share on their collection - OR BETTER SOMEHOW MARK IT AS RESHARED?
 // when sharing, if name is set to my Collection, change it to something else
 // hide/disable the their collection tab if it is empty - or show some kind of overlay?
@@ -253,7 +253,7 @@ class UserData: ObservableObject {
         }
         
         let shareableCollection = ShareableCollection(
-            collectionName: activeCollection.name,
+            collectionName: activeCollection.name == "My Collection" ? "\(prefs.curatorName)'s Collection" : activeCollection.name,
             collectionCurator: prefs.curatorName,
             collection: shareableSlots
         )
