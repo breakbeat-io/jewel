@@ -22,7 +22,7 @@
 // do all the renaming - album to content, etc
 
 // disable share on their collection - OR BETTER SOMEHOW MARK IT AS RESHARED?
-// when sharing, if name is set to my Collection, change it to something else
+
 // hide/disable the their collection tab if it is empty - or show some kind of overlay?
 // clear the shared collection url once loaded
 // when recieved a URL, switch to their collection then apply it
@@ -226,10 +226,17 @@ class UserData: ObservableObject {
         self.collectionChanged()
     }
     
-    func deleteAll() {
+    func ejectUserCollection() {
+        userCollectionActive = true
         for slotIndex in 0..<activeCollection.slots.count {
             ejectSourceFromSlot(slotIndex: slotIndex)
         }
+    }
+    
+    func ejectSharedCollection() {
+        sharedCollection = Collection(name: "Their Collection", editable: false)
+        self.collectionChanged()
+        userCollectionActive = true
     }
     
     func reset() {

@@ -65,6 +65,7 @@ struct Home: View {
                         }
                         .padding(.leading)
                         .padding(.vertical)
+                        .disabled(self.userData.sharedCollection.slots.filter( { $0.source != nil }).count == 0)
                     }
                 )
             }

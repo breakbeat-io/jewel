@@ -12,7 +12,8 @@ struct Options: View {
     
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var userData: UserData
-    @State private var showDeleteAllWarning = false
+    @State private var showEjectMyCollectionWarning = false
+    @State private var showEjectSharedCollectionWarning = false
     @State private var showLoadRecommendationsAlert = false
     
     var body: some View {
@@ -67,17 +68,32 @@ struct Options: View {
                         }
                     }
                     Button(action: {
-                        self.showDeleteAllWarning = true
+                        self.showEjectMyCollectionWarning = true
                     }) {
-                        Text("Delete All")
+                        Text("Eject My Collection")
                     }
                     .foregroundColor(.red)
-                    .alert(isPresented: $showDeleteAllWarning) {
-                        Alert(title: Text("Are you sure you want to delete all albums in your collection?"),
+                    .alert(isPresented: $showEjectMyCollectionWarning) {
+                        Alert(title: Text("Are you sure you want to eject all the albums in your collection?"),
                               message: Text("You cannot undo this operation."),
                               primaryButton: .cancel(Text("Cancel")),
-                              secondaryButton: .destructive(Text("Delete")) {
-                                self.userData.deleteAll()
+                              secondaryButton: .destructive(Text("Eject All")) {
+                                self.userData.ejectUserCollection()
+                                self.presentationMode.wrappedValue.dismiss()
+                            })
+                    }
+                    Button(action: {
+                        self.showEjectSharedCollectionWarning = true
+                    }) {
+                        Text("Eject Shared Collection")
+                    }
+                    .foregroundColor(.red)
+                    .alert(isPresented: $showEjectSharedCollectionWarning) {
+                        Alert(title: Text("Are you sure you want to eject your current shared collection?"),
+                              message: Text("You cannot undo this operation."),
+                              primaryButton: .cancel(Text("Cancel")),
+                              secondaryButton: .destructive(Text("Eject Shared")) {
+                                self.userData.ejectSharedCollection()
                                 self.presentationMode.wrappedValue.dismiss()
                             })
                     }
