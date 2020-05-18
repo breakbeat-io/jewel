@@ -61,7 +61,7 @@ struct Options: View {
                                   message: Text("This will replace your current shared collection."),
                                   primaryButton: .cancel(Text("Cancel")),
                                   secondaryButton: .default(Text("Load").bold()) {
-                                    self.userData.loadRecommendations()
+                                    self.userData.getRecommendations()
                                     self.presentationMode.wrappedValue.dismiss()
                                 })
                         }

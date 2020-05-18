@@ -36,7 +36,7 @@ import Foundation
 import HMV
 
 class UserData: ObservableObject {
-
+    
     @Published var prefs = Preferences.default
     
     @Published var userCollection = Collection(name: "My Collection", editable: true)
@@ -63,7 +63,7 @@ class UserData: ObservableObject {
     private var store: HMV?
     
     init() {
-    
+        
         // basically if we can't open the store we're dead in the water so for now may as well crash!
         try! openStore()
         
@@ -170,7 +170,7 @@ class UserData: ObservableObject {
             userDefaults.removeObject(forKey: "savedCollection")
             saveUserData(key: "jewelCollection")
         }
-
+        
     }
     
     func addAlbumToSlot(albumId: String, collection: Collection, slotIndex: Int) {
@@ -181,9 +181,9 @@ class UserData: ObservableObject {
                     let source = Source(sourceReference: album!.id, album: album)
                     let newSlot = Slot(source: source)
                     collection.slots[slotIndex] = newSlot
-//                    if let baseUrl = album?.attributes?.url {
-//                        self.populatePlatformLinks(baseUrl: baseUrl, slotIndex: slotIndex)
-//                    }
+                    //                    if let baseUrl = album?.attributes?.url {
+                    //                        self.populatePlatformLinks(baseUrl: baseUrl, slotIndex: slotIndex)
+                    //                    }
                     self.collectionChanged()
                 }
             }
@@ -240,30 +240,30 @@ class UserData: ObservableObject {
     }
     
     func createShareUrl() -> URL {
-          
-          var shareableSlots = [ShareableSlot?]()
-
-          for slot in activeCollection.slots {
-              if let content = slot.source?.album {
+        
+        var shareableSlots = [ShareableSlot?]()
+        
+        for slot in activeCollection.slots {
+            if let content = slot.source?.album {
                 let slot = ShareableSlot(sourceProvider: slot.source!.sourceProvider, sourceRef: content.id)
-                  shareableSlots.append(slot)
-              } else {
-                  shareableSlots.append(nil)
-              }
-          }
-
-          let shareableCollection = ShareableCollection(
-              collectionName: activeCollection.name,
-              collectionCurator: prefs.curatorName,
-              collection: shareableSlots
-          )
-
-          let encoder = JSONEncoder()
-          let shareableCollectionJson = try! encoder.encode(shareableCollection)
-          
-          return URL(string: "https://jewel.breakbeat.io/share/?c=\(shareableCollectionJson.base64EncodedString())")!
-          
-      }
+                shareableSlots.append(slot)
+            } else {
+                shareableSlots.append(nil)
+            }
+        }
+        
+        let shareableCollection = ShareableCollection(
+            collectionName: activeCollection.name,
+            collectionCurator: prefs.curatorName,
+            collection: shareableSlots
+        )
+        
+        let encoder = JSONEncoder()
+        let shareableCollectionJson = try! encoder.encode(shareableCollection)
+        
+        return URL(string: "https://jewel.breakbeat.io/share/?c=\(shareableCollectionJson.base64EncodedString())")!
+        
+    }
     
     func processRecievedCollection(recievedCollectionUrl: URL) {
         if let urlComponents = URLComponents(url: recievedCollectionUrl, resolvingAgainstBaseURL: true) {
@@ -272,6 +272,7 @@ class UserData: ObservableObject {
                 let decoder = JSONDecoder()
                 if let recievedCollection = try? decoder.decode(ShareableCollection.self, from: recievedCollectionEncoded) {
                     cueCandidateCollection(recievedCollection: recievedCollection)
+                    sharedCollectionCued = true
                 }
             }
         }
@@ -281,7 +282,7 @@ class UserData: ObservableObject {
         
         candidateCollection = Collection(name: recievedCollection.collectionName, editable: false)
         candidateCollection!.curator = recievedCollection.collectionCurator
-
+        
         for (index, slot) in recievedCollection.collection.enumerated() {
             if slot?.sourceProvider == SourceProvider.appleMusicAlbum {
                 addAlbumToSlot(albumId: slot!.sourceRef, collection: candidateCollection!, slotIndex: index)
@@ -289,7 +290,6 @@ class UserData: ObservableObject {
         }
         
         userCollectionActive = false
-        sharedCollectionCued = true
         
     }
     
@@ -301,22 +301,21 @@ class UserData: ObservableObject {
         }
     }
     
-    func loadRecommendations() {
+    func getRecommendations() {
         
         let request = URLRequest(url: URL(string: "https://jewel.breakbeat.io/recommendations.json")!)
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             if let data = data {
                 if let decodedResponse = try? JSONDecoder().decode(ShareableCollection.self, from: data) {
-                    // we have good data – go back to the main thread
                     DispatchQueue.main.async {
                         self.cueCandidateCollection(recievedCollection: decodedResponse)
+                        self.loadCandidateCollection()
                         return
                     }
                 }
             }
-
-            // if we're still here it means there was a problem
+            
             print("Fetch failed: \(error?.localizedDescription ?? "Unknown error")")
         }.resume()
     }
