@@ -10,17 +10,17 @@ import Foundation
 import HMV
 
 class Source: Codable {
-    let sourceProvider = SourceProvider.appleMusicAlbum
-    var sourceReference: String
+    let provider = SourceProvider.appleMusicAlbum
+    var contentId: String
     var content: Album?
     
-    init(sourceReference: String) {
-        self.sourceReference = sourceReference
+    init(contentId: String) {
+        self.contentId = contentId
     }
     
-    init(sourceReference: String, album: Album) {
-        self.sourceReference = sourceReference
-        self.content = album
+    init(contentId: String, content: Album) {
+        self.contentId = contentId
+        self.content = content
     }
     
 }

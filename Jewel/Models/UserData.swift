@@ -136,7 +136,7 @@ class UserData: ObservableObject {
             (album: Album?, error: Error?) -> Void in
             DispatchQueue.main.async {
                 if album != nil {
-                    let source = Source(sourceReference: album!.id, album: album!)
+                    let source = Source(contentId: album!.id, content: album!)
                     let newSlot = Slot(source: source)
                     collection.slots[slotIndex] = newSlot
                     if let baseUrl = album?.attributes?.url {
@@ -210,7 +210,7 @@ class UserData: ObservableObject {
         
         for slot in activeCollection.slots {
             if let content = slot.source?.content {
-                let slot = ShareableSlot(sourceProvider: slot.source!.sourceProvider, sourceRef: content.id)
+                let slot = ShareableSlot(sourceProvider: slot.source!.provider, sourceRef: content.id)
                 shareableSlots.append(slot)
             } else {
                 shareableSlots.append(nil)
