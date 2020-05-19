@@ -43,10 +43,6 @@ class UserData: ObservableObject {
         
     }
     
-    func collectionChanged() {
-        self.objectWillChange.send()
-    }
-    
     fileprivate func migrateV1UserDefaults() {
         
         if let v1CollectionName = userDefaults.string(forKey: "collectionName") {
@@ -78,7 +74,7 @@ class UserData: ObservableObject {
                     if let baseUrl = album?.attributes?.url {
                         self.populatePlatformLinks(baseUrl: baseUrl, slotIndex: slotIndex)
                     }
-                    self.collectionChanged()
+                    self.objectWillChange.send()
                 }
             }
         })
@@ -100,7 +96,7 @@ class UserData: ObservableObject {
                 if let decodedResponse = try? JSONDecoder().decode(OdesliResponse.self, from: data) {
                     DispatchQueue.main.async {
                         self.activeCollection.slots[slotIndex].playbackLinks = decodedResponse
-                        self.collectionChanged()
+                        self.objectWillChange.send()
                     }
                     
                     return
@@ -117,7 +113,7 @@ class UserData: ObservableObject {
     func ejectSourceFromSlot(slotIndex: Int) {
         let emptySlot = Slot()
         self.activeCollection.slots[slotIndex] = emptySlot
-        self.collectionChanged()
+        self.objectWillChange.send()
     }
     
     func ejectUserCollection() {
@@ -129,7 +125,7 @@ class UserData: ObservableObject {
     
     func ejectSharedCollection() {
         sharedCollection = Collection(name: "Their Collection", curator: "A Music Lover", editable: false)
-        self.collectionChanged()
+        self.objectWillChange.send()
         userCollectionActive = true
     }
     
@@ -198,7 +194,7 @@ class UserData: ObservableObject {
             sharedCollection = candidateCollection!
             candidateCollection = nil
             userCollectionActive = false
-            collectionChanged()
+            self.objectWillChange.send()
         }
     }
     

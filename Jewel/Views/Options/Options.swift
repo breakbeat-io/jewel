@@ -133,7 +133,7 @@ struct Options: View {
         }
         .navigationViewStyle(StackNavigationViewStyle())
         .onDisappear {
-            self.userData.collectionChanged()
+            self.userData.objectWillChange.send()
         }
     }
 }
