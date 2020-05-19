@@ -29,6 +29,7 @@ class Collection: Codable {
         if let savedCollection = UserDefaults.standard.object(forKey: saveKey) as? Data {
             print("Loading collection: \(saveKey)")
             if let decodedCollection = try? JSONDecoder().decode(Collection.self, from: savedCollection) {
+                self.saveKey = saveKey
                 self.name = decodedCollection.name
                 self.curator = decodedCollection.curator
                 self.slots = decodedCollection.slots
@@ -41,4 +42,14 @@ class Collection: Codable {
         self.editable = editable
         self.saveKey = saveKey
     }
+    
+    func save() {
+        if saveKey != nil {
+            if let encoded = try? JSONEncoder().encode(self) {
+                UserDefaults.standard.set(encoded, forKey: saveKey!)
+                print("Saved collection: \(saveKey!)")
+            }
+        }
+    }
+    
 }

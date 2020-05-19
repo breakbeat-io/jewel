@@ -16,7 +16,6 @@ class UserData: ObservableObject {
     @Published var userCollection = Collection.user
     @Published var sharedCollection = Collection.shared
     
-    
     @Published var userCollectionActive = true {
         didSet {
             if userCollectionActive {
@@ -40,36 +39,19 @@ class UserData: ObservableObject {
     init() {
 
         migrateV1UserDefaults()
-        
         activeCollection = userCollection
         
     }
     
-    fileprivate func saveUserData(key: String) {
-        
-        let encoder = JSONEncoder()
-        
-        switch key {    
-        case "jewelCollection":
-            if let encoded = try? encoder.encode(userCollection) {
-                userDefaults.set(encoded, forKey: key)
-                print("Saved collection")
-            }
-        case "jewelSharedCollection":
-            if let encoded = try? encoder.encode(sharedCollection) {
-                userDefaults.set(encoded, forKey: key)
-                print("Saved shared collection")
-            }
-        default:
-            print("Saving User Data: key unknown, nothing saved.")
-        }
+    fileprivate func saveUserData() {
+        userCollection.save()
+        sharedCollection.save()
     }
     
     func collectionChanged() {
         self.objectWillChange.send()
         // just save everything at the moment even if not active - the whole repetition of stuff needs to be changed anyway!
-        self.saveUserData(key: "jewelCollection")
-        self.saveUserData(key: "jewelSharedCollection")
+        self.saveUserData()
     }
     
     func preferencesChanged() {
@@ -82,7 +64,7 @@ class UserData: ObservableObject {
             print("v1.0 Collection Name found ... migrating.")
             userCollection.name = v1CollectionName
             userDefaults.removeObject(forKey: "collectionName")
-            saveUserData(key: "jewelCollection")
+            userCollection.save()
         }
         
         if let savedCollection = userDefaults.dictionary(forKey: "savedCollection") {
@@ -93,7 +75,7 @@ class UserData: ObservableObject {
                 }
             }
             userDefaults.removeObject(forKey: "savedCollection")
-            saveUserData(key: "jewelCollection")
+            userCollection.save()
         }
         
     }
