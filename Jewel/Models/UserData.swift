@@ -29,7 +29,7 @@ class UserData: ObservableObject {
     }
     
     
-    @Published var activeCollection = Collection(name: "temp", curator: "temp", editable: true) // TODO: Make this optional so I don't haev to give it a crap one just to instantly get rid of it.
+    @Published var activeCollection: Collection! = nil  // force to nil, is replaced in init. feels bad.
     
     @Published var candidateCollection: Collection?
     @Published var sharedCollectionCued = false
@@ -39,7 +39,7 @@ class UserData: ObservableObject {
     init() {
         
         migrateV1UserDefaults()
-        userCollectionActive = true
+        activeCollection = userCollection
         
     }
     
