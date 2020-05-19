@@ -29,7 +29,7 @@ class UserData: ObservableObject {
     }
     
     
-    @Published var activeCollection = Collection(name: "My Collection", editable: true) // TODO: Make this optional so I don't haev to give it a crap one just to instantly get rid of it.
+    @Published var activeCollection = Collection(name: "temp", curator: "temp", editable: true) // TODO: Make this optional so I don't haev to give it a crap one just to instantly get rid of it.
     
     @Published var candidateCollection: Collection?
     @Published var sharedCollectionCued = false
@@ -141,7 +141,7 @@ class UserData: ObservableObject {
     }
     
     func ejectSharedCollection() {
-        sharedCollection = Collection(name: "Their Collection", editable: false)
+        sharedCollection = Collection.shared
         self.collectionChanged()
         userCollectionActive = true
     }
@@ -194,8 +194,7 @@ class UserData: ObservableObject {
     
     func cueCandidateCollection(recievedCollection: ShareableCollection) {
         
-        candidateCollection = Collection(name: recievedCollection.collectionName, editable: false)
-        candidateCollection!.curator = recievedCollection.collectionCurator
+        candidateCollection = Collection(name: recievedCollection.collectionName, curator: recievedCollection.collectionCurator, editable: false)
         
         for (index, slot) in recievedCollection.collection.enumerated() {
             if slot?.sourceProvider == SourceProvider.appleMusicAlbum {

@@ -12,19 +12,20 @@ class Collection: Codable {
     
     private var saveKey: String?
     var name: String
-    var curator = "A Music Lover"
+    var curator: String
     var slots = [Slot](repeating: Slot(), count: 8)
     var editable: Bool
     
-    static let user = Collection(name: "My Collection", editable: true, saveKey: "jewelCollection")
-    static let shared = Collection(name: "Their Collection", editable: false, saveKey: "jewelSharedCollection")
+    static let user = Collection(name: "My Collection", curator: "A Music Lover", editable: true, saveKey: "jewelCollection")
+    static let shared = Collection(name: "Their Collection", curator: "A Music Lover", editable: false, saveKey: "jewelSharedCollection")
     
-    init(name: String, editable: Bool) {
+    init(name: String, curator: String, editable: Bool) {
         self.name = name
+        self.curator = curator
         self.editable = editable
     }
     
-    init(name: String, editable: Bool, saveKey: String) {
+    init(name: String, curator: String, editable: Bool, saveKey: String) {
         
         if let savedCollection = UserDefaults.standard.object(forKey: saveKey) as? Data {
             print("Loading collection: \(saveKey)")
@@ -39,6 +40,7 @@ class Collection: Codable {
         }
         
         self.name = name
+        self.curator = curator
         self.editable = editable
         self.saveKey = saveKey
     }
