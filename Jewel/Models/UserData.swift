@@ -11,23 +11,25 @@ import HMV
 
 class UserData: ObservableObject {
     
-    @Published var prefs = Preferences()
+    @Published var preferences = Preferences()
     
-    @Published var userCollection = Collection(name: "My Collection", editable: true)
+    @Published var userCollection = Collection.user
+    @Published var sharedCollection = Collection.shared
+    
     @Published var userCollectionActive = true {
         didSet {
             if userCollectionActive {
-                print("Activating User Collection")
+                print("Switching to User Collection")
                 activeCollection = userCollection
             } else {
-                print("Activating Shared Collection")
+                print("Switching to Shared Collection")
                 activeCollection = sharedCollection
             }
         }
     }
-    @Published var sharedCollection = Collection(name: "Their Collection", editable: false)
     
-    @Published var activeCollection = Collection(name: "My Collection", editable: true) // TODO: Make this optional so I don't haev to give it a crap one just to instantly get rid of it.
+    
+    @Published var activeCollection: Collection! = nil  // force to nil, is replaced in init. feels bad.
     
     @Published var candidateCollection: Collection?
     @Published var sharedCollectionCued = false
@@ -35,78 +37,10 @@ class UserData: ObservableObject {
     private var userDefaults = UserDefaults.standard
     
     init() {
-
-        migrateV1UserDefaults()
-        loadUserData()
         
+        migrateV1UserDefaults()
         activeCollection = userCollection
         
-    }
-    
-    fileprivate func loadUserData() {
-        
-        let decoder = JSONDecoder()
-        
-        // load saved user preferences
-        if let savedPreferences = userDefaults.object(forKey: "jewelPreferences") as? Data {
-            print("Loading user preferences")
-            if let decodedPreferences = try? decoder.decode(Preferences.self, from: savedPreferences) {
-                prefs = decodedPreferences
-            }
-        }
-        
-        // load saved user collection
-        if let savedCollection = userDefaults.object(forKey: "jewelCollection") as? Data {
-            print("Loading collection")
-            if let decodedCollection = try? decoder.decode(Collection.self, from: savedCollection) {
-                userCollection = decodedCollection
-            }
-        }
-        
-        // load saved user collection
-        if let savedSharedCollection = userDefaults.object(forKey: "jewelSharedCollection") as? Data {
-            print("Loading shared collection")
-            if let decodedCollection = try? decoder.decode(Collection.self, from: savedSharedCollection) {
-                sharedCollection = decodedCollection
-            }
-        }
-    }
-    
-    fileprivate func saveUserData(key: String) {
-        
-        let encoder = JSONEncoder()
-        
-        switch key {
-        case "jewelPreferences":
-            if let encoded = try? encoder.encode(prefs) {
-                userDefaults.set(encoded, forKey: key)
-                print("Saved user preferences")
-            }
-        case "jewelCollection":
-            if let encoded = try? encoder.encode(userCollection) {
-                userDefaults.set(encoded, forKey: key)
-                print("Saved collection")
-            }
-        case "jewelSharedCollection":
-            if let encoded = try? encoder.encode(sharedCollection) {
-                userDefaults.set(encoded, forKey: key)
-                print("Saved shared collection")
-            }
-        default:
-            print("Saving User Data: key unknown, nothing saved.")
-        }
-    }
-    
-    func collectionChanged() {
-        self.objectWillChange.send()
-        // just save everything at the moment even if not active - the whole repetition of stuff needs to be changed anyway!
-        self.saveUserData(key: "jewelCollection")
-        self.saveUserData(key: "jewelSharedCollection")
-    }
-    
-    func preferencesChanged() {
-        self.objectWillChange.send()
-        self.saveUserData(key: "jewelPreferences")
     }
     
     fileprivate func migrateV1UserDefaults() {
@@ -115,7 +49,6 @@ class UserData: ObservableObject {
             print("v1.0 Collection Name found ... migrating.")
             userCollection.name = v1CollectionName
             userDefaults.removeObject(forKey: "collectionName")
-            saveUserData(key: "jewelCollection")
         }
         
         if let savedCollection = userDefaults.dictionary(forKey: "savedCollection") {
@@ -126,7 +59,6 @@ class UserData: ObservableObject {
                 }
             }
             userDefaults.removeObject(forKey: "savedCollection")
-            saveUserData(key: "jewelCollection")
         }
         
     }
@@ -142,7 +74,7 @@ class UserData: ObservableObject {
                     if let baseUrl = album?.attributes?.url {
                         self.populatePlatformLinks(baseUrl: baseUrl, slotIndex: slotIndex)
                     }
-                    self.collectionChanged()
+                    self.objectWillChange.send()
                 }
             }
         })
@@ -164,7 +96,7 @@ class UserData: ObservableObject {
                 if let decodedResponse = try? JSONDecoder().decode(OdesliResponse.self, from: data) {
                     DispatchQueue.main.async {
                         self.activeCollection.slots[slotIndex].playbackLinks = decodedResponse
-                        self.collectionChanged()
+                        self.objectWillChange.send()
                     }
                     
                     return
@@ -181,7 +113,7 @@ class UserData: ObservableObject {
     func ejectSourceFromSlot(slotIndex: Int) {
         let emptySlot = Slot()
         self.activeCollection.slots[slotIndex] = emptySlot
-        self.collectionChanged()
+        self.objectWillChange.send()
     }
     
     func ejectUserCollection() {
@@ -192,8 +124,8 @@ class UserData: ObservableObject {
     }
     
     func ejectSharedCollection() {
-        sharedCollection = Collection(name: "Their Collection", editable: false)
-        self.collectionChanged()
+        sharedCollection = Collection(name: "Their Collection", curator: "A Music Lover", editable: false)
+        self.objectWillChange.send()
         userCollectionActive = true
     }
     
@@ -245,8 +177,7 @@ class UserData: ObservableObject {
     
     func cueCandidateCollection(recievedCollection: ShareableCollection) {
         
-        candidateCollection = Collection(name: recievedCollection.collectionName, editable: false)
-        candidateCollection!.curator = recievedCollection.collectionCurator
+        candidateCollection = Collection(name: recievedCollection.collectionName, curator: recievedCollection.collectionCurator, editable: false)
         
         for (index, slot) in recievedCollection.collection.enumerated() {
             if slot?.sourceProvider == SourceProvider.appleMusicAlbum {
@@ -263,7 +194,7 @@ class UserData: ObservableObject {
             sharedCollection = candidateCollection!
             candidateCollection = nil
             userCollectionActive = false
-            collectionChanged()
+            self.objectWillChange.send()
         }
     }
     

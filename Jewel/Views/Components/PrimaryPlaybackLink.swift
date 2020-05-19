@@ -18,7 +18,7 @@ struct PrimaryPlaybackLink: View {
         var playbackLink: URL?
         var playbackName: String
         
-        let preferredProvider = OdesliPlatform.allCases[userData.prefs.preferredMusicPlatform]
+        let preferredProvider = OdesliPlatform.allCases[userData.preferences.preferredMusicPlatform]
         
         if let providerLink = userData.activeCollection.slots[slotIndex].playbackLinks?.linksByPlatform[preferredProvider.rawValue] {
             playbackLink = providerLink.url

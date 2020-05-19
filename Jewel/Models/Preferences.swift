@@ -10,7 +10,32 @@ import Foundation
 
 struct Preferences: Codable {
     
-    var preferredMusicPlatform = 0
-    var debugMode = false
+    static let saveKey = "jewelPreferences"
+    var preferredMusicPlatform = 0 {
+        didSet {
+            save()
+        }
+    }
+    var debugMode = false {
+        didSet {
+            save()
+        }
+    }
+    
+    init() {
+        if let savedPreferences = UserDefaults.standard.object(forKey: Self.saveKey) as? Data {
+            print("Loading user preferences")
+            if let decodedPreferences = try? JSONDecoder().decode(Preferences.self, from: savedPreferences) {
+                self = decodedPreferences
+            }
+        }
+    }
+    
+    private func save() {
+        if let encoded = try? JSONEncoder().encode(self) {
+            UserDefaults.standard.set(encoded, forKey: Self.saveKey)
+            print("Saved user preferences")
+        }
+    }
     
 }
