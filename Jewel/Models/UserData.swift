@@ -37,17 +37,13 @@ class UserData: ObservableObject {
     private var userDefaults = UserDefaults.standard
     
     init() {
-
+        
         migrateV1UserDefaults()
         userCollectionActive = true
         
     }
     
     func collectionChanged() {
-        self.objectWillChange.send()
-    }
-    
-    func preferencesChanged() {
         self.objectWillChange.send()
     }
     
@@ -132,7 +128,7 @@ class UserData: ObservableObject {
     }
     
     func ejectSharedCollection() {
-        sharedCollection = Collection.shared
+        sharedCollection = Collection(name: "Their Collection", curator: "A Music Lover", editable: false)
         self.collectionChanged()
         userCollectionActive = true
     }

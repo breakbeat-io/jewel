@@ -134,7 +134,6 @@ struct Options: View {
         .navigationViewStyle(StackNavigationViewStyle())
         .onDisappear {
             self.userData.collectionChanged()
-            self.userData.preferencesChanged()
         }
     }
 }
