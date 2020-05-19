@@ -32,9 +32,7 @@ class UserData: ObservableObject {
     @Published var candidateCollection: Collection?
     @Published var sharedCollectionCued = false
     
-    
     private var userDefaults = UserDefaults.standard
-    private var store: HMV?
     
     init() {
         
@@ -54,8 +52,6 @@ class UserData: ObservableObject {
         if appleMusicApiToken == "" {
             print("No Apple Music API Token Found!")
             throw JewelError.noAppleMusicApiToken
-        } else {
-            store = HMV(storefront: .unitedKingdom, developerToken: appleMusicApiToken)
         }
     }
     
@@ -148,7 +144,7 @@ class UserData: ObservableObject {
     }
     
     func addAlbumToSlot(albumId: String, collection: Collection, slotIndex: Int) {
-        store!.album(id: albumId, completion: {
+        Store.appleMusic.album(id: albumId, completion: {
             (album: Album?, error: Error?) -> Void in
             DispatchQueue.main.async {
                 if album != nil {

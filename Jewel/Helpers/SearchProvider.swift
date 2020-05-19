@@ -14,13 +14,9 @@ class SearchProvider: ObservableObject {
     @Published var results: [Album]?
     
     func search(searchTerm: String) {
-        if let developerToken = Bundle.main.infoDictionary?["APPLE_MUSIC_API_TOKEN"] as? String {
-            let store = HMV(storefront: .unitedKingdom, developerToken: developerToken)
-            
-            store.search(term: searchTerm, limit: 20, types: [.albums]) { storeResults, error in
-                DispatchQueue.main.async {
-                    self.results = storeResults?.albums?.data
-                }
+        Store.appleMusic.search(term: searchTerm, limit: 20, types: [.albums]) { storeResults, error in
+            DispatchQueue.main.async {
+                self.results = storeResults?.albums?.data
             }
         }
     }
