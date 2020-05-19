@@ -11,9 +11,12 @@ import HMV
 
 class UserData: ObservableObject {
     
-    @Published var prefs = Preferences()
+    @Published var preferences = Preferences()
     
     @Published var userCollection = Collection.user
+    @Published var sharedCollection = Collection.shared
+    
+    
     @Published var userCollectionActive = true {
         didSet {
             if userCollectionActive {
@@ -25,7 +28,7 @@ class UserData: ObservableObject {
             }
         }
     }
-    @Published var sharedCollection = Collection.shared
+    
     
     @Published var activeCollection = Collection(name: "My Collection", editable: true) // TODO: Make this optional so I don't haev to give it a crap one just to instantly get rid of it.
     
