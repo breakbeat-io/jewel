@@ -11,12 +11,8 @@ import HMV
 
 class Source: Codable {
     let provider = SourceProvider.appleMusicAlbum
-    var contentId: String
+    var contentId: String?
     var content: Album?
-    
-    init(contentId: String) {
-        self.contentId = contentId
-    }
     
     init(contentId: String, content: Album) {
         self.contentId = contentId
