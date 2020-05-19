@@ -47,14 +47,6 @@ class UserData: ObservableObject {
         
         let decoder = JSONDecoder()
         
-        // load saved user preferences
-        if let savedPreferences = userDefaults.object(forKey: "jewelPreferences") as? Data {
-            print("Loading user preferences")
-            if let decodedPreferences = try? decoder.decode(Preferences.self, from: savedPreferences) {
-                prefs = decodedPreferences
-            }
-        }
-        
         // load saved user collection
         if let savedCollection = userDefaults.object(forKey: "jewelCollection") as? Data {
             print("Loading collection")
@@ -76,12 +68,7 @@ class UserData: ObservableObject {
         
         let encoder = JSONEncoder()
         
-        switch key {
-        case "jewelPreferences":
-            if let encoded = try? encoder.encode(prefs) {
-                userDefaults.set(encoded, forKey: key)
-                print("Saved user preferences")
-            }
+        switch key {    
         case "jewelCollection":
             if let encoded = try? encoder.encode(userCollection) {
                 userDefaults.set(encoded, forKey: key)
@@ -106,7 +93,6 @@ class UserData: ObservableObject {
     
     func preferencesChanged() {
         self.objectWillChange.send()
-        self.saveUserData(key: "jewelPreferences")
     }
     
     fileprivate func migrateV1UserDefaults() {
