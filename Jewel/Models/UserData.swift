@@ -43,15 +43,8 @@ class UserData: ObservableObject {
         
     }
     
-    fileprivate func saveUserData() {
-        userCollection.save()
-        sharedCollection.save()
-    }
-    
     func collectionChanged() {
         self.objectWillChange.send()
-        // just save everything at the moment even if not active - the whole repetition of stuff needs to be changed anyway!
-        self.saveUserData()
     }
     
     func preferencesChanged() {
@@ -64,7 +57,6 @@ class UserData: ObservableObject {
             print("v1.0 Collection Name found ... migrating.")
             userCollection.name = v1CollectionName
             userDefaults.removeObject(forKey: "collectionName")
-            userCollection.save()
         }
         
         if let savedCollection = userDefaults.dictionary(forKey: "savedCollection") {
@@ -75,7 +67,6 @@ class UserData: ObservableObject {
                 }
             }
             userDefaults.removeObject(forKey: "savedCollection")
-            userCollection.save()
         }
         
     }

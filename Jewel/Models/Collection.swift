@@ -11,10 +11,22 @@ import Foundation
 class Collection: Codable {
     
     private var saveKey: String?
-    var name: String
-    var curator: String
-    var slots = [Slot](repeating: Slot(), count: 8)
-    var editable: Bool
+    var name: String {
+        didSet {
+            save()
+        }
+    }
+    var curator: String {
+        didSet {
+            save()
+        }
+    }
+    var slots = [Slot](repeating: Slot(), count: 8) {
+        didSet {
+            save()
+        }
+    }
+    let editable: Bool
     
     static let user = Collection(name: "My Collection", curator: "A Music Lover", editable: true, saveKey: "jewelCollection")
     static let shared = Collection(name: "Their Collection", curator: "A Music Lover", editable: false, saveKey: "jewelSharedCollection")
@@ -45,7 +57,7 @@ class Collection: Codable {
         self.saveKey = saveKey
     }
     
-    func save() {
+    private func save() {
         if saveKey != nil {
             if let encoded = try? JSONEncoder().encode(self) {
                 UserDefaults.standard.set(encoded, forKey: saveKey!)
