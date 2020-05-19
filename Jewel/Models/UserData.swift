@@ -20,10 +20,10 @@ class UserData: ObservableObject {
     @Published var userCollectionActive = true {
         didSet {
             if userCollectionActive {
-                print("Activating User Collection")
+                print("Switching to User Collection")
                 activeCollection = userCollection
             } else {
-                print("Activating Shared Collection")
+                print("Switching to Shared Collection")
                 activeCollection = sharedCollection
             }
         }
