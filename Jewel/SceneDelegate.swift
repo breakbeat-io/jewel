@@ -20,6 +20,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
 
+        // Check that we have an Apple Music API Key else the entire App won't work!
+        let appleMusicApiToken = Bundle.main.infoDictionary?["APPLE_MUSIC_API_TOKEN"] as! String
+        if appleMusicApiToken == "" {
+            print("No Apple Music API Token Found!")
+            exit(0)
+        }
+        
+        
         // Create the SwiftUI view that provides the window contents.
         let contentView = Home()
             .environmentObject(userData)

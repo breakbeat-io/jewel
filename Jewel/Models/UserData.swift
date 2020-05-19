@@ -35,24 +35,12 @@ class UserData: ObservableObject {
     private var userDefaults = UserDefaults.standard
     
     init() {
-        
-        // basically if we can't open the store we're dead in the water so for now may as well crash!
-        try! openStore()
-        
+
         migrateV1UserDefaults()
         loadUserData()
         
         activeCollection = userCollection
         
-    }
-    
-    fileprivate func openStore() throws {
-        
-        let appleMusicApiToken = Bundle.main.infoDictionary?["APPLE_MUSIC_API_TOKEN"] as! String
-        if appleMusicApiToken == "" {
-            print("No Apple Music API Token Found!")
-            throw JewelError.noAppleMusicApiToken
-        }
     }
     
     fileprivate func loadUserData() {
