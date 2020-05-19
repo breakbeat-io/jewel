@@ -39,7 +39,7 @@ class UserData: ObservableObject {
     init() {
 
         migrateV1UserDefaults()
-        activeCollection = userCollection
+        userCollectionActive = true
         
     }
     
