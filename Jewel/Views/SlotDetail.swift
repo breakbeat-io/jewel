@@ -20,7 +20,7 @@ struct SlotDetail: View {
     @State private var showEjectWarning = false
     
     private func slotDetail() -> some View {
-        if userData.activeCollection.slots[slotIndex].source?.album != nil {
+        if userData.activeCollection.slots[slotIndex].source?.content != nil {
             return AnyView(
                 ScrollView {
                     if horizontalSizeClass == .compact {
@@ -42,7 +42,7 @@ struct SlotDetail: View {
         
         slotDetail()
             .navigationBarItems(trailing:
-                IfLet(userData.activeCollection.slots[slotIndex].source?.album) { album in
+                IfLet(userData.activeCollection.slots[slotIndex].source?.content) { album in
                     HStack {
                         if self.userData.activeCollection.editable {
                             Button(action: {

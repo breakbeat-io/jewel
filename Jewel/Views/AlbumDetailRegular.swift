@@ -21,12 +21,12 @@ struct AlbumDetailRegular: View {
                 AlbumCover(slotIndex: slotIndex)
                 PlaybackLinks(slotIndex: slotIndex)
                     .padding(.bottom)
-                IfLet(userData.activeCollection.slots[slotIndex].source?.album?.attributes?.editorialNotes?.standard) { notes in
+                IfLet(userData.activeCollection.slots[slotIndex].source?.content?.attributes?.editorialNotes?.standard) { notes in
                     Text(notes)
                 }
             }
             VStack {
-                IfLet(userData.activeCollection.slots[slotIndex].source?.album) { album in
+                IfLet(userData.activeCollection.slots[slotIndex].source?.content) { album in
                     AlbumTrackList(slotIndex: self.slotIndex)
                 }.padding(.horizontal)
                 Spacer()

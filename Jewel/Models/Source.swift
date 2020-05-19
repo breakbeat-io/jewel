@@ -12,7 +12,7 @@ import HMV
 class Source: Codable {
     let sourceProvider = SourceProvider.appleMusicAlbum
     var sourceReference: String
-    var album: Album?
+    var content: Album?
     
     init(sourceReference: String) {
         self.sourceReference = sourceReference
@@ -20,6 +20,7 @@ class Source: Codable {
     
     init(sourceReference: String, album: Album) {
         self.sourceReference = sourceReference
-        self.album = album
+        self.content = album
     }
+    
 }

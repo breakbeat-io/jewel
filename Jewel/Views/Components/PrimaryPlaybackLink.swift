@@ -24,7 +24,7 @@ struct PrimaryPlaybackLink: View {
             playbackLink = providerLink.url
             playbackName = preferredProvider.friendlyName
         } else {
-            playbackLink = userData.activeCollection.slots[slotIndex].source?.album?.attributes?.url
+            playbackLink = userData.activeCollection.slots[slotIndex].source?.content?.attributes?.url
             playbackName = OdesliPlatform.appleMusic.friendlyName
         }
         

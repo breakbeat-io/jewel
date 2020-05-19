@@ -209,7 +209,7 @@ class UserData: ObservableObject {
         var shareableSlots = [ShareableSlot?]()
         
         for slot in activeCollection.slots {
-            if let content = slot.source?.album {
+            if let content = slot.source?.content {
                 let slot = ShareableSlot(sourceProvider: slot.source!.sourceProvider, sourceRef: content.id)
                 shareableSlots.append(slot)
             } else {

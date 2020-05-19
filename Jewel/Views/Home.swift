@@ -16,7 +16,7 @@ struct Home: View {
     @State private var showShareSheet = false
     
     private func slotViewForId(slotIndex: Int) -> some View {
-        if userData.activeCollection.slots[slotIndex].source?.album == nil {
+        if userData.activeCollection.slots[slotIndex].source?.content == nil {
             return AnyView(EmptySlot(slotIndex: slotIndex))
         } else {
             return AnyView(FilledSlot(slotIndex: slotIndex))
