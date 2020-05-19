@@ -13,7 +13,7 @@ class UserData: ObservableObject {
     
     @Published var prefs = Preferences()
     
-    @Published var userCollection = Collection(name: "My Collection", editable: true)
+    @Published var userCollection = Collection.user
     @Published var userCollectionActive = true {
         didSet {
             if userCollectionActive {
@@ -25,7 +25,7 @@ class UserData: ObservableObject {
             }
         }
     }
-    @Published var sharedCollection = Collection(name: "Their Collection", editable: false)
+    @Published var sharedCollection = Collection.shared
     
     @Published var activeCollection = Collection(name: "My Collection", editable: true) // TODO: Make this optional so I don't haev to give it a crap one just to instantly get rid of it.
     
@@ -37,31 +37,9 @@ class UserData: ObservableObject {
     init() {
 
         migrateV1UserDefaults()
-        loadUserData()
         
         activeCollection = userCollection
         
-    }
-    
-    fileprivate func loadUserData() {
-        
-        let decoder = JSONDecoder()
-        
-        // load saved user collection
-        if let savedCollection = userDefaults.object(forKey: "jewelCollection") as? Data {
-            print("Loading collection")
-            if let decodedCollection = try? decoder.decode(Collection.self, from: savedCollection) {
-                userCollection = decodedCollection
-            }
-        }
-        
-        // load saved user collection
-        if let savedSharedCollection = userDefaults.object(forKey: "jewelSharedCollection") as? Data {
-            print("Loading shared collection")
-            if let decodedCollection = try? decoder.decode(Collection.self, from: savedSharedCollection) {
-                sharedCollection = decodedCollection
-            }
-        }
     }
     
     fileprivate func saveUserData(key: String) {
