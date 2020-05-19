@@ -136,7 +136,7 @@ class UserData: ObservableObject {
             (album: Album?, error: Error?) -> Void in
             DispatchQueue.main.async {
                 if album != nil {
-                    let source = Source(sourceReference: album!.id, album: album)
+                    let source = Source(sourceReference: album!.id, album: album!)
                     let newSlot = Slot(source: source)
                     collection.slots[slotIndex] = newSlot
                     if let baseUrl = album?.attributes?.url {
