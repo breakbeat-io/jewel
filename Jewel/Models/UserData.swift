@@ -34,8 +34,6 @@ class UserData: ObservableObject {
     @Published var candidateCollection: Collection?
     @Published var sharedCollectionCued = false
     
-    private var userDefaults = UserDefaults.standard
-    
     init() {
         
         migrateV1UserDefaults()
@@ -45,20 +43,20 @@ class UserData: ObservableObject {
     
     fileprivate func migrateV1UserDefaults() {
         
-        if let v1CollectionName = userDefaults.string(forKey: "collectionName") {
+        if let v1CollectionName = UserDefaults.standard.string(forKey: "collectionName") {
             print("v1.0 Collection Name found ... migrating.")
             userCollection.name = v1CollectionName
-            userDefaults.removeObject(forKey: "collectionName")
+            UserDefaults.standard.removeObject(forKey: "collectionName")
         }
         
-        if let savedCollection = userDefaults.dictionary(forKey: "savedCollection") {
+        if let savedCollection = UserDefaults.standard.dictionary(forKey: "savedCollection") {
             print("v1.0 Saved Collection found ... migrating.")
             for slotIndex in 0..<userCollection.slots.count {
                 if let albumId = savedCollection[String(slotIndex)] {
                     addAlbumToSlot(albumId: albumId as! String, collection: userCollection, slotIndex: slotIndex)
                 }
             }
-            userDefaults.removeObject(forKey: "savedCollection")
+            UserDefaults.standard.removeObject(forKey: "savedCollection")
         }
         
     }
@@ -131,8 +129,8 @@ class UserData: ObservableObject {
     
     func reset() {
         let domain = Bundle.main.bundleIdentifier!
-        userDefaults.removePersistentDomain(forName: domain)
-        userDefaults.synchronize()
+        UserDefaults.standard.removePersistentDomain(forName: domain)
+        UserDefaults.standard.synchronize()
         exit(1)
     }
     
