@@ -24,12 +24,12 @@ struct Home: View {
         
         NavigationView {
             GeometryReader { geo in
-                List(self.slots.indices, id: \.self) { index in
+                List(self.slots.indices, id: \.self) { slotIndex in
                     Group {
-                        if self.slots[index].source?.content == nil {
-                            EmptySlot(slotIndex: index)
+                        if self.slots[slotIndex].source?.content == nil {
+                            EmptySlot(slotIndex: slotIndex)
                         } else {
-                            FilledSlot(slotIndex: index)
+                            FilledSlot(slotIndex: slotIndex)
                         }
                     }
                     .frame(height: (geo.size.height - geo.safeAreaInsets.top - geo.safeAreaInsets.bottom) / CGFloat(self.slots.count))
