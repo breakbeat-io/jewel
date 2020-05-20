@@ -19,7 +19,7 @@ struct FilledSlot: View {
     var body: some View {
         
         ZStack {
-            AlbumCard(slotIndex: self.slotIndex)
+            AlbumCard(slotIndex: slotIndex)
                 .onTapGesture {
                     self.tapped = 1
             }
@@ -29,9 +29,9 @@ struct FilledSlot: View {
                 }
             }
             NavigationLink(
-                destination: SlotDetail(slotIndex: self.slotIndex),
+                destination: SlotDetail(slotIndex: slotIndex),
                 tag: 1,
-                selection: self.$tapped
+                selection: $tapped
             ){
                 EmptyView()
             }
