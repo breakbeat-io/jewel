@@ -16,57 +16,33 @@ struct Home: View {
     @State private var showOptions = false
     @State private var showShareSheet = false
     
+    private var slots: [Slot] {
+        return userData.activeCollection.slots
+    }
+    
     var body: some View {
         
         NavigationView {
             GeometryReader { geo in
-                List(self.userData.activeCollection.slots.indices, id: \.self) { index in
+                List(self.slots.indices, id: \.self) { index in
                     Group {
-                        if self.userData.activeCollection.slots[index].source?.content == nil {
+                        if self.slots[index].source?.content == nil {
                             EmptySlot(slotIndex: index)
                         } else {
                             FilledSlot(slotIndex: index)
                         }
                     }
-                    .frame(height: (geo.size.height - geo.safeAreaInsets.top - geo.safeAreaInsets.bottom) / CGFloat(self.userData.activeCollection.slots.count))
-                }
-                .sheet(isPresented: self.$showOptions) {
-                    Options().environmentObject(self.userData)
+                    .frame(height: (geo.size.height - geo.safeAreaInsets.top - geo.safeAreaInsets.bottom) / CGFloat(self.slots.count))
                 }
                 .onAppear {
                     UITableView.appearance().separatorStyle = .none
                 }
                 .navigationBarTitle(self.userData.activeCollection.name)
-                .navigationBarItems(leading:
-                    Button(action: {
-                        self.showOptions = true
-                    }) {
-                        Image(systemName: "slider.horizontal.3")
-                    }
-                    .padding(.trailing)
-                    .padding(.vertical)
+                .navigationBarItems(
+                    leading:
+                    HomeButtonsLeading()
                     ,trailing:
-                    HStack {
-                        Button(action: {
-                            self.showShareSheet = true
-                        }) {
-                            Image(systemName: "square.and.arrow.up")
-                        }
-                        .padding(.leading)
-                        .padding(.vertical)
-                        .disabled(self.userData.activeCollection.slots.filter( { $0.source != nil }).count == 0)
-                        .sheet(isPresented: self.$showShareSheet) {
-                            ShareSheet(activityItems: [self.userData.createShareUrl()])
-                        }
-                        Button(action: {
-                            self.userData.userCollectionActive.toggle()
-                        }) {
-                            Image(systemName: "arrow.2.squarepath")
-                        }
-                        .padding(.leading)
-                        .padding(.vertical)
-                        .disabled(self.userData.sharedCollection.slots.filter( { $0.source != nil }).count == 0)
-                    }
+                    HomeButtonsTrailing()
                 )
             }
             .alert(isPresented: $userData.sharedCollectionCued) {
