@@ -23,9 +23,9 @@ struct SlotDetail: View {
             if userData.activeCollection.slots[slotIndex].source?.content != nil {
                 ScrollView {
                     if horizontalSizeClass == .compact {
-                        AlbumDetailCompact(slotIndex: slotIndex)
+                        SourceDetailCompact(slotIndex: slotIndex)
                     } else {
-                        AlbumDetailRegular(slotIndex: slotIndex)
+                        SourceDetailRegular(slotIndex: slotIndex)
                     }
                 }
             } else {
