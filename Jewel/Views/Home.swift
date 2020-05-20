@@ -21,7 +21,6 @@ struct Home: View {
     }
     
     var body: some View {
-        
         NavigationView {
             GeometryReader { geo in
                 List(self.slots.indices, id: \.self) { slotIndex in

@@ -47,6 +47,7 @@
 		D2D40B4F245738220018E066 /* AlbumTrackList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D40B4E245738220018E066 /* AlbumTrackList.swift */; };
 		D2D4EBB62475DE650023EBE3 /* HomeButtonsTrailing.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D4EBB52475DE650023EBE3 /* HomeButtonsTrailing.swift */; };
 		D2D4EBB82475DF6F0023EBE3 /* HomeButtonsLeading.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D4EBB72475DF6F0023EBE3 /* HomeButtonsLeading.swift */; };
+		D2D4EBBA2475E5560023EBE3 /* SlotDetailButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D4EBB92475E5560023EBE3 /* SlotDetailButtons.swift */; };
 		D2D5875E244E391200E982E8 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D5875D244E391200E982E8 /* UserData.swift */; };
 		D2D99C7924740B7C003CAB1A /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D99C7824740B7C003CAB1A /* Store.swift */; };
 		D2E690F62450E36800B981F2 /* Slot.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E690F52450E36800B981F2 /* Slot.swift */; };
@@ -122,6 +123,7 @@
 		D2D40B4E245738220018E066 /* AlbumTrackList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumTrackList.swift; sourceTree = "<group>"; };
 		D2D4EBB52475DE650023EBE3 /* HomeButtonsTrailing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeButtonsTrailing.swift; sourceTree = "<group>"; };
 		D2D4EBB72475DF6F0023EBE3 /* HomeButtonsLeading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeButtonsLeading.swift; sourceTree = "<group>"; };
+		D2D4EBB92475E5560023EBE3 /* SlotDetailButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlotDetailButtons.swift; sourceTree = "<group>"; };
 		D2D5875D244E391200E982E8 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		D2D99C7824740B7C003CAB1A /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		D2E690F52450E36800B981F2 /* Slot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Slot.swift; sourceTree = "<group>"; };
@@ -236,6 +238,7 @@
 				D2E690F92450ECBB00B981F2 /* EmptySlot.swift */,
 				D2E690FB2450EF9A00B981F2 /* FilledSlot.swift */,
 				D26077BE24605D59005883ED /* SlotDetail.swift */,
+				D2D4EBB92475E5560023EBE3 /* SlotDetailButtons.swift */,
 				D26B5621243E80450098E9E4 /* AlbumDetailCompact.swift */,
 				D2A31B0824631F5100D6BF4A /* AlbumDetailRegular.swift */,
 				D26077C224606711005883ED /* Search */,
@@ -480,6 +483,7 @@
 				D2BD46572469895500AD3F30 /* Preferences.swift in Sources */,
 				D2A31B0924631F5100D6BF4A /* AlbumDetailRegular.swift in Sources */,
 				D28358872452D3CF00411AC9 /* SearchResultsList.swift in Sources */,
+				D2D4EBBA2475E5560023EBE3 /* SlotDetailButtons.swift in Sources */,
 				D2D99C7924740B7C003CAB1A /* Store.swift in Sources */,
 				D28358832451D3C700411AC9 /* Search.swift in Sources */,
 				D2E690F82450E98E00B981F2 /* IfLet.swift in Sources */,
