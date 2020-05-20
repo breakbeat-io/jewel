@@ -10,17 +10,21 @@ import SwiftUI
 import KingfisherSwiftUI
 import HMV
 
-struct AlbumCard: View {
+struct SourceCard: View {
     
     @EnvironmentObject var userData: UserData
     var slotIndex: Int
+    
+    var attributes: AlbumAttributes? {
+        return userData.activeCollection.slots[slotIndex].source?.content?.attributes
+    }
     
     var body: some View {
         
         Rectangle()
             .foregroundColor(.clear)
             .background(
-                IfLet(userData.activeCollection.slots[slotIndex].source?.content?.attributes?.artwork) { artwork in
+                IfLet(attributes?.artwork) { artwork in
                     KFImage(artwork.url(forWidth: 1000))
                         .placeholder {
                             RoundedRectangle(cornerRadius: 4)
@@ -33,7 +37,7 @@ struct AlbumCard: View {
             .cornerRadius(4)
             .overlay(
                 VStack(alignment: .leading) {
-                    IfLet(userData.activeCollection.slots[slotIndex].source?.content?.attributes) { attributes in
+                    IfLet(attributes) { attributes in
                         Text(attributes.name)
                             .font(.callout)
                             .fontWeight(.bold)

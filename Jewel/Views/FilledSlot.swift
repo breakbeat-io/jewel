@@ -19,7 +19,7 @@ struct FilledSlot: View {
     var body: some View {
         
         ZStack {
-            AlbumCard(slotIndex: slotIndex)
+            SourceCard(slotIndex: slotIndex)
                 .onTapGesture {
                     self.tapped = 1
             }
