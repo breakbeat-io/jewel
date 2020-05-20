@@ -12,6 +12,7 @@ import HMV
 
 struct SlotDetail: View {
     
+    @Environment(\.presentationMode) var presentationMode // Needed here as SwiftUI bug will disable navigation buttons if any subview under here dismisses a sheet https://stackoverflow.com/a/61311279
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
     @EnvironmentObject var userData: UserData
     @EnvironmentObject var searchProvider: SearchProvider
