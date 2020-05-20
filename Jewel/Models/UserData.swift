@@ -177,7 +177,9 @@ class UserData: ObservableObject {
     
     func cueCandidateCollection(recievedCollection: ShareableCollection) {
         
-        candidateCollection = Collection(name: recievedCollection.collectionName, curator: recievedCollection.collectionCurator, editable: false)
+        candidateCollection = Collection.shared
+        candidateCollection?.name = recievedCollection.collectionName
+        candidateCollection?.curator = recievedCollection.collectionCurator
         
         for (index, slot) in recievedCollection.collection.enumerated() {
             if slot?.sourceProvider == SourceProvider.appleMusicAlbum {

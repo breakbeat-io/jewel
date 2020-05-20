@@ -9,14 +9,9 @@
 import Foundation
 import HMV
 
-class Source: Codable {
+struct Source: Codable {
     let provider = SourceProvider.appleMusicAlbum
     var contentId: String?
     var content: Album?
-    
-    init(contentId: String, content: Album) {
-        self.contentId = contentId
-        self.content = content
-    }
     
 }
