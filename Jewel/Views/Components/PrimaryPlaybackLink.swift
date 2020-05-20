@@ -53,12 +53,3 @@ struct PrimaryPlaybackLink: View {
     }
 }
 
-struct PlaybackLink_Previews: PreviewProvider {
-    
-    static let userData = UserData()
-    
-    static var previews: some View {
-        PrimaryPlaybackLink(slotIndex: 0).environmentObject(userData)
-    }
-    
-}

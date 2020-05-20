@@ -44,11 +44,3 @@ struct FilledSlot: View {
     }
 }
 
-struct FilledSlot_Previews: PreviewProvider {
-    
-    static let userData = UserData()
-    
-    static var previews: some View {
-        FilledSlot(slotIndex: 0).environmentObject(userData)
-    }
-}

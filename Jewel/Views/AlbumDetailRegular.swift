@@ -36,11 +36,3 @@ struct AlbumDetailRegular: View {
     }
 }
 
-struct AlbumDetailRegular_Previews: PreviewProvider {
-    
-    static let userData = UserData()
-    
-    static var previews: some View {
-        AlbumDetailRegular(slotIndex: 0).environmentObject(userData)
-    }
-}

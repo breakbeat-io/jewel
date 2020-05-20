@@ -56,12 +56,3 @@ struct AlbumCard: View {
             .shadow(radius: 3)
     }
 }
-
-struct AlbumCard_Previews: PreviewProvider {
-    
-    static let userData = UserData()
-    
-    static var previews: some View {
-        AlbumCard(slotIndex: 0).environmentObject(userData)
-    }
-}

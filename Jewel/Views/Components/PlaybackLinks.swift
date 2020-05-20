@@ -38,12 +38,3 @@ struct PlaybackLinks: View {
         }
     }
 }
-
-struct PlaybackLinks_Previews: PreviewProvider {
-    
-    static let userData = UserData()
-    
-    static var previews: some View {
-        PlaybackLinks(slotIndex: 0).environmentObject(userData)
-    }
-}

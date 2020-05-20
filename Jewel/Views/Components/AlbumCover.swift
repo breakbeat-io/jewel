@@ -38,8 +38,3 @@ struct AlbumCover: View {
     }
 }
 
-struct AlbumCover_Previews: PreviewProvider {
-    static var previews: some View {
-        AlbumCover(slotIndex: 1)
-    }
-}

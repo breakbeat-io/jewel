@@ -78,11 +78,3 @@ struct SlotDetail: View {
     }
 }
 
-struct SlotDetail_Previews: PreviewProvider {
-    
-    static let userData = UserData()
-    
-    static var previews: some View {
-        SlotDetail(slotIndex: 1).environmentObject(userData)
-    }
-}

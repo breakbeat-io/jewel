@@ -28,12 +28,3 @@ struct AlbumDetailCompact: View {
         .padding()
     }
 }
-
-struct AlbumDetail_Previews: PreviewProvider {
-    
-    static let userData = UserData()
-    
-    static var previews: some View {
-        AlbumDetailCompact(slotIndex: 0).environmentObject(userData)
-    }
-}

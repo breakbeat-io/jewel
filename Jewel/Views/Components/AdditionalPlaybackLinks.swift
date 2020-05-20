@@ -64,12 +64,3 @@ struct AdditionalPlaybackLinks: View {
         return additionalPlaybackLinksView
     }
 }
-
-struct AlternativePlaybackLinks_Previews: PreviewProvider {
-    
-    static let userData = UserData()
-    
-    static var previews: some View {
-        AdditionalPlaybackLinks(slotIndex: 0).environmentObject(userData)
-    }
-}

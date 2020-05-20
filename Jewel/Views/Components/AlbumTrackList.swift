@@ -29,12 +29,3 @@ struct AlbumTrackList: View {
         return albumTrackList
     }
 }
-
-struct AlbumTrackList_Previews: PreviewProvider {
-    
-    static let userData = UserData()
-    
-    static var previews: some View {
-        AlbumTrackList(slotIndex: 0).environmentObject(userData)
-    }
-}

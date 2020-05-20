@@ -34,9 +34,3 @@ extension Bundle {
     }
 }
 
-
-struct Footer_Previews: PreviewProvider {
-    static var previews: some View {
-        Footer()
-    }
-}

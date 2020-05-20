@@ -137,12 +137,3 @@ struct Options: View {
         }
     }
 }
-
-struct Options_Previews: PreviewProvider {
-    
-    static let userData = UserData()
-    
-    static var previews: some View {
-        Options().environmentObject(userData)
-    }
-}

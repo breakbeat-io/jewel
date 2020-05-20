@@ -12,6 +12,7 @@ struct Home: View {
     
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var userData: UserData
+    
     @State private var showOptions = false
     @State private var showShareSheet = false
     
@@ -71,7 +72,7 @@ struct Home: View {
                 )
             }
             .alert(isPresented: $userData.sharedCollectionCued) {
-                Alert(title: Text("Shared collection received from \(userData.candidateCollection?.curator ?? "another music lover")!"),
+                Alert(title: Text("Shared collection received from \(userData.candidateCollection?.curator ?? "a discerning curator")!"),
                       message: Text("Would you like to replace your current shared collection?"),
                       primaryButton: .cancel(Text("Cancel")),
                       secondaryButton: .default(Text("Replace").bold()) {
@@ -82,14 +83,5 @@ struct Home: View {
             Start()
         }
         .statusBar(hidden: true)
-    }
-}
-
-struct Home_Previews: PreviewProvider {
-    
-    static let userData = UserData()
-    
-    static var previews: some View {
-        Home().environmentObject(userData)
     }
 }
