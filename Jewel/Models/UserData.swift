@@ -16,6 +16,8 @@ class UserData: ObservableObject {
     @Published var userCollection = Collection.user
     @Published var sharedCollection = Collection.shared
     
+    @Published var activeCollection: Collection! = nil  // force to nil, is replaced in init. feels bad.
+    
     @Published var userCollectionActive = true {
         didSet {
             if userCollectionActive {
@@ -27,9 +29,6 @@ class UserData: ObservableObject {
             }
         }
     }
-    
-    
-    @Published var activeCollection: Collection! = nil  // force to nil, is replaced in init. feels bad.
     
     @Published var candidateCollection: Collection?
     @Published var sharedCollectionCued = false
@@ -53,7 +52,7 @@ class UserData: ObservableObject {
             print("v1.0 Saved Collection found ... migrating.")
             for slotIndex in 0..<userCollection.slots.count {
                 if let albumId = savedCollection[String(slotIndex)] {
-                    addAlbumToSlot(albumId: albumId as! String, collection: userCollection, slotIndex: slotIndex)
+                    addContentToSlot(contentId: albumId as! String, collection: userCollection, slotIndex: slotIndex)
                 }
             }
             UserDefaults.standard.removeObject(forKey: "savedCollection")
@@ -61,8 +60,8 @@ class UserData: ObservableObject {
         
     }
     
-    func addAlbumToSlot(albumId: String, collection: Collection, slotIndex: Int) {
-        Store.appleMusic.album(id: albumId, completion: {
+    func addContentToSlot(contentId: String, collection: Collection, slotIndex: Int) {
+        Store.appleMusic.album(id: contentId, completion: {
             (album: Album?, error: Error?) -> Void in
             DispatchQueue.main.async {
                 if album != nil {
@@ -181,7 +180,7 @@ class UserData: ObservableObject {
         
         for (index, slot) in recievedCollection.collection.enumerated() {
             if slot?.sourceProvider == SourceProvider.appleMusicAlbum {
-                addAlbumToSlot(albumId: slot!.sourceRef, collection: candidateCollection!, slotIndex: index)
+                addContentToSlot(contentId: slot!.sourceRef, collection: candidateCollection!, slotIndex: index)
             }
         }
         

@@ -45,7 +45,7 @@ struct SearchResultsList: View {
                         }
                         Spacer()
                         Button(action: {
-                            self.userData.addAlbumToSlot(albumId: albums[i].id, collection: self.userData.activeCollection, slotIndex: self.slotIndex)
+                            self.userData.addContentToSlot(contentId: albums[i].id, collection: self.userData.activeCollection, slotIndex: self.slotIndex)
                             self.presentationMode.wrappedValue.dismiss()
                         }, label:{
                             Image(systemName: "plus.circle")
