@@ -8,15 +8,20 @@
 
 import SwiftUI
 import KingfisherSwiftUI
+import HMV
 
 struct AlbumCover: View {
     
     @EnvironmentObject var userData: UserData
     var slotIndex: Int
     
+    var attributes: AlbumAttributes? {
+        return userData.activeCollection.slots[slotIndex].source?.content?.attributes
+    }
+    
     var body: some View {
         VStack(alignment: .leading) {
-            IfLet(userData.activeCollection.slots[slotIndex].source?.content?.attributes) { attributes in
+            IfLet(attributes) { attributes in
                 KFImage(attributes.artwork.url(forWidth: 1000))
                     .placeholder {
                         RoundedRectangle(cornerRadius: 4)

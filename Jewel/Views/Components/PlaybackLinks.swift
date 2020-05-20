@@ -13,13 +13,20 @@ struct PlaybackLinks: View {
     @EnvironmentObject var userData: UserData
     var slotIndex: Int
     
+    var url: URL? {
+        return userData.activeCollection.slots[slotIndex].source?.content?.attributes?.url
+    }
+    var playbackLinks: OdesliResponse? {
+        return userData.activeCollection.slots[slotIndex].playbackLinks
+    }
+    
     @State private var showAdditionalLinks = false
     
     var body: some View {
-        IfLet(userData.activeCollection.slots[slotIndex].source?.content?.attributes?.url) { url in
-            ZStack {
+        ZStack {
+            if url != nil {
                 PrimaryPlaybackLink(slotIndex: self.slotIndex)
-                if self.userData.activeCollection.slots[self.slotIndex].playbackLinks != nil {
+                if playbackLinks != nil {
                     HStack {
                         Spacer()
                         Button(action: {
