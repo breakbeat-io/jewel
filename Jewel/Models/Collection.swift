@@ -11,6 +11,8 @@ import Foundation
 class Collection: Codable {
     
     private var saveKey: String?
+    private var numberOfSlots = 8
+    
     var name: String {
         didSet {
             save()
@@ -21,7 +23,7 @@ class Collection: Codable {
             save()
         }
     }
-    var slots = [Slot](repeating: Slot(), count: 8) {
+    var slots = [Slot]() {
         didSet {
             save()
         }
@@ -35,19 +37,24 @@ class Collection: Codable {
         self.name = name
         self.curator = curator
         self.editable = editable
+        
+        initialiseSlots()
     }
     
     init(name: String, curator: String, editable: Bool, saveKey: String) {
         
         if let savedCollection = UserDefaults.standard.object(forKey: saveKey) as? Data {
-            print("Loading collection: \(saveKey)")
-            if let decodedCollection = try? JSONDecoder().decode(Collection.self, from: savedCollection) {
+            do {
+                let decodedCollection = try JSONDecoder().decode(Collection.self, from: savedCollection)
                 self.saveKey = saveKey
                 self.name = decodedCollection.name
                 self.curator = decodedCollection.curator
                 self.slots = decodedCollection.slots
                 self.editable = decodedCollection.editable
+                print("Loaded collection: \(saveKey)")
                 return
+            } catch {
+                print(error)
             }
         }
         
@@ -55,13 +62,25 @@ class Collection: Codable {
         self.curator = curator
         self.editable = editable
         self.saveKey = saveKey
+        
+        initialiseSlots()
+    }
+    
+    private func initialiseSlots() {
+        for _ in 0..<numberOfSlots {
+            let slot = Slot()
+            slots.append(slot)
+        }
     }
     
     private func save() {
         if saveKey != nil {
-            if let encoded = try? JSONEncoder().encode(self) {
+            do {
+                let encoded = try JSONEncoder().encode(self)
                 UserDefaults.standard.set(encoded, forKey: saveKey!)
                 print("Saved collection: \(saveKey!)")
+            } catch {
+                print(error)
             }
         }
     }
