@@ -16,21 +16,19 @@ struct Home: View {
     @State private var showOptions = false
     @State private var showShareSheet = false
     
-    private func slotViewForId(slotIndex: Int) -> some View {
-        if userData.activeCollection.slots[slotIndex].source?.content == nil {
-            return AnyView(EmptySlot(slotIndex: slotIndex))
-        } else {
-            return AnyView(FilledSlot(slotIndex: slotIndex))
-        }
-    }
-    
     var body: some View {
         
         NavigationView {
             GeometryReader { geo in
                 List(self.userData.activeCollection.slots.indices, id: \.self) { index in
-                    self.slotViewForId(slotIndex: index)
-                        .frame(height: (geo.size.height - geo.safeAreaInsets.top - geo.safeAreaInsets.bottom) / CGFloat(self.userData.activeCollection.slots.count))
+                    Group {
+                        if self.userData.activeCollection.slots[index].source?.content == nil {
+                            EmptySlot(slotIndex: index)
+                        } else {
+                            FilledSlot(slotIndex: index)
+                        }
+                    }
+                    .frame(height: (geo.size.height - geo.safeAreaInsets.top - geo.safeAreaInsets.bottom) / CGFloat(self.userData.activeCollection.slots.count))
                 }
                 .sheet(isPresented: self.$showOptions) {
                     Options().environmentObject(self.userData)
