@@ -13,11 +13,12 @@ import HMV
 struct SearchResultsList: View {
     
     @Environment(\.presentationMode) var presentationMode
+    
     @EnvironmentObject var userData: UserData
     @EnvironmentObject var searchProvider: SearchProvider
-    var slotIndex: Int
     
-    var searchResults: [Album]? {
+    var slotIndex: Int
+    private var searchResults: [Album]? {
         searchProvider.results
     }
     

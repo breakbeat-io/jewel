@@ -10,7 +10,6 @@ import SwiftUI
 
 struct Footer: View {
     var body: some View {
-        
         VStack {
             Text("🎵 + 📱 = 🙌")
                 .padding(.bottom)
@@ -21,16 +20,3 @@ struct Footer: View {
         .font(.footnote)
     }
 }
-
-extension Bundle {
-    var releaseVersionNumber: String? {
-        return infoDictionary?["CFBundleShortVersionString"] as? String
-    }
-    var buildVersionNumber: String? {
-        return infoDictionary?["CFBundleVersion"] as? String
-    }
-    var buildNumber: String {
-        return "v\(releaseVersionNumber ?? "0") (\(buildVersionNumber ?? "0"))"
-    }
-}
-

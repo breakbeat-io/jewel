@@ -11,22 +11,22 @@ import SwiftUI
 struct PlaybackLinks: View {
     
     @EnvironmentObject var userData: UserData
-    var slotIndex: Int
-    
-    var url: URL? {
-        userData.activeCollection.slots[slotIndex].source?.content?.attributes?.url
-    }
-    var playbackLinks: OdesliResponse? {
-        userData.activeCollection.slots[slotIndex].playbackLinks
-    }
     
     @State private var showAdditionalLinks = false
     
+    var slotIndex: Int
+    private var url: URL? {
+        userData.activeCollection.slots[slotIndex].source?.content?.attributes?.url
+    }
+    private var playbackLinks: OdesliResponse? {
+        userData.activeCollection.slots[slotIndex].playbackLinks
+    }
+    
     var body: some View {
         ZStack {
-            if url != nil {
+            IfLet(url) { url in
                 PrimaryPlaybackLink(slotIndex: self.slotIndex)
-                if playbackLinks != nil {
+                IfLet(self.playbackLinks) { links in
                     HStack {
                         Spacer()
                         Button(action: {

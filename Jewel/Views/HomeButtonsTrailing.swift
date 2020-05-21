@@ -22,7 +22,6 @@ struct HomeButtonsTrailing: View {
     }
     
     var body: some View {
-        
         HStack {
             Button(action: {
                 self.showShareSheet = true

@@ -12,13 +12,19 @@ import HMV
 struct Search: View {
     
     @Environment(\.presentationMode) var presentationMode
+    
     @EnvironmentObject var searchProvider: SearchProvider
+    
     @State private var showCancelButton: Bool = false
+    
+    private var searchResults: [Album]? {
+        searchProvider.results
+    }
+    
     var slotIndex: Int
     
     var body: some View {
         VStack(alignment: .leading) {
-            // action buttons
             HStack {
                 Spacer()
                 Button(action: {
@@ -27,12 +33,10 @@ struct Search: View {
                     Text("Cancel")
                 }
             }.padding()
-            //search box
             SearchBar()
-            // results
-            if searchProvider.results != nil {
+            IfLet(searchResults) { results in
                 SearchResultsList(
-                    slotIndex: slotIndex
+                    slotIndex: self.slotIndex
                 )
             }
             Spacer()

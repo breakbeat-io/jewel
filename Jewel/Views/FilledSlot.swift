@@ -12,12 +12,13 @@ struct FilledSlot: View {
     
     @EnvironmentObject var userData: UserData
     @EnvironmentObject var searchProvider: SearchProvider
-    var slotIndex: Int
+    
     @State private var tapped: Int? = 0
     @State private var showSearch = false
     
+    var slotIndex: Int
+    
     var body: some View {
-        
         ZStack {
             SourceCard(slotIndex: slotIndex)
                 .onTapGesture {

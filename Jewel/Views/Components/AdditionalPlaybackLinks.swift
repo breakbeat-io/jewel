@@ -11,13 +11,14 @@ import SwiftUI
 struct AdditionalPlaybackLinks: View {
     
     @Environment(\.presentationMode) var presentationMode
-    @EnvironmentObject var userData: UserData
-    var slotIndex: Int
     
-    var availablePlatforms: [OdesliPlatform] {
+    @EnvironmentObject var userData: UserData
+    
+    var slotIndex: Int
+    private var availablePlatforms: [OdesliPlatform] {
         OdesliPlatform.allCases.filter { userData.activeCollection.slots[slotIndex].playbackLinks?.linksByPlatform[$0.rawValue] != nil }
     }
-    var platformLinks: [String : OdesliLink]? {
+    private var platformLinks: [String : OdesliLink]? {
         userData.activeCollection.slots[slotIndex].playbackLinks?.linksByPlatform
     }
     

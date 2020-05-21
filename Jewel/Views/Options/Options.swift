@@ -11,7 +11,9 @@ import SwiftUI
 struct Options: View {
     
     @Environment(\.presentationMode) var presentationMode
+    
     @EnvironmentObject var userData: UserData
+    
     @State private var showEjectMyCollectionWarning = false
     @State private var showEjectSharedCollectionWarning = false
     @State private var showLoadRecommendationsAlert = false

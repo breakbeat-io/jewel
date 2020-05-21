@@ -13,9 +13,9 @@ import HMV
 struct AlbumCover: View {
     
     @EnvironmentObject var userData: UserData
-    var slotIndex: Int
     
-    var attributes: AlbumAttributes? {
+    var slotIndex: Int
+    private var attributes: AlbumAttributes? {
         userData.activeCollection.slots[slotIndex].source?.content?.attributes
     }
     

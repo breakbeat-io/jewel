@@ -12,26 +12,26 @@ import HMV
 struct DiscTrackList: View {
     
     @EnvironmentObject var userData: UserData
+    
     var slotIndex: Int
     var discNumber: Int
     var withTitle: Bool
-    
-    var albumArtist: String? {
+    private var albumArtist: String? {
         userData.activeCollection.slots[slotIndex].source?.content?.attributes?.artistName
     }
-    var discTracks: [Track]? {
+    private var discTracks: [Track]? {
         userData.activeCollection.slots[slotIndex].source?.content?.relationships?.tracks.data?.filter { $0.attributes?.discNumber == discNumber }
     }
     
     var body: some View {
-        VStack(alignment: .leading) {
-            if discTracks != nil {
-                if withTitle {
-                    Text("Disc \(discNumber)")
+        IfLet(discTracks) { discTracks in
+            VStack(alignment: .leading) {
+                if self.withTitle {
+                    Text("Disc \(self.discNumber)")
                         .fontWeight(.bold)
                         .padding(.vertical)
                 }
-                ForEach(discTracks!) { track in
+                ForEach(discTracks) { track in
                     IfLet(track.attributes) { attributes in
                         HStack {
                             Text(String(attributes.trackNumber))

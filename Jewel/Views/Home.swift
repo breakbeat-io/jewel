@@ -11,6 +11,7 @@ import SwiftUI
 struct Home: View {
     
     @Environment(\.presentationMode) var presentationMode
+    
     @EnvironmentObject var userData: UserData
     
     @State private var showOptions = false
@@ -25,10 +26,10 @@ struct Home: View {
             GeometryReader { geo in
                 List(self.slots.indices, id: \.self) { slotIndex in
                     Group {
-                        if self.slots[slotIndex].source?.content == nil {
-                            EmptySlot(slotIndex: slotIndex)
-                        } else {
+                        if self.slots[slotIndex].source?.content != nil {
                             FilledSlot(slotIndex: slotIndex)
+                        } else {
+                            EmptySlot(slotIndex: slotIndex)
                         }
                     }
                     .frame(height: (geo.size.height - geo.safeAreaInsets.top - geo.safeAreaInsets.bottom) / CGFloat(self.slots.count))

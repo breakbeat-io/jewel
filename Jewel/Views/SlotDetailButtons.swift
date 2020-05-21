@@ -12,13 +12,18 @@ struct SlotDetailButtons: View {
     
     @EnvironmentObject var userData: UserData
     @EnvironmentObject var searchProvider: SearchProvider
-    var slotIndex: Int
+    
     @State private var showSearch = false
     @State private var showEjectWarning = false
     
+    var slotIndex: Int
+    private var showButtons: Bool {
+        userData.activeCollection.slots[slotIndex].source?.content != nil && userData.activeCollection.editable
+    }
+    
     var body: some View {
         HStack {
-            if userData.activeCollection.slots[slotIndex].source?.content != nil && userData.activeCollection.editable {
+            if showButtons {
                 Button(action: {
                     self.showSearch = true
                 }) {

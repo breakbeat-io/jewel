@@ -42,6 +42,7 @@
 		D2A31B05246308B800D6BF4A /* Start.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A31B04246308B800D6BF4A /* Start.swift */; };
 		D2A31B0924631F5100D6BF4A /* SourceDetailRegular.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A31B0824631F5100D6BF4A /* SourceDetailRegular.swift */; };
 		D2A55CCF246839980007CD1F /* OdesliResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A55CCE246839980007CD1F /* OdesliResponse.swift */; };
+		D2ADF767247728A7006D33E3 /* Bundle+BuildNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2ADF766247728A7006D33E3 /* Bundle+BuildNumber.swift */; };
 		D2BD46572469895500AD3F30 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BD46562469895500AD3F30 /* Preferences.swift */; };
 		D2BF19C5246D4F1E008B09D3 /* SourceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BF19C4246D4F1E008B09D3 /* SourceProvider.swift */; };
 		D2D40B4F245738220018E066 /* AlbumTrackList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D40B4E245738220018E066 /* AlbumTrackList.swift */; };
@@ -118,6 +119,7 @@
 		D2A31B04246308B800D6BF4A /* Start.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Start.swift; sourceTree = "<group>"; };
 		D2A31B0824631F5100D6BF4A /* SourceDetailRegular.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceDetailRegular.swift; sourceTree = "<group>"; };
 		D2A55CCE246839980007CD1F /* OdesliResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OdesliResponse.swift; sourceTree = "<group>"; };
+		D2ADF766247728A7006D33E3 /* Bundle+BuildNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+BuildNumber.swift"; sourceTree = "<group>"; };
 		D2BD46562469895500AD3F30 /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
 		D2BF19C4246D4F1E008B09D3 /* SourceProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceProvider.swift; sourceTree = "<group>"; };
 		D2D40B4E245738220018E066 /* AlbumTrackList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumTrackList.swift; sourceTree = "<group>"; };
@@ -259,7 +261,6 @@
 		D26077C02460668D005883ED /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				D2E690F72450E98E00B981F2 /* IfLet.swift */,
 				D22C4555243DE6F00001481D /* SourceCard.swift */,
 				D29D8C9D2464039600153D90 /* AlbumCover.swift */,
 				D201C464246AE9F700A5FC87 /* PlaybackLinks.swift */,
@@ -268,6 +269,7 @@
 				D2D40B4E245738220018E066 /* AlbumTrackList.swift */,
 				D22666122462F5940031C9A8 /* DiscTrackList.swift */,
 				D26BAFC0246F3F3F00F226CD /* ShareSheet.swift */,
+				D2E690F72450E98E00B981F2 /* IfLet.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -333,6 +335,7 @@
 				D2937DCA2466D94800C252EE /* Screenshots */,
 				D29C760124598F06005BE357 /* SearchProvider.swift */,
 				D2D99C7824740B7C003CAB1A /* Store.swift */,
+				D2ADF766247728A7006D33E3 /* Bundle+BuildNumber.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -488,6 +491,7 @@
 				D28358832451D3C700411AC9 /* Search.swift in Sources */,
 				D2E690F82450E98E00B981F2 /* IfLet.swift in Sources */,
 				D2D4EBB82475DF6F0023EBE3 /* HomeButtonsLeading.swift in Sources */,
+				D2ADF767247728A7006D33E3 /* Bundle+BuildNumber.swift in Sources */,
 				D20968912460106300496674 /* Options.swift in Sources */,
 				D2937DC92466D3A700C252EE /* UserData+Screenshots.swift in Sources */,
 				D27371C324571828005CC5EF /* JewelError.swift in Sources */,

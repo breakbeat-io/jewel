@@ -13,6 +13,7 @@ struct SearchBar: View {
     
     @EnvironmentObject var userData: UserData
     @EnvironmentObject var searchProvider: SearchProvider
+    
     @State private var searchTerm: String = ""
     
     var body: some View {

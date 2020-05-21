@@ -13,7 +13,11 @@ import HMV
 struct SourceDetailRegular: View {
     
     @EnvironmentObject var userData: UserData
+    
     var slotIndex: Int
+    private var notes: String? {
+        userData.activeCollection.slots[slotIndex].source?.content?.attributes?.editorialNotes?.standard
+    }
     
     var body: some View {
         HStack(alignment: .top) {
@@ -21,7 +25,7 @@ struct SourceDetailRegular: View {
                 AlbumCover(slotIndex: slotIndex)
                 PlaybackLinks(slotIndex: slotIndex)
                     .padding(.bottom)
-                IfLet(userData.activeCollection.slots[slotIndex].source?.content?.attributes?.editorialNotes?.standard) { notes in
+                IfLet(notes) { notes in
                     Text(notes)
                 }
             }

@@ -12,8 +12,10 @@ struct EmptySlot: View {
     
     @EnvironmentObject var userData: UserData
     @EnvironmentObject var searchProvider: SearchProvider
-    var slotIndex: Int
+    
     @State private var showSearch = false
+    
+    var slotIndex: Int
     
     var body: some View {
         HStack {

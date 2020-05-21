@@ -13,14 +13,13 @@ import HMV
 struct SourceCard: View {
     
     @EnvironmentObject var userData: UserData
-    var slotIndex: Int
     
-    var attributes: AlbumAttributes? {
+    var slotIndex: Int
+    private var attributes: AlbumAttributes? {
         userData.activeCollection.slots[slotIndex].source?.content?.attributes
     }
     
     var body: some View {
-        
         Rectangle()
             .foregroundColor(.clear)
             .background(

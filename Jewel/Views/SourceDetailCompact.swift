@@ -13,10 +13,10 @@ import HMV
 struct SourceDetailCompact: View {
     
     @EnvironmentObject var userData: UserData
+    
     var slotIndex: Int
     
     var body: some View {
-        
         VStack {
             AlbumCover(slotIndex: slotIndex)
             PlaybackLinks(slotIndex: slotIndex)
