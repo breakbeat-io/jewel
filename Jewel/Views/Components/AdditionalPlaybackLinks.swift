@@ -14,53 +14,55 @@ struct AdditionalPlaybackLinks: View {
     @EnvironmentObject var userData: UserData
     var slotIndex: Int
     
+    var availablePlatforms: [OdesliPlatform] {
+        OdesliPlatform.allCases.filter { userData.activeCollection.slots[slotIndex].playbackLinks?.linksByPlatform[$0.rawValue] != nil }
+    }
+    var platformLinks: [String : OdesliLink]? {
+        userData.activeCollection.slots[slotIndex].playbackLinks?.linksByPlatform
+    }
+    
     var body: some View {
-        
-        let availablePlatforms = OdesliPlatform.allCases.filter { userData.activeCollection.slots[slotIndex].playbackLinks?.linksByPlatform[$0.rawValue] != nil }
-        
-        let additionalPlaybackLinksView =
-            NavigationView {
-                VStack {
-                    List(availablePlatforms, id: \.self) { platform in
-                        IfLet(self.userData.activeCollection.slots[self.slotIndex].playbackLinks?.linksByPlatform[platform.rawValue]) { platformLink in
-                            Button(action: {
-                                UIApplication.shared.open(platformLink.url)
-                            }) {
-                                HStack {
-                                    Group {
-                                        if platform.iconRef != nil {
-                                            Text(verbatim: platform.iconRef!)
-                                                .font(.custom("FontAwesome5Brands-Regular", size: 16))
-                                        } else {
-                                            Image(systemName: "arrowshape.turn.up.right")
-                                        }
+        NavigationView {
+            VStack {
+                List(availablePlatforms, id: \.self) { platform in
+                    IfLet(self.platformLinks?[platform.rawValue]) { platformLink in
+                        Button(action: {
+                            UIApplication.shared.open(platformLink.url)
+                        }) {
+                            HStack {
+                                Group {
+                                    if platform.iconRef != nil {
+                                        Text(verbatim: platform.iconRef!)
+                                            .font(.custom("FontAwesome5Brands-Regular", size: 16))
+                                    } else {
+                                        Image(systemName: "arrowshape.turn.up.right")
                                     }
-                                    .frame(width: 40, alignment: .center)
-                                    .foregroundColor(.secondary)
-                                    Text(platform.friendlyName)
-                                        .foregroundColor(.primary)
                                 }
+                                .frame(width: 40, alignment: .center)
+                                .foregroundColor(.secondary)
+                                Text(platform.friendlyName)
+                                    .foregroundColor(.primary)
                             }
                         }
                     }
-                    Button(action: {
-                        UIApplication.shared.open(URL(string: "https://odesli.co")!)
-                    }) {
-                        Text("Platform links powered by Songlink")
-                            .foregroundColor(.secondary)
-                            .font(.footnote)
-                    }.padding(.vertical)
                 }
-                .navigationBarTitle("Play in ...", displayMode: .inline)
-                .navigationBarItems(trailing:
-                    Button(action: {
-                        self.presentationMode.wrappedValue.dismiss()
-                    }) {
-                        Text("Close")
-                    }
-                )
+                Button(action: {
+                    UIApplication.shared.open(URL(string: "https://odesli.co")!)
+                }) {
+                    Text("Platform links powered by Songlink")
+                        .foregroundColor(.secondary)
+                        .font(.footnote)
+                }.padding(.vertical)
             }
-            .navigationViewStyle(StackNavigationViewStyle())
-        return additionalPlaybackLinksView
+            .navigationBarTitle("Play in ...", displayMode: .inline)
+            .navigationBarItems(trailing:
+                Button(action: {
+                    self.presentationMode.wrappedValue.dismiss()
+                }) {
+                    Text("Close")
+                }
+            )
+        }
+        .navigationViewStyle(StackNavigationViewStyle())
     }
 }
