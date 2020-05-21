@@ -17,7 +17,6 @@ struct Search: View {
     var slotIndex: Int
     
     var body: some View {
-        
         VStack(alignment: .leading) {
             // action buttons
             HStack {

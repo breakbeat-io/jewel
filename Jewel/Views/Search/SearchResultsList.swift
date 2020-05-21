@@ -17,15 +17,16 @@ struct SearchResultsList: View {
     @EnvironmentObject var searchProvider: SearchProvider
     var slotIndex: Int
     
+    var searchResults: [Album]? {
+        searchProvider.results
+    }
+    
     var body: some View {
-        
-        let searchResults = searchProvider.results
-        
-        let searchResultsList = IfLet(searchResults) { albums in
-            List(0..<albums.count, id: \.self) { i in
-                IfLet(albums[i].attributes) { album in
+        IfLet(searchResults) { results in
+            List(0..<results.count, id: \.self) { i in
+                IfLet(results[i].attributes) { resultAttributes in
                     HStack {
-                        KFImage(album.artwork.url(forWidth: 50))
+                        KFImage(resultAttributes.artwork.url(forWidth: 50))
                             .placeholder {
                                 RoundedRectangle(cornerRadius: 4)
                                     .fill(Color.gray)
@@ -36,16 +37,16 @@ struct SearchResultsList: View {
                         .cornerRadius(4)
                         .frame(width: 50)
                         VStack(alignment: .leading) {
-                            Text(album.name)
+                            Text(resultAttributes.name)
                                 .font(.headline)
                                 .lineLimit(1)
-                            Text(album.artistName)
+                            Text(resultAttributes.artistName)
                                 .font(.subheadline)
                                 .lineLimit(1)
                         }
                         Spacer()
                         Button(action: {
-                            self.userData.addContentToSlot(contentId: albums[i].id, collection: self.userData.activeCollection, slotIndex: self.slotIndex)
+                            self.userData.addContentToSlot(contentId: results[i].id, collection: self.userData.activeCollection, slotIndex: self.slotIndex)
                             self.presentationMode.wrappedValue.dismiss()
                         }, label:{
                             Image(systemName: "plus.circle")
@@ -55,7 +56,5 @@ struct SearchResultsList: View {
                 }
             }
         }
-        
-        return searchResultsList
     }
 }
