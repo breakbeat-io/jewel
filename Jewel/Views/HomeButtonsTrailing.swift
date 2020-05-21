@@ -15,10 +15,10 @@ struct HomeButtonsTrailing: View {
     @State private var showShareSheet = false
     
     private var collectionEmpty: Bool {
-        return userData.activeCollection.slots.filter( { $0.source != nil }).count == 0
+        userData.activeCollection.slots.filter( { $0.source != nil }).count == 0
     }
     private var sharedCollectionEmpty: Bool {
-        return userData.sharedCollection.slots.filter( { $0.source != nil }).count == 0
+        userData.sharedCollection.slots.filter( { $0.source != nil }).count == 0
     }
     
     var body: some View {

@@ -17,7 +17,7 @@ struct Home: View {
     @State private var showShareSheet = false
     
     private var slots: [Slot] {
-        return userData.activeCollection.slots
+        userData.activeCollection.slots
     }
     
     var body: some View {

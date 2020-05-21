@@ -14,10 +14,10 @@ struct PlaybackLinks: View {
     var slotIndex: Int
     
     var url: URL? {
-        return userData.activeCollection.slots[slotIndex].source?.content?.attributes?.url
+        userData.activeCollection.slots[slotIndex].source?.content?.attributes?.url
     }
     var playbackLinks: OdesliResponse? {
-        return userData.activeCollection.slots[slotIndex].playbackLinks
+        userData.activeCollection.slots[slotIndex].playbackLinks
     }
     
     @State private var showAdditionalLinks = false

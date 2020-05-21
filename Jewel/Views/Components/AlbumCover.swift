@@ -16,7 +16,7 @@ struct AlbumCover: View {
     var slotIndex: Int
     
     var attributes: AlbumAttributes? {
-        return userData.activeCollection.slots[slotIndex].source?.content?.attributes
+        userData.activeCollection.slots[slotIndex].source?.content?.attributes
     }
     
     var body: some View {
