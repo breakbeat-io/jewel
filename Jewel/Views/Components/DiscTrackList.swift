@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import HMV
 
 struct DiscTrackList: View {
     
@@ -15,20 +16,22 @@ struct DiscTrackList: View {
     var discNumber: Int
     var withTitle: Bool
     
+    var albumArtist: String? {
+        userData.activeCollection.slots[slotIndex].source?.content?.attributes?.artistName
+    }
+    var discTracks: [Track]? {
+        userData.activeCollection.slots[slotIndex].source?.content?.relationships?.tracks.data?.filter { $0.attributes?.discNumber == discNumber }
+    }
+    
     var body: some View {
-        
-        let tracks = userData.activeCollection.slots[slotIndex].source?.content?.relationships?.tracks.data
-        let discTracks = tracks?.filter { $0.attributes?.discNumber == discNumber }
-        let albumArtist = userData.activeCollection.slots[slotIndex].source?.content?.attributes?.artistName
-        
-        let discTrackList = VStack(alignment: .leading) {
-            if withTitle {
-                Text("Disc \(discNumber)")
-                    .fontWeight(.bold)
-                    .padding(.vertical)
-            }
-            IfLet(discTracks) { discTracks in
-                ForEach(discTracks) { track in
+        VStack(alignment: .leading) {
+            if discTracks != nil {
+                if withTitle {
+                    Text("Disc \(discNumber)")
+                        .fontWeight(.bold)
+                        .padding(.vertical)
+                }
+                ForEach(discTracks!) { track in
                     IfLet(track.attributes) { attributes in
                         HStack {
                             Text(String(attributes.trackNumber))
@@ -41,7 +44,7 @@ struct DiscTrackList: View {
                                     .font(.callout)
                                     .fontWeight(.medium)
                                     .lineLimit(1)
-                                if attributes.artistName != albumArtist {
+                                if attributes.artistName != self.albumArtist {
                                     Text(attributes.artistName)
                                         .font(.callout)
                                         .fontWeight(.light)
@@ -60,8 +63,6 @@ struct DiscTrackList: View {
                 }
             }
         }
-        
-        return discTrackList
     }
 }
 
