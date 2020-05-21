@@ -7,25 +7,24 @@
 //
 
 import SwiftUI
+import HMV
 
 struct AlbumTrackList: View {
     
     @EnvironmentObject var userData: UserData
     var slotIndex: Int
     
+    var discCount: Int? {
+        userData.activeCollection.slots[slotIndex].source?.content?.relationships?.tracks.data?.map { $0.attributes?.discNumber ?? 1 }.max()
+    }
+    
     var body: some View {
-        
-        let tracks = userData.activeCollection.slots[slotIndex].source?.content?.relationships?.tracks.data
-        let discCount = tracks?.map { $0.attributes?.discNumber ?? 1 }.max()
-        
-        let albumTrackList = VStack(alignment: .leading) {
-            IfLet(discCount) { discCount in
-                ForEach(1..<discCount + 1, id: \.self) {
-                    DiscTrackList(slotIndex: self.slotIndex, discNumber: $0, withTitle: (discCount > 1) ? true : false)
+        VStack(alignment: .leading) {
+            if discCount != nil {
+                ForEach(1..<discCount! + 1, id: \.self) {
+                    DiscTrackList(slotIndex: self.slotIndex, discNumber: $0, withTitle: (self.discCount! > 1) ? true : false)
                 }
             }
         }
-        
-        return albumTrackList
     }
 }
