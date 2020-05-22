@@ -24,26 +24,23 @@ struct Search: View {
     var slotIndex: Int
     
     var body: some View {
-        NavigationView {
-            VStack(alignment: .leading) {
-                SearchBar()
-                    .padding()
-                IfLet(searchResults) { results in
-                    SearchResultsList(
-                        slotIndex: self.slotIndex
-                    )
-                }
+        VStack(alignment: .leading) {
+            HStack {
                 Spacer()
-            }
-            .navigationBarTitle("Search")
-            .navigationBarItems(trailing:
                 Button(action: {
                     self.presentationMode.wrappedValue.dismiss()
                 }) {
                     Text("Cancel")
-            })
+                }
+            }.padding()
+            SearchBar()
+            IfLet(searchResults) { results in
+                SearchResultsList(
+                    slotIndex: self.slotIndex
+                )
+            }
+            Spacer()
         }
-        .navigationViewStyle(StackNavigationViewStyle())
         .onDisappear(perform: {
             self.searchProvider.results?.removeAll()
         })

@@ -25,9 +25,9 @@ struct SearchResultsList: View {
     var body: some View {
         IfLet(searchResults) { results in
             List(0..<results.count, id: \.self) { i in
-                IfLet(results[i].attributes) { result in
+                IfLet(results[i].attributes) { resultAttributes in
                     HStack {
-                        KFImage(result.artwork.url(forWidth: 50))
+                        KFImage(resultAttributes.artwork.url(forWidth: 50))
                             .placeholder {
                                 RoundedRectangle(cornerRadius: 4)
                                     .fill(Color.gray)
@@ -38,18 +38,16 @@ struct SearchResultsList: View {
                         .cornerRadius(4)
                         .frame(width: 50)
                         VStack(alignment: .leading) {
-                            Text(result.name)
+                            Text(resultAttributes.name)
                                 .font(.headline)
                                 .lineLimit(1)
-                            Text(result.artistName)
+                            Text(resultAttributes.artistName)
                                 .font(.subheadline)
                                 .lineLimit(1)
                         }
                         Spacer()
                         Button(action: {
-                            self.userData.addContentToSlot(contentId: results[i].id,
-                                                           collection: self.userData.activeCollection,
-                                                           slotIndex: self.slotIndex)
+                            self.userData.addContentToSlot(contentId: results[i].id, collection: self.userData.activeCollection, slotIndex: self.slotIndex)
                             self.presentationMode.wrappedValue.dismiss()
                         }, label:{
                             Image(systemName: "plus.circle")
