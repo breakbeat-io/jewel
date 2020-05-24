@@ -22,39 +22,45 @@ struct Home: View {
     }
     
     var body: some View {
-        NavigationView {
-            GeometryReader { geo in
-                List(self.slots.indices, id: \.self) { slotIndex in
-                    Group {
-                        if self.slots[slotIndex].source?.content != nil {
-                            FilledSlot(slotIndex: slotIndex)
-                        } else {
-                            EmptySlot(slotIndex: slotIndex)
+        ZStack {
+            NavigationView {
+                GeometryReader { geo in
+                    List(self.slots.indices, id: \.self) { slotIndex in
+                        Group {
+                            if self.slots[slotIndex].source?.content != nil {
+                                FilledSlot(slotIndex: slotIndex)
+                            } else {
+                                EmptySlot(slotIndex: slotIndex)
+                            }
                         }
+                        .frame(height: (geo.size.height - geo.safeAreaInsets.top - geo.safeAreaInsets.bottom) / CGFloat(self.slots.count))
                     }
-                    .frame(height: (geo.size.height - geo.safeAreaInsets.top - geo.safeAreaInsets.bottom) / CGFloat(self.slots.count))
+                    .onAppear {
+                        UITableView.appearance().separatorStyle = .none
+                    }
+                    .navigationBarTitle(self.userData.activeCollection.name)
+                    .navigationBarItems(
+                        leading:
+                        HomeButtonsLeading()
+                        ,trailing:
+                        HomeButtonsTrailing()
+                    )
                 }
-                .onAppear {
-                    UITableView.appearance().separatorStyle = .none
+                .alert(isPresented: $userData.sharedCollectionCued) {
+                    Alert(title: Text("Shared collection received from \(userData.candidateCollection?.curator ?? "a discerning curator")!"),
+                          message: Text("Would you like to replace your current shared collection?"),
+                          primaryButton: .cancel(Text("Cancel")),
+                          secondaryButton: .default(Text("Replace").bold()) {
+                            self.userData.loadCandidateCollection()
+                            self.presentationMode.wrappedValue.dismiss()
+                        })
                 }
-                .navigationBarTitle(self.userData.activeCollection.name)
-                .navigationBarItems(
-                    leading:
-                    HomeButtonsLeading()
-                    ,trailing:
-                    HomeButtonsTrailing()
-                )
+                Start()
             }
-            .alert(isPresented: $userData.sharedCollectionCued) {
-                Alert(title: Text("Shared collection received from \(userData.candidateCollection?.curator ?? "a discerning curator")!"),
-                      message: Text("Would you like to replace your current shared collection?"),
-                      primaryButton: .cancel(Text("Cancel")),
-                      secondaryButton: .default(Text("Replace").bold()) {
-                        self.userData.loadCandidateCollection()
-                        self.presentationMode.wrappedValue.dismiss()
-                    })
+            .blur(radius: userData.preferences.firstTimeRun ? 2 : 0)
+            if userData.preferences.firstTimeRun {
+                Welcome()
             }
-            Start()
         }
         .statusBar(hidden: true)
     }

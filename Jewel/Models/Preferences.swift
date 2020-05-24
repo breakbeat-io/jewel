@@ -21,6 +21,11 @@ struct Preferences: Codable {
             save()
         }
     }
+    var firstTimeRun = true // {
+//        didSet {
+//            save()
+//        }
+//    }
     
     init() {
         if let savedPreferences = UserDefaults.standard.object(forKey: Self.saveKey) as? Data {
