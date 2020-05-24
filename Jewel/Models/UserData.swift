@@ -133,32 +133,6 @@ class UserData: ObservableObject {
         exit(1)
     }
     
-    func createShareUrl() -> URL {
-        
-        var shareableSlots = [ShareableSlot?]()
-        
-        for slot in activeCollection.slots {
-            if let content = slot.source?.content {
-                let slot = ShareableSlot(sourceProvider: slot.source!.provider, sourceRef: content.id)
-                shareableSlots.append(slot)
-            } else {
-                shareableSlots.append(nil)
-            }
-        }
-        
-        let shareableCollection = ShareableCollection(
-            collectionName: activeCollection.name == "My Collection" ? "\(activeCollection.curator)'s Collection" : activeCollection.name,
-            collectionCurator: activeCollection.curator,
-            collection: shareableSlots
-        )
-        
-        let encoder = JSONEncoder()
-        let shareableCollectionJson = try! encoder.encode(shareableCollection)
-        
-        return URL(string: "https://jewel.breakbeat.io/share/?c=\(shareableCollectionJson.base64EncodedString())")!
-        
-    }
-    
     func processRecievedCollection(recievedCollectionUrl: URL) {
         if let urlComponents = URLComponents(url: recievedCollectionUrl, resolvingAgainstBaseURL: true) {
             let params = urlComponents.queryItems
