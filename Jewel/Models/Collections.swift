@@ -10,7 +10,7 @@ import Foundation
 import Combine
 import HMV
 
-class UserData: ObservableObject {
+class Collections: ObservableObject {
     
     @Published var userCollection = Collection.user
     @Published var sharedCollection = Collection.shared

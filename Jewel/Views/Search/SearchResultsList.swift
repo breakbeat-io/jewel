@@ -14,7 +14,7 @@ struct SearchResultsList: View {
     
     @Environment(\.presentationMode) var presentationMode
     
-    @EnvironmentObject var userData: UserData
+    @EnvironmentObject var collections: Collections
     @EnvironmentObject var searchProvider: SearchProvider
     
     var slotIndex: Int
@@ -47,8 +47,8 @@ struct SearchResultsList: View {
                         }
                         Spacer()
                         Button(action: {
-                            self.userData.addContentToSlot(contentId: results[i].id,
-                                                           collection: self.userData.activeCollection,
+                            self.collections.addContentToSlot(contentId: results[i].id,
+                                                           collection: self.collections.activeCollection,
                                                            slotIndex: self.slotIndex)
                             self.presentationMode.wrappedValue.dismiss()
                         }, label:{

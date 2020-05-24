@@ -11,7 +11,7 @@ import SwiftUI
 struct Welcome: View {
     
     @EnvironmentObject var preferences: Preferences
-    @EnvironmentObject var userData: UserData
+    @EnvironmentObject var collections: Collections
     
     var body: some View {
         GeometryReader { geo in

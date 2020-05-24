@@ -13,13 +13,13 @@ struct Home: View {
     @Environment(\.presentationMode) var presentationMode
     
     @EnvironmentObject var preferences: Preferences
-    @EnvironmentObject var userData: UserData
+    @EnvironmentObject var collections: Collections
     
     @State private var showOptions = false
     @State private var showShareSheet = false
     
     private var slots: [Slot] {
-        userData.activeCollection.slots
+        collections.activeCollection.slots
     }
     
     var body: some View {
@@ -39,7 +39,7 @@ struct Home: View {
                     .onAppear {
                         UITableView.appearance().separatorStyle = .none
                     }
-                    .navigationBarTitle(self.userData.activeCollection.name)
+                    .navigationBarTitle(self.collections.activeCollection.name)
                     .navigationBarItems(
                         leading:
                         HomeButtonsLeading()
@@ -47,12 +47,12 @@ struct Home: View {
                         HomeButtonsTrailing()
                     )
                 }
-                .alert(isPresented: $userData.sharedCollectionCued) {
-                    Alert(title: Text("Shared collection received from \(userData.candidateCollection?.curator ?? "a discerning curator")!"),
+                .alert(isPresented: $collections.sharedCollectionCued) {
+                    Alert(title: Text("Shared collection received from \(collections.candidateCollection?.curator ?? "a discerning curator")!"),
                           message: Text("Would you like to replace your current shared collection?"),
                           primaryButton: .cancel(Text("Cancel")),
                           secondaryButton: .default(Text("Replace").bold()) {
-                            self.userData.loadCandidateCollection()
+                            self.collections.loadCandidateCollection()
                             self.presentationMode.wrappedValue.dismiss()
                         })
                 }

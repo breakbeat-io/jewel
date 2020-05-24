@@ -11,7 +11,7 @@ import SwiftUI
 struct HomeButtonsLeading: View {
     
     @EnvironmentObject var preferences: Preferences
-    @EnvironmentObject var userData: UserData
+    @EnvironmentObject var collections: Collections
     
     @State private var showOptions = false
     
@@ -24,7 +24,7 @@ struct HomeButtonsLeading: View {
         .sheet(isPresented: self.$showOptions) {
             Options()
                 .environmentObject(self.preferences)
-                .environmentObject(self.userData)
+                .environmentObject(self.collections)
         }
         .padding(.trailing)
         .padding(.vertical)

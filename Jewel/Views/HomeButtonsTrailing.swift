@@ -10,15 +10,15 @@ import SwiftUI
 
 struct HomeButtonsTrailing: View {
     
-    @EnvironmentObject var userData: UserData
+    @EnvironmentObject var collections: Collections
     
     @State private var showShareSheet = false
     
     private var collectionEmpty: Bool {
-        userData.activeCollection.slots.filter( { $0.source != nil }).count == 0
+        collections.activeCollection.slots.filter( { $0.source != nil }).count == 0
     }
     private var sharedCollectionEmpty: Bool {
-        userData.sharedCollection.slots.filter( { $0.source != nil }).count == 0
+        collections.sharedCollection.slots.filter( { $0.source != nil }).count == 0
     }
     
     var body: some View {
@@ -32,10 +32,10 @@ struct HomeButtonsTrailing: View {
             .padding(.vertical)
             .disabled(collectionEmpty)
             .sheet(isPresented: self.$showShareSheet) {
-                ShareSheetInterstitial().environmentObject(self.userData)
+                ShareSheetInterstitial().environmentObject(self.collections)
             }
             Button(action: {
-                self.userData.userCollectionActive.toggle()
+                self.collections.userCollectionActive.toggle()
             }) {
                 Image(systemName: "arrow.2.squarepath")
             }

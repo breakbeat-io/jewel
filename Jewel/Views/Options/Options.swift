@@ -13,7 +13,7 @@ struct Options: View {
     @Environment(\.presentationMode) var presentationMode
     
     @EnvironmentObject var preferences: Preferences
-    @EnvironmentObject var userData: UserData
+    @EnvironmentObject var collections: Collections
     
     @State private var showEjectMyCollectionWarning = false
     @State private var showEjectSharedCollectionWarning = false
@@ -27,8 +27,8 @@ struct Options: View {
                         HStack(alignment: .firstTextBaseline) {
                             Text("Collection Name")
                             TextField(
-                                userData.userCollection.name,
-                                text: $userData.userCollection.name,
+                                collections.userCollection.name,
+                                text: $collections.userCollection.name,
                                 onCommit: {
                                     self.presentationMode.wrappedValue.dismiss()
                             }
@@ -37,8 +37,8 @@ struct Options: View {
                         HStack(alignment: .firstTextBaseline) {
                             Text("Curator")
                             TextField(
-                                userData.userCollection.curator,
-                                text: $userData.userCollection.curator,
+                                collections.userCollection.curator,
+                                text: $collections.userCollection.curator,
                                 onCommit: {
                                     self.presentationMode.wrappedValue.dismiss()
                             }
@@ -63,7 +63,7 @@ struct Options: View {
                                   message: Text("This will replace your current shared collection."),
                                   primaryButton: .cancel(Text("Cancel")),
                                   secondaryButton: .default(Text("Load").bold()) {
-                                    self.userData.getRecommendations()
+                                    self.collections.getRecommendations()
                                     self.presentationMode.wrappedValue.dismiss()
                                 })
                         }
@@ -80,7 +80,7 @@ struct Options: View {
                                   message: Text("You cannot undo this operation."),
                                   primaryButton: .cancel(Text("Cancel")),
                                   secondaryButton: .destructive(Text("Eject All")) {
-                                    self.userData.ejectUserCollection()
+                                    self.collections.ejectUserCollection()
                                     self.presentationMode.wrappedValue.dismiss()
                                 })
                         }
@@ -95,7 +95,7 @@ struct Options: View {
                                   message: Text("You cannot undo this operation."),
                                   primaryButton: .cancel(Text("Cancel")),
                                   secondaryButton: .destructive(Text("Eject Shared")) {
-                                    self.userData.ejectSharedCollection()
+                                    self.collections.ejectSharedCollection()
                                     self.presentationMode.wrappedValue.dismiss()
                                 })
                         }
@@ -103,13 +103,13 @@ struct Options: View {
                     if preferences.debugMode {
                         Section(header: Text("Debug")) {
                             Button(action: {
-                                self.userData.loadScreenshotCollection()
+                                self.collections.loadScreenshotCollection()
                                 self.presentationMode.wrappedValue.dismiss()
                             }) {
                                 Text("Load Screenshot Data")
                             }
                             Button(action: {
-                                self.userData.reset()
+                                self.collections.reset()
                                 self.presentationMode.wrappedValue.dismiss()
                             }) {
                                 Text("Reset Jewel")
@@ -136,7 +136,7 @@ struct Options: View {
         }
         .navigationViewStyle(StackNavigationViewStyle())
         .onDisappear {
-            self.userData.objectWillChange.send()
+            self.collections.objectWillChange.send()
         }
     }
 }

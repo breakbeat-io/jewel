@@ -10,11 +10,11 @@ import SwiftUI
 
 struct ShareSheetInterstitial: View {
     
-    @EnvironmentObject var userData: UserData
+    @EnvironmentObject var collections: Collections
     
     var body: some View {
         Group {
-            if userData.activeCollection.shareLinkError {
+            if collections.activeCollection.shareLinkError {
                 VStack {
                     Image(systemName: "exclamationmark.triangle")
                         .font(.largeTitle)
@@ -22,7 +22,7 @@ struct ShareSheetInterstitial: View {
                         .padding()
                         .multilineTextAlignment(.center)
                 }
-            } else if userData.activeCollection.shareLinkShort == nil {
+            } else if collections.activeCollection.shareLinkShort == nil {
                 VStack {
                     Image(systemName: "square.and.arrow.up")
                         .font(.largeTitle)
@@ -31,11 +31,11 @@ struct ShareSheetInterstitial: View {
                         .multilineTextAlignment(.center)
                 }
             } else {
-                ShareSheet(activityItems: [userData.activeCollection.shareLinkShort!])
+                ShareSheet(activityItems: [collections.activeCollection.shareLinkShort!])
             }
         }
         .onAppear {
-            self.userData.activeCollection.generateShareLinks()
+            self.collections.activeCollection.generateShareLinks()
         }
     }
 }

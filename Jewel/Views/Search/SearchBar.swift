@@ -12,7 +12,7 @@ import HMV
 struct SearchBar: View {
     
     @EnvironmentObject var preferences: Preferences
-    @EnvironmentObject var userData: UserData
+    @EnvironmentObject var collections: Collections
     @EnvironmentObject var searchProvider: SearchProvider
     
     @State private var searchTerm: String = ""

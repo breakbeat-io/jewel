@@ -11,11 +11,11 @@ import HMV
 
 struct AlbumTrackList: View {
     
-    @EnvironmentObject var userData: UserData
+    @EnvironmentObject var collections: Collections
     
     var slotIndex: Int
     private var discCount: Int? {
-        userData.activeCollection.slots[slotIndex].source?.content?.relationships?.tracks.data?.map { $0.attributes?.discNumber ?? 1 }.max()
+        collections.activeCollection.slots[slotIndex].source?.content?.relationships?.tracks.data?.map { $0.attributes?.discNumber ?? 1 }.max()
     }
     
     var body: some View {

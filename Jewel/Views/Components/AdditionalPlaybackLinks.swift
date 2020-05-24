@@ -12,14 +12,14 @@ struct AdditionalPlaybackLinks: View {
     
     @Environment(\.presentationMode) var presentationMode
     
-    @EnvironmentObject var userData: UserData
+    @EnvironmentObject var collections: Collections
     
     var slotIndex: Int
     private var availablePlatforms: [OdesliPlatform] {
-        OdesliPlatform.allCases.filter { userData.activeCollection.slots[slotIndex].playbackLinks?.linksByPlatform[$0.rawValue] != nil }
+        OdesliPlatform.allCases.filter { collections.activeCollection.slots[slotIndex].playbackLinks?.linksByPlatform[$0.rawValue] != nil }
     }
     private var platformLinks: [String : OdesliLink]? {
-        userData.activeCollection.slots[slotIndex].playbackLinks?.linksByPlatform
+        collections.activeCollection.slots[slotIndex].playbackLinks?.linksByPlatform
     }
     
     var body: some View {
