@@ -32,7 +32,7 @@ struct HomeButtonsTrailing: View {
             .padding(.vertical)
             .disabled(collectionEmpty)
             .sheet(isPresented: self.$showShareSheet) {
-                ShareSheet(activityItems: [self.userData.createShareUrl()])
+                ShareSheetInterstitial().environmentObject(self.userData)
             }
             Button(action: {
                 self.userData.userCollectionActive.toggle()

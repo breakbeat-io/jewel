@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Combine
 import HMV
 
 class UserData: ObservableObject {
@@ -33,10 +34,20 @@ class UserData: ObservableObject {
     @Published var candidateCollection: Collection?
     @Published var sharedCollectionCued = false
     
+    var anyCancellableUser: AnyCancellable? = nil
+    var anyCancellableShared: AnyCancellable? = nil
+    
     init() {
         
         migrateV1UserDefaults()
         activeCollection = userCollection
+        
+        anyCancellableUser = userCollection.objectWillChange.sink { (_) in
+            self.objectWillChange.send()
+        }
+        anyCancellableShared = sharedCollection.objectWillChange.sink { (_) in
+            self.objectWillChange.send()
+        }
         
     }
     
@@ -131,32 +142,6 @@ class UserData: ObservableObject {
         UserDefaults.standard.removePersistentDomain(forName: domain)
         UserDefaults.standard.synchronize()
         exit(1)
-    }
-    
-    func createShareUrl() -> URL {
-        
-        var shareableSlots = [ShareableSlot?]()
-        
-        for slot in activeCollection.slots {
-            if let content = slot.source?.content {
-                let slot = ShareableSlot(sourceProvider: slot.source!.provider, sourceRef: content.id)
-                shareableSlots.append(slot)
-            } else {
-                shareableSlots.append(nil)
-            }
-        }
-        
-        let shareableCollection = ShareableCollection(
-            collectionName: activeCollection.name == "My Collection" ? "\(activeCollection.curator)'s Collection" : activeCollection.name,
-            collectionCurator: activeCollection.curator,
-            collection: shareableSlots
-        )
-        
-        let encoder = JSONEncoder()
-        let shareableCollectionJson = try! encoder.encode(shareableCollection)
-        
-        return URL(string: "https://jewel.breakbeat.io/share/?c=\(shareableCollectionJson.base64EncodedString())")!
-        
     }
     
     func processRecievedCollection(recievedCollectionUrl: URL) {

@@ -25,6 +25,7 @@
 		D2409C6D24697002000969B2 /* fa-brands.otf in Resources */ = {isa = PBXBuildFile; fileRef = D2409C6C24697002000969B2 /* fa-brands.otf */; };
 		D2501E102454272E006A6E2D /* KingfisherSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = D2501E0F2454272E006A6E2D /* KingfisherSwiftUI */; };
 		D26077BF24605D59005883ED /* SlotDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26077BE24605D59005883ED /* SlotDetail.swift */; };
+		D2631BE1247A860400957B0E /* ShareSheetInterstitial.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2631BE0247A860400957B0E /* ShareSheetInterstitial.swift */; };
 		D26B5622243E80450098E9E4 /* SourceDetailCompact.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26B5621243E80450098E9E4 /* SourceDetailCompact.swift */; };
 		D26B5624243E8DB00098E9E4 /* PrimaryPlaybackLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26B5623243E8DB00098E9E4 /* PrimaryPlaybackLink.swift */; };
 		D26BAFC1246F3F3F00F226CD /* ShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26BAFC0246F3F3F00F226CD /* ShareSheet.swift */; };
@@ -100,6 +101,7 @@
 		D230CC552460CC2C00FD811F /* Footer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Footer.swift; sourceTree = "<group>"; };
 		D2409C6C24697002000969B2 /* fa-brands.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fa-brands.otf"; sourceTree = "<group>"; };
 		D26077BE24605D59005883ED /* SlotDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlotDetail.swift; sourceTree = "<group>"; };
+		D2631BE0247A860400957B0E /* ShareSheetInterstitial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheetInterstitial.swift; sourceTree = "<group>"; };
 		D26B5621243E80450098E9E4 /* SourceDetailCompact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceDetailCompact.swift; sourceTree = "<group>"; };
 		D26B5623243E8DB00098E9E4 /* PrimaryPlaybackLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryPlaybackLink.swift; sourceTree = "<group>"; };
 		D26BAFC0246F3F3F00F226CD /* ShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheet.swift; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 		D27371C224571828005CC5EF /* JewelError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JewelError.swift; sourceTree = "<group>"; };
 		D28358822451D3C700411AC9 /* Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Search.swift; sourceTree = "<group>"; };
 		D28358862452D3CF00411AC9 /* SearchResultsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsList.swift; sourceTree = "<group>"; };
+		D2852026247AACF6004E2C36 /* secrets.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = secrets.xcconfig; sourceTree = "<group>"; };
 		D28AF841244F46A700AD6614 /* debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = debug.xcconfig; sourceTree = "<group>"; };
 		D28AF842244F46D700AD6614 /* release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = release.xcconfig; sourceTree = "<group>"; };
 		D2937DC82466D3A700C252EE /* UserData+Screenshots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserData+Screenshots.swift"; sourceTree = "<group>"; };
@@ -134,7 +137,6 @@
 		D2E690FB2450EF9A00B981F2 /* FilledSlot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilledSlot.swift; sourceTree = "<group>"; };
 		D2EAB323245192F000AC9CC3 /* Jewel.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Jewel.entitlements; sourceTree = "<group>"; };
 		D2ED2DA5246C2B1A00A6579F /* Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
-		D2FE406F244FAA4500623280 /* apple-music-api-token.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "apple-music-api-token.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -268,6 +270,7 @@
 				D201C45F246AAD3800A5FC87 /* AdditionalPlaybackLinks.swift */,
 				D2D40B4E245738220018E066 /* AlbumTrackList.swift */,
 				D22666122462F5940031C9A8 /* DiscTrackList.swift */,
+				D2631BE0247A860400957B0E /* ShareSheetInterstitial.swift */,
 				D26BAFC0246F3F3F00F226CD /* ShareSheet.swift */,
 				D2E690F72450E98E00B981F2 /* IfLet.swift */,
 			);
@@ -298,7 +301,7 @@
 			children = (
 				D28AF841244F46A700AD6614 /* debug.xcconfig */,
 				D28AF842244F46D700AD6614 /* release.xcconfig */,
-				D2FE406F244FAA4500623280 /* apple-music-api-token.xcconfig */,
+				D2852026247AACF6004E2C36 /* secrets.xcconfig */,
 			);
 			path = BuildConfigs;
 			sourceTree = "<group>";
@@ -501,6 +504,7 @@
 				D22C4522243DD8B00001481D /* AppDelegate.swift in Sources */,
 				D2E690F62450E36800B981F2 /* Slot.swift in Sources */,
 				D26B5624243E8DB00098E9E4 /* PrimaryPlaybackLink.swift in Sources */,
+				D2631BE1247A860400957B0E /* ShareSheetInterstitial.swift in Sources */,
 				D2BF19C5246D4F1E008B09D3 /* SourceProvider.swift in Sources */,
 				D26B5622243E80450098E9E4 /* SourceDetailCompact.swift in Sources */,
 				D2937DCE2466EC7900C252EE /* SearchProvider+Screenshots.swift in Sources */,
