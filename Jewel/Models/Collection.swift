@@ -29,8 +29,10 @@ class Collection: ObservableObject, Codable {
         }
     }
     let editable: Bool
-    var shareLinkLong: URL?
+    
+    private var shareLinkLong: URL?
     @Published var shareLinkShort: URL?
+    @Published var shareLinkError = false
     
     enum CodingKeys: CodingKey {
         case name
@@ -111,18 +113,23 @@ class Collection: ObservableObject, Codable {
     }
     
     func generateShareLinks() {
+        
+        shareLinkError = false
+        
         if shareLinkLong == nil {
             print("No links found, generating")
             shareLinkLong = generateLongLink()
             generateShortLink()
         } else {
+            
             let newLongLink = generateLongLink()
+            
             if newLongLink == shareLinkLong {
                 print("Long link hasn't changed, reusing short link")
             } else {
                 print("Long link changed, regenerating links")
                 shareLinkShort = nil
-                shareLinkLong = generateLongLink()
+                shareLinkLong = newLongLink
                 generateShortLink()
             }
         }
@@ -152,6 +159,7 @@ class Collection: ObservableObject, Codable {
             return URL(string: "https://jewel.breakbeat.io/share/?c=\(shareableCollectionJson.base64EncodedString())")!
         } catch {
             print(error)
+            shareLinkError = true
             return nil
         }
     }
@@ -160,6 +168,7 @@ class Collection: ObservableObject, Codable {
         
         guard let shareLinkLongString = shareLinkLong?.absoluteString else {
             print("No long link to shorten!")
+            shareLinkError = true
             return
         }
         
@@ -169,6 +178,7 @@ class Collection: ObservableObject, Codable {
         
         guard let uploadData = try? JSONEncoder().encode(firebaseShortLinkBody) else {
             print("Could not encode link to JSON")
+            shareLinkError = true
             return
         }
         
@@ -180,11 +190,13 @@ class Collection: ObservableObject, Codable {
         let task = URLSession.shared.uploadTask(with: request, from: uploadData) { data, response, error in
             if let error = error {
                 print ("Firebase API threw error: \(error)")
+                self.shareLinkError = true
                 return
             }
             guard let response = response as? HTTPURLResponse,
                 (200...299).contains(response.statusCode) else {
                     print ("Firebase gave a server error")
+                    self.shareLinkError = true
                     return
             }
             if let mimeType = response.mimeType,
@@ -196,17 +208,17 @@ class Collection: ObservableObject, Codable {
                             if let shortLink = json["shortLink"] as? String {
                                 self.shareLinkShort = URL(string: shortLink)!
                             } else {
+                                self.shareLinkError = true
                                 print("There was another error")
                             }
                         }
                     }
                 } catch let error as NSError {
+                    self.shareLinkError = true
                     print("Failed to load: \(error.localizedDescription)")
                 }
             }
         }
         task.resume()
-        
     }
-    
 }
