@@ -16,11 +16,11 @@ struct Welcome: View {
         GeometryReader { geo in
             ZStack {
                 Rectangle()
-                    .opacity(0.1) // hack to prevent clickthrough at opactity 0
+                    .opacity(0.1) // hack to prevent clickthrough if set to 0
                     .edgesIgnoringSafeArea(.all)
                 Rectangle()
                     .fill(Color(.systemBackground))
-                    .frame(width: geo.size.width * 0.8, height: geo.size.height * 0.9)
+                    .frame(width: geo.size.width * 0.8, height: geo.size.height * 0.7)
                     .cornerRadius(20)
                     .shadow(radius: 5)
                 VStack(alignment: .leading, spacing: 0) {
@@ -32,7 +32,7 @@ struct Welcome: View {
                     ZStack(alignment: .top) {
                         GeometryReader { geo in
                             ScrollView {
-                                Text("Jewel helps you remember great albums that you don't want to lose within the 100's of other in your library")
+                                Text("Jewel helps you remember great albums that you don't want to lose within the 100's of other in your library.")
                                     .padding(.bottom)
                                     .padding(.top)
                                 Text("Jewel gives you 8 slots to add any release from the Apple Music catalogue.  Add them as you remember them then when you're ready to listen they're there waiting for you!")
@@ -54,24 +54,22 @@ struct Welcome: View {
                         
                     }
                     HStack{
-                        
                         Button(action: {
                             self.userData.preferences.firstTimeRun = false
                         }) {
                             Text("Start collection")
                         }
                         .frame(maxWidth: .infinity, alignment: .center)
-                        
                     }
                     .padding()
                 }
-                .frame(width: geo.size.width * 0.8, height: geo.size.height * 0.9)
+                .frame(width: geo.size.width * 0.8, height: geo.size.height * 0.7)
                 Image("logo")
                     .resizable()
                     .frame(width: 75, height: 75)
                     .cornerRadius(5)
-                    .shadow(radius: 5)
-                    .offset(y: -(geo.size.height * 0.9)/2)
+                    .shadow(radius: 3)
+                    .offset(y: -(geo.size.height * 0.7)/2)
             }
         }
     }
