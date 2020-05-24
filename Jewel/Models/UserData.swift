@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Combine
 import HMV
 
 class UserData: ObservableObject {
@@ -33,10 +34,16 @@ class UserData: ObservableObject {
     @Published var candidateCollection: Collection?
     @Published var sharedCollectionCued = false
     
+    var anyCancellable: AnyCancellable? = nil
+    
     init() {
         
         migrateV1UserDefaults()
         activeCollection = userCollection
+        
+        anyCancellable = activeCollection.objectWillChange.sink { (_) in
+            self.objectWillChange.send()
+        }
         
     }
     

@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Collection: Codable {
+class Collection: ObservableObject, Codable {
     
     private var saveKey: String?
     private var numberOfSlots = 8
@@ -30,10 +30,25 @@ class Collection: Codable {
     }
     let editable: Bool
     var shareLinkLong: URL?
-    var shareLinkShort: URL?
+    @Published var shareLinkShort: URL?
+    
+    enum CodingKeys: CodingKey {
+        case name
+        case curator
+        case slots
+        case editable
+    }
     
     static let user = Collection(name: "My Collection", curator: "A Music Lover", editable: true, saveKey: "jewelCollection")
     static let shared = Collection(name: "Their Collection", curator: "A Music Lover", editable: false, saveKey: "jewelSharedCollection")
+    
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        name = try container.decode(String.self, forKey: .name)
+        curator = try container.decode(String.self, forKey: .curator)
+        slots = try container.decode([Slot].self, forKey: .slots)
+        editable = try container.decode(Bool.self, forKey: .editable)
+    }
     
     init(name: String, curator: String, editable: Bool) {
         self.name = name
@@ -66,6 +81,14 @@ class Collection: Codable {
         self.saveKey = saveKey
         
         initialiseSlots()
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(name, forKey: .name)
+        try container.encode(curator, forKey: .curator)
+        try container.encode(slots, forKey: .slots)
+        try container.encode(editable, forKey: .editable)
     }
     
     private func initialiseSlots() {
@@ -162,12 +185,14 @@ class Collection: Codable {
                 do {
                     // make sure this JSON is in the format we expect
                     if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
-                        // try to read out a string array
-                        print(json["shortLink"] as! String)
-                        //                        if let firebaseShortLink =  {
-                        self.shareLinkShort = URL(string: json["shortLink"] as! String)!
-                        print(self.shareLinkShort)
-                        //                        }
+                        DispatchQueue.main.async {
+                            // try to read out a string array
+                            print(json["shortLink"] as! String)
+                            //                        if let firebaseShortLink =  {
+                            self.shareLinkShort = URL(string: json["shortLink"] as! String)!
+                            print(self.shareLinkShort)
+                            //                        }
+                        }
                     }
                 } catch let error as NSError {
                     print("Failed to load: \(error.localizedDescription)")
