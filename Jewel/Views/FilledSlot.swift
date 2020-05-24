@@ -10,7 +10,8 @@ import SwiftUI
 
 struct FilledSlot: View {
     
-    @EnvironmentObject var userData: UserData
+    @EnvironmentObject var preferences: Preferences
+    @EnvironmentObject var collections: Collections
     @EnvironmentObject var searchProvider: SearchProvider
     
     @State private var tapped: Int? = 0
@@ -25,7 +26,7 @@ struct FilledSlot: View {
                     self.tapped = 1
             }
             .onLongPressGesture() {
-                if self.userData.activeCollection.editable {
+                if self.collections.activeCollection.editable {
                     self.showSearch = true
                 }
             }
@@ -39,7 +40,8 @@ struct FilledSlot: View {
         }
         .sheet(isPresented: $showSearch) {
             Search(slotIndex: self.slotIndex)
-                .environmentObject(self.userData)
+                .environmentObject(self.preferences)
+                .environmentObject(self.collections)
                 .environmentObject(self.searchProvider)
         }
     }

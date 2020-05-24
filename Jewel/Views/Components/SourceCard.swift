@@ -12,11 +12,11 @@ import HMV
 
 struct SourceCard: View {
     
-    @EnvironmentObject var userData: UserData
+    @EnvironmentObject var collections: Collections
     
     var slotIndex: Int
     private var attributes: AlbumAttributes? {
-        userData.activeCollection.slots[slotIndex].source?.content?.attributes
+        collections.activeCollection.slots[slotIndex].source?.content?.attributes
     }
     
     var body: some View {

@@ -12,11 +12,11 @@ import HMV
 
 struct SourceDetailRegular: View {
     
-    @EnvironmentObject var userData: UserData
+    @EnvironmentObject var collections: Collections
     
     var slotIndex: Int
     private var notes: String? {
-        userData.activeCollection.slots[slotIndex].source?.content?.attributes?.editorialNotes?.standard
+        collections.activeCollection.slots[slotIndex].source?.content?.attributes?.editorialNotes?.standard
     }
     
     var body: some View {

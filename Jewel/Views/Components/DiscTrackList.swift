@@ -11,16 +11,16 @@ import HMV
 
 struct DiscTrackList: View {
     
-    @EnvironmentObject var userData: UserData
+    @EnvironmentObject var collections: Collections
     
     var slotIndex: Int
     var discNumber: Int
     var withTitle: Bool
     private var albumArtist: String? {
-        userData.activeCollection.slots[slotIndex].source?.content?.attributes?.artistName
+        collections.activeCollection.slots[slotIndex].source?.content?.attributes?.artistName
     }
     private var discTracks: [Track]? {
-        userData.activeCollection.slots[slotIndex].source?.content?.relationships?.tracks.data?.filter { $0.attributes?.discNumber == discNumber }
+        collections.activeCollection.slots[slotIndex].source?.content?.relationships?.tracks.data?.filter { $0.attributes?.discNumber == discNumber }
     }
     
     var body: some View {

@@ -12,7 +12,7 @@ import HMV
 
 struct SourceDetailCompact: View {
     
-    @EnvironmentObject var userData: UserData
+    @EnvironmentObject var collections: Collections
     
     var slotIndex: Int
     

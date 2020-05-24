@@ -9,7 +9,7 @@
 import Foundation
 import HMV
 
-extension UserData {
+extension Collections {
     
     func loadScreenshotCollection() {
         let albums = getScreenshotAlbums()

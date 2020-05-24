@@ -10,7 +10,8 @@ import SwiftUI
 
 struct EmptySlot: View {
     
-    @EnvironmentObject var userData: UserData
+    @EnvironmentObject var preferences: Preferences
+    @EnvironmentObject var collections: Collections
     @EnvironmentObject var searchProvider: SearchProvider
     
     @State private var showSearch = false
@@ -19,7 +20,7 @@ struct EmptySlot: View {
     
     var body: some View {
         HStack {
-            if userData.activeCollection.editable {
+            if collections.activeCollection.editable {
                 Button(action: {
                     self.showSearch = true
                 }) {
@@ -36,7 +37,8 @@ struct EmptySlot: View {
                 }
                 .sheet(isPresented: $showSearch) {
                     Search(slotIndex: self.slotIndex)
-                        .environmentObject(self.userData)
+                        .environmentObject(self.preferences)
+                        .environmentObject(self.collections)
                         .environmentObject(self.searchProvider)
                 }
             } else {

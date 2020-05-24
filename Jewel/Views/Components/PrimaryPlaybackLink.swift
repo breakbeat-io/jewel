@@ -10,15 +10,16 @@ import SwiftUI
 
 struct PrimaryPlaybackLink: View {
     
-    @EnvironmentObject var userData: UserData
+    @EnvironmentObject var preferences: Preferences
+    @EnvironmentObject var collections: Collections
     
     var slotIndex: Int
     private var playbackDetails: (name: String, url: URL) {
-        let preferredProvider = OdesliPlatform.allCases[userData.preferences.preferredMusicPlatform]
-        if let providerLink = userData.activeCollection.slots[slotIndex].playbackLinks?.linksByPlatform[preferredProvider.rawValue] {
+        let preferredProvider = OdesliPlatform.allCases[preferences.preferredMusicPlatform]
+        if let providerLink = collections.activeCollection.slots[slotIndex].playbackLinks?.linksByPlatform[preferredProvider.rawValue] {
             return (preferredProvider.friendlyName, providerLink.url)
         } else {
-            return (OdesliPlatform.appleMusic.friendlyName, userData.activeCollection.slots[slotIndex].source!.content!.attributes!.url)
+            return (OdesliPlatform.appleMusic.friendlyName, collections.activeCollection.slots[slotIndex].source!.content!.attributes!.url)
         }
     }
     

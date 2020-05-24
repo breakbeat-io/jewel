@@ -1,5 +1,5 @@
 //
-//  UserData.swift
+//  Collections.swift
 //  Jewel
 //
 //  Created by Greg Hepworth on 20/04/2020.
@@ -10,9 +10,7 @@ import Foundation
 import Combine
 import HMV
 
-class UserData: ObservableObject {
-    
-    @Published var preferences = Preferences()
+class Collections: ObservableObject {
     
     @Published var userCollection = Collection.user
     @Published var sharedCollection = Collection.shared

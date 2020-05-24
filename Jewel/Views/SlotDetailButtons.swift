@@ -10,7 +10,8 @@ import SwiftUI
 
 struct SlotDetailButtons: View {
     
-    @EnvironmentObject var userData: UserData
+    @EnvironmentObject var preferences: Preferences
+    @EnvironmentObject var collections: Collections
     @EnvironmentObject var searchProvider: SearchProvider
     
     @State private var showSearch = false
@@ -18,7 +19,7 @@ struct SlotDetailButtons: View {
     
     var slotIndex: Int
     private var showButtons: Bool {
-        userData.activeCollection.slots[slotIndex].source?.content != nil && userData.activeCollection.editable
+        collections.activeCollection.slots[slotIndex].source?.content != nil && collections.activeCollection.editable
     }
     
     var body: some View {
@@ -33,7 +34,8 @@ struct SlotDetailButtons: View {
                 .padding(.vertical)
                 .sheet(isPresented: self.$showSearch) {
                     Search(slotIndex: self.slotIndex)
-                        .environmentObject(self.userData)
+                        .environmentObject(self.preferences)
+                        .environmentObject(self.collections)
                         .environmentObject(self.searchProvider)
                 }
                 Button(action: {
@@ -48,7 +50,7 @@ struct SlotDetailButtons: View {
                           primaryButton: .cancel(Text("Cancel")),
                           secondaryButton: .destructive(Text("Eject")
                           ){
-                            self.userData.ejectSourceFromSlot(slotIndex: self.slotIndex)
+                            self.collections.ejectSourceFromSlot(slotIndex: self.slotIndex)
                         }
                     )
                 }

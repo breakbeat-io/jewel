@@ -10,16 +10,16 @@ import SwiftUI
 
 struct PlaybackLinks: View {
     
-    @EnvironmentObject var userData: UserData
+    @EnvironmentObject var collections: Collections
     
     @State private var showAdditionalLinks = false
     
     var slotIndex: Int
     private var url: URL? {
-        userData.activeCollection.slots[slotIndex].source?.content?.attributes?.url
+        collections.activeCollection.slots[slotIndex].source?.content?.attributes?.url
     }
     private var playbackLinks: OdesliResponse? {
-        userData.activeCollection.slots[slotIndex].playbackLinks
+        collections.activeCollection.slots[slotIndex].playbackLinks
     }
     
     var body: some View {
@@ -36,7 +36,8 @@ struct PlaybackLinks: View {
                                 .foregroundColor(.secondary)
                         }
                         .sheet(isPresented: self.$showAdditionalLinks) {
-                            AdditionalPlaybackLinks(slotIndex: self.slotIndex).environmentObject(self.userData)
+                            AdditionalPlaybackLinks(slotIndex: self.slotIndex)
+                                .environmentObject(self.collections)
                         }
                         .padding()
                     }
