@@ -182,7 +182,14 @@ class Collection: ObservableObject, Codable {
             return
         }
         
-        let firebaseRestUrl = URL(string: "https://firebasedynamiclinks.googleapis.com/v1/shortLinks?key=***REMOVED***")!
+        guard let firebaseApiKey = Bundle.main.infoDictionary?["FIREBASE_API_KEY"] as? String else {
+            print ("No Firebase API key found!")
+            self.shareLinkError = true
+            return
+        }
+        print(firebaseApiKey)
+        
+        let firebaseRestUrl = URL(string: "https://firebasedynamiclinks.googleapis.com/v1/shortLinks?key=\(firebaseApiKey)")!
         var request = URLRequest(url: firebaseRestUrl)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
