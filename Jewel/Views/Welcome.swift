@@ -10,6 +10,7 @@ import SwiftUI
 
 struct Welcome: View {
     
+    @EnvironmentObject var preferences: Preferences
     @EnvironmentObject var userData: UserData
     
     var body: some View {
@@ -55,7 +56,7 @@ struct Welcome: View {
                     }
                     HStack{
                         Button(action: {
-                            self.userData.preferences.firstTimeRun = false
+                            self.preferences.firstTimeRun = false
                         }) {
                             Text("Start collection")
                         }

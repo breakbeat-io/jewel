@@ -12,6 +12,7 @@ struct Options: View {
     
     @Environment(\.presentationMode) var presentationMode
     
+    @EnvironmentObject var preferences: Preferences
     @EnvironmentObject var userData: UserData
     
     @State private var showEjectMyCollectionWarning = false
@@ -45,7 +46,7 @@ struct Options: View {
                         }
                     }
                     Section(footer: Text("If available, use this service for playback, otherwise use Apple Music.")) {
-                        Picker(selection: $userData.preferences.preferredMusicPlatform, label: Text("Playback Service")) {
+                        Picker(selection: $preferences.preferredMusicPlatform, label: Text("Playback Service")) {
                             ForEach(0 ..< OdesliPlatform.allCases.count, id: \.self) {
                                 Text(OdesliPlatform.allCases[$0].friendlyName)
                             }
@@ -99,7 +100,7 @@ struct Options: View {
                                 })
                         }
                     }
-                    if userData.preferences.debugMode {
+                    if preferences.debugMode {
                         Section(header: Text("Debug")) {
                             Button(action: {
                                 self.userData.loadScreenshotCollection()
@@ -120,7 +121,7 @@ struct Options: View {
                 Spacer()
                 Footer()
                     .onTapGesture(count: 10) {
-                        self.userData.preferences.debugMode.toggle()
+                        self.preferences.debugMode.toggle()
                 }
                 .padding()
             }

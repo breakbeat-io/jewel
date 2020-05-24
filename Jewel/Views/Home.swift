@@ -12,6 +12,7 @@ struct Home: View {
     
     @Environment(\.presentationMode) var presentationMode
     
+    @EnvironmentObject var preferences: Preferences
     @EnvironmentObject var userData: UserData
     
     @State private var showOptions = false
@@ -57,8 +58,8 @@ struct Home: View {
                 }
                 Start()
             }
-            .blur(radius: userData.preferences.firstTimeRun ? 2 : 0)
-            if userData.preferences.firstTimeRun {
+            .blur(radius: preferences.firstTimeRun ? 2 : 0)
+            if preferences.firstTimeRun {
                 Welcome()
             }
         }

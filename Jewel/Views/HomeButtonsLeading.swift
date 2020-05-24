@@ -10,6 +10,7 @@ import SwiftUI
 
 struct HomeButtonsLeading: View {
     
+    @EnvironmentObject var preferences: Preferences
     @EnvironmentObject var userData: UserData
     
     @State private var showOptions = false
@@ -21,7 +22,9 @@ struct HomeButtonsLeading: View {
             Image(systemName: "slider.horizontal.3")
         }
         .sheet(isPresented: self.$showOptions) {
-            Options().environmentObject(self.userData)
+            Options()
+                .environmentObject(self.preferences)
+                .environmentObject(self.userData)
         }
         .padding(.trailing)
         .padding(.vertical)

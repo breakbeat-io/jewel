@@ -11,6 +11,7 @@ import HMV
 
 struct SearchBar: View {
     
+    @EnvironmentObject var preferences: Preferences
     @EnvironmentObject var userData: UserData
     @EnvironmentObject var searchProvider: SearchProvider
     
@@ -27,7 +28,7 @@ struct SearchBar: View {
                     "Search Apple Music",
                     text: $searchTerm,
                     onCommit: {
-                        if self.userData.preferences.debugMode {
+                        if self.preferences.debugMode {
                             self.searchProvider.exampleSearch()
                         } else {
                             self.searchProvider.search(searchTerm: self.searchTerm)

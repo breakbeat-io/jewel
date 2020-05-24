@@ -36,7 +36,8 @@ struct PlaybackLinks: View {
                                 .foregroundColor(.secondary)
                         }
                         .sheet(isPresented: self.$showAdditionalLinks) {
-                            AdditionalPlaybackLinks(slotIndex: self.slotIndex).environmentObject(self.userData)
+                            AdditionalPlaybackLinks(slotIndex: self.slotIndex)
+                                .environmentObject(self.userData)
                         }
                         .padding()
                     }

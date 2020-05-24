@@ -10,6 +10,7 @@ import SwiftUI
 
 struct EmptySlot: View {
     
+    @EnvironmentObject var preferences: Preferences
     @EnvironmentObject var userData: UserData
     @EnvironmentObject var searchProvider: SearchProvider
     
@@ -36,6 +37,7 @@ struct EmptySlot: View {
                 }
                 .sheet(isPresented: $showSearch) {
                     Search(slotIndex: self.slotIndex)
+                        .environmentObject(self.preferences)
                         .environmentObject(self.userData)
                         .environmentObject(self.searchProvider)
                 }

@@ -10,6 +10,7 @@ import SwiftUI
 
 struct SlotDetailButtons: View {
     
+    @EnvironmentObject var preferences: Preferences
     @EnvironmentObject var userData: UserData
     @EnvironmentObject var searchProvider: SearchProvider
     
@@ -33,6 +34,7 @@ struct SlotDetailButtons: View {
                 .padding(.vertical)
                 .sheet(isPresented: self.$showSearch) {
                     Search(slotIndex: self.slotIndex)
+                        .environmentObject(self.preferences)
                         .environmentObject(self.userData)
                         .environmentObject(self.searchProvider)
                 }

@@ -12,8 +12,6 @@ import HMV
 
 class UserData: ObservableObject {
     
-    @Published var preferences = Preferences()
-    
     @Published var userCollection = Collection.user
     @Published var sharedCollection = Collection.shared
     
