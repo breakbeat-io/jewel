@@ -41,9 +41,9 @@ class UserData: ObservableObject {
         migrateV1UserDefaults()
         activeCollection = userCollection
         
-        anyCancellable = activeCollection.objectWillChange.sink { (_) in
+        anyCancellable = Publishers.CombineLatest(userCollection.$shareLinkShort, sharedCollection.$shareLinkShort).sink(receiveValue: { _ in
             self.objectWillChange.send()
-        }
+        })
         
     }
     
