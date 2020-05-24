@@ -19,7 +19,7 @@ struct Welcome: View {
                     .opacity(0.1) // hack to prevent clickthrough at opactity 0
                     .edgesIgnoringSafeArea(.all)
                 Rectangle()
-                    .fill(Color.white)
+                    .fill(Color(UIColor.systemBackground))
                     .frame(width: geo.size.width * 0.8, height: geo.size.height * 0.9)
                     .cornerRadius(20)
                     .shadow(radius: 5)
@@ -44,12 +44,12 @@ struct Welcome: View {
                             }
                             .padding(.horizontal)
                             Rectangle()
-                                .fill(LinearGradient(gradient: Gradient(colors: [.white, Color.white.opacity(0)]), startPoint: .top, endPoint: .bottom))
-                                .frame(height: 25)
+                                .fill(LinearGradient(gradient: Gradient(colors: [Color(UIColor.systemBackground), Color(UIColor.systemBackground).opacity(0)]), startPoint: .top, endPoint: .bottom))
+                                .frame(height: 10)
                             Rectangle()
-                                .fill(LinearGradient(gradient: Gradient(colors: [.white, Color.white.opacity(0)]), startPoint: .bottom, endPoint: .top))
-                                .frame(height: 25)
-                                .offset(y: geo.size.height - 25)
+                                .fill(LinearGradient(gradient: Gradient(colors: [Color(UIColor.systemBackground).opacity(0), Color(UIColor.systemBackground)]), startPoint: .top, endPoint: .bottom))
+                                .frame(height: 10)
+                                .offset(y: geo.size.height - 10)
                         }
                         
                     }
