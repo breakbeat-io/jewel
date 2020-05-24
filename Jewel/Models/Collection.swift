@@ -88,11 +88,21 @@ class Collection: Codable {
     }
     
     func generateShareLinks() {
-        print("generating links")
-        shareLinkLong = generateLongLink()
-        // do the logic here to check whether to create a new share link or not
-        //            generateShortLink()
-        
+        if shareLinkLong == nil {
+            print("no links found, generating")
+            shareLinkLong = generateLongLink()
+            generateShortLink()
+        } else {
+            let newLongLink = generateLongLink()
+            if newLongLink == shareLinkLong {
+                print("Long link hasn't changed, reusing short link")
+            } else {
+                print("Long link changed, regenerating links")
+                shareLinkShort = nil
+                shareLinkLong = generateLongLink()
+                generateShortLink()
+            }
+        }
     }
     
     private func generateLongLink() -> URL {

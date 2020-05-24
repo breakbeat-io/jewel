@@ -14,14 +14,14 @@ struct ShareSheetInterstitial: View {
     
     var body: some View {
         ZStack {
-            if userData.activeCollection.shareLinkLong == nil {
-                Text("generating share link")
+            if userData.activeCollection.shareLinkShort == nil {
+                Text("Generating share links ...")
             } else {
-                Text("longLink exists!")
+                ShareSheet(activityItems: [userData.activeCollection.shareLinkShort!])
             }
         }
         .onAppear {
-            self.userData.activeCollection.generateShareLinks()
+           self.userData.activeCollection.generateShareLinks()
         }
     }
 }
