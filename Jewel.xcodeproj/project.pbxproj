@@ -323,8 +323,8 @@
 		D2B1E6322448635D004D474F /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				D2D5875D244E391200E982E8 /* Collections.swift */,
 				D2BD46562469895500AD3F30 /* Preferences.swift */,
+				D2D5875D244E391200E982E8 /* Collections.swift */,
 				D2ED2DA5246C2B1A00A6579F /* Collection.swift */,
 				D2E690F52450E36800B981F2 /* Slot.swift */,
 				D22318BC246C5B5C0033B8A5 /* Source.swift */,

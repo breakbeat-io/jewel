@@ -1,5 +1,5 @@
 //
-//  UserData.swift
+//  Collections.swift
 //  Jewel
 //
 //  Created by Greg Hepworth on 20/04/2020.
