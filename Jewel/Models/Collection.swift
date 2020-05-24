@@ -112,7 +112,7 @@ class Collection: ObservableObject, Codable {
     
     func generateShareLinks() {
         if shareLinkLong == nil {
-            print("no links found, generating")
+            print("No links found, generating")
             shareLinkLong = generateLongLink()
             generateShortLink()
         } else {
@@ -128,7 +128,7 @@ class Collection: ObservableObject, Codable {
         }
     }
     
-    private func generateLongLink() -> URL {
+    private func generateLongLink() -> URL? {
         
         var shareableSlots = [ShareableSlot?]()
         
@@ -147,51 +147,57 @@ class Collection: ObservableObject, Codable {
             collection: shareableSlots
         )
         
-        let encoder = JSONEncoder()
-        let shareableCollectionJson = try! encoder.encode(shareableCollection)
-        
-        return URL(string: "https://jewel.breakbeat.io/share/?c=\(shareableCollectionJson.base64EncodedString())")!
-        
+        do {
+            let shareableCollectionJson = try JSONEncoder().encode(shareableCollection)
+            return URL(string: "https://jewel.breakbeat.io/share/?c=\(shareableCollectionJson.base64EncodedString())")!
+        } catch {
+            print(error)
+            return nil
+        }
     }
     
     private func generateShortLink() {
         
-        let firebasePrefix = "https://jewelshare.page.link"
+        guard let shareLinkLongString = shareLinkLong?.absoluteString else {
+            print("No long link to shorten!")
+            return
+        }
         
-        let longDynamicLink = firebasePrefix + "/?link=" + shareLinkLong!.absoluteString
+        let longDynamicLink = "https://jewelshare.page.link/?link=\(shareLinkLongString)"
         
         let firebaseShortLinkBody = ["longDynamicLink": longDynamicLink]
         
-        let uploadData = try! JSONEncoder().encode(firebaseShortLinkBody)
+        guard let uploadData = try? JSONEncoder().encode(firebaseShortLinkBody) else {
+            print("Could not encode link to JSON")
+            return
+        }
         
-        let url = URL(string: "https://firebasedynamiclinks.googleapis.com/v1/shortLinks?key=***REMOVED***")!
-        var request = URLRequest(url: url)
+        let firebaseRestUrl = URL(string: "https://firebasedynamiclinks.googleapis.com/v1/shortLinks?key=***REMOVED***")!
+        var request = URLRequest(url: firebaseRestUrl)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
         let task = URLSession.shared.uploadTask(with: request, from: uploadData) { data, response, error in
             if let error = error {
-                print ("error: \(error)")
+                print ("Firebase API threw error: \(error)")
                 return
             }
             guard let response = response as? HTTPURLResponse,
                 (200...299).contains(response.statusCode) else {
-                    print ("server error")
+                    print ("Firebase gave a server error")
                     return
             }
             if let mimeType = response.mimeType,
                 mimeType == "application/json",
                 let data = data {
                 do {
-                    // make sure this JSON is in the format we expect
                     if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
                         DispatchQueue.main.async {
-                            // try to read out a string array
-                            print(json["shortLink"] as! String)
-                            //                        if let firebaseShortLink =  {
-                            self.shareLinkShort = URL(string: json["shortLink"] as! String)!
-                            print(self.shareLinkShort)
-                            //                        }
+                            if let shortLink = json["shortLink"] as? String {
+                                self.shareLinkShort = URL(string: shortLink)!
+                            } else {
+                                print("There was another error")
+                            }
                         }
                     }
                 } catch let error as NSError {
