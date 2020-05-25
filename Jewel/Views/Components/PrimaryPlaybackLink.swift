@@ -14,18 +14,20 @@ struct PrimaryPlaybackLink: View {
     @EnvironmentObject var collections: Collections
     
     var slotIndex: Int
-    private var playbackDetails: (name: String, url: URL) {
+    private var playbackDetails: (name: String, url: URL?) {
         let preferredProvider = OdesliPlatform.allCases[preferences.preferredMusicPlatform]
         if let providerLink = collections.activeCollection.slots[slotIndex].playbackLinks?.linksByPlatform[preferredProvider.rawValue] {
             return (preferredProvider.friendlyName, providerLink.url)
         } else {
-            return (OdesliPlatform.appleMusic.friendlyName, collections.activeCollection.slots[slotIndex].source!.content!.attributes!.url)
+            return (OdesliPlatform.appleMusic.friendlyName, collections.activeCollection.slots[slotIndex].source?.content?.attributes?.url)
         }
     }
     
     var body: some View {
         Button(action: {
-            UIApplication.shared.open(self.playbackDetails.url)
+            if let url = self.playbackDetails.url {
+                UIApplication.shared.open(url)
+            }
         }) {
             HStack {
                 Image(systemName: "play.fill")
