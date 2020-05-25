@@ -13,7 +13,7 @@ import HMV
 class Collections: ObservableObject {
     
     @Published var userCollection = Collection.user
-    @Published var sharedCollection = Collection.shared
+    @Published var sharedCollection = Collection(name: "Their Collection", curator: "A Music Lover", editable: false, saveKey: "jewelSharedCollection")
     
     @Published var activeCollection: Collection! = nil  // force to nil, is replaced in init. feels bad.
     
@@ -150,10 +150,8 @@ class Collections: ObservableObject {
     
     func cueCandidateCollection(recievedCollection: ShareableCollection) {
         
-        candidateCollection = Collection.shared
-        candidateCollection?.name = recievedCollection.collectionName
-        candidateCollection?.curator = recievedCollection.collectionCurator
-        
+        candidateCollection = Collection(name: recievedCollection.collectionName, curator: recievedCollection.collectionCurator, editable: false)
+
         for (index, slot) in recievedCollection.collection.enumerated() {
             if slot?.sourceProvider == SourceProvider.appleMusicAlbum {
                 addContentToSlot(contentId: slot!.sourceRef, collection: candidateCollection!, slotIndex: index)
