@@ -64,6 +64,13 @@ class Preferences: ObservableObject, Codable {
         try container.encode(firstTimeRun, forKey: .firstTimeRun)
     }
     
+    func reset() {
+        let domain = Bundle.main.bundleIdentifier!
+        UserDefaults.standard.removePersistentDomain(forName: domain)
+        UserDefaults.standard.synchronize()
+        exit(1)
+    }
+    
     private func save() {
         do {
             let encoded = try JSONEncoder().encode(self)

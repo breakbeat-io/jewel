@@ -109,7 +109,7 @@ struct Options: View {
                                 Text("Load Screenshot Data")
                             }
                             Button(action: {
-                                self.collections.reset()
+                                self.preferences.reset()
                                 self.presentationMode.wrappedValue.dismiss()
                             }) {
                                 Text("Reset Jewel")

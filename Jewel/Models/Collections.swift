@@ -135,13 +135,6 @@ class Collections: ObservableObject {
         userCollectionActive = true
     }
     
-    func reset() {
-        let domain = Bundle.main.bundleIdentifier!
-        UserDefaults.standard.removePersistentDomain(forName: domain)
-        UserDefaults.standard.synchronize()
-        exit(1)
-    }
-    
     func processRecievedCollection(recievedCollectionUrl: URL) {
         if let urlComponents = URLComponents(url: recievedCollectionUrl, resolvingAgainstBaseURL: true) {
             let params = urlComponents.queryItems
