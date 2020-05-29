@@ -10,7 +10,7 @@ import SwiftUI
 
 struct ItemView: View {
     
-    let album: Album
+    let album: JewelAlbum
     
     var body: some View {
         HStack {

@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Album: Identifiable {
+struct JewelAlbum: Identifiable {
     let id = UUID()
     let title: String
     let artist: String
