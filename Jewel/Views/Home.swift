@@ -11,6 +11,7 @@ import SwiftUI
 struct Home: View {
     
     @EnvironmentObject var store: AppStore
+    
     @State private var showSearch: Bool = false
     
     var body: some View {

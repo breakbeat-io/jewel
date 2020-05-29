@@ -13,7 +13,8 @@ final class AppStore: ObservableObject {
     
     init() {
         let collection = CollectionState(albums: [Album]())
-        let appState = AppState(collection: collection)
+        let search = SearchState()
+        let appState = AppState(collection: collection, search: search)
         self.state = appState
     }
     

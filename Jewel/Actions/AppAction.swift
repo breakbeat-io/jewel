@@ -10,7 +10,8 @@ import Foundation
 
 func updateState(state: AppState, action: AppAction) -> AppState {
     return AppState(
-        collection: updateCollection(state: state.collection, action: action)
+        collection: updateCollection(state: state.collection, action: action),
+        search: updateSearch(state: state.search, action: action)
     )
 }
 
@@ -27,5 +28,9 @@ func updateCollection(state: CollectionState, action: AppAction) -> CollectionSt
     return state
 }
 
-
+func updateSearch(state: SearchState, action: AppAction) -> SearchState {
+    var state = state
+    
+    return state
+}
 

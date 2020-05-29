@@ -10,8 +10,13 @@ import Foundation
 
 struct AppState {
     var collection: CollectionState
+    var search: SearchState
 }
 
 struct CollectionState {
     var albums: [Album]
+}
+
+struct SearchState {
+    var results: [Album]?
 }

@@ -18,9 +18,9 @@ struct Search: View {
     
     var body: some View {
         NavigationView {
-            Form {
-                TextField("Name", text: $title)
-                TextField("Name", text: $artist)
+            VStack{
+                SearchBar()
+                Spacer()
             }
             .navigationBarTitle("Search")
             .navigationBarItems(
