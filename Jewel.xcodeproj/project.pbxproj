@@ -21,6 +21,7 @@
 		D249259B2481455A0011F409 /* IfLet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D249259A2481455A0011F409 /* IfLet.swift */; };
 		D249259E248145C20011F409 /* KingfisherSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = D249259D248145C20011F409 /* KingfisherSwiftUI */; };
 		D24925A224814AD60011F409 /* HMV in Frameworks */ = {isa = PBXBuildFile; productRef = D24925A124814AD60011F409 /* HMV */; };
+		D24925A424814CB60011F409 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24925A324814CB60011F409 /* Store.swift */; };
 		D2AB84632481137C008B57F9 /* JewelAlbum.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AB84622481137C008B57F9 /* JewelAlbum.swift */; };
 		D2AB8467248113EB008B57F9 /* AppActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AB8466248113EB008B57F9 /* AppActions.swift */; };
 		D2AB84692481148D008B57F9 /* AppAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AB84682481148D008B57F9 /* AppAction.swift */; };
@@ -43,6 +44,8 @@
 		D2492596248142660011F409 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		D2492598248143720011F409 /* SearchResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResults.swift; sourceTree = "<group>"; };
 		D249259A2481455A0011F409 /* IfLet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IfLet.swift; sourceTree = "<group>"; };
+		D24925A324814CB60011F409 /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
+		D24925A524814D460011F409 /* secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = secrets.xcconfig; sourceTree = "<group>"; };
 		D2AB84622481137C008B57F9 /* JewelAlbum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JewelAlbum.swift; sourceTree = "<group>"; };
 		D2AB8466248113EB008B57F9 /* AppActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppActions.swift; sourceTree = "<group>"; };
 		D2AB84682481148D008B57F9 /* AppAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAction.swift; sourceTree = "<group>"; };
@@ -68,6 +71,7 @@
 			children = (
 				D221557A2481114A00A1F04A /* Jewel */,
 				D22155792481114A00A1F04A /* Products */,
+				D24925A524814D460011F409 /* secrets.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -92,6 +96,7 @@
 				D22155862481114B00A1F04A /* LaunchScreen.storyboard */,
 				D22155892481114B00A1F04A /* Info.plist */,
 				D22155832481114B00A1F04A /* Preview Content */,
+				D24925A324814CB60011F409 /* Store.swift */,
 			);
 			path = Jewel;
 			sourceTree = "<group>";
@@ -245,6 +250,7 @@
 				D2AB8467248113EB008B57F9 /* AppActions.swift in Sources */,
 				D2AB84692481148D008B57F9 /* AppAction.swift in Sources */,
 				D2AB84632481137C008B57F9 /* JewelAlbum.swift in Sources */,
+				D24925A424814CB60011F409 /* Store.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

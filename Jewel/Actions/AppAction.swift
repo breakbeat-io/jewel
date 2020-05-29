@@ -34,6 +34,12 @@ func updateSearch(state: SearchState, action: AppAction) -> SearchState {
     
     switch action {
     case .search(let term):
+        Store.appleMusic.search(term: term, limit: 20, types: [.albums]) { storeResults, error in
+            DispatchQueue.main.async {
+                print("there were some search results from the API")
+//                self.results = storeResults?.albums?.data
+            }
+        }
         print("search term populated wtih \(term)")
     case .removeSearchResults:
         state.results = nil
