@@ -11,19 +11,23 @@ import SwiftUI
 struct Home: View {
     
     @EnvironmentObject var store: AppStore
-    @State private var isAddingMode: Bool = false
+    @State private var showSearch: Bool = false
     
     var body: some View {
         NavigationView {
             ItemListView()
                 .navigationBarTitle("Albums")
                 .navigationBarItems(
-                    leading: AddButton(isAddingMode: self.$isAddingMode),
+                    leading: Button(action: {
+                        self.showSearch = true
+                    }) {
+                        Image(systemName: "plus")
+                    },
                     trailing: TrailingView()
                 )
         }
-        .sheet(isPresented: $isAddingMode) {
-            AddItemView(isAddingMode: self.$isAddingMode)
+        .sheet(isPresented: $showSearch) {
+            Search(showSearch: self.$showSearch)
                 .environmentObject(self.store)
         }
     }

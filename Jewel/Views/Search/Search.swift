@@ -1,5 +1,5 @@
 //
-//  AddItemView.swift
+//  Search.swift
 //  Jewel
 //
 //  Created by Greg Hepworth on 29/05/2020.
@@ -8,13 +8,13 @@
 
 import SwiftUI
 
-struct AddItemView: View {
+struct Search: View {
     
     @EnvironmentObject private var store: AppStore
     
     @State private var title: String = ""
     @State private var artist: String = ""
-    @Binding var isAddingMode: Bool
+    @Binding var showSearch: Bool
     
     var body: some View {
         NavigationView {
@@ -22,10 +22,10 @@ struct AddItemView: View {
                 TextField("Name", text: $title)
                 TextField("Name", text: $artist)
             }
-            .navigationBarTitle("Album Details", displayMode: .inline)
+            .navigationBarTitle("Search")
             .navigationBarItems(
                 leading: Button(action: {
-                    self.isAddingMode = false
+                    self.showSearch = false
                 }) {
                     Text("Cancel")
                 },
@@ -35,7 +35,7 @@ struct AddItemView: View {
                         artist: self.artist
                     )
                     self.store.update(action: .addAlbum(album: album))
-                    self.isAddingMode = false
+                    self.showSearch = false
                 }) {
                     Text("Save")
                 }
