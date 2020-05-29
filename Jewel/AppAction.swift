@@ -8,7 +8,13 @@
 
 import Foundation
 
-func applyAction(state: AppState, action: AppAction) -> AppState {
+func updateState(state: AppState, action: AppAction) -> AppState {
+    return AppState(
+        collection: updateCollection(state: state.collection, action: action)
+    )
+}
+
+func updateCollection(state: CollectionState, action: AppAction) -> CollectionState {
     var state = state
     
     switch action {
@@ -19,5 +25,7 @@ func applyAction(state: AppState, action: AppAction) -> AppState {
     }
     
     return state
-    
 }
+
+
+

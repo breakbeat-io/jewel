@@ -11,12 +11,14 @@ import Foundation
 final class AppStore: ObservableObject {
     @Published private(set) var state: AppState
     
-    init(state: AppState = .init(albums: [Album]())) {
-        self.state = state
+    init() {
+        let collection = CollectionState(albums: [Album]())
+        let appState = AppState(collection: collection)
+        self.state = appState
     }
     
     public func update(action: AppAction) {
-        state = applyAction(state: state, action: action)
+        state = updateState(state: state, action: action)
     }
     
 }

@@ -9,5 +9,9 @@
 import Foundation
 
 struct AppState {
+    var collection: CollectionState
+}
+
+struct CollectionState {
     var albums: [Album]
 }

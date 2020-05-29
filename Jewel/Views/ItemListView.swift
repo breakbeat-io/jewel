@@ -14,7 +14,7 @@ struct ItemListView: View {
     
     var body: some View {
         List {
-            ForEach(store.state.albums) { album in
+            ForEach(store.state.collection.albums) { album in
                 ItemView(album: album)
             }
             .onDelete {
