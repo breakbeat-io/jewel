@@ -34,7 +34,10 @@ func updateSearch(state: SearchState, action: AppAction) -> SearchState {
     
     switch action {
     case .search(let term):
+        state.results = term
         print("search term populated wtih \(term)")
+    case .removeSearchResults:
+        state.results = nil
     default: break
     }
     

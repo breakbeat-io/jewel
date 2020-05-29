@@ -13,14 +13,14 @@ struct SearchResults: View {
     
     @EnvironmentObject var store: AppStore
     
-    private var searchResults: [Album]? {
+    private var searchResults: String? {
         store.state.search.results
     }
     
     var body: some View {
         IfLet(searchResults) { results in
             List(0..<results.count, id: \.self) { i in
-                Text("A result")
+                Text(results)
 //                IfLet(results[i].attributes) { result in
 //                    HStack {
 //                        KFImage(result.artwork.url(forWidth: 50))

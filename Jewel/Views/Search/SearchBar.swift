@@ -28,6 +28,7 @@ struct SearchBar: View {
                     .keyboardType(.webSearch)
                 Button(action: {
                     self.searchTerm = ""
+                    self.store.update(action: .removeSearchResults)
 //                    self.searchProvider.results?.removeAll()
                 }) {
                     Image(systemName: "xmark.circle.fill")

@@ -18,5 +18,5 @@ struct CollectionState {
 }
 
 struct SearchState {
-    var results: [Album]?
+    var results: String?
 }

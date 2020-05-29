@@ -12,4 +12,5 @@ enum AppAction {
     case addAlbum(album: Album)
     case removeAlbum(at: IndexSet)
     case search(term: String)
+    case removeSearchResults
 }
