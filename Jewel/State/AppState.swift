@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import HMV
 
 struct AppState {
     var collection: CollectionState
@@ -18,5 +19,5 @@ struct CollectionState {
 }
 
 struct SearchState {
-    var results: String?
+    var results: [Album]?
 }

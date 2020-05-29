@@ -15,7 +15,7 @@ struct ItemListView: View {
     var body: some View {
         List {
             ForEach(store.state.collection.albums) { album in
-                ItemView(album: album)
+                Text("This will be an Album")
             }
             .onDelete {
                 self.store.update(action: .removeAlbum(at: $0))

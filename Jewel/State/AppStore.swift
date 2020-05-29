@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import HMV
 
 final class AppStore: ObservableObject {
     @Published private(set) var state: AppState

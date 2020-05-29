@@ -20,6 +20,7 @@
 		D2492599248143720011F409 /* SearchResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2492598248143720011F409 /* SearchResults.swift */; };
 		D249259B2481455A0011F409 /* IfLet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D249259A2481455A0011F409 /* IfLet.swift */; };
 		D249259E248145C20011F409 /* KingfisherSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = D249259D248145C20011F409 /* KingfisherSwiftUI */; };
+		D24925A224814AD60011F409 /* HMV in Frameworks */ = {isa = PBXBuildFile; productRef = D24925A124814AD60011F409 /* HMV */; };
 		D2AB84632481137C008B57F9 /* JewelAlbum.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AB84622481137C008B57F9 /* JewelAlbum.swift */; };
 		D2AB8467248113EB008B57F9 /* AppActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AB8466248113EB008B57F9 /* AppActions.swift */; };
 		D2AB84692481148D008B57F9 /* AppAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AB84682481148D008B57F9 /* AppAction.swift */; };
@@ -54,6 +55,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D24925A224814AD60011F409 /* HMV in Frameworks */,
 				D249259E248145C20011F409 /* KingfisherSwiftUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -168,6 +170,7 @@
 			name = Jewel;
 			packageProductDependencies = (
 				D249259D248145C20011F409 /* KingfisherSwiftUI */,
+				D24925A124814AD60011F409 /* HMV */,
 			);
 			productName = Jewel;
 			productReference = D22155782481114A00A1F04A /* Jewel.app */;
@@ -199,6 +202,7 @@
 			mainGroup = D221556F2481114A00A1F04A;
 			packageReferences = (
 				D249259C248145C20011F409 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				D24925A024814AD60011F409 /* XCRemoteSwiftPackageReference "HMV" */,
 			);
 			productRefGroup = D22155792481114A00A1F04A /* Products */;
 			projectDirPath = "";
@@ -444,6 +448,14 @@
 				minimumVersion = 5.14.0;
 			};
 		};
+		D24925A024814AD60011F409 /* XCRemoteSwiftPackageReference "HMV" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hepto/HMV";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -451,6 +463,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D249259C248145C20011F409 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = KingfisherSwiftUI;
+		};
+		D24925A124814AD60011F409 /* HMV */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D24925A024814AD60011F409 /* XCRemoteSwiftPackageReference "HMV" */;
+			productName = HMV;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

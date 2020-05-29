@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import HMV
 
 enum AppAction {
     case addAlbum(album: Album)
