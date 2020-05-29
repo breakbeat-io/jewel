@@ -92,11 +92,11 @@
 				D24925922481409D0011F409 /* Actions */,
 				D2AB846C2481168C008B57F9 /* Views */,
 				D2AB846124811354008B57F9 /* Models */,
+				D24925A324814CB60011F409 /* Store.swift */,
 				D22155812481114B00A1F04A /* Assets.xcassets */,
 				D22155862481114B00A1F04A /* LaunchScreen.storyboard */,
 				D22155892481114B00A1F04A /* Info.plist */,
 				D22155832481114B00A1F04A /* Preview Content */,
-				D24925A324814CB60011F409 /* Store.swift */,
 			);
 			path = Jewel;
 			sourceTree = "<group>";
@@ -270,6 +270,7 @@
 /* Begin XCBuildConfiguration section */
 		D221558A2481114B00A1F04A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D24925A524814D460011F409 /* secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -330,6 +331,7 @@
 		};
 		D221558B2481114B00A1F04A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D24925A524814D460011F409 /* secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
