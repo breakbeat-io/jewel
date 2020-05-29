@@ -84,8 +84,7 @@
 			children = (
 				D221557B2481114A00A1F04A /* AppDelegate.swift */,
 				D221557D2481114A00A1F04A /* SceneDelegate.swift */,
-				D2AB846A2481159D008B57F9 /* AppStore.swift */,
-				D2492586248117710011F409 /* AppState.swift */,
+				D249259F248146350011F409 /* State */,
 				D24925922481409D0011F409 /* Actions */,
 				D2AB846C2481168C008B57F9 /* Views */,
 				D2AB846124811354008B57F9 /* Models */,
@@ -122,6 +121,15 @@
 				D2492598248143720011F409 /* SearchResults.swift */,
 			);
 			path = Search;
+			sourceTree = "<group>";
+		};
+		D249259F248146350011F409 /* State */ = {
+			isa = PBXGroup;
+			children = (
+				D2AB846A2481159D008B57F9 /* AppStore.swift */,
+				D2492586248117710011F409 /* AppState.swift */,
+			);
+			path = State;
 			sourceTree = "<group>";
 		};
 		D2AB846124811354008B57F9 /* Models */ = {
