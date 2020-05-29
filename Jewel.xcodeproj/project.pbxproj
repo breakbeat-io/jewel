@@ -9,21 +9,41 @@
 /* Begin PBXBuildFile section */
 		D221557C2481114A00A1F04A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D221557B2481114A00A1F04A /* AppDelegate.swift */; };
 		D221557E2481114A00A1F04A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D221557D2481114A00A1F04A /* SceneDelegate.swift */; };
-		D22155802481114A00A1F04A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D221557F2481114A00A1F04A /* ContentView.swift */; };
 		D22155822481114B00A1F04A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D22155812481114B00A1F04A /* Assets.xcassets */; };
 		D22155852481114B00A1F04A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D22155842481114B00A1F04A /* Preview Assets.xcassets */; };
 		D22155882481114B00A1F04A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D22155862481114B00A1F04A /* LaunchScreen.storyboard */; };
+		D2492587248117710011F409 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2492586248117710011F409 /* AppState.swift */; };
+		D2492589248118540011F409 /* ItemListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2492588248118540011F409 /* ItemListView.swift */; };
+		D249258B2481189F0011F409 /* ItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D249258A2481189F0011F409 /* ItemView.swift */; };
+		D249258D248119F30011F409 /* AddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D249258C248119F30011F409 /* AddButton.swift */; };
+		D249258F24811A650011F409 /* AddItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D249258E24811A650011F409 /* AddItemView.swift */; };
+		D249259124811BB50011F409 /* TrailingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D249259024811BB50011F409 /* TrailingView.swift */; };
+		D2AB84632481137C008B57F9 /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AB84622481137C008B57F9 /* Album.swift */; };
+		D2AB8467248113EB008B57F9 /* AppActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AB8466248113EB008B57F9 /* AppActions.swift */; };
+		D2AB84692481148D008B57F9 /* AppAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AB84682481148D008B57F9 /* AppAction.swift */; };
+		D2AB846B2481159D008B57F9 /* AppStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AB846A2481159D008B57F9 /* AppStore.swift */; };
+		D2AB846E248116A3008B57F9 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AB846D248116A3008B57F9 /* Home.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		D22155782481114A00A1F04A /* Jewel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jewel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D221557B2481114A00A1F04A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D221557D2481114A00A1F04A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		D221557F2481114A00A1F04A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		D22155812481114B00A1F04A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D22155842481114B00A1F04A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D22155872481114B00A1F04A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D22155892481114B00A1F04A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D2492586248117710011F409 /* AppState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		D2492588248118540011F409 /* ItemListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemListView.swift; sourceTree = "<group>"; };
+		D249258A2481189F0011F409 /* ItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemView.swift; sourceTree = "<group>"; };
+		D249258C248119F30011F409 /* AddButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddButton.swift; sourceTree = "<group>"; };
+		D249258E24811A650011F409 /* AddItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemView.swift; sourceTree = "<group>"; };
+		D249259024811BB50011F409 /* TrailingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailingView.swift; sourceTree = "<group>"; };
+		D2AB84622481137C008B57F9 /* Album.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
+		D2AB8466248113EB008B57F9 /* AppActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppActions.swift; sourceTree = "<group>"; };
+		D2AB84682481148D008B57F9 /* AppAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAction.swift; sourceTree = "<group>"; };
+		D2AB846A2481159D008B57F9 /* AppStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStore.swift; sourceTree = "<group>"; };
+		D2AB846D248116A3008B57F9 /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,7 +78,12 @@
 			children = (
 				D221557B2481114A00A1F04A /* AppDelegate.swift */,
 				D221557D2481114A00A1F04A /* SceneDelegate.swift */,
-				D221557F2481114A00A1F04A /* ContentView.swift */,
+				D2AB846A2481159D008B57F9 /* AppStore.swift */,
+				D2492586248117710011F409 /* AppState.swift */,
+				D2AB84682481148D008B57F9 /* AppAction.swift */,
+				D2AB8466248113EB008B57F9 /* AppActions.swift */,
+				D2AB846C2481168C008B57F9 /* Views */,
+				D2AB846124811354008B57F9 /* Models */,
 				D22155812481114B00A1F04A /* Assets.xcassets */,
 				D22155862481114B00A1F04A /* LaunchScreen.storyboard */,
 				D22155892481114B00A1F04A /* Info.plist */,
@@ -73,6 +98,27 @@
 				D22155842481114B00A1F04A /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		D2AB846124811354008B57F9 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D2AB84622481137C008B57F9 /* Album.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		D2AB846C2481168C008B57F9 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D2AB846D248116A3008B57F9 /* Home.swift */,
+				D2492588248118540011F409 /* ItemListView.swift */,
+				D249258A2481189F0011F409 /* ItemView.swift */,
+				D249258C248119F30011F409 /* AddButton.swift */,
+				D249258E24811A650011F409 /* AddItemView.swift */,
+				D249259024811BB50011F409 /* TrailingView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -147,8 +193,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				D221557C2481114A00A1F04A /* AppDelegate.swift in Sources */,
+				D2492587248117710011F409 /* AppState.swift in Sources */,
 				D221557E2481114A00A1F04A /* SceneDelegate.swift in Sources */,
-				D22155802481114A00A1F04A /* ContentView.swift in Sources */,
+				D249258D248119F30011F409 /* AddButton.swift in Sources */,
+				D249258F24811A650011F409 /* AddItemView.swift in Sources */,
+				D2AB846B2481159D008B57F9 /* AppStore.swift in Sources */,
+				D249259124811BB50011F409 /* TrailingView.swift in Sources */,
+				D2AB846E248116A3008B57F9 /* Home.swift in Sources */,
+				D249258B2481189F0011F409 /* ItemView.swift in Sources */,
+				D2492589248118540011F409 /* ItemListView.swift in Sources */,
+				D2AB8467248113EB008B57F9 /* AppActions.swift in Sources */,
+				D2AB84692481148D008B57F9 /* AppAction.swift in Sources */,
+				D2AB84632481137C008B57F9 /* Album.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
