@@ -10,6 +10,8 @@ import SwiftUI
 
 struct SearchBar: View {
     
+    @EnvironmentObject var store: AppStore
+    
     @State private var searchTerm: String = ""
     
     var body: some View {
@@ -20,12 +22,7 @@ struct SearchBar: View {
                     "Search Apple Music",
                     text: $searchTerm,
                     onCommit: {
-                        print("search term populated!")
-//                        if self.preferences.debugMode {
-//                            self.searchProvider.exampleSearch()
-//                        } else {
-//                            self.searchProvider.search(searchTerm: self.searchTerm)
-//                        }
+                        self.store.update(action: .search(term: self.searchTerm))
                 }
                 ).foregroundColor(.primary)
                     .keyboardType(.webSearch)

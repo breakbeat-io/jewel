@@ -11,9 +11,7 @@ import SwiftUI
 struct Search: View {
     
     @EnvironmentObject private var store: AppStore
-    
-    @State private var title: String = ""
-    @State private var artist: String = ""
+
     @Binding var showSearch: Bool
     
     var body: some View {
@@ -21,25 +19,15 @@ struct Search: View {
             VStack{
                 SearchBar()
                 Spacer()
+                SearchResults()
             }
             .navigationBarTitle("Search")
             .navigationBarItems(
-                leading: Button(action: {
+                trailing: Button(action: {
                     self.showSearch = false
                 }) {
                     Text("Cancel")
-                },
-                trailing: Button(action: {
-                    let album = Album(
-                        title: self.title,
-                        artist: self.artist
-                    )
-                    self.store.update(action: .addAlbum(album: album))
-                    self.showSearch = false
-                }) {
-                    Text("Save")
                 }
-                .disabled(title.isEmpty)
             )
         }
     }

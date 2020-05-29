@@ -17,14 +17,13 @@ struct Home: View {
     var body: some View {
         NavigationView {
             ItemListView()
-                .navigationBarTitle("Albums")
+                .navigationBarTitle("My Collection")
                 .navigationBarItems(
-                    leading: Button(action: {
+                    trailing: Button(action: {
                         self.showSearch = true
                     }) {
-                        Image(systemName: "plus")
-                    },
-                    trailing: TrailingView()
+                        Image(systemName: "magnifyingglass")
+                    }
                 )
         }
         .sheet(isPresented: $showSearch) {

@@ -23,6 +23,7 @@ func updateCollection(state: CollectionState, action: AppAction) -> CollectionSt
         state.albums.append(album)
     case .removeAlbum(let indexSet):
         state.albums.remove(atOffsets: indexSet)
+    default: break
     }
     
     return state
@@ -30,6 +31,12 @@ func updateCollection(state: CollectionState, action: AppAction) -> CollectionSt
 
 func updateSearch(state: SearchState, action: AppAction) -> SearchState {
     var state = state
+    
+    switch action {
+    case .search(let term):
+        print("search term populated wtih \(term)")
+    default: break
+    }
     
     return state
 }
