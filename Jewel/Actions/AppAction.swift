@@ -19,9 +19,9 @@ func updateCollection(state: CollectionState, action: AppAction) -> CollectionSt
     var state = state
     
     switch action {
-    case .addAlbum(let album):
+    case CollectionActions.addAlbum(let album):
         state.albums.append(album)
-    case .removeAlbum(let indexSet):
+    case CollectionActions.removeAlbum(let indexSet):
         state.albums.remove(atOffsets: indexSet)
     default: break
     }
@@ -33,15 +33,15 @@ func updateSearch(state: SearchState, action: AppAction) -> SearchState {
     var state = state
     
     switch action {
-    case .search(let term):
+    case SearchActions.search(let term):
         Store.appleMusic.search(term: term, limit: 20, types: [.albums]) { storeResults, error in
             DispatchQueue.main.async {
-                store.update(action: .populateSearchResults(results: (storeResults?.albums?.data)!))
+                store.update(action: SearchActions.populateSearchResults(results: (storeResults?.albums?.data)!))
             }
         }
-    case .populateSearchResults(let results):
+    case SearchActions.populateSearchResults(let results):
         state.results = results
-    case .removeSearchResults:
+    case SearchActions.removeSearchResults:
         state.results = nil
     default: break
     }

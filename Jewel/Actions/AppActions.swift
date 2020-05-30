@@ -9,9 +9,14 @@
 import Foundation
 import HMV
 
-enum AppAction {
+protocol AppAction { }
+
+enum CollectionActions: AppAction {
     case addAlbum(album: Album)
     case removeAlbum(at: IndexSet)
+}
+
+enum SearchActions: AppAction {
     case search(term: String)
     case populateSearchResults(results: [Album])
     case removeSearchResults

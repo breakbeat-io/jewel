@@ -22,13 +22,13 @@ struct SearchBar: View {
                     "Search Apple Music",
                     text: $searchTerm,
                     onCommit: {
-                        self.store.update(action: .search(term: self.searchTerm))
+                        self.store.update(action: SearchActions.search(term: self.searchTerm))
                 }
                 ).foregroundColor(.primary)
                     .keyboardType(.webSearch)
                 Button(action: {
                     self.searchTerm = ""
-                    self.store.update(action: .removeSearchResults)
+                    self.store.update(action: SearchActions.removeSearchResults)
 //                    self.searchProvider.results?.removeAll()
                 }) {
                     Image(systemName: "xmark.circle.fill")

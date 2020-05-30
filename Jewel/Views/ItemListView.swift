@@ -18,7 +18,7 @@ struct ItemListView: View {
                 Text("This will be an Album")
             }
             .onDelete {
-                self.store.update(action: .removeAlbum(at: $0))
+                self.store.update(action: CollectionActions.removeAlbum(at: $0))
             }
         }
     }
