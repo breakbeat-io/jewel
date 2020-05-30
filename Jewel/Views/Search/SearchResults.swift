@@ -48,6 +48,7 @@ struct SearchResults: View {
                         Spacer()
                         Button(action: {
                             self.store.update(action: CollectionActions.fetchAndAddAlbum(albumId: results[i].id))
+                            self.store.update(action: SearchActions.removeSearchResults)
                             self.showSearch = false
                         }, label:{
                             Image(systemName: "plus.circle")

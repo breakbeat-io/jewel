@@ -16,7 +16,15 @@ struct Home: View {
     
     var body: some View {
         NavigationView {
-            ItemListView()
+            List {
+                ForEach(store.state.collection.albums) { album in
+                    AlbumCard(album: album)
+                        .frame(height: 80)
+                }
+                .onDelete {
+                    self.store.update(action: CollectionActions.removeAlbum(at: $0))
+                }
+            }
                 .navigationBarTitle("My Collection")
                 .navigationBarItems(
                     trailing: Button(action: {
