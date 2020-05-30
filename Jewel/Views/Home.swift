@@ -19,7 +19,6 @@ struct Home: View {
             List {
                 ForEach(store.state.collection.albums) { album in
                     AlbumCard(album: album)
-                        .frame(height: 80)
                 }
                 .onDelete {
                     self.store.update(action: CollectionActions.removeAlbum(at: $0))

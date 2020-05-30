@@ -32,6 +32,7 @@ struct AlbumCard: View {
                     .resizable()
                     .scaledToFill()
             })
+            .frame(height: 80)
             .cornerRadius(4)
             .overlay(
                 VStack(alignment: .leading) {
