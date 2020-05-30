@@ -21,39 +21,38 @@ struct SearchResults: View {
     var body: some View {
         IfLet(searchResults) { results in
             List(0..<results.count, id: \.self) { i in
-                Text("There are some results")
-//                IfLet(results[i].attributes) { result in
-//                    HStack {
-//                        KFImage(result.artwork.url(forWidth: 50))
-//                            .placeholder {
-//                                RoundedRectangle(cornerRadius: 4)
-//                                    .fill(Color.gray)
-//                        }
-//                        .renderingMode(.original)
-//                        .resizable()
-//                        .aspectRatio(contentMode: .fit)
-//                        .cornerRadius(4)
-//                        .frame(width: 50)
-//                        VStack(alignment: .leading) {
-//                            Text(result.name)
-//                                .font(.headline)
-//                                .lineLimit(1)
-//                            Text(result.artistName)
-//                                .font(.subheadline)
-//                                .lineLimit(1)
-//                        }
-//                        Spacer()
-//                        Button(action: {
+                IfLet(results[i].attributes) { result in
+                    HStack {
+                        KFImage(result.artwork.url(forWidth: 50))
+                            .placeholder {
+                                RoundedRectangle(cornerRadius: 4)
+                                    .fill(Color.gray)
+                        }
+                        .renderingMode(.original)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .cornerRadius(4)
+                        .frame(width: 50)
+                        VStack(alignment: .leading) {
+                            Text(result.name)
+                                .font(.headline)
+                                .lineLimit(1)
+                            Text(result.artistName)
+                                .font(.subheadline)
+                                .lineLimit(1)
+                        }
+                        Spacer()
+                        Button(action: {
 //                            self.collections.addContentToSlot(contentId: results[i].id,
 //                                                           collection: self.collections.userCollection,
 //                                                           slotIndex: self.slotIndex)
 //                            self.presentationMode.wrappedValue.dismiss()
-//                        }, label:{
-//                            Image(systemName: "plus.circle")
-//                                .padding()
-//                        })
-//                    }
-//                }
+                        }, label:{
+                            Image(systemName: "plus.circle")
+                                .padding()
+                        })
+                    }
+                }
             }
         }
     }
