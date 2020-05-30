@@ -34,7 +34,7 @@ func updateSearch(state: SearchState, action: AppAction) -> SearchState {
     
     switch action {
     case SearchActions.search(let term):
-        Store.appleMusic.search(term: term, limit: 20, types: [.albums]) { storeResults, error in
+        RecordStore.appleMusic.search(term: term, limit: 20, types: [.albums]) { storeResults, error in
             DispatchQueue.main.async {
                 store.update(action: SearchActions.populateSearchResults(results: (storeResults?.albums?.data)!))
             }

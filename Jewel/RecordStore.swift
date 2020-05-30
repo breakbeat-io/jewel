@@ -9,7 +9,7 @@
 import Foundation
 import HMV
 
-class Store {
+class RecordStore {
     static let appleMusic = HMV(storefront: .unitedKingdom, developerToken: Bundle.main.infoDictionary?["APPLE_MUSIC_API_TOKEN"] as! String)
     
     private init() { }
