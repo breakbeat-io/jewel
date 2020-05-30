@@ -12,7 +12,11 @@ import HMV
 
 struct SearchResults: View {
     
+    @Environment(\.presentationMode) var presentationMode
+    
     @EnvironmentObject var store: AppStore
+    
+    @Binding var showSearch: Bool
     
     private var searchResults: [Album]? {
         store.state.search.results
@@ -43,10 +47,8 @@ struct SearchResults: View {
                         }
                         Spacer()
                         Button(action: {
-//                            self.collections.addContentToSlot(contentId: results[i].id,
-//                                                           collection: self.collections.userCollection,
-//                                                           slotIndex: self.slotIndex)
-//                            self.presentationMode.wrappedValue.dismiss()
+                            self.store.update(action: CollectionActions.fetchAndAddAlbum(albumId: results[i].id))
+                            self.showSearch = false
                         }, label:{
                             Image(systemName: "plus.circle")
                                 .padding()
@@ -58,8 +60,8 @@ struct SearchResults: View {
     }
 }
 
-struct SearchResults_Previews: PreviewProvider {
-    static var previews: some View {
-        SearchResults()
-    }
-}
+//struct SearchResults_Previews: PreviewProvider {
+//    static var previews: some View {
+//        SearchResults()
+//    }
+//}

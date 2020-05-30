@@ -12,6 +12,7 @@ import HMV
 protocol AppAction { }
 
 enum CollectionActions: AppAction {
+    case fetchAndAddAlbum(albumId: String)
     case addAlbum(album: Album)
     case removeAlbum(at: IndexSet)
 }

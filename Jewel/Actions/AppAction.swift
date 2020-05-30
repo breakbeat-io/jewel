@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import HMV
 
 func updateState(state: AppState, action: AppAction) -> AppState {
     return AppState(
@@ -19,6 +20,15 @@ func updateCollection(state: CollectionState, action: AppAction) -> CollectionSt
     var state = state
     
     switch action {
+    case CollectionActions.fetchAndAddAlbum(let albumId):
+        RecordStore.appleMusic.album(id: albumId, completion: {
+            (album: Album?, error: Error?) -> Void in
+            DispatchQueue.main.async {
+                if album != nil {
+                    store.update(action: CollectionActions.addAlbum(album: album!))
+                }
+            }
+        })
     case CollectionActions.addAlbum(let album):
         state.albums.append(album)
     case CollectionActions.removeAlbum(let indexSet):

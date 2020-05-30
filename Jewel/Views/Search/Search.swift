@@ -19,7 +19,7 @@ struct Search: View {
             VStack{
                 SearchBar()
                 Spacer()
-                SearchResults()
+                SearchResults(showSearch: self.$showSearch)
             }
             .navigationBarTitle("Search")
             .navigationBarItems(
