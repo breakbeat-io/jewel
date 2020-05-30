@@ -18,7 +18,11 @@ struct Home: View {
         NavigationView {
             List {
                 ForEach(store.state.collection.albums) { album in
-                    AlbumCard(album: album)
+                    NavigationLink(
+                        destination: AlbumDetail(album: album)
+                    ) {
+                        AlbumCard(album: album)
+                    }
                 }
                 .onDelete {
                     self.store.update(action: CollectionActions.removeAlbum(at: $0))
