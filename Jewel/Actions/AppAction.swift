@@ -27,11 +27,11 @@ func updateCollection(state: CollectionState, action: CollectionAction) -> Colle
     var state = state
     
     switch action {
-        case .changeCollectionName(let name):
-            state.name = name
-        case .changeCollectionCurator(let curator):
-            state.curator = curator
-    case .fetchAndAddAlbum(let albumId):
+    case .changeCollectionName(name: let name):
+        state.name = name
+    case .changeCollectionCurator(curator: let curator):
+        state.curator = curator
+    case .fetchAndAddAlbum(albumId: let albumId):
         RecordStore.appleMusic.album(id: albumId, completion: {
             (album: Album?, error: Error?) -> Void in
             DispatchQueue.main.async {
@@ -40,9 +40,9 @@ func updateCollection(state: CollectionState, action: CollectionAction) -> Colle
                 }
             }
         })
-    case .addAlbum(let album):
+    case .addAlbum(album: let album):
         state.albums.append(album)
-    case .removeAlbum(let indexSet):
+    case .removeAlbum(at: let indexSet):
         state.albums.remove(atOffsets: indexSet)
     }
     
@@ -53,13 +53,13 @@ func updateSearch(state: SearchState, action: SearchAction) -> SearchState {
     var state = state
     
     switch action {
-    case .search(let term):
+    case .search(for: let term):
         RecordStore.appleMusic.search(term: term, limit: 20, types: [.albums]) { storeResults, error in
             DispatchQueue.main.async {
                 store.update(action: SearchAction.populateSearchResults(results: (storeResults?.albums?.data)!))
             }
         }
-    case .populateSearchResults(let results):
+    case .populateSearchResults(results: let results):
         state.results = results
     case .removeSearchResults:
         state.results = nil

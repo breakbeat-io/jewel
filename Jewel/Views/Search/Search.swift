@@ -11,7 +11,7 @@ import SwiftUI
 struct Search: View {
     
     @EnvironmentObject private var store: AppStore
-
+    
     @Binding var showing: Bool
     
     var body: some View {
@@ -32,9 +32,3 @@ struct Search: View {
         }
     }
 }
-
-//struct AddItemView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        AddItemView()
-//    }
-//}

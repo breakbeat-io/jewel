@@ -22,6 +22,6 @@ struct AlbumDetail: View {
             }
             TrackList(album: album)
         }
-    .padding()
+        .padding()
     }
 }

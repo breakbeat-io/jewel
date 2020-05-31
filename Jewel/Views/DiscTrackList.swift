@@ -13,13 +13,13 @@ struct DiscTrackList: View {
     
     let album: Album
     var discNumber: Int
-       var withTitle: Bool
-       private var albumArtist: String? {
-           album.attributes?.artistName
-       }
-       private var discTracks: [Track]? {
-           album.relationships?.tracks.data?.filter { $0.attributes?.discNumber == discNumber }
-       }
+    var withTitle: Bool
+    private var albumArtist: String? {
+        album.attributes?.artistName
+    }
+    private var discTracks: [Track]? {
+        album.relationships?.tracks.data?.filter { $0.attributes?.discNumber == discNumber }
+    }
     
     var body: some View {
         IfLet(discTracks) { discTracks in

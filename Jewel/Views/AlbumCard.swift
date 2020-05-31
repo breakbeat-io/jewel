@@ -59,9 +59,3 @@ struct AlbumCard: View {
             .shadow(radius: 3)
     }
 }
-
-//struct ItemView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ItemView()
-//    }
-//}

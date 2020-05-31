@@ -22,14 +22,14 @@ struct SearchBar: View {
                     "Search Apple Music",
                     text: $searchTerm,
                     onCommit: {
-                        self.store.update(action: SearchAction.search(term: self.searchTerm))
+                        self.store.update(action: SearchAction.search(for: self.searchTerm))
                 }
                 ).foregroundColor(.primary)
                     .keyboardType(.webSearch)
                 Button(action: {
                     self.searchTerm = ""
                     self.store.update(action: SearchAction.removeSearchResults)
-//                    self.searchProvider.results?.removeAll()
+                    //                    self.searchProvider.results?.removeAll()
                 }) {
                     Image(systemName: "xmark.circle.fill")
                         .opacity(searchTerm == "" ? 0 : 1)
@@ -41,11 +41,5 @@ struct SearchBar: View {
             .cornerRadius(8.0)
         }
         .padding()
-    }
-}
-
-struct SearchBar_Previews: PreviewProvider {
-    static var previews: some View {
-        SearchBar()
     }
 }

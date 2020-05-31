@@ -48,7 +48,7 @@ struct Options: View {
                 }
                 Spacer()
                 Footer()
-                .padding()
+                    .padding()
             }
             .navigationBarTitle("Options", displayMode: .inline)
             .navigationBarItems(trailing:
