@@ -10,9 +10,23 @@ import Foundation
 import HMV
 
 final class AppStore: ObservableObject {
-    @Published private(set) var state: AppState
+    @Published private(set) var state: AppState {
+        didSet {
+            save()
+        }
+    }
     
     init() {
+        if let savedState = UserDefaults.standard.object(forKey: "jewelState") as? Data {
+            do {
+                state = try JSONDecoder().decode(AppState.self, from: savedState)
+                print("Loaded state")
+                return
+            } catch {
+                print(error)
+            }
+        }
+        
         let collection = CollectionState(albums: [Album]())
         let search = SearchState()
         let appState = AppState(collection: collection, search: search)
@@ -21,6 +35,16 @@ final class AppStore: ObservableObject {
     
     public func update(action: AppAction) {
         state = updateState(state: state, action: action)
+    }
+    
+    private func save() {
+        do {
+            let encodedState = try JSONEncoder().encode(state)
+            UserDefaults.standard.set(encodedState, forKey: "jewelState")
+            print("Saved state")
+        } catch {
+            print(error)
+        }
     }
     
 }

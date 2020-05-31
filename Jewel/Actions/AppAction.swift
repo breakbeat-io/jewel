@@ -10,50 +10,55 @@ import Foundation
 import HMV
 
 func updateState(state: AppState, action: AppAction) -> AppState {
-    return AppState(
-        collection: updateCollection(state: state.collection, action: action),
-        search: updateSearch(state: state.search, action: action)
-    )
-}
-
-func updateCollection(state: CollectionState, action: AppAction) -> CollectionState {
     var state = state
     
     switch action {
-    case CollectionActions.fetchAndAddAlbum(let albumId):
-        RecordStore.appleMusic.album(id: albumId, completion: {
-            (album: Album?, error: Error?) -> Void in
-            DispatchQueue.main.async {
-                if album != nil {
-                    store.update(action: CollectionActions.addAlbum(album: album!))
-                }
-            }
-        })
-    case CollectionActions.addAlbum(let album):
-        state.albums.append(album)
-    case CollectionActions.removeAlbum(let indexSet):
-        state.albums.remove(atOffsets: indexSet)
+    case is CollectionAction:
+        state.collection = updateCollection(state: state.collection, action: action as! CollectionAction)
+    case is SearchAction:
+        state.search = updateSearch(state: state.search, action: action as! SearchAction)
     default: break
     }
     
     return state
 }
 
-func updateSearch(state: SearchState, action: AppAction) -> SearchState {
+func updateCollection(state: CollectionState, action: CollectionAction) -> CollectionState {
     var state = state
     
     switch action {
-    case SearchActions.search(let term):
+    case .fetchAndAddAlbum(let albumId):
+        RecordStore.appleMusic.album(id: albumId, completion: {
+            (album: Album?, error: Error?) -> Void in
+            DispatchQueue.main.async {
+                if album != nil {
+                    store.update(action: CollectionAction.addAlbum(album: album!))
+                }
+            }
+        })
+    case .addAlbum(let album):
+        state.albums.append(album)
+    case .removeAlbum(let indexSet):
+        state.albums.remove(atOffsets: indexSet)
+    }
+    
+    return state
+}
+
+func updateSearch(state: SearchState, action: SearchAction) -> SearchState {
+    var state = state
+    
+    switch action {
+    case .search(let term):
         RecordStore.appleMusic.search(term: term, limit: 20, types: [.albums]) { storeResults, error in
             DispatchQueue.main.async {
-                store.update(action: SearchActions.populateSearchResults(results: (storeResults?.albums?.data)!))
+                store.update(action: SearchAction.populateSearchResults(results: (storeResults?.albums?.data)!))
             }
         }
-    case SearchActions.populateSearchResults(let results):
+    case .populateSearchResults(let results):
         state.results = results
-    case SearchActions.removeSearchResults:
+    case .removeSearchResults:
         state.results = nil
-    default: break
     }
     
     return state

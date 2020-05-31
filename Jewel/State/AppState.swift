@@ -9,15 +9,15 @@
 import Foundation
 import HMV
 
-struct AppState {
+struct AppState: Codable {
     var collection: CollectionState
     var search: SearchState
 }
 
-struct CollectionState {
+struct CollectionState: Codable {
     var albums: [Album]
 }
 
-struct SearchState {
+struct SearchState: Codable {
     var results: [Album]?
 }

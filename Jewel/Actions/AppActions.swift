@@ -11,13 +11,13 @@ import HMV
 
 protocol AppAction { }
 
-enum CollectionActions: AppAction {
+enum CollectionAction: AppAction {
     case fetchAndAddAlbum(albumId: String)
     case addAlbum(album: Album)
     case removeAlbum(at: IndexSet)
 }
 
-enum SearchActions: AppAction {
+enum SearchAction: AppAction {
     case search(term: String)
     case populateSearchResults(results: [Album])
     case removeSearchResults

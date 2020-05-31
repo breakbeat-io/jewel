@@ -25,7 +25,7 @@ struct Home: View {
                     }
                 }
                 .onDelete {
-                    self.store.update(action: CollectionActions.removeAlbum(at: $0))
+                    self.store.update(action: CollectionAction.removeAlbum(at: $0))
                 }
             }
                 .navigationBarTitle("My Collection")
