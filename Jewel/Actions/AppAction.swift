@@ -27,6 +27,10 @@ func updateCollection(state: CollectionState, action: CollectionAction) -> Colle
     var state = state
     
     switch action {
+        case .changeCollectionName(let name):
+            state.name = name
+        case .changeCollectionCurator(let curator):
+            state.curator = curator
     case .fetchAndAddAlbum(let albumId):
         RecordStore.appleMusic.album(id: albumId, completion: {
             (album: Album?, error: Error?) -> Void in

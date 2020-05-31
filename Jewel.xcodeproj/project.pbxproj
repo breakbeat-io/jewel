@@ -30,6 +30,9 @@
 		D2AB84692481148D008B57F9 /* AppAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AB84682481148D008B57F9 /* AppAction.swift */; };
 		D2AB846B2481159D008B57F9 /* AppStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AB846A2481159D008B57F9 /* AppStore.swift */; };
 		D2AB846E248116A3008B57F9 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AB846D248116A3008B57F9 /* Home.swift */; };
+		D2B4FD91248456B20028D7A4 /* Options.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B4FD90248456B20028D7A4 /* Options.swift */; };
+		D2B4FD93248458000028D7A4 /* Footer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B4FD92248458000028D7A4 /* Footer.swift */; };
+		D2B4FD95248458300028D7A4 /* Bundle+BuildNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B4FD94248458300028D7A4 /* Bundle+BuildNumber.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +60,9 @@
 		D2AB84682481148D008B57F9 /* AppAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAction.swift; sourceTree = "<group>"; };
 		D2AB846A2481159D008B57F9 /* AppStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStore.swift; sourceTree = "<group>"; };
 		D2AB846D248116A3008B57F9 /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
+		D2B4FD90248456B20028D7A4 /* Options.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Options.swift; sourceTree = "<group>"; };
+		D2B4FD92248458000028D7A4 /* Footer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Footer.swift; sourceTree = "<group>"; };
+		D2B4FD94248458300028D7A4 /* Bundle+BuildNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+BuildNumber.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +104,7 @@
 				D24925922481409D0011F409 /* Actions */,
 				D2AB846C2481168C008B57F9 /* Views */,
 				D24925A324814CB60011F409 /* RecordStore.swift */,
+				D2B4FD94248458300028D7A4 /* Bundle+BuildNumber.swift */,
 				D22155812481114B00A1F04A /* Assets.xcassets */,
 				D22155862481114B00A1F04A /* LaunchScreen.storyboard */,
 				D22155892481114B00A1F04A /* Info.plist */,
@@ -152,10 +159,20 @@
 				D22574A32482A882004E83E1 /* PlaybackLink.swift */,
 				D22574A52482A938004E83E1 /* TrackList.swift */,
 				D22574A72482AA4C004E83E1 /* DiscTrackList.swift */,
+				D2B4FD8F248456940028D7A4 /* Options */,
 				D24925932481410F0011F409 /* Search */,
 				D249259A2481455A0011F409 /* IfLet.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		D2B4FD8F248456940028D7A4 /* Options */ = {
+			isa = PBXGroup;
+			children = (
+				D2B4FD90248456B20028D7A4 /* Options.swift */,
+				D2B4FD92248458000028D7A4 /* Footer.swift */,
+			);
+			path = Options;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -249,7 +266,10 @@
 				D249258F24811A650011F409 /* Search.swift in Sources */,
 				D2AB846B2481159D008B57F9 /* AppStore.swift in Sources */,
 				D2AB846E248116A3008B57F9 /* Home.swift in Sources */,
+				D2B4FD95248458300028D7A4 /* Bundle+BuildNumber.swift in Sources */,
 				D249258B2481189F0011F409 /* AlbumCard.swift in Sources */,
+				D2B4FD91248456B20028D7A4 /* Options.swift in Sources */,
+				D2B4FD93248458000028D7A4 /* Footer.swift in Sources */,
 				D22574A02482A71C004E83E1 /* AlbumDetail.swift in Sources */,
 				D2AB8467248113EB008B57F9 /* AppActions.swift in Sources */,
 				D2AB84692481148D008B57F9 /* AppAction.swift in Sources */,

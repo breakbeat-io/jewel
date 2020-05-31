@@ -12,19 +12,19 @@ struct Search: View {
     
     @EnvironmentObject private var store: AppStore
 
-    @Binding var showSearch: Bool
+    @Binding var showing: Bool
     
     var body: some View {
         NavigationView {
             VStack{
                 SearchBar()
                 Spacer()
-                SearchResults(showSearch: self.$showSearch)
+                SearchResults(showing: self.$showing)
             }
             .navigationBarTitle("Search")
             .navigationBarItems(
                 trailing: Button(action: {
-                    self.showSearch = false
+                    self.showing = false
                 }) {
                     Text("Cancel")
                 }

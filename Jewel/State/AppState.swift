@@ -15,6 +15,8 @@ struct AppState: Codable {
 }
 
 struct CollectionState: Codable {
+    var name: String = "My Collection"
+    var curator: String = "A Music Lover"
     var albums: [Album]
 }
 

@@ -13,6 +13,7 @@ struct Home: View {
     @EnvironmentObject var store: AppStore
     
     @State private var showSearch: Bool = false
+    @State private var showOptions: Bool = false
     
     var body: some View {
         NavigationView {
@@ -28,18 +29,26 @@ struct Home: View {
                     self.store.update(action: CollectionAction.removeAlbum(at: $0))
                 }
             }
-                .navigationBarTitle("My Collection")
-                .navigationBarItems(
-                    trailing: Button(action: {
-                        self.showSearch = true
-                    }) {
-                        Image(systemName: "magnifyingglass")
-                    }
-                )
-        }
-        .sheet(isPresented: $showSearch) {
-            Search(showSearch: self.$showSearch)
-                .environmentObject(self.store)
+            .navigationBarTitle(store.state.collection.name)
+            .navigationBarItems(
+                leading: Button(action: {
+                    self.showOptions = true
+                }) {
+                    Image(systemName: "slider.horizontal.3")
+                }.sheet(isPresented: self.$showOptions) {
+                    Options(showing: self.$showOptions)
+                        .environmentObject(self.store)
+                },
+                trailing: Button(action: {
+                    self.showSearch = true
+                }) {
+                    Image(systemName: "magnifyingglass")
+                }
+                .sheet(isPresented: $showSearch) {
+                    Search(showing: self.$showSearch)
+                        .environmentObject(self.store)
+                }
+            )
         }
     }
 }

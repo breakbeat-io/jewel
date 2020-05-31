@@ -12,6 +12,8 @@ import HMV
 protocol AppAction { }
 
 enum CollectionAction: AppAction {
+    case changeCollectionName(name: String)
+    case changeCollectionCurator(curator: String)
     case fetchAndAddAlbum(albumId: String)
     case addAlbum(album: Album)
     case removeAlbum(at: IndexSet)

@@ -16,7 +16,7 @@ struct SearchResults: View {
     
     @EnvironmentObject var store: AppStore
     
-    @Binding var showSearch: Bool
+    @Binding var showing: Bool
     
     private var searchResults: [Album]? {
         store.state.search.results
@@ -49,7 +49,7 @@ struct SearchResults: View {
                         Button(action: {
                             self.store.update(action: CollectionAction.fetchAndAddAlbum(albumId: results[i].id))
                             self.store.update(action: SearchAction.removeSearchResults)
-                            self.showSearch = false
+                            self.showing = false
                         }, label:{
                             Image(systemName: "plus.circle")
                                 .padding()
