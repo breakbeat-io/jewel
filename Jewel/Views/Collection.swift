@@ -31,6 +31,7 @@ struct Collection: View {
                                 }
                             } else {
                                 EmptySlot(slotIndex: albumIndex)
+                                    .deleteDisabled(true)
                             }
                         }
                         .frame(height: (geo.size.height - geo.safeAreaInsets.top - geo.safeAreaInsets.bottom) / CGFloat(self.albums.count))
