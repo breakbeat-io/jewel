@@ -17,7 +17,7 @@ enum CollectionAction: AppAction {
     case setSelectedSlot(slotIndex: Int)
     case fetchAndAddAlbum(albumId: String)
     case addAlbum(album: Album)
-    case removeAlbum(at: IndexSet)
+    case removeAlbum(slotIndexes: IndexSet)
 }
 
 enum SearchAction: AppAction {

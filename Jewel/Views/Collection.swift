@@ -20,19 +20,24 @@ struct Collection: View {
     var body: some View {
         NavigationView {
             GeometryReader { geo in
-                List(self.albums.indices, id: \.self) { albumIndex in
-                    Group {
-                        if self.albums[albumIndex] != nil {
-                            NavigationLink(
-                                destination: AlbumDetail(album: self.albums[albumIndex]!)
-                            ) {
-                                AlbumCard(album: self.albums[albumIndex]!)
+                List {
+                    ForEach(self.albums.indices, id: \.self) { albumIndex in
+                        Group {
+                            if self.albums[albumIndex] != nil {
+                                NavigationLink(
+                                    destination: AlbumDetail(album: self.albums[albumIndex]!)
+                                ) {
+                                    AlbumCard(album: self.albums[albumIndex]!)
+                                }
+                            } else {
+                                EmptySlot(slotIndex: albumIndex)
                             }
-                        } else {
-                            EmptySlot(slotIndex: albumIndex)
                         }
+                        .frame(height: (geo.size.height - geo.safeAreaInsets.top - geo.safeAreaInsets.bottom) / CGFloat(self.albums.count))
                     }
-                    .frame(height: (geo.size.height - geo.safeAreaInsets.top - geo.safeAreaInsets.bottom) / CGFloat(self.albums.count))
+                    .onDelete {
+                        self.store.update(action: CollectionAction.removeAlbum(slotIndexes: $0))
+                    }
                 }
                 .onAppear {
                     UITableView.appearance().separatorStyle = .none

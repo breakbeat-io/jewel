@@ -46,8 +46,10 @@ func updateCollection(state: CollectionState, action: CollectionAction) -> Colle
         if let selectedSlot = state.selectedSlot {
             state.albums[selectedSlot] = album
         }
-    case .removeAlbum(at: let indexSet):
-        state.albums.remove(atOffsets: indexSet)
+    case .removeAlbum(slotIndexes: let slotIndexes):
+        for i in slotIndexes {
+            state.albums[i] = nil
+        }
     }
     
     return state
