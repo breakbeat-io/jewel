@@ -50,6 +50,8 @@ func updateCollection(state: CollectionState, action: CollectionAction) -> Colle
         for i in slotIndexes {
             state.albums[i] = nil
         }
+    case .moveAlbum(from: let from, to: let to):
+        state.albums.move(fromOffsets: from, toOffset: to)
     }
     
     return state

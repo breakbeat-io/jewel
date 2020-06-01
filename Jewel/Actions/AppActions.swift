@@ -18,6 +18,7 @@ enum CollectionAction: AppAction {
     case fetchAndAddAlbum(albumId: String)
     case addAlbum(album: Album)
     case removeAlbum(slotIndexes: IndexSet)
+    case moveAlbum(from: IndexSet, to: Int)
 }
 
 enum SearchAction: AppAction {

@@ -36,6 +36,9 @@ struct Collection: View {
                         }
                         .frame(height: (geo.size.height - geo.safeAreaInsets.top - geo.safeAreaInsets.bottom) / CGFloat(self.albums.count))
                     }
+                    .onMove { (indexSet, index) in
+                        self.store.update(action: CollectionAction.moveAlbum(from: indexSet, to: index))
+                    }
                     .onDelete {
                         self.store.update(action: CollectionAction.removeAlbum(slotIndexes: $0))
                     }

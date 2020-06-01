@@ -31,11 +31,12 @@ struct HomeButtonsTrailing: View {
     @EnvironmentObject var store: AppStore
     
     var body: some View {
-        Button(action: {
-            
-        }) {
-            Image(systemName: "square.and.arrow.up")
-        }
-        .disabled(true)
+        EditButton()
+//        Button(action: {
+//
+//        }) {
+//            Image(systemName: "square.and.arrow.up")
+//        }
+//        .disabled(true)
     }
 }
