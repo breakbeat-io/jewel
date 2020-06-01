@@ -24,10 +24,13 @@ struct Collection: View {
                     ForEach(self.albums.indices, id: \.self) { albumIndex in
                         Group {
                             if self.albums[albumIndex] != nil {
-                                NavigationLink(
-                                    destination: AlbumDetail(album: self.albums[albumIndex]!)
-                                ) {
+                                ZStack {
                                     AlbumCard(album: self.albums[albumIndex]!)
+                                    NavigationLink(
+                                        destination: AlbumDetail(album: self.albums[albumIndex]!)
+                                    ){
+                                        EmptyView()
+                                    }
                                 }
                             } else {
                                 EmptySlot(slotIndex: albumIndex)
