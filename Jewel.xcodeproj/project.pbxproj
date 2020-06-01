@@ -29,7 +29,9 @@
 		D2AB8467248113EB008B57F9 /* AppActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AB8466248113EB008B57F9 /* AppActions.swift */; };
 		D2AB84692481148D008B57F9 /* AppAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AB84682481148D008B57F9 /* AppAction.swift */; };
 		D2AB846B2481159D008B57F9 /* AppStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AB846A2481159D008B57F9 /* AppStore.swift */; };
-		D2AB846E248116A3008B57F9 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AB846D248116A3008B57F9 /* Home.swift */; };
+		D2AB846E248116A3008B57F9 /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AB846D248116A3008B57F9 /* Collection.swift */; };
+		D2AC120724859D5E00C52D9E /* CollectionNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AC120624859D5E00C52D9E /* CollectionNavigationBar.swift */; };
+		D2AC120B24859E2300C52D9E /* EmptySlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AC120A24859E2300C52D9E /* EmptySlot.swift */; };
 		D2B4FD91248456B20028D7A4 /* Options.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B4FD90248456B20028D7A4 /* Options.swift */; };
 		D2B4FD93248458000028D7A4 /* Footer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B4FD92248458000028D7A4 /* Footer.swift */; };
 		D2B4FD95248458300028D7A4 /* Bundle+BuildNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B4FD94248458300028D7A4 /* Bundle+BuildNumber.swift */; };
@@ -55,11 +57,13 @@
 		D2492598248143720011F409 /* SearchResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResults.swift; sourceTree = "<group>"; };
 		D249259A2481455A0011F409 /* IfLet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IfLet.swift; sourceTree = "<group>"; };
 		D24925A324814CB60011F409 /* RecordStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordStore.swift; sourceTree = "<group>"; };
-		D24925A524814D460011F409 /* secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = secrets.xcconfig; sourceTree = "<group>"; };
 		D2AB8466248113EB008B57F9 /* AppActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppActions.swift; sourceTree = "<group>"; };
 		D2AB84682481148D008B57F9 /* AppAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAction.swift; sourceTree = "<group>"; };
 		D2AB846A2481159D008B57F9 /* AppStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStore.swift; sourceTree = "<group>"; };
-		D2AB846D248116A3008B57F9 /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
+		D2AB846D248116A3008B57F9 /* Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
+		D2AC120624859D5E00C52D9E /* CollectionNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionNavigationBar.swift; sourceTree = "<group>"; };
+		D2AC120A24859E2300C52D9E /* EmptySlot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptySlot.swift; sourceTree = "<group>"; };
+		D2AC120E2485A20400C52D9E /* secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = secrets.xcconfig; sourceTree = "<group>"; };
 		D2B4FD90248456B20028D7A4 /* Options.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Options.swift; sourceTree = "<group>"; };
 		D2B4FD92248458000028D7A4 /* Footer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Footer.swift; sourceTree = "<group>"; };
 		D2B4FD94248458300028D7A4 /* Bundle+BuildNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+BuildNumber.swift"; sourceTree = "<group>"; };
@@ -83,7 +87,6 @@
 			children = (
 				D221557A2481114A00A1F04A /* Jewel */,
 				D22155792481114A00A1F04A /* Products */,
-				D24925A524814D460011F409 /* secrets.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -98,16 +101,14 @@
 		D221557A2481114A00A1F04A /* Jewel */ = {
 			isa = PBXGroup;
 			children = (
-				D221557B2481114A00A1F04A /* AppDelegate.swift */,
-				D221557D2481114A00A1F04A /* SceneDelegate.swift */,
+				D2AC120424859D1C00C52D9E /* App */,
 				D249259F248146350011F409 /* State */,
 				D24925922481409D0011F409 /* Actions */,
 				D2AB846C2481168C008B57F9 /* Views */,
-				D24925A324814CB60011F409 /* RecordStore.swift */,
-				D2B4FD94248458300028D7A4 /* Bundle+BuildNumber.swift */,
+				D2AC120D2485A1B700C52D9E /* Services */,
+				D2AC120524859D3800C52D9E /* Util */,
 				D22155812481114B00A1F04A /* Assets.xcassets */,
 				D22155862481114B00A1F04A /* LaunchScreen.storyboard */,
-				D22155892481114B00A1F04A /* Info.plist */,
 				D22155832481114B00A1F04A /* Preview Content */,
 			);
 			path = Jewel;
@@ -152,7 +153,9 @@
 		D2AB846C2481168C008B57F9 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				D2AB846D248116A3008B57F9 /* Home.swift */,
+				D2AB846D248116A3008B57F9 /* Collection.swift */,
+				D2AC120624859D5E00C52D9E /* CollectionNavigationBar.swift */,
+				D2AC120A24859E2300C52D9E /* EmptySlot.swift */,
 				D249258A2481189F0011F409 /* AlbumCard.swift */,
 				D225749F2482A71C004E83E1 /* AlbumDetail.swift */,
 				D22574A12482A7F2004E83E1 /* AlbumCover.swift */,
@@ -164,6 +167,33 @@
 				D249259A2481455A0011F409 /* IfLet.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		D2AC120424859D1C00C52D9E /* App */ = {
+			isa = PBXGroup;
+			children = (
+				D22155892481114B00A1F04A /* Info.plist */,
+				D221557B2481114A00A1F04A /* AppDelegate.swift */,
+				D221557D2481114A00A1F04A /* SceneDelegate.swift */,
+				D2AC120E2485A20400C52D9E /* secrets.xcconfig */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		D2AC120524859D3800C52D9E /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				D2B4FD94248458300028D7A4 /* Bundle+BuildNumber.swift */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
+		D2AC120D2485A1B700C52D9E /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				D24925A324814CB60011F409 /* RecordStore.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 		D2B4FD8F248456940028D7A4 /* Options */ = {
@@ -259,18 +289,20 @@
 				D249259B2481455A0011F409 /* IfLet.swift in Sources */,
 				D22574A42482A882004E83E1 /* PlaybackLink.swift in Sources */,
 				D22574A22482A7F2004E83E1 /* AlbumCover.swift in Sources */,
+				D2AC120724859D5E00C52D9E /* CollectionNavigationBar.swift in Sources */,
 				D221557C2481114A00A1F04A /* AppDelegate.swift in Sources */,
 				D2492587248117710011F409 /* AppState.swift in Sources */,
 				D221557E2481114A00A1F04A /* SceneDelegate.swift in Sources */,
 				D2492599248143720011F409 /* SearchResults.swift in Sources */,
 				D249258F24811A650011F409 /* Search.swift in Sources */,
 				D2AB846B2481159D008B57F9 /* AppStore.swift in Sources */,
-				D2AB846E248116A3008B57F9 /* Home.swift in Sources */,
+				D2AB846E248116A3008B57F9 /* Collection.swift in Sources */,
 				D2B4FD95248458300028D7A4 /* Bundle+BuildNumber.swift in Sources */,
 				D249258B2481189F0011F409 /* AlbumCard.swift in Sources */,
 				D2B4FD91248456B20028D7A4 /* Options.swift in Sources */,
 				D2B4FD93248458000028D7A4 /* Footer.swift in Sources */,
 				D22574A02482A71C004E83E1 /* AlbumDetail.swift in Sources */,
+				D2AC120B24859E2300C52D9E /* EmptySlot.swift in Sources */,
 				D2AB8467248113EB008B57F9 /* AppActions.swift in Sources */,
 				D2AB84692481148D008B57F9 /* AppAction.swift in Sources */,
 				D24925A424814CB60011F409 /* RecordStore.swift in Sources */,
@@ -294,7 +326,7 @@
 /* Begin XCBuildConfiguration section */
 		D221558A2481114B00A1F04A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D24925A524814D460011F409 /* secrets.xcconfig */;
+			baseConfigurationReference = D2AC120E2485A20400C52D9E /* secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -355,7 +387,7 @@
 		};
 		D221558B2481114B00A1F04A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D24925A524814D460011F409 /* secrets.xcconfig */;
+			baseConfigurationReference = D2AC120E2485A20400C52D9E /* secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -416,7 +448,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Jewel/Preview Content\"";
 				DEVELOPMENT_TEAM = 3Z89R2M235;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = Jewel/Info.plist;
+				INFOPLIST_FILE = Jewel/App/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -436,7 +468,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Jewel/Preview Content\"";
 				DEVELOPMENT_TEAM = 3Z89R2M235;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = Jewel/Info.plist;
+				INFOPLIST_FILE = Jewel/App/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

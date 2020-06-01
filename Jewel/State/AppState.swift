@@ -17,7 +17,7 @@ struct AppState: Codable {
 struct CollectionState: Codable {
     var name: String = "My Collection"
     var curator: String = "A Music Lover"
-    var albums: [Album]
+    var albums = [Album?](repeating: nil, count: 8)
 }
 
 struct SearchState: Codable {

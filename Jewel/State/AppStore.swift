@@ -27,7 +27,7 @@ final class AppStore: ObservableObject {
             }
         }
         
-        let collection = CollectionState(albums: [Album]())
+        let collection = CollectionState()
         let search = SearchState()
         let appState = AppState(collection: collection, search: search)
         self.state = appState
