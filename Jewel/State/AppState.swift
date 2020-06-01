@@ -7,19 +7,8 @@
 //
 
 import Foundation
-import HMV
 
 struct AppState: Codable {
     var collection: CollectionState
     var search: SearchState
-}
-
-struct CollectionState: Codable {
-    var name: String = "My Collection"
-    var curator: String = "A Music Lover"
-    var albums = [Album?](repeating: nil, count: 8)
-}
-
-struct SearchState: Codable {
-    var results: [Album]?
 }

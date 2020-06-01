@@ -30,17 +30,12 @@ struct HomeButtonsTrailing: View {
     
     @EnvironmentObject var store: AppStore
     
-    @State private var showSearch: Bool = false
-    
     var body: some View {
         Button(action: {
-            self.showSearch = true
+            
         }) {
-            Image(systemName: "magnifyingglass")
+            Image(systemName: "square.and.arrow.up")
         }
-        .sheet(isPresented: self.$showSearch) {
-            Search(showing: self.$showSearch)
-                .environmentObject(self.store)
-        }
+        .disabled(true)
     }
 }

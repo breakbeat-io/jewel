@@ -31,6 +31,8 @@ func updateCollection(state: CollectionState, action: CollectionAction) -> Colle
         state.name = name
     case .changeCollectionCurator(curator: let curator):
         state.curator = curator
+    case .setSelectedSlot(slotIndex: let slotIndex):
+        state.selectedSlot = slotIndex
     case .fetchAndAddAlbum(albumId: let albumId):
         RecordStore.appleMusic.album(id: albumId, completion: {
             (album: Album?, error: Error?) -> Void in
@@ -41,7 +43,9 @@ func updateCollection(state: CollectionState, action: CollectionAction) -> Colle
             }
         })
     case .addAlbum(album: let album):
-        state.albums.append(album)
+        if let selectedSlot = state.selectedSlot {
+            state.albums[selectedSlot] = album
+        }
     case .removeAlbum(at: let indexSet):
         state.albums.remove(atOffsets: indexSet)
     }

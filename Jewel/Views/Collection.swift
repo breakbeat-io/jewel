@@ -29,7 +29,7 @@ struct Collection: View {
                                 AlbumCard(album: self.albums[albumIndex]!)
                             }
                         } else {
-                            EmptySlot()
+                            EmptySlot(slotIndex: albumIndex)
                         }
                     }
                     .frame(height: (geo.size.height - geo.safeAreaInsets.top - geo.safeAreaInsets.bottom) / CGFloat(self.albums.count))

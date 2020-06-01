@@ -13,10 +13,13 @@ struct EmptySlot: View {
     @EnvironmentObject var store: AppStore
     
     @State private var showSearch: Bool = false
+    
+    var slotIndex: Int
 
     var body: some View {
         HStack {
             Button(action: {
+                self.store.update(action: CollectionAction.setSelectedSlot(slotIndex: self.slotIndex))
                 self.showSearch = true
             }) {
                 RoundedRectangle(cornerRadius: 4)
