@@ -14,7 +14,7 @@ struct Collection: View {
     @EnvironmentObject var store: AppStore
     
     private var albums: [Album?] {
-        store.state.collection.albums
+        store.state.collection.slots
     }
     
     var body: some View {

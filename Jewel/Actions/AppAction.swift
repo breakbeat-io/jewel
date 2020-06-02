@@ -58,14 +58,14 @@ func updateCollection(state: CollectionState, action: CollectionAction) -> Colle
         })
     case .addAlbum(album: let album):
         if let selectedSlot = state.selectedSlot {
-            state.albums[selectedSlot] = album
+            state.slots[selectedSlot] = album
         }
     case .removeAlbum(slotIndexes: let slotIndexes):
         for i in slotIndexes {
-            state.albums[i] = nil
+            state.slots[i] = nil
         }
     case .moveAlbum(from: let from, to: let to):
-        state.albums.move(fromOffsets: from, toOffset: to)
+        state.slots.move(fromOffsets: from, toOffset: to)
     }
     
     return state

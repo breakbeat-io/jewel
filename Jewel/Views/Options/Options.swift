@@ -52,7 +52,7 @@ struct Options: View {
                             ).foregroundColor(.accentColor)
                         }
                     }
-                    Section(footer: Text("If available, use this service for playback, otherwise use Apple Music.")) {
+                    Section(footer: Text("Use this service for playback if available, otherwise use Apple Music.")) {
                         Picker(selection: preferredMusicPlatform, label: Text("Playback Service")) {
                             ForEach(0 ..< OdesliPlatform.allCases.count, id: \.self) {
                                 Text(OdesliPlatform.allCases[$0].friendlyName)

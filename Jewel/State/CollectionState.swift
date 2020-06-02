@@ -12,6 +12,6 @@ import HMV
 struct CollectionState: Codable {
     var name: String = "My Collection"
     var curator: String = "A Music Lover"
-    var albums = [Album?](repeating: nil, count: 8)
+    var slots = [Album?](repeating: nil, count: 8)
     var selectedSlot: Int?
 }
