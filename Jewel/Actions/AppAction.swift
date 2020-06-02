@@ -40,7 +40,6 @@ func updateOptions(state: OptionsState, action: OptionsAction) -> OptionsState {
         exit(1)
     }
     
-    
     return state
 }
 
@@ -49,31 +48,77 @@ func updateCollection(state: CollectionState, action: CollectionAction) -> Colle
     var state = state
     
     switch action {
+        
     case .changeCollectionName(name: let name):
         state.name = name
+        
     case .changeCollectionCurator(curator: let curator):
         state.curator = curator
+        
     case .setSelectedSlot(slotIndex: let slotIndex):
         state.selectedSlot = slotIndex
+        
     case .fetchAndAddAlbum(albumId: let albumId):
         RecordStore.appleMusic.album(id: albumId, completion: {
             (album: Album?, error: Error?) -> Void in
             DispatchQueue.main.async {
                 if album != nil {
-                    store.update(action: CollectionAction.addAlbum(album: album!))
+                    store.update(action: CollectionAction.addAlbumToSlot(album: album!))
+                    store.update(action: CollectionAction.fetchAndSetPlatformLinks)
                 }
             }
         })
-    case .addAlbum(album: let album):
+        
+    case .addAlbumToSlot(album: let album):
         if let selectedSlot = state.selectedSlot {
             state.slots[selectedSlot].album = album
         }
-    case .removeAlbum(slotIndexes: let slotIndexes):
+        
+    case .removeAlbumFromSlot(slotIndexes: let slotIndexes):
         for i in slotIndexes {
-            state.slots[i].album = nil
+            state.slots[i] = Slot()
         }
-    case .moveAlbum(from: let from, to: let to):
+        
+    case .moveSlot(from: let from, to: let to):
         state.slots.move(fromOffsets: from, toOffset: to)
+        
+    case .fetchAndSetPlatformLinks:
+        
+        guard let baseUrl = state.slots[state.selectedSlot!].album?.attributes?.url else {
+            print("Platform Links: No baseUrl on Album")
+            break
+        }
+        
+        print("Platform Links: Populating links for \(baseUrl.absoluteString) in slot \(String(describing: state.selectedSlot))")
+        
+        let request = URLRequest(url: URL(string: "https://api.song.link/v1-alpha.1/links?url=\(baseUrl.absoluteString)")!)
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let response = response as? HTTPURLResponse {
+                if response.statusCode != 200 {
+                    print(response.statusCode)
+                }
+            }
+            
+            if let data = data {
+                if let decodedResponse = try? JSONDecoder().decode(OdesliResponse.self, from: data) {
+                    DispatchQueue.main.async {
+                        store.update(action: CollectionAction.setPlatformLinks(platformLinks: decodedResponse))
+                    }
+                    
+                    return
+                }
+            }
+            
+            if let error = error {
+                print("Platform Links: Error getting playbackLinks: \(error.localizedDescription)")
+            }
+            
+        }.resume()
+        
+    case .setPlatformLinks(platformLinks: let platformLinks):
+        state.slots[state.selectedSlot!].playbackLinks = platformLinks
+    
     }
     
     return state
@@ -97,4 +142,3 @@ func updateSearch(state: SearchState, action: SearchAction) -> SearchState {
     
     return state
 }
-

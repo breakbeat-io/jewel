@@ -22,9 +22,11 @@ enum CollectionAction: AppAction {
     case changeCollectionCurator(curator: String)
     case setSelectedSlot(slotIndex: Int)
     case fetchAndAddAlbum(albumId: String)
-    case addAlbum(album: Album)
-    case removeAlbum(slotIndexes: IndexSet)
-    case moveAlbum(from: IndexSet, to: Int)
+    case addAlbumToSlot(album: Album)
+    case fetchAndSetPlatformLinks
+    case setPlatformLinks(platformLinks: OdesliResponse)
+    case removeAlbumFromSlot(slotIndexes: IndexSet)
+    case moveSlot(from: IndexSet, to: Int)
 }
 
 enum SearchAction: AppAction {

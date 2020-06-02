@@ -13,11 +13,16 @@ struct AlbumDetail: View {
     
     let album: Album
     
+    private var playbackLinks: OdesliResponse? {
+        let slot = store.state.collection.slots.first(where: { $0.album?.id == album.id })!
+        return slot.playbackLinks
+    }
+    
     var body: some View {
         ScrollView {
             AlbumCover(album: album)
             IfLet(album.attributes?.url) { url in
-                PlaybackLink(url: url)
+                PlaybackLinks(url: url, playbackLinks: self.playbackLinks)
                     .padding(.bottom)
             }
             TrackList(album: album)

@@ -12,5 +12,13 @@ import HMV
 struct Slot: Identifiable, Codable {
     var id = UUID()
     var album: Album?
+//        didSet {
+//            print("Album is \(album?.attributes?.artistName)")
+//            print("Slot is \(store.state.collection.selectedSlot)")
+//            print("Slot Id is \(store.state.collection.slots[store.state.collection.selectedSlot!].id)")
+//            store.update(action: CollectionAction.fetchAndSetPlatformLinks)
+//            print("Album is \(album?.attributes?.artistName)")
+//        }
+//    }
     var playbackLinks: OdesliResponse?
 }

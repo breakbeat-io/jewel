@@ -40,10 +40,10 @@ struct Collection: View {
                         .frame(height: (geo.size.height - geo.safeAreaInsets.top - geo.safeAreaInsets.bottom) / CGFloat(self.slots.count))
                     }
                     .onMove { (indexSet, index) in
-                        self.store.update(action: CollectionAction.moveAlbum(from: indexSet, to: index))
+                        self.store.update(action: CollectionAction.moveSlot(from: indexSet, to: index))
                     }
                     .onDelete {
-                        self.store.update(action: CollectionAction.removeAlbum(slotIndexes: $0))
+                        self.store.update(action: CollectionAction.removeAlbumFromSlot(slotIndexes: $0))
                     }
                 }
                 .onAppear {
