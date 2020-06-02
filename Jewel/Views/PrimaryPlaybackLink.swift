@@ -12,22 +12,24 @@ struct PrimaryPlaybackLink: View {
     
     @EnvironmentObject var store: AppStore
     
-    private var playbackLink: (name: String, url: URL?)? {
-        guard let i = store.state.collection.selectedSlot else {
-            return nil
+    private var slot: Slot? {
+        if let i = store.state.collection.selectedSlot {
+            return store.state.collection.slots[i]
         }
-        
+        return nil
+    }
+    private var playbackLink: (name: String, url: URL?) {
         let preferredProvider = OdesliPlatform.allCases[store.state.options.preferredMusicPlatform]
-        if let providerLink = store.state.collection.slots[i].playbackLinks?.linksByPlatform[preferredProvider.rawValue] {
+        if let providerLink = slot?.playbackLinks?.linksByPlatform[preferredProvider.rawValue] {
             return (preferredProvider.friendlyName, providerLink.url)
         } else {
-            return (OdesliPlatform.appleMusic.friendlyName, store.state.collection.slots[i].album?.attributes?.url)
+            return (OdesliPlatform.appleMusic.friendlyName, slot?.album?.attributes?.url)
         }
     }
     
     var body: some View {
         Button(action: {
-            if let url = self.playbackLink?.url {
+            if let url = self.playbackLink.url {
                 UIApplication.shared.open(url)
             }
         }) {

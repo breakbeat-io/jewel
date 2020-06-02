@@ -16,17 +16,17 @@ struct DiscTrackList: View {
     var discNumber: Int
     var withTitle: Bool
     
-    private var album: Album? {
+    private var slot: Slot? {
         if let i = store.state.collection.selectedSlot {
-            return store.state.collection.slots[i].album
+            return store.state.collection.slots[i]
         }
         return nil
     }
     private var albumArtist: String? {
-        album?.attributes?.artistName
+        slot?.album?.attributes?.artistName
     }
     private var discTracks: [Track]? {
-        album?.relationships?.tracks.data?.filter { $0.attributes?.discNumber == discNumber }
+        slot?.album?.relationships?.tracks.data?.filter { $0.attributes?.discNumber == discNumber }
     }
     
     var body: some View {

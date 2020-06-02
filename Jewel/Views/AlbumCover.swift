@@ -14,11 +14,14 @@ struct AlbumCover: View {
     
     @EnvironmentObject var store: AppStore
     
-    private var attributes: AlbumAttributes? {
+    private var slot: Slot? {
         if let i = store.state.collection.selectedSlot {
-            return store.state.collection.slots[i].album?.attributes
+            return store.state.collection.slots[i]
         }
         return nil
+    }
+    private var attributes: AlbumAttributes? {
+        slot?.album?.attributes
     }
     
     var body: some View {

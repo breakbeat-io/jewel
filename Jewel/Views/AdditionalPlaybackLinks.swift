@@ -14,45 +14,40 @@ struct AdditionalPlaybackLinks: View {
     
     @Binding var showing: Bool
     
-    private var selectedSlot: Int? {
-        store.state.collection.selectedSlot
-    }
-    private var availablePlatforms: [OdesliPlatform]? {
-        if let i = selectedSlot {
-            return OdesliPlatform.allCases.filter { store.state.collection.slots[i].playbackLinks?.linksByPlatform[$0.rawValue] != nil }
+    private var slot: Slot? {
+        if let i = store.state.collection.selectedSlot {
+            return store.state.collection.slots[i]
         }
         return nil
+    }
+    private var availablePlatforms: [OdesliPlatform] {
+        OdesliPlatform.allCases.filter { slot?.playbackLinks?.linksByPlatform[$0.rawValue] != nil }
     }
     private var platformLinks: [String : OdesliLink]? {
-        if let i = selectedSlot {
-            return store.state.collection.slots[i].playbackLinks?.linksByPlatform
-        }
-        return nil
+        slot?.playbackLinks?.linksByPlatform
     }
     
     var body: some View {
         NavigationView {
             VStack {
-                IfLet(availablePlatforms) { availablePlatforms in
-                    List(availablePlatforms, id: \.self) { platform in
-                        IfLet(self.platformLinks?[platform.rawValue]) { platformLink in
-                            Button(action: {
-                                UIApplication.shared.open(platformLink.url)
-                            }) {
-                                HStack {
-                                    Group {
-                                        if platform.iconRef != nil {
-                                            Text(verbatim: platform.iconRef!)
-                                                .font(.custom("FontAwesome5Brands-Regular", size: 16))
-                                        } else {
-                                            Image(systemName: "arrowshape.turn.up.right")
-                                        }
+                List(availablePlatforms, id: \.self) { platform in
+                    IfLet(self.platformLinks?[platform.rawValue]) { platformLink in
+                        Button(action: {
+                            UIApplication.shared.open(platformLink.url)
+                        }) {
+                            HStack {
+                                Group {
+                                    if platform.iconRef != nil {
+                                        Text(verbatim: platform.iconRef!)
+                                            .font(.custom("FontAwesome5Brands-Regular", size: 16))
+                                    } else {
+                                        Image(systemName: "arrowshape.turn.up.right")
                                     }
-                                    .frame(width: 40, alignment: .center)
-                                    .foregroundColor(.secondary)
-                                    Text(platform.friendlyName)
-                                        .foregroundColor(.primary)
                                 }
+                                .frame(width: 40, alignment: .center)
+                                .foregroundColor(.secondary)
+                                Text(platform.friendlyName)
+                                    .foregroundColor(.primary)
                             }
                         }
                     }
