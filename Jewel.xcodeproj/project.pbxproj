@@ -31,6 +31,7 @@
 		D27FB812248693AF0014C05D /* Slot.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27FB811248693AF0014C05D /* Slot.swift */; };
 		D27FB8142486ACF90014C05D /* PrimaryPlaybackLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27FB8132486ACF90014C05D /* PrimaryPlaybackLink.swift */; };
 		D27FB8162486AD500014C05D /* AdditionalPlaybackLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27FB8152486AD500014C05D /* AdditionalPlaybackLinks.swift */; };
+		D27FB8202486B46D0014C05D /* fa-brands.otf in Resources */ = {isa = PBXBuildFile; fileRef = D27FB81F2486B46D0014C05D /* fa-brands.otf */; };
 		D2AB8467248113EB008B57F9 /* AppActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AB8466248113EB008B57F9 /* AppActions.swift */; };
 		D2AB84692481148D008B57F9 /* AppAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AB84682481148D008B57F9 /* AppAction.swift */; };
 		D2AB846B2481159D008B57F9 /* AppStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AB846A2481159D008B57F9 /* AppStore.swift */; };
@@ -69,6 +70,7 @@
 		D27FB811248693AF0014C05D /* Slot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Slot.swift; sourceTree = "<group>"; };
 		D27FB8132486ACF90014C05D /* PrimaryPlaybackLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryPlaybackLink.swift; sourceTree = "<group>"; };
 		D27FB8152486AD500014C05D /* AdditionalPlaybackLinks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalPlaybackLinks.swift; sourceTree = "<group>"; };
+		D27FB81F2486B46D0014C05D /* fa-brands.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fa-brands.otf"; sourceTree = "<group>"; };
 		D2AB8466248113EB008B57F9 /* AppActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppActions.swift; sourceTree = "<group>"; };
 		D2AB84682481148D008B57F9 /* AppAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAction.swift; sourceTree = "<group>"; };
 		D2AB846A2481159D008B57F9 /* AppStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStore.swift; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 				D2AC120D2485A1B700C52D9E /* Services */,
 				D2AC120524859D3800C52D9E /* Util */,
 				D22155812481114B00A1F04A /* Assets.xcassets */,
+				D27FB81E2486B4550014C05D /* Fonts */,
 				D22155862481114B00A1F04A /* LaunchScreen.storyboard */,
 				D22155832481114B00A1F04A /* Preview Content */,
 			);
@@ -166,6 +169,14 @@
 				D27FB811248693AF0014C05D /* Slot.swift */,
 			);
 			path = State;
+			sourceTree = "<group>";
+		};
+		D27FB81E2486B4550014C05D /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				D27FB81F2486B46D0014C05D /* fa-brands.otf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		D2AB846C2481168C008B57F9 /* Views */ = {
@@ -294,6 +305,7 @@
 			files = (
 				D22155882481114B00A1F04A /* LaunchScreen.storyboard in Resources */,
 				D22155852481114B00A1F04A /* Preview Assets.xcassets in Resources */,
+				D27FB8202486B46D0014C05D /* fa-brands.otf in Resources */,
 				D22155822481114B00A1F04A /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
