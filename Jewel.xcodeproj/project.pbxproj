@@ -179,13 +179,9 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
-		D2AB846C2481168C008B57F9 /* Views */ = {
+		D27FB82124870B020014C05D /* Source Detail */ = {
 			isa = PBXGroup;
 			children = (
-				D2AB846D248116A3008B57F9 /* Collection.swift */,
-				D2AC120624859D5E00C52D9E /* CollectionNavigationBar.swift */,
-				D2AC120A24859E2300C52D9E /* EmptySlot.swift */,
-				D249258A2481189F0011F409 /* FilledSlot.swift */,
 				D225749F2482A71C004E83E1 /* AlbumDetail.swift */,
 				D22574A12482A7F2004E83E1 /* AlbumCover.swift */,
 				D22574A32482A882004E83E1 /* PlaybackLinks.swift */,
@@ -193,6 +189,18 @@
 				D27FB8152486AD500014C05D /* AdditionalPlaybackLinks.swift */,
 				D22574A52482A938004E83E1 /* TrackList.swift */,
 				D22574A72482AA4C004E83E1 /* DiscTrackList.swift */,
+			);
+			path = "Source Detail";
+			sourceTree = "<group>";
+		};
+		D2AB846C2481168C008B57F9 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D2AB846D248116A3008B57F9 /* Collection.swift */,
+				D2AC120624859D5E00C52D9E /* CollectionNavigationBar.swift */,
+				D2AC120A24859E2300C52D9E /* EmptySlot.swift */,
+				D249258A2481189F0011F409 /* FilledSlot.swift */,
+				D27FB82124870B020014C05D /* Source Detail */,
 				D2B4FD8F248456940028D7A4 /* Options */,
 				D24925932481410F0011F409 /* Search */,
 				D249259A2481455A0011F409 /* IfLet.swift */,
