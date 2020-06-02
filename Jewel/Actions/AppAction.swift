@@ -83,7 +83,6 @@ func updateCollection(state: CollectionState, action: CollectionAction) -> Colle
         state.slots.move(fromOffsets: from, toOffset: to)
         
     case .fetchAndSetPlatformLinks:
-        
         guard let baseUrl = state.slots[state.selectedSlot!].album?.attributes?.url else {
             print("Platform Links: No baseUrl on Album")
             break
@@ -128,16 +127,27 @@ func updateSearch(state: SearchState, action: SearchAction) -> SearchState {
     var state = state
     
     switch action {
+        
     case .search(for: let term):
-        RecordStore.appleMusic.search(term: term, limit: 20, types: [.albums]) { storeResults, error in
-            DispatchQueue.main.async {
-                store.update(action: SearchAction.populateSearchResults(results: (storeResults?.albums?.data)!))
+        RecordStore.appleMusic.search(term: term, limit: 20, types: [.albums]) { results, error in
+            if let results = results {
+                DispatchQueue.main.async {
+                    store.update(action: SearchAction.populateSearchResults(results: (results.albums?.data)!))
+                }
+            }
+            
+            if let error = error {
+                print(error.localizedDescription)
+                // TODO: create another action to show an error in search results.
             }
         }
+        
     case .populateSearchResults(results: let results):
         state.results = results
+        
     case .removeSearchResults:
         state.results = nil
+        
     }
     
     return state
