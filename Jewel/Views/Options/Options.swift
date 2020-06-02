@@ -59,9 +59,22 @@ struct Options: View {
                             }
                         }
                     }
+                    if store.state.options.debugMode {
+                        Section(header: Text("Debug")) {
+                            Button(action: {
+                                self.store.update(action: OptionsAction.reset)
+                            }) {
+                                Text("Reset Jewel")
+                                    .foregroundColor(.red)
+                            }
+                        }
+                    }
                 }
                 Spacer()
                 Footer()
+                    .onTapGesture(count: 10) {
+                        self.store.update(action: OptionsAction.toggleDebugMode)
+                    }
                     .padding()
             }
             .navigationBarTitle("Options", displayMode: .inline)

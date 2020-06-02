@@ -13,7 +13,7 @@ struct Collection: View {
     
     @EnvironmentObject var store: AppStore
     
-    private var slots: [Slot?] {
+    private var slots: [Slot] {
         store.state.collection.slots
     }
     
@@ -23,11 +23,11 @@ struct Collection: View {
                 List {
                     ForEach(self.slots.indices, id: \.self) { slotIndex in
                         Group {
-                            if self.slots[slotIndex] != nil {
+                            if self.slots[slotIndex].album != nil {
                                 ZStack {
-                                    AlbumCard(album: self.slots[slotIndex]!.album)
+                                    AlbumCard(album: self.slots[slotIndex].album!)
                                     NavigationLink(
-                                        destination: AlbumDetail(album: self.slots[slotIndex]!.album)
+                                        destination: AlbumDetail(album: self.slots[slotIndex].album!)
                                     ){
                                         EmptyView()
                                     }

@@ -13,6 +13,8 @@ protocol AppAction { }
 
 enum OptionsAction: AppAction {
     case setPreferredPlatform(platform: Int)
+    case toggleDebugMode
+    case reset
 }
 
 enum CollectionAction: AppAction {

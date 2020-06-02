@@ -31,7 +31,15 @@ func updateOptions(state: OptionsState, action: OptionsAction) -> OptionsState {
     switch action {
     case .setPreferredPlatform(platform: let platform):
         state.preferredMusicPlatform = platform
+    case .toggleDebugMode:
+        state.debugMode.toggle()
+    case .reset:
+        let domain = Bundle.main.bundleIdentifier!
+        UserDefaults.standard.removePersistentDomain(forName: domain)
+        UserDefaults.standard.synchronize()
+        exit(1)
     }
+    
     
     return state
 }
@@ -58,11 +66,11 @@ func updateCollection(state: CollectionState, action: CollectionAction) -> Colle
         })
     case .addAlbum(album: let album):
         if let selectedSlot = state.selectedSlot {
-            state.slots[selectedSlot] = Slot(album: album)
+            state.slots[selectedSlot].album = album
         }
     case .removeAlbum(slotIndexes: let slotIndexes):
         for i in slotIndexes {
-            state.slots[i] = nil
+            state.slots[i].album = nil
         }
     case .moveAlbum(from: let from, to: let to):
         state.slots.move(fromOffsets: from, toOffset: to)
