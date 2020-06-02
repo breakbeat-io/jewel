@@ -14,7 +14,10 @@ struct TrackList: View {
     @EnvironmentObject var store: AppStore
     
     private var discCount: Int? {
-        store.state.collection.slots[store.state.collection.selectedSlot!].album?.relationships?.tracks.data?.map { $0.attributes?.discNumber ?? 1 }.max()
+        if let i = store.state.collection.selectedSlot {
+            return store.state.collection.slots[i].album?.relationships?.tracks.data?.map { $0.attributes?.discNumber ?? 1 }.max()
+        }
+        return nil
     }
     
     var body: some View {

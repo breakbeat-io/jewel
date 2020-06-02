@@ -17,7 +17,10 @@ struct DiscTrackList: View {
     var withTitle: Bool
     
     private var album: Album? {
-        store.state.collection.slots[store.state.collection.selectedSlot!].album
+        if let i = store.state.collection.selectedSlot {
+            return store.state.collection.slots[i].album
+        }
+        return nil
     }
     private var albumArtist: String? {
         album?.attributes?.artistName

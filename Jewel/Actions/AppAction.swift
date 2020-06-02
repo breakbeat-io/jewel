@@ -58,6 +58,9 @@ func updateCollection(state: CollectionState, action: CollectionAction) -> Colle
     case .setSelectedSlot(slotIndex: let slotIndex):
         state.selectedSlot = slotIndex
         
+    case .deselectSlot:
+        state.selectedSlot = nil
+        
     case .fetchAndAddAlbum(albumId: let albumId):
         RecordStore.appleMusic.album(id: albumId, completion: {
             (album: Album?, error: Error?) -> Void in

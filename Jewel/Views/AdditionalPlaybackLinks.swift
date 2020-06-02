@@ -14,34 +14,45 @@ struct AdditionalPlaybackLinks: View {
     
     @Binding var showing: Bool
     
-    private var availablePlatforms: [OdesliPlatform] {
-        OdesliPlatform.allCases.filter { store.state.collection.slots[store.state.collection.selectedSlot!].playbackLinks?.linksByPlatform[$0.rawValue] != nil }
+    private var selectedSlot: Int? {
+        store.state.collection.selectedSlot
+    }
+    private var availablePlatforms: [OdesliPlatform]? {
+        if let i = selectedSlot {
+            return OdesliPlatform.allCases.filter { store.state.collection.slots[i].playbackLinks?.linksByPlatform[$0.rawValue] != nil }
+        }
+        return nil
     }
     private var platformLinks: [String : OdesliLink]? {
-        store.state.collection.slots[store.state.collection.selectedSlot!].playbackLinks?.linksByPlatform
+        if let i = selectedSlot {
+            return store.state.collection.slots[i].playbackLinks?.linksByPlatform
+        }
+        return nil
     }
     
     var body: some View {
         NavigationView {
             VStack {
-                List(availablePlatforms, id: \.self) { platform in
-                    IfLet(self.platformLinks?[platform.rawValue]) { platformLink in
-                        Button(action: {
-                            UIApplication.shared.open(platformLink.url)
-                        }) {
-                            HStack {
-                                Group {
-                                    if platform.iconRef != nil {
-                                        Text(verbatim: platform.iconRef!)
-                                            .font(.custom("FontAwesome5Brands-Regular", size: 16))
-                                    } else {
-                                        Image(systemName: "arrowshape.turn.up.right")
+                IfLet(availablePlatforms) { availablePlatforms in
+                    List(availablePlatforms, id: \.self) { platform in
+                        IfLet(self.platformLinks?[platform.rawValue]) { platformLink in
+                            Button(action: {
+                                UIApplication.shared.open(platformLink.url)
+                            }) {
+                                HStack {
+                                    Group {
+                                        if platform.iconRef != nil {
+                                            Text(verbatim: platform.iconRef!)
+                                                .font(.custom("FontAwesome5Brands-Regular", size: 16))
+                                        } else {
+                                            Image(systemName: "arrowshape.turn.up.right")
+                                        }
                                     }
+                                    .frame(width: 40, alignment: .center)
+                                    .foregroundColor(.secondary)
+                                    Text(platform.friendlyName)
+                                        .foregroundColor(.primary)
                                 }
-                                .frame(width: 40, alignment: .center)
-                                .foregroundColor(.secondary)
-                                Text(platform.friendlyName)
-                                    .foregroundColor(.primary)
                             }
                         }
                     }

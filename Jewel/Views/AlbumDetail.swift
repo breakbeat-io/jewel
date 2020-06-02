@@ -11,6 +11,8 @@ import HMV
 
 struct AlbumDetail: View {
     
+    @EnvironmentObject var store: AppStore
+  
     var body: some View {
         ScrollView {
             AlbumCover()
@@ -19,5 +21,8 @@ struct AlbumDetail: View {
             TrackList()
         }
         .padding()
+        .onDisappear {
+            self.store.update(action: CollectionAction.deselectSlot)
+        }
     }
 }

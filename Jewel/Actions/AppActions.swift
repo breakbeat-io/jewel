@@ -21,6 +21,7 @@ enum CollectionAction: AppAction {
     case changeCollectionName(name: String)
     case changeCollectionCurator(curator: String)
     case setSelectedSlot(slotIndex: Int)
+    case deselectSlot
     case fetchAndAddAlbum(albumId: String)
     case addAlbumToSlot(album: Album)
     case fetchAndSetPlatformLinks

@@ -30,5 +30,8 @@ struct Search: View {
                 }
             )
         }
+        .onDisappear {
+            self.store.update(action: CollectionAction.deselectSlot)
+        }
     }
 }

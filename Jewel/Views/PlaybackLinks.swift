@@ -13,11 +13,20 @@ struct PlaybackLinks: View {
     
     @EnvironmentObject var store: AppStore
     
+    private var selectedSlot: Int? {
+        store.state.collection.selectedSlot
+    }
     private var url: URL? {
-        store.state.collection.slots[store.state.collection.selectedSlot!].album?.attributes?.url
+        if let i = selectedSlot {
+            return store.state.collection.slots[i].album?.attributes?.url
+        }
+        return nil
     }
     private var playbackLinks: OdesliResponse? {
-        store.state.collection.slots[store.state.collection.selectedSlot!].playbackLinks
+        if let i = selectedSlot {
+            return store.state.collection.slots[i].playbackLinks
+        }
+        return nil
     }
     
     @State private var showAdditionalLinks = false
