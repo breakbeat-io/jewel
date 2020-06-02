@@ -28,6 +28,7 @@
 		D24925A424814CB60011F409 /* RecordStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24925A324814CB60011F409 /* RecordStore.swift */; };
 		D27FB80E24868AF60014C05D /* Odesli.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27FB80D24868AF60014C05D /* Odesli.swift */; };
 		D27FB81024868B320014C05D /* OptionsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27FB80F24868B320014C05D /* OptionsState.swift */; };
+		D27FB812248693AF0014C05D /* Slot.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27FB811248693AF0014C05D /* Slot.swift */; };
 		D2AB8467248113EB008B57F9 /* AppActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AB8466248113EB008B57F9 /* AppActions.swift */; };
 		D2AB84692481148D008B57F9 /* AppAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AB84682481148D008B57F9 /* AppAction.swift */; };
 		D2AB846B2481159D008B57F9 /* AppStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AB846A2481159D008B57F9 /* AppStore.swift */; };
@@ -63,6 +64,7 @@
 		D24925A324814CB60011F409 /* RecordStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordStore.swift; sourceTree = "<group>"; };
 		D27FB80D24868AF60014C05D /* Odesli.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Odesli.swift; sourceTree = "<group>"; };
 		D27FB80F24868B320014C05D /* OptionsState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsState.swift; sourceTree = "<group>"; };
+		D27FB811248693AF0014C05D /* Slot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Slot.swift; sourceTree = "<group>"; };
 		D2AB8466248113EB008B57F9 /* AppActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppActions.swift; sourceTree = "<group>"; };
 		D2AB84682481148D008B57F9 /* AppAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAction.swift; sourceTree = "<group>"; };
 		D2AB846A2481159D008B57F9 /* AppStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStore.swift; sourceTree = "<group>"; };
@@ -157,6 +159,7 @@
 				D27FB80F24868B320014C05D /* OptionsState.swift */,
 				D2AC120F2485A65D00C52D9E /* CollectionState.swift */,
 				D2AC12112485A67000C52D9E /* SearchState.swift */,
+				D27FB811248693AF0014C05D /* Slot.swift */,
 			);
 			path = State;
 			sourceTree = "<group>";
@@ -299,6 +302,7 @@
 				D22574A82482AA4C004E83E1 /* DiscTrackList.swift in Sources */,
 				D2492597248142660011F409 /* SearchBar.swift in Sources */,
 				D249259B2481455A0011F409 /* IfLet.swift in Sources */,
+				D27FB812248693AF0014C05D /* Slot.swift in Sources */,
 				D27FB80E24868AF60014C05D /* Odesli.swift in Sources */,
 				D22574A42482A882004E83E1 /* PlaybackLink.swift in Sources */,
 				D22574A22482A7F2004E83E1 /* AlbumCover.swift in Sources */,

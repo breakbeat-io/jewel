@@ -13,7 +13,7 @@ struct Collection: View {
     
     @EnvironmentObject var store: AppStore
     
-    private var albums: [Album?] {
+    private var slots: [Slot?] {
         store.state.collection.slots
     }
     
@@ -21,23 +21,23 @@ struct Collection: View {
         NavigationView {
             GeometryReader { geo in
                 List {
-                    ForEach(self.albums.indices, id: \.self) { albumIndex in
+                    ForEach(self.slots.indices, id: \.self) { slotIndex in
                         Group {
-                            if self.albums[albumIndex] != nil {
+                            if self.slots[slotIndex] != nil {
                                 ZStack {
-                                    AlbumCard(album: self.albums[albumIndex]!)
+                                    AlbumCard(album: self.slots[slotIndex]!.album)
                                     NavigationLink(
-                                        destination: AlbumDetail(album: self.albums[albumIndex]!)
+                                        destination: AlbumDetail(album: self.slots[slotIndex]!.album)
                                     ){
                                         EmptyView()
                                     }
                                 }
                             } else {
-                                EmptySlot(slotIndex: albumIndex)
+                                EmptySlot(slotIndex: slotIndex)
                                     .deleteDisabled(true)
                             }
                         }
-                        .frame(height: (geo.size.height - geo.safeAreaInsets.top - geo.safeAreaInsets.bottom) / CGFloat(self.albums.count))
+                        .frame(height: (geo.size.height - geo.safeAreaInsets.top - geo.safeAreaInsets.bottom) / CGFloat(self.slots.count))
                     }
                     .onMove { (indexSet, index) in
                         self.store.update(action: CollectionAction.moveAlbum(from: indexSet, to: index))
