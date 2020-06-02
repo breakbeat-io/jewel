@@ -15,12 +15,14 @@ struct AlbumDetail: View {
   
     var body: some View {
         ScrollView {
-            AlbumCover()
-            PlaybackLinks()
-                .padding(.bottom)
-            TrackList()
+            VStack {
+                AlbumCover()
+                PlaybackLinks()
+                    .padding(.bottom)
+                TrackList()
+            }
+            .padding()
         }
-        .padding()
         .onDisappear {
             self.store.update(action: CollectionAction.deselectSlot)
         }
