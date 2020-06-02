@@ -13,28 +13,34 @@ struct PlaybackLinks: View {
     
     @EnvironmentObject var store: AppStore
     
-    var url: URL
-    var playbackLinks: OdesliResponse?
+    private var url: URL? {
+        store.state.collection.slots[store.state.collection.selectedSlot!].album?.attributes?.url
+    }
+    private var playbackLinks: OdesliResponse? {
+        store.state.collection.slots[store.state.collection.selectedSlot!].playbackLinks
+    }
     
     @State private var showAdditionalLinks = false
     
     var body: some View {
         ZStack {
-            PrimaryPlaybackLink()
-            IfLet(self.playbackLinks) { links in
-                HStack {
-                    Spacer()
-                    Button(action: {
-                        self.showAdditionalLinks.toggle()
-                    }) {
-                        Image(systemName: "link")
-                            .foregroundColor(.secondary)
+            IfLet(url) { url in
+                PrimaryPlaybackLink()
+                IfLet(self.playbackLinks) { links in
+                    HStack {
+                        Spacer()
+                        Button(action: {
+                            self.showAdditionalLinks.toggle()
+                        }) {
+                            Image(systemName: "link")
+                                .foregroundColor(.secondary)
+                        }
+                        .sheet(isPresented: self.$showAdditionalLinks) {
+                            AdditionalPlaybackLinks(showing: self.$showAdditionalLinks)
+                                .environmentObject(self.store)
+                        }
+                        .padding()
                     }
-                    .sheet(isPresented: self.$showAdditionalLinks) {
-                        AdditionalPlaybackLinks(showing: self.$showAdditionalLinks)
-                            .environmentObject(self.store)
-                    }
-                    .padding()
                 }
             }
         }

@@ -25,7 +25,7 @@ struct PrimaryPlaybackLink: View {
         Button(action: {
             if let url = self.playbackLink.url {
                 UIApplication.shared.open(url)
-        }
+            }
         }) {
             HStack {
                 Image(systemName: "play.fill")

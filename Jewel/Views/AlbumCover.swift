@@ -12,10 +12,10 @@ import HMV
 
 struct AlbumCover: View {
     
-    let album: Album
+    @EnvironmentObject var store: AppStore
     
     private var attributes: AlbumAttributes? {
-        album.attributes
+        store.state.collection.slots[store.state.collection.selectedSlot!].album?.attributes
     }
     
     var body: some View {

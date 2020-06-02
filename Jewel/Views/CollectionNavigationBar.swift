@@ -28,15 +28,7 @@ struct HomeButtonsLeading: View {
 
 struct HomeButtonsTrailing: View {
     
-    @EnvironmentObject var store: AppStore
-    
     var body: some View {
         EditButton()
-//        Button(action: {
-//
-//        }) {
-//            Image(systemName: "square.and.arrow.up")
-//        }
-//        .disabled(true)
     }
 }

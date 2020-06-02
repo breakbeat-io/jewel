@@ -11,14 +11,19 @@ import HMV
 
 struct DiscTrackList: View {
     
-    let album: Album
+    @EnvironmentObject var store: AppStore
+    
     var discNumber: Int
     var withTitle: Bool
+    
+    private var album: Album? {
+        store.state.collection.slots[store.state.collection.selectedSlot!].album
+    }
     private var albumArtist: String? {
-        album.attributes?.artistName
+        album?.attributes?.artistName
     }
     private var discTracks: [Track]? {
-        album.relationships?.tracks.data?.filter { $0.attributes?.discNumber == discNumber }
+        album?.relationships?.tracks.data?.filter { $0.attributes?.discNumber == discNumber }
     }
     
     var body: some View {

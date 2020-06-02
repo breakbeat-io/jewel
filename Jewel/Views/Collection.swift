@@ -25,9 +25,9 @@ struct Collection: View {
                         Group {
                             if self.slots[slotIndex].album != nil {
                                 ZStack {
-                                    AlbumCard(album: self.slots[slotIndex].album!)
+                                    FilledSlot(slotIndex: slotIndex)
                                     NavigationLink(
-                                        destination: AlbumDetail(album: self.slots[slotIndex].album!)
+                                        destination: AlbumDetail()
                                     ){
                                         EmptyView()
                                     }

@@ -11,17 +11,17 @@ import HMV
 
 struct TrackList: View {
     
-    let album: Album
+    @EnvironmentObject var store: AppStore
     
     private var discCount: Int? {
-        album.relationships?.tracks.data?.map { $0.attributes?.discNumber ?? 1 }.max()
+        store.state.collection.slots[store.state.collection.selectedSlot!].album?.relationships?.tracks.data?.map { $0.attributes?.discNumber ?? 1 }.max()
     }
     
     var body: some View {
         VStack(alignment: .leading) {
             IfLet(discCount) { discCount in
                 ForEach(1..<discCount + 1, id: \.self) {
-                    DiscTrackList(album: self.album, discNumber: $0, withTitle: (discCount > 1) ? true : false)
+                    DiscTrackList(discNumber: $0, withTitle: (discCount > 1) ? true : false)
                 }
             }
         }

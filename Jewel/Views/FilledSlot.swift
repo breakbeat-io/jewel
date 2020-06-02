@@ -1,5 +1,5 @@
 //
-//  ItemView.swift
+//  FilleSlot.swift
 //  Jewel
 //
 //  Created by Greg Hepworth on 29/05/2020.
@@ -10,7 +10,7 @@ import SwiftUI
 import KingfisherSwiftUI
 import HMV
 
-struct Filledslot: View {
+struct FilledSlot: View {
     
     @EnvironmentObject var store: AppStore
     
