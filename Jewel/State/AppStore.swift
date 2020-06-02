@@ -27,9 +27,10 @@ final class AppStore: ObservableObject {
             }
         }
         
+        let options = OptionsState()
         let collection = CollectionState()
         let search = SearchState()
-        let appState = AppState(collection: collection, search: search)
+        let appState = AppState(options: options, collection: collection, search: search)
         self.state = appState
     }
     

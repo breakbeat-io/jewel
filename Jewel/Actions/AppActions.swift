@@ -11,6 +11,10 @@ import HMV
 
 protocol AppAction { }
 
+enum OptionsAction: AppAction {
+    case setPreferredPlatform(platform: Int)
+}
+
 enum CollectionAction: AppAction {
     case changeCollectionName(name: String)
     case changeCollectionCurator(curator: String)

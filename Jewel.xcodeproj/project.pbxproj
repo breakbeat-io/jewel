@@ -26,6 +26,8 @@
 		D249259E248145C20011F409 /* KingfisherSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = D249259D248145C20011F409 /* KingfisherSwiftUI */; };
 		D24925A224814AD60011F409 /* HMV in Frameworks */ = {isa = PBXBuildFile; productRef = D24925A124814AD60011F409 /* HMV */; };
 		D24925A424814CB60011F409 /* RecordStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24925A324814CB60011F409 /* RecordStore.swift */; };
+		D27FB80E24868AF60014C05D /* Odesli.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27FB80D24868AF60014C05D /* Odesli.swift */; };
+		D27FB81024868B320014C05D /* OptionsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27FB80F24868B320014C05D /* OptionsState.swift */; };
 		D2AB8467248113EB008B57F9 /* AppActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AB8466248113EB008B57F9 /* AppActions.swift */; };
 		D2AB84692481148D008B57F9 /* AppAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AB84682481148D008B57F9 /* AppAction.swift */; };
 		D2AB846B2481159D008B57F9 /* AppStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AB846A2481159D008B57F9 /* AppStore.swift */; };
@@ -59,6 +61,8 @@
 		D2492598248143720011F409 /* SearchResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResults.swift; sourceTree = "<group>"; };
 		D249259A2481455A0011F409 /* IfLet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IfLet.swift; sourceTree = "<group>"; };
 		D24925A324814CB60011F409 /* RecordStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordStore.swift; sourceTree = "<group>"; };
+		D27FB80D24868AF60014C05D /* Odesli.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Odesli.swift; sourceTree = "<group>"; };
+		D27FB80F24868B320014C05D /* OptionsState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsState.swift; sourceTree = "<group>"; };
 		D2AB8466248113EB008B57F9 /* AppActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppActions.swift; sourceTree = "<group>"; };
 		D2AB84682481148D008B57F9 /* AppAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAction.swift; sourceTree = "<group>"; };
 		D2AB846A2481159D008B57F9 /* AppStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStore.swift; sourceTree = "<group>"; };
@@ -150,6 +154,7 @@
 			children = (
 				D2AB846A2481159D008B57F9 /* AppStore.swift */,
 				D2492586248117710011F409 /* AppState.swift */,
+				D27FB80F24868B320014C05D /* OptionsState.swift */,
 				D2AC120F2485A65D00C52D9E /* CollectionState.swift */,
 				D2AC12112485A67000C52D9E /* SearchState.swift */,
 			);
@@ -198,6 +203,7 @@
 			isa = PBXGroup;
 			children = (
 				D24925A324814CB60011F409 /* RecordStore.swift */,
+				D27FB80D24868AF60014C05D /* Odesli.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -293,6 +299,7 @@
 				D22574A82482AA4C004E83E1 /* DiscTrackList.swift in Sources */,
 				D2492597248142660011F409 /* SearchBar.swift in Sources */,
 				D249259B2481455A0011F409 /* IfLet.swift in Sources */,
+				D27FB80E24868AF60014C05D /* Odesli.swift in Sources */,
 				D22574A42482A882004E83E1 /* PlaybackLink.swift in Sources */,
 				D22574A22482A7F2004E83E1 /* AlbumCover.swift in Sources */,
 				D2AC120724859D5E00C52D9E /* CollectionNavigationBar.swift in Sources */,
@@ -315,6 +322,7 @@
 				D2AB84692481148D008B57F9 /* AppAction.swift in Sources */,
 				D24925A424814CB60011F409 /* RecordStore.swift in Sources */,
 				D22574A62482A938004E83E1 /* TrackList.swift in Sources */,
+				D27FB81024868B320014C05D /* OptionsState.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

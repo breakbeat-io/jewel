@@ -13,6 +13,8 @@ func updateState(state: AppState, action: AppAction) -> AppState {
     var state = state
     
     switch action {
+    case is OptionsAction:
+        state.options = updateOptions(state: state.options, action: action as! OptionsAction)
     case is CollectionAction:
         state.collection = updateCollection(state: state.collection, action: action as! CollectionAction)
     case is SearchAction:
@@ -22,6 +24,18 @@ func updateState(state: AppState, action: AppAction) -> AppState {
     
     return state
 }
+
+func updateOptions(state: OptionsState, action: OptionsAction) -> OptionsState {
+    var state = state
+    
+    switch action {
+    case .setPreferredPlatform(platform: let platform):
+        state.preferredMusicPlatform = platform
+    }
+    
+    return state
+}
+
 
 func updateCollection(state: CollectionState, action: CollectionAction) -> CollectionState {
     var state = state
