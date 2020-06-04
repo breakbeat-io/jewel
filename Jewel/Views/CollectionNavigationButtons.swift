@@ -13,15 +13,26 @@ struct CollectionNavigationButtonsLeading: View {
   @EnvironmentObject var store: AppStore
   
   @State private var showOptions: Bool = false
+  @State private var showSharing: Bool = false
   
   var body: some View {
     HStack {
       Button(action: {
-        self.store.update(action: LibraryAction.addCollection(collection: self.store.state.collection))
+        self.showSharing = true
       }) {
         Image(systemName: "square.and.arrow.up")
       }
       .padding(.trailing)
+      .actionSheet(isPresented: $showSharing) {
+        ActionSheet(title: Text("Share Collection"),
+                    buttons: [
+                      .default(Text("Add to Library")) {
+                        self.store.update(action: LibraryAction.addCollection(collection: self.store.state.collection))
+                        self.store.update(action: CollectionAction.toggleActive)
+                      },
+                      .cancel()
+                    ])
+      }
       Button(action: {
         self.showOptions = true
       }) {
