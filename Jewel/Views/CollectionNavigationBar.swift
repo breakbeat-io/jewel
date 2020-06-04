@@ -23,6 +23,8 @@ struct HomeButtonsLeading: View {
       Options(showing: self.$showOptions)
         .environmentObject(self.store)
     }
+    .padding(.trailing)
+    .padding(.vertical)
   }
 }
 
@@ -30,5 +32,7 @@ struct HomeButtonsTrailing: View {
   
   var body: some View {
     EditButton()
+      .padding(.leading)
+      .padding(.vertical)
   }
 }
