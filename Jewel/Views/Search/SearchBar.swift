@@ -9,37 +9,36 @@
 import SwiftUI
 
 struct SearchBar: View {
-    
-    @EnvironmentObject var store: AppStore
-    
-    @State private var searchTerm: String = ""
-    
-    var body: some View {
-        VStack(alignment: .leading) {
-            HStack {
-                Image(systemName: "magnifyingglass")
-                TextField(
-                    "Search Apple Music",
-                    text: $searchTerm,
-                    onCommit: {
-                        self.store.update(action: SearchAction.search(for: self.searchTerm))
-                }
-                ).foregroundColor(.primary)
-                    .keyboardType(.webSearch)
-                Button(action: {
-                    self.searchTerm = ""
-                    self.store.update(action: SearchAction.removeSearchResults)
-                    //                    self.searchProvider.results?.removeAll()
-                }) {
-                    Image(systemName: "xmark.circle.fill")
-                        .opacity(searchTerm == "" ? 0 : 1)
-                }
-            }
-            .padding(EdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8))
-            .foregroundColor(.secondary)
-            .background(Color(.secondarySystemBackground))
-            .cornerRadius(8.0)
+  
+  @EnvironmentObject var store: AppStore
+  
+  @State private var searchTerm: String = ""
+  
+  var body: some View {
+    VStack(alignment: .leading) {
+      HStack {
+        Image(systemName: "magnifyingglass")
+        TextField(
+          "Search Apple Music",
+          text: $searchTerm,
+          onCommit: {
+            RecordStore.browse(for: self.searchTerm)
         }
-        .padding()
+        ).foregroundColor(.primary)
+          .keyboardType(.webSearch)
+        Button(action: {
+          self.searchTerm = ""
+          self.store.update(action: SearchAction.removeSearchResults)
+        }) {
+          Image(systemName: "xmark.circle.fill")
+            .opacity(searchTerm == "" ? 0 : 1)
+        }
+      }
+      .padding(EdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8))
+      .foregroundColor(.secondary)
+      .background(Color(.secondarySystemBackground))
+      .cornerRadius(8.0)
     }
+    .padding()
+  }
 }

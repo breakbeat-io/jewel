@@ -30,7 +30,6 @@ enum CollectionAction: AppAction {
 }
 
 enum SearchAction: AppAction {
-    case search(for: String)
     case populateSearchResults(results: [Album])
     case removeSearchResults
 }
