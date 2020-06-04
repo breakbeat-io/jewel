@@ -10,5 +10,5 @@ import Foundation
 import HMV
 
 struct SearchState: Codable {
-    var results: [Album]?
+  var results: [Album]?
 }

@@ -9,26 +9,26 @@
 import SwiftUI
 
 struct HomeButtonsLeading: View {
-    
-    @EnvironmentObject var store: AppStore
-    
-    @State private var showOptions: Bool = false
-    
-    var body: some View {
-        Button(action: {
-            self.showOptions = true
-        }) {
-            Image(systemName: "slider.horizontal.3")
-        }.sheet(isPresented: self.$showOptions) {
-            Options(showing: self.$showOptions)
-                .environmentObject(self.store)
-        }
+  
+  @EnvironmentObject var store: AppStore
+  
+  @State private var showOptions: Bool = false
+  
+  var body: some View {
+    Button(action: {
+      self.showOptions = true
+    }) {
+      Image(systemName: "slider.horizontal.3")
+    }.sheet(isPresented: self.$showOptions) {
+      Options(showing: self.$showOptions)
+        .environmentObject(self.store)
     }
+  }
 }
 
 struct HomeButtonsTrailing: View {
-    
-    var body: some View {
-        EditButton()
-    }
+  
+  var body: some View {
+    EditButton()
+  }
 }

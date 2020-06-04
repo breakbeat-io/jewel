@@ -10,15 +10,15 @@ import Foundation
 import HMV
 
 struct CollectionState: Codable {
-    var name: String = "My Collection"
-    var curator: String = "A Music Lover"
-    var slots: [Slot] = {
-        var tmpSlots = [Slot]()
-        for _ in 0..<8 {
-            let slot = Slot()
-            tmpSlots.append(slot)
-        }
-        return tmpSlots
-    }()
-    var selectedSlot: Int?
+  var name: String = "My Collection"
+  var curator: String = "A Music Lover"
+  var slots: [Slot] = {
+    var tmpSlots = [Slot]()
+    for _ in 0..<8 {
+      let slot = Slot()
+      tmpSlots.append(slot)
+    }
+    return tmpSlots
+  }()
+  var selectedSlot: Int?
 }

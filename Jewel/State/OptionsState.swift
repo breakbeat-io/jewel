@@ -9,7 +9,7 @@
 import Foundation
 
 struct OptionsState: Codable {
-    var preferredMusicPlatform: Int = 0
-    var debugMode: Bool = false
-    var firstTimeRun: Bool = false
+  var preferredMusicPlatform: Int = 0
+  var debugMode: Bool = false
+  var firstTimeRun: Bool = false
 }

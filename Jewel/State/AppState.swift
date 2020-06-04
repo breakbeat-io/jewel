@@ -9,7 +9,7 @@
 import Foundation
 
 struct AppState: Codable {
-    var options: OptionsState
-    var collection: CollectionState
-    var search: SearchState
+  var options: OptionsState
+  var collection: CollectionState
+  var search: SearchState
 }

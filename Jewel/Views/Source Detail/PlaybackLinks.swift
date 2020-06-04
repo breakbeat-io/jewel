@@ -10,45 +10,45 @@ import SwiftUI
 import HMV
 
 struct PlaybackLinks: View {
-    
-    @EnvironmentObject var store: AppStore
-    
-    private var slot: Slot? {
-        if let i = store.state.collection.selectedSlot {
-            return store.state.collection.slots[i]
-        }
-        return nil
+  
+  @EnvironmentObject var store: AppStore
+  
+  private var slot: Slot? {
+    if let i = store.state.collection.selectedSlot {
+      return store.state.collection.slots[i]
     }
-    private var url: URL? {
-        slot?.album?.attributes?.url
-    }
-    private var playbackLinks: OdesliResponse? {
-        slot?.playbackLinks
-    }
-    
-    @State private var showAdditionalLinks = false
-    
-    var body: some View {
-        ZStack {
-            IfLet(url) { url in
-                PrimaryPlaybackLink()
-                IfLet(self.playbackLinks) { links in
-                    HStack {
-                        Spacer()
-                        Button(action: {
-                            self.showAdditionalLinks.toggle()
-                        }) {
-                            Image(systemName: "link")
-                                .foregroundColor(.secondary)
-                        }
-                        .sheet(isPresented: self.$showAdditionalLinks) {
-                            AdditionalPlaybackLinks(showing: self.$showAdditionalLinks)
-                                .environmentObject(self.store)
-                        }
-                        .padding()
-                    }
-                }
+    return nil
+  }
+  private var url: URL? {
+    slot?.album?.attributes?.url
+  }
+  private var playbackLinks: OdesliResponse? {
+    slot?.playbackLinks
+  }
+  
+  @State private var showAdditionalLinks = false
+  
+  var body: some View {
+    ZStack {
+      IfLet(url) { url in
+        PrimaryPlaybackLink()
+        IfLet(self.playbackLinks) { links in
+          HStack {
+            Spacer()
+            Button(action: {
+              self.showAdditionalLinks.toggle()
+            }) {
+              Image(systemName: "link")
+                .foregroundColor(.secondary)
             }
+            .sheet(isPresented: self.$showAdditionalLinks) {
+              AdditionalPlaybackLinks(showing: self.$showAdditionalLinks)
+                .environmentObject(self.store)
+            }
+            .padding()
+          }
         }
+      }
     }
+  }
 }
