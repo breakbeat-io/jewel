@@ -62,7 +62,7 @@ class RecordStore {
       if let data = data {
         if let decodedResponse = try? JSONDecoder().decode(OdesliResponse.self, from: data) {
           DispatchQueue.main.async {
-            store.update(action: CollectionAction.setPlatformLinks(platformLinks: decodedResponse))
+            store.update(action: CollectionAction.setPlatformLinks(baseUrl: baseUrl, platformLinks: decodedResponse))
           }
           
           return

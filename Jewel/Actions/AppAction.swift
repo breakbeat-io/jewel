@@ -83,10 +83,10 @@ func updateCollection(state: CollectionState, action: CollectionAction) -> Colle
   case .moveSlot(from: let from, to: let to):
     state.slots.move(fromOffsets: from, toOffset: to)
     
-  case .setPlatformLinks(platformLinks: let platformLinks):
-    print("would do platform links")
-    //        state.slots[state.selectedSlot!].playbackLinks = platformLinks
-    
+  case .setPlatformLinks(baseUrl: let baseUrl, platformLinks: let platformLinks):
+    if let i = state.slots.firstIndex(where: { $0.album?.attributes?.url == baseUrl }) {
+      state.slots[i].playbackLinks = platformLinks
+    }
   }
   
   return state

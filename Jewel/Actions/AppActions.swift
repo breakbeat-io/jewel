@@ -12,23 +12,23 @@ import HMV
 protocol AppAction { }
 
 enum OptionsAction: AppAction {
-    case setPreferredPlatform(platform: Int)
-    case toggleDebugMode
-    case reset
+  case setPreferredPlatform(platform: Int)
+  case toggleDebugMode
+  case reset
 }
 
 enum CollectionAction: AppAction {
-    case changeCollectionName(name: String)
-    case changeCollectionCurator(curator: String)
-    case setSelectedSlot(slotIndex: Int)
-    case deselectSlot
-    case addAlbumToSlot(album: Album)
-    case setPlatformLinks(platformLinks: OdesliResponse)
-    case removeAlbumFromSlot(slotIndexes: IndexSet)
-    case moveSlot(from: IndexSet, to: Int)
+  case changeCollectionName(name: String)
+  case changeCollectionCurator(curator: String)
+  case setSelectedSlot(slotIndex: Int)
+  case deselectSlot
+  case addAlbumToSlot(album: Album)
+  case setPlatformLinks(baseUrl: URL, platformLinks: OdesliResponse)
+  case removeAlbumFromSlot(slotIndexes: IndexSet)
+  case moveSlot(from: IndexSet, to: Int)
 }
 
 enum SearchAction: AppAction {
-    case populateSearchResults(results: [Album])
-    case removeSearchResults
+  case populateSearchResults(results: [Album])
+  case removeSearchResults
 }
