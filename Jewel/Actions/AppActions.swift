@@ -23,7 +23,6 @@ enum CollectionAction: AppAction {
     case setSelectedSlot(slotIndex: Int)
     case deselectSlot
     case addAlbumToSlot(album: Album)
-    case fetchAndSetPlatformLinks
     case setPlatformLinks(platformLinks: OdesliResponse)
     case removeAlbumFromSlot(slotIndexes: IndexSet)
     case moveSlot(from: IndexSet, to: Int)
