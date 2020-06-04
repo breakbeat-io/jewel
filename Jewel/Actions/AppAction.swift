@@ -84,8 +84,9 @@ func updateCollection(state: CollectionState, action: CollectionAction) -> Colle
     state.slots.move(fromOffsets: from, toOffset: to)
     
   case .setPlatformLinks(baseUrl: let baseUrl, platformLinks: let platformLinks):
-    if let i = state.slots.firstIndex(where: { $0.album?.attributes?.url == baseUrl }) {
-      state.slots[i].playbackLinks = platformLinks
+    let indices = state.slots.enumerated().compactMap({ $1.album?.attributes?.url == baseUrl ? $0 : nil })
+    for i in indices {
+        state.slots[i].playbackLinks = platformLinks
     }
   }
   
