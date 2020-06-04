@@ -60,18 +60,7 @@ func updateCollection(state: CollectionState, action: CollectionAction) -> Colle
         
     case .deselectSlot:
         state.selectedSlot = nil
-        
-    case .fetchAndAddAlbum(albumId: let albumId):
-        RecordStore.appleMusic.album(id: albumId, completion: {
-            (album: Album?, error: Error?) -> Void in
-            DispatchQueue.main.async {
-                if album != nil {
-                    store.update(action: CollectionAction.addAlbumToSlot(album: album!))
-                    store.update(action: CollectionAction.fetchAndSetPlatformLinks)
-                }
-            }
-        })
-        
+
     case .addAlbumToSlot(album: let album):
         if let selectedSlot = state.selectedSlot {
             state.slots[selectedSlot].album = album
@@ -119,7 +108,8 @@ func updateCollection(state: CollectionState, action: CollectionAction) -> Colle
         }.resume()
         
     case .setPlatformLinks(platformLinks: let platformLinks):
-        state.slots[state.selectedSlot!].playbackLinks = platformLinks
+      print("would do platform links")
+//        state.slots[state.selectedSlot!].playbackLinks = platformLinks
     
     }
     

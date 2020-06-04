@@ -47,7 +47,7 @@ struct SearchResults: View {
                         }
                         Spacer()
                         Button(action: {
-                            self.store.update(action: CollectionAction.fetchAndAddAlbum(albumId: results[i].id))
+                            RecordStore.purchase(albumId: results[i].id)
                             self.store.update(action: SearchAction.removeSearchResults)
                             self.showing = false
                         }, label:{
