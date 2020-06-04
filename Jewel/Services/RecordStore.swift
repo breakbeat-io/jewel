@@ -29,11 +29,11 @@ class RecordStore {
     }
   }
   
-  static func purchase(albumId: String) {
+  static func purchase(albumId: String, slotIndex: Int) {
     RecordStore.appleMusic.album(id: albumId, completion: { album, error in
       if let album = album {
         DispatchQueue.main.async {
-          store.update(action: CollectionAction.addAlbumToSlot(album: album))
+          store.update(action: CollectionAction.addAlbumToSlot(album: album, slotIndex: slotIndex))
           if let baseUrl = album.attributes?.url {
             RecordStore.alternativeSuppliers(for: baseUrl)
           }

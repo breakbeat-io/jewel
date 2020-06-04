@@ -22,7 +22,7 @@ enum CollectionAction: AppAction {
   case changeCollectionCurator(curator: String)
   case setSelectedSlot(slotIndex: Int)
   case deselectSlot
-  case addAlbumToSlot(album: Album)
+  case addAlbumToSlot(album: Album, slotIndex: Int)
   case setPlatformLinks(baseUrl: URL, platformLinks: OdesliResponse)
   case removeAlbumFromSlot(slotIndexes: IndexSet)
   case moveSlot(from: IndexSet, to: Int)

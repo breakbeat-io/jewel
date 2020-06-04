@@ -70,10 +70,8 @@ func updateCollection(state: CollectionState, action: CollectionAction) -> Colle
   case .deselectSlot:
     state.selectedSlot = nil
     
-  case .addAlbumToSlot(album: let album):
-    if let selectedSlot = state.selectedSlot {
-      state.slots[selectedSlot].album = album
-    }
+  case .addAlbumToSlot(album: let album, slotIndex: let slotIndex):
+    state.slots[slotIndex].album = album
     
   case .removeAlbumFromSlot(slotIndexes: let slotIndexes):
     for i in slotIndexes {

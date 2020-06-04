@@ -9,29 +9,27 @@
 import SwiftUI
 
 struct Search: View {
-    
-    @EnvironmentObject private var store: AppStore
-    
-    @Binding var showing: Bool
-    
-    var body: some View {
-        NavigationView {
-            VStack{
-                SearchBar()
-                Spacer()
-                SearchResults(showing: self.$showing)
-            }
-            .navigationBarTitle("Search")
-            .navigationBarItems(
-                trailing: Button(action: {
-                    self.showing = false
-                }) {
-                    Text("Cancel")
-                }
-            )
+  
+  @EnvironmentObject private var store: AppStore
+  
+  var slotIndex: Int
+  @Binding var showing: Bool
+  
+  var body: some View {
+    NavigationView {
+      VStack{
+        SearchBar()
+        Spacer()
+        SearchResults(slotIndex: slotIndex, showing: self.$showing)
+      }
+      .navigationBarTitle("Search")
+      .navigationBarItems(
+        trailing: Button(action: {
+          self.showing = false
+        }) {
+          Text("Cancel")
         }
-        .onDisappear {
-            self.store.update(action: CollectionAction.deselectSlot)
-        }
+      )
     }
+  }
 }
