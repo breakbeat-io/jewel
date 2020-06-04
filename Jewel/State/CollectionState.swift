@@ -10,6 +10,7 @@ import Foundation
 import HMV
 
 struct CollectionState: Codable {
+  var active: Bool = true
   var name: String = "My Collection"
   var curator: String = "A Music Lover"
   var slots: [Slot] = {
@@ -21,4 +22,10 @@ struct CollectionState: Codable {
     return tmpSlots
   }()
   var selectedSlot: Int?
+  
+  enum CodingKeys: CodingKey {
+    case name
+    case curator
+    case slots
+  }
 }

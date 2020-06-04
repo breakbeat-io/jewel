@@ -31,8 +31,16 @@ struct HomeButtonsLeading: View {
 struct HomeButtonsTrailing: View {
   
   var body: some View {
-    EditButton()
+    HStack {
+      EditButton()
+        .padding(.leading)
+      Button(action: {
+        store.update(action: CollectionAction.toggleActive)
+      }) {
+        Image(systemName: "arrow.2.squarepath" )
+      }
       .padding(.leading)
-      .padding(.vertical)
+    }
+    .padding(.vertical)
   }
 }

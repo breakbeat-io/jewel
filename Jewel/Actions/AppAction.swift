@@ -10,6 +10,8 @@ import Foundation
 import HMV
 
 func updateState(appState: AppState, action: AppAction) -> AppState {
+  print("Performing action: \(action)")
+  
   var newAppState = appState
   
   switch action {
@@ -57,6 +59,9 @@ func updateCollection(collectionState: CollectionState, action: CollectionAction
   var newCollectionState = collectionState
   
   switch action {
+    
+  case .toggleActive:
+    newCollectionState.active.toggle()
     
   case .changeCollectionName(name: let name):
     newCollectionState.name = name

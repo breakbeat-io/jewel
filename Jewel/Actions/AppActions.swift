@@ -18,6 +18,7 @@ enum OptionsAction: AppAction {
 }
 
 enum CollectionAction: AppAction {
+  case toggleActive
   case changeCollectionName(name: String)
   case changeCollectionCurator(curator: String)
   case setSelectedSlot(slotIndex: Int)
