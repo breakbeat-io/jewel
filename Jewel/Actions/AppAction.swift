@@ -22,6 +22,9 @@ func updateState(appState: AppState, action: AppAction) -> AppState {
   case is CollectionAction:
     newAppState.collection = updateCollection(collectionState: newAppState.collection, action: action as! CollectionAction)
     
+  case is LibraryAction:
+    newAppState.library = updateLibrary(libraryState: newAppState.library, action: action as! LibraryAction)
+    
   case is SearchAction:
     newAppState.search = updateSearch(searchState: newAppState.search, action: action as! SearchAction)
     
@@ -94,6 +97,25 @@ func updateCollection(collectionState: CollectionState, action: CollectionAction
   }
   
   return newCollectionState
+}
+
+func updateLibrary(libraryState: LibraryState, action: LibraryAction) -> LibraryState {
+  var newLibraryState = libraryState
+  
+  switch action {
+    
+  case .addCollection(collection: let collection):
+    newLibraryState.collections.append(collection)
+    
+  case .removeCollection(slotIndexes: let slotIndexes):
+    newLibraryState.collections.remove(atOffsets: slotIndexes)
+    
+  case .moveCollection(from: let from, to: let to):
+    newLibraryState.collections.move(fromOffsets: from, toOffset: to)
+    
+  }
+  
+  return newLibraryState
 }
 
 func updateSearch(searchState: SearchState, action: SearchAction) -> SearchState {

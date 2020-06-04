@@ -9,7 +9,34 @@
 import SwiftUI
 
 struct Library: View {
+  
+  @EnvironmentObject var store: AppStore
+  
+  private var collections: [CollectionState] {
+    store.state.library.collections
+  }
+  
   var body: some View {
-    Text("Shared Library")
+    List {
+      ForEach(collections) { collection in
+        NavigationLink(destination: Collection()) {
+          VStack(alignment: .leading) {
+            Text(collection.name)
+            Text(collection.curator)
+          }
+        }
+      }
+      .onMove { (indexSet, index) in
+        self.store.update(action: LibraryAction.moveCollection(from: indexSet, to: index))
+      }
+      .onDelete {
+        self.store.update(action: LibraryAction.removeCollection(slotIndexes: $0))
+      }
+    }
+    .navigationBarTitle("Shared Collections")
+    .navigationBarItems(
+      leading: LibraryNavigationButtonsLeading(),
+      trailing: LibraryNavigationButtonsTrailing()
+    )
   }
 }

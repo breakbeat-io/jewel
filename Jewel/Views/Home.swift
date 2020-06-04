@@ -21,10 +21,6 @@ struct Home: View {
           Library()
         }
       }
-      .navigationBarItems(
-        leading: HomeButtonsLeading(),
-        trailing: HomeButtonsTrailing()
-      )
     }
   }
 }

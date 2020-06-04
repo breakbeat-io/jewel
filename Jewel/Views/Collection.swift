@@ -49,6 +49,10 @@ struct Collection: View {
         UITableView.appearance().separatorStyle = .none
       }
       .navigationBarTitle(self.store.state.collection.name)
+      .navigationBarItems(
+        leading: CollectionNavigationButtonsLeading(),
+        trailing: CollectionNavigationButtonsTrailing()
+      )
     }
   }
 }

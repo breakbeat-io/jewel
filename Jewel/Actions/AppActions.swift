@@ -29,6 +29,12 @@ enum CollectionAction: AppAction {
   case moveSlot(from: IndexSet, to: Int)
 }
 
+enum LibraryAction: AppAction {
+  case addCollection(collection: CollectionState)
+  case removeCollection(slotIndexes: IndexSet)
+  case moveCollection(from: IndexSet, to: Int)
+}
+
 enum SearchAction: AppAction {
   case populateSearchResults(results: [Album])
   case removeSearchResults
