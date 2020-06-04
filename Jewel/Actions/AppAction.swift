@@ -9,37 +9,37 @@
 import Foundation
 import HMV
 
-func updateState(state: AppState, action: AppAction) -> AppState {
-  var state = state
+func updateState(appState: AppState, action: AppAction) -> AppState {
+  var newAppState = appState
   
   switch action {
     
   case is OptionsAction:
-    state.options = updateOptions(state: state.options, action: action as! OptionsAction)
+    newAppState.options = updateOptions(optionsState: newAppState.options, action: action as! OptionsAction)
     
   case is CollectionAction:
-    state.collection = updateCollection(state: state.collection, action: action as! CollectionAction)
+    newAppState.collection = updateCollection(collectionState: newAppState.collection, action: action as! CollectionAction)
     
   case is SearchAction:
-    state.search = updateSearch(state: state.search, action: action as! SearchAction)
+    newAppState.search = updateSearch(searchState: newAppState.search, action: action as! SearchAction)
     
   default: break
     
   }
   
-  return state
+  return newAppState
 }
 
-func updateOptions(state: OptionsState, action: OptionsAction) -> OptionsState {
-  var state = state
+func updateOptions(optionsState: OptionsState, action: OptionsAction) -> OptionsState {
+  var newOptionsState = optionsState
   
   switch action {
     
   case .setPreferredPlatform(platform: let platform):
-    state.preferredMusicPlatform = platform
+    newOptionsState.preferredMusicPlatform = platform
     
   case .toggleDebugMode:
-    state.debugMode.toggle()
+    newOptionsState.debugMode.toggle()
     
   case .reset:
     let domain = Bundle.main.bundleIdentifier!
@@ -49,60 +49,60 @@ func updateOptions(state: OptionsState, action: OptionsAction) -> OptionsState {
     
   }
   
-  return state
+  return newOptionsState
 }
 
 
-func updateCollection(state: CollectionState, action: CollectionAction) -> CollectionState {
-  var state = state
+func updateCollection(collectionState: CollectionState, action: CollectionAction) -> CollectionState {
+  var newCollectionState = collectionState
   
   switch action {
     
   case .changeCollectionName(name: let name):
-    state.name = name
+    newCollectionState.name = name
     
   case .changeCollectionCurator(curator: let curator):
-    state.curator = curator
+    newCollectionState.curator = curator
     
   case .setSelectedSlot(slotIndex: let slotIndex):
-    state.selectedSlot = slotIndex
+    newCollectionState.selectedSlot = slotIndex
     
   case .deselectSlot:
-    state.selectedSlot = nil
+    newCollectionState.selectedSlot = nil
     
   case .addAlbumToSlot(album: let album, slotIndex: let slotIndex):
-    state.slots[slotIndex].album = album
+    newCollectionState.slots[slotIndex].album = album
     
   case .removeAlbumFromSlot(slotIndexes: let slotIndexes):
     for i in slotIndexes {
-      state.slots[i] = Slot()
+      newCollectionState.slots[i] = Slot()
     }
     
   case .moveSlot(from: let from, to: let to):
-    state.slots.move(fromOffsets: from, toOffset: to)
+    newCollectionState.slots.move(fromOffsets: from, toOffset: to)
     
   case .setPlatformLinks(baseUrl: let baseUrl, platformLinks: let platformLinks):
-    let indices = state.slots.enumerated().compactMap({ $1.album?.attributes?.url == baseUrl ? $0 : nil })
+    let indices = newCollectionState.slots.enumerated().compactMap({ $1.album?.attributes?.url == baseUrl ? $0 : nil })
     for i in indices {
-      state.slots[i].playbackLinks = platformLinks
+      newCollectionState.slots[i].playbackLinks = platformLinks
     }
   }
   
-  return state
+  return newCollectionState
 }
 
-func updateSearch(state: SearchState, action: SearchAction) -> SearchState {
-  var state = state
+func updateSearch(searchState: SearchState, action: SearchAction) -> SearchState {
+  var newSearchState = searchState
   
   switch action {
     
   case .populateSearchResults(results: let results):
-    state.results = results
+    newSearchState.results = results
     
   case .removeSearchResults:
-    state.results = nil
+    newSearchState.results = nil
     
   }
   
-  return state
+  return newSearchState
 }

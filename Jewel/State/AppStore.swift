@@ -35,7 +35,7 @@ final class AppStore: ObservableObject {
   }
   
   public func update(action: AppAction) {
-    state = updateState(state: state, action: action)
+    state = updateState(appState: state, action: action)
   }
   
   private func save() {
