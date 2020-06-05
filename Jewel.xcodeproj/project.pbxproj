@@ -16,7 +16,6 @@
 		D22574A22482A7F2004E83E1 /* AlbumCover.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22574A12482A7F2004E83E1 /* AlbumCover.swift */; };
 		D22574A42482A882004E83E1 /* LibraryPlaybackLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22574A32482A882004E83E1 /* LibraryPlaybackLinks.swift */; };
 		D22574A62482A938004E83E1 /* TrackList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22574A52482A938004E83E1 /* TrackList.swift */; };
-		D22574A82482AA4C004E83E1 /* DiscTrackList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22574A72482AA4C004E83E1 /* DiscTrackList.swift */; };
 		D2492587248117710011F409 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2492586248117710011F409 /* AppState.swift */; };
 		D249258B2481189F0011F409 /* FilledSlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = D249258A2481189F0011F409 /* FilledSlot.swift */; };
 		D249258F24811A650011F409 /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = D249258E24811A650011F409 /* Search.swift */; };
@@ -57,7 +56,8 @@
 		D2F8D15A248A735E008C29C3 /* PlaybackLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F8D159248A735E008C29C3 /* PlaybackLinks.swift */; };
 		D2F8D15D248A742A008C29C3 /* LibraryAdditionalPlaybackLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F8D15C248A742A008C29C3 /* LibraryAdditionalPlaybackLinks.swift */; };
 		D2F8D15F248A7488008C29C3 /* LibraryTrackList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F8D15E248A7488008C29C3 /* LibraryTrackList.swift */; };
-		D2F8D161248A74B9008C29C3 /* LibraryDiscTrackList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F8D160248A74B9008C29C3 /* LibraryDiscTrackList.swift */; };
+		D2F8D164248A7E2B008C29C3 /* NewTrackList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F8D163248A7E2B008C29C3 /* NewTrackList.swift */; };
+		D2F8D166248A7E42008C29C3 /* NewDiscTrackList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F8D165248A7E42008C29C3 /* NewDiscTrackList.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,7 +72,6 @@
 		D22574A12482A7F2004E83E1 /* AlbumCover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumCover.swift; sourceTree = "<group>"; };
 		D22574A32482A882004E83E1 /* LibraryPlaybackLinks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryPlaybackLinks.swift; sourceTree = "<group>"; };
 		D22574A52482A938004E83E1 /* TrackList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackList.swift; sourceTree = "<group>"; };
-		D22574A72482AA4C004E83E1 /* DiscTrackList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscTrackList.swift; sourceTree = "<group>"; };
 		D2492586248117710011F409 /* AppState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		D249258A2481189F0011F409 /* FilledSlot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilledSlot.swift; sourceTree = "<group>"; };
 		D249258E24811A650011F409 /* Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Search.swift; sourceTree = "<group>"; };
@@ -112,7 +111,8 @@
 		D2F8D159248A735E008C29C3 /* PlaybackLinks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackLinks.swift; sourceTree = "<group>"; };
 		D2F8D15C248A742A008C29C3 /* LibraryAdditionalPlaybackLinks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryAdditionalPlaybackLinks.swift; sourceTree = "<group>"; };
 		D2F8D15E248A7488008C29C3 /* LibraryTrackList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryTrackList.swift; sourceTree = "<group>"; };
-		D2F8D160248A74B9008C29C3 /* LibraryDiscTrackList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryDiscTrackList.swift; sourceTree = "<group>"; };
+		D2F8D163248A7E2B008C29C3 /* NewTrackList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTrackList.swift; sourceTree = "<group>"; };
+		D2F8D165248A7E42008C29C3 /* NewDiscTrackList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewDiscTrackList.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -219,7 +219,6 @@
 				D27FB8132486ACF90014C05D /* PrimaryPlaybackLink.swift */,
 				D27FB8152486AD500014C05D /* AdditionalPlaybackLinks.swift */,
 				D22574A52482A938004E83E1 /* TrackList.swift */,
-				D22574A72482AA4C004E83E1 /* DiscTrackList.swift */,
 			);
 			path = "Source Detail";
 			sourceTree = "<group>";
@@ -227,6 +226,7 @@
 		D2AB846C2481168C008B57F9 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				D2F8D162248A7E1A008C29C3 /* Components */,
 				D24C80CE248995F500EFACD8 /* Home.swift */,
 				D2F8D149248A6409008C29C3 /* Library */,
 				D2F8D14A248A641F008C29C3 /* Collection */,
@@ -309,9 +309,17 @@
 				D2F8D157248A721A008C29C3 /* LibraryPrimaryPlaybackLink.swift */,
 				D2F8D15C248A742A008C29C3 /* LibraryAdditionalPlaybackLinks.swift */,
 				D2F8D15E248A7488008C29C3 /* LibraryTrackList.swift */,
-				D2F8D160248A74B9008C29C3 /* LibraryDiscTrackList.swift */,
 			);
 			path = "Slot Detail";
+			sourceTree = "<group>";
+		};
+		D2F8D162248A7E1A008C29C3 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				D2F8D163248A7E2B008C29C3 /* NewTrackList.swift */,
+				D2F8D165248A7E42008C29C3 /* NewDiscTrackList.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -395,7 +403,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D2F8D15D248A742A008C29C3 /* LibraryAdditionalPlaybackLinks.swift in Sources */,
-				D22574A82482AA4C004E83E1 /* DiscTrackList.swift in Sources */,
 				D2492597248142660011F409 /* SearchBar.swift in Sources */,
 				D2F8D150248A6DF1008C29C3 /* LibraryCollection.swift in Sources */,
 				D249259B2481455A0011F409 /* IfLet.swift in Sources */,
@@ -423,6 +430,7 @@
 				D249258B2481189F0011F409 /* FilledSlot.swift in Sources */,
 				D2F8D15F248A7488008C29C3 /* LibraryTrackList.swift in Sources */,
 				D2B4FD91248456B20028D7A4 /* Options.swift in Sources */,
+				D2F8D164248A7E2B008C29C3 /* NewTrackList.swift in Sources */,
 				D27FB8162486AD500014C05D /* AdditionalPlaybackLinks.swift in Sources */,
 				D2B4FD93248458000028D7A4 /* Footer.swift in Sources */,
 				D2F8D156248A70DD008C29C3 /* LibraryAlbumCover.swift in Sources */,
@@ -432,12 +440,12 @@
 				D2AC120B24859E2300C52D9E /* EmptySlot.swift in Sources */,
 				D24C80CD248995D900EFACD8 /* Library.swift in Sources */,
 				D2AB8467248113EB008B57F9 /* AppActions.swift in Sources */,
+				D2F8D166248A7E42008C29C3 /* NewDiscTrackList.swift in Sources */,
 				D2AB84692481148D008B57F9 /* AppAction.swift in Sources */,
 				D2F8D154248A7086008C29C3 /* LibraryAlbumDetail.swift in Sources */,
 				D2F8D14E248A666C008C29C3 /* CollectionArtworkComposite.swift in Sources */,
 				D24925A424814CB60011F409 /* RecordStore.swift in Sources */,
 				D22574A62482A938004E83E1 /* TrackList.swift in Sources */,
-				D2F8D161248A74B9008C29C3 /* LibraryDiscTrackList.swift in Sources */,
 				D27FB81024868B320014C05D /* OptionsState.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

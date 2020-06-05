@@ -1,32 +1,23 @@
 //
 //  DiscTrackList.swift
-//  Jewel
+//  Listen Later
 //
-//  Created by Greg Hepworth on 30/05/2020.
+//  Created by Greg Hepworth on 05/06/2020.
 //  Copyright © 2020 Breakbeat Ltd. All rights reserved.
 //
 
 import SwiftUI
 import HMV
 
-struct DiscTrackList: View {
+struct NewDiscTrackList: View {
   
-  @EnvironmentObject var store: AppStore
-  
+  var tracks: [Track]
+  var albumArtist: String
   var discNumber: Int
   var withTitle: Bool
   
-  private var slot: Slot? {
-    if let i = store.state.collection.selectedSlot {
-      return store.state.collection.slots[i]
-    }
-    return nil
-  }
-  private var albumArtist: String? {
-    slot?.album?.attributes?.artistName
-  }
   private var discTracks: [Track]? {
-    slot?.album?.relationships?.tracks.data?.filter { $0.attributes?.discNumber == discNumber }
+    tracks.filter { $0.attributes?.discNumber == discNumber }
   }
   
   var body: some View {
