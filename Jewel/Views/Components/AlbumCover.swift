@@ -9,7 +9,7 @@
 import SwiftUI
 import KingfisherSwiftUI
 
-struct NewAlbumCover: View {
+struct AlbumCover: View {
   
   var albumName: String
   var albumArtist: String

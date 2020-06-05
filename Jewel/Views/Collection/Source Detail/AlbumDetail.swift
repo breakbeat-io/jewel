@@ -32,7 +32,7 @@ struct AlbumDetail: View {
       VStack {
         IfLet(album?.attributes?.name) { albumName in
           IfLet(self.albumArtist) { albumArtist in
-            NewAlbumCover(albumName: albumName,
+            AlbumCover(albumName: albumName,
                           albumArtist: albumArtist,
                           albumArtwork: self.album?.attributes?.artwork.url(forWidth: 1000))
           }
