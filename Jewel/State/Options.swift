@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct OptionsState: Codable {
+struct Options: Codable {
   var preferredMusicPlatform: Int = 0
   var debugMode: Bool = false
   var firstTimeRun: Bool = false

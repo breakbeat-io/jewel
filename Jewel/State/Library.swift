@@ -9,6 +9,6 @@
 import Foundation
 import HMV
 
-struct LibraryState: Codable {
-  var collections = [CollectionState]()
+struct Library: Codable {
+  var collections = [Collection]()
 }

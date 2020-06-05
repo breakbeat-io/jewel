@@ -11,7 +11,7 @@ import KingfisherSwiftUI
 
 struct CollectionCard: View {
   
-  var collection: CollectionState
+  var collection: Collection
   
   private var collectionArtwork: [URL] {
     var artworkUrls = [URL]()

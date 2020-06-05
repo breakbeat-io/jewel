@@ -30,7 +30,7 @@ enum CollectionAction: AppAction {
 }
 
 enum LibraryAction: AppAction {
-  case addCollection(collection: CollectionState)
+  case addCollection(collection: Collection)
   case removeCollection(slotIndexes: IndexSet)
   case moveCollection(from: IndexSet, to: Int)
 }

@@ -12,7 +12,7 @@ struct LibraryHome: View {
   
   @EnvironmentObject var store: AppStore
   
-  private var collections: [CollectionState] {
+  private var collections: [Collection] {
     store.state.library.collections
   }
   

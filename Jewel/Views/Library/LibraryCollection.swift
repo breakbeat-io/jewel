@@ -11,7 +11,7 @@ import HMV
 
 struct LibraryCollection: View {
   
-  var collection: CollectionState
+  var collection: Collection
   
   var slots: [Slot] {
     collection.slots

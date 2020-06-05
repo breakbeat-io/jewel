@@ -9,7 +9,7 @@
 import Foundation
 import HMV
 
-struct CollectionState: Identifiable, Codable {
+struct Collection: Identifiable, Codable {
   var id = UUID()
   var active: Bool = true
   var name: String = "My Collection"
