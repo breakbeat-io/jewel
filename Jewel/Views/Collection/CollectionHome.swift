@@ -53,7 +53,7 @@ struct CollectionHome: View {
       .navigationBarTitle(self.store.state.collection.name)
       .navigationBarItems(
         leading: CollectionNavigationButtonsLeading(),
-        trailing: CollectionNavigationButtonsTrailing()
+        trailing: NavigationBarItemsTrailing()
       )
     }
   }
@@ -94,25 +94,6 @@ struct CollectionNavigationButtonsLeading: View {
         OptionsHome(showing: self.$showOptions)
           .environmentObject(self.store)
       }
-    }
-    .padding(.vertical)
-  }
-}
-
-struct CollectionNavigationButtonsTrailing: View {
-  
-  @EnvironmentObject var store: AppStore
-  
-  var body: some View {
-    HStack {
-      EditButton()
-        .padding(.leading)
-      Button(action: {
-        self.store.update(action: CollectionAction.toggleActive)
-      }) {
-        Image(systemName: "square.stack" )
-      }
-      .padding(.leading)
     }
     .padding(.vertical)
   }

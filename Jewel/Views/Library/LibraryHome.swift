@@ -19,7 +19,7 @@ struct LibraryHome: View {
   var body: some View {
     List {
       ForEach(collections) { collection in
-        NavigationLink(destination: LibraryCollection(collection: collection)) {
+        NavigationLink(destination: SharedCollection(collection: collection)) {
           VStack(alignment: .leading) {
             CollectionCard(collection: collection)
           }
@@ -34,34 +34,7 @@ struct LibraryHome: View {
     }
     .navigationBarTitle("Shared Collections")
     .navigationBarItems(
-      leading: LibraryNavigationButtonsLeading(),
-      trailing: LibraryNavigationButtonsTrailing()
+      trailing: NavigationBarItemsTrailing()
     )
-  }
-}
-
-struct LibraryNavigationButtonsLeading: View {
-  
-  var body: some View {
-    EmptyView()
-  }
-}
-
-struct LibraryNavigationButtonsTrailing: View {
-  
-  @EnvironmentObject var store: AppStore
-  
-  var body: some View {
-    HStack {
-      EditButton()
-        .padding(.leading)
-      Button(action: {
-        self.store.update(action: CollectionAction.toggleActive)
-      }) {
-        Image(systemName: "music.house" )
-      }
-      .padding(.leading)
-    }
-    .padding(.vertical)
   }
 }
