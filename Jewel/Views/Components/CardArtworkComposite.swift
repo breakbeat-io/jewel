@@ -11,7 +11,7 @@ import KingfisherSwiftUI
 
 struct CardArtworkComposite: View {
   
-  var images: [URL]
+  let images: [URL]
   
   var body: some View {
     HStack {

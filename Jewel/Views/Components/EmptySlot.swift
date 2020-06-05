@@ -14,7 +14,7 @@ struct EmptySlot: View {
   
   @State private var showSearch: Bool = false
   
-  var slotIndex: Int
+  let slotIndex: Int
   
   var body: some View {
     HStack {

@@ -10,7 +10,7 @@ import SwiftUI
 
 struct AlternativePlaybackLinks: View {
   
-  var playbackLinks: OdesliResponse
+  let playbackLinks: OdesliResponse
   
   @Binding var showing: Bool
   

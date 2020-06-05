@@ -11,8 +11,8 @@ import KingfisherSwiftUI
 
 struct AlbumCover: View {
   
-  var albumName: String
-  var albumArtist: String
+  let albumName: String
+  let albumArtist: String
   var albumArtwork: URL?
   
   var body: some View {

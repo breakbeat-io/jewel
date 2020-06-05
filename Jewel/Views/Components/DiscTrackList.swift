@@ -11,10 +11,10 @@ import HMV
 
 struct DiscTrackList: View {
   
-  var discNumber: Int
-  var discTracks: [Track]
-  var showDiscNumber: Bool
-  var albumArtist: String
+  let discNumber: Int
+  let discTracks: [Track]
+  let showDiscNumber: Bool
+  let albumArtist: String
   
   var body: some View {
       VStack(alignment: .leading) {

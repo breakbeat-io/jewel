@@ -11,8 +11,8 @@ import HMV
 
 struct TrackList: View {
   
-  var tracks: [Track]
-  var albumArtist: String
+  let tracks: [Track]
+  let albumArtist: String
   
   private var discCount: Int? {
     tracks.map { $0.attributes?.discNumber ?? 1 }.max()
