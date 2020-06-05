@@ -42,7 +42,7 @@ struct PlaybackLinks: View {
                 .foregroundColor(.secondary)
             }
             .sheet(isPresented: self.$showAdditionalLinks) {
-              NewAdditionalPlaybackLinks(playbackLinks: playbackLinks,
+              AlternativePlaybackLinks(playbackLinks: playbackLinks,
                                          showing: self.$showAdditionalLinks)
                 .environmentObject(self.store)
             }

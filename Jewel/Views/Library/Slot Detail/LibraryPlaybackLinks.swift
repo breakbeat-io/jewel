@@ -20,7 +20,7 @@ struct LibraryPlaybackLinks: View {
     slot.playbackLinks
   }
   
-  @State private var showAdditionalLinks = false
+  @State private var showAlternativeLinks = false
   
   var body: some View {
     ZStack {
@@ -30,14 +30,14 @@ struct LibraryPlaybackLinks: View {
           HStack {
             Spacer()
             Button(action: {
-              self.showAdditionalLinks.toggle()
+              self.showAlternativeLinks.toggle()
             }) {
               Image(systemName: "link")
                 .foregroundColor(.secondary)
             }
-            .sheet(isPresented: self.$showAdditionalLinks) {
-              NewAdditionalPlaybackLinks(playbackLinks: playbackLinks,
-                                         showing: self.$showAdditionalLinks)
+            .sheet(isPresented: self.$showAlternativeLinks) {
+              AlternativePlaybackLinks(playbackLinks: playbackLinks,
+                                         showing: self.$showAlternativeLinks)
             }
             .padding()
           }
