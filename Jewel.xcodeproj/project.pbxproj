@@ -207,6 +207,7 @@
 		D27FB82124870B020014C05D /* Source Detail */ = {
 			isa = PBXGroup;
 			children = (
+				D2F8D14D248A666C008C29C3 /* CollectionArtworkComposite.swift */,
 				D225749F2482A71C004E83E1 /* AlbumDetail.swift */,
 				D2F8D159248A735E008C29C3 /* PlaybackLinks.swift */,
 				D27FB8132486ACF90014C05D /* PrimaryPlaybackLink.swift */,
@@ -272,7 +273,6 @@
 				D24C80CC248995D900EFACD8 /* Library.swift */,
 				D24C80D22489A5F100EFACD8 /* LibraryNavigationButtons.swift */,
 				D2F8D14B248A6451008C29C3 /* CollectionCard.swift */,
-				D2F8D14D248A666C008C29C3 /* CollectionArtworkComposite.swift */,
 				D2F8D14F248A6DF1008C29C3 /* LibraryCollection.swift */,
 				D2F8D151248A6FD9008C29C3 /* LibrarySlot.swift */,
 				D2F8D15B248A73C6008C29C3 /* Slot Detail */,
