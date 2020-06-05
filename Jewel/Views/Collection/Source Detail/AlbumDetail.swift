@@ -33,8 +33,8 @@ struct AlbumDetail: View {
         IfLet(album?.attributes?.name) { albumName in
           IfLet(self.albumArtist) { albumArtist in
             AlbumCover(albumName: albumName,
-                          albumArtist: albumArtist,
-                          albumArtwork: self.album?.attributes?.artwork.url(forWidth: 1000))
+                       albumArtist: albumArtist,
+                       albumArtwork: self.album?.attributes?.artwork.url(forWidth: 1000))
           }
         }
         PlaybackLinks()

@@ -18,8 +18,8 @@ struct LibraryAlbumDetail: View {
       VStack {
         IfLet(slot.album?.attributes) { attributes in
           AlbumCover(albumName: attributes.name,
-                        albumArtist: attributes.artistName,
-                        albumArtwork: attributes.artwork.url(forWidth: 1000))
+                     albumArtist: attributes.artistName,
+                     albumArtwork: attributes.artwork.url(forWidth: 1000))
           LibraryPlaybackLinks(slot: self.slot)
             .padding(.bottom)
           TrackList(tracks: (self.slot.album?.relationships?.tracks.data)!, albumArtist: attributes.artistName)
