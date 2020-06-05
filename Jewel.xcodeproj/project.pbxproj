@@ -202,16 +202,6 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
-		D27FB82124870B020014C05D /* Source Detail */ = {
-			isa = PBXGroup;
-			children = (
-				D225749F2482A71C004E83E1 /* AlbumDetail.swift */,
-				D2F8D159248A735E008C29C3 /* PlaybackLinks.swift */,
-				D27FB8132486ACF90014C05D /* PrimaryPlaybackLink.swift */,
-			);
-			path = "Source Detail";
-			sourceTree = "<group>";
-		};
 		D2AB846C2481168C008B57F9 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -271,7 +261,9 @@
 				D2F8D14B248A6451008C29C3 /* CollectionCard.swift */,
 				D2F8D14F248A6DF1008C29C3 /* LibraryCollection.swift */,
 				D2F8D151248A6FD9008C29C3 /* LibrarySlot.swift */,
-				D2F8D15B248A73C6008C29C3 /* Slot Detail */,
+				D2F8D153248A7086008C29C3 /* LibraryAlbumDetail.swift */,
+				D22574A32482A882004E83E1 /* LibraryPlaybackLinks.swift */,
+				D2F8D157248A721A008C29C3 /* LibraryPrimaryPlaybackLink.swift */,
 			);
 			path = Library;
 			sourceTree = "<group>";
@@ -282,19 +274,11 @@
 				D2AB846D248116A3008B57F9 /* Collection.swift */,
 				D2AC120624859D5E00C52D9E /* CollectionNavigationButtons.swift */,
 				D249258A2481189F0011F409 /* FilledSlot.swift */,
-				D27FB82124870B020014C05D /* Source Detail */,
+				D225749F2482A71C004E83E1 /* AlbumDetail.swift */,
+				D2F8D159248A735E008C29C3 /* PlaybackLinks.swift */,
+				D27FB8132486ACF90014C05D /* PrimaryPlaybackLink.swift */,
 			);
 			path = Collection;
-			sourceTree = "<group>";
-		};
-		D2F8D15B248A73C6008C29C3 /* Slot Detail */ = {
-			isa = PBXGroup;
-			children = (
-				D2F8D153248A7086008C29C3 /* LibraryAlbumDetail.swift */,
-				D22574A32482A882004E83E1 /* LibraryPlaybackLinks.swift */,
-				D2F8D157248A721A008C29C3 /* LibraryPrimaryPlaybackLink.swift */,
-			);
-			path = "Slot Detail";
 			sourceTree = "<group>";
 		};
 		D2F8D162248A7E1A008C29C3 /* Components */ = {
