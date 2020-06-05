@@ -12,7 +12,7 @@ import HMV
 struct DiscTrackList: View {
   
   var discNumber: Int
-  var tracks: [Track]
+  var discTracks: [Track]
   var showDiscNumber: Bool
   var albumArtist: String
   
@@ -23,7 +23,7 @@ struct DiscTrackList: View {
             .fontWeight(.bold)
             .padding(.vertical)
         }
-        ForEach(tracks) { track in
+        ForEach(discTracks) { track in
           IfLet(track.attributes) { attributes in
             HStack {
               Text(String(attributes.trackNumber))
