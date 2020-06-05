@@ -253,7 +253,6 @@
 			isa = PBXGroup;
 			children = (
 				D24C80CC248995D900EFACD8 /* LibraryHome.swift */,
-				D2F8D14B248A6451008C29C3 /* CollectionCard.swift */,
 				D2F8D14F248A6DF1008C29C3 /* LibraryCollection.swift */,
 				D2F8D153248A7086008C29C3 /* LibraryAlbumDetail.swift */,
 				D22574A32482A882004E83E1 /* LibraryPlaybackLinks.swift */,
@@ -279,6 +278,7 @@
 				D2AC120A24859E2300C52D9E /* EmptySlot.swift */,
 				D2D78594248AF60A00E0CC63 /* FilledSlot.swift */,
 				D2D78592248AF2E900E0CC63 /* AlbumCard.swift */,
+				D2F8D14B248A6451008C29C3 /* CollectionCard.swift */,
 				D2F8D14D248A666C008C29C3 /* CardArtworkComposite.swift */,
 				D2D7858E248A910A00E0CC63 /* AlbumCover.swift */,
 				D2F8D163248A7E2B008C29C3 /* TrackList.swift */,
