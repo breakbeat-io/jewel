@@ -24,7 +24,9 @@ struct LibraryCollection: View {
           Group {
             if self.slots[slotIndex].album != nil {
               ZStack {
-                LibrarySlot(slot: self.slots[slotIndex])
+                IfLet(self.slots[slotIndex].album?.attributes) { attributes in
+                  NewFilledSlot(attributes: attributes)
+                }
                 NavigationLink(
                   destination: LibraryAlbumDetail(slot: self.slots[slotIndex])
                 ){
