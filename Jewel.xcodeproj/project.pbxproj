@@ -207,8 +207,6 @@
 		D27FB82124870B020014C05D /* Source Detail */ = {
 			isa = PBXGroup;
 			children = (
-				D2AC120A24859E2300C52D9E /* EmptySlot.swift */,
-				D2F8D14D248A666C008C29C3 /* CardArtworkComposite.swift */,
 				D225749F2482A71C004E83E1 /* AlbumDetail.swift */,
 				D2F8D159248A735E008C29C3 /* PlaybackLinks.swift */,
 				D27FB8132486ACF90014C05D /* PrimaryPlaybackLink.swift */,
@@ -306,6 +304,8 @@
 		D2F8D162248A7E1A008C29C3 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				D2AC120A24859E2300C52D9E /* EmptySlot.swift */,
+				D2F8D14D248A666C008C29C3 /* CardArtworkComposite.swift */,
 				D2D7858E248A910A00E0CC63 /* AlbumCover.swift */,
 				D2F8D163248A7E2B008C29C3 /* TrackList.swift */,
 				D2F8D165248A7E42008C29C3 /* DiscTrackList.swift */,
