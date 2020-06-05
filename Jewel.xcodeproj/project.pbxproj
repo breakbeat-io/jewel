@@ -204,10 +204,9 @@
 				D24C80CE248995F500EFACD8 /* Home.swift */,
 				D2F8D14A248A641F008C29C3 /* Collection */,
 				D2F8D149248A6409008C29C3 /* Library */,
-				D2F8D162248A7E1A008C29C3 /* Components */,
 				D2B4FD8F248456940028D7A4 /* Options */,
 				D24925932481410F0011F409 /* Search */,
-				D249259A2481455A0011F409 /* IfLet.swift */,
+				D2F8D162248A7E1A008C29C3 /* Components */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -275,6 +274,7 @@
 		D2F8D162248A7E1A008C29C3 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				D249259A2481455A0011F409 /* IfLet.swift */,
 				D2AC120A24859E2300C52D9E /* EmptySlot.swift */,
 				D2D78594248AF60A00E0CC63 /* FilledSlot.swift */,
 				D2D78592248AF2E900E0CC63 /* AlbumCard.swift */,
