@@ -20,7 +20,7 @@ struct LibraryAlbumDetail: View {
           LibraryAlbumCover(attributes: attributes)
           LibraryPlaybackLinks(slot: self.slot)
             .padding(.bottom)
-          NewTrackList(tracks: (self.slot.album?.relationships?.tracks.data)!, albumArtist: attributes.artistName)
+          TrackList(tracks: (self.slot.album?.relationships?.tracks.data)!, albumArtist: attributes.artistName)
         }
       }
       .padding()

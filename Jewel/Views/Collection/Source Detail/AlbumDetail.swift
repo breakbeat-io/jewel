@@ -35,7 +35,7 @@ struct AlbumDetail: View {
           .padding(.bottom)
         IfLet(tracks) { tracks in
           IfLet(self.albumArtist) { albumArtist in
-            NewTrackList(
+            TrackList(
               tracks: tracks,
               albumArtist: albumArtist
             )

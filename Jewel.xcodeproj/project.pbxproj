@@ -54,7 +54,7 @@
 		D2F8D158248A721A008C29C3 /* LibraryPrimaryPlaybackLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F8D157248A721A008C29C3 /* LibraryPrimaryPlaybackLink.swift */; };
 		D2F8D15A248A735E008C29C3 /* PlaybackLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F8D159248A735E008C29C3 /* PlaybackLinks.swift */; };
 		D2F8D15D248A742A008C29C3 /* LibraryAdditionalPlaybackLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F8D15C248A742A008C29C3 /* LibraryAdditionalPlaybackLinks.swift */; };
-		D2F8D164248A7E2B008C29C3 /* NewTrackList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F8D163248A7E2B008C29C3 /* NewTrackList.swift */; };
+		D2F8D164248A7E2B008C29C3 /* TrackList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F8D163248A7E2B008C29C3 /* TrackList.swift */; };
 		D2F8D166248A7E42008C29C3 /* DiscTrackList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F8D165248A7E42008C29C3 /* DiscTrackList.swift */; };
 /* End PBXBuildFile section */
 
@@ -107,7 +107,7 @@
 		D2F8D157248A721A008C29C3 /* LibraryPrimaryPlaybackLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryPrimaryPlaybackLink.swift; sourceTree = "<group>"; };
 		D2F8D159248A735E008C29C3 /* PlaybackLinks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackLinks.swift; sourceTree = "<group>"; };
 		D2F8D15C248A742A008C29C3 /* LibraryAdditionalPlaybackLinks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryAdditionalPlaybackLinks.swift; sourceTree = "<group>"; };
-		D2F8D163248A7E2B008C29C3 /* NewTrackList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTrackList.swift; sourceTree = "<group>"; };
+		D2F8D163248A7E2B008C29C3 /* TrackList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackList.swift; sourceTree = "<group>"; };
 		D2F8D165248A7E42008C29C3 /* DiscTrackList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscTrackList.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -310,7 +310,7 @@
 		D2F8D162248A7E1A008C29C3 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				D2F8D163248A7E2B008C29C3 /* NewTrackList.swift */,
+				D2F8D163248A7E2B008C29C3 /* TrackList.swift */,
 				D2F8D165248A7E42008C29C3 /* DiscTrackList.swift */,
 			);
 			path = Components;
@@ -423,7 +423,7 @@
 				D2B4FD95248458300028D7A4 /* Bundle+BuildNumber.swift in Sources */,
 				D249258B2481189F0011F409 /* FilledSlot.swift in Sources */,
 				D2B4FD91248456B20028D7A4 /* Options.swift in Sources */,
-				D2F8D164248A7E2B008C29C3 /* NewTrackList.swift in Sources */,
+				D2F8D164248A7E2B008C29C3 /* TrackList.swift in Sources */,
 				D27FB8162486AD500014C05D /* AdditionalPlaybackLinks.swift in Sources */,
 				D2B4FD93248458000028D7A4 /* Footer.swift in Sources */,
 				D2F8D156248A70DD008C29C3 /* LibraryAlbumCover.swift in Sources */,

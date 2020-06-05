@@ -9,7 +9,7 @@
 import SwiftUI
 import HMV
 
-struct NewTrackList: View {
+struct TrackList: View {
   
   var tracks: [Track]
   var albumArtist: String
