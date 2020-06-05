@@ -19,7 +19,7 @@ struct Library: View {
   var body: some View {
     List {
       ForEach(collections) { collection in
-        NavigationLink(destination: Collection()) {
+        NavigationLink(destination: LibraryCollection(collection: collection)) {
           VStack(alignment: .leading) {
             CollectionCard(collection: collection)
           }
