@@ -26,7 +26,6 @@
 		D24C80CD248995D900EFACD8 /* Library.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24C80CC248995D900EFACD8 /* Library.swift */; };
 		D24C80CF248995F500EFACD8 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24C80CE248995F500EFACD8 /* Home.swift */; };
 		D24C80D124899D0C00EFACD8 /* LibraryState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24C80D024899D0C00EFACD8 /* LibraryState.swift */; };
-		D24C80D32489A5F100EFACD8 /* LibraryNavigationButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24C80D22489A5F100EFACD8 /* LibraryNavigationButtons.swift */; };
 		D27FB80E24868AF60014C05D /* Odesli.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27FB80D24868AF60014C05D /* Odesli.swift */; };
 		D27FB81024868B320014C05D /* OptionsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27FB80F24868B320014C05D /* OptionsState.swift */; };
 		D27FB812248693AF0014C05D /* Slot.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27FB811248693AF0014C05D /* Slot.swift */; };
@@ -36,7 +35,6 @@
 		D2AB84692481148D008B57F9 /* AppAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AB84682481148D008B57F9 /* AppAction.swift */; };
 		D2AB846B2481159D008B57F9 /* AppStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AB846A2481159D008B57F9 /* AppStore.swift */; };
 		D2AB846E248116A3008B57F9 /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AB846D248116A3008B57F9 /* Collection.swift */; };
-		D2AC120724859D5E00C52D9E /* CollectionNavigationButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AC120624859D5E00C52D9E /* CollectionNavigationButtons.swift */; };
 		D2AC120B24859E2300C52D9E /* EmptySlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AC120A24859E2300C52D9E /* EmptySlot.swift */; };
 		D2AC12102485A65D00C52D9E /* CollectionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AC120F2485A65D00C52D9E /* CollectionState.swift */; };
 		D2AC12122485A67000C52D9E /* SearchState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AC12112485A67000C52D9E /* SearchState.swift */; };
@@ -76,7 +74,6 @@
 		D24C80CC248995D900EFACD8 /* Library.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Library.swift; sourceTree = "<group>"; };
 		D24C80CE248995F500EFACD8 /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
 		D24C80D024899D0C00EFACD8 /* LibraryState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryState.swift; sourceTree = "<group>"; };
-		D24C80D22489A5F100EFACD8 /* LibraryNavigationButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryNavigationButtons.swift; sourceTree = "<group>"; };
 		D27FB80D24868AF60014C05D /* Odesli.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Odesli.swift; sourceTree = "<group>"; };
 		D27FB80F24868B320014C05D /* OptionsState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsState.swift; sourceTree = "<group>"; };
 		D27FB811248693AF0014C05D /* Slot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Slot.swift; sourceTree = "<group>"; };
@@ -86,7 +83,6 @@
 		D2AB84682481148D008B57F9 /* AppAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAction.swift; sourceTree = "<group>"; };
 		D2AB846A2481159D008B57F9 /* AppStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStore.swift; sourceTree = "<group>"; };
 		D2AB846D248116A3008B57F9 /* Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
-		D2AC120624859D5E00C52D9E /* CollectionNavigationButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionNavigationButtons.swift; sourceTree = "<group>"; };
 		D2AC120A24859E2300C52D9E /* EmptySlot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptySlot.swift; sourceTree = "<group>"; };
 		D2AC120E2485A20400C52D9E /* secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = secrets.xcconfig; sourceTree = "<group>"; };
 		D2AC120F2485A65D00C52D9E /* CollectionState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionState.swift; sourceTree = "<group>"; };
@@ -257,7 +253,6 @@
 			isa = PBXGroup;
 			children = (
 				D24C80CC248995D900EFACD8 /* Library.swift */,
-				D24C80D22489A5F100EFACD8 /* LibraryNavigationButtons.swift */,
 				D2F8D14B248A6451008C29C3 /* CollectionCard.swift */,
 				D2F8D14F248A6DF1008C29C3 /* LibraryCollection.swift */,
 				D2F8D151248A6FD9008C29C3 /* LibrarySlot.swift */,
@@ -272,7 +267,6 @@
 			isa = PBXGroup;
 			children = (
 				D2AB846D248116A3008B57F9 /* Collection.swift */,
-				D2AC120624859D5E00C52D9E /* CollectionNavigationButtons.swift */,
 				D249258A2481189F0011F409 /* FilledSlot.swift */,
 				D225749F2482A71C004E83E1 /* AlbumDetail.swift */,
 				D2F8D159248A735E008C29C3 /* PlaybackLinks.swift */,
@@ -381,7 +375,6 @@
 				D27FB80E24868AF60014C05D /* Odesli.swift in Sources */,
 				D22574A42482A882004E83E1 /* LibraryPlaybackLinks.swift in Sources */,
 				D27FB8142486ACF90014C05D /* PrimaryPlaybackLink.swift in Sources */,
-				D2AC120724859D5E00C52D9E /* CollectionNavigationButtons.swift in Sources */,
 				D221557C2481114A00A1F04A /* AppDelegate.swift in Sources */,
 				D2AC12122485A67000C52D9E /* SearchState.swift in Sources */,
 				D2492587248117710011F409 /* AppState.swift in Sources */,
@@ -404,7 +397,6 @@
 				D2D7858F248A910A00E0CC63 /* AlbumCover.swift in Sources */,
 				D2B4FD93248458000028D7A4 /* Footer.swift in Sources */,
 				D2F8D152248A6FD9008C29C3 /* LibrarySlot.swift in Sources */,
-				D24C80D32489A5F100EFACD8 /* LibraryNavigationButtons.swift in Sources */,
 				D22574A02482A71C004E83E1 /* AlbumDetail.swift in Sources */,
 				D2AC120B24859E2300C52D9E /* EmptySlot.swift in Sources */,
 				D24C80CD248995D900EFACD8 /* Library.swift in Sources */,

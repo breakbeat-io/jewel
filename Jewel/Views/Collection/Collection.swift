@@ -56,3 +56,62 @@ struct Collection: View {
     }
   }
 }
+
+struct CollectionNavigationButtonsLeading: View {
+  
+  @EnvironmentObject var store: AppStore
+  
+  @State private var showOptions: Bool = false
+  @State private var showSharing: Bool = false
+  
+  var body: some View {
+    HStack {
+      Button(action: {
+        self.showSharing = true
+      }) {
+        Image(systemName: "square.and.arrow.up")
+      }
+      .padding(.trailing)
+      .actionSheet(isPresented: $showSharing) {
+        ActionSheet(title: Text("Share Collection"),
+                    buttons: [
+                      .default(Text("Add to Library")) {
+                        self.store.update(action: LibraryAction.addCollection(collection: self.store.state.collection))
+                        self.store.update(action: CollectionAction.toggleActive)
+                      },
+                      .cancel()
+                    ])
+      }
+      Button(action: {
+        self.showOptions = true
+      }) {
+        Image(systemName: "slider.horizontal.3")
+      }
+      .padding(.trailing)
+      .sheet(isPresented: self.$showOptions) {
+        Options(showing: self.$showOptions)
+          .environmentObject(self.store)
+      }
+    }
+    .padding(.vertical)
+  }
+}
+
+struct CollectionNavigationButtonsTrailing: View {
+  
+  @EnvironmentObject var store: AppStore
+  
+  var body: some View {
+    HStack {
+      EditButton()
+        .padding(.leading)
+      Button(action: {
+        self.store.update(action: CollectionAction.toggleActive)
+      }) {
+        Image(systemName: "square.stack" )
+      }
+      .padding(.leading)
+    }
+    .padding(.vertical)
+  }
+}

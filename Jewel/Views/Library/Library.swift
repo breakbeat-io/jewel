@@ -39,3 +39,29 @@ struct Library: View {
     )
   }
 }
+
+struct LibraryNavigationButtonsLeading: View {
+  
+  var body: some View {
+    EmptyView()
+  }
+}
+
+struct LibraryNavigationButtonsTrailing: View {
+  
+  @EnvironmentObject var store: AppStore
+  
+  var body: some View {
+    HStack {
+      EditButton()
+        .padding(.leading)
+      Button(action: {
+        self.store.update(action: CollectionAction.toggleActive)
+      }) {
+        Image(systemName: "music.house" )
+      }
+      .padding(.leading)
+    }
+    .padding(.vertical)
+  }
+}
