@@ -9,26 +9,21 @@
 import SwiftUI
 import HMV
 
-struct NewDiscTrackList: View {
+struct DiscTrackList: View {
   
-  var tracks: [Track]
-  var albumArtist: String
   var discNumber: Int
-  var withTitle: Bool
-  
-  private var discTracks: [Track]? {
-    tracks.filter { $0.attributes?.discNumber == discNumber }
-  }
+  var tracks: [Track]
+  var showDiscNumber: Bool
+  var albumArtist: String
   
   var body: some View {
-    IfLet(discTracks) { discTracks in
       VStack(alignment: .leading) {
-        if self.withTitle {
-          Text("Disc \(self.discNumber)")
+        if showDiscNumber {
+          Text("Disc \(discNumber)")
             .fontWeight(.bold)
             .padding(.vertical)
         }
-        ForEach(discTracks) { track in
+        ForEach(tracks) { track in
           IfLet(track.attributes) { attributes in
             HStack {
               Text(String(attributes.trackNumber))
@@ -60,5 +55,4 @@ struct NewDiscTrackList: View {
         }
       }
     }
-  }
 }

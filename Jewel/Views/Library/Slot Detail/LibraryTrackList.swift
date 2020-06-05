@@ -19,12 +19,12 @@ struct LibraryTrackList: View {
   var body: some View {
     VStack(alignment: .leading) {
       IfLet(discCount) { discCount in
-        ForEach(1..<discCount + 1, id: \.self) {
-          NewDiscTrackList(
-            tracks: (self.slot.album?.relationships?.tracks.data)!,
-            albumArtist: (self.slot.album?.attributes?.artistName)!,
-            discNumber: $0,
-            withTitle: (discCount > 1) ? true : false)
+        ForEach(1..<discCount + 1, id: \.self) { discNumber in
+          DiscTrackList(
+            discNumber: discNumber,
+            tracks: (self.slot.album?.relationships?.tracks.data?.filter { $0.attributes?.discNumber == discNumber })!,
+            showDiscNumber: (discCount > 1) ? true : false,
+            albumArtist: (self.slot.album?.attributes?.artistName)!)
         }
       }
     }
