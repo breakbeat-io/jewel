@@ -9,19 +9,9 @@
 import SwiftUI
 import KingfisherSwiftUI
 
-struct CollectionArtworkComposite: View {
+struct CardArtworkComposite: View {
   
-  var collection: CollectionState
-  
-  var images: [URL] {
-    var tmpImages = [URL]()
-    for slot in collection.slots {
-      if let artworkUrl = slot.album?.attributes?.artwork.url(forWidth: 1000) {
-        tmpImages.append(artworkUrl)
-      }
-    }
-    return tmpImages
-  }
+  var images: [URL]
   
   var body: some View {
     HStack {

@@ -13,11 +13,21 @@ struct CollectionCard: View {
   
   var collection: CollectionState
   
+  private var collectionArtwork: [URL] {
+    var artworkUrls = [URL]()
+    for slot in collection.slots {
+      if let artworkUrl = slot.album?.attributes?.artwork.url(forWidth: 1000) {
+        artworkUrls.append(artworkUrl)
+      }
+    }
+    return artworkUrls
+  }
+  
   var body: some View {
     Rectangle()
       .foregroundColor(.clear)
       .background(
-        CollectionArtworkComposite(collection: collection)
+        CardArtworkComposite(images: collectionArtwork)
     )
       .cornerRadius(4)
       .overlay(
