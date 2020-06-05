@@ -16,9 +16,9 @@ struct Home: View {
     NavigationView {
       Group {
         if store.state.collection.active {
-          Collection()
+          CollectionHome()
         } else {
-          Library()
+          LibraryHome()
         }
       }
     }
