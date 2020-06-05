@@ -30,7 +30,13 @@ struct AlbumDetail: View {
   var body: some View {
     ScrollView {
       VStack {
-        AlbumCover()
+        IfLet(album?.attributes?.name) { albumName in
+          IfLet(self.albumArtist) { albumArtist in
+            NewAlbumCover(albumName: albumName,
+                          albumArtist: albumArtist,
+                          albumArtwork: self.album?.attributes?.artwork.url(forWidth: 1000))
+          }
+        }
         PlaybackLinks()
           .padding(.bottom)
         IfLet(tracks) { tracks in

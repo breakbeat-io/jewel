@@ -17,7 +17,9 @@ struct LibraryAlbumDetail: View {
     ScrollView {
       VStack {
         IfLet(slot.album?.attributes) { attributes in
-          LibraryAlbumCover(attributes: attributes)
+          NewAlbumCover(albumName: attributes.name,
+                        albumArtist: attributes.artistName,
+                        albumArtwork: attributes.artwork.url(forWidth: 1000))
           LibraryPlaybackLinks(slot: self.slot)
             .padding(.bottom)
           TrackList(tracks: (self.slot.album?.relationships?.tracks.data)!, albumArtist: attributes.artistName)
