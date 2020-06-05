@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct Options: View {
+struct OptionsHome: View {
   
   @EnvironmentObject private var store: AppStore
   

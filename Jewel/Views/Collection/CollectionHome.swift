@@ -89,7 +89,7 @@ struct CollectionNavigationButtonsLeading: View {
       }
       .padding(.trailing)
       .sheet(isPresented: self.$showOptions) {
-        Options(showing: self.$showOptions)
+        OptionsHome(showing: self.$showOptions)
           .environmentObject(self.store)
       }
     }

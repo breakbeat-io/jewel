@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct Search: View {
+struct SearchHome: View {
   
   @EnvironmentObject private var store: AppStore
   

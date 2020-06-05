@@ -33,7 +33,7 @@ struct EmptySlot: View {
         )
       }
       .sheet(isPresented: $showSearch) {
-        Search(slotIndex: self.slotIndex, showing: self.$showSearch)
+        SearchHome(slotIndex: self.slotIndex, showing: self.$showSearch)
           .environmentObject(self.store)
       }
     }
