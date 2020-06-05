@@ -21,8 +21,7 @@ struct Library: View {
       ForEach(collections) { collection in
         NavigationLink(destination: Collection()) {
           VStack(alignment: .leading) {
-            Text(collection.name)
-            Text(collection.curator)
+            CollectionCard(collection: collection)
           }
         }
       }
