@@ -7,9 +7,29 @@
 //
 
 import SwiftUI
+import HMV
 
 struct NewTrackList: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+  
+  var tracks: [Track]
+  var albumArtist: String
+  
+  private var discCount: Int? {
+    tracks.map { $0.attributes?.discNumber ?? 1 }.max()
+  }
+  
+  var body: some View {
+    VStack(alignment: .leading) {
+      IfLet(discCount) { discCount in
+        ForEach(1..<discCount + 1, id: \.self) { discNumber in
+          DiscTrackList(
+            discNumber: discNumber,
+            discTracks: self.tracks.filter { $0.attributes?.discNumber == discNumber },
+            showDiscNumber: (discCount > 1) ? true : false,
+            albumArtist: self.albumArtist
+          )
+        }
+      }
     }
+  }
 }

@@ -13,13 +13,35 @@ struct AlbumDetail: View {
   
   @EnvironmentObject var store: AppStore
   
+  private var album: Album? {
+    if let i = store.state.collection.selectedSlot {
+      return store.state.collection.slots[i].album
+    }
+    return nil
+  }
+  
+  private var tracks: [Track]? {
+    album?.relationships?.tracks.data
+  }
+  private var albumArtist: String? {
+    album?.attributes?.artistName
+  }
+  
   var body: some View {
     ScrollView {
       VStack {
         AlbumCover()
         PlaybackLinks()
           .padding(.bottom)
-        TrackList()
+        IfLet(tracks) { tracks in
+          IfLet(self.albumArtist) { albumArtist in
+            NewTrackList(
+              tracks: tracks,
+              albumArtist: albumArtist
+            )
+          }
+          
+        }
       }
       .padding()
     }
