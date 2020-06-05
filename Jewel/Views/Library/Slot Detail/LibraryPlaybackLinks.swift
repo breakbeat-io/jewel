@@ -26,7 +26,7 @@ struct LibraryPlaybackLinks: View {
     ZStack {
       IfLet(url) { url in
         LibraryPrimaryPlaybackLink(slot: self.slot)
-        IfLet(self.playbackLinks) { links in
+        IfLet(self.playbackLinks) { playbackLinks in
           HStack {
             Spacer()
             Button(action: {
@@ -36,7 +36,8 @@ struct LibraryPlaybackLinks: View {
                 .foregroundColor(.secondary)
             }
             .sheet(isPresented: self.$showAdditionalLinks) {
-              LibraryAdditionalPlaybackLinks(slot: self.slot, showing: self.$showAdditionalLinks)
+              NewAdditionalPlaybackLinks(playbackLinks: playbackLinks,
+                                         showing: self.$showAdditionalLinks)
             }
             .padding()
           }

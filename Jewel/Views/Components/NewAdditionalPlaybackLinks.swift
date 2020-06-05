@@ -1,37 +1,28 @@
 //
-//  AdditionalPlaybackLinks.swift
+//  NewAdditionalPlaybackLinks.swift
 //  Listen Later
 //
-//  Created by Greg Hepworth on 02/06/2020.
+//  Created by Greg Hepworth on 05/06/2020.
 //  Copyright © 2020 Breakbeat Ltd. All rights reserved.
 //
 
 import SwiftUI
 
-struct AdditionalPlaybackLinks: View {
+struct NewAdditionalPlaybackLinks: View {
   
-  @EnvironmentObject var store: AppStore
+  var playbackLinks: OdesliResponse
   
   @Binding var showing: Bool
   
-  private var slot: Slot? {
-    if let i = store.state.collection.selectedSlot {
-      return store.state.collection.slots[i]
-    }
-    return nil
-  }
   private var availablePlatforms: [OdesliPlatform] {
-    OdesliPlatform.allCases.filter { slot?.playbackLinks?.linksByPlatform[$0.rawValue] != nil }
-  }
-  private var platformLinks: [String : OdesliLink]? {
-    slot?.playbackLinks?.linksByPlatform
+    OdesliPlatform.allCases.filter { playbackLinks.linksByPlatform[$0.rawValue] != nil }
   }
   
   var body: some View {
     NavigationView {
       VStack {
         List(availablePlatforms, id: \.self) { platform in
-          IfLet(self.platformLinks?[platform.rawValue]) { platformLink in
+          IfLet(self.playbackLinks.linksByPlatform[platform.rawValue]) { platformLink in
             Button(action: {
               UIApplication.shared.open(platformLink.url)
             }) {
