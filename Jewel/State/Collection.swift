@@ -23,6 +23,9 @@ struct Collection: Identifiable, Codable {
     return tmpSlots
   }()
   
+  var shareLink: URL?
+  var shareLinkError = false
+  
   enum CodingKeys: CodingKey {
     case name
     case curator

@@ -10,22 +10,15 @@ import SwiftUI
 
 struct ShareSheetLoader: View {
   
-  let collection: Collection
+  @EnvironmentObject var store: AppStore
   
-  @State private var shareLink: URL?
-  @State private var shareLinkError: Bool = false
+  private var collection: Collection {
+    store.state.collection
+  }
   
   var body: some View {
     Group {
-      if shareLink == nil {
-        VStack {
-          Image(systemName: "square.and.arrow.up")
-            .font(.largeTitle)
-          Text("Creating shareable link ...")
-            .padding()
-            .multilineTextAlignment(.center)
-        }
-      } else if shareLinkError {
+      if collection.shareLinkError {
         VStack {
           Image(systemName: "exclamationmark.triangle")
             .font(.largeTitle)
@@ -33,17 +26,20 @@ struct ShareSheetLoader: View {
             .padding()
             .multilineTextAlignment(.center)
         }
+      } else if collection.shareLink == nil {
+        VStack {
+          Image(systemName: "square.and.arrow.up")
+            .font(.largeTitle)
+          Text("Creating shareable link ...")
+            .padding()
+            .multilineTextAlignment(.center)
+        }
       } else {
-        ShareSheet(activityItems: [shareLink!])
+        ShareSheet(activityItems: [collection.shareLink!])
       }
     }
     .onAppear {
-      do {
-        self.shareLink = try ShareLinkProvider.generateLongLink(from: self.collection)
-      } catch {
-        print(error)
-        self.shareLinkError = true
-      }
+      ShareLinkProvider.populateShareLink(from: self.store.state.collection)
     }
   }
 }

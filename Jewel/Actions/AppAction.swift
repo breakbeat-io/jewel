@@ -88,6 +88,12 @@ func updateCollection(collection: Collection, action: CollectionAction) -> Colle
     for i in indices {
       newCollection.slots[i].playbackLinks = platformLinks
     }
+    
+  case .setShareLink(shareLink: let shareLink):
+    newCollection.shareLink = shareLink
+    
+  case .setShareLinkError:
+    newCollection.shareLinkError = true
   }
   
   return newCollection

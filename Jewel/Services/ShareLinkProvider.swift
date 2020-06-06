@@ -40,11 +40,21 @@ class ShareLinkProvider {
     }
   }
   
-  enum ShareError: Error {
-    case unableToEncodeCollection
+  static func populateShareLink(from collection: Collection) {
+    
+//     = generateLongLink(from: collection)
+//    let shortLink = generateShortLink(from: longLink)
+    
+    guard let longLink = generateLongLink(from: collection) else {
+      store.update(action: CollectionAction.setShareLinkError)
+      return
+    }
+    
+    store.update(action: CollectionAction.setShareLink(shareLink: longLink))
+    
   }
   
-  static func generateLongLink(from collection: Collection) throws -> URL {
+  private static func generateLongLink(from collection: Collection) -> URL? {
     
     var shareableSlots = [ShareableSlot?]()
     
@@ -68,74 +78,57 @@ class ShareLinkProvider {
       return URL(string: "https://listenlater.link/s/?c=\(shareableCollectionJson.base64EncodedString())")!
     } catch {
       print(error)
-      throw ShareError.unableToEncodeCollection
+      return nil
     }
   }
   
-  static func generateShortLink() {
-    
-//    guard let shareLinkLongString = shareLinkLong?.absoluteString else {
-//      print("No long link to shorten!")
-//      shareLinkError = true
-//      return
-//    }
+//  private static func generateShortLink(from url: URL) throws -> URL {
 //
-//    let longDynamicLink = "https://jewelshare.page.link/?link=\(shareLinkLongString)"
-//
-//    let firebaseShortLinkBody = ["longDynamicLink": longDynamicLink]
-//
-//    guard let uploadData = try? JSONEncoder().encode(firebaseShortLinkBody) else {
-//      print("Could not encode link to JSON")
-//      shareLinkError = true
-//      return
-//    }
-//
-//    guard let firebaseApiKey = Bundle.main.infoDictionary?["FIREBASE_API_KEY"] as? String else {
-//      print ("No Firebase API key found!")
-//      self.shareLinkError = true
-//      return
-//    }
-//    print(firebaseApiKey)
-//
-//    let firebaseRestUrl = URL(string: "https://firebasedynamiclinks.googleapis.com/v1/shortLinks?key=\(firebaseApiKey)")!
-//    var request = URLRequest(url: firebaseRestUrl)
-//    request.httpMethod = "POST"
-//    request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-//
-//    let task = URLSession.shared.uploadTask(with: request, from: uploadData) { data, response, error in
-//      if let error = error {
-//        print ("Firebase API threw error: \(error)")
-//        self.shareLinkError = true
-//        return
-//      }
-//      guard let response = response as? HTTPURLResponse,
-//        (200...299).contains(response.statusCode) else {
-//          print ("Firebase gave a server error")
-//          self.shareLinkError = true
-//          return
-//      }
-//      if let mimeType = response.mimeType,
-//        mimeType == "application/json",
-//        let data = data {
-//        do {
-//          if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
-//            DispatchQueue.main.async {
-//              if let shortLink = json["shortLink"] as? String {
-//                self.shareLinkShort = URL(string: shortLink)!
-//              } else {
-//                self.shareLinkError = true
-//                print("There was another error")
-//              }
-//            }
-//          }
-//        } catch let error as NSError {
-//          self.shareLinkError = true
-//          print("Failed to load: \(error.localizedDescription)")
-//        }
-//      }
-//    }
-//    task.resume()
-    
-  }
+////    let longDynamicLink = "https://jewelshare.page.link/?link=\(url.absoluteString)"
+////    let firebaseShortLinkBodyRaw = ["longDynamicLink": longDynamicLink]
+////
+////    let firebaseShortLinkBodyRawJSON = try JSONEncoder().encode(firebaseShortLinkBodyRaw)
+////
+////    guard let firebaseApiKey = Bundle.main.infoDictionary?["FIREBASE_API_KEY"] as? String else {
+////      print ("No Firebase API key found!")
+////      throw ShareError.firebaseAPIKeyMissing
+////    }
+////
+////    let firebaseRestUrl = URL(string: "https://firebasedynamiclinks.googleapis.com/v1/shortLinks?key=\(firebaseApiKey)")!
+////    var request = URLRequest(url: firebaseRestUrl)
+////    request.httpMethod = "POST"
+////    request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+////
+////    let task = URLSession.shared.uploadTask(with: request, from: firebaseShortLinkBodyRawJSON) { data, response, error in
+////      if let error = error {
+////        print ("Firebase API threw error: \(error)")
+////      }
+////      guard let response = response as? HTTPURLResponse,
+////        (200...299).contains(response.statusCode) else {
+////          print ("Firebase gave a server error")
+////      }
+////      if let mimeType = response.mimeType,
+////        mimeType == "application/json",
+////        let data = data {
+////        do {
+////          if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
+////            DispatchQueue.main.async {
+////              if let shortLink = json["shortLink"] as? String {
+////                self.shareLinkShort = URL(string: shortLink)!
+////              } else {
+////                self.shareLinkError = true
+////                print("There was another error")
+////              }
+////            }
+////          }
+////        } catch let error as NSError {
+////          self.shareLinkError = true
+////          print("Failed to load: \(error.localizedDescription)")
+////        }
+////      }
+////    }
+////    task.resume()
+////
+//  }
   
 }
