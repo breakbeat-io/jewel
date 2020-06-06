@@ -1,27 +1,24 @@
 //
-//  PlaybackLink.swift
-//  Jewel
+//  NewPlaybackLinks.swift
+//  Listen Later
 //
-//  Created by Greg Hepworth on 30/05/2020.
+//  Created by Greg Hepworth on 06/06/2020.
 //  Copyright © 2020 Breakbeat Ltd. All rights reserved.
 //
 
 import SwiftUI
-import HMV
 
-struct LibraryPlaybackLinks: View {
+struct NewPlaybackLinks: View {
   
-  var slot: Slot
-
-  private var playbackLinks: OdesliResponse? {
-    slot.playbackLinks
-  }
+  let baseUrl: URL
+  let playbackLinks: OdesliResponse?
+  
   private var playbackLink: (name: String, url: URL?) {
     let preferredProvider = OdesliPlatform.allCases[store.state.options.preferredMusicPlatform]
-    if let providerLink = slot.playbackLinks?.linksByPlatform[preferredProvider.rawValue] {
+    if let providerLink = playbackLinks?.linksByPlatform[preferredProvider.rawValue] {
       return (preferredProvider.friendlyName, providerLink.url)
     } else {
-      return (OdesliPlatform.appleMusic.friendlyName, slot.album?.attributes?.url)
+      return (OdesliPlatform.appleMusic.friendlyName, baseUrl)
     }
   }
   
@@ -43,7 +40,7 @@ struct LibraryPlaybackLinks: View {
             }
             .sheet(isPresented: self.$showAlternativeLinks) {
               AlternativePlaybackLinks(playbackLinks: playbackLinks,
-                                         showing: self.$showAlternativeLinks)
+                                       showing: self.$showAlternativeLinks)
             }
             .padding()
           }

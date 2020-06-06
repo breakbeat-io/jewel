@@ -13,40 +13,28 @@ struct AlbumDetail: View {
   
   @EnvironmentObject var store: AppStore
   
-  private var album: Album? {
+  private var slot: Slot? {
     if let i = store.state.collection.selectedSlot {
-      return store.state.collection.slots[i].album
+      return store.state.collection.slots[i]
     }
     return nil
-  }
-  
-  private var tracks: [Track]? {
-    album?.relationships?.tracks.data
-  }
-  private var albumArtist: String? {
-    album?.attributes?.artistName
   }
   
   var body: some View {
     ScrollView {
       VStack {
-        IfLet(album?.attributes?.name) { albumName in
-          IfLet(self.albumArtist) { albumArtist in
-            AlbumCover(albumName: albumName,
-                       albumArtist: albumArtist,
-                       albumArtwork: self.album?.attributes?.artwork.url(forWidth: 1000))
+        IfLet(slot?.album?.attributes) { attributes in
+            AlbumCover(albumName: attributes.name,
+                       albumArtist: attributes.artistName,
+                       albumArtwork: attributes.artwork.url(forWidth: 1000))
+          NewPlaybackLinks(baseUrl: attributes.url,
+                           playbackLinks: self.slot?.playbackLinks)
+            .padding(.bottom)
+          IfLet(self.slot?.album?.relationships?.tracks.data) { tracks in
+              TrackList(tracks: tracks,
+                        albumArtist: attributes.artistName
+              )
           }
-        }
-        PlaybackLinks()
-          .padding(.bottom)
-        IfLet(tracks) { tracks in
-          IfLet(self.albumArtist) { albumArtist in
-            TrackList(
-              tracks: tracks,
-              albumArtist: albumArtist
-            )
-          }
-          
         }
       }
       .padding()

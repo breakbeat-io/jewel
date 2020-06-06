@@ -20,10 +20,12 @@ struct LibraryAlbumDetail: View {
           AlbumCover(albumName: attributes.name,
                      albumArtist: attributes.artistName,
                      albumArtwork: attributes.artwork.url(forWidth: 1000))
-          LibraryPlaybackLinks(slot: self.slot)
+          NewPlaybackLinks(baseUrl: attributes.url,
+                           playbackLinks: self.slot.playbackLinks)
             .padding(.bottom)
           IfLet(self.slot.album?.relationships?.tracks.data) { tracks in
-            TrackList(tracks: tracks, albumArtist: attributes.artistName)
+            TrackList(tracks: tracks,
+                      albumArtist: attributes.artistName)
           }
         }
       }
