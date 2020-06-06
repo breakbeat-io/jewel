@@ -78,6 +78,10 @@ struct CollectionNavigationButtonsLeading: View {
         ActionSheet(
                     title: Text("Share this collection as \n \"\(store.state.collection.name)\" by \"\(store.state.collection.curator)\""),
                     buttons: [
+                      .default(Text("Send share link")) {
+                        let shareLink = ShareLinkProvider.generateLongLink(from: self.store.state.collection)
+                        print(shareLink)
+                      },
                       .default(Text("Add to my Collection Library")) {
                         self.store.update(action: LibraryAction.addCollection(collection: self.store.state.collection))
                         self.store.update(action: CollectionAction.toggleActive)
