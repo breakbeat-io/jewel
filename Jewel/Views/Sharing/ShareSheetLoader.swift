@@ -18,19 +18,19 @@ struct ShareSheetLoader: View {
   
   var body: some View {
     Group {
-      if collection.shareLinkError {
-        VStack {
-          Image(systemName: "exclamationmark.triangle")
-            .font(.largeTitle)
-          Text("There was an error creating the shareable link, please try again later.")
-            .padding()
-            .multilineTextAlignment(.center)
-        }
-      } else if collection.shareLinkShort == nil {
+      if collection.shareLinkShort == nil {
         VStack {
           Image(systemName: "square.and.arrow.up")
             .font(.largeTitle)
           Text("Creating shareable link ...")
+            .padding()
+            .multilineTextAlignment(.center)
+        }
+      } else if collection.shareLinkError {
+        VStack {
+          Image(systemName: "exclamationmark.triangle")
+            .font(.largeTitle)
+          Text("There was an error creating the shareable link, please try again later.")
             .padding()
             .multilineTextAlignment(.center)
         }

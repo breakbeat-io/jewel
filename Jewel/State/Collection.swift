@@ -31,5 +31,7 @@ struct Collection: Identifiable, Codable {
     case name
     case curator
     case slots
+    case shareLinkLong
+    case shareLinkShort
   }
 }
