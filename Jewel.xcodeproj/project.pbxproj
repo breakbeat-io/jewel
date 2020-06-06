@@ -28,8 +28,8 @@
 		D27FB80E24868AF60014C05D /* Odesli.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27FB80D24868AF60014C05D /* Odesli.swift */; };
 		D27FB81024868B320014C05D /* Options.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27FB80F24868B320014C05D /* Options.swift */; };
 		D27FB812248693AF0014C05D /* Slot.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27FB811248693AF0014C05D /* Slot.swift */; };
-		D27FB8142486ACF90014C05D /* PrimaryPlaybackLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27FB8132486ACF90014C05D /* PrimaryPlaybackLink.swift */; };
 		D27FB8202486B46D0014C05D /* fa-brands.otf in Resources */ = {isa = PBXBuildFile; fileRef = D27FB81F2486B46D0014C05D /* fa-brands.otf */; };
+		D28AD1B5248BACB2009B584A /* PlaybackLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28AD1B4248BACB2009B584A /* PlaybackLink.swift */; };
 		D2AB8467248113EB008B57F9 /* AppActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AB8466248113EB008B57F9 /* AppActions.swift */; };
 		D2AB84692481148D008B57F9 /* AppAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AB84682481148D008B57F9 /* AppAction.swift */; };
 		D2AB846B2481159D008B57F9 /* AppStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AB846A2481159D008B57F9 /* AppStore.swift */; };
@@ -49,7 +49,6 @@
 		D2F8D14E248A666C008C29C3 /* CardArtworkComposite.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F8D14D248A666C008C29C3 /* CardArtworkComposite.swift */; };
 		D2F8D150248A6DF1008C29C3 /* SharedCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F8D14F248A6DF1008C29C3 /* SharedCollection.swift */; };
 		D2F8D154248A7086008C29C3 /* LibraryAlbumDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F8D153248A7086008C29C3 /* LibraryAlbumDetail.swift */; };
-		D2F8D158248A721A008C29C3 /* LibraryPrimaryPlaybackLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F8D157248A721A008C29C3 /* LibraryPrimaryPlaybackLink.swift */; };
 		D2F8D15A248A735E008C29C3 /* PlaybackLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F8D159248A735E008C29C3 /* PlaybackLinks.swift */; };
 		D2F8D164248A7E2B008C29C3 /* TrackList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F8D163248A7E2B008C29C3 /* TrackList.swift */; };
 		D2F8D166248A7E42008C29C3 /* DiscTrackList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F8D165248A7E42008C29C3 /* DiscTrackList.swift */; };
@@ -77,8 +76,8 @@
 		D27FB80D24868AF60014C05D /* Odesli.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Odesli.swift; sourceTree = "<group>"; };
 		D27FB80F24868B320014C05D /* Options.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Options.swift; sourceTree = "<group>"; };
 		D27FB811248693AF0014C05D /* Slot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Slot.swift; sourceTree = "<group>"; };
-		D27FB8132486ACF90014C05D /* PrimaryPlaybackLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryPlaybackLink.swift; sourceTree = "<group>"; };
 		D27FB81F2486B46D0014C05D /* fa-brands.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fa-brands.otf"; sourceTree = "<group>"; };
+		D28AD1B4248BACB2009B584A /* PlaybackLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackLink.swift; sourceTree = "<group>"; };
 		D2AB8466248113EB008B57F9 /* AppActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppActions.swift; sourceTree = "<group>"; };
 		D2AB84682481148D008B57F9 /* AppAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAction.swift; sourceTree = "<group>"; };
 		D2AB846A2481159D008B57F9 /* AppStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStore.swift; sourceTree = "<group>"; };
@@ -99,7 +98,6 @@
 		D2F8D14D248A666C008C29C3 /* CardArtworkComposite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardArtworkComposite.swift; sourceTree = "<group>"; };
 		D2F8D14F248A6DF1008C29C3 /* SharedCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedCollection.swift; sourceTree = "<group>"; };
 		D2F8D153248A7086008C29C3 /* LibraryAlbumDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryAlbumDetail.swift; sourceTree = "<group>"; };
-		D2F8D157248A721A008C29C3 /* LibraryPrimaryPlaybackLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryPrimaryPlaybackLink.swift; sourceTree = "<group>"; };
 		D2F8D159248A735E008C29C3 /* PlaybackLinks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackLinks.swift; sourceTree = "<group>"; };
 		D2F8D163248A7E2B008C29C3 /* TrackList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackList.swift; sourceTree = "<group>"; };
 		D2F8D165248A7E42008C29C3 /* DiscTrackList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscTrackList.swift; sourceTree = "<group>"; };
@@ -257,7 +255,6 @@
 				D2F8D14F248A6DF1008C29C3 /* SharedCollection.swift */,
 				D2F8D153248A7086008C29C3 /* LibraryAlbumDetail.swift */,
 				D22574A32482A882004E83E1 /* LibraryPlaybackLinks.swift */,
-				D2F8D157248A721A008C29C3 /* LibraryPrimaryPlaybackLink.swift */,
 			);
 			path = Library;
 			sourceTree = "<group>";
@@ -268,7 +265,6 @@
 				D2AB846D248116A3008B57F9 /* CollectionHome.swift */,
 				D225749F2482A71C004E83E1 /* AlbumDetail.swift */,
 				D2F8D159248A735E008C29C3 /* PlaybackLinks.swift */,
-				D27FB8132486ACF90014C05D /* PrimaryPlaybackLink.swift */,
 			);
 			path = Collection;
 			sourceTree = "<group>";
@@ -284,9 +280,10 @@
 				D2F8D14B248A6451008C29C3 /* CollectionCard.swift */,
 				D2F8D14D248A666C008C29C3 /* CardArtworkComposite.swift */,
 				D2D7858E248A910A00E0CC63 /* AlbumCover.swift */,
+				D28AD1B4248BACB2009B584A /* PlaybackLink.swift */,
+				D2D78590248AED2900E0CC63 /* AlternativePlaybackLinks.swift */,
 				D2F8D163248A7E2B008C29C3 /* TrackList.swift */,
 				D2F8D165248A7E42008C29C3 /* DiscTrackList.swift */,
-				D2D78590248AED2900E0CC63 /* AlternativePlaybackLinks.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -378,7 +375,6 @@
 				D27FB812248693AF0014C05D /* Slot.swift in Sources */,
 				D27FB80E24868AF60014C05D /* Odesli.swift in Sources */,
 				D22574A42482A882004E83E1 /* LibraryPlaybackLinks.swift in Sources */,
-				D27FB8142486ACF90014C05D /* PrimaryPlaybackLink.swift in Sources */,
 				D221557C2481114A00A1F04A /* AppDelegate.swift in Sources */,
 				D2AC12122485A67000C52D9E /* Search.swift in Sources */,
 				D2492587248117710011F409 /* AppState.swift in Sources */,
@@ -394,7 +390,6 @@
 				D24C80D124899D0C00EFACD8 /* Library.swift in Sources */,
 				D2AB846B2481159D008B57F9 /* AppStore.swift in Sources */,
 				D2AB846E248116A3008B57F9 /* CollectionHome.swift in Sources */,
-				D2F8D158248A721A008C29C3 /* LibraryPrimaryPlaybackLink.swift in Sources */,
 				D2AC12102485A65D00C52D9E /* Collection.swift in Sources */,
 				D2B4FD95248458300028D7A4 /* Bundle+BuildNumber.swift in Sources */,
 				D2B4FD91248456B20028D7A4 /* OptionsHome.swift in Sources */,
@@ -404,6 +399,7 @@
 				D22574A02482A71C004E83E1 /* AlbumDetail.swift in Sources */,
 				D2AC120B24859E2300C52D9E /* EmptySlot.swift in Sources */,
 				D24C80CD248995D900EFACD8 /* LibraryHome.swift in Sources */,
+				D28AD1B5248BACB2009B584A /* PlaybackLink.swift in Sources */,
 				D2AB8467248113EB008B57F9 /* AppActions.swift in Sources */,
 				D2F8D166248A7E42008C29C3 /* DiscTrackList.swift in Sources */,
 				D2AB84692481148D008B57F9 /* AppAction.swift in Sources */,
