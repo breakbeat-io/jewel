@@ -18,7 +18,9 @@ class RecordStore {
     RecordStore.appleMusic.search(term: searchTerm, limit: 20, types: [.albums]) { results, error in
       if let results = results {
         DispatchQueue.main.async {
-          store.update(action: SearchAction.populateSearchResults(results: (results.albums?.data)!))
+          if let results = results.albums?.data {
+            store.update(action: SearchAction.populateSearchResults(results: results))
+          }
         }
       }
       

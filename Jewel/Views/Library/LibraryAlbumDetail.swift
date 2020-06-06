@@ -22,7 +22,9 @@ struct LibraryAlbumDetail: View {
                      albumArtwork: attributes.artwork.url(forWidth: 1000))
           LibraryPlaybackLinks(slot: self.slot)
             .padding(.bottom)
-          TrackList(tracks: (self.slot.album?.relationships?.tracks.data)!, albumArtist: attributes.artistName)
+          IfLet(self.slot.album?.relationships?.tracks.data) { tracks in
+            TrackList(tracks: tracks, albumArtist: attributes.artistName)
+          }
         }
       }
       .padding()
