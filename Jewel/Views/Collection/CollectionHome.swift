@@ -28,7 +28,7 @@ struct CollectionHome: View {
                   FilledSlot(attributes: attributes, slotIndex: slotIndex)
                 }
                 NavigationLink(
-                  destination: AlbumDetail()
+                  destination: ObservedAlbumDetail()
                 ){
                   EmptyView()
                 }

@@ -1,17 +1,16 @@
 //
-//  LibraryAlbumDetail.swift
+//  AlbumView.swift
 //  Listen Later
 //
-//  Created by Greg Hepworth on 05/06/2020.
+//  Created by Greg Hepworth on 06/06/2020.
 //  Copyright © 2020 Breakbeat Ltd. All rights reserved.
 //
 
 import SwiftUI
-import HMV
 
-struct LibraryAlbumDetail: View {
+struct AlbumView: View {
   
-  var slot: Slot
+  let slot: Slot
   
   var body: some View {
     ScrollView {
@@ -21,11 +20,12 @@ struct LibraryAlbumDetail: View {
                      albumArtist: attributes.artistName,
                      albumArtwork: attributes.artwork.url(forWidth: 1000))
           PlaybackLinks(baseUrl: attributes.url,
-                           playbackLinks: self.slot.playbackLinks)
+                        playbackLinks: self.slot.playbackLinks)
             .padding(.bottom)
           IfLet(self.slot.album?.relationships?.tracks.data) { tracks in
             TrackList(tracks: tracks,
-                      albumArtist: attributes.artistName)
+                      albumArtist: attributes.artistName
+            )
           }
         }
       }
