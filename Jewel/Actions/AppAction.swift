@@ -72,12 +72,6 @@ func updateCollection(collection: Collection, action: CollectionAction) -> Colle
   case .changeCollectionCurator(curator: let curator):
     newCollection.curator = curator
     
-  case .setSelectedSlot(slotIndex: let slotIndex):
-    newCollection.selectedSlot = slotIndex
-    
-  case .deselectSlot:
-    newCollection.selectedSlot = nil
-    
   case .addAlbumToSlot(album: let album, slotIndex: let slotIndex):
     newCollection.slots[slotIndex].album = album
     

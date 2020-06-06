@@ -25,10 +25,10 @@ struct CollectionHome: View {
             if self.slots[slotIndex].album != nil {
               ZStack {
                 IfLet(self.slots[slotIndex].album?.attributes) { attributes in
-                  FilledSlot(attributes: attributes, slotIndex: slotIndex)
+                  FilledSlot(attributes: attributes)
                 }
                 NavigationLink(
-                  destination: ObservedAlbumDetail()
+                  destination: ObservedAlbumDetail(slotId: slotIndex)
                 ){
                   EmptyView()
                 }

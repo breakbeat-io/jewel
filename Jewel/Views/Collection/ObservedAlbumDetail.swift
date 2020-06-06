@@ -13,19 +13,13 @@ struct ObservedAlbumDetail: View {
   
   @EnvironmentObject var store: AppStore
   
-  private var slot: Slot? {
-    if let i = store.state.collection.selectedSlot {
-      return store.state.collection.slots[i]
-    }
-    return nil
+  let slotId: Int
+  
+  private var slot: Slot {
+      store.state.collection.slots[slotId]
   }
   
   var body: some View {
-    IfLet(slot) { slot in
-      AlbumDetail(slot: slot)
-    }
-    .onDisappear {
-      self.store.update(action: CollectionAction.deselectSlot)
-    }
+    AlbumDetail(slot: slot)
   }
 }

@@ -22,7 +22,6 @@ struct Collection: Identifiable, Codable {
     }
     return tmpSlots
   }()
-  var selectedSlot: Int?
   
   enum CodingKeys: CodingKey {
     case name
