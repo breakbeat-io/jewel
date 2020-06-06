@@ -29,6 +29,7 @@
 		D27FB812248693AF0014C05D /* Slot.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27FB811248693AF0014C05D /* Slot.swift */; };
 		D27FB8202486B46D0014C05D /* fa-brands.otf in Resources */ = {isa = PBXBuildFile; fileRef = D27FB81F2486B46D0014C05D /* fa-brands.otf */; };
 		D2881748248BE81400EB47C2 /* ShareLinkProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2881747248BE81400EB47C2 /* ShareLinkProvider.swift */; };
+		D288174A248BEABF00EB47C2 /* ShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2881749248BEABF00EB47C2 /* ShareSheet.swift */; };
 		D28AD1B5248BACB2009B584A /* PlaybackLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28AD1B4248BACB2009B584A /* PlaybackLink.swift */; };
 		D28AD1B7248BB148009B584A /* PlaybackLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28AD1B6248BB148009B584A /* PlaybackLinks.swift */; };
 		D28AD1B9248BB5D4009B584A /* AlbumDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28AD1B8248BB5D4009B584A /* AlbumDetail.swift */; };
@@ -76,6 +77,7 @@
 		D27FB811248693AF0014C05D /* Slot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Slot.swift; sourceTree = "<group>"; };
 		D27FB81F2486B46D0014C05D /* fa-brands.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fa-brands.otf"; sourceTree = "<group>"; };
 		D2881747248BE81400EB47C2 /* ShareLinkProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareLinkProvider.swift; sourceTree = "<group>"; };
+		D2881749248BEABF00EB47C2 /* ShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheet.swift; sourceTree = "<group>"; };
 		D28AD1B4248BACB2009B584A /* PlaybackLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackLink.swift; sourceTree = "<group>"; };
 		D28AD1B6248BB148009B584A /* PlaybackLinks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackLinks.swift; sourceTree = "<group>"; };
 		D28AD1B8248BB5D4009B584A /* AlbumDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumDetail.swift; sourceTree = "<group>"; };
@@ -196,12 +198,21 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		D288174B248BEB0C00EB47C2 /* Sharing */ = {
+			isa = PBXGroup;
+			children = (
+				D2881749248BEABF00EB47C2 /* ShareSheet.swift */,
+			);
+			path = Sharing;
+			sourceTree = "<group>";
+		};
 		D2AB846C2481168C008B57F9 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				D24C80CE248995F500EFACD8 /* Home.swift */,
 				D2F8D14A248A641F008C29C3 /* Collection */,
 				D2F8D149248A6409008C29C3 /* Library */,
+				D288174B248BEB0C00EB47C2 /* Sharing */,
 				D2B4FD8F248456940028D7A4 /* Options */,
 				D24925932481410F0011F409 /* Search */,
 				D2F8D162248A7E1A008C29C3 /* Components */,
@@ -396,6 +407,7 @@
 				D2AC120B24859E2300C52D9E /* EmptySlotCard.swift in Sources */,
 				D24C80CD248995D900EFACD8 /* LibraryHome.swift in Sources */,
 				D28AD1B5248BACB2009B584A /* PlaybackLink.swift in Sources */,
+				D288174A248BEABF00EB47C2 /* ShareSheet.swift in Sources */,
 				D2AB8467248113EB008B57F9 /* AppActions.swift in Sources */,
 				D2881748248BE81400EB47C2 /* ShareLinkProvider.swift in Sources */,
 				D2F8D166248A7E42008C29C3 /* DiscTrackList.swift in Sources */,

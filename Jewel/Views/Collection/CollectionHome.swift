@@ -65,6 +65,9 @@ struct CollectionNavigationButtonsLeading: View {
   
   @State private var showOptions: Bool = false
   @State private var showSharing: Bool = false
+  @State private var showShareLink: Bool = false
+  
+  @State private var shareLink: URL? = nil
   
   var body: some View {
     HStack {
@@ -79,8 +82,8 @@ struct CollectionNavigationButtonsLeading: View {
                     title: Text("Share this collection as \n \"\(store.state.collection.name)\" by \"\(store.state.collection.curator)\""),
                     buttons: [
                       .default(Text("Send share link")) {
-                        let shareLink = ShareLinkProvider.generateLongLink(from: self.store.state.collection)
-                        print(shareLink)
+                        self.shareLink = ShareLinkProvider.generateLongLink(from: self.store.state.collection)
+                        self.showShareLink = true
                       },
                       .default(Text("Add to my Collection Library")) {
                         self.store.update(action: LibraryAction.addCollection(collection: self.store.state.collection))
@@ -91,6 +94,9 @@ struct CollectionNavigationButtonsLeading: View {
                       },
                       .cancel()
                     ])
+      }
+      .sheet(isPresented: self.$showShareLink) {
+        ShareSheet(activityItems: [self.shareLink])
       }
       Button(action: {
         self.showOptions = true
