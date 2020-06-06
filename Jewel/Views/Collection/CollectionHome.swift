@@ -75,11 +75,15 @@ struct CollectionNavigationButtonsLeading: View {
       }
       .padding(.trailing)
       .actionSheet(isPresented: $showSharing) {
-        ActionSheet(title: Text("Share Collection"),
+        ActionSheet(
+                    title: Text("Share this collection as \n \"\(store.state.collection.name)\" by \"\(store.state.collection.curator)\""),
                     buttons: [
-                      .default(Text("Add to Library")) {
+                      .default(Text("Add to my Collection Library")) {
                         self.store.update(action: LibraryAction.addCollection(collection: self.store.state.collection))
                         self.store.update(action: CollectionAction.toggleActive)
+                      },
+                      .default(Text("Update Collection Name")) {
+                        self.showOptions = true
                       },
                       .cancel()
                     ])
