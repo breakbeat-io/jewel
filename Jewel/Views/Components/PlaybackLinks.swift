@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct NewPlaybackLinks: View {
+struct PlaybackLinks: View {
   
   let baseUrl: URL
   let playbackLinks: OdesliResponse?

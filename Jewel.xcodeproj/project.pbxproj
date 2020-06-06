@@ -29,7 +29,7 @@
 		D27FB812248693AF0014C05D /* Slot.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27FB811248693AF0014C05D /* Slot.swift */; };
 		D27FB8202486B46D0014C05D /* fa-brands.otf in Resources */ = {isa = PBXBuildFile; fileRef = D27FB81F2486B46D0014C05D /* fa-brands.otf */; };
 		D28AD1B5248BACB2009B584A /* PlaybackLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28AD1B4248BACB2009B584A /* PlaybackLink.swift */; };
-		D28AD1B7248BB148009B584A /* NewPlaybackLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28AD1B6248BB148009B584A /* NewPlaybackLinks.swift */; };
+		D28AD1B7248BB148009B584A /* PlaybackLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28AD1B6248BB148009B584A /* PlaybackLinks.swift */; };
 		D2AB8467248113EB008B57F9 /* AppActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AB8466248113EB008B57F9 /* AppActions.swift */; };
 		D2AB84692481148D008B57F9 /* AppAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AB84682481148D008B57F9 /* AppAction.swift */; };
 		D2AB846B2481159D008B57F9 /* AppStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AB846A2481159D008B57F9 /* AppStore.swift */; };
@@ -76,7 +76,7 @@
 		D27FB811248693AF0014C05D /* Slot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Slot.swift; sourceTree = "<group>"; };
 		D27FB81F2486B46D0014C05D /* fa-brands.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fa-brands.otf"; sourceTree = "<group>"; };
 		D28AD1B4248BACB2009B584A /* PlaybackLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackLink.swift; sourceTree = "<group>"; };
-		D28AD1B6248BB148009B584A /* NewPlaybackLinks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPlaybackLinks.swift; sourceTree = "<group>"; };
+		D28AD1B6248BB148009B584A /* PlaybackLinks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackLinks.swift; sourceTree = "<group>"; };
 		D2AB8466248113EB008B57F9 /* AppActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppActions.swift; sourceTree = "<group>"; };
 		D2AB84682481148D008B57F9 /* AppAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAction.swift; sourceTree = "<group>"; };
 		D2AB846A2481159D008B57F9 /* AppStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStore.swift; sourceTree = "<group>"; };
@@ -276,7 +276,7 @@
 				D2F8D14B248A6451008C29C3 /* CollectionCard.swift */,
 				D2F8D14D248A666C008C29C3 /* CardArtworkComposite.swift */,
 				D2D7858E248A910A00E0CC63 /* AlbumCover.swift */,
-				D28AD1B6248BB148009B584A /* NewPlaybackLinks.swift */,
+				D28AD1B6248BB148009B584A /* PlaybackLinks.swift */,
 				D28AD1B4248BACB2009B584A /* PlaybackLink.swift */,
 				D2D78590248AED2900E0CC63 /* AlternativePlaybackLinks.swift */,
 				D2F8D163248A7E2B008C29C3 /* TrackList.swift */,
@@ -382,7 +382,7 @@
 				D24C80CF248995F500EFACD8 /* Home.swift in Sources */,
 				D249258F24811A650011F409 /* SearchHome.swift in Sources */,
 				D2F8D14C248A6451008C29C3 /* CollectionCard.swift in Sources */,
-				D28AD1B7248BB148009B584A /* NewPlaybackLinks.swift in Sources */,
+				D28AD1B7248BB148009B584A /* PlaybackLinks.swift in Sources */,
 				D24C80D124899D0C00EFACD8 /* Library.swift in Sources */,
 				D2AB846B2481159D008B57F9 /* AppStore.swift in Sources */,
 				D2AB846E248116A3008B57F9 /* CollectionHome.swift in Sources */,

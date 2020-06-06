@@ -27,7 +27,7 @@ struct AlbumDetail: View {
             AlbumCover(albumName: attributes.name,
                        albumArtist: attributes.artistName,
                        albumArtwork: attributes.artwork.url(forWidth: 1000))
-          NewPlaybackLinks(baseUrl: attributes.url,
+          PlaybackLinks(baseUrl: attributes.url,
                            playbackLinks: self.slot?.playbackLinks)
             .padding(.bottom)
           IfLet(self.slot?.album?.relationships?.tracks.data) { tracks in
