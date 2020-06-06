@@ -40,7 +40,11 @@ class ShareLinkProvider {
     }
   }
   
-  static func generateLongLink(from collection: Collection) -> URL? {
+  enum ShareError: Error {
+    case unableToEncodeCollection
+  }
+  
+  static func generateLongLink(from collection: Collection) throws -> URL {
     
     var shareableSlots = [ShareableSlot?]()
     
@@ -64,7 +68,7 @@ class ShareLinkProvider {
       return URL(string: "https://ll.breakbeat.io/shared/?collection=\(shareableCollectionJson.base64EncodedString())")!
     } catch {
       print(error)
-      return nil
+      throw ShareError.unableToEncodeCollection
     }
   }
   

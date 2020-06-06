@@ -30,6 +30,7 @@
 		D27FB8202486B46D0014C05D /* fa-brands.otf in Resources */ = {isa = PBXBuildFile; fileRef = D27FB81F2486B46D0014C05D /* fa-brands.otf */; };
 		D2881748248BE81400EB47C2 /* ShareLinkProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2881747248BE81400EB47C2 /* ShareLinkProvider.swift */; };
 		D288174A248BEABF00EB47C2 /* ShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2881749248BEABF00EB47C2 /* ShareSheet.swift */; };
+		D288174D248BEDAA00EB47C2 /* ShareSheetLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D288174C248BEDAA00EB47C2 /* ShareSheetLoader.swift */; };
 		D28AD1B5248BACB2009B584A /* PlaybackLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28AD1B4248BACB2009B584A /* PlaybackLink.swift */; };
 		D28AD1B7248BB148009B584A /* PlaybackLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28AD1B6248BB148009B584A /* PlaybackLinks.swift */; };
 		D28AD1B9248BB5D4009B584A /* AlbumDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28AD1B8248BB5D4009B584A /* AlbumDetail.swift */; };
@@ -78,6 +79,7 @@
 		D27FB81F2486B46D0014C05D /* fa-brands.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fa-brands.otf"; sourceTree = "<group>"; };
 		D2881747248BE81400EB47C2 /* ShareLinkProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareLinkProvider.swift; sourceTree = "<group>"; };
 		D2881749248BEABF00EB47C2 /* ShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheet.swift; sourceTree = "<group>"; };
+		D288174C248BEDAA00EB47C2 /* ShareSheetLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheetLoader.swift; sourceTree = "<group>"; };
 		D28AD1B4248BACB2009B584A /* PlaybackLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackLink.swift; sourceTree = "<group>"; };
 		D28AD1B6248BB148009B584A /* PlaybackLinks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackLinks.swift; sourceTree = "<group>"; };
 		D28AD1B8248BB5D4009B584A /* AlbumDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumDetail.swift; sourceTree = "<group>"; };
@@ -201,6 +203,7 @@
 		D288174B248BEB0C00EB47C2 /* Sharing */ = {
 			isa = PBXGroup;
 			children = (
+				D288174C248BEDAA00EB47C2 /* ShareSheetLoader.swift */,
 				D2881749248BEABF00EB47C2 /* ShareSheet.swift */,
 			);
 			path = Sharing;
@@ -383,6 +386,7 @@
 				D27FB80E24868AF60014C05D /* Odesli.swift in Sources */,
 				D28AD1B9248BB5D4009B584A /* AlbumDetail.swift in Sources */,
 				D221557C2481114A00A1F04A /* AppDelegate.swift in Sources */,
+				D288174D248BEDAA00EB47C2 /* ShareSheetLoader.swift in Sources */,
 				D2AC12122485A67000C52D9E /* Search.swift in Sources */,
 				D2492587248117710011F409 /* AppState.swift in Sources */,
 				D2D78591248AED2900E0CC63 /* AlternativePlaybackLinks.swift in Sources */,
