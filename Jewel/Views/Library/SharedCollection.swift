@@ -28,7 +28,7 @@ struct SharedCollection: View {
                   FilledSlot(attributes: attributes)
                 }
                 NavigationLink(
-                  destination: AlbumView(slot: self.slots[slotIndex])
+                  destination: AlbumDetail(slot: self.slots[slotIndex])
                 ){
                   EmptyView()
                 }

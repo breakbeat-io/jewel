@@ -22,7 +22,7 @@ struct ObservedAlbumDetail: View {
   
   var body: some View {
     IfLet(slot) { slot in
-      AlbumView(slot: slot)
+      AlbumDetail(slot: slot)
     }
     .onDisappear {
       self.store.update(action: CollectionAction.deselectSlot)

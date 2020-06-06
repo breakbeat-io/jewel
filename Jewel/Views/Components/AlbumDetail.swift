@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct AlbumView: View {
+struct AlbumDetail: View {
   
   let slot: Slot
   
