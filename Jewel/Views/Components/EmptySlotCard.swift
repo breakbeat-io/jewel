@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct EmptySlot: View {
+struct EmptySlotCard: View {
   
   @EnvironmentObject var store: AppStore
   

@@ -25,7 +25,7 @@ struct CollectionHome: View {
             if self.slots[slotIndex].album != nil {
               ZStack {
                 IfLet(self.slots[slotIndex].album?.attributes) { attributes in
-                  FilledSlot(attributes: attributes)
+                  AlbumCard(albumName: attributes.name, albumArtist: attributes.artistName, albumArtwork: attributes.artwork.url(forWidth: 1000))
                 }
                 NavigationLink(
                   destination: ObservedAlbumDetail(slotId: slotIndex)
@@ -34,7 +34,7 @@ struct CollectionHome: View {
                 }
               }
             } else {
-              EmptySlot(slotIndex: slotIndex)
+              EmptySlotCard(slotIndex: slotIndex)
                 .deleteDisabled(true)
             }
           }
