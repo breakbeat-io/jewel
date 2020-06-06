@@ -23,7 +23,8 @@ struct Collection: Identifiable, Codable {
     return tmpSlots
   }()
   
-  var shareLink: URL?
+  var shareLinkLong: URL?
+  var shareLinkShort: URL?
   var shareLinkError = false
   
   enum CodingKeys: CodingKey {

@@ -26,7 +26,7 @@ struct ShareSheetLoader: View {
             .padding()
             .multilineTextAlignment(.center)
         }
-      } else if collection.shareLink == nil {
+      } else if collection.shareLinkShort == nil {
         VStack {
           Image(systemName: "square.and.arrow.up")
             .font(.largeTitle)
@@ -35,11 +35,36 @@ struct ShareSheetLoader: View {
             .multilineTextAlignment(.center)
         }
       } else {
-        ShareSheet(activityItems: [collection.shareLink!])
+        ShareSheet(activityItems: [collection.shareLinkShort!])
       }
     }
     .onAppear {
-      ShareLinkProvider.populateShareLink(from: self.store.state.collection)
+      self.generateShareLinks()
+    }
+  }
+  
+  private func generateShareLinks() {
+    self.store.update(action: CollectionAction.setShareLinkError(errorState: false))
+    
+    if self.collection.shareLinkLong == nil {
+      print("No links found, generating")
+      guard let shareLinkLong = ShareLinkProvider.getLongLink(for: self.collection) else {
+        return
+      }
+      self.store.update(action: CollectionAction.setShareLinkLong(shareLinkLong: shareLinkLong))
+      ShareLinkProvider.setShortLink(for: shareLinkLong)
+    } else {
+      guard let newLongLink = ShareLinkProvider.getLongLink(for: self.collection) else {
+        return
+      }
+      
+      if newLongLink == self.collection.shareLinkLong {
+        print("Long link hasn't changed, reusing short link")
+      } else {
+        print("Long link changed, regenerating links")
+        self.store.update(action: CollectionAction.setShareLinkLong(shareLinkLong: newLongLink))
+        ShareLinkProvider.setShortLink(for: newLongLink)
+      }
     }
   }
 }

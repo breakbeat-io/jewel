@@ -40,70 +40,7 @@ class ShareLinkProvider {
     }
   }
   
-  static func populateShareLink(from collection: Collection) {
-    
-    guard let longLink = generateLongLink(from: collection) else {
-      print("Could not create Long Link")
-      store.update(action: CollectionAction.setShareLinkError)
-      return
-    }
-
-    let longDynamicLink = "https://listenlater.page.link/?link=\(longLink.absoluteString)"
-    
-    let firebaseShortLinkBodyRaw = ["longDynamicLink": longDynamicLink]
-    guard let firebaseShortLinkBodyRawJSON = try? JSONEncoder().encode(firebaseShortLinkBodyRaw) else {
-      print("Could not encode link to JSON")
-      store.update(action: CollectionAction.setShareLinkError)
-      return
-    }
-
-    guard let firebaseApiKey = Bundle.main.infoDictionary?["FIREBASE_API_KEY"] as? String else {
-      print ("No Firebase API key found!")
-      store.update(action: CollectionAction.setShareLinkError)
-      return
-    }
-
-    let firebaseRestUrl = URL(string: "https://firebasedynamiclinks.googleapis.com/v1/shortLinks?key=\(firebaseApiKey)")!
-    var request = URLRequest(url: firebaseRestUrl)
-    request.httpMethod = "POST"
-    request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-
-    let task = URLSession.shared.uploadTask(with: request, from: firebaseShortLinkBodyRawJSON) { data, response, error in
-      if let error = error {
-        print ("Firebase API threw error: \(error)")
-        store.update(action: CollectionAction.setShareLinkError)
-        return
-      }
-      guard let response = response as? HTTPURLResponse,
-        (200...299).contains(response.statusCode) else {
-          print ("Firebase gave a server error")
-          store.update(action: CollectionAction.setShareLinkError)
-          return
-      }
-      if let mimeType = response.mimeType,
-        mimeType == "application/json",
-        let data = data {
-        do {
-          if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
-            DispatchQueue.main.async {
-              if let shortLink = json["shortLink"] as? String {
-                store.update(action: CollectionAction.setShareLink(shareLink: URL(string: shortLink)!))
-              } else {
-                print("There was another error")
-                store.update(action: CollectionAction.setShareLinkError)
-              }
-            }
-          }
-        } catch let error as NSError {
-          print("Failed to load: \(error.localizedDescription)")
-          store.update(action: CollectionAction.setShareLinkError)
-        }
-      }
-    }
-    task.resume()
-  }
-  
-  private static func generateLongLink(from collection: Collection) -> URL? {
+  static func getLongLink(for collection: Collection) -> URL? {
     
     var shareableSlots = [ShareableSlot?]()
     
@@ -129,6 +66,63 @@ class ShareLinkProvider {
       print(error)
       return nil
     }
+  }
+  
+  static func setShortLink(for url: URL) {
+
+    let longDynamicLink = "https://listenlater.page.link/?link=\(url.absoluteString)"
+    
+    let firebaseShortLinkBodyRaw = ["longDynamicLink": longDynamicLink]
+    guard let firebaseShortLinkBodyRawJSON = try? JSONEncoder().encode(firebaseShortLinkBodyRaw) else {
+      print("Could not encode link to JSON")
+      store.update(action: CollectionAction.setShareLinkError(errorState: true))
+      return
+    }
+
+    guard let firebaseApiKey = Bundle.main.infoDictionary?["FIREBASE_API_KEY"] as? String else {
+      print ("No Firebase API key found!")
+      store.update(action: CollectionAction.setShareLinkError(errorState: true))
+      return
+    }
+
+    let firebaseRestUrl = URL(string: "https://firebasedynamiclinks.googleapis.com/v1/shortLinks?key=\(firebaseApiKey)")!
+    var request = URLRequest(url: firebaseRestUrl)
+    request.httpMethod = "POST"
+    request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+
+    let task = URLSession.shared.uploadTask(with: request, from: firebaseShortLinkBodyRawJSON) { data, response, error in
+      if let error = error {
+        print ("Firebase API threw error: \(error)")
+        store.update(action: CollectionAction.setShareLinkError(errorState: true))
+        return
+      }
+      guard let response = response as? HTTPURLResponse,
+        (200...299).contains(response.statusCode) else {
+          print ("Firebase gave a server error")
+          store.update(action: CollectionAction.setShareLinkError(errorState: true))
+          return
+      }
+      if let mimeType = response.mimeType,
+        mimeType == "application/json",
+        let data = data {
+        do {
+          if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
+            DispatchQueue.main.async {
+              if let shortLink = json["shortLink"] as? String {
+                store.update(action: CollectionAction.setShareLinkShort(shareLinkShort: URL(string: shortLink)!))
+              } else {
+                print("There was another error")
+                store.update(action: CollectionAction.setShareLinkError(errorState: true))
+              }
+            }
+          }
+        } catch let error as NSError {
+          print("Failed to load: \(error.localizedDescription)")
+          store.update(action: CollectionAction.setShareLinkError(errorState: true))
+        }
+      }
+    }
+    task.resume()
   }
   
 }
