@@ -65,7 +65,7 @@ class ShareLinkProvider {
 
     do {
       let shareableCollectionJson = try JSONEncoder().encode(shareableCollection)
-      return URL(string: "https://ll.breakbeat.io/shared/?collection=\(shareableCollectionJson.base64EncodedString())")!
+      return URL(string: "https://listenlater.link/s/?c=\(shareableCollectionJson.base64EncodedString())")!
     } catch {
       print(error)
       throw ShareError.unableToEncodeCollection
