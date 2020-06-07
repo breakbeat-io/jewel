@@ -138,21 +138,20 @@ class ShareLinkProvider {
       if let recievedCollectionEncoded = Data(base64Encoded: (params!.first(where: { $0.name == "c" })?.value!)!) {
         let decoder = JSONDecoder()
         if let recievedCollection = try? decoder.decode(ShareableCollection.self, from: recievedCollectionEncoded) {
-          expandCollection(shareableCollection: recievedCollection)
+          store.update(action: LibraryAction.cueRecievedCollection(shareableCollection: recievedCollection))
         }
       }
     }
   }
   
-  private static func expandCollection(shareableCollection: ShareableCollection) {
-    let sharedCollection = Collection(name: shareableCollection.collectionName, curator: shareableCollection.collectionCurator)
-    
-    store.update(action: LibraryAction.cueRecievedCollection(collection: sharedCollection))
-    
+  static func expandCollection(shareableCollection: ShareableCollection) {
+    let collection = Collection(name: shareableCollection.collectionName, curator: shareableCollection.collectionCurator)
+
+    store.update(action: LibraryAction.addCollection(collection: collection))
+
     for (index, slot) in shareableCollection.collection.enumerated() {
       if slot?.sourceProvider == SourceProvider.appleMusicAlbum {
-        // here will put the album in the collection
-        //            addContentToSlot(contentId: slot!.sourceRef, expand, slotIndex: index)
+        RecordStore.borrow(albumId: slot!.sourceRef, slotIndex: index, collectionId: collection.id)
       }
     }
   }

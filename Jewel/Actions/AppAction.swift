@@ -10,7 +10,7 @@ import Foundation
 import HMV
 
 func updateState(appState: AppState, action: AppAction) -> AppState {
-  print("Performing action: \(action)")
+//  print("Performing action: \(action)")
   
   var newAppState = appState
   
@@ -121,17 +121,22 @@ func updateLibrary(library: Library, action: LibraryAction) -> Library {
   case .moveCollection(from: let from, to: let to):
     newLibrary.collections.move(fromOffsets: from, toOffset: to)
     
-  case .cueRecievedCollection(collection: let collection):
-    newLibrary.recievedCollection = collection
+  case .cueRecievedCollection(shareableCollection: let shareableCollection):
+    newLibrary.recievedCollection = shareableCollection
 
   case .uncueRecievedCollection:
     newLibrary.recievedCollection = nil
     
-  case .commitRecievedCollection:
-    if let recievedCollection = newLibrary.recievedCollection {
-      newLibrary.collections.append(recievedCollection)
+//  case .commitRecievedCollection:
+//    if let recievedCollection = newLibrary.recievedCollection {
+//      newLibrary.collections.append(recievedCollection)
+//    }
+//    newLibrary.recievedCollection = nil
+    
+  case .addAlbumToSlot(album: let album, slotIndex: let slotIndex, collectionId: let collectionId):
+    if let collectionIndex = newLibrary.collections.firstIndex(where: { $0.id == collectionId }) {
+      newLibrary.collections[collectionIndex].slots[slotIndex].album = album
     }
-    newLibrary.recievedCollection = nil
     
   }
   

@@ -11,8 +11,7 @@ import HMV
 
 struct Library: Codable {
   var collections = [Collection]()
-  var recievedCollection: Collection?
-  var recievedCollectionCued: Bool = false
+  var recievedCollection: ShareLinkProvider.ShareableCollection?
   
   enum CodingKeys: CodingKey {
     case collections

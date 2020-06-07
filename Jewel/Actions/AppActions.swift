@@ -35,9 +35,10 @@ enum LibraryAction: AppAction {
   case addCollection(collection: Collection)
   case removeCollection(slotIndexes: IndexSet)
   case moveCollection(from: IndexSet, to: Int)
-  case cueRecievedCollection(collection: Collection)
+  case cueRecievedCollection(shareableCollection: ShareLinkProvider.ShareableCollection)
   case uncueRecievedCollection
-  case commitRecievedCollection
+//  case commitRecievedCollection
+  case addAlbumToSlot(album: Album, slotIndex: Int, collectionId: UUID)
 }
 
 enum SearchAction: AppAction {

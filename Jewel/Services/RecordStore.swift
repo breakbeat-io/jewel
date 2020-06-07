@@ -49,6 +49,25 @@ class RecordStore {
     })
   }
   
+  static func borrow(albumId: String, slotIndex: Int, collectionId: UUID) {
+    RecordStore.appleMusic.album(id: albumId, completion: { album, error in
+      if let album = album {
+        DispatchQueue.main.async {
+          store.update(action: LibraryAction.addAlbumToSlot(album: album, slotIndex: slotIndex, collectionId: collectionId))
+//          if let baseUrl = album.attributes?.url {
+//            RecordStore.alternativeSuppliers(for: baseUrl)
+//          }
+        }
+        
+        if let error = error {
+          print(error.localizedDescription)
+          // TODO: create another action to show an error in album add.
+        }
+      }
+    })
+  }
+  
+  
   static func alternativeSuppliers(for baseUrl: URL) {
     print("Platform Links: Populating links for \(baseUrl.absoluteString)")
     
