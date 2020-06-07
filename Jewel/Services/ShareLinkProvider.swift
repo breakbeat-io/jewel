@@ -40,8 +40,7 @@ class ShareLinkProvider {
     }
   }
   
-  static func getLongLink(for collection: Collection) -> URL? {
-    
+  static func generateLongLink(for collection: Collection) -> URL? {
     var shareableSlots = [ShareableSlot?]()
     
     for slot in collection.slots {
@@ -68,9 +67,17 @@ class ShareLinkProvider {
     }
   }
   
-  static func setShortLink(for url: URL) {
+  static func setShareLinks(for collection: Collection) {
+    
+    store.update(action: CollectionAction.invalidateShareLinks)
+    
+    guard let longLink = generateLongLink(for: collection) else {
+      print("Could not create long link")
+      store.update(action: CollectionAction.setShareLinkError(errorState: true))
+      return
+    }
 
-    let longDynamicLink = "https://listenlater.page.link/?link=\(url.absoluteString)"
+    let longDynamicLink = "https://listenlater.page.link/?link=\(longLink.absoluteString)"
     
     let firebaseShortLinkBodyRaw = ["longDynamicLink": longDynamicLink]
     guard let firebaseShortLinkBodyRawJSON = try? JSONEncoder().encode(firebaseShortLinkBodyRaw) else {
@@ -109,7 +116,7 @@ class ShareLinkProvider {
           if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
             DispatchQueue.main.async {
               if let shortLink = json["shortLink"] as? String {
-                store.update(action: CollectionAction.setShareLinkShort(shareLinkShort: URL(string: shortLink)!))
+                store.update(action: CollectionAction.setShareLinks(shareLinkLong: longLink, shareLinkShort: URL(string: shortLink)!))
               } else {
                 print("There was another error")
                 store.update(action: CollectionAction.setShareLinkError(errorState: true))

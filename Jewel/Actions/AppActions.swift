@@ -25,8 +25,8 @@ enum CollectionAction: AppAction {
   case setPlatformLinks(baseUrl: URL, platformLinks: OdesliResponse)
   case removeAlbumFromSlot(slotIndexes: IndexSet)
   case moveSlot(from: IndexSet, to: Int)
-  case setShareLinkLong(shareLinkLong: URL)
-  case setShareLinkShort(shareLinkShort: URL)
+  case invalidateShareLinks
+  case setShareLinks(shareLinkLong: URL, shareLinkShort: URL)
   case setShareLinkError(errorState: Bool)
 }
 

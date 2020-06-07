@@ -89,10 +89,12 @@ func updateCollection(collection: Collection, action: CollectionAction) -> Colle
       newCollection.slots[i].playbackLinks = platformLinks
     }
     
-  case .setShareLinkLong(shareLinkLong: let shareLinkLong):
+  case .invalidateShareLinks:
+    newCollection.shareLinkLong = nil
+    newCollection.shareLinkShort = nil
+  
+  case .setShareLinks(shareLinkLong: let shareLinkLong, shareLinkShort: let shareLinkShort):
     newCollection.shareLinkLong = shareLinkLong
-    
-  case .setShareLinkShort(shareLinkShort: let shareLinkShort):
     newCollection.shareLinkShort = shareLinkShort
     
   case .setShareLinkError(errorState: let errorState):

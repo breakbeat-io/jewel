@@ -39,32 +39,22 @@ struct ShareSheetLoader: View {
       }
     }
     .onAppear {
-      self.generateShareLinks()
+      self.refreshShareLinks()
     }
   }
   
-  private func generateShareLinks() {
+  private func refreshShareLinks() {
+    
     self.store.update(action: CollectionAction.setShareLinkError(errorState: false))
     
-    if self.collection.shareLinkLong == nil {
-      print("No links found, generating")
-      guard let shareLinkLong = ShareLinkProvider.getLongLink(for: self.collection) else {
-        return
-      }
-      self.store.update(action: CollectionAction.setShareLinkLong(shareLinkLong: shareLinkLong))
-      ShareLinkProvider.setShortLink(for: shareLinkLong)
-    } else {
-      guard let newLongLink = ShareLinkProvider.getLongLink(for: self.collection) else {
-        return
-      }
-      
-      if newLongLink == self.collection.shareLinkLong {
-        print("Long link hasn't changed, reusing short link")
-      } else {
-        print("Long link changed, regenerating links")
-        self.store.update(action: CollectionAction.setShareLinkLong(shareLinkLong: newLongLink))
-        ShareLinkProvider.setShortLink(for: newLongLink)
-      }
+    let newLongLink = ShareLinkProvider.generateLongLink(for: collection)
+    
+    if collection.shareLinkLong == nil || newLongLink != collection.shareLinkLong {
+      print("Creating new Links")
+      ShareLinkProvider.setShareLinks(for: collection)
+      return
     }
+    
+    print("Reusing existing links")
   }
 }
