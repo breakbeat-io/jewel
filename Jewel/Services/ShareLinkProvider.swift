@@ -132,4 +132,8 @@ class ShareLinkProvider {
     task.resume()
   }
   
+  static func processRecievedCollection(recievedCollectionUrl: URL) {
+    print(recievedCollectionUrl)
+  }
+  
 }

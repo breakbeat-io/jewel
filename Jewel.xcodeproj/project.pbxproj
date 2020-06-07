@@ -80,6 +80,7 @@
 		D2881747248BE81400EB47C2 /* ShareLinkProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareLinkProvider.swift; sourceTree = "<group>"; };
 		D2881749248BEABF00EB47C2 /* ShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheet.swift; sourceTree = "<group>"; };
 		D288174C248BEDAA00EB47C2 /* ShareSheetLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheetLoader.swift; sourceTree = "<group>"; };
+		D288174E248D148E00EB47C2 /* Listen Later.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Listen Later.entitlements"; sourceTree = "<group>"; };
 		D28AD1B4248BACB2009B584A /* PlaybackLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackLink.swift; sourceTree = "<group>"; };
 		D28AD1B6248BB148009B584A /* PlaybackLinks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackLinks.swift; sourceTree = "<group>"; };
 		D28AD1B8248BB5D4009B584A /* AlbumDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumDetail.swift; sourceTree = "<group>"; };
@@ -229,6 +230,7 @@
 				D22155892481114B00A1F04A /* Info.plist */,
 				D221557B2481114A00A1F04A /* AppDelegate.swift */,
 				D221557D2481114A00A1F04A /* SceneDelegate.swift */,
+				D288174E248D148E00EB47C2 /* Listen Later.entitlements */,
 				D2AC120E2485A20400C52D9E /* secrets.xcconfig */,
 			);
 			path = App;
@@ -556,6 +558,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Jewel/App/Listen Later.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Jewel/Preview Content\"";
 				DEVELOPMENT_TEAM = 3Z89R2M235;
@@ -577,6 +580,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Jewel/App/Listen Later.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Jewel/Preview Content\"";
 				DEVELOPMENT_TEAM = 3Z89R2M235;
