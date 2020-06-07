@@ -147,15 +147,14 @@ class ShareLinkProvider {
   private static func expandCollection(shareableCollection: ShareableCollection) {
     let sharedCollection = Collection(name: shareableCollection.collectionName, curator: shareableCollection.collectionCurator)
     
+    store.update(action: LibraryAction.cueRecievedCollection(collection: sharedCollection))
+    
     for (index, slot) in shareableCollection.collection.enumerated() {
       if slot?.sourceProvider == SourceProvider.appleMusicAlbum {
         // here will put the album in the collection
         //            addContentToSlot(contentId: slot!.sourceRef, expand, slotIndex: index)
       }
     }
-    
-    store.update(action: LibraryAction.addCollection(collection: sharedCollection))
-    
   }
   
 }

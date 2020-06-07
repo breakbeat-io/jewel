@@ -12,6 +12,13 @@ struct Home: View {
   
   @EnvironmentObject var store: AppStore
   
+  private var recievedCollectionCued: Binding<Bool> {
+    Binding (
+      get: { self.store.state.library.recievedCollectionCued },
+      set: { self.store.update(action: LibraryAction.setRecievedCollectioCued(cuedState: $0)) }
+    )
+  }
+  
   var body: some View {
     NavigationView {
       Group {
@@ -20,6 +27,16 @@ struct Home: View {
         } else {
           LibraryHome()
         }
+      }
+      .alert(isPresented: recievedCollectionCued) {
+        Alert(title: Text("Shared collection received from \(store.state.library.recievedCollection?.curator ?? "a discerning curator")!"),
+              message: Text("Would you like to add the Collection \(store.state.library.recievedCollection?.name ?? "") to your Shared Library?"),
+              primaryButton: .cancel(Text("Cancel")) {
+                self.store.update(action: LibraryAction.uncueRecievedCollection)
+          },
+              secondaryButton: .default(Text("Add").bold()) {
+                self.store.update(action: LibraryAction.commitRecievedCollection)
+          })
       }
     }
   }

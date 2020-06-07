@@ -11,4 +11,10 @@ import HMV
 
 struct Library: Codable {
   var collections = [Collection]()
+  var recievedCollection: Collection?
+  var recievedCollectionCued: Bool = false
+  
+  enum CodingKeys: CodingKey {
+    case collections
+  }
 }

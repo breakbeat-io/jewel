@@ -89,7 +89,7 @@ struct CollectionNavigationButtonsLeading: View {
             },
             .default(Text("Add to my Collection Library")) {
               self.store.update(action: LibraryAction.addCollection(collection: self.store.state.collection))
-              self.store.update(action: CollectionAction.toggleActive)
+              self.store.update(action: CollectionAction.setActiveState(activeState: false))
             },
             .default(Text("Update Collection Name")) {
               self.showOptions = true

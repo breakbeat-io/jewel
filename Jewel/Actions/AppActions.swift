@@ -19,6 +19,7 @@ enum OptionsAction: AppAction {
 
 enum CollectionAction: AppAction {
   case toggleActive
+  case setActiveState(activeState: Bool)
   case changeCollectionName(name: String)
   case changeCollectionCurator(curator: String)
   case addAlbumToSlot(album: Album, slotIndex: Int)
@@ -34,6 +35,10 @@ enum LibraryAction: AppAction {
   case addCollection(collection: Collection)
   case removeCollection(slotIndexes: IndexSet)
   case moveCollection(from: IndexSet, to: Int)
+  case cueRecievedCollection(collection: Collection)
+  case uncueRecievedCollection
+  case setRecievedCollectioCued(cuedState: Bool)
+  case commitRecievedCollection
 }
 
 enum SearchAction: AppAction {

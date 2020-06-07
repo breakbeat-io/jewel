@@ -66,6 +66,9 @@ func updateCollection(collection: Collection, action: CollectionAction) -> Colle
   case .toggleActive:
     newCollection.active.toggle()
     
+  case .setActiveState(activeState: let activeState):
+    newCollection.active = activeState
+    
   case .changeCollectionName(name: let name):
     newCollection.name = name
     
@@ -92,7 +95,7 @@ func updateCollection(collection: Collection, action: CollectionAction) -> Colle
   case .invalidateShareLinks:
     newCollection.shareLinkLong = nil
     newCollection.shareLinkShort = nil
-  
+    
   case .setShareLinks(shareLinkLong: let shareLinkLong, shareLinkShort: let shareLinkShort):
     newCollection.shareLinkLong = shareLinkLong
     newCollection.shareLinkShort = shareLinkShort
@@ -117,6 +120,24 @@ func updateLibrary(library: Library, action: LibraryAction) -> Library {
     
   case .moveCollection(from: let from, to: let to):
     newLibrary.collections.move(fromOffsets: from, toOffset: to)
+    
+  case .cueRecievedCollection(collection: let collection):
+    newLibrary.recievedCollection = collection
+    newLibrary.recievedCollectionCued = true
+
+  case .uncueRecievedCollection:
+    newLibrary.recievedCollection = nil
+    newLibrary.recievedCollectionCued = false
+    
+  case .setRecievedCollectioCued(cuedState: let cuedState):
+    newLibrary.recievedCollectionCued = cuedState
+    
+  case .commitRecievedCollection:
+    if let recievedCollection = newLibrary.recievedCollection {
+      newLibrary.collections.append(recievedCollection)
+    }
+    newLibrary.recievedCollection = nil
+    newLibrary.recievedCollectionCued = false
     
   }
   
