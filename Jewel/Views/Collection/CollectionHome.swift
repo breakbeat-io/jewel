@@ -67,6 +67,10 @@ struct CollectionNavigationButtonsLeading: View {
   @State private var showSharing: Bool = false
   @State private var showShareLink: Bool = false
   
+  private var collectionEmpty: Bool {
+    store.state.collection.slots.filter( { $0.album != nil }).count == 0
+  }
+  
   var body: some View {
     HStack {
       Button(action: {
@@ -75,6 +79,7 @@ struct CollectionNavigationButtonsLeading: View {
         Image(systemName: "square.and.arrow.up")
       }
       .padding(.trailing)
+      .disabled(collectionEmpty)
       .actionSheet(isPresented: $showSharing) {
         ActionSheet(
           title: Text("Share this collection as \n \"\(store.state.collection.name)\" by \"\(store.state.collection.curator)\""),
