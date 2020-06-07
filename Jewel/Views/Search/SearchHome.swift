@@ -31,5 +31,6 @@ struct SearchHome: View {
         }
       )
     }
+    .navigationViewStyle(StackNavigationViewStyle())
   }
 }
