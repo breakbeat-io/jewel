@@ -29,8 +29,8 @@ struct Home: View {
         }
       }
       .alert(isPresented: recievedCollectionCued) {
-        Alert(title: Text("Shared collection received from a discerning curator."),
-              message: Text("Would you like to add the Collection to your Shared Library?"),
+        Alert(title: Text("Shared collection received."),
+              message: Text("Would you like to add \"\(store.state.library.recievedCollection!.collectionName)\" by \"\(store.state.library.recievedCollection!.collectionCurator)\" to your Shared Library?"),
               primaryButton: .cancel(Text("Cancel")) {
                 self.store.update(action: LibraryAction.uncueRecievedCollection)
           },
