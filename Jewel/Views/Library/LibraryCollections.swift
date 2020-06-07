@@ -35,7 +35,7 @@ struct LibraryCollections: View {
               }
             } else {
               RoundedRectangle(cornerRadius: 4)
-                .fill(Color.gray)
+                .fill(Color(UIColor.secondarySystemBackground))
             }
           }
           .frame(height: (geo.size.height - geo.safeAreaInsets.top - geo.safeAreaInsets.bottom) / CGFloat(self.slots.count))

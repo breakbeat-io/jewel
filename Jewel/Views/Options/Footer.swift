@@ -15,7 +15,7 @@ struct Footer: View {
         .padding(.bottom)
       Text("© 2020 Breakbeat Ltd.")
       Text(Bundle.main.buildNumber)
-        .foregroundColor(Color.gray)
+        .foregroundColor(Color.secondary)
     }
     .font(.footnote)
   }

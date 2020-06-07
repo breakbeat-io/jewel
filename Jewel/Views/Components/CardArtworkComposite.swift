@@ -22,7 +22,7 @@ struct CardArtworkComposite: View {
             KFImage(image)
               .placeholder {
                 RoundedRectangle(cornerRadius: 4)
-                  .fill(Color.secondary)
+                  .fill(Color(UIColor.secondarySystemBackground))
             }
             .resizable()
             .scaledToFill()

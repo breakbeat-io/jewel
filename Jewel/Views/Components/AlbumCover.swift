@@ -21,7 +21,7 @@ struct AlbumCover: View {
         KFImage(self.albumArtwork)
           .placeholder {
             RoundedRectangle(cornerRadius: 4)
-              .fill(Color.gray)
+              .fill(Color(UIColor.secondarySystemBackground))
         }
         .resizable()
         .aspectRatio(contentMode: .fit)

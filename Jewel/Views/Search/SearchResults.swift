@@ -31,7 +31,7 @@ struct SearchResults: View {
             KFImage(result.artwork.url(forWidth: 50))
               .placeholder {
                 RoundedRectangle(cornerRadius: 4)
-                  .fill(Color.gray)
+                  .fill(Color(UIColor.secondarySystemBackground))
             }
             .renderingMode(.original)
             .resizable()
