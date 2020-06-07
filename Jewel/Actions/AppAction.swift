@@ -121,17 +121,11 @@ func updateLibrary(library: Library, action: LibraryAction) -> Library {
   case .moveCollection(from: let from, to: let to):
     newLibrary.collections.move(fromOffsets: from, toOffset: to)
     
-  case .cueRecievedCollection(shareableCollection: let shareableCollection):
-    newLibrary.recievedCollection = shareableCollection
+  case .cueCollection(shareableCollection: let shareableCollection):
+    newLibrary.cuedCollection = shareableCollection
 
-  case .uncueRecievedCollection:
-    newLibrary.recievedCollection = nil
-    
-//  case .commitRecievedCollection:
-//    if let recievedCollection = newLibrary.recievedCollection {
-//      newLibrary.collections.append(recievedCollection)
-//    }
-//    newLibrary.recievedCollection = nil
+  case .uncueCollection:
+    newLibrary.cuedCollection = nil
     
   case .addAlbumToSlot(album: let album, slotIndex: let slotIndex, collectionId: let collectionId):
     if let collectionIndex = newLibrary.collections.firstIndex(where: { $0.id == collectionId }) {

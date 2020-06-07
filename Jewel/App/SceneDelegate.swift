@@ -53,7 +53,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
       let urlToOpen = userActivity.webpageURL else {
         return
     }
-    ShareLinkProvider.processRecievedCollection(recievedCollectionUrl: urlToOpen)
+    ShareLinkProvider.cueReceivedCollection(receivedCollectionUrl: urlToOpen)
     
   }
   

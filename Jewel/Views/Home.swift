@@ -12,9 +12,9 @@ struct Home: View {
   
   @EnvironmentObject var store: AppStore
   
-  private var recievedCollectionCued: Binding<Bool> {
+  private var receivedCollectionCued: Binding<Bool> {
     Binding (
-      get: { self.store.state.library.recievedCollection != nil },
+      get: { self.store.state.library.cuedCollection != nil },
       set: { _ = $0 }
     )
   }
@@ -28,15 +28,16 @@ struct Home: View {
           LibraryHome()
         }
       }
-      .alert(isPresented: recievedCollectionCued) {
+      .alert(isPresented: receivedCollectionCued) {
         Alert(title: Text("Shared collection received."),
-              message: Text("Would you like to add \"\(store.state.library.recievedCollection!.collectionName)\" by \"\(store.state.library.recievedCollection!.collectionCurator)\" to your Shared Library?"),
+              message: Text("Would you like to add \"\(store.state.library.cuedCollection!.collectionName)\" by \"\(store.state.library.cuedCollection!.collectionCurator)\" to your Shared Library?"),
               primaryButton: .cancel(Text("Cancel")) {
-                self.store.update(action: LibraryAction.uncueRecievedCollection)
+                self.store.update(action: LibraryAction.uncueCollection)
           },
               secondaryButton: .default(Text("Add").bold()) {
-                ShareLinkProvider.expandCollection(shareableCollection: self.store.state.library.recievedCollection!)
                 self.store.update(action: CollectionAction.setActiveState(activeState: false))
+                ShareLinkProvider.expandShareableCollection(shareableCollection: self.store.state.library.cuedCollection!)
+                self.store.update(action: LibraryAction.uncueCollection)
           })
       }
     }

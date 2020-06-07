@@ -132,21 +132,25 @@ class ShareLinkProvider {
     task.resume()
   }
   
-  static func processRecievedCollection(recievedCollectionUrl: URL) {
-    if let urlComponents = URLComponents(url: recievedCollectionUrl, resolvingAgainstBaseURL: true) {
+  static func cueReceivedCollection(receivedCollectionUrl: URL) {
+    if let urlComponents = URLComponents(url: receivedCollectionUrl, resolvingAgainstBaseURL: true) {
       let params = urlComponents.queryItems
-      if let recievedCollectionEncoded = Data(base64Encoded: (params!.first(where: { $0.name == "c" })?.value!)!) {
-        let decoder = JSONDecoder()
-        if let recievedCollection = try? decoder.decode(ShareableCollection.self, from: recievedCollectionEncoded) {
-          store.update(action: LibraryAction.cueRecievedCollection(shareableCollection: recievedCollection))
+      if let receivedCollectionEncoded = Data(base64Encoded: (params!.first(where: { $0.name == "c" })?.value!)!) {
+        do {
+          let shareableCollection = try JSONDecoder().decode(ShareableCollection.self, from: receivedCollectionEncoded)
+          store.update(action: LibraryAction.cueCollection(shareableCollection: shareableCollection))
+        } catch {
+          print("Could not decode received collection")
         }
       }
     }
   }
   
-  static func expandCollection(shareableCollection: ShareableCollection) {
-    let collection = Collection(name: shareableCollection.collectionName, curator: shareableCollection.collectionCurator)
-
+  static func expandShareableCollection(shareableCollection: ShareableCollection) {
+    var collection = Collection()
+    collection.name = shareableCollection.collectionName
+    collection.curator = shareableCollection.collectionCurator
+    
     store.update(action: LibraryAction.addCollection(collection: collection))
 
     for (index, slot) in shareableCollection.collection.enumerated() {
