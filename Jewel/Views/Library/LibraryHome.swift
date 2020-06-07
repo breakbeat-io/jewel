@@ -17,19 +17,27 @@ struct LibraryHome: View {
   }
   
   var body: some View {
-    List {
-      ForEach(collections) { collection in
-        NavigationLink(destination: LibraryCollections(collection: collection)) {
-          VStack(alignment: .leading) {
-            CollectionCard(collection: collection)
+    Group {
+      if collections.count == 0 {
+        Text("Collections you have saved or people have shared with you will appear here.")
+          .multilineTextAlignment(.center)
+          .foregroundColor(Color.secondary)
+      } else {
+        List {
+          ForEach(collections) { collection in
+            NavigationLink(destination: LibraryCollections(collection: collection)) {
+              VStack(alignment: .leading) {
+                CollectionCard(collection: collection)
+              }
+            }
+          }
+          .onMove { (indexSet, index) in
+            self.store.update(action: LibraryAction.moveCollection(from: indexSet, to: index))
+          }
+          .onDelete {
+            self.store.update(action: LibraryAction.removeCollection(slotIndexes: $0))
           }
         }
-      }
-      .onMove { (indexSet, index) in
-        self.store.update(action: LibraryAction.moveCollection(from: indexSet, to: index))
-      }
-      .onDelete {
-        self.store.update(action: LibraryAction.removeCollection(slotIndexes: $0))
       }
     }
     .navigationBarTitle("Shared Collections")

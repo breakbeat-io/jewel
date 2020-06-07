@@ -11,7 +11,7 @@ import Foundation
 class ShareLinkProvider {
   
   enum SourceProvider: String, Codable {
-      case appleMusicAlbum
+    case appleMusicAlbum
   }
   
   struct ShareableCollection: Codable {
@@ -51,13 +51,13 @@ class ShareLinkProvider {
         shareableSlots.append(nil)
       }
     }
-
+    
     let shareableCollection = ShareableCollection(
       collectionName: collection.name == "My Collection" ? "\(collection.curator)'s Collection" : collection.name,
       collectionCurator: collection.curator,
       collection: shareableSlots
     )
-
+    
     do {
       let shareableCollectionJson = try JSONEncoder().encode(shareableCollection)
       return URL(string: "https://listenlater.link/s/?c=\(shareableCollectionJson.base64EncodedString())")!
@@ -76,7 +76,7 @@ class ShareLinkProvider {
       store.update(action: CollectionAction.setShareLinkError(errorState: true))
       return
     }
-
+    
     let longDynamicLink = "https://listenlater.page.link/?link=\(longLink.absoluteString)"
     
     let firebaseShortLinkBodyRaw = ["longDynamicLink": longDynamicLink]
@@ -85,18 +85,18 @@ class ShareLinkProvider {
       store.update(action: CollectionAction.setShareLinkError(errorState: true))
       return
     }
-
+    
     guard let firebaseApiKey = Bundle.main.infoDictionary?["FIREBASE_API_KEY"] as? String else {
       print ("No Firebase API key found!")
       store.update(action: CollectionAction.setShareLinkError(errorState: true))
       return
     }
-
+    
     let firebaseRestUrl = URL(string: "https://firebasedynamiclinks.googleapis.com/v1/shortLinks?key=\(firebaseApiKey)")!
     var request = URLRequest(url: firebaseRestUrl)
     request.httpMethod = "POST"
     request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-
+    
     let task = URLSession.shared.uploadTask(with: request, from: firebaseShortLinkBodyRawJSON) { data, response, error in
       if let error = error {
         print ("Firebase API threw error: \(error)")
@@ -133,7 +133,29 @@ class ShareLinkProvider {
   }
   
   static func processRecievedCollection(recievedCollectionUrl: URL) {
-    print(recievedCollectionUrl)
+    if let urlComponents = URLComponents(url: recievedCollectionUrl, resolvingAgainstBaseURL: true) {
+      let params = urlComponents.queryItems
+      if let recievedCollectionEncoded = Data(base64Encoded: (params!.first(where: { $0.name == "c" })?.value!)!) {
+        let decoder = JSONDecoder()
+        if let recievedCollection = try? decoder.decode(ShareableCollection.self, from: recievedCollectionEncoded) {
+          expandCollection(shareableCollection: recievedCollection)
+        }
+      }
+    }
+  }
+  
+  private static func expandCollection(shareableCollection: ShareableCollection) {
+    let sharedCollection = Collection(name: shareableCollection.collectionName, curator: shareableCollection.collectionCurator)
+    
+    for (index, slot) in shareableCollection.collection.enumerated() {
+      if slot?.sourceProvider == SourceProvider.appleMusicAlbum {
+        // here will put the album in the collection
+        //            addContentToSlot(contentId: slot!.sourceRef, expand, slotIndex: index)
+      }
+    }
+    
+    store.update(action: LibraryAction.addCollection(collection: sharedCollection))
+    
   }
   
 }
