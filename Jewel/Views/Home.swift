@@ -14,8 +14,8 @@ struct Home: View {
   
   private var recievedCollectionCued: Binding<Bool> {
     Binding (
-      get: { self.store.state.library.recievedCollectionCued },
-      set: { self.store.update(action: LibraryAction.setRecievedCollectioCued(cuedState: $0)) }
+      get: { self.store.state.library.recievedCollection != nil },
+      set: { print("User rejected shared collection: \($0)") }
     )
   }
   
@@ -35,6 +35,7 @@ struct Home: View {
                 self.store.update(action: LibraryAction.uncueRecievedCollection)
           },
               secondaryButton: .default(Text("Add").bold()) {
+                self.store.update(action: CollectionAction.setActiveState(activeState: false))
                 self.store.update(action: LibraryAction.commitRecievedCollection)
           })
       }

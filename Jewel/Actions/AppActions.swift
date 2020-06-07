@@ -37,7 +37,6 @@ enum LibraryAction: AppAction {
   case moveCollection(from: IndexSet, to: Int)
   case cueRecievedCollection(collection: Collection)
   case uncueRecievedCollection
-  case setRecievedCollectioCued(cuedState: Bool)
   case commitRecievedCollection
 }
 

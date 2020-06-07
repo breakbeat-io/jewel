@@ -123,21 +123,15 @@ func updateLibrary(library: Library, action: LibraryAction) -> Library {
     
   case .cueRecievedCollection(collection: let collection):
     newLibrary.recievedCollection = collection
-    newLibrary.recievedCollectionCued = true
 
   case .uncueRecievedCollection:
     newLibrary.recievedCollection = nil
-    newLibrary.recievedCollectionCued = false
-    
-  case .setRecievedCollectioCued(cuedState: let cuedState):
-    newLibrary.recievedCollectionCued = cuedState
     
   case .commitRecievedCollection:
     if let recievedCollection = newLibrary.recievedCollection {
       newLibrary.collections.append(recievedCollection)
     }
     newLibrary.recievedCollection = nil
-    newLibrary.recievedCollectionCued = false
     
   }
   
