@@ -25,6 +25,9 @@ func updateState(appState: AppState, action: AppAction) -> AppState {
   case is LibraryAction:
     newAppState.library = updateLibrary(library: newAppState.library, action: action as! LibraryAction)
     
+  case is SlotAction:
+    newAppState = updateSlots(state: newAppState, action: action as! SlotAction)
+    
   case is SearchAction:
     newAppState.search = updateSearch(search: newAppState.search, action: action as! SearchAction)
     
@@ -75,9 +78,6 @@ func updateCollection(collection: Collection, action: CollectionAction) -> Colle
   case .changeCollectionCurator(curator: let curator):
     newCollection.curator = curator
     
-  case .addAlbumToSlot(album: let album, slotIndex: let slotIndex):
-    newCollection.slots[slotIndex].album = album
-    
   case .removeAlbumFromSlot(slotIndexes: let slotIndexes):
     for i in slotIndexes {
       newCollection.slots[i] = Slot()
@@ -127,14 +127,28 @@ func updateLibrary(library: Library, action: LibraryAction) -> Library {
   case .uncueCollection:
     newLibrary.cuedCollection = nil
     
-  case .addAlbumToSlot(album: let album, slotIndex: let slotIndex, collectionId: let collectionId):
-    if let collectionIndex = newLibrary.collections.firstIndex(where: { $0.id == collectionId }) {
-      newLibrary.collections[collectionIndex].slots[slotIndex].album = album
-    }
-    
   }
   
   return newLibrary
+}
+
+func updateSlots(state: AppState, action: SlotAction) -> AppState {
+  var newState = state
+  
+  switch action {
+    
+  case .addAlbumToSlot(album: let album, slotIndex: let slotIndex, collectionId: let collectionId):
+    if newState.collection.id == collectionId {
+      newState.collection.slots[slotIndex].album = album
+    } else {
+      if let collectionIndex = newState.library.collections.firstIndex(where: { $0.id == collectionId }) {
+        newState.library.collections[collectionIndex].slots[slotIndex].album = album
+      }
+    }
+  }
+  
+  return newState
+  
 }
 
 func updateSearch(search: Search, action: SearchAction) -> Search {

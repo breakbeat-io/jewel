@@ -24,9 +24,9 @@ struct SearchResults: View {
   }
   
   var body: some View {
-    IfLet(searchResults) { results in
-      List(0..<results.count, id: \.self) { i in
-        IfLet(results[i].attributes) { result in
+    IfLet(searchResults) { albums in
+      List(0..<albums.count, id: \.self) { i in
+        IfLet(albums[i].attributes) { result in
           HStack {
             KFImage(result.artwork.url(forWidth: 50))
               .placeholder {
@@ -48,7 +48,7 @@ struct SearchResults: View {
             }
             Spacer()
             Button(action: {
-              RecordStore.purchase(albumId: results[i].id, slotIndex: self.slotIndex)
+              RecordStore.purchase(album: albums[i].id, forSlot: self.slotIndex, inCollection: self.store.state.collection.id)
               self.store.update(action: SearchAction.removeSearchResults)
               self.showing = false
             }, label:{

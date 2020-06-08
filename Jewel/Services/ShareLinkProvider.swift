@@ -155,7 +155,7 @@ class ShareLinkProvider {
 
     for (index, slot) in shareableCollection.collection.enumerated() {
       if slot?.sourceProvider == SourceProvider.appleMusicAlbum {
-        RecordStore.borrow(albumId: slot!.sourceRef, slotIndex: index, collectionId: collection.id)
+        RecordStore.purchase(album: slot!.sourceRef, forSlot: index, inCollection: collection.id)
       }
     }
   }

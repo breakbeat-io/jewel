@@ -12,5 +12,11 @@ struct AppState: Codable {
   var options: Options
   var collection: Collection
   var library: Library
-  var search: Search
+  var search = Search()
+  
+  enum CodingKeys: CodingKey {
+    case options
+    case collection
+    case library
+  }
 }
