@@ -43,15 +43,12 @@ struct UserCollectionButtons: View {
           ActionSheet(
             title: Text("Share this collection as \n \"\(store.state.library.userCollection.name)\" by \"\(store.state.library.userCollection.curator)\""),
             buttons: [
-              .default(Text("Send share link")) {
+              .default(Text("Send Share Link")) {
                 self.showShareLink = true
               },
               .default(Text("Add to my Collection Library")) {
                 self.store.update(action: LibraryAction.addSharedCollection(collection: self.store.state.library.userCollection))
                 self.store.update(action: LibraryAction.makeUserCollectionActive(activeState: false))
-              },
-              .default(Text("Update Collection Name")) {
-                self.showOptions = true
               },
               .cancel()
           ])

@@ -41,7 +41,7 @@ struct Home: View {
           .tabItem {
             Image(systemName: "rectangle.on.rectangle.angled")
               .imageScale(.medium)
-            Text("Shared Collections")
+            Text("Collection Library")
         }
         .tag("shared")
       }
