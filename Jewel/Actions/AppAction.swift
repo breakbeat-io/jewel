@@ -86,12 +86,6 @@ func updateCollection(collection: Collection, action: CollectionAction) -> Colle
   case .moveSlot(from: let from, to: let to):
     newCollection.slots.move(fromOffsets: from, toOffset: to)
     
-  case .setPlatformLinks(baseUrl: let baseUrl, platformLinks: let platformLinks):
-    let indices = newCollection.slots.enumerated().compactMap({ $1.album?.attributes?.url == baseUrl ? $0 : nil })
-    for i in indices {
-      newCollection.slots[i].playbackLinks = platformLinks
-    }
-    
   case .invalidateShareLinks:
     newCollection.shareLinkLong = nil
     newCollection.shareLinkShort = nil
@@ -143,6 +137,21 @@ func updateSlots(state: AppState, action: SlotAction) -> AppState {
     } else {
       if let collectionIndex = newState.library.collections.firstIndex(where: { $0.id == collectionId }) {
         newState.library.collections[collectionIndex].slots[slotIndex].album = album
+      }
+    }
+    
+  case .setPlatformLinks(baseUrl: let baseUrl, platformLinks: let platformLinks, collectionId: let collectionId):
+    if newState.collection.id == collectionId {
+      let indices = newState.collection.slots.enumerated().compactMap({ $1.album?.attributes?.url == baseUrl ? $0 : nil })
+      for i in indices {
+        newState.collection.slots[i].playbackLinks = platformLinks
+      }
+    } else {
+      if let collectionIndex = newState.library.collections.firstIndex(where: { $0.id == collectionId }) {
+        let indices = newState.library.collections[collectionIndex].slots.enumerated().compactMap({ $1.album?.attributes?.url == baseUrl ? $0 : nil })
+        for i in indices {
+          newState.library.collections[collectionIndex].slots[i].playbackLinks = platformLinks
+        }
       }
     }
   }

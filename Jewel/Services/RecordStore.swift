@@ -36,9 +36,9 @@ class RecordStore {
       if let album = album {
         DispatchQueue.main.async {
           store.update(action: SlotAction.addAlbumToSlot(album: album, slotIndex: slotIndex, collectionId: collectionId))
-//          if let baseUrl = album.attributes?.url {
-//            RecordStore.alternativeSuppliers(for: baseUrl)
-//          }
+          if let baseUrl = album.attributes?.url {
+            RecordStore.alternativeSuppliers(for: baseUrl, inCollection: collectionId)
+          }
         }
         
         if let error = error {
@@ -49,7 +49,7 @@ class RecordStore {
     })
   }
   
-  static func alternativeSuppliers(for baseUrl: URL) {
+  static func alternativeSuppliers(for baseUrl: URL, inCollection collectionId: UUID) {
     print("Platform Links: Populating links for \(baseUrl.absoluteString)")
     
     let request = URLRequest(url: URL(string: "https://api.song.link/v1-alpha.1/links?url=\(baseUrl.absoluteString)")!)
@@ -64,7 +64,7 @@ class RecordStore {
       if let data = data {
         if let decodedResponse = try? JSONDecoder().decode(OdesliResponse.self, from: data) {
           DispatchQueue.main.async {
-            store.update(action: CollectionAction.setPlatformLinks(baseUrl: baseUrl, platformLinks: decodedResponse))
+            store.update(action: SlotAction.setPlatformLinks(baseUrl: baseUrl, platformLinks: decodedResponse, collectionId: collectionId))
           }
           
           return

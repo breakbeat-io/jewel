@@ -22,7 +22,6 @@ enum CollectionAction: AppAction {
   case setActiveState(activeState: Bool)
   case changeCollectionName(name: String)
   case changeCollectionCurator(curator: String)
-  case setPlatformLinks(baseUrl: URL, platformLinks: OdesliResponse)
   case removeAlbumFromSlot(slotIndexes: IndexSet)
   case moveSlot(from: IndexSet, to: Int)
   case invalidateShareLinks
@@ -40,6 +39,7 @@ enum LibraryAction: AppAction {
 
 enum SlotAction: AppAction {
   case addAlbumToSlot(album: Album, slotIndex: Int, collectionId: UUID)
+  case setPlatformLinks(baseUrl: URL, platformLinks: OdesliResponse, collectionId: UUID)
 }
 
 enum SearchAction: AppAction {
