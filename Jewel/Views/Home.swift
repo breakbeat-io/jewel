@@ -12,6 +12,8 @@ struct Home: View {
   
   @EnvironmentObject var store: AppStore
   
+  @State private var isEditing: Bool = false
+  
   private var receivedCollectionCued: Binding<Bool> {
     Binding (
       get: { self.store.state.library.cuedCollection != nil },
@@ -20,12 +22,26 @@ struct Home: View {
   }
   
   var body: some View {
-    Group {
-      if store.state.library.userCollectionActive {
-        UserCollection()
-      } else {
-        SharedCollections()
+    NavigationView {
+      TabView {
+        UserCollection(isEditing: self.$isEditing)
+          .tabItem {
+            Image(systemName: "music.house")
+              .imageScale(.medium)
+            Text(store.state.library.userCollection.name)
+        }
+        SharedCollections(isEditing: self.$isEditing)
+          .tabItem {
+            Image(systemName: "rectangle.on.rectangle.angled")
+              .imageScale(.medium)
+            Text("Shared Collections")
+        }
       }
+      .navigationBarTitle(store.state.library.userCollectionActive ? self.store.state.library.userCollection.name : "Shared Collections")
+      .navigationBarItems(
+        leading: UserCollectionButtons(),
+        trailing: LibraryButtons(isEditing: self.$isEditing)
+      )
     }
     .alert(isPresented: receivedCollectionCued) {
       Alert(title: Text("Shared collection received."),
@@ -38,6 +54,9 @@ struct Home: View {
               ShareLinkProvider.expandShareableCollection(shareableCollection: self.store.state.library.cuedCollection!)
               self.store.update(action: LibraryAction.uncueSharedCollection)
         })
+    }
+    .onAppear {
+      UITableView.appearance().separatorStyle = .none
     }
   }
 }

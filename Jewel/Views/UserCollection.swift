@@ -13,13 +13,15 @@ struct UserCollection: View {
   
   @EnvironmentObject var store: AppStore
   
+  @Binding var isEditing: Bool
+  
   private var slots: [Slot] {
     store.state.library.userCollection.slots
   }
   
   var body: some View {
-    NavigationView {
-      GeometryReader { geo in
+    GeometryReader { geo in
+      VStack {
         List {
           ForEach(self.slots.indices, id: \.self) { slotIndex in
             Group {
@@ -39,7 +41,7 @@ struct UserCollection: View {
                   .deleteDisabled(true)
               }
             }
-            .frame(height: (geo.size.height - geo.safeAreaInsets.top - geo.safeAreaInsets.bottom) / CGFloat(self.slots.count))
+            .frame(height: (geo.size.height - geo.safeAreaInsets.bottom) / CGFloat(self.slots.count))
           }
           .onMove { (indexSet, index) in
             self.store.update(action: LibraryAction.moveSlot(from: indexSet, to: index))
@@ -48,15 +50,13 @@ struct UserCollection: View {
             self.store.update(action: LibraryAction.removeAlbumFromSlot(slotIndexes: $0))
           }
         }
-        .onAppear {
-          UITableView.appearance().separatorStyle = .none
-        }
-        .navigationBarTitle(self.store.state.library.userCollection.name)
-        .navigationBarItems(
-          leading: UserCollectionButtons(),
-          trailing: LibraryButtons()
-        )
+        .environment(\.editMode, .constant(self.isEditing ? EditMode.active : EditMode.inactive))
       }
+      .onAppear {
+        self.store.update(action: LibraryAction.setActiveState(activeState: true))
+        self.isEditing = false
+      }
+      
     }
   }
 }

@@ -1,27 +1,22 @@
 //
-//  NavigationBarItemsTrailing.swift
+//  LibraryButtons.swift
 //  Listen Later
 //
-//  Created by Greg Hepworth on 05/06/2020.
+//  Created by Greg Hepworth on 08/06/2020.
 //  Copyright © 2020 Breakbeat Ltd. All rights reserved.
 //
 
 import SwiftUI
 
 struct LibraryButtons: View {
-  @EnvironmentObject var store: AppStore
+  
+  @Binding var isEditing: Bool
   
   var body: some View {
-    HStack {
-      EditButton()
-        .padding(.leading)
-      Button(action: {
-        self.store.update(action: LibraryAction.toggleActive)
-      }) {
-        Image(systemName: "arrow.2.squarepath" )
-      }
-      .padding(.leading)
+    Button(action: {
+      self.isEditing.toggle()
+    }) {
+      Text(isEditing ? "Done" : "Edit")
     }
-    .padding(.vertical)
   }
 }
