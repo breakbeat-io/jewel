@@ -88,7 +88,7 @@ func updateLibrary(library: Library, action: LibraryAction) -> Library {
     newLibrary.userCollection.shareLinkError = errorState
     
   case .addSharedCollection(collection: let collection):
-    newLibrary.sharedCollections.append(collection)
+    newLibrary.sharedCollections.insert(collection, at: 0)
     
   case .removeSharedCollection(slotIndexes: let slotIndexes):
     newLibrary.sharedCollections.remove(atOffsets: slotIndexes)
