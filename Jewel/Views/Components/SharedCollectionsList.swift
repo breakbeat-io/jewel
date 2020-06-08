@@ -9,7 +9,7 @@
 import SwiftUI
 import HMV
 
-struct SharedCollection: View {
+struct SharedCollectionsList: View {
   
   var collection: Collection
   
@@ -25,17 +25,17 @@ struct SharedCollection: View {
             if self.slots[slotIndex].album != nil {
               ZStack {
                 IfLet(self.slots[slotIndex].album?.attributes) { attributes in
-                  FilledSlot(attributes: attributes)
+                  AlbumCard(albumName: attributes.name, albumArtist: attributes.artistName, albumArtwork: attributes.artwork.url(forWidth: 1000))
                 }
                 NavigationLink(
-                  destination: LibraryAlbumDetail(slot: self.slots[slotIndex])
+                  destination: AlbumDetail(slot: self.slots[slotIndex])
                 ){
                   EmptyView()
                 }
               }
             } else {
               RoundedRectangle(cornerRadius: 4)
-                .fill(Color.gray)
+                .fill(Color(UIColor.secondarySystemBackground))
             }
           }
           .frame(height: (geo.size.height - geo.safeAreaInsets.top - geo.safeAreaInsets.bottom) / CGFloat(self.slots.count))

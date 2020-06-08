@@ -23,9 +23,9 @@ struct Home: View {
     NavigationView {
       Group {
         if store.state.library.userCollectionActive {
-          CollectionHome()
+          UserCollectionHome()
         } else {
-          LibraryHome()
+          SharedCollectionsHome()
         }
       }
       .alert(isPresented: receivedCollectionCued) {

@@ -21,7 +21,7 @@
 		D249259E248145C20011F409 /* KingfisherSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = D249259D248145C20011F409 /* KingfisherSwiftUI */; };
 		D24925A224814AD60011F409 /* HMV in Frameworks */ = {isa = PBXBuildFile; productRef = D24925A124814AD60011F409 /* HMV */; };
 		D24925A424814CB60011F409 /* RecordStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24925A324814CB60011F409 /* RecordStore.swift */; };
-		D24C80CD248995D900EFACD8 /* LibraryHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24C80CC248995D900EFACD8 /* LibraryHome.swift */; };
+		D24C80CD248995D900EFACD8 /* SharedCollections.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24C80CC248995D900EFACD8 /* SharedCollections.swift */; };
 		D24C80CF248995F500EFACD8 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24C80CE248995F500EFACD8 /* Home.swift */; };
 		D24C80D124899D0C00EFACD8 /* Library.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24C80D024899D0C00EFACD8 /* Library.swift */; };
 		D27FB80E24868AF60014C05D /* Odesli.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27FB80D24868AF60014C05D /* Odesli.swift */; };
@@ -37,7 +37,7 @@
 		D2AB8467248113EB008B57F9 /* AppActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AB8466248113EB008B57F9 /* AppActions.swift */; };
 		D2AB84692481148D008B57F9 /* AppAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AB84682481148D008B57F9 /* AppAction.swift */; };
 		D2AB846B2481159D008B57F9 /* AppStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AB846A2481159D008B57F9 /* AppStore.swift */; };
-		D2AB846E248116A3008B57F9 /* CollectionHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AB846D248116A3008B57F9 /* CollectionHome.swift */; };
+		D2AB846E248116A3008B57F9 /* UserCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AB846D248116A3008B57F9 /* UserCollection.swift */; };
 		D2AC120B24859E2300C52D9E /* EmptySlotCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AC120A24859E2300C52D9E /* EmptySlotCard.swift */; };
 		D2AC12102485A65D00C52D9E /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AC120F2485A65D00C52D9E /* Collection.swift */; };
 		D2AC12122485A67000C52D9E /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AC12112485A67000C52D9E /* Search.swift */; };
@@ -50,7 +50,7 @@
 		D2D78597248AFAB400E0CC63 /* NavigationBarItemsTrailing.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D78596248AFAB400E0CC63 /* NavigationBarItemsTrailing.swift */; };
 		D2F8D14C248A6451008C29C3 /* CollectionCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F8D14B248A6451008C29C3 /* CollectionCard.swift */; };
 		D2F8D14E248A666C008C29C3 /* CardArtworkComposite.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F8D14D248A666C008C29C3 /* CardArtworkComposite.swift */; };
-		D2F8D150248A6DF1008C29C3 /* LibraryCollections.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F8D14F248A6DF1008C29C3 /* LibraryCollections.swift */; };
+		D2F8D150248A6DF1008C29C3 /* SharedCollectionsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F8D14F248A6DF1008C29C3 /* SharedCollectionsList.swift */; };
 		D2F8D164248A7E2B008C29C3 /* TrackList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F8D163248A7E2B008C29C3 /* TrackList.swift */; };
 		D2F8D166248A7E42008C29C3 /* DiscTrackList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F8D165248A7E42008C29C3 /* DiscTrackList.swift */; };
 /* End PBXBuildFile section */
@@ -70,7 +70,7 @@
 		D2492598248143720011F409 /* SearchResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResults.swift; sourceTree = "<group>"; };
 		D249259A2481455A0011F409 /* IfLet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IfLet.swift; sourceTree = "<group>"; };
 		D24925A324814CB60011F409 /* RecordStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordStore.swift; sourceTree = "<group>"; };
-		D24C80CC248995D900EFACD8 /* LibraryHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryHome.swift; sourceTree = "<group>"; };
+		D24C80CC248995D900EFACD8 /* SharedCollections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedCollections.swift; sourceTree = "<group>"; };
 		D24C80CE248995F500EFACD8 /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
 		D24C80D024899D0C00EFACD8 /* Library.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Library.swift; sourceTree = "<group>"; };
 		D27FB80D24868AF60014C05D /* Odesli.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Odesli.swift; sourceTree = "<group>"; };
@@ -87,7 +87,7 @@
 		D2AB8466248113EB008B57F9 /* AppActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppActions.swift; sourceTree = "<group>"; };
 		D2AB84682481148D008B57F9 /* AppAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAction.swift; sourceTree = "<group>"; };
 		D2AB846A2481159D008B57F9 /* AppStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStore.swift; sourceTree = "<group>"; };
-		D2AB846D248116A3008B57F9 /* CollectionHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionHome.swift; sourceTree = "<group>"; };
+		D2AB846D248116A3008B57F9 /* UserCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCollection.swift; sourceTree = "<group>"; };
 		D2AC120A24859E2300C52D9E /* EmptySlotCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptySlotCard.swift; sourceTree = "<group>"; };
 		D2AC120E2485A20400C52D9E /* secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = secrets.xcconfig; sourceTree = "<group>"; };
 		D2AC120F2485A65D00C52D9E /* Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
@@ -101,7 +101,7 @@
 		D2D78596248AFAB400E0CC63 /* NavigationBarItemsTrailing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarItemsTrailing.swift; sourceTree = "<group>"; };
 		D2F8D14B248A6451008C29C3 /* CollectionCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCard.swift; sourceTree = "<group>"; };
 		D2F8D14D248A666C008C29C3 /* CardArtworkComposite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardArtworkComposite.swift; sourceTree = "<group>"; };
-		D2F8D14F248A6DF1008C29C3 /* LibraryCollections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryCollections.swift; sourceTree = "<group>"; };
+		D2F8D14F248A6DF1008C29C3 /* SharedCollectionsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedCollectionsList.swift; sourceTree = "<group>"; };
 		D2F8D163248A7E2B008C29C3 /* TrackList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackList.swift; sourceTree = "<group>"; };
 		D2F8D165248A7E42008C29C3 /* DiscTrackList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscTrackList.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -214,8 +214,8 @@
 			isa = PBXGroup;
 			children = (
 				D24C80CE248995F500EFACD8 /* Home.swift */,
-				D2F8D14A248A641F008C29C3 /* Collection */,
-				D2F8D149248A6409008C29C3 /* Library */,
+				D2AB846D248116A3008B57F9 /* UserCollection.swift */,
+				D24C80CC248995D900EFACD8 /* SharedCollections.swift */,
 				D288174B248BEB0C00EB47C2 /* Sharing */,
 				D2B4FD8F248456940028D7A4 /* Options */,
 				D24925932481410F0011F409 /* Search */,
@@ -263,23 +263,6 @@
 			path = Options;
 			sourceTree = "<group>";
 		};
-		D2F8D149248A6409008C29C3 /* Library */ = {
-			isa = PBXGroup;
-			children = (
-				D24C80CC248995D900EFACD8 /* LibraryHome.swift */,
-				D2F8D14F248A6DF1008C29C3 /* LibraryCollections.swift */,
-			);
-			path = Library;
-			sourceTree = "<group>";
-		};
-		D2F8D14A248A641F008C29C3 /* Collection */ = {
-			isa = PBXGroup;
-			children = (
-				D2AB846D248116A3008B57F9 /* CollectionHome.swift */,
-			);
-			path = Collection;
-			sourceTree = "<group>";
-		};
 		D2F8D162248A7E1A008C29C3 /* Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -287,6 +270,7 @@
 				D2D78596248AFAB400E0CC63 /* NavigationBarItemsTrailing.swift */,
 				D2AC120A24859E2300C52D9E /* EmptySlotCard.swift */,
 				D2D78592248AF2E900E0CC63 /* AlbumCard.swift */,
+				D2F8D14F248A6DF1008C29C3 /* SharedCollectionsList.swift */,
 				D2F8D14B248A6451008C29C3 /* CollectionCard.swift */,
 				D2F8D14D248A666C008C29C3 /* CardArtworkComposite.swift */,
 				D225749F2482A71C004E83E1 /* ObservedAlbumDetail.swift */,
@@ -382,7 +366,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D2492597248142660011F409 /* SearchBar.swift in Sources */,
-				D2F8D150248A6DF1008C29C3 /* LibraryCollections.swift in Sources */,
+				D2F8D150248A6DF1008C29C3 /* SharedCollectionsList.swift in Sources */,
 				D249259B2481455A0011F409 /* IfLet.swift in Sources */,
 				D27FB812248693AF0014C05D /* Slot.swift in Sources */,
 				D27FB80E24868AF60014C05D /* Odesli.swift in Sources */,
@@ -402,7 +386,7 @@
 				D28AD1B7248BB148009B584A /* PlaybackLinks.swift in Sources */,
 				D24C80D124899D0C00EFACD8 /* Library.swift in Sources */,
 				D2AB846B2481159D008B57F9 /* AppStore.swift in Sources */,
-				D2AB846E248116A3008B57F9 /* CollectionHome.swift in Sources */,
+				D2AB846E248116A3008B57F9 /* UserCollection.swift in Sources */,
 				D2AC12102485A65D00C52D9E /* Collection.swift in Sources */,
 				D2B4FD95248458300028D7A4 /* Bundle+BuildNumber.swift in Sources */,
 				D2B4FD91248456B20028D7A4 /* OptionsHome.swift in Sources */,
@@ -411,7 +395,7 @@
 				D2B4FD93248458000028D7A4 /* Footer.swift in Sources */,
 				D22574A02482A71C004E83E1 /* ObservedAlbumDetail.swift in Sources */,
 				D2AC120B24859E2300C52D9E /* EmptySlotCard.swift in Sources */,
-				D24C80CD248995D900EFACD8 /* LibraryHome.swift in Sources */,
+				D24C80CD248995D900EFACD8 /* SharedCollections.swift in Sources */,
 				D28AD1B5248BACB2009B584A /* PlaybackLink.swift in Sources */,
 				D288174A248BEABF00EB47C2 /* ShareSheet.swift in Sources */,
 				D2AB8467248113EB008B57F9 /* AppActions.swift in Sources */,

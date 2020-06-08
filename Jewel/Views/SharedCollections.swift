@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct LibraryHome: View {
+struct SharedCollectionsHome: View {
   
   @EnvironmentObject var store: AppStore
   
@@ -25,7 +25,7 @@ struct LibraryHome: View {
       } else {
         List {
           ForEach(collections) { collection in
-            NavigationLink(destination: LibraryCollections(collection: collection)) {
+            NavigationLink(destination: SharedCollectionsList(collection: collection)) {
               VStack(alignment: .leading) {
                 CollectionCard(collection: collection)
               }
