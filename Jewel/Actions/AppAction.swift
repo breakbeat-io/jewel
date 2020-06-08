@@ -10,7 +10,7 @@ import Foundation
 import HMV
 
 func updateState(appState: AppState, action: AppAction) -> AppState {
-//  print("Performing action: \(action)")
+  //  print("Performing action: \(action)")
   
   var newAppState = appState
   
@@ -19,14 +19,8 @@ func updateState(appState: AppState, action: AppAction) -> AppState {
   case is OptionsAction:
     newAppState.options = updateOptions(options: newAppState.options, action: action as! OptionsAction)
     
-  case is CollectionAction:
-    newAppState.collection = updateCollection(collection: newAppState.collection, action: action as! CollectionAction)
-    
   case is LibraryAction:
     newAppState.library = updateLibrary(library: newAppState.library, action: action as! LibraryAction)
-    
-  case is SlotAction:
-    newAppState = updateSlots(state: newAppState, action: action as! SlotAction)
     
   case is SearchAction:
     newAppState.search = updateSearch(search: newAppState.search, action: action as! SearchAction)
@@ -60,104 +54,84 @@ func updateOptions(options: Options, action: OptionsAction) -> Options {
   return newOptions
 }
 
-
-func updateCollection(collection: Collection, action: CollectionAction) -> Collection {
-  var newCollection = collection
-  
-  switch action {
-    
-  case .toggleActive:
-    newCollection.active.toggle()
-    
-  case .setActiveState(activeState: let activeState):
-    newCollection.active = activeState
-    
-  case .changeCollectionName(name: let name):
-    newCollection.name = name
-    
-  case .changeCollectionCurator(curator: let curator):
-    newCollection.curator = curator
-    
-  case .removeAlbumFromSlot(slotIndexes: let slotIndexes):
-    for i in slotIndexes {
-      newCollection.slots[i] = Slot()
-    }
-    
-  case .moveSlot(from: let from, to: let to):
-    newCollection.slots.move(fromOffsets: from, toOffset: to)
-    
-  case .invalidateShareLinks:
-    newCollection.shareLinkLong = nil
-    newCollection.shareLinkShort = nil
-    
-  case .setShareLinks(shareLinkLong: let shareLinkLong, shareLinkShort: let shareLinkShort):
-    newCollection.shareLinkLong = shareLinkLong
-    newCollection.shareLinkShort = shareLinkShort
-    
-  case .setShareLinkError(errorState: let errorState):
-    newCollection.shareLinkError = errorState
-  }
-  
-  return newCollection
-}
-
 func updateLibrary(library: Library, action: LibraryAction) -> Library {
   var newLibrary = library
   
   switch action {
     
-  case .addCollection(collection: let collection):
-    newLibrary.collections.append(collection)
+  case .toggleActive:
+    newLibrary.userCollection.active.toggle()
     
-  case .removeCollection(slotIndexes: let slotIndexes):
-    newLibrary.collections.remove(atOffsets: slotIndexes)
+  case .setActiveState(activeState: let activeState):
+    newLibrary.userCollection.active = activeState
     
-  case .moveCollection(from: let from, to: let to):
-    newLibrary.collections.move(fromOffsets: from, toOffset: to)
+  case .changeUserCollectionName(name: let name):
+    newLibrary.userCollection.name = name
     
-  case .cueCollection(shareableCollection: let shareableCollection):
+  case .changeUserCollectionCurator(curator: let curator):
+    newLibrary.userCollection.curator = curator
+    
+  case .removeAlbumFromSlot(slotIndexes: let slotIndexes):
+    for i in slotIndexes {
+      newLibrary.userCollection.slots[i] = Slot()
+    }
+    
+  case .moveSlot(from: let from, to: let to):
+    newLibrary.userCollection.slots.move(fromOffsets: from, toOffset: to)
+    
+  case .invalidateShareLinks:
+    newLibrary.userCollection.shareLinkLong = nil
+    newLibrary.userCollection.shareLinkShort = nil
+    
+  case .setShareLinks(shareLinkLong: let shareLinkLong, shareLinkShort: let shareLinkShort):
+    newLibrary.userCollection.shareLinkLong = shareLinkLong
+    newLibrary.userCollection.shareLinkShort = shareLinkShort
+    
+  case .setShareLinkError(errorState: let errorState):
+    newLibrary.userCollection.shareLinkError = errorState
+    
+  case .addSharedCollection(collection: let collection):
+    newLibrary.sharedCollections.append(collection)
+    
+  case .removeSharedCollection(slotIndexes: let slotIndexes):
+    newLibrary.sharedCollections.remove(atOffsets: slotIndexes)
+    
+  case .moveSharedCollection(from: let from, to: let to):
+    newLibrary.sharedCollections.move(fromOffsets: from, toOffset: to)
+    
+  case .cueSharedCollection(shareableCollection: let shareableCollection):
     newLibrary.cuedCollection = shareableCollection
-
-  case .uncueCollection:
+    
+  case .uncueSharedCollection:
     newLibrary.cuedCollection = nil
     
-  }
-  
-  return newLibrary
-}
-
-func updateSlots(state: AppState, action: SlotAction) -> AppState {
-  var newState = state
-  
-  switch action {
-    
   case .addAlbumToSlot(album: let album, slotIndex: let slotIndex, collectionId: let collectionId):
-    if newState.collection.id == collectionId {
-      newState.collection.slots[slotIndex].album = album
+    if newLibrary.userCollection.id == collectionId {
+      newLibrary.userCollection.slots[slotIndex].album = album
     } else {
-      if let collectionIndex = newState.library.collections.firstIndex(where: { $0.id == collectionId }) {
-        newState.library.collections[collectionIndex].slots[slotIndex].album = album
+      if let collectionIndex = newLibrary.sharedCollections.firstIndex(where: { $0.id == collectionId }) {
+        newLibrary.sharedCollections[collectionIndex].slots[slotIndex].album = album
       }
     }
     
   case .setPlatformLinks(baseUrl: let baseUrl, platformLinks: let platformLinks, collectionId: let collectionId):
-    if newState.collection.id == collectionId {
-      let indices = newState.collection.slots.enumerated().compactMap({ $1.album?.attributes?.url == baseUrl ? $0 : nil })
+    if newLibrary.userCollection.id == collectionId {
+      let indices = newLibrary.userCollection.slots.enumerated().compactMap({ $1.album?.attributes?.url == baseUrl ? $0 : nil })
       for i in indices {
-        newState.collection.slots[i].playbackLinks = platformLinks
+        newLibrary.userCollection.slots[i].playbackLinks = platformLinks
       }
     } else {
-      if let collectionIndex = newState.library.collections.firstIndex(where: { $0.id == collectionId }) {
-        let indices = newState.library.collections[collectionIndex].slots.enumerated().compactMap({ $1.album?.attributes?.url == baseUrl ? $0 : nil })
+      if let collectionIndex = newLibrary.sharedCollections.firstIndex(where: { $0.id == collectionId }) {
+        let indices = newLibrary.sharedCollections[collectionIndex].slots.enumerated().compactMap({ $1.album?.attributes?.url == baseUrl ? $0 : nil })
         for i in indices {
-          newState.library.collections[collectionIndex].slots[i].playbackLinks = platformLinks
+          newLibrary.sharedCollections[collectionIndex].slots[i].playbackLinks = platformLinks
         }
       }
     }
+    
   }
   
-  return newState
-  
+  return newLibrary
 }
 
 func updateSearch(search: Search, action: SearchAction) -> Search {

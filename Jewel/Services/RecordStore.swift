@@ -35,7 +35,7 @@ class RecordStore {
     RecordStore.appleMusic.album(id: albumId, completion: { album, error in
       if let album = album {
         DispatchQueue.main.async {
-          store.update(action: SlotAction.addAlbumToSlot(album: album, slotIndex: slotIndex, collectionId: collectionId))
+          store.update(action: LibraryAction.addAlbumToSlot(album: album, slotIndex: slotIndex, collectionId: collectionId))
           if let baseUrl = album.attributes?.url {
             RecordStore.alternativeSuppliers(for: baseUrl, inCollection: collectionId)
           }
@@ -64,7 +64,7 @@ class RecordStore {
       if let data = data {
         if let decodedResponse = try? JSONDecoder().decode(OdesliResponse.self, from: data) {
           DispatchQueue.main.async {
-            store.update(action: SlotAction.setPlatformLinks(baseUrl: baseUrl, platformLinks: decodedResponse, collectionId: collectionId))
+            store.update(action: LibraryAction.setPlatformLinks(baseUrl: baseUrl, platformLinks: decodedResponse, collectionId: collectionId))
           }
           
           return

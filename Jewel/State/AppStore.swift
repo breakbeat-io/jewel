@@ -28,9 +28,8 @@ final class AppStore: ObservableObject {
     }
     
     let options = Options()
-    let collection = Collection()
-    let library = Library()
-    let appState = AppState(options: options, collection: collection, library: library)
+    let library = Library(userCollection: Collection(), sharedCollections: [Collection]())
+    let appState = AppState(options: options, library: library)
     self.state = appState
   }
   

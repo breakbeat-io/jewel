@@ -32,10 +32,10 @@ struct OptionsHome: View {
             HStack(alignment: .firstTextBaseline) {
               Text("Collection Name")
               TextField(
-                store.state.collection.name,
+                store.state.library.userCollection.name,
                 text: $collectionName,
                 onCommit: {
-                  self.store.update(action: CollectionAction.changeCollectionName(name: self.collectionName))
+                  self.store.update(action: LibraryAction.changeUserCollectionName(name: self.collectionName))
                   self.showing = false
               }
               ).foregroundColor(.accentColor)
@@ -43,10 +43,10 @@ struct OptionsHome: View {
             HStack(alignment: .firstTextBaseline) {
               Text("Curator")
               TextField(
-                store.state.collection.curator,
+                store.state.library.userCollection.curator,
                 text: $collectionCurator,
                 onCommit: {
-                  self.store.update(action: CollectionAction.changeCollectionCurator(curator: self.collectionCurator))
+                  self.store.update(action: LibraryAction.changeUserCollectionCurator(curator: self.collectionCurator))
                   self.showing = false
               }
               ).foregroundColor(.accentColor)

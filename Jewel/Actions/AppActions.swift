@@ -17,29 +17,23 @@ enum OptionsAction: AppAction {
   case reset
 }
 
-enum CollectionAction: AppAction {
+enum LibraryAction: AppAction {
   case toggleActive
   case setActiveState(activeState: Bool)
-  case changeCollectionName(name: String)
-  case changeCollectionCurator(curator: String)
+  case changeUserCollectionName(name: String)
+  case changeUserCollectionCurator(curator: String)
+  case addAlbumToSlot(album: Album, slotIndex: Int, collectionId: UUID)
   case removeAlbumFromSlot(slotIndexes: IndexSet)
+  case setPlatformLinks(baseUrl: URL, platformLinks: OdesliResponse, collectionId: UUID)
   case moveSlot(from: IndexSet, to: Int)
   case invalidateShareLinks
   case setShareLinks(shareLinkLong: URL, shareLinkShort: URL)
   case setShareLinkError(errorState: Bool)
-}
-
-enum LibraryAction: AppAction {
-  case addCollection(collection: Collection)
-  case removeCollection(slotIndexes: IndexSet)
-  case moveCollection(from: IndexSet, to: Int)
-  case cueCollection(shareableCollection: ShareLinkProvider.ShareableCollection)
-  case uncueCollection
-}
-
-enum SlotAction: AppAction {
-  case addAlbumToSlot(album: Album, slotIndex: Int, collectionId: UUID)
-  case setPlatformLinks(baseUrl: URL, platformLinks: OdesliResponse, collectionId: UUID)
+  case addSharedCollection(collection: Collection)
+  case removeSharedCollection(slotIndexes: IndexSet)
+  case moveSharedCollection(from: IndexSet, to: Int)
+  case cueSharedCollection(shareableCollection: ShareLinkProvider.ShareableCollection)
+  case uncueSharedCollection
 }
 
 enum SearchAction: AppAction {

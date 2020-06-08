@@ -13,7 +13,7 @@ struct LibraryHome: View {
   @EnvironmentObject var store: AppStore
   
   private var collections: [Collection] {
-    store.state.library.collections
+    store.state.library.sharedCollections
   }
   
   var body: some View {
@@ -32,10 +32,10 @@ struct LibraryHome: View {
             }
           }
           .onMove { (indexSet, index) in
-            self.store.update(action: LibraryAction.moveCollection(from: indexSet, to: index))
+            self.store.update(action: LibraryAction.moveSharedCollection(from: indexSet, to: index))
           }
           .onDelete {
-            self.store.update(action: LibraryAction.removeCollection(slotIndexes: $0))
+            self.store.update(action: LibraryAction.removeSharedCollection(slotIndexes: $0))
           }
         }
       }

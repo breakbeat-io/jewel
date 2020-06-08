@@ -13,7 +13,7 @@ struct ShareSheetLoader: View {
   @EnvironmentObject var store: AppStore
   
   private var collection: Collection {
-    store.state.collection
+    store.state.library.userCollection
   }
   
   var body: some View {
@@ -45,7 +45,7 @@ struct ShareSheetLoader: View {
   
   private func refreshShareLinks() {
     
-    self.store.update(action: CollectionAction.setShareLinkError(errorState: false))
+    self.store.update(action: LibraryAction.setShareLinkError(errorState: false))
     
     let newLongLink = ShareLinkProvider.generateLongLink(for: collection)
     

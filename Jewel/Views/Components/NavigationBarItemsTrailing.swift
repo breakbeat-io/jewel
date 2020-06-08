@@ -16,7 +16,7 @@ struct NavigationBarItemsTrailing: View {
       EditButton()
         .padding(.leading)
       Button(action: {
-        self.store.update(action: CollectionAction.toggleActive)
+        self.store.update(action: LibraryAction.toggleActive)
       }) {
         Image(systemName: "arrow.2.squarepath" )
       }

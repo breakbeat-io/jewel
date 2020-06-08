@@ -16,7 +16,7 @@ struct ObservedAlbumDetail: View {
   let slotId: Int
   
   private var slot: Slot {
-      store.state.collection.slots[slotId]
+      store.state.library.userCollection.slots[slotId]
   }
   
   var body: some View {

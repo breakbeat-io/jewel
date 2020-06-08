@@ -14,7 +14,7 @@ struct CollectionHome: View {
   @EnvironmentObject var store: AppStore
   
   private var slots: [Slot] {
-    store.state.collection.slots
+    store.state.library.userCollection.slots
   }
   
   var body: some View {
@@ -41,16 +41,16 @@ struct CollectionHome: View {
           .frame(height: (geo.size.height - geo.safeAreaInsets.top - geo.safeAreaInsets.bottom) / CGFloat(self.slots.count))
         }
         .onMove { (indexSet, index) in
-          self.store.update(action: CollectionAction.moveSlot(from: indexSet, to: index))
+          self.store.update(action: LibraryAction.moveSlot(from: indexSet, to: index))
         }
         .onDelete {
-          self.store.update(action: CollectionAction.removeAlbumFromSlot(slotIndexes: $0))
+          self.store.update(action: LibraryAction.removeAlbumFromSlot(slotIndexes: $0))
         }
       }
       .onAppear {
         UITableView.appearance().separatorStyle = .none
       }
-      .navigationBarTitle(self.store.state.collection.name)
+      .navigationBarTitle(self.store.state.library.userCollection.name)
       .navigationBarItems(
         leading: CollectionNavigationButtonsLeading(),
         trailing: NavigationBarItemsTrailing()
@@ -68,7 +68,7 @@ struct CollectionNavigationButtonsLeading: View {
   @State private var showShareLink: Bool = false
   
   private var collectionEmpty: Bool {
-    store.state.collection.slots.filter( { $0.album != nil }).count == 0
+    store.state.library.userCollection.slots.filter( { $0.album != nil }).count == 0
   }
   
   var body: some View {
@@ -82,14 +82,14 @@ struct CollectionNavigationButtonsLeading: View {
       .disabled(collectionEmpty)
       .actionSheet(isPresented: $showSharing) {
         ActionSheet(
-          title: Text("Share this collection as \n \"\(store.state.collection.name)\" by \"\(store.state.collection.curator)\""),
+          title: Text("Share this collection as \n \"\(store.state.library.userCollection.name)\" by \"\(store.state.library.userCollection.curator)\""),
           buttons: [
             .default(Text("Send share link")) {
               self.showShareLink = true
             },
             .default(Text("Add to my Collection Library")) {
-              self.store.update(action: LibraryAction.addCollection(collection: self.store.state.collection))
-              self.store.update(action: CollectionAction.setActiveState(activeState: false))
+              self.store.update(action: LibraryAction.addSharedCollection(collection: self.store.state.library.userCollection))
+              self.store.update(action: LibraryAction.setActiveState(activeState: false))
             },
             .default(Text("Update Collection Name")) {
               self.showOptions = true

@@ -10,10 +10,12 @@ import Foundation
 import HMV
 
 struct Library: Codable {
-  var collections = [Collection]()
+  var userCollection: Collection
+  var sharedCollections: [Collection]
   var cuedCollection: ShareLinkProvider.ShareableCollection?
   
   enum CodingKeys: CodingKey {
-    case collections
+    case userCollection
+    case sharedCollections
   }
 }

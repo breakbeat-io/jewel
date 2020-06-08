@@ -69,11 +69,11 @@ class ShareLinkProvider {
   
   static func setShareLinks(for collection: Collection) {
     
-    store.update(action: CollectionAction.invalidateShareLinks)
+    store.update(action: LibraryAction.invalidateShareLinks)
     
     guard let longLink = generateLongLink(for: collection) else {
       print("Could not create long link")
-      store.update(action: CollectionAction.setShareLinkError(errorState: true))
+      store.update(action: LibraryAction.setShareLinkError(errorState: true))
       return
     }
     
@@ -82,13 +82,13 @@ class ShareLinkProvider {
     let firebaseShortLinkBodyRaw = ["longDynamicLink": longDynamicLink]
     guard let firebaseShortLinkBodyRawJSON = try? JSONEncoder().encode(firebaseShortLinkBodyRaw) else {
       print("Could not encode link to JSON")
-      store.update(action: CollectionAction.setShareLinkError(errorState: true))
+      store.update(action: LibraryAction.setShareLinkError(errorState: true))
       return
     }
     
     guard let firebaseApiKey = Bundle.main.infoDictionary?["FIREBASE_API_KEY"] as? String else {
       print ("No Firebase API key found!")
-      store.update(action: CollectionAction.setShareLinkError(errorState: true))
+      store.update(action: LibraryAction.setShareLinkError(errorState: true))
       return
     }
     
@@ -100,13 +100,13 @@ class ShareLinkProvider {
     let task = URLSession.shared.uploadTask(with: request, from: firebaseShortLinkBodyRawJSON) { data, response, error in
       if let error = error {
         print ("Firebase API threw error: \(error)")
-        store.update(action: CollectionAction.setShareLinkError(errorState: true))
+        store.update(action: LibraryAction.setShareLinkError(errorState: true))
         return
       }
       guard let response = response as? HTTPURLResponse,
         (200...299).contains(response.statusCode) else {
           print ("Firebase gave a server error")
-          store.update(action: CollectionAction.setShareLinkError(errorState: true))
+          store.update(action: LibraryAction.setShareLinkError(errorState: true))
           return
       }
       if let mimeType = response.mimeType,
@@ -116,16 +116,16 @@ class ShareLinkProvider {
           if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
             DispatchQueue.main.async {
               if let shortLink = json["shortLink"] as? String {
-                store.update(action: CollectionAction.setShareLinks(shareLinkLong: longLink, shareLinkShort: URL(string: shortLink)!))
+                store.update(action: LibraryAction.setShareLinks(shareLinkLong: longLink, shareLinkShort: URL(string: shortLink)!))
               } else {
                 print("There was another error")
-                store.update(action: CollectionAction.setShareLinkError(errorState: true))
+                store.update(action: LibraryAction.setShareLinkError(errorState: true))
               }
             }
           }
         } catch let error as NSError {
           print("Failed to load: \(error.localizedDescription)")
-          store.update(action: CollectionAction.setShareLinkError(errorState: true))
+          store.update(action: LibraryAction.setShareLinkError(errorState: true))
         }
       }
     }
@@ -138,7 +138,7 @@ class ShareLinkProvider {
       if let receivedCollectionEncoded = Data(base64Encoded: (params!.first(where: { $0.name == "c" })?.value!)!) {
         do {
           let shareableCollection = try JSONDecoder().decode(ShareableCollection.self, from: receivedCollectionEncoded)
-          store.update(action: LibraryAction.cueCollection(shareableCollection: shareableCollection))
+          store.update(action: LibraryAction.cueSharedCollection(shareableCollection: shareableCollection))
         } catch {
           print("Could not decode received collection")
         }
@@ -151,7 +151,7 @@ class ShareLinkProvider {
     collection.name = shareableCollection.collectionName
     collection.curator = shareableCollection.collectionCurator
     
-    store.update(action: LibraryAction.addCollection(collection: collection))
+    store.update(action: LibraryAction.addSharedCollection(collection: collection))
 
     for (index, slot) in shareableCollection.collection.enumerated() {
       if slot?.sourceProvider == SourceProvider.appleMusicAlbum {
