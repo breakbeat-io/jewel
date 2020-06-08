@@ -9,7 +9,7 @@
 import SwiftUI
 import HMV
 
-struct UserCollectionHome: View {
+struct UserCollection: View {
   
   @EnvironmentObject var store: AppStore
   

@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct SharedCollectionsHome: View {
+struct SharedCollections: View {
   
   @EnvironmentObject var store: AppStore
   
