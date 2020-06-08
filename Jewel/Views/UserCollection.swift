@@ -18,43 +18,45 @@ struct UserCollection: View {
   }
   
   var body: some View {
-    GeometryReader { geo in
-      List {
-        ForEach(self.slots.indices, id: \.self) { slotIndex in
-          Group {
-            if self.slots[slotIndex].album != nil {
-              ZStack {
-                IfLet(self.slots[slotIndex].album?.attributes) { attributes in
-                  AlbumCard(albumName: attributes.name, albumArtist: attributes.artistName, albumArtwork: attributes.artwork.url(forWidth: 1000))
+    NavigationView {
+      GeometryReader { geo in
+        List {
+          ForEach(self.slots.indices, id: \.self) { slotIndex in
+            Group {
+              if self.slots[slotIndex].album != nil {
+                ZStack {
+                  IfLet(self.slots[slotIndex].album?.attributes) { attributes in
+                    AlbumCard(albumName: attributes.name, albumArtist: attributes.artistName, albumArtwork: attributes.artwork.url(forWidth: 1000))
+                  }
+                  NavigationLink(
+                    destination: ObservedAlbumDetail(slotId: slotIndex)
+                  ){
+                    EmptyView()
+                  }
                 }
-                NavigationLink(
-                  destination: ObservedAlbumDetail(slotId: slotIndex)
-                ){
-                  EmptyView()
-                }
+              } else {
+                EmptySlotCard(slotIndex: slotIndex)
+                  .deleteDisabled(true)
               }
-            } else {
-              EmptySlotCard(slotIndex: slotIndex)
-                .deleteDisabled(true)
             }
+            .frame(height: (geo.size.height - geo.safeAreaInsets.top - geo.safeAreaInsets.bottom) / CGFloat(self.slots.count))
           }
-          .frame(height: (geo.size.height - geo.safeAreaInsets.top - geo.safeAreaInsets.bottom) / CGFloat(self.slots.count))
+          .onMove { (indexSet, index) in
+            self.store.update(action: LibraryAction.moveSlot(from: indexSet, to: index))
+          }
+          .onDelete {
+            self.store.update(action: LibraryAction.removeAlbumFromSlot(slotIndexes: $0))
+          }
         }
-        .onMove { (indexSet, index) in
-          self.store.update(action: LibraryAction.moveSlot(from: indexSet, to: index))
+        .onAppear {
+          UITableView.appearance().separatorStyle = .none
         }
-        .onDelete {
-          self.store.update(action: LibraryAction.removeAlbumFromSlot(slotIndexes: $0))
-        }
+        .navigationBarTitle(self.store.state.library.userCollection.name)
+        .navigationBarItems(
+          leading: UserCollectionButtons(),
+          trailing: LibraryButtons()
+        )
       }
-      .onAppear {
-        UITableView.appearance().separatorStyle = .none
-      }
-      .navigationBarTitle(self.store.state.library.userCollection.name)
-      .navigationBarItems(
-        leading: UserCollectionButtons(),
-        trailing: LibraryButtons()
-      )
     }
   }
 }

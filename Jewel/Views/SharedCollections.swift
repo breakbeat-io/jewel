@@ -17,32 +17,34 @@ struct SharedCollections: View {
   }
   
   var body: some View {
-    Group {
-      if collections.count == 0 {
-        Text("Collections you have saved or people have shared with you will appear here.")
-          .multilineTextAlignment(.center)
-          .foregroundColor(Color.secondary)
-      } else {
-        List {
-          ForEach(collections) { collection in
-            NavigationLink(destination: SharedCollectionsList(collection: collection)) {
-              VStack(alignment: .leading) {
-                CollectionCard(collection: collection)
+    NavigationView {
+      Group {
+        if collections.count == 0 {
+          Text("Collections you have saved or people have shared with you will appear here.")
+            .multilineTextAlignment(.center)
+            .foregroundColor(Color.secondary)
+        } else {
+          List {
+            ForEach(collections) { collection in
+              NavigationLink(destination: SharedCollectionsList(collection: collection)) {
+                VStack(alignment: .leading) {
+                  CollectionCard(collection: collection)
+                }
               }
             }
-          }
-          .onMove { (indexSet, index) in
-            self.store.update(action: LibraryAction.moveSharedCollection(from: indexSet, to: index))
-          }
-          .onDelete {
-            self.store.update(action: LibraryAction.removeSharedCollection(slotIndexes: $0))
+            .onMove { (indexSet, index) in
+              self.store.update(action: LibraryAction.moveSharedCollection(from: indexSet, to: index))
+            }
+            .onDelete {
+              self.store.update(action: LibraryAction.removeSharedCollection(slotIndexes: $0))
+            }
           }
         }
       }
+      .navigationBarTitle("Shared Collections")
+      .navigationBarItems(
+        trailing: LibraryButtons()
+      )
     }
-    .navigationBarTitle("Shared Collections")
-    .navigationBarItems(
-      trailing: LibraryButtons()
-    )
   }
 }

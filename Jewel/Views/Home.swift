@@ -20,26 +20,24 @@ struct Home: View {
   }
   
   var body: some View {
-    NavigationView {
-      Group {
-        if store.state.library.userCollectionActive {
-          UserCollection()
-        } else {
-          SharedCollections()
-        }
+    Group {
+      if store.state.library.userCollectionActive {
+        UserCollection()
+      } else {
+        SharedCollections()
       }
-      .alert(isPresented: receivedCollectionCued) {
-        Alert(title: Text("Shared collection received."),
-              message: Text("Would you like to add \"\(store.state.library.cuedCollection!.collectionName)\" by \"\(store.state.library.cuedCollection!.collectionCurator)\" to your Shared Library?"),
-              primaryButton: .cancel(Text("Cancel")) {
-                self.store.update(action: LibraryAction.uncueSharedCollection)
-          },
-              secondaryButton: .default(Text("Add").bold()) {
-                self.store.update(action: LibraryAction.setActiveState(activeState: false))
-                ShareLinkProvider.expandShareableCollection(shareableCollection: self.store.state.library.cuedCollection!)
-                self.store.update(action: LibraryAction.uncueSharedCollection)
-          })
-      }
+    }
+    .alert(isPresented: receivedCollectionCued) {
+      Alert(title: Text("Shared collection received."),
+            message: Text("Would you like to add \"\(store.state.library.cuedCollection!.collectionName)\" by \"\(store.state.library.cuedCollection!.collectionCurator)\" to your Shared Library?"),
+            primaryButton: .cancel(Text("Cancel")) {
+              self.store.update(action: LibraryAction.uncueSharedCollection)
+        },
+            secondaryButton: .default(Text("Add").bold()) {
+              self.store.update(action: LibraryAction.setActiveState(activeState: false))
+              ShareLinkProvider.expandShareableCollection(shareableCollection: self.store.state.library.cuedCollection!)
+              self.store.update(action: LibraryAction.uncueSharedCollection)
+        })
     }
   }
 }
