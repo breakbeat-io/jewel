@@ -60,10 +60,10 @@ func updateLibrary(library: Library, action: LibraryAction) -> Library {
   switch action {
     
   case .toggleActive:
-    newLibrary.userCollection.active.toggle()
+    newLibrary.userCollectionActive.toggle()
     
   case .setActiveState(activeState: let activeState):
-    newLibrary.userCollection.active = activeState
+    newLibrary.userCollectionActive = activeState
     
   case .changeUserCollectionName(name: let name):
     newLibrary.userCollection.name = name

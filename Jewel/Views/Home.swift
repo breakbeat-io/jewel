@@ -22,7 +22,7 @@ struct Home: View {
   var body: some View {
     NavigationView {
       Group {
-        if store.state.library.userCollection.active {
+        if store.state.library.userCollectionActive {
           CollectionHome()
         } else {
           LibraryHome()

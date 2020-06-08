@@ -10,7 +10,10 @@ import Foundation
 import HMV
 
 struct Library: Codable {
+  
   var userCollection: Collection
+  var userCollectionActive: Bool = true
+  
   var sharedCollections: [Collection]
   var cuedCollection: ShareLinkProvider.ShareableCollection?
   
