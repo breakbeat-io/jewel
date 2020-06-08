@@ -18,8 +18,7 @@ enum OptionsAction: AppAction {
 }
 
 enum LibraryAction: AppAction {
-  case toggleActive
-  case setActiveState(activeState: Bool)
+  case makeUserCollectionActive(activeState: Bool)
   case changeUserCollectionName(name: String)
   case changeUserCollectionCurator(curator: String)
   case addAlbumToSlot(album: Album, slotIndex: Int, collectionId: UUID)

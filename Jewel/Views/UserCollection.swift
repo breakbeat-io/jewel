@@ -53,7 +53,6 @@ struct UserCollection: View {
         .environment(\.editMode, .constant(self.isEditing ? EditMode.active : EditMode.inactive))
       }
       .onAppear {
-        self.store.update(action: LibraryAction.setActiveState(activeState: true))
         self.isEditing = false
       }
       

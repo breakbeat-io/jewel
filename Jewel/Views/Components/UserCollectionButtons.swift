@@ -48,7 +48,7 @@ struct UserCollectionButtons: View {
               },
               .default(Text("Add to my Collection Library")) {
                 self.store.update(action: LibraryAction.addSharedCollection(collection: self.store.state.library.userCollection))
-                self.store.update(action: LibraryAction.setActiveState(activeState: false))
+                self.store.update(action: LibraryAction.makeUserCollectionActive(activeState: false))
               },
               .default(Text("Update Collection Name")) {
                 self.showOptions = true

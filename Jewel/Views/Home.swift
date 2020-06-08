@@ -14,6 +14,12 @@ struct Home: View {
   
   @State private var isEditing: Bool = false
   
+  private var selectedTab: Binding<String> {
+    Binding (
+      get: { self.store.state.library.userCollectionActive ? "user" : "shared" },
+      set: { self.store.update(action: LibraryAction.makeUserCollectionActive(activeState: $0 == "user" ? true : false )) }
+    )
+  }
   private var receivedCollectionCued: Binding<Bool> {
     Binding (
       get: { self.store.state.library.cuedCollection != nil },
@@ -23,19 +29,21 @@ struct Home: View {
   
   var body: some View {
     NavigationView {
-      TabView {
+      TabView(selection: selectedTab) {
         UserCollection(isEditing: self.$isEditing)
           .tabItem {
             Image(systemName: "music.house")
               .imageScale(.medium)
             Text(store.state.library.userCollection.name)
         }
+        .tag("user")
         SharedCollections(isEditing: self.$isEditing)
           .tabItem {
             Image(systemName: "rectangle.on.rectangle.angled")
               .imageScale(.medium)
             Text("Shared Collections")
         }
+        .tag("shared")
       }
       .navigationBarTitle(store.state.library.userCollectionActive ? self.store.state.library.userCollection.name : "Shared Collections")
       .navigationBarItems(
@@ -50,7 +58,7 @@ struct Home: View {
               self.store.update(action: LibraryAction.uncueSharedCollection)
         },
             secondaryButton: .default(Text("Add").bold()) {
-              self.store.update(action: LibraryAction.setActiveState(activeState: false))
+              self.store.update(action: LibraryAction.makeUserCollectionActive(activeState: false))
               ShareLinkProvider.expandShareableCollection(shareableCollection: self.store.state.library.cuedCollection!)
               self.store.update(action: LibraryAction.uncueSharedCollection)
         })

@@ -47,7 +47,6 @@ struct SharedCollections: View {
       }
     }
     .onAppear {
-      self.store.update(action: LibraryAction.setActiveState(activeState: false))
       self.isEditing = false
     }
   }
