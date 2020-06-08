@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct NavigationBarItemsTrailing: View {
+struct LibraryButtons: View {
   @EnvironmentObject var store: AppStore
   
   var body: some View {

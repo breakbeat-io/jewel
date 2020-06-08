@@ -34,6 +34,7 @@
 		D28AD1B5248BACB2009B584A /* PlaybackLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28AD1B4248BACB2009B584A /* PlaybackLink.swift */; };
 		D28AD1B7248BB148009B584A /* PlaybackLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28AD1B6248BB148009B584A /* PlaybackLinks.swift */; };
 		D28AD1B9248BB5D4009B584A /* AlbumDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28AD1B8248BB5D4009B584A /* AlbumDetail.swift */; };
+		D29E7ACB248E933A0068C9BC /* UserCollectionButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29E7ACA248E933A0068C9BC /* UserCollectionButtons.swift */; };
 		D2AB8467248113EB008B57F9 /* AppActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AB8466248113EB008B57F9 /* AppActions.swift */; };
 		D2AB84692481148D008B57F9 /* AppAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AB84682481148D008B57F9 /* AppAction.swift */; };
 		D2AB846B2481159D008B57F9 /* AppStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AB846A2481159D008B57F9 /* AppStore.swift */; };
@@ -47,7 +48,7 @@
 		D2D7858F248A910A00E0CC63 /* AlbumCover.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D7858E248A910A00E0CC63 /* AlbumCover.swift */; };
 		D2D78591248AED2900E0CC63 /* AlternativePlaybackLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D78590248AED2900E0CC63 /* AlternativePlaybackLinks.swift */; };
 		D2D78593248AF2E900E0CC63 /* AlbumCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D78592248AF2E900E0CC63 /* AlbumCard.swift */; };
-		D2D78597248AFAB400E0CC63 /* NavigationBarItemsTrailing.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D78596248AFAB400E0CC63 /* NavigationBarItemsTrailing.swift */; };
+		D2D78597248AFAB400E0CC63 /* LibraryButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D78596248AFAB400E0CC63 /* LibraryButtons.swift */; };
 		D2F8D14C248A6451008C29C3 /* CollectionCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F8D14B248A6451008C29C3 /* CollectionCard.swift */; };
 		D2F8D14E248A666C008C29C3 /* CardArtworkComposite.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F8D14D248A666C008C29C3 /* CardArtworkComposite.swift */; };
 		D2F8D150248A6DF1008C29C3 /* SharedCollectionsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F8D14F248A6DF1008C29C3 /* SharedCollectionsList.swift */; };
@@ -84,6 +85,7 @@
 		D28AD1B4248BACB2009B584A /* PlaybackLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackLink.swift; sourceTree = "<group>"; };
 		D28AD1B6248BB148009B584A /* PlaybackLinks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackLinks.swift; sourceTree = "<group>"; };
 		D28AD1B8248BB5D4009B584A /* AlbumDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumDetail.swift; sourceTree = "<group>"; };
+		D29E7ACA248E933A0068C9BC /* UserCollectionButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCollectionButtons.swift; sourceTree = "<group>"; };
 		D2AB8466248113EB008B57F9 /* AppActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppActions.swift; sourceTree = "<group>"; };
 		D2AB84682481148D008B57F9 /* AppAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAction.swift; sourceTree = "<group>"; };
 		D2AB846A2481159D008B57F9 /* AppStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStore.swift; sourceTree = "<group>"; };
@@ -98,7 +100,7 @@
 		D2D7858E248A910A00E0CC63 /* AlbumCover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumCover.swift; sourceTree = "<group>"; };
 		D2D78590248AED2900E0CC63 /* AlternativePlaybackLinks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlternativePlaybackLinks.swift; sourceTree = "<group>"; };
 		D2D78592248AF2E900E0CC63 /* AlbumCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumCard.swift; sourceTree = "<group>"; };
-		D2D78596248AFAB400E0CC63 /* NavigationBarItemsTrailing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarItemsTrailing.swift; sourceTree = "<group>"; };
+		D2D78596248AFAB400E0CC63 /* LibraryButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryButtons.swift; sourceTree = "<group>"; };
 		D2F8D14B248A6451008C29C3 /* CollectionCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCard.swift; sourceTree = "<group>"; };
 		D2F8D14D248A666C008C29C3 /* CardArtworkComposite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardArtworkComposite.swift; sourceTree = "<group>"; };
 		D2F8D14F248A6DF1008C29C3 /* SharedCollectionsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedCollectionsList.swift; sourceTree = "<group>"; };
@@ -267,7 +269,8 @@
 			isa = PBXGroup;
 			children = (
 				D249259A2481455A0011F409 /* IfLet.swift */,
-				D2D78596248AFAB400E0CC63 /* NavigationBarItemsTrailing.swift */,
+				D29E7ACA248E933A0068C9BC /* UserCollectionButtons.swift */,
+				D2D78596248AFAB400E0CC63 /* LibraryButtons.swift */,
 				D2AC120A24859E2300C52D9E /* EmptySlotCard.swift */,
 				D2D78592248AF2E900E0CC63 /* AlbumCard.swift */,
 				D2F8D14F248A6DF1008C29C3 /* SharedCollectionsList.swift */,
@@ -366,6 +369,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D2492597248142660011F409 /* SearchBar.swift in Sources */,
+				D29E7ACB248E933A0068C9BC /* UserCollectionButtons.swift in Sources */,
 				D2F8D150248A6DF1008C29C3 /* SharedCollectionsList.swift in Sources */,
 				D249259B2481455A0011F409 /* IfLet.swift in Sources */,
 				D27FB812248693AF0014C05D /* Slot.swift in Sources */,
@@ -379,7 +383,7 @@
 				D221557E2481114A00A1F04A /* SceneDelegate.swift in Sources */,
 				D2D78593248AF2E900E0CC63 /* AlbumCard.swift in Sources */,
 				D2492599248143720011F409 /* SearchResults.swift in Sources */,
-				D2D78597248AFAB400E0CC63 /* NavigationBarItemsTrailing.swift in Sources */,
+				D2D78597248AFAB400E0CC63 /* LibraryButtons.swift in Sources */,
 				D24C80CF248995F500EFACD8 /* Home.swift in Sources */,
 				D249258F24811A650011F409 /* SearchHome.swift in Sources */,
 				D2F8D14C248A6451008C29C3 /* CollectionCard.swift in Sources */,

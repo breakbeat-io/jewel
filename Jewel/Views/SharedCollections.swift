@@ -42,7 +42,7 @@ struct SharedCollections: View {
     }
     .navigationBarTitle("Shared Collections")
     .navigationBarItems(
-      trailing: NavigationBarItemsTrailing()
+      trailing: LibraryButtons()
     )
   }
 }
