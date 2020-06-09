@@ -25,25 +25,22 @@ struct SharedCollections: View {
           .multilineTextAlignment(.center)
           .foregroundColor(Color.secondary)
       } else {
-        VStack {
-          List {
-            ForEach(collections) { collection in
-              NavigationLink(destination: SharedCollectionsList(collection: collection)) {
-                VStack(alignment: .leading) {
-                  CollectionCard(collection: collection)
-                }
+        List {
+          ForEach(collections) { collection in
+            NavigationLink(destination: SharedCollectionsList(collection: collection)) {
+              VStack(alignment: .leading) {
+                CollectionCard(collection: collection)
               }
             }
-              // here set isediting based on whether the
-              .onMove { (indexSet, index) in
-                self.store.update(action: LibraryAction.moveSharedCollection(from: indexSet, to: index))
-            }
-            .onDelete {
-              self.store.update(action: LibraryAction.removeSharedCollection(slotIndexes: $0))
-            }
           }
-          .environment(\.editMode, .constant(self.isEditing ? EditMode.active : EditMode.inactive))
+          .onMove { (indexSet, index) in
+            self.store.update(action: LibraryAction.moveSharedCollection(from: indexSet, to: index))
+          }
+          .onDelete {
+            self.store.update(action: LibraryAction.removeSharedCollection(slotIndexes: $0))
+          }
         }
+        .environment(\.editMode, .constant(self.isEditing ? EditMode.active : EditMode.inactive))
       }
     }
     .onAppear {

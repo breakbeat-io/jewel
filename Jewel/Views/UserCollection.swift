@@ -21,41 +21,38 @@ struct UserCollection: View {
   
   var body: some View {
     GeometryReader { geo in
-      VStack {
-        List {
-          ForEach(self.slots.indices, id: \.self) { slotIndex in
-            Group {
-              if self.slots[slotIndex].album != nil {
-                ZStack {
-                  IfLet(self.slots[slotIndex].album?.attributes) { attributes in
-                    AlbumCard(albumName: attributes.name, albumArtist: attributes.artistName, albumArtwork: attributes.artwork.url(forWidth: 1000))
-                  }
-                  NavigationLink(
-                    destination: ObservedAlbumDetail(slotId: slotIndex)
-                  ){
-                    EmptyView()
-                  }
+      List {
+        ForEach(self.slots.indices, id: \.self) { slotIndex in
+          Group {
+            if self.slots[slotIndex].album != nil {
+              ZStack {
+                IfLet(self.slots[slotIndex].album?.attributes) { attributes in
+                  AlbumCard(albumName: attributes.name, albumArtist: attributes.artistName, albumArtwork: attributes.artwork.url(forWidth: 1000))
                 }
-              } else {
-                EmptySlotCard(slotIndex: slotIndex)
-                  .deleteDisabled(true)
+                NavigationLink(
+                  destination: ObservedAlbumDetail(slotId: slotIndex)
+                ){
+                  EmptyView()
+                }
               }
+            } else {
+              EmptySlotCard(slotIndex: slotIndex)
+                .deleteDisabled(true)
             }
-            .frame(height: (geo.size.height - geo.safeAreaInsets.bottom) / CGFloat(self.slots.count))
           }
-          .onMove { (indexSet, index) in
-            self.store.update(action: LibraryAction.moveSlot(from: indexSet, to: index))
-          }
-          .onDelete {
-            self.store.update(action: LibraryAction.removeAlbumFromSlot(slotIndexes: $0))
-          }
+          .frame(height: (geo.size.height - geo.safeAreaInsets.bottom) / CGFloat(self.slots.count))
         }
-        .environment(\.editMode, .constant(self.isEditing ? EditMode.active : EditMode.inactive))
+        .onMove { (indexSet, index) in
+          self.store.update(action: LibraryAction.moveSlot(from: indexSet, to: index))
+        }
+        .onDelete {
+          self.store.update(action: LibraryAction.removeAlbumFromSlot(slotIndexes: $0))
+        }
       }
+      .environment(\.editMode, .constant(self.isEditing ? EditMode.active : EditMode.inactive))
       .onAppear {
         self.isEditing = false
       }
-      
     }
   }
 }
