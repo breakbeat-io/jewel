@@ -50,6 +50,7 @@ struct Home: View {
         leading: UserCollectionButtons(),
         trailing: LibraryButtons(isEditing: self.$isEditing)
       )
+      EmptyDetail()
     }
     .alert(isPresented: receivedCollectionCued) {
       Alert(title: Text("Shared collection received."),
