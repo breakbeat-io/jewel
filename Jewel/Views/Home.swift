@@ -28,41 +28,47 @@ struct Home: View {
   }
   
   var body: some View {
-    NavigationView {
-      TabView(selection: selectedTab) {
-        UserCollection(isEditing: self.$isEditing)
-          .tabItem {
-            Image(systemName: "music.house")
-              .imageScale(.medium)
-            Text(store.state.library.userCollection.name)
+    ZStack {
+      NavigationView {
+        TabView(selection: selectedTab) {
+          UserCollection(isEditing: self.$isEditing)
+            .tabItem {
+              Image(systemName: "music.house")
+                .imageScale(.medium)
+              Text(store.state.library.userCollection.name)
+          }
+          .tag("user")
+          SharedCollections(isEditing: self.$isEditing)
+            .tabItem {
+              Image(systemName: "rectangle.on.rectangle.angled")
+                .imageScale(.medium)
+              Text("Collection Library")
+          }
+          .tag("shared")
         }
-        .tag("user")
-        SharedCollections(isEditing: self.$isEditing)
-          .tabItem {
-            Image(systemName: "rectangle.on.rectangle.angled")
-              .imageScale(.medium)
-            Text("Collection Library")
+        .alert(isPresented: receivedCollectionCued) {
+          Alert(title: Text("Shared collection received."),
+                message: Text("Would you like to add \"\(store.state.library.cuedCollection!.collectionName)\" by \"\(store.state.library.cuedCollection!.collectionCurator)\" to your Shared Library?"),
+                primaryButton: .cancel(Text("Cancel")) {
+                  self.store.update(action: LibraryAction.uncueSharedCollection)
+            },
+                secondaryButton: .default(Text("Add").bold()) {
+                  self.store.update(action: LibraryAction.makeUserCollectionActive(activeState: false))
+                  ShareLinkProvider.expandShareableCollection(shareableCollection: self.store.state.library.cuedCollection!)
+                  self.store.update(action: LibraryAction.uncueSharedCollection)
+            })
         }
-        .tag("shared")
+        .navigationBarTitle(store.state.library.userCollectionActive ? self.store.state.library.userCollection.name : "Collection Library")
+        .navigationBarItems(
+          leading: UserCollectionButtons(),
+          trailing: LibraryButtons(isEditing: self.$isEditing)
+        )
+        EmptyDetail()
       }
-      .navigationBarTitle(store.state.library.userCollectionActive ? self.store.state.library.userCollection.name : "Collection Library")
-      .navigationBarItems(
-        leading: UserCollectionButtons(),
-        trailing: LibraryButtons(isEditing: self.$isEditing)
-      )
-      EmptyDetail()
-    }
-    .alert(isPresented: receivedCollectionCued) {
-      Alert(title: Text("Shared collection received."),
-            message: Text("Would you like to add \"\(store.state.library.cuedCollection!.collectionName)\" by \"\(store.state.library.cuedCollection!.collectionCurator)\" to your Shared Library?"),
-            primaryButton: .cancel(Text("Cancel")) {
-              self.store.update(action: LibraryAction.uncueSharedCollection)
-        },
-            secondaryButton: .default(Text("Add").bold()) {
-              self.store.update(action: LibraryAction.makeUserCollectionActive(activeState: false))
-              ShareLinkProvider.expandShareableCollection(shareableCollection: self.store.state.library.cuedCollection!)
-              self.store.update(action: LibraryAction.uncueSharedCollection)
-        })
+      .blur(radius: store.state.options.firstTimeRun ? 10 : 0)
+      if store.state.options.firstTimeRun {
+          Welcome()
+      }
     }
     .onAppear {
       UITableView.appearance().separatorStyle = .none

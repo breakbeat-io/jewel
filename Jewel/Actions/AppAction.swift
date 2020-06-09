@@ -49,6 +49,8 @@ func updateOptions(options: Options, action: OptionsAction) -> Options {
     UserDefaults.standard.synchronize()
     exit(1)
     
+  case .firstTimeRun(_: let firstTimeRunState):
+    newOptions.firstTimeRun = firstTimeRunState
   }
   
   return newOptions

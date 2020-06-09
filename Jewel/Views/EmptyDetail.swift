@@ -14,7 +14,7 @@ struct EmptyDetail: View {
   var body: some View {
     VStack {
       Spacer()
-      Image("primary-logo-large")
+      Image("primary-logo")
         .resizable()
         .scaledToFill()
         .frame(width: 150, height: 150)
