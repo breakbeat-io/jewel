@@ -30,7 +30,7 @@
 		D27FB81024868B320014C05D /* Options.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27FB80F24868B320014C05D /* Options.swift */; };
 		D27FB812248693AF0014C05D /* Slot.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27FB811248693AF0014C05D /* Slot.swift */; };
 		D27FB8202486B46D0014C05D /* fa-brands.otf in Resources */ = {isa = PBXBuildFile; fileRef = D27FB81F2486B46D0014C05D /* fa-brands.otf */; };
-		D2881748248BE81400EB47C2 /* ShareLinkProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2881747248BE81400EB47C2 /* ShareLinkProvider.swift */; };
+		D2881748248BE81400EB47C2 /* SharedCollectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2881747248BE81400EB47C2 /* SharedCollectionManager.swift */; };
 		D288174A248BEABF00EB47C2 /* ShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2881749248BEABF00EB47C2 /* ShareSheet.swift */; };
 		D288174D248BEDAA00EB47C2 /* ShareSheetLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D288174C248BEDAA00EB47C2 /* ShareSheetLoader.swift */; };
 		D28AD1B5248BACB2009B584A /* PlaybackLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28AD1B4248BACB2009B584A /* PlaybackLink.swift */; };
@@ -82,7 +82,7 @@
 		D27FB80F24868B320014C05D /* Options.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Options.swift; sourceTree = "<group>"; };
 		D27FB811248693AF0014C05D /* Slot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Slot.swift; sourceTree = "<group>"; };
 		D27FB81F2486B46D0014C05D /* fa-brands.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fa-brands.otf"; sourceTree = "<group>"; };
-		D2881747248BE81400EB47C2 /* ShareLinkProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareLinkProvider.swift; sourceTree = "<group>"; };
+		D2881747248BE81400EB47C2 /* SharedCollectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedCollectionManager.swift; sourceTree = "<group>"; };
 		D2881749248BEABF00EB47C2 /* ShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheet.swift; sourceTree = "<group>"; };
 		D288174C248BEDAA00EB47C2 /* ShareSheetLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheetLoader.swift; sourceTree = "<group>"; };
 		D288174E248D148E00EB47C2 /* Listen Later.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Listen Later.entitlements"; sourceTree = "<group>"; };
@@ -255,7 +255,7 @@
 		D2AC120D2485A1B700C52D9E /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				D2881747248BE81400EB47C2 /* ShareLinkProvider.swift */,
+				D2881747248BE81400EB47C2 /* SharedCollectionManager.swift */,
 				D24925A324814CB60011F409 /* RecordStore.swift */,
 				D27FB80D24868AF60014C05D /* Odesli.swift */,
 			);
@@ -411,7 +411,7 @@
 				D28AD1B5248BACB2009B584A /* PlaybackLink.swift in Sources */,
 				D288174A248BEABF00EB47C2 /* ShareSheet.swift in Sources */,
 				D2AB8467248113EB008B57F9 /* AppActions.swift in Sources */,
-				D2881748248BE81400EB47C2 /* ShareLinkProvider.swift in Sources */,
+				D2881748248BE81400EB47C2 /* SharedCollectionManager.swift in Sources */,
 				D2F8D166248A7E42008C29C3 /* DiscTrackList.swift in Sources */,
 				D2AB84692481148D008B57F9 /* AppAction.swift in Sources */,
 				D2F8D14E248A666C008C29C3 /* CardArtworkComposite.swift in Sources */,

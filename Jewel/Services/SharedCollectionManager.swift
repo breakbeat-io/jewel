@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ShareLinkProvider {
+class SharedCollectionManager {
   
   enum SourceProvider: String, Codable {
     case appleMusicAlbum
@@ -152,12 +152,29 @@ class ShareLinkProvider {
     collection.curator = shareableCollection.collectionCurator
     
     store.update(action: LibraryAction.addSharedCollection(collection: collection))
-
+    
     for (index, slot) in shareableCollection.collection.enumerated() {
       if slot?.sourceProvider == SourceProvider.appleMusicAlbum {
         RecordStore.purchase(album: slot!.sourceRef, forSlot: index, inCollection: collection.id)
       }
     }
+  }
+  
+  static func loadRecommendations() {
+    let request = URLRequest(url: URL(string: "https://listenlater.link/recommendations.json")!)
+    
+    URLSession.shared.dataTask(with: request) { data, response, error in
+      if let data = data {
+        if let decodedResponse = try? JSONDecoder().decode(ShareableCollection.self, from: data) {
+          DispatchQueue.main.async {
+            expandShareableCollection(shareableCollection: decodedResponse)
+            return
+          }
+        }
+      }
+      
+      print("Fetch failed: \(error?.localizedDescription ?? "Unknown error")")
+    }.resume()
   }
   
 }

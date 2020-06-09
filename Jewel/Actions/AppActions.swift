@@ -32,7 +32,7 @@ enum LibraryAction: AppAction {
   case addSharedCollection(collection: Collection)
   case removeSharedCollection(slotIndexes: IndexSet)
   case moveSharedCollection(from: IndexSet, to: Int)
-  case cueSharedCollection(shareableCollection: ShareLinkProvider.ShareableCollection)
+  case cueSharedCollection(shareableCollection: SharedCollectionManager.ShareableCollection)
   case uncueSharedCollection
 }
 

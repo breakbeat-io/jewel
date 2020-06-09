@@ -15,7 +15,7 @@ struct Library: Codable {
   var userCollectionActive: Bool = true
   
   var sharedCollections: [Collection]
-  var cuedCollection: ShareLinkProvider.ShareableCollection?
+  var cuedCollection: SharedCollectionManager.ShareableCollection?
   
   enum CodingKeys: CodingKey {
     case userCollection

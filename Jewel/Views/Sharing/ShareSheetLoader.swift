@@ -47,11 +47,11 @@ struct ShareSheetLoader: View {
     
     self.store.update(action: LibraryAction.shareLinkError(false))
     
-    let newLongLink = ShareLinkProvider.generateLongLink(for: collection)
+    let newLongLink = SharedCollectionManager.generateLongLink(for: collection)
     
     if collection.shareLinkLong == nil || newLongLink != collection.shareLinkLong {
       print("Creating new Links")
-      ShareLinkProvider.setShareLinks(for: collection)
+      SharedCollectionManager.setShareLinks(for: collection)
       return
     }
     

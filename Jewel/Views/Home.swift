@@ -54,7 +54,7 @@ struct Home: View {
             },
                 secondaryButton: .default(Text("Add").bold()) {
                   self.store.update(action: LibraryAction.userCollectionActive(false))
-                  ShareLinkProvider.expandShareableCollection(shareableCollection: self.store.state.library.cuedCollection!)
+                  SharedCollectionManager.expandShareableCollection(shareableCollection: self.store.state.library.cuedCollection!)
                   self.store.update(action: LibraryAction.uncueSharedCollection)
             })
         }
