@@ -10,10 +10,25 @@ import SwiftUI
 
 struct AlbumDetail: View {
   
+  @Environment(\.horizontalSizeClass) var horizontalSizeClass
+  
   let slot: Slot
   
   var body: some View {
     ScrollView {
+      if horizontalSizeClass == .compact {
+        Compact(slot: slot)
+      } else {
+        Regular(slot: slot)
+      }
+    }
+  }
+  
+  struct Compact: View {
+    
+    let slot: Slot
+    
+    var body: some View {
       VStack {
         IfLet(slot.album?.attributes) { attributes in
           AlbumCover(albumName: attributes.name,
@@ -32,4 +47,34 @@ struct AlbumDetail: View {
       .padding()
     }
   }
+  
+  struct Regular: View {
+    
+    let slot: Slot
+    
+    var body: some View {
+      HStack(alignment: .top) {
+        IfLet(slot.album?.attributes) { attributes in
+          VStack {
+            AlbumCover(albumName: attributes.name,
+                       albumArtist: attributes.artistName,
+                       albumArtwork: attributes.artwork.url(forWidth: 1000))
+            PlaybackLinks(baseUrl: attributes.url,
+                          playbackLinks: self.slot.playbackLinks)
+              .padding(.bottom)
+          }
+          VStack {
+            IfLet(self.slot.album?.relationships?.tracks.data) { tracks in
+              TrackList(tracks: tracks,
+                        albumArtist: attributes.artistName
+              )
+            }
+            Spacer()
+          }
+        }
+        .padding()
+      }
+    }
+  }
+  
 }

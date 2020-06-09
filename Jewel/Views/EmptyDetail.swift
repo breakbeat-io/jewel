@@ -19,7 +19,6 @@ struct EmptyDetail: View {
         .scaledToFill()
         .frame(width: 150, height: 150)
         .cornerRadius(20)
-        .shadow(radius: 5)
       Text("Listen Later")
         .font(.largeTitle)
       Text("Reminders and album curation for your music library")
@@ -30,9 +29,9 @@ struct EmptyDetail: View {
         Image(systemName: "sidebar.left")
         Text("Manage your collections from the sidebar")
       }
-      .foregroundColor(.secondary)
       .padding()
     }
+    .foregroundColor(Color.secondary)
     .opacity(fadeIn ? 1 : 0)
     .animation(Animation.easeIn(duration: 1))
     .onAppear {
