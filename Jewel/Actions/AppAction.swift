@@ -61,50 +61,50 @@ func updateLibrary(library: Library, action: LibraryAction) -> Library {
   
   switch action {
     
-  case .makeUserCollectionActive(activeState: let activeState):
-    newLibrary.userCollectionActive = activeState
+  case .userCollectionActive(let userCollectionActive):
+    newLibrary.userCollectionActive = userCollectionActive
     
-  case .changeUserCollectionName(name: let name):
+  case .changeUserCollectionName(let name):
     newLibrary.userCollection.name = name
     
-  case .changeUserCollectionCurator(curator: let curator):
+  case .changeUserCollectionCurator(let curator):
     newLibrary.userCollection.curator = curator
     
-  case .removeAlbumFromSlot(slotIndexes: let slotIndexes):
+  case .removeAlbumFromSlot(let slotIndexes):
     for i in slotIndexes {
       newLibrary.userCollection.slots[i] = Slot()
     }
     
-  case .moveSlot(from: let from, to: let to):
+  case .moveSlot(let from, let to):
     newLibrary.userCollection.slots.move(fromOffsets: from, toOffset: to)
     
   case .invalidateShareLinks:
     newLibrary.userCollection.shareLinkLong = nil
     newLibrary.userCollection.shareLinkShort = nil
     
-  case .setShareLinks(shareLinkLong: let shareLinkLong, shareLinkShort: let shareLinkShort):
+  case .setShareLinks(let shareLinkLong, let shareLinkShort):
     newLibrary.userCollection.shareLinkLong = shareLinkLong
     newLibrary.userCollection.shareLinkShort = shareLinkShort
     
-  case .setShareLinkError(errorState: let errorState):
+  case .shareLinkError(let errorState):
     newLibrary.userCollection.shareLinkError = errorState
     
-  case .addSharedCollection(collection: let collection):
+  case .addSharedCollection(let collection):
     newLibrary.sharedCollections.insert(collection, at: 0)
     
-  case .removeSharedCollection(slotIndexes: let slotIndexes):
+  case .removeSharedCollection(let slotIndexes):
     newLibrary.sharedCollections.remove(atOffsets: slotIndexes)
     
-  case .moveSharedCollection(from: let from, to: let to):
+  case .moveSharedCollection(let from, let to):
     newLibrary.sharedCollections.move(fromOffsets: from, toOffset: to)
     
-  case .cueSharedCollection(shareableCollection: let shareableCollection):
+  case .cueSharedCollection(let shareableCollection):
     newLibrary.cuedCollection = shareableCollection
     
   case .uncueSharedCollection:
     newLibrary.cuedCollection = nil
     
-  case .addAlbumToSlot(album: let album, slotIndex: let slotIndex, collectionId: let collectionId):
+  case .addAlbumToSlot(let album, let slotIndex, let collectionId):
     if newLibrary.userCollection.id == collectionId {
       newLibrary.userCollection.slots[slotIndex].album = album
     } else {
@@ -113,7 +113,7 @@ func updateLibrary(library: Library, action: LibraryAction) -> Library {
       }
     }
     
-  case .setPlatformLinks(baseUrl: let baseUrl, platformLinks: let platformLinks, collectionId: let collectionId):
+  case .setPlatformLinks(let baseUrl, let platformLinks, let collectionId):
     if newLibrary.userCollection.id == collectionId {
       let indices = newLibrary.userCollection.slots.enumerated().compactMap({ $1.album?.attributes?.url == baseUrl ? $0 : nil })
       for i in indices {
@@ -138,7 +138,7 @@ func updateSearch(search: Search, action: SearchAction) -> Search {
   
   switch action {
     
-  case .populateSearchResults(results: let results):
+  case .populateSearchResults(let results):
     newSearch.results = results
     
   case .removeSearchResults:

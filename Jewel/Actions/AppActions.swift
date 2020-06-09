@@ -19,7 +19,7 @@ enum OptionsAction: AppAction {
 }
 
 enum LibraryAction: AppAction {
-  case makeUserCollectionActive(activeState: Bool)
+  case userCollectionActive(_: Bool)
   case changeUserCollectionName(name: String)
   case changeUserCollectionCurator(curator: String)
   case addAlbumToSlot(album: Album, slotIndex: Int, collectionId: UUID)
@@ -28,7 +28,7 @@ enum LibraryAction: AppAction {
   case moveSlot(from: IndexSet, to: Int)
   case invalidateShareLinks
   case setShareLinks(shareLinkLong: URL, shareLinkShort: URL)
-  case setShareLinkError(errorState: Bool)
+  case shareLinkError(_: Bool)
   case addSharedCollection(collection: Collection)
   case removeSharedCollection(slotIndexes: IndexSet)
   case moveSharedCollection(from: IndexSet, to: Int)

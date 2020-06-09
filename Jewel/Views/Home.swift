@@ -17,7 +17,7 @@ struct Home: View {
   private var selectedTab: Binding<String> {
     Binding (
       get: { self.store.state.library.userCollectionActive ? "user" : "shared" },
-      set: { self.store.update(action: LibraryAction.makeUserCollectionActive(activeState: $0 == "user" ? true : false )) }
+      set: { self.store.update(action: LibraryAction.userCollectionActive($0 == "user" ? true : false )) }
     )
   }
   private var receivedCollectionCued: Binding<Bool> {
@@ -53,7 +53,7 @@ struct Home: View {
                   self.store.update(action: LibraryAction.uncueSharedCollection)
             },
                 secondaryButton: .default(Text("Add").bold()) {
-                  self.store.update(action: LibraryAction.makeUserCollectionActive(activeState: false))
+                  self.store.update(action: LibraryAction.userCollectionActive(false))
                   ShareLinkProvider.expandShareableCollection(shareableCollection: self.store.state.library.cuedCollection!)
                   self.store.update(action: LibraryAction.uncueSharedCollection)
             })
@@ -67,7 +67,7 @@ struct Home: View {
       }
       .blur(radius: store.state.options.firstTimeRun ? 10 : 0)
       if store.state.options.firstTimeRun {
-          Welcome()
+        Welcome()
       }
     }
     .onAppear {

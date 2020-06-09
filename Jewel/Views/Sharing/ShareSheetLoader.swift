@@ -45,7 +45,7 @@ struct ShareSheetLoader: View {
   
   private func refreshShareLinks() {
     
-    self.store.update(action: LibraryAction.setShareLinkError(errorState: false))
+    self.store.update(action: LibraryAction.shareLinkError(false))
     
     let newLongLink = ShareLinkProvider.generateLongLink(for: collection)
     
