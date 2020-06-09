@@ -21,9 +21,10 @@ struct SharedCollections: View {
   var body: some View {
     Group {
       if collections.count == 0 {
-        Text("Collections you have saved or people have shared with you will appear here.")
+        Text("Collections you have saved or that people have shared with you will appear here.")
           .multilineTextAlignment(.center)
           .foregroundColor(Color.secondary)
+          .padding()
       } else {
         List {
           ForEach(collections) { collection in

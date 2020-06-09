@@ -45,7 +45,7 @@ struct Home: View {
         }
         .tag("shared")
       }
-      .navigationBarTitle(store.state.library.userCollectionActive ? self.store.state.library.userCollection.name : "Shared Collections")
+      .navigationBarTitle(store.state.library.userCollectionActive ? self.store.state.library.userCollection.name : "Collection Library")
       .navigationBarItems(
         leading: UserCollectionButtons(),
         trailing: LibraryButtons(isEditing: self.$isEditing)
