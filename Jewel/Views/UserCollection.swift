@@ -40,7 +40,8 @@ struct UserCollection: View {
                 .deleteDisabled(true)
             }
           }
-          .frame(height: (geo.size.height - geo.safeAreaInsets.bottom) / CGFloat(self.slots.count))
+          .frame(height: AppStore.cardHeight(viewHeight: geo.size.height)
+          )
         }
         .onMove { (indexSet, index) in
           self.store.update(action: LibraryAction.moveSlot(from: indexSet, to: index))

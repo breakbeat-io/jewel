@@ -38,7 +38,7 @@ struct SharedCollectionsList: View {
                 .fill(Color(UIColor.secondarySystemBackground))
             }
           }
-          .frame(height: (geo.size.height - geo.safeAreaInsets.top - geo.safeAreaInsets.bottom) / CGFloat(self.slots.count))
+          .frame(height: AppStore.cardHeight(viewHeight: geo.size.height))
         }
       }
       .navigationBarTitle(self.collection.name)

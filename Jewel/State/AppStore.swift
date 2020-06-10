@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 import HMV
 
 final class AppStore: ObservableObject {
@@ -47,4 +48,15 @@ final class AppStore: ObservableObject {
     }
   }
   
+ static func cardHeight(viewHeight: CGFloat) -> CGFloat {
+    switch viewHeight {
+    case 852...:
+      return 94
+    case 673..<852:
+      return 71
+    default:
+      return 61
+    }
+  }
+    
 }
