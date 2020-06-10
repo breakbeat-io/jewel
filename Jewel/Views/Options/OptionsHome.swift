@@ -35,7 +35,7 @@ struct OptionsHome: View {
                 store.state.library.userCollection.name,
                 text: $collectionName,
                 onCommit: {
-                  self.store.update(action: LibraryAction.changeUserCollectionName(name: self.collectionName))
+                  self.store.update(action: LibraryAction.setUserCollectionName(name: self.collectionName))
                   self.showing = false
               }
               ).foregroundColor(.accentColor)
@@ -46,7 +46,7 @@ struct OptionsHome: View {
                 store.state.library.userCollection.curator,
                 text: $collectionCurator,
                 onCommit: {
-                  self.store.update(action: LibraryAction.changeUserCollectionCurator(curator: self.collectionCurator))
+                  self.store.update(action: LibraryAction.setUserCollectionCurator(curator: self.collectionCurator))
                   self.showing = false
               }
               ).foregroundColor(.accentColor)

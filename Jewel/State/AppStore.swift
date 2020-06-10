@@ -36,7 +36,7 @@ final class AppStore: ObservableObject {
     self.state = appState
     
     migrateV1UserDefaults()
-
+    
   }
   
   public func update(action: AppAction) {
@@ -72,7 +72,6 @@ final class AppStore: ObservableObject {
     }
     
   }
-  
   
   static func cardHeight(viewHeight: CGFloat) -> CGFloat {
     switch viewHeight {

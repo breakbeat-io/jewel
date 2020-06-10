@@ -20,8 +20,8 @@ enum OptionsAction: AppAction {
 
 enum LibraryAction: AppAction {
   case userCollectionActive(_: Bool)
-  case changeUserCollectionName(name: String)
-  case changeUserCollectionCurator(curator: String)
+  case setUserCollectionName(name: String)
+  case setUserCollectionCurator(curator: String)
   case addAlbumToSlot(album: Album, slotIndex: Int, collectionId: UUID)
   case removeAlbumFromSlot(slotIndexes: IndexSet)
   case setPlatformLinks(baseUrl: URL, platformLinks: OdesliResponse, collectionId: UUID)

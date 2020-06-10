@@ -64,10 +64,10 @@ func updateLibrary(library: Library, action: LibraryAction) -> Library {
   case .userCollectionActive(let userCollectionActive):
     newLibrary.userCollectionActive = userCollectionActive
     
-  case .changeUserCollectionName(let name):
+  case .setUserCollectionName(let name):
     newLibrary.userCollection.name = name
     
-  case .changeUserCollectionCurator(let curator):
+  case .setUserCollectionCurator(let curator):
     newLibrary.userCollection.curator = curator
     
   case .removeAlbumFromSlot(let slotIndexes):
