@@ -14,9 +14,14 @@ struct OptionsHome: View {
   
   @Binding var showing: Bool
   
-  @State var collectionName: String = ""
-  @State var collectionCurator: String = ""
-  
+  private var collectionName: Binding<String> { Binding (
+    get: { self.store.state.library.userCollection.name },
+    set: { self.store.update(action: LibraryAction.setUserCollectionName(name: $0))}
+    )}
+  private var collectionCurator: Binding<String> { Binding (
+    get: { self.store.state.library.userCollection.curator },
+    set: { self.store.update(action: LibraryAction.setUserCollectionCurator(curator: $0))}
+    )}
   private var preferredMusicPlatform: Binding<Int> { Binding (
     get: { self.store.state.options.preferredMusicPlatform },
     set: { self.store.update(action: OptionsAction.setPreferredPlatform(platform: $0)) }
@@ -33,9 +38,8 @@ struct OptionsHome: View {
               Text("Collection Name")
               TextField(
                 store.state.library.userCollection.name,
-                text: $collectionName,
+                text: collectionName,
                 onCommit: {
-                  self.store.update(action: LibraryAction.setUserCollectionName(name: self.collectionName))
                   self.showing = false
               }
               ).foregroundColor(.accentColor)
@@ -44,9 +48,8 @@ struct OptionsHome: View {
               Text("Curator")
               TextField(
                 store.state.library.userCollection.curator,
-                text: $collectionCurator,
+                text: collectionCurator,
                 onCommit: {
-                  self.store.update(action: LibraryAction.setUserCollectionCurator(curator: self.collectionCurator))
                   self.showing = false
               }
               ).foregroundColor(.accentColor)
