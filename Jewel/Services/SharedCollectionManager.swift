@@ -72,7 +72,7 @@ class SharedCollectionManager {
     AppEnvironment.global.update(action: LibraryAction.invalidateShareLinks)
     
     guard let longLink = generateLongLink(for: collection) else {
-      print("Could not create long link")
+      print("💎 Share Links: > Could not create long link")
       AppEnvironment.global.update(action: LibraryAction.shareLinkError(true))
       return
     }
@@ -81,7 +81,7 @@ class SharedCollectionManager {
     
     let firebaseShortLinkBodyRaw = ["longDynamicLink": longDynamicLink]
     guard let firebaseShortLinkBodyRawJSON = try? JSONEncoder().encode(firebaseShortLinkBodyRaw) else {
-      print("Could not encode link to JSON")
+      print("💎 Share Links: > Could not encode link to JSON")
       AppEnvironment.global.update(action: LibraryAction.shareLinkError(true))
       return
     }
@@ -118,13 +118,13 @@ class SharedCollectionManager {
               if let shortLink = json["shortLink"] as? String {
                 AppEnvironment.global.update(action: LibraryAction.setShareLinks(shareLinkLong: longLink, shareLinkShort: URL(string: shortLink)!))
               } else {
-                print("There was another error")
+                print("💎 Share Links: > There was another error")
                 AppEnvironment.global.update(action: LibraryAction.shareLinkError(true))
               }
             }
           }
         } catch let error as NSError {
-          print("Failed to load: \(error.localizedDescription)")
+          print("💎 Share Links: > Failed to load: \(error.localizedDescription)")
           AppEnvironment.global.update(action: LibraryAction.shareLinkError(true))
         }
       }
@@ -140,7 +140,7 @@ class SharedCollectionManager {
           let shareableCollection = try JSONDecoder().decode(ShareableCollection.self, from: receivedCollectionEncoded)
           AppEnvironment.global.update(action: LibraryAction.cueSharedCollection(shareableCollection: shareableCollection))
         } catch {
-          print("Could not decode received collection")
+          print("💎 Shared Collection > Could not decode received collection")
         }
       }
     }
@@ -173,7 +173,7 @@ class SharedCollectionManager {
         }
       }
       
-      print("Fetch failed: \(error?.localizedDescription ?? "Unknown error")")
+      print("💎 Load Recommendations > Fetch failed: \(error?.localizedDescription ?? "Unknown error")")
     }.resume()
   }
   

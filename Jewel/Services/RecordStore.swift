@@ -50,7 +50,7 @@ class RecordStore {
   }
   
   static func alternativeSuppliers(for baseUrl: URL, inCollection collectionId: UUID) {
-    print("Platform Links: Populating links for \(baseUrl.absoluteString)")
+    print("💎 Platform Links > Populating links for \(baseUrl.absoluteString)")
     
     let request = URLRequest(url: URL(string: "https://api.song.link/v1-alpha.1/links?url=\(baseUrl.absoluteString)")!)
     
@@ -72,7 +72,7 @@ class RecordStore {
       }
       
       if let error = error {
-        print("Platform Links: Error getting playbackLinks: \(error.localizedDescription)")
+        print("💎 Platform Links > Error getting playbackLinks: \(error.localizedDescription)")
       }
       
     }.resume()

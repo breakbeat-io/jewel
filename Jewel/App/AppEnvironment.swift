@@ -24,10 +24,10 @@ final class AppEnvironment: ObservableObject {
     if let savedState = UserDefaults.standard.object(forKey: "jewelState") as? Data {
       do {
         state = try JSONDecoder().decode(AppState.self, from: savedState)
-        print("Loaded state")
+        print("💎 State > Loaded state")
         return
       } catch {
-        print(error)
+        print("💎 State > Error loading state: \(error)")
       }
     }
     
@@ -49,22 +49,21 @@ final class AppEnvironment: ObservableObject {
     do {
       let encodedState = try JSONEncoder().encode(state)
       UserDefaults.standard.set(encodedState, forKey: "jewelState")
-      print("Saved state")
     } catch {
-      print(error)
+      print("💎 State > Error saving state: \(error)")
     }
   }
   
   private func migrateV1UserDefaults() {
     
     if let v1CollectionName = UserDefaults.standard.string(forKey: "collectionName") {
-      print("v1.0 Collection Name found ... migrating.")
+      print("💎 State Migration > v1.0 Collection Name found ... migrating.")
       state.library.userCollection.name = v1CollectionName
       UserDefaults.standard.removeObject(forKey: "collectionName")
     }
     
     if let savedCollection = UserDefaults.standard.dictionary(forKey: "savedCollection") {
-      print("v1.0 Saved Collection found ... migrating.")
+      print("💎 State Migration > v1.0 Saved Collection found ... migrating.")
       for slotIndex in 0..<state.library.userCollection.slots.count {
         if let albumId = savedCollection[String(slotIndex)] {
           RecordStore.purchase(album: albumId as! String, forSlot: slotIndex, inCollection: state.library.userCollection.id)

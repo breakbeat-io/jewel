@@ -10,7 +10,7 @@ import Foundation
 import HMV
 
 func updateState(appState: AppState, action: AppAction) -> AppState {
-  print("💎 Performing: \(action.description)")
+  print("💎 Update >  \(action.description)")
   
   var newAppState = appState
   

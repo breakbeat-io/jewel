@@ -50,11 +50,11 @@ struct ShareSheetLoader: View {
     let newLongLink = SharedCollectionManager.generateLongLink(for: collection)
     
     if collection.shareLinkLong == nil || newLongLink != collection.shareLinkLong {
-      print("Creating new Links")
+      print("💎 Share Links: > Creating new Links")
       SharedCollectionManager.setShareLinks(for: collection)
       return
     }
     
-    print("Reusing existing links")
+    print("💎 Share Links: > Reusing existing links")
   }
 }
