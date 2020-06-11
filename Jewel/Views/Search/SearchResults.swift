@@ -14,13 +14,13 @@ struct SearchResults: View {
   
   @Environment(\.presentationMode) var presentationMode
   
-  @EnvironmentObject var store: AppStore
+  @EnvironmentObject var environment: AppEnvironment
   
   var slotIndex: Int
   @Binding var showing: Bool
   
   private var searchResults: [Album]? {
-    store.state.search.results
+    environment.state.search.results
   }
   
   var body: some View {
@@ -48,8 +48,8 @@ struct SearchResults: View {
             }
             Spacer()
             Button(action: {
-              RecordStore.purchase(album: albums[i].id, forSlot: self.slotIndex, inCollection: self.store.state.library.userCollection.id)
-              self.store.update(action: SearchAction.removeSearchResults)
+              RecordStore.purchase(album: albums[i].id, forSlot: self.slotIndex, inCollection: self.environment.state.library.userCollection.id)
+              self.environment.update(action: SearchAction.removeSearchResults)
               self.showing = false
             }, label:{
               Image(systemName: "plus.circle")

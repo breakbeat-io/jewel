@@ -10,9 +10,9 @@ import Foundation
 import UIKit
 import HMV
 
-final class AppStore: ObservableObject {
+final class AppEnvironment: ObservableObject {
   
-  static let store = AppStore()
+  static let global = AppEnvironment()
   
   @Published private(set) var state: AppState {
     didSet {

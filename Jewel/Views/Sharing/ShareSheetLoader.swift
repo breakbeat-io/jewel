@@ -10,10 +10,10 @@ import SwiftUI
 
 struct ShareSheetLoader: View {
   
-  @EnvironmentObject var store: AppStore
+  @EnvironmentObject var environment: AppEnvironment
   
   private var collection: Collection {
-    store.state.library.userCollection
+    environment.state.library.userCollection
   }
   
   var body: some View {
@@ -45,7 +45,7 @@ struct ShareSheetLoader: View {
   
   private func refreshShareLinks() {
     
-    self.store.update(action: LibraryAction.shareLinkError(false))
+    self.environment.update(action: LibraryAction.shareLinkError(false))
     
     let newLongLink = SharedCollectionManager.generateLongLink(for: collection)
     

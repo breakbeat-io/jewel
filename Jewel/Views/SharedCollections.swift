@@ -10,12 +10,12 @@ import SwiftUI
 
 struct SharedCollections: View {
   
-  @EnvironmentObject var store: AppStore
+  @EnvironmentObject var environment: AppEnvironment
   
   @Binding var isEditing: Bool
   
   private var collections: [Collection] {
-    store.state.library.sharedCollections
+    environment.state.library.sharedCollections
   }
   
   var body: some View {
@@ -35,10 +35,10 @@ struct SharedCollections: View {
             }
           }
           .onMove { (indexSet, index) in
-            self.store.update(action: LibraryAction.moveSharedCollection(from: indexSet, to: index))
+            self.environment.update(action: LibraryAction.moveSharedCollection(from: indexSet, to: index))
           }
           .onDelete {
-            self.store.update(action: LibraryAction.removeSharedCollection(slotIndexes: $0))
+            self.environment.update(action: LibraryAction.removeSharedCollection(slotIndexes: $0))
           }
         }
         .environment(\.editMode, .constant(self.isEditing ? EditMode.active : EditMode.inactive))

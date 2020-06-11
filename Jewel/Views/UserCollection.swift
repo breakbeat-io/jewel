@@ -11,12 +11,12 @@ import HMV
 
 struct UserCollection: View {
   
-  @EnvironmentObject var store: AppStore
+  @EnvironmentObject var environment: AppEnvironment
   
   @Binding var isEditing: Bool
   
   private var slots: [Slot] {
-    store.state.library.userCollection.slots
+    environment.state.library.userCollection.slots
   }
   
   var body: some View {
@@ -40,14 +40,14 @@ struct UserCollection: View {
                 .deleteDisabled(true)
             }
           }
-          .frame(height: AppStore.cardHeight(viewHeight: geo.size.height)
+          .frame(height: AppEnvironment.cardHeight(viewHeight: geo.size.height)
           )
         }
         .onMove { (indexSet, index) in
-          self.store.update(action: LibraryAction.moveSlot(from: indexSet, to: index))
+          self.environment.update(action: LibraryAction.moveSlot(from: indexSet, to: index))
         }
         .onDelete {
-          self.store.update(action: LibraryAction.removeAlbumFromSlot(slotIndexes: $0))
+          self.environment.update(action: LibraryAction.removeAlbumFromSlot(slotIndexes: $0))
         }
       }
       .environment(\.editMode, .constant(self.isEditing ? EditMode.active : EditMode.inactive))

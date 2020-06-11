@@ -10,21 +10,21 @@ import SwiftUI
 
 struct OptionsHome: View {
   
-  @EnvironmentObject private var store: AppStore
+  @EnvironmentObject private var environment: AppEnvironment
   
   @Binding var showing: Bool
   
   private var collectionName: Binding<String> { Binding (
-    get: { self.store.state.library.userCollection.name },
-    set: { self.store.update(action: LibraryAction.setUserCollectionName(name: $0))}
+    get: { self.environment.state.library.userCollection.name },
+    set: { self.environment.update(action: LibraryAction.setUserCollectionName(name: $0))}
     )}
   private var collectionCurator: Binding<String> { Binding (
-    get: { self.store.state.library.userCollection.curator },
-    set: { self.store.update(action: LibraryAction.setUserCollectionCurator(curator: $0))}
+    get: { self.environment.state.library.userCollection.curator },
+    set: { self.environment.update(action: LibraryAction.setUserCollectionCurator(curator: $0))}
     )}
   private var preferredMusicPlatform: Binding<Int> { Binding (
-    get: { self.store.state.options.preferredMusicPlatform },
-    set: { self.store.update(action: OptionsAction.setPreferredPlatform(platform: $0)) }
+    get: { self.environment.state.options.preferredMusicPlatform },
+    set: { self.environment.update(action: OptionsAction.setPreferredPlatform(platform: $0)) }
     )
   }
   
@@ -37,7 +37,7 @@ struct OptionsHome: View {
             HStack(alignment: .firstTextBaseline) {
               Text("Collection Name")
               TextField(
-                store.state.library.userCollection.name,
+                environment.state.library.userCollection.name,
                 text: collectionName,
                 onCommit: {
                   self.showing = false
@@ -47,7 +47,7 @@ struct OptionsHome: View {
             HStack(alignment: .firstTextBaseline) {
               Text("Curator")
               TextField(
-                store.state.library.userCollection.curator,
+                environment.state.library.userCollection.curator,
                 text: collectionCurator,
                 onCommit: {
                   self.showing = false
@@ -62,10 +62,10 @@ struct OptionsHome: View {
               }
             }
           }
-          if store.state.options.debugMode {
+          if environment.state.options.debugMode {
             Section(header: Text("Debug")) {
               Button(action: {
-                self.store.update(action: OptionsAction.reset)
+                self.environment.update(action: OptionsAction.reset)
               }) {
                 Text("Reset Jewel")
                   .foregroundColor(.red)
@@ -76,7 +76,7 @@ struct OptionsHome: View {
         Spacer()
         Footer()
           .onTapGesture(count: 10) {
-            self.store.update(action: OptionsAction.toggleDebugMode)
+            self.environment.update(action: OptionsAction.toggleDebugMode)
         }
         .padding()
       }

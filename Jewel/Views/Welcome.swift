@@ -10,7 +10,7 @@ import SwiftUI
 
 struct Welcome: View {
   
-  @EnvironmentObject var store: AppStore
+  @EnvironmentObject var environment: AppEnvironment
   
   var body: some View {
     GeometryReader { geo in
@@ -55,7 +55,7 @@ struct Welcome: View {
           }
           HStack{
             Button(action: {
-              self.store.update(action: OptionsAction.firstTimeRun(false))
+              self.environment.update(action: OptionsAction.firstTimeRun(false))
             }) {
               Text("Start collection")
             }

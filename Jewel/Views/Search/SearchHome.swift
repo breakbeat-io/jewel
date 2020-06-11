@@ -10,7 +10,7 @@ import SwiftUI
 
 struct SearchHome: View {
   
-  @EnvironmentObject private var store: AppStore
+  @EnvironmentObject private var environment: AppEnvironment
   
   var slotIndex: Int
   @Binding var showing: Bool

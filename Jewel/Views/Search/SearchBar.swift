@@ -10,7 +10,7 @@ import SwiftUI
 
 struct SearchBar: View {
   
-  @EnvironmentObject var store: AppStore
+  @EnvironmentObject var environment: AppEnvironment
   
   @State private var searchTerm: String = ""
   
@@ -28,7 +28,7 @@ struct SearchBar: View {
           .keyboardType(.webSearch)
         Button(action: {
           self.searchTerm = ""
-          self.store.update(action: SearchAction.removeSearchResults)
+          self.environment.update(action: SearchAction.removeSearchResults)
         }) {
           Image(systemName: "xmark.circle.fill")
             .opacity(searchTerm == "" ? 0 : 1)

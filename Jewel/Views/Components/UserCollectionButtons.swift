@@ -10,7 +10,7 @@ import SwiftUI
 
 struct UserCollectionButtons: View {
   
-  @EnvironmentObject var store: AppStore
+  @EnvironmentObject var environment: AppEnvironment
   
   @State private var showOptions: Bool = false
   @State private var showSharing: Bool = false
@@ -18,12 +18,12 @@ struct UserCollectionButtons: View {
   @State private var showLoadRecommendationsAlert = false
   
   private var collectionEmpty: Bool {
-    store.state.library.userCollection.slots.filter( { $0.album != nil }).count == 0
+    environment.state.library.userCollection.slots.filter( { $0.album != nil }).count == 0
   }
   
   var body: some View {
     Group {
-      if store.state.library.userCollectionActive {
+      if environment.state.library.userCollectionActive {
         HStack {
           Button(action: {
             self.showOptions = true
@@ -32,7 +32,7 @@ struct UserCollectionButtons: View {
           }
           .sheet(isPresented: self.$showOptions) {
             OptionsHome(showing: self.$showOptions)
-              .environmentObject(self.store)
+              .environmentObject(self.environment)
           }
           .padding(.trailing)
           .padding(.vertical)
@@ -46,21 +46,21 @@ struct UserCollectionButtons: View {
           .disabled(collectionEmpty)
           .actionSheet(isPresented: $showSharing) {
             ActionSheet(
-              title: Text("Share this collection as \n \"\(store.state.library.userCollection.name)\" by \"\(store.state.library.userCollection.curator)\""),
+              title: Text("Share this collection as \n \"\(environment.state.library.userCollection.name)\" by \"\(environment.state.library.userCollection.curator)\""),
               buttons: [
                 .default(Text("Send Share Link")) {
                   self.showShareLink = true
                 },
                 .default(Text("Add to my Collection Library")) {
-                  self.store.update(action: LibraryAction.addSharedCollection(collection: self.store.state.library.userCollection))
-                  self.store.update(action: LibraryAction.userCollectionActive(false))
+                  self.environment.update(action: LibraryAction.addSharedCollection(collection: self.environment.state.library.userCollection))
+                  self.environment.update(action: LibraryAction.userCollectionActive(false))
                 },
                 .cancel()
             ])
           }
           .sheet(isPresented: self.$showShareLink) {
             ShareSheetLoader()
-              .environmentObject(self.store)
+              .environmentObject(self.environment)
           }
         }
       } else {
