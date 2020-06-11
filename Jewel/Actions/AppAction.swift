@@ -37,7 +37,7 @@ func updateOptions(options: Options, action: OptionsAction) -> Options {
   
   switch action {
     
-  case .setPreferredPlatform(platform: let platform):
+  case .setPreferredPlatform(let platform):
     newOptions.preferredMusicPlatform = platform
     
   case .toggleDebugMode:
@@ -49,7 +49,7 @@ func updateOptions(options: Options, action: OptionsAction) -> Options {
     UserDefaults.standard.synchronize()
     exit(1)
     
-  case .firstTimeRun(_: let firstTimeRunState):
+  case .firstTimeRun(let firstTimeRunState):
     newOptions.firstTimeRun = firstTimeRunState
   }
   
