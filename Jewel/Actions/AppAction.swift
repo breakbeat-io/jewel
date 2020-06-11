@@ -10,7 +10,7 @@ import Foundation
 import HMV
 
 func updateState(appState: AppState, action: AppAction) -> AppState {
-  //  print("Performing action: \(action)")
+  print("💎 Performing: \(action.description)")
   
   var newAppState = appState
   
@@ -33,6 +33,8 @@ func updateState(appState: AppState, action: AppAction) -> AppState {
 }
 
 func updateOptions(options: Options, action: OptionsAction) -> Options {
+  print(action.description)
+  
   var newOptions = options
   
   switch action {
