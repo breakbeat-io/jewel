@@ -190,7 +190,6 @@
 		D249259F248146350011F409 /* State */ = {
 			isa = PBXGroup;
 			children = (
-				D2AB846A2481159D008B57F9 /* AppEnvironment.swift */,
 				D2492586248117710011F409 /* AppState.swift */,
 				D27FB80F24868B320014C05D /* Options.swift */,
 				D24C80D024899D0C00EFACD8 /* Library.swift */,
@@ -240,6 +239,7 @@
 				D22155892481114B00A1F04A /* Info.plist */,
 				D221557B2481114A00A1F04A /* AppDelegate.swift */,
 				D221557D2481114A00A1F04A /* SceneDelegate.swift */,
+				D2AB846A2481159D008B57F9 /* AppEnvironment.swift */,
 				D288174E248D148E00EB47C2 /* Listen Later.entitlements */,
 				D2AC120E2485A20400C52D9E /* secrets.xcconfig */,
 			);
