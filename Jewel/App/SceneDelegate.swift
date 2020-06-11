@@ -9,8 +9,6 @@
 import UIKit
 import SwiftUI
 
-let store = AppStore()
-
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
   
   var window: UIWindow?
@@ -30,7 +28,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     // Create the SwiftUI view that provides the window contents.
     let contentView = Home()
-      .environmentObject(store)
+      .environmentObject(AppStore.store)
     
     // Use a UIHostingController as window root view controller.
     if let windowScene = scene as? UIWindowScene {

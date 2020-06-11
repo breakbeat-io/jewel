@@ -12,13 +12,15 @@ import HMV
 
 final class AppStore: ObservableObject {
   
+  static let store = AppStore()
+  
   @Published private(set) var state: AppState {
     didSet {
       save()
     }
   }
   
-  init() {
+  private init() {
     if let savedState = UserDefaults.standard.object(forKey: "jewelState") as? Data {
       do {
         state = try JSONDecoder().decode(AppState.self, from: savedState)

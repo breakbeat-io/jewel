@@ -14,7 +14,7 @@ struct PlaybackLinks: View {
   let playbackLinks: OdesliResponse?
   
   private var playbackLink: (name: String, url: URL?) {
-    let preferredProvider = OdesliPlatform.allCases[store.state.options.preferredMusicPlatform]
+    let preferredProvider = OdesliPlatform.allCases[AppStore.store.state.options.preferredMusicPlatform]
     if let providerLink = playbackLinks?.linksByPlatform[preferredProvider.rawValue] {
       return (preferredProvider.friendlyName, providerLink.url)
     } else {
