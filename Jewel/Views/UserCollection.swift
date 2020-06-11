@@ -40,7 +40,7 @@ struct UserCollection: View {
                 .deleteDisabled(true)
             }
           }
-          .frame(height: AppEnvironment.cardHeight(viewHeight: geo.size.height)
+          .frame(height: Helpers.cardHeight(viewHeight: geo.size.height)
           )
         }
         .onMove { (indexSet, index) in

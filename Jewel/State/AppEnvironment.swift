@@ -75,15 +75,4 @@ final class AppEnvironment: ObservableObject {
     
   }
   
-  static func cardHeight(viewHeight: CGFloat) -> CGFloat {
-    switch viewHeight {
-    case 852...:
-      return 94
-    case 673..<852:
-      return 71
-    default:
-      return 61
-    }
-  }
-  
 }

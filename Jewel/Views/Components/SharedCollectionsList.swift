@@ -38,7 +38,7 @@ struct SharedCollectionsList: View {
                 .fill(Color(UIColor.secondarySystemBackground))
             }
           }
-          .frame(height: AppEnvironment.cardHeight(viewHeight: geo.size.height))
+          .frame(height: Helpers.cardHeight(viewHeight: geo.size.height))
         }
       }
       .navigationBarTitle(self.collection.name)
