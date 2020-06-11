@@ -22,8 +22,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     // Check that we have an Apple Music API Key else the entire App won't work!
     let appleMusicApiToken = Bundle.main.infoDictionary?["APPLE_MUSIC_API_TOKEN"] as! String
     if appleMusicApiToken == "" {
-      print("No Apple Music API Token Found!")
-      exit(0)
+      fatalError("No Apple Music API Token Found!")
     }
     
     // Create the SwiftUI view that provides the window contents.
