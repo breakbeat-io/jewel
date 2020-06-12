@@ -10,7 +10,22 @@ import SwiftUI
 
 struct Welcome: View {
   
+  @Environment(\.horizontalSizeClass) var horizontalSizeClass
+  @Environment(\.verticalSizeClass) var verticalSizeClass
+  
   @EnvironmentObject var environment: AppEnvironment
+  
+  private let heading = "Welcome!"
+  private let description = """
+  Listen Later is a place to store albums you want to listen to later.
+
+  Add and remove albums from any of 8 slots as you think of them, and they'll be there waiting for you when you're ready to listen!
+
+  Send your collection to friends and find out what they're listening to by asking them to send their collection to you.
+
+  Build a Collection Library of your and your friends collections for easy play back later!
+  """
+  private let buttonLabel = "Start My Collection"
   
   var body: some View {
     GeometryReader { geo in
@@ -20,11 +35,11 @@ struct Welcome: View {
           .edgesIgnoringSafeArea(.all)
         Rectangle()
           .fill(Color(.systemBackground))
-          .frame(width: geo.size.width * 0.8, height: geo.size.height * 0.7)
+          .frame(width: self.responsiveWidth(viewWidth: geo.size.width), height: self.responsiveHeight(viewHeight: geo.size.height))
           .cornerRadius(20)
           .shadow(radius: 5)
         VStack(alignment: .leading, spacing: 0) {
-          Text("Welcome to Jewel!")
+          Text(self.heading)
             .font(.title)
             .padding(.top, 50)
             .padding(.bottom, 5)
@@ -32,15 +47,11 @@ struct Welcome: View {
           ZStack(alignment: .top) {
             GeometryReader { geo in
               ScrollView {
-                Text("Jewel helps you remember great albums that you don't want to lose within the 100's of other in your library.")
-                  .padding(.bottom)
-                  .padding(.top)
-                Text("Jewel gives you 8 slots to add any release from the Apple Music catalogue.  Add them as you remember them then when you're ready to listen they're there waiting for you!")
-                  .padding(.bottom)
-                Text("You can also 'borrow' a collection from a friend, or share your with them!  Switch between the collections with the icon in the top right.")
-                  .padding(.bottom)
-                Text("Your collection is for anything you wish - new releases, favourite albums, an upcoming roadtrip - start collecting now!")
-                  .padding(.bottom)
+                VStack(alignment: .leading) {
+                  Text(self.description)
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 5)
+                }
               }
               .padding(.horizontal)
               Rectangle()
@@ -57,20 +68,38 @@ struct Welcome: View {
             Button(action: {
               self.environment.update(action: OptionsAction.firstTimeRun(false))
             }) {
-              Text("Start collection")
+              Text(self.buttonLabel)
             }
             .frame(maxWidth: .infinity, alignment: .center)
           }
           .padding()
         }
-        .frame(width: geo.size.width * 0.8, height: geo.size.height * 0.7)
+        .frame(width: self.responsiveWidth(viewWidth: geo.size.width), height: self.responsiveHeight(viewHeight: geo.size.height))
         Image("primary-logo")
           .resizable()
           .frame(width: 75, height: 75)
           .cornerRadius(5)
           .shadow(radius: 3)
-          .offset(y: -(geo.size.height * 0.7)/2)
+          .offset(y: -(self.responsiveHeight(viewHeight: geo.size.height)/2))
       }
+    }
+  }
+  
+  private func responsiveWidth(viewWidth: CGFloat) -> CGFloat {
+    if horizontalSizeClass == .compact {
+      return viewWidth * 0.8
+    } else {
+      return 400
+    }
+  }
+  
+  private func responsiveHeight(viewHeight: CGFloat) -> CGFloat {
+    if verticalSizeClass == .compact {
+      return viewHeight - 85
+    } else if horizontalSizeClass == .compact {
+      return viewHeight * 0.7
+    } else {
+      return 450
     }
   }
 }
