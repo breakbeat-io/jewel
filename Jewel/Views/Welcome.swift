@@ -47,11 +47,9 @@ struct Welcome: View {
           ZStack(alignment: .top) {
             GeometryReader { geo in
               ScrollView {
-                VStack(alignment: .leading) {
-                  Text(self.description)
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 5)
-                }
+                Text(self.description)
+                  .frame(maxWidth: .infinity)
+                  .padding(.vertical, 5)
               }
               .padding(.horizontal)
               Rectangle()
@@ -64,14 +62,12 @@ struct Welcome: View {
             }
             
           }
-          HStack{
-            Button(action: {
-              self.environment.update(action: OptionsAction.firstTimeRun(false))
-            }) {
-              Text(self.buttonLabel)
-            }
-            .frame(maxWidth: .infinity, alignment: .center)
+          Button(action: {
+            self.environment.update(action: OptionsAction.firstTimeRun(false))
+          }) {
+            Text(self.buttonLabel)
           }
+          .frame(maxWidth: .infinity, alignment: .center)
           .padding()
         }
         .frame(width: self.responsiveWidth(viewWidth: geo.size.width), height: self.responsiveHeight(viewHeight: geo.size.height))

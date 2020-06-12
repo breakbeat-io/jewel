@@ -15,30 +15,28 @@ struct SearchBar: View {
   @State private var searchTerm: String = ""
   
   var body: some View {
-    VStack(alignment: .leading) {
-      HStack {
-        Image(systemName: "magnifyingglass")
-        TextField(
-          "Search Apple Music",
-          text: $searchTerm,
-          onCommit: {
-            RecordStore.browse(for: self.searchTerm)
-        }
-        ).foregroundColor(.primary)
-          .keyboardType(.webSearch)
-        Button(action: {
-          self.searchTerm = ""
-          self.environment.update(action: SearchAction.removeSearchResults)
-        }) {
-          Image(systemName: "xmark.circle.fill")
-            .opacity(searchTerm == "" ? 0 : 1)
-        }
+    HStack {
+      Image(systemName: "magnifyingglass")
+      TextField(
+        "Search Apple Music",
+        text: $searchTerm,
+        onCommit: {
+          RecordStore.browse(for: self.searchTerm)
       }
-      .padding(EdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8))
-      .foregroundColor(.secondary)
-      .background(Color(.secondarySystemBackground))
-      .cornerRadius(8.0)
+      ).foregroundColor(.primary)
+        .keyboardType(.webSearch)
+      Button(action: {
+        self.searchTerm = ""
+        self.environment.update(action: SearchAction.removeSearchResults)
+      }) {
+        Image(systemName: "xmark.circle.fill")
+          .opacity(searchTerm == "" ? 0 : 1)
+      }
     }
+    .padding(EdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8))
+    .foregroundColor(.secondary)
+    .background(Color(.secondarySystemBackground))
+    .cornerRadius(8.0)
     .padding()
   }
 }

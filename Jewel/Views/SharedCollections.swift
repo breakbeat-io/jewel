@@ -29,9 +29,7 @@ struct SharedCollections: View {
         List {
           ForEach(collections) { collection in
             NavigationLink(destination: SharedCollectionsList(collection: collection)) {
-              VStack(alignment: .leading) {
-                CollectionCard(collection: collection)
-              }
+              CollectionCard(collection: collection)
             }
           }
           .onMove { (indexSet, index) in

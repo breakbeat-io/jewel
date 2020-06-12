@@ -17,25 +17,23 @@ struct EmptySlotCard: View {
   @State private var showSearch: Bool = false
   
   var body: some View {
-    HStack {
-      Button(action: {
-        self.showSearch = true
-      }) {
-        RoundedRectangle(cornerRadius: 4)
-          .stroke(
-            Color.secondary,
-            style: StrokeStyle(lineWidth: 2, dash: [4, 6])
-        )
-          .overlay(
-            Image(systemName: "plus")
-              .font(.headline)
-              .foregroundColor(Color.secondary)
-        )
-      }
-      .sheet(isPresented: $showSearch) {
-        SearchHome(slotIndex: self.slotIndex, showing: self.$showSearch)
-          .environmentObject(self.environment)
-      }
+    Button(action: {
+      self.showSearch = true
+    }) {
+      RoundedRectangle(cornerRadius: 4)
+        .stroke(
+          Color.secondary,
+          style: StrokeStyle(lineWidth: 2, dash: [4, 6])
+      )
+        .overlay(
+          Image(systemName: "plus")
+            .font(.headline)
+            .foregroundColor(Color.secondary)
+      )
+    }
+    .sheet(isPresented: $showSearch) {
+      SearchHome(slotIndex: self.slotIndex, showing: self.$showSearch)
+        .environmentObject(self.environment)
     }
   }
 }
