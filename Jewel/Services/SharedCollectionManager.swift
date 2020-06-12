@@ -140,7 +140,7 @@ class SharedCollectionManager {
           let shareableCollection = try JSONDecoder().decode(ShareableCollection.self, from: receivedCollectionEncoded)
           AppEnvironment.global.update(action: LibraryAction.cueSharedCollection(shareableCollection: shareableCollection))
         } catch {
-          print("💎 Shared Collection > Could not decode received collection")
+          print("💎 Shared Collection > Could not decode received collection: \(error)")
         }
       }
     }

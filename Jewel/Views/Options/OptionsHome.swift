@@ -28,13 +28,12 @@ struct OptionsHome: View {
     )
   }
   
-  
   var body: some View {
     NavigationView {
       VStack {
         Form {
           Section(footer: Text("Choose a name for your collection, and to represent the curator when sharing the collection.")) {
-            HStack(alignment: .firstTextBaseline) {
+            HStack {
               Text("Collection Name")
               TextField(
                 environment.state.library.userCollection.name,
@@ -44,7 +43,7 @@ struct OptionsHome: View {
               }
               ).foregroundColor(.accentColor)
             }
-            HStack(alignment: .firstTextBaseline) {
+            HStack {
               Text("Curator")
               TextField(
                 environment.state.library.userCollection.curator,

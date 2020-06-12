@@ -9,6 +9,7 @@
 import SwiftUI
 
 struct EmptyDetail: View {
+  
   @State private var fadeIn = false
   
   var body: some View {

@@ -11,14 +11,20 @@ import UIKit
 
 struct Helpers {
   
-  static func cardHeight(viewHeight: CGFloat) -> CGFloat {
+  enum cardHeights: CGFloat {
+    case tall = 94
+    case medium = 71
+    case short = 61
+  }
+  
+  static func cardHeightFor(viewHeight: CGFloat) -> CGFloat {
     switch viewHeight {
     case 852...:
-      return 94
+      return cardHeights.tall.rawValue
     case 673..<852:
-      return 71
+      return cardHeights.medium.rawValue
     default:
-      return 61
+      return cardHeights.short.rawValue
     }
   }
   

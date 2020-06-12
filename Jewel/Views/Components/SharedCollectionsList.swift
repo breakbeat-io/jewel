@@ -13,7 +13,7 @@ struct SharedCollectionsList: View {
   
   var collection: Collection
   
-  var slots: [Slot] {
+  private var slots: [Slot] {
     collection.slots
   }
   
@@ -38,7 +38,7 @@ struct SharedCollectionsList: View {
                 .fill(Color(UIColor.secondarySystemBackground))
             }
           }
-          .frame(height: Helpers.cardHeight(viewHeight: geo.size.height))
+          .frame(height: Helpers.cardHeightFor(viewHeight: geo.size.height))
         }
       }
       .navigationBarTitle(self.collection.name)

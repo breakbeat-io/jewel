@@ -12,8 +12,6 @@ import HMV
 
 struct SearchResults: View {
   
-  @Environment(\.presentationMode) var presentationMode
-  
   @EnvironmentObject var environment: AppEnvironment
   
   var slotIndex: Int

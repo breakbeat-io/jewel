@@ -50,7 +50,7 @@ struct CollectionCard: View {
         .cornerRadius(4)
         .padding(4)
         , alignment: .bottomLeading)
-      .frame(height: 60)
+      .frame(height: Helpers.cardHeights.medium.rawValue)
       .shadow(radius: 3)
   }
 }

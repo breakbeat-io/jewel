@@ -12,9 +12,9 @@ struct EmptySlotCard: View {
   
   @EnvironmentObject var environment: AppEnvironment
   
-  @State private var showSearch: Bool = false
-  
   let slotIndex: Int
+  
+  @State private var showSearch: Bool = false
   
   var body: some View {
     HStack {

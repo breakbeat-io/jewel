@@ -59,6 +59,7 @@ func updateOptions(options: Options, action: OptionsAction) -> Options {
 }
 
 func updateLibrary(library: Library, action: LibraryAction) -> Library {
+  
   var newLibrary = library
   
   switch action {
@@ -136,6 +137,7 @@ func updateLibrary(library: Library, action: LibraryAction) -> Library {
 }
 
 func updateSearch(search: Search, action: SearchAction) -> Search {
+  
   var newSearch = search
   
   switch action {
