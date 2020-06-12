@@ -147,7 +147,7 @@ class SharedCollectionManager {
   }
   
   static func expandShareableCollection(shareableCollection: ShareableCollection) {
-    var collection = Collection()
+    var collection = Collection(type: CollectionType.sharedCollection)
     collection.name = shareableCollection.collectionName
     collection.curator = shareableCollection.collectionCurator
     

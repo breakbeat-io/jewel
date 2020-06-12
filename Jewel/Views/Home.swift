@@ -35,7 +35,7 @@ struct Home: View {
             .tabItem {
               Image(systemName: "music.house")
                 .imageScale(.medium)
-              Text(environment.state.library.userCollection.name)
+              Text("On Rotation")
           }
           .tag("user")
           SharedCollections(isEditing: self.$isEditing)

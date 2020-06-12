@@ -11,6 +11,7 @@ import HMV
 
 struct Collection: Identifiable, Codable {
   var id = UUID()
+  var type: CollectionType
   var name: String = "My Collection"
   var curator: String = "A Music Lover"
   var slots: [Slot] = {
@@ -27,10 +28,17 @@ struct Collection: Identifiable, Codable {
   var shareLinkError = false
   
   enum CodingKeys: CodingKey {
+    case id
     case name
+    case type
     case curator
     case slots
     case shareLinkLong
     case shareLinkShort
   }
+}
+
+enum CollectionType: String, Codable {
+  case userCollection
+  case sharedCollection
 }

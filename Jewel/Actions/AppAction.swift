@@ -33,7 +33,6 @@ func updateState(appState: AppState, action: AppAction) -> AppState {
 }
 
 func updateOptions(options: Options, action: OptionsAction) -> Options {
-  print(action.description)
   
   var newOptions = options
   
@@ -91,6 +90,15 @@ func updateLibrary(library: Library, action: LibraryAction) -> Library {
     
   case let .shareLinkError(errorState):
     newLibrary.userCollection.shareLinkError = errorState
+  
+  case let .saveOnRotation(collection):
+    let formatter = DateFormatter()
+    formatter.dateFormat = "MMM yyyy"
+    let dateString = formatter.string(from: Date())
+    var newCollection = collection
+    newCollection.id = UUID()
+    newCollection.name = "On Rotation — \(dateString)"
+    newLibrary.sharedCollections.insert(newCollection, at: 0)
     
   case let .addSharedCollection(collection):
     newLibrary.sharedCollections.insert(collection, at: 0)

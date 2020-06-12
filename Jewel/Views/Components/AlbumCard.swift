@@ -46,7 +46,7 @@ struct AlbumCard: View {
               .padding(.bottom, 4)
               .lineLimit(1)
         }
-        .background(Color.black)
+        .background(Color.black.opacity(0.8))
         .cornerRadius(4)
         .padding(4)
         , alignment: .bottomLeading)

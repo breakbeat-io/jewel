@@ -51,7 +51,7 @@ struct UserCollectionButtons: View {
                 self.showShareLink = true
               },
               .default(Text("Add to my Collection Library")) {
-                self.environment.update(action: LibraryAction.addSharedCollection(collection: self.environment.state.library.userCollection))
+                self.environment.update(action: LibraryAction.saveOnRotation(collection: self.environment.state.library.userCollection))
                 self.environment.update(action: LibraryAction.userCollectionActive(false))
               },
               .cancel()

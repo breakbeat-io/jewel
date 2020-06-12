@@ -32,7 +32,7 @@ final class AppEnvironment: ObservableObject {
     }
     
     let options = Options()
-    let library = Library(userCollection: Collection(), sharedCollections: [Collection]())
+    let library = Library(userCollection: Collection(type: CollectionType.userCollection), sharedCollections: [Collection]())
     let appState = AppState(options: options, library: library)
     
     self.state = appState

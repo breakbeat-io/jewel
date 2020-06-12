@@ -24,14 +24,17 @@ struct CollectionCard: View {
   }
   
   var body: some View {
-    Rectangle()
-      .foregroundColor(.clear)
-      .background(
-        CardArtworkComposite(images: collectionArtwork)
-    )
-      .cornerRadius(4)
-      .overlay(
-        VStack(alignment: .leading) {
+    ZStack(alignment: .bottom) {
+      Rectangle()
+        .foregroundColor(.clear)
+        .background(
+          CardArtworkComposite(images: collectionArtwork)
+      )
+        .cornerRadius(4)
+        .frame(height: Helpers.cardHeights.medium.rawValue)
+        .shadow(radius: 3)
+      HStack(alignment: .bottom) {
+        VStack(alignment: .leading, spacing: 0) {
           Text(collection.name)
             .font(.callout)
             .fontWeight(.bold)
@@ -42,15 +45,20 @@ struct CollectionCard: View {
           Text(collection.curator)
             .font(.footnote)
             .foregroundColor(.white)
+            .lineLimit(1)
             .padding(.horizontal, 6)
             .padding(.bottom, 4)
-            .lineLimit(1)
         }
-        .background(Color.black)
+        .background(Color.black.opacity(0.8))
         .cornerRadius(4)
-        .padding(4)
-        , alignment: .bottomLeading)
-      .frame(height: Helpers.cardHeights.medium.rawValue)
-      .shadow(radius: 3)
+        Spacer()
+        if collection.type == .userCollection {
+          Image(systemName: "person.circle")
+            .padding(4)
+            .foregroundColor(Color.black.opacity(0.8))
+        }
+      }
+      .padding(4)
+    }
   }
 }

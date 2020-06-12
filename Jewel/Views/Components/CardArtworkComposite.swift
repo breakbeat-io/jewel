@@ -28,7 +28,7 @@ struct CardArtworkComposite: View {
             .scaledToFill()
         )
           .clipped()
-          .frame(height: Helpers.cardHeights.medium.rawValue * 2)
+          .frame(height: Helpers.cardHeights.medium.rawValue * 3)
           .rotationEffect(.degrees(15))
       }
     }
