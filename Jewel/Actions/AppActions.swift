@@ -45,6 +45,7 @@ enum LibraryAction: AppAction {
   case setShareLinks(shareLinkLong: URL, shareLinkShort: URL)
   case shareLinkError(_: Bool)
   case saveOnRotation(collection: Collection)
+  case addUserCollection
   case addSharedCollection(collection: Collection)
   case removeSharedCollection(slotIndexes: IndexSet)
   case moveSharedCollection(from: IndexSet, to: Int)
@@ -76,6 +77,8 @@ enum LibraryAction: AppAction {
       return "\(type(of: self)): Setting the share link error"
     case .saveOnRotation:
       return "\(type(of: self)): Saving current On Rotation to Library"
+    case .addUserCollection:
+      return "\(type(of: self)): Adding a user collection to the Library"
     case .addSharedCollection:
       return "\(type(of: self)): Adding a shared collection to the library"
     case .removeSharedCollection:

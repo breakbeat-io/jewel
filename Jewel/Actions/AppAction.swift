@@ -99,6 +99,10 @@ func updateLibrary(library: Library, action: LibraryAction) -> Library {
     newCollection.id = UUID()
     newCollection.name = "On Rotation — \(dateString)"
     newLibrary.sharedCollections.insert(newCollection, at: 0)
+  
+  case .addUserCollection:
+    let newCollection = Collection(type: .userCollection, name: "New Collection", curator: "A Music Lover")
+    newLibrary.sharedCollections.insert(newCollection, at: 0)
     
   case let .addSharedCollection(collection):
     newLibrary.sharedCollections.insert(collection, at: 0)

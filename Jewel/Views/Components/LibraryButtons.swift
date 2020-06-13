@@ -18,7 +18,7 @@ struct LibraryButtons: View {
     HStack {
       if !environment.state.library.onRotationActive {
         Button(action: {
-          
+          self.environment.update(action: LibraryAction.addUserCollection)
         }) {
           Image(systemName: "plus")
         }
