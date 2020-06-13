@@ -17,7 +17,7 @@ struct Home: View {
   private var selectedTab: Binding<String> {
     Binding (
       get: { self.environment.state.library.onRotationActive ? "user" : "shared" },
-      set: { self.environment.update(action: LibraryAction.userCollectionActive($0 == "user" ? true : false )) }
+      set: { self.environment.update(action: LibraryAction.onRotationActive($0 == "user" ? true : false )) }
     )
   }
   private var receivedCollectionCued: Binding<Bool> {
@@ -53,7 +53,7 @@ struct Home: View {
                   self.environment.update(action: LibraryAction.uncueSharedCollection)
             },
                 secondaryButton: .default(Text("Add").bold()) {
-                  self.environment.update(action: LibraryAction.userCollectionActive(false))
+                  self.environment.update(action: LibraryAction.onRotationActive(false))
                   SharedCollectionManager.expandShareableCollection(shareableCollection: self.environment.state.library.cuedCollection!)
                   self.environment.update(action: LibraryAction.uncueSharedCollection)
             })

@@ -52,7 +52,7 @@ struct UserCollectionButtons: View {
               },
               .default(Text("Add to my Collection Library")) {
                 self.environment.update(action: LibraryAction.saveOnRotation(collection: self.environment.state.library.onRotation))
-                self.environment.update(action: LibraryAction.userCollectionActive(false))
+                self.environment.update(action: LibraryAction.onRotationActive(false))
               },
               .cancel()
             ]

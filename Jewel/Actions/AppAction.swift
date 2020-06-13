@@ -63,8 +63,8 @@ func updateLibrary(library: Library, action: LibraryAction) -> Library {
   
   switch action {
     
-  case let .userCollectionActive(userCollectionActive):
-    newLibrary.onRotationActive = userCollectionActive
+  case let .onRotationActive(onRotationActiveState):
+    newLibrary.onRotationActive = onRotationActiveState
     
   case let .setUserCollectionName(name):
     newLibrary.onRotation.name = name
@@ -120,7 +120,7 @@ func updateLibrary(library: Library, action: LibraryAction) -> Library {
     newLibrary.cuedCollection = nil
     
   case let .addAlbumToSlot(album, slotIndex, collectionId):
-    if newLibrary.onRotation.id == collectionId {
+    if collectionId == newLibrary.onRotation.id {
       newLibrary.onRotation.slots[slotIndex].album = album
     } else {
       if let collectionIndex = newLibrary.sharedCollections.firstIndex(where: { $0.id == collectionId }) {
