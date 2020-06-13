@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct SharedCollections: View {
+struct CollectionLibrary: View {
   
   @EnvironmentObject var environment: AppEnvironment
   
@@ -28,7 +28,7 @@ struct SharedCollections: View {
       } else {
         List {
           ForEach(collections) { collection in
-            NavigationLink(destination: SharedCollectionsList(collection: collection)) {
+            NavigationLink(destination: AlbumList(collection: collection)) {
               CollectionCard(collection: collection)
             }
           }

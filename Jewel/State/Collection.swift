@@ -12,8 +12,8 @@ import HMV
 struct Collection: Identifiable, Codable {
   var id = UUID()
   var type: CollectionType
-  var name: String = "My Collection"
-  var curator: String = "A Music Lover"
+  var name: String
+  var curator: String
   var slots: [Slot] = {
     var tmpSlots = [Slot]()
     for _ in 0..<8 {

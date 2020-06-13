@@ -31,14 +31,14 @@ struct Home: View {
     ZStack {
       NavigationView {
         TabView(selection: selectedTab) {
-          UserCollection(isEditing: self.$isEditing)
+          OnRotation(isEditing: self.$isEditing)
             .tabItem {
               Image(systemName: "music.house")
                 .imageScale(.medium)
               Text("On Rotation")
           }
           .tag("user")
-          SharedCollections(isEditing: self.$isEditing)
+          CollectionLibrary(isEditing: self.$isEditing)
             .tabItem {
               Image(systemName: "rectangle.on.rectangle.angled")
                 .imageScale(.medium)

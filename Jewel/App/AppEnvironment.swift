@@ -32,7 +32,8 @@ final class AppEnvironment: ObservableObject {
     }
     
     let options = Options()
-    let library = Library(onRotation: Collection(type: CollectionType.userCollection), sharedCollections: [Collection]())
+    let onRotationCollection = Collection(type: .userCollection, name: "On Rotation", curator: "A Music Lover")
+    let library = Library(onRotation: onRotationCollection, sharedCollections: [Collection]())
     let appState = AppState(options: options, library: library)
     
     self.state = appState

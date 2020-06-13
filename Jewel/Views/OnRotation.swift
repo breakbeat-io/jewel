@@ -9,7 +9,7 @@
 import SwiftUI
 import HMV
 
-struct UserCollection: View {
+struct OnRotation: View {
   
   @EnvironmentObject var environment: AppEnvironment
   

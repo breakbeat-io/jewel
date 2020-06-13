@@ -147,9 +147,7 @@ class SharedCollectionManager {
   }
   
   static func expandShareableCollection(shareableCollection: ShareableCollection) {
-    var collection = Collection(type: CollectionType.sharedCollection)
-    collection.name = shareableCollection.collectionName
-    collection.curator = shareableCollection.collectionCurator
+    let collection = Collection(type: .sharedCollection, name: shareableCollection.collectionName, curator: shareableCollection.collectionCurator)
     
     AppEnvironment.global.update(action: LibraryAction.addSharedCollection(collection: collection))
     

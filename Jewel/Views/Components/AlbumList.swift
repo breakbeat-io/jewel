@@ -9,7 +9,7 @@
 import SwiftUI
 import HMV
 
-struct SharedCollectionsList: View {
+struct AlbumList: View {
   
   var collection: Collection
   
