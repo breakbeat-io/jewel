@@ -78,15 +78,6 @@ struct UserCollectionButtons: View {
                   SharedCollectionManager.loadRecommendations()
             })
         }
-        Button(action: {
-          // this is a weird thing where I couldn't get this clause to align to the right places unless there was exactly the same layout as the other clause above, so have added a dummy button :(
-        }) {
-          Image(systemName: "square.and.arrow.down")
-            .opacity(0)
-        }
-        .padding(.trailing)
-        .padding(.vertical)
-        .disabled(true)
       }
     }
   }

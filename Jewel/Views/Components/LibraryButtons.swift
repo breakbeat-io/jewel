@@ -10,13 +10,26 @@ import SwiftUI
 
 struct LibraryButtons: View {
   
+  @EnvironmentObject var environment: AppEnvironment
+  
   @Binding var isEditing: Bool
   
   var body: some View {
-    Button(action: {
-      self.isEditing.toggle()
-    }) {
-      Text(isEditing ? "Done" : "Edit")
+    HStack {
+      if !environment.state.library.onRotationActive {
+        Button(action: {
+          
+        }) {
+          Image(systemName: "plus")
+        }
+        .padding(.trailing)
+      }
+      Button(action: {
+        self.isEditing.toggle()
+      }) {
+        Text(isEditing ? "Done" : "Edit")
+      }
     }
+    .padding(.vertical)
   }
 }
