@@ -16,7 +16,7 @@ struct ObservedAlbumDetail: View {
   let slotId: Int
   
   private var slot: Slot {
-      environment.state.library.userCollection.slots[slotId]
+      environment.state.library.onRotation.slots[slotId]
   }
   
   var body: some View {

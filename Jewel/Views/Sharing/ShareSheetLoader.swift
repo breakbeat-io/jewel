@@ -13,7 +13,7 @@ struct ShareSheetLoader: View {
   @EnvironmentObject var environment: AppEnvironment
   
   private var collection: Collection {
-    environment.state.library.userCollection
+    environment.state.library.onRotation
   }
   
   var body: some View {

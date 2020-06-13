@@ -16,7 +16,7 @@ struct Home: View {
   
   private var selectedTab: Binding<String> {
     Binding (
-      get: { self.environment.state.library.userCollectionActive ? "user" : "shared" },
+      get: { self.environment.state.library.onRotationActive ? "user" : "shared" },
       set: { self.environment.update(action: LibraryAction.userCollectionActive($0 == "user" ? true : false )) }
     )
   }
@@ -58,7 +58,7 @@ struct Home: View {
                   self.environment.update(action: LibraryAction.uncueSharedCollection)
             })
         }
-        .navigationBarTitle(environment.state.library.userCollectionActive ? self.environment.state.library.userCollection.name : "Collection Library")
+        .navigationBarTitle(environment.state.library.onRotationActive ? self.environment.state.library.onRotation.name : "Collection Library")
         .navigationBarItems(
           leading: UserCollectionButtons(),
           trailing: LibraryButtons(isEditing: self.$isEditing)

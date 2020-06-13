@@ -16,7 +16,7 @@ struct UserCollection: View {
   @Binding var isEditing: Bool
   
   private var slots: [Slot] {
-    environment.state.library.userCollection.slots
+    environment.state.library.onRotation.slots
   }
   
   var body: some View {

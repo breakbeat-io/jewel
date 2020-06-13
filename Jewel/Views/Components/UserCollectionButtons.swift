@@ -18,12 +18,12 @@ struct UserCollectionButtons: View {
   @State private var showLoadRecommendationsAlert = false
   
   private var collectionEmpty: Bool {
-    environment.state.library.userCollection.slots.filter( { $0.album != nil }).count == 0
+    environment.state.library.onRotation.slots.filter( { $0.album != nil }).count == 0
   }
   
   var body: some View {
     HStack {
-      if environment.state.library.userCollectionActive {
+      if environment.state.library.onRotationActive {
         Button(action: {
           self.showOptions = true
         }) {
@@ -45,13 +45,13 @@ struct UserCollectionButtons: View {
         .disabled(collectionEmpty)
         .actionSheet(isPresented: $showSharing) {
           ActionSheet(
-            title: Text("Share this collection as \n \"\(environment.state.library.userCollection.name)\" by \"\(environment.state.library.userCollection.curator)\""),
+            title: Text("Share this collection as \n \"\(environment.state.library.onRotation.name)\" by \"\(environment.state.library.onRotation.curator)\""),
             buttons: [
               .default(Text("Send Share Link")) {
                 self.showShareLink = true
               },
               .default(Text("Add to my Collection Library")) {
-                self.environment.update(action: LibraryAction.saveOnRotation(collection: self.environment.state.library.userCollection))
+                self.environment.update(action: LibraryAction.saveOnRotation(collection: self.environment.state.library.onRotation))
                 self.environment.update(action: LibraryAction.userCollectionActive(false))
               },
               .cancel()

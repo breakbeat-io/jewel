@@ -64,32 +64,32 @@ func updateLibrary(library: Library, action: LibraryAction) -> Library {
   switch action {
     
   case let .userCollectionActive(userCollectionActive):
-    newLibrary.userCollectionActive = userCollectionActive
+    newLibrary.onRotationActive = userCollectionActive
     
   case let .setUserCollectionName(name):
-    newLibrary.userCollection.name = name
+    newLibrary.onRotation.name = name
     
   case let .setUserCollectionCurator(curator):
-    newLibrary.userCollection.curator = curator
+    newLibrary.onRotation.curator = curator
     
   case let .removeAlbumFromSlot(slotIndexes):
     for i in slotIndexes {
-      newLibrary.userCollection.slots[i] = Slot()
+      newLibrary.onRotation.slots[i] = Slot()
     }
     
   case let .moveSlot(from, to):
-    newLibrary.userCollection.slots.move(fromOffsets: from, toOffset: to)
+    newLibrary.onRotation.slots.move(fromOffsets: from, toOffset: to)
     
   case .invalidateShareLinks:
-    newLibrary.userCollection.shareLinkLong = nil
-    newLibrary.userCollection.shareLinkShort = nil
+    newLibrary.onRotation.shareLinkLong = nil
+    newLibrary.onRotation.shareLinkShort = nil
     
   case let .setShareLinks(shareLinkLong, shareLinkShort):
-    newLibrary.userCollection.shareLinkLong = shareLinkLong
-    newLibrary.userCollection.shareLinkShort = shareLinkShort
+    newLibrary.onRotation.shareLinkLong = shareLinkLong
+    newLibrary.onRotation.shareLinkShort = shareLinkShort
     
   case let .shareLinkError(errorState):
-    newLibrary.userCollection.shareLinkError = errorState
+    newLibrary.onRotation.shareLinkError = errorState
   
   case let .saveOnRotation(collection):
     let formatter = DateFormatter()
@@ -116,8 +116,8 @@ func updateLibrary(library: Library, action: LibraryAction) -> Library {
     newLibrary.cuedCollection = nil
     
   case let .addAlbumToSlot(album, slotIndex, collectionId):
-    if newLibrary.userCollection.id == collectionId {
-      newLibrary.userCollection.slots[slotIndex].album = album
+    if newLibrary.onRotation.id == collectionId {
+      newLibrary.onRotation.slots[slotIndex].album = album
     } else {
       if let collectionIndex = newLibrary.sharedCollections.firstIndex(where: { $0.id == collectionId }) {
         newLibrary.sharedCollections[collectionIndex].slots[slotIndex].album = album
@@ -125,10 +125,10 @@ func updateLibrary(library: Library, action: LibraryAction) -> Library {
     }
     
   case let .setPlatformLinks(baseUrl, platformLinks, collectionId):
-    if newLibrary.userCollection.id == collectionId {
-      let indices = newLibrary.userCollection.slots.enumerated().compactMap({ $1.album?.attributes?.url == baseUrl ? $0 : nil })
+    if newLibrary.onRotation.id == collectionId {
+      let indices = newLibrary.onRotation.slots.enumerated().compactMap({ $1.album?.attributes?.url == baseUrl ? $0 : nil })
       for i in indices {
-        newLibrary.userCollection.slots[i].playbackLinks = platformLinks
+        newLibrary.onRotation.slots[i].playbackLinks = platformLinks
       }
     } else {
       if let collectionIndex = newLibrary.sharedCollections.firstIndex(where: { $0.id == collectionId }) {

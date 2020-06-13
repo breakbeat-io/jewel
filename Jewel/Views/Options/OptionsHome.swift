@@ -15,11 +15,11 @@ struct OptionsHome: View {
   @Binding var showing: Bool
   
   private var collectionName: Binding<String> { Binding (
-    get: { self.environment.state.library.userCollection.name },
+    get: { self.environment.state.library.onRotation.name },
     set: { self.environment.update(action: LibraryAction.setUserCollectionName(name: $0))}
     )}
   private var collectionCurator: Binding<String> { Binding (
-    get: { self.environment.state.library.userCollection.curator },
+    get: { self.environment.state.library.onRotation.curator },
     set: { self.environment.update(action: LibraryAction.setUserCollectionCurator(curator: $0))}
     )}
   private var preferredMusicPlatform: Binding<Int> { Binding (
@@ -36,7 +36,7 @@ struct OptionsHome: View {
             HStack {
               Text("Collection Name")
               TextField(
-                environment.state.library.userCollection.name,
+                environment.state.library.onRotation.name,
                 text: collectionName,
                 onCommit: {
                   self.showing = false
@@ -46,7 +46,7 @@ struct OptionsHome: View {
             HStack {
               Text("Curator")
               TextField(
-                environment.state.library.userCollection.curator,
+                environment.state.library.onRotation.curator,
                 text: collectionCurator,
                 onCommit: {
                   self.showing = false

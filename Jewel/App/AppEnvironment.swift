@@ -32,7 +32,7 @@ final class AppEnvironment: ObservableObject {
     }
     
     let options = Options()
-    let library = Library(userCollection: Collection(type: CollectionType.userCollection), sharedCollections: [Collection]())
+    let library = Library(onRotation: Collection(type: CollectionType.userCollection), sharedCollections: [Collection]())
     let appState = AppState(options: options, library: library)
     
     self.state = appState
@@ -58,15 +58,15 @@ final class AppEnvironment: ObservableObject {
     
     if let v1CollectionName = UserDefaults.standard.string(forKey: "collectionName") {
       print("💎 State Migration > v1.0 Collection Name found ... migrating.")
-      state.library.userCollection.name = v1CollectionName
+      state.library.onRotation.name = v1CollectionName
       UserDefaults.standard.removeObject(forKey: "collectionName")
     }
     
     if let savedCollection = UserDefaults.standard.dictionary(forKey: "savedCollection") {
       print("💎 State Migration > v1.0 Saved Collection found ... migrating.")
-      for slotIndex in 0..<state.library.userCollection.slots.count {
+      for slotIndex in 0..<state.library.onRotation.slots.count {
         if let albumId = savedCollection[String(slotIndex)] {
-          RecordStore.purchase(album: albumId as! String, forSlot: slotIndex, inCollection: state.library.userCollection.id)
+          RecordStore.purchase(album: albumId as! String, forSlot: slotIndex, inCollection: state.library.onRotation.id)
         }
       }
       UserDefaults.standard.removeObject(forKey: "savedCollection")
