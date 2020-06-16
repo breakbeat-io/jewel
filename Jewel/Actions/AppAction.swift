@@ -75,8 +75,14 @@ func updateLibrary(library: Library, action: LibraryAction) -> Library {
       }
     }
     
-  case let .setUserCollectionCurator(curator):
-    newLibrary.onRotation.curator = curator
+  case let .setCollectionCurator(curator, collectionId):
+    if collectionId == newLibrary.onRotation.id {
+      newLibrary.onRotation.curator = curator
+    } else {
+      if let collectionIndex = newLibrary.sharedCollections.firstIndex(where: { $0.id == collectionId }) {
+        newLibrary.sharedCollections[collectionIndex].curator = curator
+      }
+    }
     
   case let .removeAlbumFromSlot(slotIndexes):
     for i in slotIndexes {
@@ -96,7 +102,7 @@ func updateLibrary(library: Library, action: LibraryAction) -> Library {
     
   case let .shareLinkError(errorState):
     newLibrary.onRotation.shareLinkError = errorState
-  
+    
   case let .saveOnRotation(collection):
     let formatter = DateFormatter()
     formatter.dateFormat = "MMM yyyy"
@@ -105,7 +111,7 @@ func updateLibrary(library: Library, action: LibraryAction) -> Library {
     newCollection.id = UUID()
     newCollection.name = "On Rotation — \(dateString)"
     newLibrary.sharedCollections.insert(newCollection, at: 0)
-  
+    
   case .addUserCollection:
     let newCollection = Collection(type: .userCollection, name: "New Collection", curator: "A Music Lover")
     newLibrary.sharedCollections.insert(newCollection, at: 0)

@@ -14,13 +14,16 @@ struct OptionsHome: View {
   
   @Binding var showing: Bool
   
+  private var collectionId: UUID {
+    self.environment.state.library.onRotation.id
+  }
   private var collectionName: Binding<String> { Binding (
     get: { self.environment.state.library.onRotation.name },
-    set: { self.environment.update(action: LibraryAction.setCollectionName(name: $0, collectionId: self.environment.state.library.onRotation.id))}
+    set: { self.environment.update(action: LibraryAction.setCollectionName(name: $0, collectionId: self.collectionId))}
     )}
   private var collectionCurator: Binding<String> { Binding (
     get: { self.environment.state.library.onRotation.curator },
-    set: { self.environment.update(action: LibraryAction.setUserCollectionCurator(curator: $0))}
+    set: { self.environment.update(action: LibraryAction.setCollectionCurator(curator: $0, collectionId: self.collectionId))}
     )}
   private var preferredMusicPlatform: Binding<Int> { Binding (
     get: { self.environment.state.options.preferredMusicPlatform },
