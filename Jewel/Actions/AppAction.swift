@@ -106,8 +106,14 @@ func updateLibrary(library: Library, action: LibraryAction) -> Library {
       }
     }
     
-  case let .moveSlot(from, to):
-    newLibrary.onRotation.slots.move(fromOffsets: from, toOffset: to)
+  case let .moveSlot(from, to, collectionId):
+    if collectionId == newLibrary.onRotation.id {
+      newLibrary.onRotation.slots.move(fromOffsets: from, toOffset: to)
+    } else {
+      if let collectionIndex = newLibrary.sharedCollections.firstIndex(where: { $0.id == collectionId }) {
+        newLibrary.sharedCollections[collectionIndex].slots.move(fromOffsets: from, toOffset: to)
+      }
+    }
     
   case .invalidateShareLinks:
     newLibrary.onRotation.shareLinkLong = nil

@@ -40,7 +40,7 @@ enum LibraryAction: AppAction {
   case addAlbumToSlot(album: Album, slotIndex: Int, collectionId: UUID)
   case removeAlbumFromSlot(slotIndexes: IndexSet, collectionId: UUID)
   case setPlatformLinks(baseUrl: URL, platformLinks: OdesliResponse, collectionId: UUID)
-  case moveSlot(from: IndexSet, to: Int)
+  case moveSlot(from: IndexSet, to: Int, collectionId: UUID)
   case invalidateShareLinks
   case setShareLinks(shareLinkLong: URL, shareLinkShort: URL)
   case shareLinkError(_: Bool)

@@ -15,6 +15,9 @@ struct OnRotation: View {
   
   @Binding var isEditing: Bool
   
+  private var collectionId: UUID {
+    environment.state.library.onRotation.id
+  }
   private var slots: [Slot] {
     environment.state.library.onRotation.slots
   }
@@ -44,10 +47,10 @@ struct OnRotation: View {
           )
         }
         .onMove { (indexSet, index) in
-          self.environment.update(action: LibraryAction.moveSlot(from: indexSet, to: index))
+          self.environment.update(action: LibraryAction.moveSlot(from: indexSet, to: index, collectionId: self.collectionId))
         }
         .onDelete {
-          self.environment.update(action: LibraryAction.removeAlbumFromSlot(slotIndexes: $0, collectionId: self.environment.state.library.onRotation.id))
+          self.environment.update(action: LibraryAction.removeAlbumFromSlot(slotIndexes: $0, collectionId: self.collectionId))
         }
       }
       .environment(\.editMode, .constant(self.isEditing ? EditMode.active : EditMode.inactive))
