@@ -35,7 +35,7 @@ enum OptionsAction: AppAction {
 
 enum LibraryAction: AppAction {
   case onRotationActive(_: Bool)
-  case setUserCollectionName(name: String)
+  case setCollectionName(name: String, collectionId: UUID)
   case setUserCollectionCurator(curator: String)
   case addAlbumToSlot(album: Album, slotIndex: Int, collectionId: UUID)
   case removeAlbumFromSlot(slotIndexes: IndexSet)
@@ -57,7 +57,7 @@ enum LibraryAction: AppAction {
       
     case .onRotationActive:
       return "\(type(of: self)): Changing active state of on rotation"
-    case .setUserCollectionName:
+    case .setCollectionName:
       return "\(type(of: self)): Setting user collection name"
     case .setUserCollectionCurator:
       return "\(type(of: self)): Setting user collection curator"

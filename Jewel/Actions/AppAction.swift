@@ -66,8 +66,14 @@ func updateLibrary(library: Library, action: LibraryAction) -> Library {
   case let .onRotationActive(onRotationActiveState):
     newLibrary.onRotationActive = onRotationActiveState
     
-  case let .setUserCollectionName(name):
-    newLibrary.onRotation.name = name
+  case let .setCollectionName(name, collectionId):
+    if collectionId == newLibrary.onRotation.id {
+      newLibrary.onRotation.name = name
+    } else {
+      if let collectionIndex = newLibrary.sharedCollections.firstIndex(where: { $0.id == collectionId }) {
+        newLibrary.sharedCollections[collectionIndex].name = name
+      }
+    }
     
   case let .setUserCollectionCurator(curator):
     newLibrary.onRotation.curator = curator

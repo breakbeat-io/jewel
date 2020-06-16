@@ -16,7 +16,7 @@ struct OptionsHome: View {
   
   private var collectionName: Binding<String> { Binding (
     get: { self.environment.state.library.onRotation.name },
-    set: { self.environment.update(action: LibraryAction.setUserCollectionName(name: $0))}
+    set: { self.environment.update(action: LibraryAction.setCollectionName(name: $0, collectionId: self.environment.state.library.onRotation.id))}
     )}
   private var collectionCurator: Binding<String> { Binding (
     get: { self.environment.state.library.onRotation.curator },
