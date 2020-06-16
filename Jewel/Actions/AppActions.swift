@@ -38,7 +38,7 @@ enum LibraryAction: AppAction {
   case setCollectionName(name: String, collectionId: UUID)
   case setCollectionCurator(curator: String, collectionId: UUID)
   case addAlbumToSlot(album: Album, slotIndex: Int, collectionId: UUID)
-  case removeAlbumFromSlot(slotIndexes: IndexSet)
+  case removeAlbumFromSlot(slotIndexes: IndexSet, collectionId: UUID)
   case setPlatformLinks(baseUrl: URL, platformLinks: OdesliResponse, collectionId: UUID)
   case moveSlot(from: IndexSet, to: Int)
   case invalidateShareLinks

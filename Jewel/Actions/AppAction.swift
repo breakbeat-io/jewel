@@ -84,9 +84,26 @@ func updateLibrary(library: Library, action: LibraryAction) -> Library {
       }
     }
     
-  case let .removeAlbumFromSlot(slotIndexes):
-    for i in slotIndexes {
-      newLibrary.onRotation.slots[i] = Slot()
+  case let .addAlbumToSlot(album, slotIndex, collectionId):
+    if collectionId == newLibrary.onRotation.id {
+      newLibrary.onRotation.slots[slotIndex].album = album
+    } else {
+      if let collectionIndex = newLibrary.sharedCollections.firstIndex(where: { $0.id == collectionId }) {
+        newLibrary.sharedCollections[collectionIndex].slots[slotIndex].album = album
+      }
+    }
+    
+  case let .removeAlbumFromSlot(slotIndexes, collectionId):
+    if collectionId == newLibrary.onRotation.id {
+      for i in slotIndexes {
+        newLibrary.onRotation.slots[i] = Slot()
+      }
+    } else {
+      if let collectionIndex = newLibrary.sharedCollections.firstIndex(where: { $0.id == collectionId }) {
+        for i in slotIndexes {
+          newLibrary.sharedCollections[collectionIndex].slots[i] = Slot()
+        }
+      }
     }
     
   case let .moveSlot(from, to):
@@ -130,15 +147,6 @@ func updateLibrary(library: Library, action: LibraryAction) -> Library {
     
   case .uncueSharedCollection:
     newLibrary.cuedCollection = nil
-    
-  case let .addAlbumToSlot(album, slotIndex, collectionId):
-    if collectionId == newLibrary.onRotation.id {
-      newLibrary.onRotation.slots[slotIndex].album = album
-    } else {
-      if let collectionIndex = newLibrary.sharedCollections.firstIndex(where: { $0.id == collectionId }) {
-        newLibrary.sharedCollections[collectionIndex].slots[slotIndex].album = album
-      }
-    }
     
   case let .setPlatformLinks(baseUrl, platformLinks, collectionId):
     if newLibrary.onRotation.id == collectionId {

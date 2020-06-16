@@ -47,7 +47,7 @@ struct OnRotation: View {
           self.environment.update(action: LibraryAction.moveSlot(from: indexSet, to: index))
         }
         .onDelete {
-          self.environment.update(action: LibraryAction.removeAlbumFromSlot(slotIndexes: $0))
+          self.environment.update(action: LibraryAction.removeAlbumFromSlot(slotIndexes: $0, collectionId: self.environment.state.library.onRotation.id))
         }
       }
       .environment(\.editMode, .constant(self.isEditing ? EditMode.active : EditMode.inactive))
