@@ -76,7 +76,11 @@ struct CollectionDetail: View {
         }
         .navigationBarTitle(collection.name)
         .navigationBarItems(
-          leading: UserCollectionButtons(collectionId: self.collectionId).environmentObject(self.environment),
+          leading:
+            HStack {
+              OptionsButton()
+              SharingButton(collectionId: self.collectionId)
+            }.environmentObject(self.environment),
           trailing: self.editable && !self.empty ? AnyView(EditButton()) : AnyView(EmptyView())
         )
       }
