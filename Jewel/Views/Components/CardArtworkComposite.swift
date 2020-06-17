@@ -15,22 +15,28 @@ struct CardArtworkComposite: View {
   
   var body: some View {
     HStack {
-      ForEach(images, id: \.self) { image in
+      if images.count != 0 {
+        ForEach(images, id: \.self) { image in
+          Rectangle()
+            .foregroundColor(.clear)
+            .background(
+              KFImage(image)
+                .placeholder {
+                  RoundedRectangle(cornerRadius: 4)
+                    .fill(Color(UIColor.secondarySystemBackground))
+              }
+              .resizable()
+              .scaledToFill()
+          )
+            .clipped()
+            .frame(height: Helpers.cardHeights.medium.rawValue * 3)
+            .rotationEffect(.degrees(15))
+        }
+      } else {
         Rectangle()
-          .foregroundColor(.clear)
-          .background(
-            KFImage(image)
-              .placeholder {
-                RoundedRectangle(cornerRadius: 4)
-                  .fill(Color(UIColor.secondarySystemBackground))
-            }
-            .resizable()
-            .scaledToFill()
-        )
-          .clipped()
-          .frame(height: Helpers.cardHeights.medium.rawValue * 3)
-          .rotationEffect(.degrees(15))
+          .foregroundColor(Color(UIColor.secondarySystemBackground))
       }
+      
     }
   }
 }
