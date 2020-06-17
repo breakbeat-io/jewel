@@ -13,14 +13,27 @@ struct EditableAlbumList: View {
   
   @State var isEditing = false
   
-  var collection: Collection
+  var collectionId: UUID
+  
+  private var collection: Collection? {
+    if collectionId == environment.state.library.onRotation.id {
+      return environment.state.library.onRotation
+    } else {
+      if let collectionIndex = environment.state.library.sharedCollections.firstIndex(where: { $0.id == collectionId }) {
+        return environment.state.library.sharedCollections[collectionIndex]
+      }
+    }
+    
+    return nil
+  }
   
   private var slots: [Slot] {
-    collection.slots
+    collection!.slots
   }
   
   var body: some View {
     GeometryReader { geo in
+      IfLet(self.collection) { collection in
       List {
         ForEach(self.slots.indices, id: \.self) { slotIndex in
           Group {
@@ -30,14 +43,14 @@ struct EditableAlbumList: View {
                   AlbumCard(albumName: attributes.name, albumArtist: attributes.artistName, albumArtwork: attributes.artwork.url(forWidth: 1000))
                 }
                 NavigationLink(
-                  destination: ObservedAlbumDetail(slotId: slotIndex, collectionId: self.collection.id)
+                  destination: ObservedAlbumDetail(slotId: slotIndex, collectionId: self.collectionId)
                 ){
                   EmptyView()
                 }
               }
             } else {
-              if self.collection.type == .userCollection {
-                EmptySlotCard(slotIndex: slotIndex, collectionId: self.collection.id)
+              if collection.type == .userCollection {
+                EmptySlotCard(slotIndex: slotIndex, collectionId: self.collectionId)
                   .deleteDisabled(true)
               } else {
                 RoundedRectangle(cornerRadius: 4)
@@ -49,17 +62,17 @@ struct EditableAlbumList: View {
           )
         }
         .onMove { (indexSet, index) in
-          self.environment.update(action: LibraryAction.moveSlot(from: indexSet, to: index, collectionId: self.collection.id))
+          self.environment.update(action: LibraryAction.moveSlot(from: indexSet, to: index, collectionId: self.collectionId))
         }
         .onDelete {
-          self.environment.update(action: LibraryAction.removeAlbumFromSlot(slotIndexes: $0, collectionId: self.collection.id))
+          self.environment.update(action: LibraryAction.removeAlbumFromSlot(slotIndexes: $0, collectionId: self.collectionId))
         }
       }
-      .navigationBarTitle(self.collection.name)
+      .navigationBarTitle(collection.name)
       .navigationBarItems(
         trailing:
         HStack {
-          if self.collection.type == .userCollection {
+          if collection.type == .userCollection {
             Button(action: {
               self.isEditing.toggle()
             }) {
@@ -70,5 +83,6 @@ struct EditableAlbumList: View {
       )
         .environment(\.editMode, .constant(self.isEditing ? EditMode.active : EditMode.inactive))
     }
+      }
   }
 }
