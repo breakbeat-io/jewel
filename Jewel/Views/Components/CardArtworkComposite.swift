@@ -14,7 +14,7 @@ struct CardArtworkComposite: View {
   let images: [URL?]
   
   var body: some View {
-    HStack(spacing: 0) {
+    HStack(spacing: 4) {
       ForEach(images, id: \.self) { image in
         Rectangle()
           .foregroundColor(.clear)
