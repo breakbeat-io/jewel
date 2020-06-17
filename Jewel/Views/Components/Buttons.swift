@@ -24,8 +24,6 @@ struct OptionsButton: View {
       OptionsHome(showing: self.$showOptions)
         .environmentObject(self.environment)
     }
-    .padding(.trailing)
-    .padding(.vertical)
   }
 }
 
@@ -49,8 +47,6 @@ struct SharingButton: View {
       }) {
         Image(systemName: "square.and.arrow.up")
       }
-      .padding(.trailing)
-      .padding(.vertical)
       .disabled(self.collectionEmpty)
       .actionSheet(isPresented: self.$showSharing) {
         ActionSheet(
@@ -84,8 +80,6 @@ struct RecommendationsButton: View {
     }) {
       Image(systemName: "square.and.arrow.down")
     }
-    .padding(.trailing)
-    .padding(.vertical)
     .alert(isPresented: $showLoadRecommendationsAlert) {
       Alert(title: Text("Add our current Recommended Collection?"),
             message: Text("Every three months we publish a Collection of new and classic albums for you to listen to."),
@@ -93,6 +87,19 @@ struct RecommendationsButton: View {
             secondaryButton: .default(Text("Add").bold()) {
               SharedCollectionManager.loadRecommendations()
         })
+    }
+  }
+}
+
+struct AddCollectionButton: View {
+  
+  @EnvironmentObject var environment: AppEnvironment
+  
+  var body: some View {
+    Button(action: {
+      self.environment.update(action: LibraryAction.addUserCollection)
+    }) {
+      Image(systemName: "plus")
     }
   }
 }

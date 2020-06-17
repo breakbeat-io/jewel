@@ -38,7 +38,6 @@
 		D28AD1B7248BB148009B584A /* PlaybackLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28AD1B6248BB148009B584A /* PlaybackLinks.swift */; };
 		D28AD1B9248BB5D4009B584A /* AlbumDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28AD1B8248BB5D4009B584A /* AlbumDetail.swift */; };
 		D29E7ACB248E933A0068C9BC /* Buttons.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29E7ACA248E933A0068C9BC /* Buttons.swift */; };
-		D29E7ACF248EE7B90068C9BC /* LibraryButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29E7ACE248EE7B90068C9BC /* LibraryButtons.swift */; };
 		D2AB8467248113EB008B57F9 /* AppActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AB8466248113EB008B57F9 /* AppActions.swift */; };
 		D2AB84692481148D008B57F9 /* AppAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AB84682481148D008B57F9 /* AppAction.swift */; };
 		D2AB846B2481159D008B57F9 /* AppEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AB846A2481159D008B57F9 /* AppEnvironment.swift */; };
@@ -92,7 +91,6 @@
 		D28AD1B6248BB148009B584A /* PlaybackLinks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackLinks.swift; sourceTree = "<group>"; };
 		D28AD1B8248BB5D4009B584A /* AlbumDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumDetail.swift; sourceTree = "<group>"; };
 		D29E7ACA248E933A0068C9BC /* Buttons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Buttons.swift; sourceTree = "<group>"; };
-		D29E7ACE248EE7B90068C9BC /* LibraryButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryButtons.swift; sourceTree = "<group>"; };
 		D2AB8466248113EB008B57F9 /* AppActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppActions.swift; sourceTree = "<group>"; };
 		D2AB84682481148D008B57F9 /* AppAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAction.swift; sourceTree = "<group>"; };
 		D2AB846A2481159D008B57F9 /* AppEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnvironment.swift; sourceTree = "<group>"; };
@@ -279,7 +277,6 @@
 			children = (
 				D249259A2481455A0011F409 /* IfLet.swift */,
 				D29E7ACA248E933A0068C9BC /* Buttons.swift */,
-				D29E7ACE248EE7B90068C9BC /* LibraryButtons.swift */,
 				D2AC120A24859E2300C52D9E /* EmptySlotCard.swift */,
 				D2D78592248AF2E900E0CC63 /* AlbumCard.swift */,
 				D2F0E21F249A370A00EA3FA2 /* CollectionDetail.swift */,
@@ -385,7 +382,6 @@
 				D28AD1B9248BB5D4009B584A /* AlbumDetail.swift in Sources */,
 				D221557C2481114A00A1F04A /* AppDelegate.swift in Sources */,
 				D23C398C248FC63D00AD237E /* EmptyDetail.swift in Sources */,
-				D29E7ACF248EE7B90068C9BC /* LibraryButtons.swift in Sources */,
 				D288174D248BEDAA00EB47C2 /* ShareSheetLoader.swift in Sources */,
 				D2AC12122485A67000C52D9E /* Search.swift in Sources */,
 				D2492587248117710011F409 /* AppState.swift in Sources */,

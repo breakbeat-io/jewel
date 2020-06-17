@@ -43,11 +43,21 @@ struct CollectionLibrary: View {
       .navigationBarTitle("Collection Library")
       .navigationBarItems(
         leading:
-          HStack {
-            OptionsButton()
-            RecommendationsButton()
-          }.environmentObject(self.environment),
-        trailing: collections.count != 0 ? AnyView(EditButton()) : AnyView(EmptyView())
+        HStack {
+          OptionsButton()
+            .padding(.trailing)
+          RecommendationsButton()
+            .padding(.trailing)
+        }
+        .padding(.vertical)
+        .environmentObject(self.environment),
+        trailing:
+        HStack {
+          AddCollectionButton()
+            .padding(.leading)
+          collections.count != 0 ? AnyView(EditButton().padding(.leading)) : AnyView(EmptyView())
+        }
+        .padding(.vertical)
       )
     }
   }
