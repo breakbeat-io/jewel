@@ -12,7 +12,6 @@ struct Home: View {
   
   @EnvironmentObject var environment: AppEnvironment
   
-  @State private var isEditing: Bool = false
   @State private var selectedTab = "onrotation"
   
   private var receivedCollectionCued: Binding<Bool> {
@@ -24,41 +23,33 @@ struct Home: View {
   
   var body: some View {
     ZStack {
-      NavigationView {
-        TabView(selection: $selectedTab) {
-          OnRotation(isEditing: $isEditing)
-            .tabItem {
-              Image(systemName: "music.house")
-                .imageScale(.medium)
-              Text("On Rotation")
-          }
-          .tag("onrotation")
-          CollectionLibrary(isEditing: $isEditing)
-            .tabItem {
-              Image(systemName: "rectangle.on.rectangle.angled")
-                .imageScale(.medium)
-              Text("Collection Library")
-          }
-          .tag("library")
+      TabView(selection: $selectedTab) {
+        OnRotation()
+          .tabItem {
+            Image(systemName: "music.house")
+            Text("On Rotation")
         }
-        .alert(isPresented: receivedCollectionCued) {
-          Alert(title: Text("Shared collection received."),
-                message: Text("Would you like to add \"\(environment.state.library.cuedCollection!.collectionName)\" by \"\(environment.state.library.cuedCollection!.collectionCurator)\" to your Shared Library?"),
-                primaryButton: .cancel(Text("Cancel")) {
-                  self.environment.update(action: LibraryAction.uncueSharedCollection)
-            },
-                secondaryButton: .default(Text("Add").bold()) {
-                  self.selectedTab = "library"
-                  SharedCollectionManager.expandShareableCollection(shareableCollection: self.environment.state.library.cuedCollection!)
-                  self.environment.update(action: LibraryAction.uncueSharedCollection)
-            })
+        .tag("onrotation")
+        .environmentObject(self.environment)
+        CollectionLibrary()
+          .tabItem {
+            Image(systemName: "rectangle.on.rectangle.angled")
+            Text("Collection Library")
         }
-        .navigationBarTitle(selectedTab == "onrotation" ? environment.state.library.onRotation.name : "Collection Library")
-        .navigationBarItems(
-          leading: UserCollectionButtons(selectedTab: $selectedTab),
-          trailing: LibraryButtons(selectedTab: $selectedTab, isEditing: $isEditing)
-        )
-        EmptyDetail()
+        .tag("library")
+        .environmentObject(self.environment)
+      }
+      .alert(isPresented: receivedCollectionCued) {
+        Alert(title: Text("Shared collection received."),
+              message: Text("Would you like to add \"\(environment.state.library.cuedCollection!.collectionName)\" by \"\(environment.state.library.cuedCollection!.collectionCurator)\" to your Shared Library?"),
+              primaryButton: .cancel(Text("Cancel")) {
+                self.environment.update(action: LibraryAction.uncueSharedCollection)
+          },
+              secondaryButton: .default(Text("Add").bold()) {
+                self.selectedTab = "library"
+                SharedCollectionManager.expandShareableCollection(shareableCollection: self.environment.state.library.cuedCollection!)
+                self.environment.update(action: LibraryAction.uncueSharedCollection)
+          })
       }
       .blur(radius: environment.state.options.firstTimeRun ? 10 : 0)
       if environment.state.options.firstTimeRun {

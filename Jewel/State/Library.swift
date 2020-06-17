@@ -13,11 +13,11 @@ struct Library: Codable {
   
   var onRotation: Collection
   
-  var sharedCollections: [Collection]
+  var collections: [Collection]
   var cuedCollection: SharedCollectionManager.ShareableCollection?
   
   enum CodingKeys: CodingKey {
     case onRotation
-    case sharedCollections
+    case collections
   }
 }

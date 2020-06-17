@@ -17,8 +17,8 @@ struct EditableAlbumList: View {
     if collectionId == environment.state.library.onRotation.id {
       return environment.state.library.onRotation
     } else {
-      if let collectionIndex = environment.state.library.sharedCollections.firstIndex(where: { $0.id == collectionId }) {
-        return environment.state.library.sharedCollections[collectionIndex]
+      if let collectionIndex = environment.state.library.collections.firstIndex(where: { $0.id == collectionId }) {
+        return environment.state.library.collections[collectionIndex]
       }
     }
     
@@ -30,6 +30,9 @@ struct EditableAlbumList: View {
   }
   private var editable: Bool {
     collection?.type == .userCollection ? true : false
+  }
+  private var empty: Bool {
+    slots.filter({ $0.album != nil }).count == 0
   }
   
   var body: some View {
@@ -73,12 +76,8 @@ struct EditableAlbumList: View {
         }
         .navigationBarTitle(collection.name)
         .navigationBarItems(
-          trailing:
-          HStack {
-            if self.editable {
-              EditButton()
-            }
-          }
+          leading: UserCollectionButtons().environmentObject(self.environment),
+          trailing: self.editable && !self.empty ? AnyView(EditButton()) : AnyView(EmptyView())
         )
       }
     }

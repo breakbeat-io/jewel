@@ -67,8 +67,8 @@ func updateLibrary(library: Library, action: LibraryAction) -> Library {
     if collectionId == newLibrary.onRotation.id {
       newLibrary.onRotation.name = name
     } else {
-      if let collectionIndex = newLibrary.sharedCollections.firstIndex(where: { $0.id == collectionId }) {
-        newLibrary.sharedCollections[collectionIndex].name = name
+      if let collectionIndex = newLibrary.collections.firstIndex(where: { $0.id == collectionId }) {
+        newLibrary.collections[collectionIndex].name = name
       }
     }
     
@@ -76,8 +76,8 @@ func updateLibrary(library: Library, action: LibraryAction) -> Library {
     if collectionId == newLibrary.onRotation.id {
       newLibrary.onRotation.curator = curator
     } else {
-      if let collectionIndex = newLibrary.sharedCollections.firstIndex(where: { $0.id == collectionId }) {
-        newLibrary.sharedCollections[collectionIndex].curator = curator
+      if let collectionIndex = newLibrary.collections.firstIndex(where: { $0.id == collectionId }) {
+        newLibrary.collections[collectionIndex].curator = curator
       }
     }
     
@@ -85,8 +85,8 @@ func updateLibrary(library: Library, action: LibraryAction) -> Library {
     if collectionId == newLibrary.onRotation.id {
       newLibrary.onRotation.slots[slotIndex].album = album
     } else {
-      if let collectionIndex = newLibrary.sharedCollections.firstIndex(where: { $0.id == collectionId }) {
-        newLibrary.sharedCollections[collectionIndex].slots[slotIndex].album = album
+      if let collectionIndex = newLibrary.collections.firstIndex(where: { $0.id == collectionId }) {
+        newLibrary.collections[collectionIndex].slots[slotIndex].album = album
       }
     }
     
@@ -96,9 +96,9 @@ func updateLibrary(library: Library, action: LibraryAction) -> Library {
         newLibrary.onRotation.slots[i] = Slot()
       }
     } else {
-      if let collectionIndex = newLibrary.sharedCollections.firstIndex(where: { $0.id == collectionId }) {
+      if let collectionIndex = newLibrary.collections.firstIndex(where: { $0.id == collectionId }) {
         for i in slotIndexes {
-          newLibrary.sharedCollections[collectionIndex].slots[i] = Slot()
+          newLibrary.collections[collectionIndex].slots[i] = Slot()
         }
       }
     }
@@ -107,8 +107,8 @@ func updateLibrary(library: Library, action: LibraryAction) -> Library {
     if collectionId == newLibrary.onRotation.id {
       newLibrary.onRotation.slots.move(fromOffsets: from, toOffset: to)
     } else {
-      if let collectionIndex = newLibrary.sharedCollections.firstIndex(where: { $0.id == collectionId }) {
-        newLibrary.sharedCollections[collectionIndex].slots.move(fromOffsets: from, toOffset: to)
+      if let collectionIndex = newLibrary.collections.firstIndex(where: { $0.id == collectionId }) {
+        newLibrary.collections[collectionIndex].slots.move(fromOffsets: from, toOffset: to)
       }
     }
     
@@ -130,20 +130,20 @@ func updateLibrary(library: Library, action: LibraryAction) -> Library {
     var newCollection = collection
     newCollection.id = UUID()
     newCollection.name = "On Rotation — \(dateString)"
-    newLibrary.sharedCollections.insert(newCollection, at: 0)
+    newLibrary.collections.insert(newCollection, at: 0)
     
   case .addUserCollection:
     let newCollection = Collection(type: .userCollection, name: "New Collection", curator: "A Music Lover")
-    newLibrary.sharedCollections.insert(newCollection, at: 0)
+    newLibrary.collections.insert(newCollection, at: 0)
     
   case let .addSharedCollection(collection):
-    newLibrary.sharedCollections.insert(collection, at: 0)
+    newLibrary.collections.insert(collection, at: 0)
     
   case let .removeSharedCollection(slotIndexes):
-    newLibrary.sharedCollections.remove(atOffsets: slotIndexes)
+    newLibrary.collections.remove(atOffsets: slotIndexes)
     
   case let .moveSharedCollection(from, to):
-    newLibrary.sharedCollections.move(fromOffsets: from, toOffset: to)
+    newLibrary.collections.move(fromOffsets: from, toOffset: to)
     
   case let .cueSharedCollection(shareableCollection):
     newLibrary.cuedCollection = shareableCollection
@@ -158,10 +158,10 @@ func updateLibrary(library: Library, action: LibraryAction) -> Library {
         newLibrary.onRotation.slots[i].playbackLinks = platformLinks
       }
     } else {
-      if let collectionIndex = newLibrary.sharedCollections.firstIndex(where: { $0.id == collectionId }) {
-        let indices = newLibrary.sharedCollections[collectionIndex].slots.enumerated().compactMap({ $1.album?.attributes?.url == baseUrl ? $0 : nil })
+      if let collectionIndex = newLibrary.collections.firstIndex(where: { $0.id == collectionId }) {
+        let indices = newLibrary.collections[collectionIndex].slots.enumerated().compactMap({ $1.album?.attributes?.url == baseUrl ? $0 : nil })
         for i in indices {
-          newLibrary.sharedCollections[collectionIndex].slots[i].playbackLinks = platformLinks
+          newLibrary.collections[collectionIndex].slots[i].playbackLinks = platformLinks
         }
       }
     }

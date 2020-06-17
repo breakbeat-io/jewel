@@ -20,8 +20,8 @@ struct ObservedAlbumDetail: View {
     if collectionId == environment.state.library.onRotation.id {
       return environment.state.library.onRotation.slots[slotId]
     } else {
-      if let collectionIndex = environment.state.library.sharedCollections.firstIndex(where: { $0.id == collectionId }) {
-        return environment.state.library.sharedCollections[collectionIndex].slots[slotId]
+      if let collectionIndex = environment.state.library.collections.firstIndex(where: { $0.id == collectionId }) {
+        return environment.state.library.collections[collectionIndex].slots[slotId]
       }
     }
     
