@@ -30,6 +30,9 @@ struct EditableAlbumList: View {
   private var slots: [Slot] {
     collection!.slots
   }
+  private var editable: Bool {
+    collection?.type == .userCollection ? true : false
+  }
   
   var body: some View {
     GeometryReader { geo in
@@ -48,13 +51,15 @@ struct EditableAlbumList: View {
                   EmptyView()
                 }
               }
+              .deleteDisabled(!self.editable)
             } else {
-              if collection.type == .userCollection {
+              if self.editable {
                 EmptySlotCard(slotIndex: slotIndex, collectionId: self.collectionId)
                   .deleteDisabled(true)
               } else {
                 RoundedRectangle(cornerRadius: 4)
                   .fill(Color(UIColor.secondarySystemBackground))
+                  .deleteDisabled(true)
               }
             }
           }
@@ -72,7 +77,7 @@ struct EditableAlbumList: View {
       .navigationBarItems(
         trailing:
         HStack {
-          if collection.type == .userCollection {
+          if self.editable {
             Button(action: {
               self.isEditing.toggle()
             }) {
