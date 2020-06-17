@@ -42,7 +42,7 @@ struct CollectionLibrary: View {
       }
       .navigationBarTitle("Collection Library")
       .navigationBarItems(
-        leading: UserCollectionButtons().environmentObject(self.environment),
+//        leading: UserCollectionButtons().environmentObject(self.environment),
         trailing: collections.count != 0 ? AnyView(EditButton()) : AnyView(EmptyView())
       )
     }

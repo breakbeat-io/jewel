@@ -12,30 +12,39 @@ struct ShareSheetLoader: View {
   
   @EnvironmentObject var environment: AppEnvironment
   
-  private var collection: Collection {
-    environment.state.library.onRotation
+  let collectionId: UUID
+  
+  private var collection: Collection? {
+    if collectionId == environment.state.library.onRotation.id {
+      return environment.state.library.onRotation
+    } else if let collectionIndex = environment.state.library.collections.firstIndex(where: { $0.id == collectionId }) {
+      return environment.state.library.collections[collectionIndex]
+    }
+    return nil
   }
   
   var body: some View {
     Group {
-      if collection.shareLinkShort == nil {
-        VStack {
-          Image(systemName: "square.and.arrow.up")
-            .font(.largeTitle)
-          Text("Creating shareable link ...")
-            .padding()
-            .multilineTextAlignment(.center)
+      IfLet(collection) { collection in
+        if collection.shareLinkShort == nil {
+          VStack {
+            Image(systemName: "square.and.arrow.up")
+              .font(.largeTitle)
+            Text("Creating shareable link ...")
+              .padding()
+              .multilineTextAlignment(.center)
+          }
+        } else if collection.shareLinkError {
+          VStack {
+            Image(systemName: "exclamationmark.triangle")
+              .font(.largeTitle)
+            Text("There was an error creating the shareable link, please try again later.")
+              .padding()
+              .multilineTextAlignment(.center)
+          }
+        } else {
+          ShareSheet(activityItems: [collection.shareLinkShort!])
         }
-      } else if collection.shareLinkError {
-        VStack {
-          Image(systemName: "exclamationmark.triangle")
-            .font(.largeTitle)
-          Text("There was an error creating the shareable link, please try again later.")
-            .padding()
-            .multilineTextAlignment(.center)
-        }
-      } else {
-        ShareSheet(activityItems: [collection.shareLinkShort!])
       }
     }
     .onAppear {
@@ -45,7 +54,11 @@ struct ShareSheetLoader: View {
   
   private func refreshShareLinks() {
     
-    self.environment.update(action: LibraryAction.shareLinkError(false))
+    guard let collection = collection else {
+      return
+    }
+    
+    self.environment.update(action: LibraryAction.shareLinkError(false, collectionId: collection.id))
     
     let newLongLink = SharedCollectionManager.generateLongLink(for: collection)
     

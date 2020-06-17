@@ -40,9 +40,9 @@ enum LibraryAction: AppAction {
   case removeAlbumFromSlot(slotIndexes: IndexSet, collectionId: UUID)
   case setPlatformLinks(baseUrl: URL, platformLinks: OdesliResponse, collectionId: UUID)
   case moveSlot(from: IndexSet, to: Int, collectionId: UUID)
-  case invalidateShareLinks
-  case setShareLinks(shareLinkLong: URL, shareLinkShort: URL)
-  case shareLinkError(_: Bool)
+  case invalidateShareLinks(collectionId: UUID)
+  case setShareLinks(shareLinkLong: URL, shareLinkShort: URL, collectionId: UUID)
+  case shareLinkError(_: Bool, collectionId: UUID)
   case saveOnRotation(collection: Collection)
   case addUserCollection
   case addSharedCollection(collection: Collection)

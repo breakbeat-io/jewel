@@ -76,7 +76,7 @@ struct EditableAlbumList: View {
         }
         .navigationBarTitle(collection.name)
         .navigationBarItems(
-          leading: UserCollectionButtons().environmentObject(self.environment),
+          leading: UserCollectionButtons(collectionId: self.collectionId).environmentObject(self.environment),
           trailing: self.editable && !self.empty ? AnyView(EditButton()) : AnyView(EmptyView())
         )
       }

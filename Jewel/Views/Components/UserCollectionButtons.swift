@@ -12,6 +12,8 @@ struct UserCollectionButtons: View {
   
   @EnvironmentObject var environment: AppEnvironment
   
+  let collectionId: UUID
+  
   @State private var showOptions: Bool = false
   @State private var showSharing: Bool = false
   @State private var showShareLink: Bool = false
@@ -57,7 +59,7 @@ struct UserCollectionButtons: View {
         )
       }
       .sheet(isPresented: self.$showShareLink) {
-        ShareSheetLoader()
+        ShareSheetLoader(collectionId: self.collectionId)
           .environmentObject(self.environment)
       }
       Button(action: {

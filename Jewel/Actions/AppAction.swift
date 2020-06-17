@@ -112,16 +112,36 @@ func updateLibrary(library: Library, action: LibraryAction) -> Library {
       }
     }
     
-  case .invalidateShareLinks:
-    newLibrary.onRotation.shareLinkLong = nil
-    newLibrary.onRotation.shareLinkShort = nil
+  case let .invalidateShareLinks(collectionId):
+    if collectionId == newLibrary.onRotation.id {
+      newLibrary.onRotation.shareLinkLong = nil
+      newLibrary.onRotation.shareLinkShort = nil
+    } else {
+      if let collectionIndex = newLibrary.collections.firstIndex(where: { $0.id == collectionId }) {
+        newLibrary.collections[collectionIndex].shareLinkLong = nil
+        newLibrary.collections[collectionIndex].shareLinkShort = nil
+      }
+    }
     
-  case let .setShareLinks(shareLinkLong, shareLinkShort):
-    newLibrary.onRotation.shareLinkLong = shareLinkLong
-    newLibrary.onRotation.shareLinkShort = shareLinkShort
+  case let .setShareLinks(shareLinkLong, shareLinkShort, collectionId):
+    if collectionId == newLibrary.onRotation.id {
+      newLibrary.onRotation.shareLinkLong = shareLinkLong
+      newLibrary.onRotation.shareLinkShort = shareLinkShort
+    } else {
+      if let collectionIndex = newLibrary.collections.firstIndex(where: { $0.id == collectionId }) {
+        newLibrary.collections[collectionIndex].shareLinkLong = shareLinkLong
+        newLibrary.collections[collectionIndex].shareLinkShort = shareLinkShort
+      }
+    }
     
-  case let .shareLinkError(errorState):
-    newLibrary.onRotation.shareLinkError = errorState
+  case let .shareLinkError(errorState, collectionId):
+    if collectionId == newLibrary.onRotation.id {
+      newLibrary.onRotation.shareLinkError = errorState
+    } else {
+      if let collectionIndex = newLibrary.collections.firstIndex(where: { $0.id == collectionId }) {
+        newLibrary.collections[collectionIndex].shareLinkError = errorState
+      }
+    }
     
   case let .saveOnRotation(collection):
     let formatter = DateFormatter()
