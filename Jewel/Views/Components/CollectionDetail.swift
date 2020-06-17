@@ -78,16 +78,13 @@ struct CollectionDetail: View {
         .navigationBarItems(
           leading:
           HStack {
-            OptionsButton()
-              .padding(.trailing)
-            SharingButton(collectionId: self.collectionId)
-              .padding(.trailing)
+            self.editable && !self.empty ? AnyView(EditButton()) : AnyView(EmptyView())
           }
           .padding(.vertical)
           .environmentObject(self.environment),
           trailing:
           HStack {
-            self.editable && !self.empty ? AnyView(EditButton().padding(.leading)) : AnyView(EmptyView())
+            OptionsButton()
           }
           .padding(.vertical)
         )

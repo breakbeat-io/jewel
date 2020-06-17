@@ -35,6 +35,8 @@ struct OptionsHome: View {
     NavigationView {
       VStack {
         Form {
+          SharingOptionsButton(collectionId: collectionId)
+          RecommendationsButton()
           Section(footer: Text("Choose a name for your collection, and to represent the curator when sharing the collection.")) {
             HStack {
               Text("Collection Name")
@@ -82,7 +84,7 @@ struct OptionsHome: View {
         }
         .padding()
       }
-      .navigationBarTitle("Options", displayMode: .inline)
+      .navigationBarTitle("Collection Options", displayMode: .inline)
       .navigationBarItems(trailing:
         Button(action: {
           self.showing = false

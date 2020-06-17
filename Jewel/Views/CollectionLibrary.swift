@@ -44,18 +44,14 @@ struct CollectionLibrary: View {
       .navigationBarItems(
         leading:
         HStack {
-          OptionsButton()
-            .padding(.trailing)
-          RecommendationsButton()
-            .padding(.trailing)
+          collections.count != 0 ? AnyView(EditButton()) : AnyView(EmptyView())
         }
-        .padding(.vertical)
-        .environmentObject(self.environment),
+        .padding(.vertical),
         trailing:
         HStack {
           AddCollectionButton()
-            .padding(.leading)
-          collections.count != 0 ? AnyView(EditButton().padding(.leading)) : AnyView(EmptyView())
+            .padding(.trailing)
+          OptionsButton()
         }
         .padding(.vertical)
       )

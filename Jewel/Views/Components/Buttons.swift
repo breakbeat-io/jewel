@@ -18,7 +18,7 @@ struct OptionsButton: View {
     Button(action: {
       self.showOptions = true
     }) {
-      Image(systemName: "slider.horizontal.3")
+      Image(systemName: "ellipsis")
     }
     .sheet(isPresented: self.$showOptions) {
       OptionsHome(showing: self.$showOptions)
@@ -27,7 +27,7 @@ struct OptionsButton: View {
   }
 }
 
-struct SharingButton: View {
+struct SharingOptionsButton: View {
   
   @EnvironmentObject var environment: AppEnvironment
   
@@ -45,7 +45,10 @@ struct SharingButton: View {
       Button(action: {
         self.showSharing = true
       }) {
-        Image(systemName: "square.and.arrow.up")
+        HStack {
+          Image(systemName: "square.and.arrow.up")
+          Text("Share Collection")
+        }
       }
       .disabled(self.collectionEmpty)
       .actionSheet(isPresented: self.$showSharing) {
