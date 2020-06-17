@@ -11,8 +11,6 @@ import SwiftUI
 struct EditableAlbumList: View {
   @EnvironmentObject var environment: AppEnvironment
   
-  @State var isEditing = false
-  
   var collectionId: UUID
   
   private var collection: Collection? {
@@ -37,57 +35,52 @@ struct EditableAlbumList: View {
   var body: some View {
     GeometryReader { geo in
       IfLet(self.collection) { collection in
-      List {
-        ForEach(self.slots.indices, id: \.self) { slotIndex in
-          Group {
-            if self.slots[slotIndex].album != nil {
-              ZStack {
-                IfLet(self.slots[slotIndex].album?.attributes) { attributes in
-                  AlbumCard(albumName: attributes.name, albumArtist: attributes.artistName, albumArtwork: attributes.artwork.url(forWidth: 1000))
+        List {
+          ForEach(self.slots.indices, id: \.self) { slotIndex in
+            Group {
+              if self.slots[slotIndex].album != nil {
+                ZStack {
+                  IfLet(self.slots[slotIndex].album?.attributes) { attributes in
+                    AlbumCard(albumName: attributes.name, albumArtist: attributes.artistName, albumArtwork: attributes.artwork.url(forWidth: 1000))
+                  }
+                  NavigationLink(
+                    destination: ObservedAlbumDetail(slotId: slotIndex, collectionId: self.collectionId)
+                  ){
+                    EmptyView()
+                  }
                 }
-                NavigationLink(
-                  destination: ObservedAlbumDetail(slotId: slotIndex, collectionId: self.collectionId)
-                ){
-                  EmptyView()
-                }
-              }
-              .deleteDisabled(!self.editable)
-            } else {
-              if self.editable {
-                EmptySlotCard(slotIndex: slotIndex, collectionId: self.collectionId)
-                  .deleteDisabled(true)
+                .deleteDisabled(!self.editable)
               } else {
-                RoundedRectangle(cornerRadius: 4)
-                  .fill(Color(UIColor.secondarySystemBackground))
-                  .deleteDisabled(true)
+                if self.editable {
+                  EmptySlotCard(slotIndex: slotIndex, collectionId: self.collectionId)
+                    .deleteDisabled(true)
+                } else {
+                  RoundedRectangle(cornerRadius: 4)
+                    .fill(Color(UIColor.secondarySystemBackground))
+                    .deleteDisabled(true)
+                }
               }
             }
+            .frame(height: Helpers.cardHeightFor(viewHeight: geo.size.height)
+            )
           }
-          .frame(height: Helpers.cardHeightFor(viewHeight: geo.size.height)
-          )
+          .onMove { (indexSet, index) in
+            self.environment.update(action: LibraryAction.moveSlot(from: indexSet, to: index, collectionId: self.collectionId))
+          }
+          .onDelete {
+            self.environment.update(action: LibraryAction.removeAlbumFromSlot(slotIndexes: $0, collectionId: self.collectionId))
+          }
         }
-        .onMove { (indexSet, index) in
-          self.environment.update(action: LibraryAction.moveSlot(from: indexSet, to: index, collectionId: self.collectionId))
-        }
-        .onDelete {
-          self.environment.update(action: LibraryAction.removeAlbumFromSlot(slotIndexes: $0, collectionId: self.collectionId))
-        }
-      }
-      .navigationBarTitle(collection.name)
-      .navigationBarItems(
-        trailing:
-        HStack {
-          if self.editable {
-            Button(action: {
-              self.isEditing.toggle()
-            }) {
-              Text(self.isEditing ? "Done" : "Edit")
+        .navigationBarTitle(collection.name)
+        .navigationBarItems(
+          trailing:
+          HStack {
+            if self.editable {
+              EditButton()
             }
           }
-        }
-      )
-        .environment(\.editMode, .constant(self.isEditing ? EditMode.active : EditMode.inactive))
-    }
+        )
       }
+    }
   }
 }
