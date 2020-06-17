@@ -12,6 +12,8 @@ struct UserCollectionButtons: View {
   
   @EnvironmentObject var environment: AppEnvironment
   
+  @Binding var selectedTab: String
+  
   @State private var showOptions: Bool = false
   @State private var showSharing: Bool = false
   @State private var showShareLink: Bool = false
@@ -23,7 +25,7 @@ struct UserCollectionButtons: View {
   
   var body: some View {
     HStack {
-      if environment.state.library.onRotationActive {
+      if selectedTab == "onrotation" {
         Button(action: {
           self.showOptions = true
         }) {
@@ -51,8 +53,8 @@ struct UserCollectionButtons: View {
                 self.showShareLink = true
               },
               .default(Text("Add to my Collection Library")) {
+                self.selectedTab = "library"
                 self.environment.update(action: LibraryAction.saveOnRotation(collection: self.environment.state.library.onRotation))
-                self.environment.update(action: LibraryAction.onRotationActive(false))
               },
               .cancel()
             ]

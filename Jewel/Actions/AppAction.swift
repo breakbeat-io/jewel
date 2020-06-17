@@ -63,9 +63,6 @@ func updateLibrary(library: Library, action: LibraryAction) -> Library {
   
   switch action {
     
-  case let .onRotationActive(onRotationActiveState):
-    newLibrary.onRotationActive = onRotationActiveState
-    
   case let .setCollectionName(name, collectionId):
     if collectionId == newLibrary.onRotation.id {
       newLibrary.onRotation.name = name

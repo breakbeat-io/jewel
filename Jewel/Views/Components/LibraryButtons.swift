@@ -12,11 +12,12 @@ struct LibraryButtons: View {
   
   @EnvironmentObject var environment: AppEnvironment
   
+  @Binding var selectedTab: String
   @Binding var isEditing: Bool
   
   var body: some View {
     HStack {
-      if !environment.state.library.onRotationActive {
+      if selectedTab == "library" {
         Button(action: {
           self.environment.update(action: LibraryAction.addUserCollection)
         }) {

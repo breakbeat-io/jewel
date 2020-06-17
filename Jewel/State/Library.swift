@@ -12,7 +12,6 @@ import HMV
 struct Library: Codable {
   
   var onRotation: Collection
-  var onRotationActive: Bool = true
   
   var sharedCollections: [Collection]
   var cuedCollection: SharedCollectionManager.ShareableCollection?
