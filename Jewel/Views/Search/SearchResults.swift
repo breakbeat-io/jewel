@@ -14,7 +14,9 @@ struct SearchResults: View {
   
   @EnvironmentObject var environment: AppEnvironment
   
-  var slotIndex: Int
+  let slotIndex: Int
+  let collectionId: UUID
+  
   @Binding var showing: Bool
   
   private var searchResults: [Album]? {
@@ -46,7 +48,7 @@ struct SearchResults: View {
             }
             Spacer()
             Button(action: {
-              RecordStore.purchase(album: albums[i].id, forSlot: self.slotIndex, inCollection: self.environment.state.library.onRotation.id)
+              RecordStore.purchase(album: albums[i].id, forSlot: self.slotIndex, inCollection: self.collectionId)
               self.environment.update(action: SearchAction.removeSearchResults)
               self.showing = false
             }, label:{

@@ -39,7 +39,7 @@ struct OnRotation: View {
                 }
               }
             } else {
-              EmptySlotCard(slotIndex: slotIndex)
+              EmptySlotCard(slotIndex: slotIndex, collectionId: self.collectionId)
                 .deleteDisabled(true)
             }
           }

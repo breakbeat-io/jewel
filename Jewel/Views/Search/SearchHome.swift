@@ -12,7 +12,8 @@ struct SearchHome: View {
   
   @EnvironmentObject private var environment: AppEnvironment
   
-  var slotIndex: Int
+  let slotIndex: Int
+  let collectionId: UUID
   @Binding var showing: Bool
   
   var body: some View {
@@ -20,7 +21,7 @@ struct SearchHome: View {
       VStack{
         SearchBar()
         Spacer()
-        SearchResults(slotIndex: slotIndex, showing: self.$showing)
+        SearchResults(slotIndex: slotIndex, collectionId: collectionId, showing: self.$showing)
       }
       .navigationBarTitle("Search")
       .navigationBarItems(

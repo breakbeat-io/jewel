@@ -13,6 +13,7 @@ struct EmptySlotCard: View {
   @EnvironmentObject var environment: AppEnvironment
   
   let slotIndex: Int
+  let collectionId: UUID
   
   @State private var showSearch: Bool = false
   
@@ -32,7 +33,7 @@ struct EmptySlotCard: View {
       )
     }
     .sheet(isPresented: $showSearch) {
-      SearchHome(slotIndex: self.slotIndex, showing: self.$showSearch)
+      SearchHome(slotIndex: self.slotIndex, collectionId: self.collectionId, showing: self.$showSearch)
         .environmentObject(self.environment)
     }
   }

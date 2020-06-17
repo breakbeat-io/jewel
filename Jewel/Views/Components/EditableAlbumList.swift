@@ -37,7 +37,7 @@ struct EditableAlbumList: View {
               }
             } else {
               if self.collection.type == .userCollection {
-                EmptySlotCard(slotIndex: slotIndex)
+                EmptySlotCard(slotIndex: slotIndex, collectionId: self.collection.id)
                   .deleteDisabled(true)
               } else {
                 RoundedRectangle(cornerRadius: 4)
