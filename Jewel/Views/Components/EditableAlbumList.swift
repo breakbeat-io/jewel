@@ -30,7 +30,7 @@ struct EditableAlbumList: View {
                   AlbumCard(albumName: attributes.name, albumArtist: attributes.artistName, albumArtwork: attributes.artwork.url(forWidth: 1000))
                 }
                 NavigationLink(
-                  destination: ObservedAlbumDetail(slotId: slotIndex)
+                  destination: ObservedAlbumDetail(slotId: slotIndex, collectionId: self.collection.id)
                 ){
                   EmptyView()
                 }

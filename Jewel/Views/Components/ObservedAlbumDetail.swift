@@ -14,12 +14,23 @@ struct ObservedAlbumDetail: View {
   @EnvironmentObject var environment: AppEnvironment
   
   let slotId: Int
+  let collectionId: UUID
   
-  private var slot: Slot {
-      environment.state.library.onRotation.slots[slotId]
+  private var slot: Slot? {
+    if collectionId == environment.state.library.onRotation.id {
+      return environment.state.library.onRotation.slots[slotId]
+    } else {
+      if let collectionIndex = environment.state.library.sharedCollections.firstIndex(where: { $0.id == collectionId }) {
+        return environment.state.library.sharedCollections[collectionIndex].slots[slotId]
+      }
+    }
+    
+    return nil
   }
   
   var body: some View {
-    AlbumDetail(slot: slot)
+    IfLet(slot) { slot in
+      AlbumDetail(slot: slot)
+    }
   }
 }
