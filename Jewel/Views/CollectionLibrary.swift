@@ -28,7 +28,7 @@ struct CollectionLibrary: View {
       } else {
         List {
           ForEach(collections) { collection in
-            NavigationLink(destination: AlbumList(collection: collection)) {
+            NavigationLink(destination: EditableAlbumList(collection: collection)) {
               CollectionCard(collection: collection)
             }
           }
