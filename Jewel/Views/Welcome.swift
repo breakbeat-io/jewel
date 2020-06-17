@@ -31,7 +31,7 @@ struct Welcome: View {
     GeometryReader { geo in
       ZStack {
         Rectangle()
-          .opacity(0.1) // hack to prevent clickthrough if set to 0
+          .opacity(0.01) // hack to prevent clickthrough if set to 0
           .edgesIgnoringSafeArea(.all)
         Rectangle()
           .fill(Color(.systemBackground))

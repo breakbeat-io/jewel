@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct EditableAlbumList: View {
+struct CollectionDetail: View {
   @EnvironmentObject var environment: AppEnvironment
   
   var collectionId: UUID

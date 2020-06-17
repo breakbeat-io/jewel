@@ -19,7 +19,7 @@ struct OnRotation: View {
 
   var body: some View {
     NavigationView {
-      EditableAlbumList(collectionId: collectionId)
+      CollectionDetail(collectionId: collectionId)
       EmptyDetail()
     }
   }
