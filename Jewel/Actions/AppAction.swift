@@ -66,28 +66,22 @@ func updateLibrary(library: Library, action: LibraryAction) -> Library {
   case let .setCollectionName(name, collectionId):
     if collectionId == newLibrary.onRotation.id {
       newLibrary.onRotation.name = name
-    } else {
-      if let collectionIndex = newLibrary.collections.firstIndex(where: { $0.id == collectionId }) {
-        newLibrary.collections[collectionIndex].name = name
-      }
+    } else if let collectionIndex = newLibrary.collections.firstIndex(where: { $0.id == collectionId }) {
+      newLibrary.collections[collectionIndex].name = name
     }
     
   case let .setCollectionCurator(curator, collectionId):
     if collectionId == newLibrary.onRotation.id {
       newLibrary.onRotation.curator = curator
-    } else {
-      if let collectionIndex = newLibrary.collections.firstIndex(where: { $0.id == collectionId }) {
-        newLibrary.collections[collectionIndex].curator = curator
-      }
+    } else if let collectionIndex = newLibrary.collections.firstIndex(where: { $0.id == collectionId }) {
+      newLibrary.collections[collectionIndex].curator = curator
     }
     
   case let .addAlbumToSlot(album, slotIndex, collectionId):
     if collectionId == newLibrary.onRotation.id {
       newLibrary.onRotation.slots[slotIndex].album = album
-    } else {
-      if let collectionIndex = newLibrary.collections.firstIndex(where: { $0.id == collectionId }) {
-        newLibrary.collections[collectionIndex].slots[slotIndex].album = album
-      }
+    } else if let collectionIndex = newLibrary.collections.firstIndex(where: { $0.id == collectionId }) {
+      newLibrary.collections[collectionIndex].slots[slotIndex].album = album
     }
     
   case let .removeAlbumFromSlot(slotIndexes, collectionId):
@@ -95,52 +89,42 @@ func updateLibrary(library: Library, action: LibraryAction) -> Library {
       for i in slotIndexes {
         newLibrary.onRotation.slots[i] = Slot()
       }
-    } else {
-      if let collectionIndex = newLibrary.collections.firstIndex(where: { $0.id == collectionId }) {
-        for i in slotIndexes {
-          newLibrary.collections[collectionIndex].slots[i] = Slot()
-        }
+    } else if let collectionIndex = newLibrary.collections.firstIndex(where: { $0.id == collectionId }) {
+      for i in slotIndexes {
+        newLibrary.collections[collectionIndex].slots[i] = Slot()
       }
     }
     
   case let .moveSlot(from, to, collectionId):
     if collectionId == newLibrary.onRotation.id {
       newLibrary.onRotation.slots.move(fromOffsets: from, toOffset: to)
-    } else {
-      if let collectionIndex = newLibrary.collections.firstIndex(where: { $0.id == collectionId }) {
-        newLibrary.collections[collectionIndex].slots.move(fromOffsets: from, toOffset: to)
-      }
+    } else if let collectionIndex = newLibrary.collections.firstIndex(where: { $0.id == collectionId }) {
+      newLibrary.collections[collectionIndex].slots.move(fromOffsets: from, toOffset: to)
     }
     
   case let .invalidateShareLinks(collectionId):
     if collectionId == newLibrary.onRotation.id {
       newLibrary.onRotation.shareLinkLong = nil
       newLibrary.onRotation.shareLinkShort = nil
-    } else {
-      if let collectionIndex = newLibrary.collections.firstIndex(where: { $0.id == collectionId }) {
-        newLibrary.collections[collectionIndex].shareLinkLong = nil
-        newLibrary.collections[collectionIndex].shareLinkShort = nil
-      }
+    } else if let collectionIndex = newLibrary.collections.firstIndex(where: { $0.id == collectionId }) {
+      newLibrary.collections[collectionIndex].shareLinkLong = nil
+      newLibrary.collections[collectionIndex].shareLinkShort = nil
     }
     
   case let .setShareLinks(shareLinkLong, shareLinkShort, collectionId):
     if collectionId == newLibrary.onRotation.id {
       newLibrary.onRotation.shareLinkLong = shareLinkLong
       newLibrary.onRotation.shareLinkShort = shareLinkShort
-    } else {
-      if let collectionIndex = newLibrary.collections.firstIndex(where: { $0.id == collectionId }) {
-        newLibrary.collections[collectionIndex].shareLinkLong = shareLinkLong
-        newLibrary.collections[collectionIndex].shareLinkShort = shareLinkShort
-      }
+    } else if let collectionIndex = newLibrary.collections.firstIndex(where: { $0.id == collectionId }) {
+      newLibrary.collections[collectionIndex].shareLinkLong = shareLinkLong
+      newLibrary.collections[collectionIndex].shareLinkShort = shareLinkShort
     }
     
   case let .shareLinkError(errorState, collectionId):
     if collectionId == newLibrary.onRotation.id {
       newLibrary.onRotation.shareLinkError = errorState
-    } else {
-      if let collectionIndex = newLibrary.collections.firstIndex(where: { $0.id == collectionId }) {
-        newLibrary.collections[collectionIndex].shareLinkError = errorState
-      }
+    } else if let collectionIndex = newLibrary.collections.firstIndex(where: { $0.id == collectionId }) {
+      newLibrary.collections[collectionIndex].shareLinkError = errorState
     }
     
   case let .saveOnRotation(collection):
@@ -177,18 +161,17 @@ func updateLibrary(library: Library, action: LibraryAction) -> Library {
       for i in indices {
         newLibrary.onRotation.slots[i].playbackLinks = platformLinks
       }
-    } else {
-      if let collectionIndex = newLibrary.collections.firstIndex(where: { $0.id == collectionId }) {
-        let indices = newLibrary.collections[collectionIndex].slots.enumerated().compactMap({ $1.album?.attributes?.url == baseUrl ? $0 : nil })
-        for i in indices {
-          newLibrary.collections[collectionIndex].slots[i].playbackLinks = platformLinks
-        }
+    } else if let collectionIndex = newLibrary.collections.firstIndex(where: { $0.id == collectionId }) {
+      let indices = newLibrary.collections[collectionIndex].slots.enumerated().compactMap({ $1.album?.attributes?.url == baseUrl ? $0 : nil })
+      for i in indices {
+        newLibrary.collections[collectionIndex].slots[i].playbackLinks = platformLinks
       }
     }
-    
   }
   
-  return newLibrary
+}
+
+return newLibrary
 }
 
 func updateSearch(search: Search, action: SearchAction) -> Search {
