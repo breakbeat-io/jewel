@@ -11,32 +11,26 @@ import KingfisherSwiftUI
 
 struct CardArtworkComposite: View {
   
-  let images: [URL]
+  let images: [URL?]
   
   var body: some View {
-    HStack {
-      if images.count != 0 {
-        ForEach(images, id: \.self) { image in
-          Rectangle()
-            .foregroundColor(.clear)
-            .background(
-              KFImage(image)
-                .placeholder {
-                  RoundedRectangle(cornerRadius: 4)
-                    .fill(Color(UIColor.secondarySystemBackground))
-              }
-              .resizable()
-              .scaledToFill()
-          )
-            .clipped()
-            .frame(height: Helpers.cardHeights.medium.rawValue * 3)
-            .rotationEffect(.degrees(15))
-        }
-      } else {
+    HStack(spacing: 0) {
+      ForEach(images, id: \.self) { image in
         Rectangle()
-          .foregroundColor(Color(UIColor.secondarySystemBackground))
+          .foregroundColor(.clear)
+          .background(
+            KFImage(image)
+              .placeholder {
+                RoundedRectangle(cornerRadius: 4)
+                  .fill(Color(UIColor.secondarySystemBackground))
+            }
+            .resizable()
+            .scaledToFill()
+        )
+          .clipped()
+          .frame(height: Helpers.cardHeights.medium.rawValue * 1.5)
+          .rotationEffect(.degrees(15))
       }
-      
     }
   }
 }

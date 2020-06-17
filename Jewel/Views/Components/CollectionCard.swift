@@ -13,11 +13,13 @@ struct CollectionCard: View {
   
   let collection: Collection
   
-  private var collectionArtwork: [URL] {
-    var artworkUrls = [URL]()
+  private var collectionArtwork: [URL?] {
+    var artworkUrls = [URL?]()
     for slot in collection.slots {
       if let artworkUrl = slot.album?.attributes?.artwork.url(forWidth: 1000) {
         artworkUrls.append(artworkUrl)
+      } else {
+        artworkUrls.append(nil)
       }
     }
     return artworkUrls
