@@ -12,8 +12,6 @@ struct CollectionDetail: View {
   
   @EnvironmentObject var app: AppEnvironment
   
-  @State var selections = Set<Int>()
-  
   var collectionId: UUID
   
   private var collection: Collection? {
@@ -41,7 +39,7 @@ struct CollectionDetail: View {
   var body: some View {
     GeometryReader { geo in
       IfLet(self.collection) { collection in
-        List(selection: self.$selections) {
+        List(selection: self.$app.navigation.collectionEditSelection) {
           ForEach(self.slots.indices, id: \.self) { slotIndex in
             Group {
               if self.slots[slotIndex].album != nil {
@@ -84,9 +82,9 @@ struct CollectionDetail: View {
             HStack {
               if self.app.navigation.collectionIsEditing {
                 Button(action: {
-                  self.app.update(action: LibraryAction.removeAlbumsFromCollection(albumIds: self.selections, collectionId: self.collectionId))
+                  self.app.update(action: LibraryAction.removeAlbumsFromCollection(albumIds: self.app.navigation.collectionEditSelection, collectionId: self.collectionId))
                   self.app.navigation.collectionIsEditing.toggle()
-                  self.selections = Set<Int>()
+                  self.app.navigation.collectionEditSelection = Set<Int>()
                 }) {
                   Image(systemName: "trash")
                 }

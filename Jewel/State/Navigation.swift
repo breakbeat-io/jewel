@@ -12,6 +12,7 @@ struct Navigation {
   var selectedTab: String = "onrotation"
   
   var collectionIsEditing: Bool = false
+  var collectionEditSelection = Set<Int>()
   
   var showLibraryOptions: Bool = false
   var libraryIsEditing: Bool = false

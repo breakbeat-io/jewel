@@ -107,7 +107,6 @@ func updateLibrary(library: Library, action: LibraryAction) -> Library {
     }
     
   case let .removeAlbumsFromCollection(albumIds, collectionId):
-    print(albumIds)
     if var collection = extractCollection(collectionId: collectionId) {
       for albumId in albumIds {
         collection.slots[albumId] = Slot()
