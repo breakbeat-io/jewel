@@ -84,7 +84,7 @@ struct CollectionDetail: View {
           .environmentObject(self.environment),
           trailing:
           HStack {
-            OptionsButton()
+            CollectionOptionsButton(collectionId: self.collectionId)
           }
           .padding(.vertical)
         )

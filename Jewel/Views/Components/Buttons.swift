@@ -8,9 +8,11 @@
 
 import SwiftUI
 
-struct OptionsButton: View {
+struct CollectionOptionsButton: View {
   
   @EnvironmentObject var environment: AppEnvironment
+  
+  let collectionId: UUID
   
   @State private var showOptions: Bool = false
   
@@ -21,7 +23,7 @@ struct OptionsButton: View {
       Image(systemName: "ellipsis")
     }
     .sheet(isPresented: self.$showOptions) {
-      OptionsHome(showing: self.$showOptions)
+      OptionsHome(collectionId: self.collectionId, showing: self.$showOptions)
         .environmentObject(self.environment)
     }
   }

@@ -12,17 +12,24 @@ struct OptionsHome: View {
   
   @EnvironmentObject private var environment: AppEnvironment
   
+  let collectionId: UUID
+  
   @Binding var showing: Bool
   
-  private var collectionId: UUID {
-    self.environment.state.library.onRotation.id
+  private var collection: Collection {
+    if self.collectionId == self.environment.state.library.onRotation.id {
+      return self.environment.state.library.onRotation
+    } else {
+      return self.environment.state.library.collections.first(where: { $0.id == self.collectionId })!
+    }
   }
+
   private var collectionName: Binding<String> { Binding (
-    get: { self.environment.state.library.onRotation.name },
+    get: { self.collection.name },
     set: { self.environment.update(action: LibraryAction.setCollectionName(name: $0, collectionId: self.collectionId))}
     )}
   private var collectionCurator: Binding<String> { Binding (
-    get: { self.environment.state.library.onRotation.curator },
+    get: { self.collection.curator },
     set: { self.environment.update(action: LibraryAction.setCollectionCurator(curator: $0, collectionId: self.collectionId))}
     )}
   private var preferredMusicPlatform: Binding<Int> { Binding (

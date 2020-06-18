@@ -51,7 +51,6 @@ struct CollectionLibrary: View {
         HStack {
           AddCollectionButton()
             .padding(.trailing)
-          OptionsButton()
         }
         .padding(.vertical)
       )
