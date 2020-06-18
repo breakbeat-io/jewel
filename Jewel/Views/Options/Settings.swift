@@ -19,41 +19,41 @@ struct Settings: View {
   }
   
   var body: some View {
-    VStack {
-      Form {
-        Section(footer: Text("Use this service for playback if available, otherwise use Apple Music.")) {
-          Picker(selection: preferredMusicPlatform, label: Text("Playback Service")) {
-            ForEach(0 ..< OdesliPlatform.allCases.count, id: \.self) {
-              Text(OdesliPlatform.allCases[$0].friendlyName)
+    NavigationView {
+      VStack {
+        Form {
+          Section(footer: Text("Use this service for playback if available, otherwise use Apple Music.")) {
+            Picker(selection: preferredMusicPlatform, label: Text("Playback Service")) {
+              ForEach(0 ..< OdesliPlatform.allCases.count, id: \.self) {
+                Text(OdesliPlatform.allCases[$0].friendlyName)
+              }
+            }
+          }
+          if app.state.options.debugMode {
+            Button(action: {
+              self.app.update(action: OptionsAction.reset)
+            }) {
+              Text("Reset Jewel")
+                .foregroundColor(.red)
             }
           }
         }
-        if app.state.options.debugMode {
-          Button(action: {
-            self.app.update(action: OptionsAction.reset)
-          }) {
-            Text("Reset Jewel")
-              .foregroundColor(.red)
-          }
+        Spacer()
+        Footer()
+          .onTapGesture(count: 10) {
+            self.app.update(action: OptionsAction.toggleDebugMode)
         }
+        .padding()
       }
-      Spacer()
-      Footer()
-        .onTapGesture(count: 10) {
-          self.app.update(action: OptionsAction.toggleDebugMode)
-      }
-      .padding()
-    }
-    .navigationBarTitle("Settings", displayMode: .inline)
-    .navigationBarItems(
-      trailing:
+      .navigationBarTitle("Settings", displayMode: .inline)
+      .navigationBarItems(
+        trailing:
         Button(action: {
-          self.app.navigation.showCollectionOptions = false
-          self.app.navigation.showLibraryOptions = false
           self.app.navigation.showSettings = false
         }) {
           Text("Close")
         }
-    )
+      )
+    }
   }
 }

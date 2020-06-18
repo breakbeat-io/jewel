@@ -35,74 +35,71 @@ struct CollectionOptions: View {
   
   var body: some View {
     NavigationView {
-      if app.navigation.showSettings {
-        Settings()
-      } else {
-        Form {
-          Section {
-            ShareCollectionButton(collectionId: collectionId)
-            if collection.id == app.state.library.onRotation.id {
-              Button(action: {
-                self.app.update(action: LibraryAction.saveOnRotation(collection: self.app.state.library.onRotation))
-              }) {
-                HStack {
-                  Image(systemName: "arrow.right.square")
-                    .frame(width: Constants.optionsButtonIconWidth)
-                  Text("Add to my Collection Library")
-                }
-              }
-            }
-            if collection.type == .userCollection {
-              Button(action: {
-                self.app.navigation.collectionIsEditing = true
-                self.app.navigation.showCollectionOptions = false
-              }) {
-                HStack {
-                  Image(systemName: "square.stack.3d.up")
-                    .frame(width: Constants.optionsButtonIconWidth)
-                  Text("Reorder Collection")
-                }
+      Form {
+        Section {
+          ShareCollectionButton(collectionId: collectionId)
+          if collection.id == app.state.library.onRotation.id {
+            Button(action: {
+              self.app.update(action: LibraryAction.saveOnRotation(collection: self.app.state.library.onRotation))
+            }) {
+              HStack {
+                Image(systemName: "arrow.right.square")
+                  .frame(width: Constants.optionsButtonIconWidth)
+                Text("Add to my Collection Library")
               }
             }
           }
-          .disabled(self.collectionEmpty)
-          
-          Section {
-            HStack {
-              Text("Collection Name")
-              TextField(
-                collectionName.wrappedValue,
-                text: collectionName,
-                onCommit: {
-                  self.app.navigation.showCollectionOptions = false
+          if collection.type == .userCollection {
+            Button(action: {
+              self.app.navigation.collectionIsEditing = true
+              self.app.navigation.showCollectionOptions = false
+            }) {
+              HStack {
+                Image(systemName: "square.stack.3d.up")
+                  .frame(width: Constants.optionsButtonIconWidth)
+                Text("Reorder Collection")
               }
-              ).foregroundColor(.accentColor)
-            }
-            HStack {
-              Text("Curator")
-              TextField(
-                collectionCurator.wrappedValue,
-                text: collectionCurator,
-                onCommit: {
-                  self.app.navigation.showCollectionOptions = false
-              }
-              ).foregroundColor(.accentColor)
             }
           }
-          .disabled(collection.type != .userCollection)
         }
-        .navigationBarTitle("Collection Options", displayMode: .inline)
-        .navigationBarItems(
-          leading:
-          SettingsButton(),
-          trailing:
-          Button(action: {
-            self.app.navigation.showCollectionOptions = false
-          }) {
-            Text("Close")
+        .disabled(self.collectionEmpty)
+        
+        Section {
+          HStack {
+            Text("Collection Name")
+            TextField(
+              collectionName.wrappedValue,
+              text: collectionName,
+              onCommit: {
+                self.app.navigation.showCollectionOptions = false
+            }
+            ).foregroundColor(.accentColor)
           }
-        )
+          HStack {
+            Text("Curator")
+            TextField(
+              collectionCurator.wrappedValue,
+              text: collectionCurator,
+              onCommit: {
+                self.app.navigation.showCollectionOptions = false
+            }
+            ).foregroundColor(.accentColor)
+          }
+        }
+        .disabled(collection.type != .userCollection)
       }
+      .navigationBarTitle("Collection Options", displayMode: .inline)
+      .navigationBarItems(
+        leading:
+        SettingsButton(),
+        trailing:
+        Button(action: {
+          self.app.navigation.showCollectionOptions = false
+        }) {
+          Text("Close")
+        }
+      )
+      
     }
     .navigationViewStyle(StackNavigationViewStyle())
   }

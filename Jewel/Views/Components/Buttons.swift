@@ -16,7 +16,11 @@ struct SettingsButton: View {
     Button(action: {
       self.app.navigation.showSettings.toggle()
     }) {
-      Image(systemName: app.navigation.showSettings ? "slider.horizontal.3" : "gear")
+      Image(systemName: "gear")
+    }
+    .sheet(isPresented: $app.navigation.showSettings) {
+        Settings()
+          .environmentObject(self.app)
     }
   }
 }

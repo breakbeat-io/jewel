@@ -14,37 +14,33 @@ struct LibraryOptions: View {
   
   var body: some View {
     NavigationView {
-      if app.navigation.showSettings {
-        Settings()
-      } else {
-        Form {
-          Section {
-            Button(action: {
-              self.app.navigation.libraryIsEditing = true
-              self.app.navigation.showLibraryOptions = false
-            }) {
-              HStack {
-                Image(systemName: "square.stack.3d.up")
-                  .frame(width: Constants.optionsButtonIconWidth)
-                Text("Reorder Library")
-              }
-            }
-            .disabled(app.state.library.collections.isEmpty)
-            RecommendationsButton()
-          }
-        }
-        .navigationBarTitle("Library Options", displayMode: .inline)
-        .navigationBarItems(
-          leading:
-          SettingsButton(),
-          trailing:
+      Form {
+        Section {
           Button(action: {
+            self.app.navigation.libraryIsEditing = true
             self.app.navigation.showLibraryOptions = false
           }) {
-            Text("Close")
+            HStack {
+              Image(systemName: "square.stack.3d.up")
+                .frame(width: Constants.optionsButtonIconWidth)
+              Text("Reorder Library")
+            }
           }
-        )
+          .disabled(app.state.library.collections.isEmpty)
+          RecommendationsButton()
+        }
       }
+      .navigationBarTitle("Library Options", displayMode: .inline)
+      .navigationBarItems(
+        leading:
+        SettingsButton(),
+        trailing:
+        Button(action: {
+          self.app.navigation.showLibraryOptions = false
+        }) {
+          Text("Close")
+        }
+      )
     }
     .navigationViewStyle(StackNavigationViewStyle())
   }
