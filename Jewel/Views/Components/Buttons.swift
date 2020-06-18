@@ -38,10 +38,6 @@ struct ShareCollectionButton: View {
   @State private var showSharing: Bool = false
   @State private var showShareLink: Bool = false
   
-  private var collectionEmpty: Bool {
-    environment.state.library.onRotation.slots.filter( { $0.album != nil }).count == 0
-  }
-  
   var body: some View {
     IfLet(collectionId) { collectionId in
       Button(action: {
@@ -53,7 +49,6 @@ struct ShareCollectionButton: View {
           Text("Share Collection")
         }
       }
-      .disabled(self.collectionEmpty)
       .actionSheet(isPresented: self.$showSharing) {
         ActionSheet(
           title: Text("Share this collection as \n \"\(self.environment.state.library.onRotation.name)\" by \"\(self.environment.state.library.onRotation.curator)\""),

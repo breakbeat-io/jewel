@@ -23,7 +23,9 @@ struct OptionsHome: View {
       return self.environment.state.library.collections.first(where: { $0.id == self.collectionId })!
     }
   }
-  
+  private var collectionEmpty: Bool {
+    collection.slots.filter( { $0.album != nil }).count == 0
+  }
   private var collectionName: Binding<String> { Binding (
     get: { self.collection.name },
     set: { self.environment.update(action: LibraryAction.setCollectionName(name: $0, collectionId: self.collectionId))}
@@ -52,6 +54,7 @@ struct OptionsHome: View {
       Form {
         Section(header: Text("COLLECTION OPTIONS")) {
           ShareCollectionButton(collectionId: collectionId)
+            .disabled(self.collectionEmpty)
           Button(action: {
             self.environment.update(action: LibraryAction.saveOnRotation(collection: self.environment.state.library.onRotation))
           }) {
@@ -61,6 +64,7 @@ struct OptionsHome: View {
               Text("Add to my Collection Library")
             }
           }
+          .disabled(self.collectionEmpty)
         }
         Section {
           HStack {
