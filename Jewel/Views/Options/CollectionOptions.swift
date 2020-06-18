@@ -42,19 +42,8 @@ struct CollectionOptions: View {
     NavigationView {
       VStack {
         Form {
+          
           Section {
-            if collection.type == .userCollection {
-              Button(action: {
-                self.app.navigation.collectionIsEditing = true
-                self.app.navigation.showCollectionOptions = false
-              }) {
-                HStack {
-                  Image(systemName: "pencil")
-                    .frame(width: 30)
-                  Text("Edit Collection")
-                }
-              }
-            }
             ShareCollectionButton(collectionId: collectionId)
             if collection.id == app.state.library.onRotation.id {
               Button(action: {
@@ -62,39 +51,49 @@ struct CollectionOptions: View {
               }) {
                 HStack {
                   Image(systemName: "arrow.right.square")
-                    .frame(width: 30)
+                    .frame(width: Constants.optionsButtonIconWidth)
                   Text("Add to my Collection Library")
                 }
               }
             }
-          }.disabled(self.collectionEmpty)
+            if collection.type == .userCollection {
+              Button(action: {
+                self.app.navigation.collectionIsEditing = true
+                self.app.navigation.showCollectionOptions = false
+              }) {
+                HStack {
+                  Image(systemName: "square.stack.3d.up")
+                    .frame(width: Constants.optionsButtonIconWidth)
+                  Text("Reorder Collection")
+                }
+              }
+            }
+          }
+          .disabled(self.collectionEmpty)
+          
           Section {
             HStack {
               Text("Collection Name")
               TextField(
-                app.state.library.onRotation.name,
+                collectionName.wrappedValue,
                 text: collectionName,
                 onCommit: {
                   self.app.navigation.showCollectionOptions = false
-              }
+                }
               ).foregroundColor(.accentColor)
             }
             HStack {
               Text("Curator")
               TextField(
-                app.state.library.onRotation.curator,
+                collectionCurator.wrappedValue,
                 text: collectionCurator,
                 onCommit: {
                   self.app.navigation.showCollectionOptions = false
-              }
+                }
               ).foregroundColor(.accentColor)
             }
           }
           .disabled(collection.type != .userCollection)
-          
-          Section(header: Text("LIBRARY OPTIONS")) {
-            RecommendationsButton()
-          }
           
           Section(header: Text("APP OPTIONS"), footer: Text("Use this service for playback if available, otherwise use Apple Music.")) {
             Picker(selection: preferredMusicPlatform, label: Text("Playback Service")) {

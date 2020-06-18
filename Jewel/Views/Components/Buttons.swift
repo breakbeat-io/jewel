@@ -113,7 +113,7 @@ struct ShareCollectionButton: View {
       }) {
         HStack {
           Image(systemName: "square.and.arrow.up")
-            .frame(width: 30)
+            .frame(width: Constants.optionsButtonIconWidth)
           Text("Share Collection")
         }
       }
@@ -146,7 +146,7 @@ struct RecommendationsButton: View {
     }) {
       HStack {
         Image(systemName: "square.and.arrow.down")
-          .frame(width: 30)
+          .frame(width: Constants.optionsButtonIconWidth)
         Text("Load Recommendations")
       }
     }
