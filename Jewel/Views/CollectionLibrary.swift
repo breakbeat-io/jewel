@@ -51,6 +51,8 @@ struct CollectionLibrary: View {
           if self.isEditing {
             Button(action: {
               self.environment.update(action: LibraryAction.removeSharedCollections(collectionIds: self.selections))
+              self.isEditing.toggle()
+              self.selections = Set<UUID>()
             }) {
               Image(systemName: "trash")
             }

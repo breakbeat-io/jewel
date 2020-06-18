@@ -13,6 +13,7 @@ struct CollectionDetail: View {
   @EnvironmentObject var environment: AppEnvironment
   
   @State var isEditing = false
+  @State var selections = Set<Int>()
   
   var collectionId: UUID
   
@@ -41,7 +42,7 @@ struct CollectionDetail: View {
   var body: some View {
     GeometryReader { geo in
       IfLet(self.collection) { collection in
-        List {
+        List(selection: self.$selections) {
           ForEach(self.slots.indices, id: \.self) { slotIndex in
             Group {
               if self.slots[slotIndex].album != nil {
@@ -83,6 +84,14 @@ struct CollectionDetail: View {
           leading:
             HStack {
               if self.isEditing {
+                Button(action: {
+                  self.environment.update(action: LibraryAction.removeAlbumsFromCollection(albumIds: self.selections, collectionId: self.collectionId))
+                  self.isEditing.toggle()
+                  self.selections = Set<Int>()
+                }) {
+                  Image(systemName: "trash")
+                }
+                .padding(.trailing)
                 Button(action: {
                   self.isEditing.toggle()
                 }) {

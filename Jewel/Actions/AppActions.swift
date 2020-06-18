@@ -38,6 +38,7 @@ enum LibraryAction: AppAction {
   case setCollectionCurator(curator: String, collectionId: UUID)
   case addAlbumToSlot(album: Album, slotIndex: Int, collectionId: UUID)
   case removeAlbumFromSlot(slotIndexes: IndexSet, collectionId: UUID)
+  case removeAlbumsFromCollection(albumIds: Set<Int>, collectionId: UUID)
   case setPlatformLinks(baseUrl: URL, platformLinks: OdesliResponse, collectionId: UUID)
   case moveSlot(from: IndexSet, to: Int, collectionId: UUID)
   case invalidateShareLinks(collectionId: UUID)
@@ -63,6 +64,8 @@ enum LibraryAction: AppAction {
       return "\(type(of: self)): Adding an album to a collection"
     case .removeAlbumFromSlot:
       return "\(type(of: self)): Removing an album from a collection"
+    case .removeAlbumsFromCollection:
+      return "\(type(of: self)): Removing some albums from a collection"
     case .setPlatformLinks:
       return "\(type(of: self)): Setting platform links for an album"
     case .moveSlot:

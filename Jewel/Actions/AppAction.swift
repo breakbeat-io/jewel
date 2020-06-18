@@ -106,6 +106,15 @@ func updateLibrary(library: Library, action: LibraryAction) -> Library {
       commitCollection(collection: collection)
     }
     
+  case let .removeAlbumsFromCollection(albumIds, collectionId):
+    print(albumIds)
+    if var collection = extractCollection(collectionId: collectionId) {
+      for albumId in albumIds {
+        collection.slots[albumId] = Slot()
+      }
+      commitCollection(collection: collection)
+    }
+    
   case let .moveSlot(from, to, collectionId):
     if var collection = extractCollection(collectionId: collectionId) {
       collection.slots.move(fromOffsets: from, toOffset: to)
