@@ -31,9 +31,6 @@ struct Welcome: View {
     GeometryReader { geo in
       ZStack {
         Rectangle()
-          .opacity(0.01) // hack to prevent clickthrough if set to 0
-          .edgesIgnoringSafeArea(.all)
-        Rectangle()
           .fill(Color(.systemBackground))
           .frame(width: self.responsiveWidth(viewWidth: geo.size.width), height: self.responsiveHeight(viewHeight: geo.size.height))
           .cornerRadius(20)

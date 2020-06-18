@@ -39,6 +39,7 @@ struct Home: View {
         .tag("library")
         .environmentObject(self.environment)
       }
+      .disabled(environment.state.options.firstTimeRun)
       .alert(isPresented: receivedCollectionCued) {
         Alert(title: Text("Shared collection received."),
               message: Text("Would you like to add \"\(environment.state.library.cuedCollection!.collectionName)\" by \"\(environment.state.library.cuedCollection!.collectionCurator)\" to your Shared Library?"),
