@@ -10,14 +10,14 @@ import SwiftUI
 
 struct LibraryOptions: View {
   
-  @EnvironmentObject private var environment: AppEnvironment
+  @EnvironmentObject private var app: AppEnvironment
   
   @Binding var showing: Bool
   @Binding var editMode: Bool
   
   private var preferredMusicPlatform: Binding<Int> { Binding (
-    get: { self.environment.state.options.preferredMusicPlatform },
-    set: { self.environment.update(action: OptionsAction.setPreferredPlatform(platform: $0)) }
+    get: { self.app.state.options.preferredMusicPlatform },
+    set: { self.app.update(action: OptionsAction.setPreferredPlatform(platform: $0)) }
     )
   }
   
@@ -36,7 +36,7 @@ struct LibraryOptions: View {
                 Text("Edit Library")
               }
             }
-            .disabled(environment.state.library.collections.isEmpty)
+            .disabled(app.state.library.collections.isEmpty)
             RecommendationsButton()
           }
           
@@ -47,9 +47,9 @@ struct LibraryOptions: View {
               }
             }
           }
-          if environment.state.options.debugMode {
+          if app.state.options.debugMode {
             Button(action: {
-              self.environment.update(action: OptionsAction.reset)
+              self.app.update(action: OptionsAction.reset)
             }) {
               Text("Reset Jewel")
                 .foregroundColor(.red)
@@ -59,7 +59,7 @@ struct LibraryOptions: View {
         Spacer()
         Footer()
           .onTapGesture(count: 10) {
-            self.environment.update(action: OptionsAction.toggleDebugMode)
+            self.app.update(action: OptionsAction.toggleDebugMode)
         }
         .padding()
       }

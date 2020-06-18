@@ -13,7 +13,7 @@ struct Welcome: View {
   @Environment(\.horizontalSizeClass) var horizontalSizeClass
   @Environment(\.verticalSizeClass) var verticalSizeClass
   
-  @EnvironmentObject var environment: AppEnvironment
+  @EnvironmentObject var app: AppEnvironment
   
   private let heading = "Welcome!"
   private let description = """
@@ -60,7 +60,7 @@ struct Welcome: View {
             
           }
           Button(action: {
-            self.environment.update(action: OptionsAction.firstTimeRun(false))
+            self.app.update(action: OptionsAction.firstTimeRun(false))
           }) {
             Text(self.buttonLabel)
           }

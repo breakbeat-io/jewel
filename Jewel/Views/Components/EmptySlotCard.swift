@@ -10,7 +10,7 @@ import SwiftUI
 
 struct EmptySlotCard: View {
   
-  @EnvironmentObject var environment: AppEnvironment
+  @EnvironmentObject var app: AppEnvironment
   
   let slotIndex: Int
   let collectionId: UUID
@@ -34,7 +34,7 @@ struct EmptySlotCard: View {
     }
     .sheet(isPresented: $showSearch) {
       SearchHome(slotIndex: self.slotIndex, collectionId: self.collectionId, showing: self.$showSearch)
-        .environmentObject(self.environment)
+        .environmentObject(self.app)
     }
   }
 }

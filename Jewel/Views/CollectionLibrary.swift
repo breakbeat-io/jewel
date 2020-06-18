@@ -10,13 +10,13 @@ import SwiftUI
 
 struct CollectionLibrary: View {
   
-  @EnvironmentObject var environment: AppEnvironment
+  @EnvironmentObject var app: AppEnvironment
   
   @State var isEditing = false
   @State var selections = Set<UUID>()
   
   private var collections: [Collection] {
-    environment.state.library.collections
+    app.state.library.collections
   }
   
   var body: some View {
@@ -35,10 +35,10 @@ struct CollectionLibrary: View {
               }
             }
             .onMove { (indexSet, index) in
-              self.environment.update(action: LibraryAction.moveSharedCollection(from: indexSet, to: index))
+              self.app.update(action: LibraryAction.moveSharedCollection(from: indexSet, to: index))
             }
             .onDelete {
-              self.environment.update(action: LibraryAction.removeSharedCollection(slotIndexes: $0))
+              self.app.update(action: LibraryAction.removeSharedCollection(slotIndexes: $0))
             }
           }
         }
@@ -50,7 +50,7 @@ struct CollectionLibrary: View {
         HStack {
           if self.isEditing {
             Button(action: {
-              self.environment.update(action: LibraryAction.removeSharedCollections(collectionIds: self.selections))
+              self.app.update(action: LibraryAction.removeSharedCollections(collectionIds: self.selections))
               self.isEditing.toggle()
               self.selections = Set<UUID>()
             }) {

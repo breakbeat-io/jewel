@@ -12,7 +12,7 @@ import HMV
 
 struct SearchResults: View {
   
-  @EnvironmentObject var environment: AppEnvironment
+  @EnvironmentObject var app: AppEnvironment
   
   let slotIndex: Int
   let collectionId: UUID
@@ -20,7 +20,7 @@ struct SearchResults: View {
   @Binding var showing: Bool
   
   private var searchResults: [Album]? {
-    environment.state.search.results
+    app.state.search.results
   }
   
   var body: some View {
@@ -49,7 +49,7 @@ struct SearchResults: View {
             Spacer()
             Button(action: {
               RecordStore.purchase(album: albums[i].id, forSlot: self.slotIndex, inCollection: self.collectionId)
-              self.environment.update(action: SearchAction.removeSearchResults)
+              self.app.update(action: SearchAction.removeSearchResults)
               self.showing = false
             }, label:{
               Image(systemName: "plus.circle")

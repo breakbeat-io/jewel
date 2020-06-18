@@ -10,17 +10,17 @@ import SwiftUI
 
 struct CollectionOptions: View {
   
-  @EnvironmentObject private var environment: AppEnvironment
+  @EnvironmentObject private var app: AppEnvironment
   
   let collectionId: UUID
   @Binding var showing: Bool
   @Binding var editMode: Bool
   
   private var collection: Collection {
-    if self.collectionId == self.environment.state.library.onRotation.id {
-      return self.environment.state.library.onRotation
+    if self.collectionId == self.app.state.library.onRotation.id {
+      return self.app.state.library.onRotation
     } else {
-      return self.environment.state.library.collections.first(where: { $0.id == self.collectionId })!
+      return self.app.state.library.collections.first(where: { $0.id == self.collectionId })!
     }
   }
   private var collectionEmpty: Bool {
@@ -28,15 +28,15 @@ struct CollectionOptions: View {
   }
   private var collectionName: Binding<String> { Binding (
     get: { self.collection.name },
-    set: { self.environment.update(action: LibraryAction.setCollectionName(name: $0, collectionId: self.collectionId))}
+    set: { self.app.update(action: LibraryAction.setCollectionName(name: $0, collectionId: self.collectionId))}
     )}
   private var collectionCurator: Binding<String> { Binding (
     get: { self.collection.curator },
-    set: { self.environment.update(action: LibraryAction.setCollectionCurator(curator: $0, collectionId: self.collectionId))}
+    set: { self.app.update(action: LibraryAction.setCollectionCurator(curator: $0, collectionId: self.collectionId))}
     )}
   private var preferredMusicPlatform: Binding<Int> { Binding (
-    get: { self.environment.state.options.preferredMusicPlatform },
-    set: { self.environment.update(action: OptionsAction.setPreferredPlatform(platform: $0)) }
+    get: { self.app.state.options.preferredMusicPlatform },
+    set: { self.app.update(action: OptionsAction.setPreferredPlatform(platform: $0)) }
     )
   }
   
@@ -58,9 +58,9 @@ struct CollectionOptions: View {
               }
             }
             ShareCollectionButton(collectionId: collectionId)
-            if collection.id == environment.state.library.onRotation.id {
+            if collection.id == app.state.library.onRotation.id {
               Button(action: {
-                self.environment.update(action: LibraryAction.saveOnRotation(collection: self.environment.state.library.onRotation))
+                self.app.update(action: LibraryAction.saveOnRotation(collection: self.app.state.library.onRotation))
               }) {
                 HStack {
                   Image(systemName: "arrow.right.square")
@@ -74,7 +74,7 @@ struct CollectionOptions: View {
             HStack {
               Text("Collection Name")
               TextField(
-                environment.state.library.onRotation.name,
+                app.state.library.onRotation.name,
                 text: collectionName,
                 onCommit: {
                   self.showing = false
@@ -84,7 +84,7 @@ struct CollectionOptions: View {
             HStack {
               Text("Curator")
               TextField(
-                environment.state.library.onRotation.curator,
+                app.state.library.onRotation.curator,
                 text: collectionCurator,
                 onCommit: {
                   self.showing = false
@@ -105,9 +105,9 @@ struct CollectionOptions: View {
               }
             }
           }
-          if environment.state.options.debugMode {
+          if app.state.options.debugMode {
             Button(action: {
-              self.environment.update(action: OptionsAction.reset)
+              self.app.update(action: OptionsAction.reset)
             }) {
               Text("Reset Jewel")
                 .foregroundColor(.red)
@@ -117,7 +117,7 @@ struct CollectionOptions: View {
         Spacer()
         Footer()
           .onTapGesture(count: 10) {
-            self.environment.update(action: OptionsAction.toggleDebugMode)
+            self.app.update(action: OptionsAction.toggleDebugMode)
         }
         .padding()
       }

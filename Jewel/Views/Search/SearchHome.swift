@@ -10,7 +10,7 @@ import SwiftUI
 
 struct SearchHome: View {
   
-  @EnvironmentObject private var environment: AppEnvironment
+  @EnvironmentObject private var app: AppEnvironment
   
   let slotIndex: Int
   let collectionId: UUID

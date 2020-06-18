@@ -10,7 +10,7 @@ import SwiftUI
 
 struct CollectionDetail: View {
   
-  @EnvironmentObject var environment: AppEnvironment
+  @EnvironmentObject var app: AppEnvironment
   
   @State var isEditing = false
   @State var selections = Set<Int>()
@@ -18,11 +18,11 @@ struct CollectionDetail: View {
   var collectionId: UUID
   
   private var collection: Collection? {
-    if collectionId == environment.state.library.onRotation.id {
-      return environment.state.library.onRotation
+    if collectionId == app.state.library.onRotation.id {
+      return app.state.library.onRotation
     } else {
-      if let collectionIndex = environment.state.library.collections.firstIndex(where: { $0.id == collectionId }) {
-        return environment.state.library.collections[collectionIndex]
+      if let collectionIndex = app.state.library.collections.firstIndex(where: { $0.id == collectionId }) {
+        return app.state.library.collections[collectionIndex]
       }
     }
     
@@ -72,10 +72,10 @@ struct CollectionDetail: View {
             )
           }
           .onMove { (indexSet, index) in
-            self.environment.update(action: LibraryAction.moveSlot(from: indexSet, to: index, collectionId: self.collectionId))
+            self.app.update(action: LibraryAction.moveSlot(from: indexSet, to: index, collectionId: self.collectionId))
           }
           .onDelete {
-            self.environment.update(action: LibraryAction.removeAlbumFromSlot(slotIndexes: $0, collectionId: self.collectionId))
+            self.app.update(action: LibraryAction.removeAlbumFromSlot(slotIndexes: $0, collectionId: self.collectionId))
           }
         }
         .environment(\.editMode, .constant(self.isEditing ? EditMode.active : EditMode.inactive)).animation(Animation.spring())
@@ -85,7 +85,7 @@ struct CollectionDetail: View {
             HStack {
               if self.isEditing {
                 Button(action: {
-                  self.environment.update(action: LibraryAction.removeAlbumsFromCollection(albumIds: self.selections, collectionId: self.collectionId))
+                  self.app.update(action: LibraryAction.removeAlbumsFromCollection(albumIds: self.selections, collectionId: self.collectionId))
                   self.isEditing.toggle()
                   self.selections = Set<Int>()
                 }) {

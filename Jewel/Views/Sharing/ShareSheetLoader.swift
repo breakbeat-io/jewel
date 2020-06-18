@@ -10,15 +10,15 @@ import SwiftUI
 
 struct ShareSheetLoader: View {
   
-  @EnvironmentObject var environment: AppEnvironment
+  @EnvironmentObject var app: AppEnvironment
   
   let collectionId: UUID
   
   private var collection: Collection? {
-    if collectionId == environment.state.library.onRotation.id {
-      return environment.state.library.onRotation
-    } else if let collectionIndex = environment.state.library.collections.firstIndex(where: { $0.id == collectionId }) {
-      return environment.state.library.collections[collectionIndex]
+    if collectionId == app.state.library.onRotation.id {
+      return app.state.library.onRotation
+    } else if let collectionIndex = app.state.library.collections.firstIndex(where: { $0.id == collectionId }) {
+      return app.state.library.collections[collectionIndex]
     }
     return nil
   }
@@ -58,7 +58,7 @@ struct ShareSheetLoader: View {
       return
     }
     
-    self.environment.update(action: LibraryAction.shareLinkError(false, collectionId: collection.id))
+    self.app.update(action: LibraryAction.shareLinkError(false, collectionId: collection.id))
     
     let newLongLink = SharedCollectionManager.generateLongLink(for: collection)
     

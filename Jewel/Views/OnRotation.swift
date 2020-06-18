@@ -11,10 +11,10 @@ import HMV
 
 struct OnRotation: View {
   
-  @EnvironmentObject var environment: AppEnvironment
+  @EnvironmentObject var app: AppEnvironment
   
   private var collectionId: UUID {
-    environment.state.library.onRotation.id
+    app.state.library.onRotation.id
   }
 
   var body: some View {

@@ -10,7 +10,7 @@ import SwiftUI
 
 struct CollectionOptionsButton: View {
   
-  @EnvironmentObject var environment: AppEnvironment
+  @EnvironmentObject var app: AppEnvironment
   
   let collectionId: UUID
   @Binding var editMode: Bool
@@ -25,14 +25,14 @@ struct CollectionOptionsButton: View {
     }
     .sheet(isPresented: self.$showOptions) {
       CollectionOptions(collectionId: self.collectionId, showing: self.$showOptions, editMode: self.$editMode)
-        .environmentObject(self.environment)
+        .environmentObject(self.app)
     }
   }
 }
 
 struct LibraryOptionsButton: View {
   
-  @EnvironmentObject var environment: AppEnvironment
+  @EnvironmentObject var app: AppEnvironment
   
   @Binding var editMode: Bool
   @State private var showOptions: Bool = false
@@ -45,7 +45,7 @@ struct LibraryOptionsButton: View {
     }
     .sheet(isPresented: self.$showOptions) {
       LibraryOptions(showing: self.$showOptions, editMode: self.$editMode)
-        .environmentObject(self.environment)
+        .environmentObject(self.app)
     }
   }
 }
@@ -53,7 +53,7 @@ struct LibraryOptionsButton: View {
 
 struct ShareCollectionButton: View {
   
-  @EnvironmentObject var environment: AppEnvironment
+  @EnvironmentObject var app: AppEnvironment
   
   var collectionId: UUID?
   
@@ -73,7 +73,7 @@ struct ShareCollectionButton: View {
       }
       .actionSheet(isPresented: self.$showSharing) {
         ActionSheet(
-          title: Text("Share this collection as \n \"\(self.environment.state.library.onRotation.name)\" by \"\(self.environment.state.library.onRotation.curator)\""),
+          title: Text("Share this collection as \n \"\(self.app.state.library.onRotation.name)\" by \"\(self.app.state.library.onRotation.curator)\""),
           buttons: [
             .default(Text("Send Share Link")) {
               self.showShareLink = true
@@ -84,7 +84,7 @@ struct ShareCollectionButton: View {
       }
       .sheet(isPresented: self.$showShareLink) {
         ShareSheetLoader(collectionId: collectionId)
-          .environmentObject(self.environment)
+          .environmentObject(self.app)
       }
     }
   }
@@ -117,11 +117,11 @@ struct RecommendationsButton: View {
 
 struct AddCollectionButton: View {
   
-  @EnvironmentObject var environment: AppEnvironment
+  @EnvironmentObject var app: AppEnvironment
   
   var body: some View {
     Button(action: {
-      self.environment.update(action: LibraryAction.addUserCollection)
+      self.app.update(action: LibraryAction.addUserCollection)
     }) {
       Image(systemName: "plus")
     }
