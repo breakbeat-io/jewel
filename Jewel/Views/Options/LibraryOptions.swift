@@ -22,15 +22,16 @@ struct LibraryOptions: View {
     NavigationView {
       VStack {
         Form {
+          
           Section {
             Button(action: {
               self.app.navigation.collectionLibraryIsEditing = true
               self.app.navigation.showCollectionLibraryOptions = false
             }) {
               HStack {
-                Image(systemName: "pencil")
-                  .frame(width: 30)
-                Text("Edit Library")
+                Image(systemName: "square.stack.3d.up")
+                  .frame(width: Constants.optionsButtonIconWidth)
+                Text("Reorder Library")
               }
             }
             .disabled(app.state.library.collections.isEmpty)

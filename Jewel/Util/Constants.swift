@@ -9,7 +9,9 @@
 import Foundation
 import UIKit
 
-struct Helpers {
+struct Constants {
+  
+  static let optionsButtonIconWidth: CGFloat = 30
   
   enum cardHeights: CGFloat {
     case tall = 94

@@ -68,7 +68,7 @@ struct CollectionDetail: View {
                 }
               }
             }
-            .frame(height: Helpers.cardHeightFor(viewHeight: geo.size.height)
+            .frame(height: Constants.cardHeightFor(viewHeight: geo.size.height)
             )
           }
           .onMove { (indexSet, index) in
