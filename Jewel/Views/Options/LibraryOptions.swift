@@ -12,8 +12,6 @@ struct LibraryOptions: View {
   
   @EnvironmentObject private var app: AppEnvironment
   
-  @Binding var showing: Bool
-  
   private var preferredMusicPlatform: Binding<Int> { Binding (
     get: { self.app.state.options.preferredMusicPlatform },
     set: { self.app.update(action: OptionsAction.setPreferredPlatform(platform: $0)) }
@@ -27,7 +25,7 @@ struct LibraryOptions: View {
           Section {
             Button(action: {
               self.app.navigation.collectionLibraryIsEditing = true
-              self.showing = false
+              self.app.navigation.showCollectionLibraryOptions = false
             }) {
               HStack {
                 Image(systemName: "pencil")
@@ -65,7 +63,7 @@ struct LibraryOptions: View {
       .navigationBarTitle("Library Options", displayMode: .inline)
       .navigationBarItems(trailing:
         Button(action: {
-          self.showing = false
+          self.app.navigation.showCollectionLibraryOptions = false
         }) {
           Text("Close")
         }
