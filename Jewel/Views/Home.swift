@@ -12,8 +12,6 @@ struct Home: View {
   
   @EnvironmentObject var environment: AppEnvironment
   
-  @State private var selectedTab = "onrotation"
-  
   private var receivedCollectionCued: Binding<Bool> {
     Binding (
       get: { self.environment.state.library.cuedCollection != nil },
@@ -23,7 +21,7 @@ struct Home: View {
   
   var body: some View {
     ZStack {
-      TabView(selection: $selectedTab) {
+      TabView(selection: $environment.navigation.selectedTab) {
         OnRotation()
           .tabItem {
             Image(systemName: "music.house")
@@ -47,7 +45,7 @@ struct Home: View {
                 self.environment.update(action: LibraryAction.uncueSharedCollection)
           },
               secondaryButton: .default(Text("Add").bold()) {
-                self.selectedTab = "library"
+                self.environment.navigation.selectedTab = "library"
                 SharedCollectionManager.expandShareableCollection(shareableCollection: self.environment.state.library.cuedCollection!)
                 self.environment.update(action: LibraryAction.uncueSharedCollection)
           })

@@ -19,6 +19,7 @@ final class AppEnvironment: ObservableObject {
       save()
     }
   }
+  @Published var navigation = Navigation()
   
   private init() {
     if let savedState = UserDefaults.standard.object(forKey: "jewelState") as? Data {
