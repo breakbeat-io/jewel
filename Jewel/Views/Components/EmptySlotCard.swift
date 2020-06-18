@@ -21,7 +21,7 @@ struct EmptySlotCard: View {
     Button(action: {
       self.showSearch = true
     }) {
-      RoundedRectangle(cornerRadius: 4)
+      RoundedRectangle(cornerRadius: Constants.cardCornerRadius)
         .stroke(
           Color.secondary,
           style: StrokeStyle(lineWidth: 2, dash: [4, 6])

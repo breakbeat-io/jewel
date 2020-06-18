@@ -22,14 +22,14 @@ struct AlbumCard: View {
         IfLet(albumArtwork) { url in
           KFImage(url)
             .placeholder {
-              RoundedRectangle(cornerRadius: 4)
+              RoundedRectangle(cornerRadius: Constants.cardCornerRadius)
                 .fill(Color(UIColor.secondarySystemBackground))
           }
           .renderingMode(.original)
           .resizable()
           .scaledToFill()
       })
-      .cornerRadius(4)
+      .cornerRadius(Constants.cardCornerRadius)
       .overlay(
         VStack(alignment: .leading) {
             Text(albumName)
@@ -47,7 +47,7 @@ struct AlbumCard: View {
               .lineLimit(1)
         }
         .background(Color.black.opacity(0.8))
-        .cornerRadius(4)
+        .cornerRadius(Constants.cardCornerRadius)
         .padding(4)
         , alignment: .bottomLeading)
       .shadow(radius: 3)

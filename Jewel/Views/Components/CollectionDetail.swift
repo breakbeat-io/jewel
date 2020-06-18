@@ -17,12 +17,9 @@ struct CollectionDetail: View {
   private var collection: Collection? {
     if collectionId == app.state.library.onRotation.id {
       return app.state.library.onRotation
-    } else {
-      if let collectionIndex = app.state.library.collections.firstIndex(where: { $0.id == collectionId }) {
-        return app.state.library.collections[collectionIndex]
-      }
+    } else if let collectionIndex = app.state.library.collections.firstIndex(where: { $0.id == collectionId }) {
+      return app.state.library.collections[collectionIndex]
     }
-    
     return nil
   }
   
@@ -30,10 +27,7 @@ struct CollectionDetail: View {
     collection!.slots
   }
   private var editable: Bool {
-    collection?.type == .userCollection ? true : false
-  }
-  private var empty: Bool {
-    slots.filter({ $0.album != nil }).count == 0
+    collection!.type == .userCollection ? true : false
   }
   
   var body: some View {
@@ -55,14 +49,15 @@ struct CollectionDetail: View {
                 }
                 .deleteDisabled(!self.editable)
               } else {
-                if self.editable {
-                  EmptySlotCard(slotIndex: slotIndex, collectionId: self.collectionId)
-                    .deleteDisabled(true)
-                } else {
-                  RoundedRectangle(cornerRadius: 4)
-                    .fill(Color(UIColor.secondarySystemBackground))
-                    .deleteDisabled(true)
+                Group {
+                  if self.editable {
+                    EmptySlotCard(slotIndex: slotIndex, collectionId: self.collectionId)
+                  } else {
+                    RoundedRectangle(cornerRadius: Constants.cardCornerRadius)
+                      .fill(Color(UIColor.secondarySystemBackground))
+                  }
                 }
+                .deleteDisabled(true)
               }
             }
             .frame(height: Constants.cardHeightFor(viewHeight: geo.size.height)
@@ -79,24 +74,8 @@ struct CollectionDetail: View {
         .navigationBarTitle(collection.name)
         .navigationBarItems(
           leading:
-            HStack {
-              if self.app.navigation.collectionIsEditing {
-                Button(action: {
-                  self.app.update(action: LibraryAction.removeAlbumsFromCollection(albumIds: self.app.navigation.collectionEditSelection, collectionId: self.collectionId))
-                  self.app.navigation.collectionIsEditing.toggle()
-                  self.app.navigation.collectionEditSelection = Set<Int>()
-                }) {
-                  Image(systemName: "trash")
-                }
-                .padding(.trailing)
-                Button(action: {
-                  self.app.navigation.collectionIsEditing.toggle()
-                }) {
-                  Text("Done")
-                }
-              }
-            }
-          .padding(.vertical),
+            CollectionEditButtons(collectionId: self.collectionId)
+            .padding(.vertical),
           trailing:
             CollectionOptionsButton(collectionId: self.collectionId)
               .padding([.vertical, .leading])

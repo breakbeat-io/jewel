@@ -30,7 +30,7 @@ struct CollectionCard: View {
         .background(
           CardArtworkComposite(images: collectionArtwork)
       )
-        .cornerRadius(4)
+        .cornerRadius(Constants.cardCornerRadius)
         .frame(height: Constants.cardHeights.medium.rawValue)
         .shadow(radius: 3)
       HStack(alignment: .bottom) {
@@ -50,7 +50,7 @@ struct CollectionCard: View {
             .padding(.bottom, 4)
         }
         .background(Color.black.opacity(0.8))
-        .cornerRadius(4)
+        .cornerRadius(Constants.cardCornerRadius)
         Spacer()
         if collection.type == .userCollection {
           Image(systemName: "person.circle")

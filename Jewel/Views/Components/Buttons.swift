@@ -8,6 +8,33 @@
 
 import SwiftUI
 
+struct CollectionEditButtons: View {
+  
+  @EnvironmentObject var app: AppEnvironment
+  
+  let collectionId: UUID
+  
+  var body: some View {
+    HStack {
+      if self.app.navigation.collectionIsEditing {
+        Button(action: {
+          self.app.update(action: LibraryAction.removeAlbumsFromCollection(albumIds: self.app.navigation.collectionEditSelection, collectionId: self.collectionId))
+          self.app.navigation.collectionIsEditing.toggle()
+          self.app.navigation.collectionEditSelection = Set<Int>()
+        }) {
+          Image(systemName: "trash")
+        }
+        .padding(.trailing)
+        Button(action: {
+          self.app.navigation.collectionIsEditing.toggle()
+        }) {
+          Text("Done")
+        }
+      }
+    }
+  }
+}
+
 struct CollectionOptionsButton: View {
   
   @EnvironmentObject var app: AppEnvironment

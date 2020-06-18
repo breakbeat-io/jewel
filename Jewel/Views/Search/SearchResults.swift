@@ -30,13 +30,13 @@ struct SearchResults: View {
           HStack {
             KFImage(result.artwork.url(forWidth: 50))
               .placeholder {
-                RoundedRectangle(cornerRadius: 4)
+                RoundedRectangle(cornerRadius: Constants.cardCornerRadius)
                   .fill(Color(UIColor.secondarySystemBackground))
             }
             .renderingMode(.original)
             .resizable()
             .aspectRatio(contentMode: .fit)
-            .cornerRadius(4)
+            .cornerRadius(Constants.cardCornerRadius)
             .frame(width: 50)
             VStack(alignment: .leading) {
               Text(result.name)
