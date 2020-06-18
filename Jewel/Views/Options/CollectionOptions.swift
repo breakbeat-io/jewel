@@ -32,17 +32,13 @@ struct CollectionOptions: View {
     get: { self.collection.curator },
     set: { self.app.update(action: LibraryAction.setCollectionCurator(curator: $0, collectionId: self.collectionId))}
     )}
-  private var preferredMusicPlatform: Binding<Int> { Binding (
-    get: { self.app.state.options.preferredMusicPlatform },
-    set: { self.app.update(action: OptionsAction.setPreferredPlatform(platform: $0)) }
-    )
-  }
   
   var body: some View {
     NavigationView {
-      VStack {
+      if app.navigation.showSettings {
+        Settings()
+      } else {
         Form {
-          
           Section {
             ShareCollectionButton(collectionId: collectionId)
             if collection.id == app.state.library.onRotation.id {
@@ -79,7 +75,7 @@ struct CollectionOptions: View {
                 text: collectionName,
                 onCommit: {
                   self.app.navigation.showCollectionOptions = false
-                }
+              }
               ).foregroundColor(.accentColor)
             }
             HStack {
@@ -89,43 +85,24 @@ struct CollectionOptions: View {
                 text: collectionCurator,
                 onCommit: {
                   self.app.navigation.showCollectionOptions = false
-                }
+              }
               ).foregroundColor(.accentColor)
             }
           }
           .disabled(collection.type != .userCollection)
-          
-          Section(header: Text("APP OPTIONS"), footer: Text("Use this service for playback if available, otherwise use Apple Music.")) {
-            Picker(selection: preferredMusicPlatform, label: Text("Playback Service")) {
-              ForEach(0 ..< OdesliPlatform.allCases.count, id: \.self) {
-                Text(OdesliPlatform.allCases[$0].friendlyName)
-              }
-            }
-          }
-          if app.state.options.debugMode {
-            Button(action: {
-              self.app.update(action: OptionsAction.reset)
-            }) {
-              Text("Reset Jewel")
-                .foregroundColor(.red)
-            }
-          }
         }
-        Spacer()
-        Footer()
-          .onTapGesture(count: 10) {
-            self.app.update(action: OptionsAction.toggleDebugMode)
-        }
-        .padding()
+        .navigationBarTitle("Collection Options", displayMode: .inline)
+        .navigationBarItems(
+          leading:
+          SettingsButton(),
+          trailing:
+          Button(action: {
+            self.app.navigation.showCollectionOptions = false
+          }) {
+            Text("Close")
+          }
+        )
       }
-      .navigationBarTitle("Collection Options", displayMode: .inline)
-      .navigationBarItems(trailing:
-        Button(action: {
-          self.app.navigation.showCollectionOptions = false
-        }) {
-          Text("Close")
-        }
-      )
     }
     .navigationViewStyle(StackNavigationViewStyle())
   }

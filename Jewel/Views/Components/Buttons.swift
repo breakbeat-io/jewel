@@ -8,6 +8,19 @@
 
 import SwiftUI
 
+struct SettingsButton: View {
+  
+  @EnvironmentObject var app: AppEnvironment
+  
+  var body: some View {
+    Button(action: {
+      self.app.navigation.showSettings.toggle()
+    }) {
+      Image(systemName: app.navigation.showSettings ? "slider.horizontal.3" : "gear")
+    }
+  }
+}
+
 struct CollectionEditButtons: View {
   
   @EnvironmentObject var app: AppEnvironment
