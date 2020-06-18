@@ -13,7 +13,6 @@ struct CollectionOptions: View {
   @EnvironmentObject private var app: AppEnvironment
   
   let collectionId: UUID
-  @Binding var showing: Bool
   
   private var collection: Collection {
     if self.collectionId == self.app.state.library.onRotation.id {
@@ -47,7 +46,7 @@ struct CollectionOptions: View {
             if collection.type == .userCollection {
               Button(action: {
                 self.app.navigation.collectionIsEditing = true
-                self.showing = false
+                self.app.navigation.showCollectionOptions = false
               }) {
                 HStack {
                   Image(systemName: "pencil")
@@ -76,7 +75,7 @@ struct CollectionOptions: View {
                 app.state.library.onRotation.name,
                 text: collectionName,
                 onCommit: {
-                  self.showing = false
+                  self.app.navigation.showCollectionOptions = false
               }
               ).foregroundColor(.accentColor)
             }
@@ -86,7 +85,7 @@ struct CollectionOptions: View {
                 app.state.library.onRotation.curator,
                 text: collectionCurator,
                 onCommit: {
-                  self.showing = false
+                  self.app.navigation.showCollectionOptions = false
               }
               ).foregroundColor(.accentColor)
             }
@@ -123,7 +122,7 @@ struct CollectionOptions: View {
       .navigationBarTitle("Collection Options", displayMode: .inline)
       .navigationBarItems(trailing:
         Button(action: {
-          self.showing = false
+          self.app.navigation.showCollectionOptions = false
         }) {
           Text("Close")
         }

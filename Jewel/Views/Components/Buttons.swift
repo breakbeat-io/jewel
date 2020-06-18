@@ -41,16 +41,14 @@ struct CollectionOptionsButton: View {
   
   let collectionId: UUID
   
-  @State private var showOptions: Bool = false
-  
   var body: some View {
     Button(action: {
-      self.showOptions = true
+      self.app.navigation.showCollectionOptions = true
     }) {
       Image(systemName: "ellipsis")
     }
-    .sheet(isPresented: self.$showOptions) {
-      CollectionOptions(collectionId: self.collectionId, showing: self.$showOptions)
+    .sheet(isPresented: self.$app.navigation.showCollectionOptions) {
+      CollectionOptions(collectionId: self.collectionId)
         .environmentObject(self.app)
     }
   }
