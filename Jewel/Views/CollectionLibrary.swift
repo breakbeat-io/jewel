@@ -12,8 +12,6 @@ struct CollectionLibrary: View {
   
   @EnvironmentObject var app: AppEnvironment
   
-  @State var editSelection = Set<UUID>()
-  
   private var collections: [Collection] {
     app.state.library.collections
   }
@@ -27,7 +25,7 @@ struct CollectionLibrary: View {
             .foregroundColor(Color.secondary)
             .padding()
         } else {
-          List(selection: $editSelection) {
+          List(selection: $app.navigation.collectionLibraryEditSelection) {
             ForEach(collections) { collection in
               NavigationLink(destination: CollectionDetail(collectionId: collection.id)) {
                 CollectionCard(collection: collection)
@@ -46,23 +44,7 @@ struct CollectionLibrary: View {
       .navigationBarTitle("Collection Library")
       .navigationBarItems(
         leading:
-          HStack {
-            if self.app.navigation.collectionLibraryIsEditing {
-              Button(action: {
-                self.app.update(action: LibraryAction.removeSharedCollections(collectionIds: self.editSelection))
-                self.app.navigation.collectionLibraryIsEditing.toggle()
-                self.editSelection = Set<UUID>()
-              }) {
-                Image(systemName: "trash")
-              }
-              .padding(.trailing)
-              Button(action: {
-                self.app.navigation.collectionLibraryIsEditing.toggle()
-              }) {
-                Text("Done")
-              }
-            }
-          }
+          LibraryEditButtons()
           .padding(.vertical),
         trailing:
           HStack {

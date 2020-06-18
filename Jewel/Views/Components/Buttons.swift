@@ -30,6 +30,31 @@ struct CollectionOptionsButton: View {
   }
 }
 
+struct LibraryEditButtons: View {
+  
+  @EnvironmentObject var app: AppEnvironment
+  
+  var body: some View {
+    HStack {
+      if self.app.navigation.collectionLibraryIsEditing {
+        Button(action: {
+          self.app.update(action: LibraryAction.removeSharedCollections(collectionIds: self.app.navigation.collectionLibraryEditSelection))
+          self.app.navigation.collectionLibraryIsEditing.toggle()
+          self.app.navigation.collectionLibraryEditSelection = Set<UUID>()
+        }) {
+          Image(systemName: "trash")
+        }
+        .padding(.trailing)
+        Button(action: {
+          self.app.navigation.collectionLibraryIsEditing.toggle()
+        }) {
+          Text("Done")
+        }
+      }
+    }
+  }
+}
+
 struct LibraryOptionsButton: View {
   
   @EnvironmentObject var app: AppEnvironment

@@ -13,4 +13,5 @@ struct Navigation {
   
   var showCollectionLibraryOptions: Bool = false
   var collectionLibraryIsEditing: Bool = false
+  var collectionLibraryEditSelection = Set<UUID>()
 }
