@@ -13,6 +13,7 @@ struct CollectionLibrary: View {
   @EnvironmentObject var environment: AppEnvironment
   
   @State var isEditing = false
+  @State var selections = Set<UUID>()
   
   private var collections: [Collection] {
     environment.state.library.collections
@@ -27,7 +28,7 @@ struct CollectionLibrary: View {
             .foregroundColor(Color.secondary)
             .padding()
         } else {
-          List {
+          List(selection: $selections) {
             ForEach(collections) { collection in
               NavigationLink(destination: CollectionDetail(collectionId: collection.id)) {
                 CollectionCard(collection: collection)
@@ -48,6 +49,12 @@ struct CollectionLibrary: View {
         leading:
         HStack {
           if self.isEditing {
+            Button(action: {
+              self.environment.update(action: LibraryAction.removeSharedCollections(collectionIds: self.selections))
+            }) {
+              Image(systemName: "trash")
+            }
+            .padding(.trailing)
             Button(action: {
               self.isEditing.toggle()
             }) {

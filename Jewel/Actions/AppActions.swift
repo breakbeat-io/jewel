@@ -47,6 +47,7 @@ enum LibraryAction: AppAction {
   case addUserCollection
   case addSharedCollection(collection: Collection)
   case removeSharedCollection(slotIndexes: IndexSet)
+  case removeSharedCollections(collectionIds: Set<UUID>)
   case moveSharedCollection(from: IndexSet, to: Int)
   case cueSharedCollection(shareableCollection: SharedCollectionManager.ShareableCollection)
   case uncueSharedCollection
@@ -80,6 +81,8 @@ enum LibraryAction: AppAction {
       return "\(type(of: self)): Adding a shared collection to the library"
     case .removeSharedCollection:
       return "\(type(of: self)): Removing a shared collection from the library"
+    case .removeSharedCollections:
+      return "\(type(of: self)): Removing some shared collections from the library"
     case .moveSharedCollection:
       return "\(type(of: self)): Moving a shared collections position"
     case .cueSharedCollection:
