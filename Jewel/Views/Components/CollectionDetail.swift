@@ -9,7 +9,10 @@
 import SwiftUI
 
 struct CollectionDetail: View {
+  
   @EnvironmentObject var environment: AppEnvironment
+  
+  @State var isEditing = false
   
   var collectionId: UUID
   
@@ -74,19 +77,23 @@ struct CollectionDetail: View {
             self.environment.update(action: LibraryAction.removeAlbumFromSlot(slotIndexes: $0, collectionId: self.collectionId))
           }
         }
+        .environment(\.editMode, .constant(self.isEditing ? EditMode.active : EditMode.inactive)).animation(Animation.spring())
         .navigationBarTitle(collection.name)
         .navigationBarItems(
           leading:
-          HStack {
-            self.editable && !self.empty ? AnyView(EditButton()) : AnyView(EmptyView())
-          }
-          .padding(.vertical)
-          .environmentObject(self.environment),
+            HStack {
+              if self.isEditing {
+                Button(action: {
+                  self.isEditing.toggle()
+                }) {
+                  Text("Done")
+                }
+              }
+            }
+          .padding(.vertical),
           trailing:
-          HStack {
-            CollectionOptionsButton(collectionId: self.collectionId)
-          }
-          .padding(.vertical)
+            CollectionOptionsButton(collectionId: self.collectionId, editMode: self.$isEditing)
+              .padding([.vertical, .leading])
         )
       }
     }

@@ -13,6 +13,7 @@ struct CollectionOptionsButton: View {
   @EnvironmentObject var environment: AppEnvironment
   
   let collectionId: UUID
+  @Binding var editMode: Bool
   
   @State private var showOptions: Bool = false
   
@@ -23,7 +24,7 @@ struct CollectionOptionsButton: View {
       Image(systemName: "ellipsis")
     }
     .sheet(isPresented: self.$showOptions) {
-      OptionsHome(collectionId: self.collectionId, showing: self.$showOptions)
+      OptionsHome(collectionId: self.collectionId, showing: self.$showOptions, editMode: self.$editMode)
         .environmentObject(self.environment)
     }
   }

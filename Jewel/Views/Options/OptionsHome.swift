@@ -15,6 +15,7 @@ struct OptionsHome: View {
   let collectionId: UUID
   
   @Binding var showing: Bool
+  @Binding var editMode: Bool
   
   private var collection: Collection {
     if self.collectionId == self.environment.state.library.onRotation.id {
@@ -53,8 +54,17 @@ struct OptionsHome: View {
       .padding([.horizontal, .top])
       Form {
         Section(header: Text("COLLECTION OPTIONS")) {
+          Button(action: {
+            self.editMode = true
+            self.showing = false
+          }) {
+            HStack {
+              Image(systemName: "pencil")
+                .frame(width: 30)
+              Text("Edit Collection")
+            }
+          }
           ShareCollectionButton(collectionId: collectionId)
-            .disabled(self.collectionEmpty)
           Button(action: {
             self.environment.update(action: LibraryAction.saveOnRotation(collection: self.environment.state.library.onRotation))
           }) {
@@ -64,8 +74,7 @@ struct OptionsHome: View {
               Text("Add to my Collection Library")
             }
           }
-          .disabled(self.collectionEmpty)
-        }
+        }.disabled(self.collectionEmpty)
         Section {
           HStack {
             Text("Collection Name")
