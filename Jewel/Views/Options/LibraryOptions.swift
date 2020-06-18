@@ -25,8 +25,8 @@ struct LibraryOptions: View {
           
           Section {
             Button(action: {
-              self.app.navigation.collectionLibraryIsEditing = true
-              self.app.navigation.showCollectionLibraryOptions = false
+              self.app.navigation.libraryIsEditing = true
+              self.app.navigation.showLibraryOptions = false
             }) {
               HStack {
                 Image(systemName: "square.stack.3d.up")
@@ -64,7 +64,7 @@ struct LibraryOptions: View {
       .navigationBarTitle("Library Options", displayMode: .inline)
       .navigationBarItems(trailing:
         Button(action: {
-          self.app.navigation.showCollectionLibraryOptions = false
+          self.app.navigation.showLibraryOptions = false
         }) {
           Text("Close")
         }

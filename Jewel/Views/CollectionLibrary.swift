@@ -25,7 +25,7 @@ struct CollectionLibrary: View {
             .foregroundColor(Color.secondary)
             .padding()
         } else {
-          List(selection: $app.navigation.collectionLibraryEditSelection) {
+          List(selection: $app.navigation.libraryEditSelection) {
             ForEach(collections) { collection in
               NavigationLink(destination: CollectionDetail(collectionId: collection.id)) {
                 CollectionCard(collection: collection)
@@ -40,7 +40,7 @@ struct CollectionLibrary: View {
           }
         }
       }
-      .environment(\.editMode, .constant(self.app.navigation.collectionLibraryIsEditing ? EditMode.active : EditMode.inactive)).animation(Animation.spring())
+      .environment(\.editMode, .constant(self.app.navigation.libraryIsEditing ? EditMode.active : EditMode.inactive)).animation(Animation.spring())
       .navigationBarTitle("Collection Library")
       .navigationBarItems(
         leading:

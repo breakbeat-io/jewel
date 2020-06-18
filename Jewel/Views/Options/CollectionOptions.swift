@@ -14,7 +14,6 @@ struct CollectionOptions: View {
   
   let collectionId: UUID
   @Binding var showing: Bool
-  @Binding var editMode: Bool
   
   private var collection: Collection {
     if self.collectionId == self.app.state.library.onRotation.id {
@@ -47,7 +46,7 @@ struct CollectionOptions: View {
           Section {
             if collection.type == .userCollection {
               Button(action: {
-                self.editMode = true
+                self.app.navigation.collectionIsEditing = true
                 self.showing = false
               }) {
                 HStack {

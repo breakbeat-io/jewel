@@ -12,7 +12,6 @@ struct CollectionDetail: View {
   
   @EnvironmentObject var app: AppEnvironment
   
-  @State var isEditing = false
   @State var selections = Set<Int>()
   
   var collectionId: UUID
@@ -78,22 +77,22 @@ struct CollectionDetail: View {
             self.app.update(action: LibraryAction.removeAlbumFromSlot(slotIndexes: $0, collectionId: self.collectionId))
           }
         }
-        .environment(\.editMode, .constant(self.isEditing ? EditMode.active : EditMode.inactive)).animation(Animation.spring())
+        .environment(\.editMode, .constant(self.app.navigation.collectionIsEditing ? EditMode.active : EditMode.inactive)).animation(Animation.spring())
         .navigationBarTitle(collection.name)
         .navigationBarItems(
           leading:
             HStack {
-              if self.isEditing {
+              if self.app.navigation.collectionIsEditing {
                 Button(action: {
                   self.app.update(action: LibraryAction.removeAlbumsFromCollection(albumIds: self.selections, collectionId: self.collectionId))
-                  self.isEditing.toggle()
+                  self.app.navigation.collectionIsEditing.toggle()
                   self.selections = Set<Int>()
                 }) {
                   Image(systemName: "trash")
                 }
                 .padding(.trailing)
                 Button(action: {
-                  self.isEditing.toggle()
+                  self.app.navigation.collectionIsEditing.toggle()
                 }) {
                   Text("Done")
                 }
@@ -101,7 +100,7 @@ struct CollectionDetail: View {
             }
           .padding(.vertical),
           trailing:
-            CollectionOptionsButton(collectionId: self.collectionId, editMode: self.$isEditing)
+            CollectionOptionsButton(collectionId: self.collectionId)
               .padding([.vertical, .leading])
         )
       }

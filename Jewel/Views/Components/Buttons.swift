@@ -13,7 +13,6 @@ struct CollectionOptionsButton: View {
   @EnvironmentObject var app: AppEnvironment
   
   let collectionId: UUID
-  @Binding var editMode: Bool
   
   @State private var showOptions: Bool = false
   
@@ -24,7 +23,7 @@ struct CollectionOptionsButton: View {
       Image(systemName: "ellipsis")
     }
     .sheet(isPresented: self.$showOptions) {
-      CollectionOptions(collectionId: self.collectionId, showing: self.$showOptions, editMode: self.$editMode)
+      CollectionOptions(collectionId: self.collectionId, showing: self.$showOptions)
         .environmentObject(self.app)
     }
   }
@@ -36,17 +35,17 @@ struct LibraryEditButtons: View {
   
   var body: some View {
     HStack {
-      if self.app.navigation.collectionLibraryIsEditing {
+      if self.app.navigation.libraryIsEditing {
         Button(action: {
-          self.app.update(action: LibraryAction.removeSharedCollections(collectionIds: self.app.navigation.collectionLibraryEditSelection))
-          self.app.navigation.collectionLibraryIsEditing.toggle()
-          self.app.navigation.collectionLibraryEditSelection = Set<UUID>()
+          self.app.update(action: LibraryAction.removeSharedCollections(collectionIds: self.app.navigation.libraryEditSelection))
+          self.app.navigation.libraryIsEditing.toggle()
+          self.app.navigation.libraryEditSelection = Set<UUID>()
         }) {
           Image(systemName: "trash")
         }
         .padding(.trailing)
         Button(action: {
-          self.app.navigation.collectionLibraryIsEditing.toggle()
+          self.app.navigation.libraryIsEditing.toggle()
         }) {
           Text("Done")
         }
@@ -61,11 +60,11 @@ struct LibraryOptionsButton: View {
   
   var body: some View {
     Button(action: {
-      self.app.navigation.showCollectionLibraryOptions = true
+      self.app.navigation.showLibraryOptions = true
     }) {
       Image(systemName: "ellipsis")
     }
-    .sheet(isPresented: self.$app.navigation.showCollectionLibraryOptions) {
+    .sheet(isPresented: self.$app.navigation.showLibraryOptions) {
       LibraryOptions()
         .environmentObject(self.app)
     }
