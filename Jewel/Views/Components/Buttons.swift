@@ -29,7 +29,7 @@ struct CollectionOptionsButton: View {
   }
 }
 
-struct SharingOptionsButton: View {
+struct ShareCollectionButton: View {
   
   @EnvironmentObject var environment: AppEnvironment
   
@@ -49,6 +49,7 @@ struct SharingOptionsButton: View {
       }) {
         HStack {
           Image(systemName: "square.and.arrow.up")
+            .frame(width: 30)
           Text("Share Collection")
         }
       }
@@ -59,9 +60,6 @@ struct SharingOptionsButton: View {
           buttons: [
             .default(Text("Send Share Link")) {
               self.showShareLink = true
-            },
-            .default(Text("Add to my Collection Library")) {
-              self.environment.update(action: LibraryAction.saveOnRotation(collection: self.environment.state.library.onRotation))
             },
             .cancel()
           ]
@@ -83,7 +81,11 @@ struct RecommendationsButton: View {
     Button(action: {
       self.showLoadRecommendationsAlert = true
     }) {
-      Image(systemName: "square.and.arrow.down")
+      HStack {
+        Image(systemName: "square.and.arrow.down")
+          .frame(width: 30)
+        Text("Load Recommendations")
+      }
     }
     .alert(isPresented: $showLoadRecommendationsAlert) {
       Alert(title: Text("Add our current Recommended Collection?"),
