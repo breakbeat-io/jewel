@@ -45,24 +45,28 @@ struct CollectionOptions: View {
       VStack {
         Form {
           Section {
-            Button(action: {
-              self.editMode = true
-              self.showing = false
-            }) {
-              HStack {
-                Image(systemName: "pencil")
-                  .frame(width: 30)
-                Text("Edit Collection")
+            if collection.type == .userCollection {
+              Button(action: {
+                self.editMode = true
+                self.showing = false
+              }) {
+                HStack {
+                  Image(systemName: "pencil")
+                    .frame(width: 30)
+                  Text("Edit Collection")
+                }
               }
             }
             ShareCollectionButton(collectionId: collectionId)
-            Button(action: {
-              self.environment.update(action: LibraryAction.saveOnRotation(collection: self.environment.state.library.onRotation))
-            }) {
-              HStack {
-                Image(systemName: "arrow.right.square")
-                  .frame(width: 30)
-                Text("Add to my Collection Library")
+            if collection.id == environment.state.library.onRotation.id {
+              Button(action: {
+                self.environment.update(action: LibraryAction.saveOnRotation(collection: self.environment.state.library.onRotation))
+              }) {
+                HStack {
+                  Image(systemName: "arrow.right.square")
+                    .frame(width: 30)
+                  Text("Add to my Collection Library")
+                }
               }
             }
           }.disabled(self.collectionEmpty)
@@ -88,6 +92,7 @@ struct CollectionOptions: View {
               ).foregroundColor(.accentColor)
             }
           }
+          .disabled(collection.type != .userCollection)
           
           Section(header: Text("LIBRARY OPTIONS")) {
             RecommendationsButton()
