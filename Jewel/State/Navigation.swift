@@ -9,5 +9,6 @@
 import Foundation
 
 struct Navigation {
-  var selectedTab = "onrotation"
+  var selectedTab: String = "onrotation"
+  var collectionLibraryIsEditing: Bool = false
 }

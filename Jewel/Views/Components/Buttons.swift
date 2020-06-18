@@ -33,8 +33,7 @@ struct CollectionOptionsButton: View {
 struct LibraryOptionsButton: View {
   
   @EnvironmentObject var app: AppEnvironment
-  
-  @Binding var editMode: Bool
+
   @State private var showOptions: Bool = false
   
   var body: some View {
@@ -44,7 +43,7 @@ struct LibraryOptionsButton: View {
       Image(systemName: "ellipsis")
     }
     .sheet(isPresented: self.$showOptions) {
-      LibraryOptions(showing: self.$showOptions, editMode: self.$editMode)
+      LibraryOptions(showing: self.$showOptions)
         .environmentObject(self.app)
     }
   }

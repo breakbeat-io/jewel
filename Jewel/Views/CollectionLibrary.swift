@@ -12,8 +12,7 @@ struct CollectionLibrary: View {
   
   @EnvironmentObject var app: AppEnvironment
   
-  @State var isEditing = false
-  @State var selections = Set<UUID>()
+  @State var editSelection = Set<UUID>()
   
   private var collections: [Collection] {
     app.state.library.collections
@@ -22,13 +21,13 @@ struct CollectionLibrary: View {
   var body: some View {
     NavigationView {
       Group {
-        if collections.count == 0 {
+        if collections.isEmpty {
           Text("Collections you have saved or that people have shared with you will appear here.")
             .multilineTextAlignment(.center)
             .foregroundColor(Color.secondary)
             .padding()
         } else {
-          List(selection: $selections) {
+          List(selection: $editSelection) {
             ForEach(collections) { collection in
               NavigationLink(destination: CollectionDetail(collectionId: collection.id)) {
                 CollectionCard(collection: collection)
@@ -43,35 +42,35 @@ struct CollectionLibrary: View {
           }
         }
       }
-      .environment(\.editMode, .constant(self.isEditing ? EditMode.active : EditMode.inactive)).animation(Animation.spring())
+      .environment(\.editMode, .constant(self.app.navigation.collectionLibraryIsEditing ? EditMode.active : EditMode.inactive)).animation(Animation.spring())
       .navigationBarTitle("Collection Library")
       .navigationBarItems(
         leading:
-        HStack {
-          if self.isEditing {
-            Button(action: {
-              self.app.update(action: LibraryAction.removeSharedCollections(collectionIds: self.selections))
-              self.isEditing.toggle()
-              self.selections = Set<UUID>()
-            }) {
-              Image(systemName: "trash")
-            }
-            .padding(.trailing)
-            Button(action: {
-              self.isEditing.toggle()
-            }) {
-              Text("Done")
+          HStack {
+            if self.app.navigation.collectionLibraryIsEditing {
+              Button(action: {
+                self.app.update(action: LibraryAction.removeSharedCollections(collectionIds: self.editSelection))
+                self.app.navigation.collectionLibraryIsEditing.toggle()
+                self.editSelection = Set<UUID>()
+              }) {
+                Image(systemName: "trash")
+              }
+              .padding(.trailing)
+              Button(action: {
+                self.app.navigation.collectionLibraryIsEditing.toggle()
+              }) {
+                Text("Done")
+              }
             }
           }
-        }
-        .padding(.vertical),
+          .padding(.vertical),
         trailing:
-        HStack {
-          AddCollectionButton()
-            .padding(.trailing)
-          LibraryOptionsButton(editMode: self.$isEditing)
-        }
-        .padding(.vertical)
+          HStack {
+            AddCollectionButton()
+              .padding(.trailing)
+            LibraryOptionsButton()
+          }
+          .padding(.vertical)
       )
     }
   }

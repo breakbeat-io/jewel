@@ -22,35 +22,39 @@ struct Home: View {
   var body: some View {
     ZStack {
       TabView(selection: $app.navigation.selectedTab) {
+        
         OnRotation()
           .tabItem {
             Image(systemName: "music.house")
             Text("On Rotation")
         }
         .tag("onrotation")
-        .environmentObject(self.app)
+        .environmentObject(app)
+        
         CollectionLibrary()
           .tabItem {
             Image(systemName: "rectangle.on.rectangle.angled")
             Text("Collection Library")
         }
         .tag("library")
-        .environmentObject(self.app)
+        .environmentObject(app)
+        
       }
       .disabled(app.state.options.firstTimeRun)
+      .blur(radius: app.state.options.firstTimeRun ? 10 : 0)
       .alert(isPresented: receivedCollectionCued) {
         Alert(title: Text("Shared collection received."),
               message: Text("Would you like to add \"\(app.state.library.cuedCollection!.collectionName)\" by \"\(app.state.library.cuedCollection!.collectionCurator)\" to your Shared Library?"),
               primaryButton: .cancel(Text("Cancel")) {
                 self.app.update(action: LibraryAction.uncueSharedCollection)
-          },
+              },
               secondaryButton: .default(Text("Add").bold()) {
                 self.app.navigation.selectedTab = "library"
                 SharedCollectionManager.expandShareableCollection(shareableCollection: self.app.state.library.cuedCollection!)
                 self.app.update(action: LibraryAction.uncueSharedCollection)
-          })
+              }
+        )
       }
-      .blur(radius: app.state.options.firstTimeRun ? 10 : 0)
       if app.state.options.firstTimeRun {
         Welcome()
       }

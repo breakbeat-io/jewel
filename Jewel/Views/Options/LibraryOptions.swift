@@ -13,7 +13,6 @@ struct LibraryOptions: View {
   @EnvironmentObject private var app: AppEnvironment
   
   @Binding var showing: Bool
-  @Binding var editMode: Bool
   
   private var preferredMusicPlatform: Binding<Int> { Binding (
     get: { self.app.state.options.preferredMusicPlatform },
@@ -27,7 +26,7 @@ struct LibraryOptions: View {
         Form {
           Section {
             Button(action: {
-              self.editMode = true
+              self.app.navigation.collectionLibraryIsEditing = true
               self.showing = false
             }) {
               HStack {
