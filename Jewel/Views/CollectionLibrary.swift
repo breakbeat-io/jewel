@@ -12,6 +12,8 @@ struct CollectionLibrary: View {
   
   @EnvironmentObject var environment: AppEnvironment
   
+  @State var isEditing = false
+  
   private var collections: [Collection] {
     environment.state.library.collections
   }
@@ -40,17 +42,25 @@ struct CollectionLibrary: View {
           }
         }
       }
+      .environment(\.editMode, .constant(self.isEditing ? EditMode.active : EditMode.inactive)).animation(Animation.spring())
       .navigationBarTitle("Collection Library")
       .navigationBarItems(
         leading:
         HStack {
-          collections.count != 0 ? AnyView(EditButton()) : AnyView(EmptyView())
+          if self.isEditing {
+            Button(action: {
+              self.isEditing.toggle()
+            }) {
+              Text("Done")
+            }
+          }
         }
         .padding(.vertical),
         trailing:
         HStack {
           AddCollectionButton()
             .padding(.trailing)
+          LibraryOptionsButton(editMode: self.$isEditing)
         }
         .padding(.vertical)
       )

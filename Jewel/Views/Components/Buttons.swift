@@ -24,11 +24,32 @@ struct CollectionOptionsButton: View {
       Image(systemName: "ellipsis")
     }
     .sheet(isPresented: self.$showOptions) {
-      OptionsHome(collectionId: self.collectionId, showing: self.$showOptions, editMode: self.$editMode)
+      CollectionOptions(collectionId: self.collectionId, showing: self.$showOptions, editMode: self.$editMode)
         .environmentObject(self.environment)
     }
   }
 }
+
+struct LibraryOptionsButton: View {
+  
+  @EnvironmentObject var environment: AppEnvironment
+  
+  @Binding var editMode: Bool
+  @State private var showOptions: Bool = false
+  
+  var body: some View {
+    Button(action: {
+      self.showOptions = true
+    }) {
+      Image(systemName: "ellipsis")
+    }
+    .sheet(isPresented: self.$showOptions) {
+      LibraryOptions(showing: self.$showOptions, editMode: self.$editMode)
+        .environmentObject(self.environment)
+    }
+  }
+}
+
 
 struct ShareCollectionButton: View {
   
