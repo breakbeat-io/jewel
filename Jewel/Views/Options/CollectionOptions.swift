@@ -91,7 +91,8 @@ struct CollectionOptions: View {
       .navigationBarTitle("Collection Options", displayMode: .inline)
       .navigationBarItems(
         leading:
-        SettingsButton(),
+        SettingsButton()
+          .environmentObject(self.app),
         trailing:
         Button(action: {
           self.app.navigation.showCollectionOptions = false

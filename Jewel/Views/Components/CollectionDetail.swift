@@ -75,11 +75,13 @@ struct CollectionDetail: View {
         .navigationBarItems(
           leading:
             CollectionEditButtons(collectionId: self.collectionId)
-            .padding(.vertical),
+              .padding(.vertical)
+              .environmentObject(self.app),
           trailing:
             CollectionOptionsButton(collectionId: self.collectionId)
               .disabled(self.app.navigation.collectionIsEditing)
               .padding([.vertical, .leading])
+              .environmentObject(self.app)
         )
       }
     }

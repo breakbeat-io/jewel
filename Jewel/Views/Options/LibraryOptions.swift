@@ -33,7 +33,8 @@ struct LibraryOptions: View {
       .navigationBarTitle("Library Options", displayMode: .inline)
       .navigationBarItems(
         leading:
-        SettingsButton(),
+        SettingsButton()
+          .environmentObject(self.app),
         trailing:
         Button(action: {
           self.app.navigation.showLibraryOptions = false

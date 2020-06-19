@@ -45,12 +45,15 @@ struct CollectionLibrary: View {
       .navigationBarItems(
         leading:
           LibraryEditButtons()
-          .padding(.vertical),
+            .padding(.vertical)
+            .environmentObject(self.app),
         trailing:
           HStack {
             AddCollectionButton()
               .padding(.trailing)
+              .environmentObject(self.app)
             LibraryOptionsButton()
+              .environmentObject(self.app)
           }
           .disabled(app.navigation.libraryIsEditing)
           .padding(.vertical)
