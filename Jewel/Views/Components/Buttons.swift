@@ -122,6 +122,10 @@ struct ShareCollectionButton: View {
   
   @State private var showSharing: Bool = false
   
+  private var isOnRotation: Bool {
+    self.collectionId == self.app.state.library.onRotation.id
+  }
+  
   var body: some View {
     IfLet(collectionId) { collectionId in
       Button(action: {
@@ -130,7 +134,7 @@ struct ShareCollectionButton: View {
         HStack {
           Image(systemName: "square.and.arrow.up")
             .frame(width: Constants.optionsButtonIconWidth)
-          Text("Share Collection")
+          Text("Share \(self.isOnRotation ? "On Rotation" : "Collection")")
         }
       }
       .sheet(isPresented: self.$showSharing) {

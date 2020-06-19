@@ -14,6 +14,9 @@ struct CollectionOptions: View {
   
   let collectionId: UUID
   
+  private var isOnRotation: Bool {
+    self.collectionId == self.app.state.library.onRotation.id
+  }
   private var collection: Collection {
     if self.collectionId == self.app.state.library.onRotation.id {
       return self.app.state.library.onRotation
@@ -57,7 +60,7 @@ struct CollectionOptions: View {
               HStack {
                 Image(systemName: "square.stack.3d.up")
                   .frame(width: Constants.optionsButtonIconWidth)
-                Text("Reorder Collection")
+                Text("Reorder \(isOnRotation ? "On Rotation" : "Collection")")
               }
             }
           }
@@ -75,6 +78,7 @@ struct CollectionOptions: View {
             }
             ).foregroundColor(.accentColor)
           }
+          .disabled(isOnRotation)
           HStack {
             Text("Curator")
             TextField(
@@ -88,7 +92,7 @@ struct CollectionOptions: View {
         }
         .disabled(collection.type != .userCollection)
       }
-      .navigationBarTitle("Collection Options", displayMode: .inline)
+      .navigationBarTitle("\(isOnRotation ? "On Rotation" : "Collection") Options", displayMode: .inline)
       .navigationBarItems(
         leading:
         SettingsButton()
