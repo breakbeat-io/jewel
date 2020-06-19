@@ -52,6 +52,7 @@ struct CollectionLibrary: View {
               .padding(.trailing)
             LibraryOptionsButton()
           }
+          .disabled(app.navigation.libraryIsEditing)
           .padding(.vertical)
       )
     }

@@ -78,6 +78,7 @@ struct CollectionDetail: View {
             .padding(.vertical),
           trailing:
             CollectionOptionsButton(collectionId: self.collectionId)
+              .disabled(self.app.navigation.collectionIsEditing)
               .padding([.vertical, .leading])
         )
       }
