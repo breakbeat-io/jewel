@@ -16,11 +16,8 @@ struct OnRotation: View {
   private var collectionId: UUID {
     app.state.library.onRotation.id
   }
-
+  
   var body: some View {
-    NavigationView {
-      CollectionDetail(collectionId: collectionId)
-      EmptyDetail()
-    }
+    CollectionDetail(collectionId: collectionId)
   }
 }

@@ -43,6 +43,8 @@ struct CollectionOptions: View {
           ShareCollectionButton(collectionId: collectionId)
           if collection.id == app.state.library.onRotation.id {
             Button(action: {
+              self.app.navigation.selectedTab = .library
+              self.app.navigation.showOptions = false
               self.app.update(action: LibraryAction.saveOnRotation(collection: self.app.state.library.onRotation))
             }) {
               HStack {
@@ -55,7 +57,7 @@ struct CollectionOptions: View {
           if collection.type == .userCollection {
             Button(action: {
               self.app.navigation.collectionIsEditing = true
-              self.app.navigation.showCollectionOptions = false
+              self.app.navigation.showOptions = false
             }) {
               HStack {
                 Image(systemName: "square.stack.3d.up")
@@ -74,7 +76,7 @@ struct CollectionOptions: View {
               collectionName.wrappedValue,
               text: collectionName,
               onCommit: {
-                self.app.navigation.showCollectionOptions = false
+                self.app.navigation.showOptions = false
             }
             ).foregroundColor(.accentColor)
           }
@@ -85,7 +87,7 @@ struct CollectionOptions: View {
               collectionCurator.wrappedValue,
               text: collectionCurator,
               onCommit: {
-                self.app.navigation.showCollectionOptions = false
+                self.app.navigation.showOptions = false
             }
             ).foregroundColor(.accentColor)
           }
@@ -99,7 +101,7 @@ struct CollectionOptions: View {
           .environmentObject(self.app),
         trailing:
         Button(action: {
-          self.app.navigation.showCollectionOptions = false
+          self.app.navigation.showOptions = false
         }) {
           Text("Close")
         }

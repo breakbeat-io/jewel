@@ -18,7 +18,7 @@ struct LibraryOptions: View {
         Section {
           Button(action: {
             self.app.navigation.libraryIsEditing = true
-            self.app.navigation.showLibraryOptions = false
+            self.app.navigation.showOptions = false
           }) {
             HStack {
               Image(systemName: "square.stack.3d.up")
@@ -37,7 +37,7 @@ struct LibraryOptions: View {
           .environmentObject(self.app),
         trailing:
         Button(action: {
-          self.app.navigation.showLibraryOptions = false
+          self.app.navigation.showOptions = false
         }) {
           Text("Close")
         }

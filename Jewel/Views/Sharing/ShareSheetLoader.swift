@@ -51,7 +51,7 @@ struct ShareSheetLoader: View {
       self.refreshShareLinks()
     }
     .onDisappear() {
-      self.app.navigation.closeOptions()
+      self.app.navigation.showOptions = false
     }
   }
   

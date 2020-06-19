@@ -17,7 +17,6 @@ struct CollectionLibrary: View {
   }
   
   var body: some View {
-    NavigationView {
       Group {
         if collections.isEmpty {
           Text("Collections you have saved or that people have shared with you will appear here.")
@@ -30,6 +29,7 @@ struct CollectionLibrary: View {
               NavigationLink(destination: CollectionDetail(collectionId: collection.id)) {
                 CollectionCard(collection: collection)
               }
+              .isDetailLink(false)
             }
             .onMove { (indexSet, index) in
               self.app.update(action: LibraryAction.moveSharedCollection(from: indexSet, to: index))
@@ -41,23 +41,5 @@ struct CollectionLibrary: View {
         }
       }
       .environment(\.editMode, .constant(self.app.navigation.libraryIsEditing ? EditMode.active : EditMode.inactive)).animation(Animation.spring())
-      .navigationBarTitle("Collection Library")
-      .navigationBarItems(
-        leading:
-          LibraryEditButtons()
-            .padding(.vertical)
-            .environmentObject(self.app),
-        trailing:
-          HStack {
-            AddCollectionButton()
-              .padding(.trailing)
-              .environmentObject(self.app)
-            LibraryOptionsButton()
-              .environmentObject(self.app)
-          }
-          .disabled(app.navigation.libraryIsEditing)
-          .padding(.vertical)
-      )
-    }
   }
 }

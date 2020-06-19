@@ -8,32 +8,44 @@
 
 import SwiftUI
 
-struct SettingsButton: View {
+struct OptionsButtons: View {
   
   @EnvironmentObject var app: AppEnvironment
-  
-  var body: some View {
-    Button(action: {
-      self.app.navigation.showSettings.toggle()
-    }) {
-      Image(systemName: "gear")
-    }
-    .sheet(isPresented: $app.navigation.showSettings) {
-        Settings()
-          .environmentObject(self.app)
-    }
-  }
-}
-
-struct CollectionEditButtons: View {
-  
-  @EnvironmentObject var app: AppEnvironment
-  
-  let collectionId: UUID
   
   var body: some View {
     HStack {
-      if self.app.navigation.collectionIsEditing {
+      Spacer()
+      if app.navigation.selectedTab == .library {
+        Button(action: {
+          self.app.update(action: LibraryAction.addUserCollection)
+        }) {
+          Image(systemName: "plus")
+        }
+        .padding(.leading)
+      }
+      Button(action: {
+        self.app.navigation.showOptions = true
+      }) {
+        Image(systemName: "ellipsis")
+      }
+      .padding(.leading)
+    }
+    .frame(minWidth: 80) // need to give it a width else it will center in the available space so buttons will jump about as they come and go
+    .padding(.vertical)
+  }
+}
+
+struct EditButtons: View {
+  
+  @EnvironmentObject var app: AppEnvironment
+  
+  private var collectionId: UUID {
+    app.state.library.onRotation.id
+  }
+  
+  var body: some View {
+    HStack {
+      if app.navigation.selectedTab == .onrotation && self.app.navigation.collectionIsEditing {
         Button(action: {
           self.app.update(action: LibraryAction.removeAlbumsFromCollection(albumIds: self.app.navigation.collectionEditSelection, collectionId: self.collectionId))
           self.app.navigation.collectionIsEditing.toggle()
@@ -48,36 +60,8 @@ struct CollectionEditButtons: View {
           Text("Done")
         }
       }
-    }
-  }
-}
-
-struct CollectionOptionsButton: View {
-  
-  @EnvironmentObject var app: AppEnvironment
-  
-  let collectionId: UUID
-  
-  var body: some View {
-    Button(action: {
-      self.app.navigation.showCollectionOptions = true
-    }) {
-      Image(systemName: "ellipsis")
-    }
-    .sheet(isPresented: self.$app.navigation.showCollectionOptions) {
-      CollectionOptions(collectionId: self.collectionId)
-        .environmentObject(self.app)
-    }
-  }
-}
-
-struct LibraryEditButtons: View {
-  
-  @EnvironmentObject var app: AppEnvironment
-  
-  var body: some View {
-    HStack {
-      if self.app.navigation.libraryIsEditing {
+      
+      if app.navigation.selectedTab == .library && self.app.navigation.libraryIsEditing {
         Button(action: {
           self.app.update(action: LibraryAction.removeSharedCollections(collectionIds: self.app.navigation.libraryEditSelection))
           self.app.navigation.libraryIsEditing.toggle()
@@ -96,23 +80,23 @@ struct LibraryEditButtons: View {
   }
 }
 
-struct LibraryOptionsButton: View {
+
+struct SettingsButton: View {
   
   @EnvironmentObject var app: AppEnvironment
   
   var body: some View {
     Button(action: {
-      self.app.navigation.showLibraryOptions = true
+      self.app.navigation.showSettings = true
     }) {
-      Image(systemName: "ellipsis")
+      Image(systemName: "gear")
     }
-    .sheet(isPresented: self.$app.navigation.showLibraryOptions) {
-      LibraryOptions()
-        .environmentObject(self.app)
+    .sheet(isPresented: $app.navigation.showSettings) {
+        Settings()
+          .environmentObject(self.app)
     }
   }
 }
-
 
 struct ShareCollectionButton: View {
   
@@ -166,22 +150,10 @@ struct RecommendationsButton: View {
             message: Text("Every three months we publish a Collection of new and classic albums for you to listen to."),
             primaryButton: .cancel(Text("Cancel")),
             secondaryButton: .default(Text("Add").bold()) {
-              self.app.navigation.closeOptions()
+              self.app.navigation.showOptions = false
               SharedCollectionManager.loadRecommendations()
         })
     }
   }
 }
 
-struct AddCollectionButton: View {
-  
-  @EnvironmentObject var app: AppEnvironment
-  
-  var body: some View {
-    Button(action: {
-      self.app.update(action: LibraryAction.addUserCollection)
-    }) {
-      Image(systemName: "plus")
-    }
-  }
-}

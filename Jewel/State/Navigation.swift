@@ -9,27 +9,25 @@
 import Foundation
 
 struct Navigation {
-  var selectedTab: String = "onrotation" {
+
+  var selectedTab: Navigation.Tab = .onrotation {
     didSet {
       stopEditing()
     }
   }
+  enum Tab: String {
+    case onrotation = "On Rotation"
+    case library = "Collection Library"
+  }
   
+  var showOptions: Bool = false
   var showSettings: Bool = false
   
-  var showCollectionOptions: Bool = false
   var collectionIsEditing: Bool = false
   var collectionEditSelection = Set<Int>()
   
-  var showLibraryOptions: Bool = false
   var libraryIsEditing: Bool = false
   var libraryEditSelection = Set<UUID>()
-  
-  mutating func closeOptions() {
-    showSettings = false
-    showCollectionOptions = false
-    showLibraryOptions = false
-  }
   
   mutating func stopEditing() {
     collectionIsEditing = false
@@ -37,3 +35,5 @@ struct Navigation {
   }
   
 }
+
+
