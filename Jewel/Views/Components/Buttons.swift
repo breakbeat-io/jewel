@@ -143,6 +143,8 @@ struct ShareCollectionButton: View {
 
 struct RecommendationsButton: View {
   
+  @EnvironmentObject var app: AppEnvironment
+  
   @State private var showLoadRecommendationsAlert = false
   
   var body: some View {
@@ -160,6 +162,7 @@ struct RecommendationsButton: View {
             message: Text("Every three months we publish a Collection of new and classic albums for you to listen to."),
             primaryButton: .cancel(Text("Cancel")),
             secondaryButton: .default(Text("Add").bold()) {
+              self.app.navigation.closeOptions()
               SharedCollectionManager.loadRecommendations()
         })
     }
