@@ -9,7 +9,11 @@
 import Foundation
 
 struct Navigation {
-  var selectedTab: String = "onrotation"
+  var selectedTab: String = "onrotation" {
+    didSet {
+      stopEditing()
+    }
+  }
   
   var showSettings: Bool = false
   
@@ -22,8 +26,14 @@ struct Navigation {
   var libraryEditSelection = Set<UUID>()
   
   mutating func closeOptions() {
-    self.showSettings = false
-    self.showCollectionOptions = false
-    self.showLibraryOptions = false
+    showSettings = false
+    showCollectionOptions = false
+    showLibraryOptions = false
   }
+  
+  mutating func stopEditing() {
+    collectionIsEditing = false
+    libraryIsEditing = false
+  }
+  
 }
