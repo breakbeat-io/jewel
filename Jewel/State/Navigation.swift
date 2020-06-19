@@ -20,4 +20,10 @@ struct Navigation {
   var showLibraryOptions: Bool = false
   var libraryIsEditing: Bool = false
   var libraryEditSelection = Set<UUID>()
+  
+  mutating func closeOptions() {
+    self.showSettings = false
+    self.showCollectionOptions = false
+    self.showLibraryOptions = false
+  }
 }

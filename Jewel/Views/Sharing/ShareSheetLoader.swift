@@ -50,6 +50,9 @@ struct ShareSheetLoader: View {
     .onAppear {
       self.refreshShareLinks()
     }
+    .onDisappear() {
+      self.app.navigation.closeOptions()
+    }
   }
   
   private func refreshShareLinks() {

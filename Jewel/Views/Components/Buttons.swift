@@ -121,7 +121,6 @@ struct ShareCollectionButton: View {
   var collectionId: UUID?
   
   @State private var showSharing: Bool = false
-  @State private var showShareLink: Bool = false
   
   var body: some View {
     IfLet(collectionId) { collectionId in
@@ -134,18 +133,7 @@ struct ShareCollectionButton: View {
           Text("Share Collection")
         }
       }
-      .actionSheet(isPresented: self.$showSharing) {
-        ActionSheet(
-          title: Text("Share this collection as \n \"\(self.app.state.library.onRotation.name)\" by \"\(self.app.state.library.onRotation.curator)\""),
-          buttons: [
-            .default(Text("Send Share Link")) {
-              self.showShareLink = true
-            },
-            .cancel()
-          ]
-        )
-      }
-      .sheet(isPresented: self.$showShareLink) {
+      .sheet(isPresented: self.$showSharing) {
         ShareSheetLoader(collectionId: collectionId)
           .environmentObject(self.app)
       }
