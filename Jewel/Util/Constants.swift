@@ -11,6 +11,7 @@ import UIKit
 
 struct Constants {
   
+  static let buttonWidth: CGFloat = 70
   static let optionsButtonIconWidth: CGFloat = 30
   static let cardCornerRadius: CGFloat = 4
   

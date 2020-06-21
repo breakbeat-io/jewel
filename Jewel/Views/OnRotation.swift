@@ -1,23 +1,32 @@
 //
-//  Home.swift
-//  Jewel
+//  OnRotation.swift
+//  Listen Later
 //
-//  Created by Greg Hepworth on 29/05/2020.
+//  Created by Greg Hepworth on 21/06/2020.
 //  Copyright © 2020 Breakbeat Ltd. All rights reserved.
 //
 
 import SwiftUI
-import HMV
 
 struct OnRotation: View {
   
-  @EnvironmentObject var app: AppEnvironment
-  
-  private var collectionId: UUID {
-    app.state.library.onRotation.id
-  }
-  
   var body: some View {
-    CollectionDetail(collectionId: collectionId)
+    VStack(alignment: .leading) {
+      Text("On Rotation")
+        .font(.title)
+        .fontWeight(.bold)
+      Text("by hepto")
+        .font(.subheadline)
+        .fontWeight(.light)
+      GeometryReader { geo in
+        VStack(spacing: 5) {
+          ForEach((0...7).reversed(), id: \.self) { album in
+            RoundedRectangle(cornerRadius: 8)
+              .foregroundColor(Color(UIColor.secondarySystemBackground))
+              .frame(height: (geo.size.height / 8) - 5 )
+          }
+        }
+      }
+    }
   }
 }
