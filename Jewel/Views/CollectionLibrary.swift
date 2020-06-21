@@ -40,6 +40,6 @@ struct CollectionLibrary: View {
           }
         }
       }
-      .environment(\.editMode, .constant(self.app.navigation.libraryIsEditing ? EditMode.active : EditMode.inactive)).animation(Animation.spring())
+      .environment(\.editMode, .constant(self.app.navigation.libraryIsEditing ? EditMode.active : EditMode.inactive))
   }
 }

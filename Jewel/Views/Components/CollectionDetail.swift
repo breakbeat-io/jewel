@@ -70,7 +70,7 @@ struct CollectionDetail: View {
             self.app.update(action: LibraryAction.removeAlbumFromSlot(slotIndexes: $0, collectionId: self.collectionId))
           }
         }
-        .environment(\.editMode, .constant(self.app.navigation.collectionIsEditing ? EditMode.active : EditMode.inactive)).animation(Animation.spring())
+        .environment(\.editMode, .constant(self.app.navigation.collectionIsEditing ? EditMode.active : EditMode.inactive))
       }
     }
   }
