@@ -13,6 +13,7 @@ struct Navigation {
   var selectedTab: Navigation.Tab = .onrotation {
     didSet {
       stopEditing()
+      selectedCollection = nil
     }
   }
   enum Tab: String {
