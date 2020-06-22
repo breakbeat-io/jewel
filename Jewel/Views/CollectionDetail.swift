@@ -49,10 +49,14 @@ struct CollectionDetail: View {
                   IfLet(self.slots[slotIndex].album?.attributes) { attributes in
                     SourceCard(slot: self.slots[slotIndex], sourceName: attributes.name, sourceArtist: attributes.artistName, sourceArtwork: attributes.artwork.url(forWidth: 1000))
                   }
-                } else {
+                } else if self.editable {
                   AddSourceCard(slotIndex: slotIndex, collectionId: collection.id)
+                } else {
+                  RoundedRectangle(cornerRadius: Constants.cardCornerRadius)
+                    .fill(Color(UIColor.secondarySystemBackground))
                 }
               }
+              .deleteDisabled(!self.editable)
               .frame(height: Constants.cardHeightFor(viewHeight: geo.size.height))
             }
             .onMove { (indexSet, index) in
