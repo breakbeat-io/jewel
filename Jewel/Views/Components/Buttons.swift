@@ -8,77 +8,7 @@
 
 import SwiftUI
 
-struct OptionsButtons: View {
-  
-  @EnvironmentObject var app: AppEnvironment
-  
-  var body: some View {
-    HStack {
-      Spacer()
-      if app.navigation.selectedTab == .library {
-        Button(action: {
-          self.app.update(action: LibraryAction.addUserCollection)
-        }) {
-          Image(systemName: "plus")
-        }
-        .padding(.leading)
-      }
-      Button(action: {
-        self.app.navigation.showOptions = true
-      }) {
-        Image(systemName: "ellipsis")
-      }
-      .padding(.leading)
-    }
-    .frame(minWidth: 80) // need to give it a width else it will center in the available space so buttons will jump about as they come and go
-    .padding(.vertical)
-  }
-}
 
-struct EditButtons: View {
-  
-  @EnvironmentObject var app: AppEnvironment
-  
-  private var collectionId: UUID {
-    app.state.library.onRotation.id
-  }
-  
-  var body: some View {
-    HStack {
-      if app.navigation.selectedTab == .onrotation && self.app.navigation.collectionIsEditing {
-        Button(action: {
-          self.app.update(action: LibraryAction.removeAlbumsFromCollection(albumIds: self.app.navigation.collectionEditSelection, collectionId: self.collectionId))
-          self.app.navigation.collectionIsEditing.toggle()
-          self.app.navigation.collectionEditSelection = Set<Int>()
-        }) {
-          Image(systemName: "trash")
-        }
-        .padding(.trailing)
-        Button(action: {
-          self.app.navigation.collectionIsEditing.toggle()
-        }) {
-          Text("Done")
-        }
-      }
-      
-      if app.navigation.selectedTab == .library && self.app.navigation.libraryIsEditing {
-        Button(action: {
-          self.app.update(action: LibraryAction.removeSharedCollections(collectionIds: self.app.navigation.libraryEditSelection))
-          self.app.navigation.libraryIsEditing.toggle()
-          self.app.navigation.libraryEditSelection = Set<UUID>()
-        }) {
-          Image(systemName: "trash")
-        }
-        .padding(.trailing)
-        Button(action: {
-          self.app.navigation.libraryIsEditing.toggle()
-        }) {
-          Text("Done")
-        }
-      }
-    }
-  }
-}
 
 
 struct SettingsButton: View {
