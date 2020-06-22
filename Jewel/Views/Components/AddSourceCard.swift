@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct EmptySlotCard: View {
+struct AddSourceCard: View {
   
   @EnvironmentObject var app: AppEnvironment
   
@@ -22,10 +22,7 @@ struct EmptySlotCard: View {
       self.showSearch = true
     }) {
       RoundedRectangle(cornerRadius: Constants.cardCornerRadius)
-        .stroke(
-          Color.secondary,
-          style: StrokeStyle(lineWidth: 2, dash: [4, 6])
-      )
+        .foregroundColor(Color(UIColor.secondarySystemBackground))
         .overlay(
           Image(systemName: "plus")
             .font(.headline)

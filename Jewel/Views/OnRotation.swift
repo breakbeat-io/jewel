@@ -28,20 +28,14 @@ struct OnRotation: View {
         .font(.subheadline)
         .fontWeight(.light)
         .foregroundColor(.secondary)
-      GeometryReader { geo in
-        VStack {
-          ForEach(self.slots.indices, id: \.self) { slotIndex in
-            Group {
-            if self.slots[slotIndex].album != nil {
-              IfLet(self.slots[slotIndex].album?.attributes) { attributes in
-                AlbumCard(albumName: attributes.name, albumArtist: attributes.artistName, albumArtwork: attributes.artwork.url(forWidth: 1000))
-              }
-            } else {
-              RoundedRectangle(cornerRadius: 8)
-                .foregroundColor(Color(UIColor.secondarySystemBackground))
-                .frame(height: (geo.size.height / 8) - 5 )
-              }
+      ForEach(self.slots.indices, id: \.self) { slotIndex in
+        Group {
+          if self.slots[slotIndex].album != nil {
+            IfLet(self.slots[slotIndex].album?.attributes) { attributes in
+              SourceCard(slot: self.slots[slotIndex], sourceName: attributes.name, sourceArtist: attributes.artistName, sourceArtwork: attributes.artwork.url(forWidth: 1000))
             }
+          } else {
+            AddSourceCard(slotIndex: slotIndex, collectionId: self.collection.id)
           }
         }
       }

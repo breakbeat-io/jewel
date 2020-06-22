@@ -39,7 +39,7 @@ struct CollectionDetail: View {
               if self.slots[slotIndex].album != nil {
                 ZStack {
                   IfLet(self.slots[slotIndex].album?.attributes) { attributes in
-                    AlbumCard(albumName: attributes.name, albumArtist: attributes.artistName, albumArtwork: attributes.artwork.url(forWidth: 1000))
+                    SourceCard(slot: self.slots[slotIndex], sourceName: attributes.name, sourceArtist: attributes.artistName, sourceArtwork: attributes.artwork.url(forWidth: 1000))
                   }
                   NavigationLink(
                     destination: ObservedAlbumDetail(slotId: slotIndex, collectionId: self.collectionId)
@@ -51,7 +51,7 @@ struct CollectionDetail: View {
               } else {
                 Group {
                   if self.editable {
-                    EmptySlotCard(slotIndex: slotIndex, collectionId: self.collectionId)
+                    AddSourceCard(slotIndex: slotIndex, collectionId: self.collectionId)
                   } else {
                     RoundedRectangle(cornerRadius: Constants.cardCornerRadius)
                       .fill(Color(UIColor.secondarySystemBackground))
