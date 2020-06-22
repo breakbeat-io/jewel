@@ -41,10 +41,7 @@ struct OldHome: View {
         }
         .environmentObject(app)
         .navigationBarTitle(app.navigation.selectedTab.rawValue)
-        .navigationBarItems(
-          leading: EditButtons(),
-          trailing: OptionsButtons()
-        )
+
       }
       .disabled(app.state.options.firstTimeRun)
       .blur(radius: app.state.options.firstTimeRun ? 10 : 0)

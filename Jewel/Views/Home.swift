@@ -8,10 +8,6 @@
 
 import SwiftUI
 
-struct ViewConstants {
-  static let buttonWidth: CGFloat = 70
-}
-
 struct Home: View {
   
   @EnvironmentObject var app: AppEnvironment
