@@ -37,6 +37,11 @@ struct Home: View {
         }
         .background(Color(UIColor.systemBackground))
       }
+      .disabled(app.state.options.firstTimeRun)
+      .blur(radius: app.state.options.firstTimeRun ? 10 : 0)
+      if app.state.options.firstTimeRun {
+        Welcome()
+      }
     }
     .alert(isPresented: receivedCollectionCued) {
       Alert(title: Text("Shared collection received."),
