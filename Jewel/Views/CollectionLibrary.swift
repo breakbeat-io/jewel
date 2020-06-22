@@ -18,19 +18,37 @@ struct CollectionLibrary: View {
   
   var body: some View {
     VStack(alignment: .leading) {
-      if collections.isEmpty {
-        Text("Collections you have saved or that people have shared with you will appear here.")
-          .multilineTextAlignment(.center)
-          .foregroundColor(Color.secondary)
+      Text("Collection Library")
+        .font(.title)
+        .fontWeight(.bold)
+        .padding()
+        if collections.isEmpty {
+          VStack {
+            Spacer()
+            Image(systemName: "music.note.list")
+              .font(.system(size: 40))
+              .padding(.bottom)
+            Text("Collections you have saved or that people have shared with you will appear here.")
+              .multilineTextAlignment(.center)
+            Spacer()
+          }
           .padding()
-      } else {
-        Text("Collection Library")
-          .font(.title)
-          .fontWeight(.bold)
-        List(collections) { collection in
-          CollectionCard(collection: collection)
+          .foregroundColor(Color.secondary)
+        } else {
+        List(selection: $app.navigation.libraryEditSelection) {
+          ForEach(collections) { collection in
+            CollectionCard(collection: collection)
+          }
+          .onMove { (indexSet, index) in
+            self.app.update(action: LibraryAction.moveSharedCollection(from: indexSet, to: index))
+          }
+          .onDelete {
+            self.app.update(action: LibraryAction.removeSharedCollection(slotIndexes: $0))
+          }
         }
+        .environment(\.editMode, .constant(self.app.navigation.libraryIsEditing ? EditMode.active : EditMode.inactive)).animation(Animation.spring())
       }
     }
+    .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
   }
 }
