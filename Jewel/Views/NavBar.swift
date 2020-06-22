@@ -43,10 +43,13 @@ struct BackButton: View {
         Button(action: {
           self.app.navigation.selectedCollection = nil
         }) {
-          Image(systemName: "chevron.left")
+          HStack {
+            Image(systemName: "chevron.left")
+            Spacer()
+          }
         }
+        .padding(.trailing)
       }
-      Spacer()
     }
     .padding(.vertical)
     .frame(width: Constants.buttonWidth)
