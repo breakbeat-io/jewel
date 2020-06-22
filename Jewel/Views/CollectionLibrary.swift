@@ -32,8 +32,5 @@ struct CollectionLibrary: View {
         }
       }
     }
-    .onAppear {
-      UITableView.appearance().separatorStyle = .none
-    }
   }
 }

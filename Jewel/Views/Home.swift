@@ -16,6 +16,13 @@ struct Home: View {
   
   @EnvironmentObject var app: AppEnvironment
   
+  private var receivedCollectionCued: Binding<Bool> {
+    Binding (
+      get: { self.app.state.library.cuedCollection != nil },
+      set: { _ = $0 }
+    )
+  }
+  
   var body: some View {
     ZStack {
       Color(UIColor.systemBackground)
@@ -35,11 +42,21 @@ struct Home: View {
         .background(Color(UIColor.systemBackground))
       }
     }
-  }
-}
-
-struct Home_Previews: PreviewProvider {
-  static var previews: some View {
-    Home()
+    .alert(isPresented: receivedCollectionCued) {
+      Alert(title: Text("Shared collection received."),
+            message: Text("Would you like to add \"\(app.state.library.cuedCollection!.collectionName)\" by \"\(app.state.library.cuedCollection!.collectionCurator)\" to your Shared Library?"),
+            primaryButton: .cancel(Text("Cancel")) {
+              self.app.update(action: LibraryAction.uncueSharedCollection)
+        },
+            secondaryButton: .default(Text("Add").bold()) {
+              self.app.navigation.selectedTab = .library
+              SharedCollectionManager.expandShareableCollection(shareableCollection: self.app.state.library.cuedCollection!)
+              self.app.update(action: LibraryAction.uncueSharedCollection)
+        }
+      )
+    }
+    .onAppear {
+      UITableView.appearance().separatorStyle = .none
+    }
   }
 }
