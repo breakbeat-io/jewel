@@ -58,7 +58,11 @@ struct ActionButtons: View {
   @EnvironmentObject var app: AppEnvironment
   
   private var collectionId: UUID {
-    app.state.library.onRotation.id
+    if app.navigation.selectedCollection != nil {
+      return app.navigation.selectedCollection!
+    } else {
+     return app.state.library.onRotation.id
+    }
   }
   
   private var isEditing: Bool {
@@ -69,7 +73,7 @@ struct ActionButtons: View {
     HStack {
       if isEditing {
         Spacer()
-        if app.navigation.selectedTab == .onrotation && self.app.navigation.collectionIsEditing {
+        if self.app.navigation.collectionIsEditing {
           Button(action: {
             self.app.update(action: LibraryAction.removeAlbumsFromCollection(albumIds: self.app.navigation.collectionEditSelection, collectionId: self.collectionId))
             self.app.navigation.collectionIsEditing.toggle()
