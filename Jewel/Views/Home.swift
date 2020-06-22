@@ -32,7 +32,11 @@ struct Home: View {
             OnRotation()
           }
           if app.navigation.selectedTab == .library {
-            CollectionLibrary()
+            if app.navigation.selectedCollection == nil {
+              CollectionLibrary()
+            } else {
+              CollectionDetail(collectionId: self.app.navigation.selectedCollection!)
+            }
           }
         }
         .background(Color(UIColor.systemBackground))

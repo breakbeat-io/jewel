@@ -15,7 +15,7 @@ struct NavBar: View {
   var body: some View {
     VStack {
       HStack {
-        BackButton().hidden()
+        BackButton()
         Picker("Library", selection: $app.navigation.selectedTab) {
           Image(systemName: "music.house")
             .tag(Navigation.Tab.onrotation)
@@ -39,10 +39,12 @@ struct BackButton: View {
   
   var body: some View {
     HStack {
-      Button(action: {
-
-      }) {
-        Image(systemName: "chevron.left")
+      IfLet(self.app.navigation.selectedCollection) { collection in
+        Button(action: {
+          self.app.navigation.selectedCollection = nil
+        }) {
+          Image(systemName: "chevron.left")
+        }
       }
       Spacer()
     }

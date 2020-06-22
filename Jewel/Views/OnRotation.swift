@@ -22,10 +22,10 @@ struct OnRotation: View {
   var body: some View {
     VStack(alignment: .leading) {
       VStack(alignment: .leading) {
-        Text("On Rotation")
+        Text(collection.name)
           .font(.title)
           .fontWeight(.bold)
-        Text("by hepto")
+        Text("by \(collection.curator)")
           .font(.subheadline)
           .fontWeight(.light)
           .foregroundColor(.secondary)

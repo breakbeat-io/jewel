@@ -25,6 +25,7 @@ struct CardArtworkComposite: View {
                   RoundedRectangle(cornerRadius: Constants.cardCornerRadius)
                     .fill(Color(UIColor.secondarySystemBackground))
               }
+              .renderingMode(.original)
               .resizable()
               .scaledToFill()
             )

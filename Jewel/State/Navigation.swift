@@ -25,6 +25,7 @@ struct Navigation {
   
   var collectionIsEditing: Bool = false
   var collectionEditSelection = Set<Int>()
+  var selectedCollection: UUID?
   
   var libraryIsEditing: Bool = false
   var libraryEditSelection = Set<UUID>()
