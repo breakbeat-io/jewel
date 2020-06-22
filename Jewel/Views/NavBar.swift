@@ -123,8 +123,13 @@ struct ActionButtons: View {
               CollectionOptions(collectionId: self.app.state.library.onRotation.id)
                 .environmentObject(self.app)
             } else {
+              if self.app.navigation.selectedCollection == nil {
               LibraryOptions()
                 .environmentObject(self.app)
+              } else {
+                CollectionOptions(collectionId: self.app.navigation.selectedCollection!)
+                .environmentObject(self.app)
+              }
             }
           }
       }
