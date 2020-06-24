@@ -30,13 +30,13 @@ struct Home: View {
         VStack {
           if app.navigation.selectedTab == .onrotation {
             OnRotation()
+              .transition(.move(edge: .leading))
+              .animation(.easeInOut)
           }
           if app.navigation.selectedTab == .library {
-            if app.navigation.selectedCollection == nil {
               CollectionLibrary()
-            } else {
-              CollectionDetail(collectionId: self.app.navigation.selectedCollection!)
-            }
+                .transition(.move(edge: .trailing))
+                .animation(.easeInOut)
           }
         }
         .background(Color(UIColor.systemBackground))

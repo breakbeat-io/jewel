@@ -37,13 +37,17 @@ struct OnRotation: View {
             Group {
               if self.slots[slotIndex].album != nil {
                 IfLet(self.slots[slotIndex].album?.attributes) { attributes in
-                  SourceCard(slot: self.slots[slotIndex], sourceName: attributes.name, sourceArtist: attributes.artistName, sourceArtwork: attributes.artwork.url(forWidth: 1000))
+                  SourceCard(sourceName: attributes.name, sourceArtist: attributes.artistName, sourceArtwork: attributes.artwork.url(forWidth: 1000))
+                    .sheet(isPresented: self.$app.navigation.showSourceDetail) {
+                      AlbumDetail(slot: self.slots[slotIndex])
+                    }
                 }
               } else {
                 AddSourceCard(slotIndex: slotIndex, collectionId: self.collection.id)
               }
             }
             .frame(height: Constants.cardHeightFor(viewHeight: geo.size.height))
+
           }
           .onMove { (indexSet, index) in
             self.app.update(action: LibraryAction.moveSlot(from: indexSet, to: index, collectionId: self.collection.id))

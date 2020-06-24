@@ -21,6 +21,8 @@ struct Navigation {
     case library = "Collection Library"
   }
   
+  var showSourceDetail: Bool = false
+  
   var showOptions: Bool = false
   var showSettings: Bool = false
   

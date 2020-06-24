@@ -15,7 +15,9 @@ struct NavBar: View {
   var body: some View {
     VStack {
       HStack {
-        BackButton()
+        Spacer()
+          .padding(.vertical)
+          .frame(width: Constants.buttonWidth)
         Picker("Library", selection: $app.navigation.selectedTab) {
           Image(systemName: "music.house")
             .tag(Navigation.Tab.onrotation)
@@ -30,29 +32,6 @@ struct NavBar: View {
         .frame(height: 1.0, alignment: .bottom)
         .foregroundColor(Color(UIColor.systemFill))
     }
-  }
-}
-
-struct BackButton: View {
-  
-  @EnvironmentObject var app: AppEnvironment
-  
-  var body: some View {
-    HStack {
-      IfLet(self.app.navigation.selectedCollection) { collection in
-        Button(action: {
-          self.app.navigation.selectedCollection = nil
-        }) {
-          HStack {
-            Image(systemName: "chevron.left")
-            Spacer()
-          }
-        }
-        .padding(.trailing)
-      }
-    }
-    .padding(.vertical)
-    .frame(width: Constants.buttonWidth)
   }
 }
 
@@ -74,8 +53,8 @@ struct ActionButtons: View {
   
   var body: some View {
     HStack {
+      Spacer()
       if isEditing {
-        Spacer()
         if self.app.navigation.collectionIsEditing {
           Button(action: {
             self.app.update(action: LibraryAction.removeAlbumsFromCollection(albumIds: self.app.navigation.collectionEditSelection, collectionId: self.collectionId))
@@ -109,7 +88,6 @@ struct ActionButtons: View {
         }
       } else {
           if app.navigation.selectedTab == .library {
-            Spacer()
             Button(action: {
               self.app.update(action: LibraryAction.addUserCollection)
             }) {

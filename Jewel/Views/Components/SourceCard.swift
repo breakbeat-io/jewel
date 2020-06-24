@@ -11,17 +11,15 @@ import KingfisherSwiftUI
 
 struct SourceCard: View {
   
-  let slot: Slot
+  @EnvironmentObject var app: AppEnvironment
   
   let sourceName: String
   let sourceArtist: String
   var sourceArtwork: URL?
   
-  @State private var showSourceDetail: Bool = false
-  
   var body: some View {
     Button(action: {
-      self.showSourceDetail.toggle()
+      self.app.navigation.showSourceDetail = true
     }) {
       Rectangle()
         .foregroundColor(.clear)
@@ -58,9 +56,6 @@ struct SourceCard: View {
           .padding(4)
           , alignment: .bottomLeading)
         .shadow(radius: 3)
-    }
-    .sheet(isPresented: $showSourceDetail) {
-      AlbumDetail(slot: self.slot)
     }
   }
 }

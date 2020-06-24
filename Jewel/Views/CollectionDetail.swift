@@ -12,24 +12,16 @@ struct CollectionDetail: View {
   
   @EnvironmentObject var app: AppEnvironment
   
-  var collectionId: UUID
-  
-  private var collection: Collection? {
-    if let collectionIndex = app.state.library.collections.firstIndex(where: { $0.id == collectionId }) {
-      return app.state.library.collections[collectionIndex]
-    }
-    return nil
-  }
+  var collection: Collection
   
   private var slots: [Slot] {
-    collection!.slots
+    collection.slots
   }
   private var editable: Bool {
-    collection!.type == .userCollection ? true : false
+    collection.type == .userCollection ? true : false
   }
   
   var body: some View {
-    IfLet(collection) { collection in
       VStack(alignment: .leading) {
         VStack(alignment: .leading) {
           Text(collection.name)
@@ -47,10 +39,13 @@ struct CollectionDetail: View {
               Group {
                 if self.slots[slotIndex].album != nil {
                   IfLet(self.slots[slotIndex].album?.attributes) { attributes in
-                    SourceCard(slot: self.slots[slotIndex], sourceName: attributes.name, sourceArtist: attributes.artistName, sourceArtwork: attributes.artwork.url(forWidth: 1000))
+                    SourceCard(sourceName: attributes.name, sourceArtist: attributes.artistName, sourceArtwork: attributes.artwork.url(forWidth: 1000))
+                      .sheet(isPresented: self.$app.navigation.showSourceDetail) {
+                        AlbumDetail(slot: self.slots[slotIndex])
+                      }
                   }
                 } else if self.editable {
-                  AddSourceCard(slotIndex: slotIndex, collectionId: collection.id)
+                  AddSourceCard(slotIndex: slotIndex, collectionId: self.collection.id)
                 } else {
                   RoundedRectangle(cornerRadius: Constants.cardCornerRadius)
                     .fill(Color(UIColor.secondarySystemBackground))
@@ -60,16 +55,15 @@ struct CollectionDetail: View {
               .frame(height: Constants.cardHeightFor(viewHeight: geo.size.height))
             }
             .onMove { (indexSet, index) in
-              self.app.update(action: LibraryAction.moveSlot(from: indexSet, to: index, collectionId: collection.id))
+              self.app.update(action: LibraryAction.moveSlot(from: indexSet, to: index, collectionId: self.collection.id))
             }
             .onDelete {
-              self.app.update(action: LibraryAction.removeAlbumFromSlot(slotIndexes: $0, collectionId: collection.id))
+              self.app.update(action: LibraryAction.removeAlbumFromSlot(slotIndexes: $0, collectionId: self.collection.id))
             }
           }
           .environment(\.editMode, .constant(self.app.navigation.collectionIsEditing ? EditMode.active : EditMode.inactive))
         }
       }
       .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
-    }
   }
 }
