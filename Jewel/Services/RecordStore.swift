@@ -31,12 +31,12 @@ class RecordStore {
     }
   }
   
-  static func purchase(album albumId: String, forSlot slotIndex: Int, inCollection collectionId: UUID) {
-    RecordStore.appleMusic.album(id: albumId, completion: { album, error in
-      if let album = album {
+  static func purchase(album appleMusicAlbumId: String, forSlot slotIndex: Int, inCollection collectionId: UUID) {
+    RecordStore.appleMusic.album(id: appleMusicAlbumId, completion: { appleMusicAlbum, error in
+      if let appleMusicAlbum = appleMusicAlbum {
         DispatchQueue.main.async {
-          AppEnvironment.global.update(action: LibraryAction.addAlbumToSlot(album: album, slotIndex: slotIndex, collectionId: collectionId))
-          if let baseUrl = album.attributes?.url {
+          AppEnvironment.global.update(action: LibraryAction.addSourceToSlot(source: appleMusicAlbum, slotIndex: slotIndex, collectionId: collectionId))
+          if let baseUrl = appleMusicAlbum.attributes?.url {
             RecordStore.alternativeSuppliers(for: baseUrl, inCollection: collectionId)
           }
         }

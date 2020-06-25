@@ -11,6 +11,8 @@ import HMV
 
 struct Slot: Identifiable, Codable {
   var id = UUID()
-  var album: Album?
+  var source: AppleMusicAlbum?
   var playbackLinks: OdesliResponse?
 }
+
+typealias AppleMusicAlbum = Album

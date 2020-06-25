@@ -57,7 +57,7 @@ struct ActionButtons: View {
       if isEditing {
         if self.app.navigation.collectionIsEditing {
           Button(action: {
-            self.app.update(action: LibraryAction.removeAlbumsFromCollection(albumIds: self.app.navigation.collectionEditSelection, collectionId: self.collectionId))
+            self.app.update(action: LibraryAction.removeSourcesFromCollection(sourceIds: self.app.navigation.collectionEditSelection, collectionId: self.collectionId))
             self.app.navigation.collectionIsEditing.toggle()
             self.app.navigation.collectionEditSelection = Set<Int>()
           }) {

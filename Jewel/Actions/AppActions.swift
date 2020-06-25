@@ -33,9 +33,9 @@ enum OptionsAction: AppAction {
 enum LibraryAction: AppAction {
   case setCollectionName(name: String, collectionId: UUID)
   case setCollectionCurator(curator: String, collectionId: UUID)
-  case addAlbumToSlot(album: Album, slotIndex: Int, collectionId: UUID)
-  case removeAlbumFromSlot(slotIndexes: IndexSet, collectionId: UUID)
-  case removeAlbumsFromCollection(albumIds: Set<Int>, collectionId: UUID)
+  case addSourceToSlot(source: AppleMusicAlbum, slotIndex: Int, collectionId: UUID)
+  case removeSourceFromSlot(slotIndexes: IndexSet, collectionId: UUID)
+  case removeSourcesFromCollection(sourceIds: Set<Int>, collectionId: UUID)
   case setPlatformLinks(baseUrl: URL, platformLinks: OdesliResponse, collectionId: UUID)
   case moveSlot(from: IndexSet, to: Int, collectionId: UUID)
   case invalidateShareLinks(collectionId: UUID)
@@ -57,16 +57,16 @@ enum LibraryAction: AppAction {
       return "\(type(of: self)): Setting user collection name"
     case .setCollectionCurator:
       return "\(type(of: self)): Setting user collection curator"
-    case .addAlbumToSlot:
-      return "\(type(of: self)): Adding an album to a collection"
-    case .removeAlbumFromSlot:
-      return "\(type(of: self)): Removing an album from a collection"
-    case .removeAlbumsFromCollection:
-      return "\(type(of: self)): Removing some albums from a collection"
+    case .addSourceToSlot:
+      return "\(type(of: self)): Adding a source to a collection"
+    case .removeSourceFromSlot:
+      return "\(type(of: self)): Removing an source from a collection"
+    case .removeSourcesFromCollection:
+      return "\(type(of: self)): Removing some sources from a collection"
     case .setPlatformLinks:
-      return "\(type(of: self)): Setting platform links for an album"
+      return "\(type(of: self)): Setting platform links for an source"
     case .moveSlot:
-      return "\(type(of: self)): Moving an albums slot"
+      return "\(type(of: self)): Moving a sources slot"
     case .invalidateShareLinks:
       return "\(type(of: self)): Invalidating share links"
     case .setShareLinks:
@@ -95,7 +95,7 @@ enum LibraryAction: AppAction {
 }
 
 enum SearchAction: AppAction {
-  case populateSearchResults(results: [Album])
+  case populateSearchResults(results: [AppleMusicAlbum])
   case removeSearchResults
   
   var description: String {

@@ -19,14 +19,14 @@ struct SearchResults: View {
   
   @Binding var showing: Bool
   
-  private var searchResults: [Album]? {
+  private var searchResults: [AppleMusicAlbum]? {
     app.state.search.results
   }
   
   var body: some View {
-    IfLet(searchResults) { albums in
-      List(0..<albums.count, id: \.self) { i in
-        IfLet(albums[i].attributes) { result in
+    IfLet(searchResults) { appleMusicAlbums in
+      List(0..<appleMusicAlbums.count, id: \.self) { i in
+        IfLet(appleMusicAlbums[i].attributes) { result in
           HStack {
             KFImage(result.artwork.url(forWidth: 50))
               .placeholder {
@@ -48,7 +48,7 @@ struct SearchResults: View {
             }
             Spacer()
             Button(action: {
-              RecordStore.purchase(album: albums[i].id, forSlot: self.slotIndex, inCollection: self.collectionId)
+              RecordStore.purchase(album: appleMusicAlbums[i].id, forSlot: self.slotIndex, inCollection: self.collectionId)
               self.app.update(action: SearchAction.removeSearchResults)
               self.showing = false
             }, label:{

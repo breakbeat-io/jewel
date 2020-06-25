@@ -25,7 +25,7 @@ struct CollectionOptions: View {
     }
   }
   private var collectionEmpty: Bool {
-    collection.slots.filter( { $0.album != nil }).count == 0
+    collection.slots.filter( { $0.source != nil }).count == 0
   }
   private var collectionName: Binding<String> { Binding (
     get: { self.collection.name },

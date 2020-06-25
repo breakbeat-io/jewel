@@ -37,8 +37,8 @@ struct CollectionDetail: View {
         List(selection: self.$app.navigation.collectionEditSelection) {
           ForEach(self.slots.indices, id: \.self) { slotIndex in
             Group {
-              if self.slots[slotIndex].album != nil {
-                IfLet(self.slots[slotIndex].album?.attributes) { attributes in
+              if self.slots[slotIndex].source != nil {
+                IfLet(self.slots[slotIndex].source?.attributes) { attributes in
                   SourceCard(sourceName: attributes.name, sourceArtist: attributes.artistName, sourceArtwork: attributes.artwork.url(forWidth: 1000))
                     .sheet(isPresented: self.$app.navigation.showSourceDetail) {
                       AlbumDetail(slot: self.slots[slotIndex])
@@ -58,7 +58,7 @@ struct CollectionDetail: View {
             self.app.update(action: LibraryAction.moveSlot(from: indexSet, to: index, collectionId: self.collection.id))
           }
           .onDelete {
-            self.app.update(action: LibraryAction.removeAlbumFromSlot(slotIndexes: $0, collectionId: self.collection.id))
+            self.app.update(action: LibraryAction.removeSourceFromSlot(slotIndexes: $0, collectionId: self.collection.id))
           }
         }
         .environment(\.editMode, .constant(self.app.navigation.collectionIsEditing ? EditMode.active : EditMode.inactive))

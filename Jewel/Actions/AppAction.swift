@@ -89,13 +89,13 @@ func updateLibrary(library: Library, action: LibraryAction) -> Library {
       commitCollection(collection: collection)
     }
     
-  case let .addAlbumToSlot(album, slotIndex, collectionId):
+  case let .addSourceToSlot(source, slotIndex, collectionId):
     if var collection = extractCollection(collectionId: collectionId) {
-      collection.slots[slotIndex].album = album
+      collection.slots[slotIndex].source = source
       commitCollection(collection: collection)
     }
     
-  case let .removeAlbumFromSlot(slotIndexes, collectionId):
+  case let .removeSourceFromSlot(slotIndexes, collectionId):
     if var collection = extractCollection(collectionId: collectionId) {
       for i in slotIndexes {
         collection.slots[i] = Slot()
@@ -103,10 +103,10 @@ func updateLibrary(library: Library, action: LibraryAction) -> Library {
       commitCollection(collection: collection)
     }
     
-  case let .removeAlbumsFromCollection(albumIds, collectionId):
+  case let .removeSourcesFromCollection(sourceIds, collectionId):
     if var collection = extractCollection(collectionId: collectionId) {
-      for albumId in albumIds {
-        collection.slots[albumId] = Slot()
+      for sourceId in sourceIds {
+        collection.slots[sourceId] = Slot()
       }
       commitCollection(collection: collection)
     }
@@ -172,7 +172,7 @@ func updateLibrary(library: Library, action: LibraryAction) -> Library {
     
   case let .setPlatformLinks(baseUrl, platformLinks, collectionId):
     if var collection = extractCollection(collectionId: collectionId) {
-      let indices = collection.slots.enumerated().compactMap({ $1.album?.attributes?.url == baseUrl ? $0 : nil })
+      let indices = collection.slots.enumerated().compactMap({ $1.source?.attributes?.url == baseUrl ? $0 : nil })
       for i in indices {
         collection.slots[i].playbackLinks = platformLinks
       }

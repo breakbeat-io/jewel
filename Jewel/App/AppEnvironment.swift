@@ -67,8 +67,8 @@ final class AppEnvironment: ObservableObject {
     if let savedCollection = UserDefaults.standard.dictionary(forKey: "savedCollection") {
       print("💎 State Migration > v1.0 Saved Collection found ... migrating.")
       for slotIndex in 0..<state.library.onRotation.slots.count {
-        if let albumId = savedCollection[String(slotIndex)] {
-          RecordStore.purchase(album: albumId as! String, forSlot: slotIndex, inCollection: state.library.onRotation.id)
+        if let appleMusicAlbumId = savedCollection[String(slotIndex)] {
+          RecordStore.purchase(album: appleMusicAlbumId as! String, forSlot: slotIndex, inCollection: state.library.onRotation.id)
         }
       }
       UserDefaults.standard.removeObject(forKey: "savedCollection")
