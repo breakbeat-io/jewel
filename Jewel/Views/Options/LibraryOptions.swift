@@ -46,3 +46,31 @@ struct LibraryOptions: View {
     .navigationViewStyle(StackNavigationViewStyle())
   }
 }
+
+struct RecommendationsButton: View {
+  
+  @EnvironmentObject var app: AppEnvironment
+  
+  @State private var showLoadRecommendationsAlert = false
+  
+  var body: some View {
+    Button(action: {
+      self.showLoadRecommendationsAlert = true
+    }) {
+      HStack {
+        Image(systemName: "square.and.arrow.down")
+          .frame(width: Constants.optionsButtonIconWidth)
+        Text("Load Recommendations")
+      }
+    }
+    .alert(isPresented: $showLoadRecommendationsAlert) {
+      Alert(title: Text("Add our current Recommended Collection?"),
+            message: Text("Every three months we publish a Collection of new and classic albums for you to listen to."),
+            primaryButton: .cancel(Text("Cancel")),
+            secondaryButton: .default(Text("Add").bold()) {
+              self.app.navigation.showOptions = false
+              SharedCollectionManager.loadRecommendations()
+        })
+    }
+  }
+}
