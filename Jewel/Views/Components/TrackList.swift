@@ -12,7 +12,7 @@ import HMV
 struct TrackList: View {
   
   let tracks: [Track]
-  let albumArtist: String
+  let sourceArtist: String
   
   private var discCount: Int? {
     tracks.map { $0.attributes?.discNumber ?? 1 }.max()
@@ -26,7 +26,7 @@ struct TrackList: View {
             discNumber: discNumber,
             discTracks: self.tracks.filter { $0.attributes?.discNumber == discNumber },
             showDiscNumber: (discCount > 1) ? true : false,
-            albumArtist: self.albumArtist
+            sourceArtist: self.sourceArtist
           )
         }
       }

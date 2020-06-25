@@ -14,7 +14,7 @@ struct DiscTrackList: View {
   let discNumber: Int
   let discTracks: [Track]
   let showDiscNumber: Bool
-  let albumArtist: String
+  let sourceArtist: String
   
   var body: some View {
       VStack(alignment: .leading) {
@@ -36,7 +36,7 @@ struct DiscTrackList: View {
                   .font(.callout)
                   .fontWeight(.medium)
                   .lineLimit(1)
-                if attributes.artistName != self.albumArtist {
+                if attributes.artistName != self.sourceArtist {
                   Text(attributes.artistName)
                     .font(.callout)
                     .fontWeight(.light)

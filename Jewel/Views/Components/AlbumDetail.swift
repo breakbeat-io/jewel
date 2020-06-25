@@ -39,7 +39,7 @@ struct AlbumDetail: View {
             .padding(.bottom)
           IfLet(self.slot.album?.relationships?.tracks.data) { tracks in
             TrackList(tracks: tracks,
-                      albumArtist: attributes.artistName
+                      sourceArtist: attributes.artistName
             )
           }
         }
@@ -66,7 +66,7 @@ struct AlbumDetail: View {
           VStack {
             IfLet(self.slot.album?.relationships?.tracks.data) { tracks in
               TrackList(tracks: tracks,
-                        albumArtist: attributes.artistName
+                        sourceArtist: attributes.artistName
               )
             }
             Spacer()
