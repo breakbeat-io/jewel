@@ -10,12 +10,15 @@ import Foundation
 
 struct Navigation {
   
+  let onRotationId: UUID
+  var activeCollectionId: UUID
+  
   var showDebugMenu: Bool = false
 
   var selectedTab: Navigation.Tab = .onrotation {
     didSet {
       listIsEditing = false
-      selectedCollection = nil
+      activeCollectionId = onRotationId
     }
   }
   enum Tab: String {
@@ -24,6 +27,7 @@ struct Navigation {
   }
   
   var showSourceDetail: Bool = false
+  var showCollection: Bool = false
   
   var showHomeOptions: Bool = false
   var showSettings: Bool = false
@@ -32,8 +36,6 @@ struct Navigation {
   var listIsEditing: Bool = false
   var collectionEditSelection = Set<Int>()
   var libraryEditSelection = Set<UUID>()
-  
-  var selectedCollection: UUID?
   
 }
 

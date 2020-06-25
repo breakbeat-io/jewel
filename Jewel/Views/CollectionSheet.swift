@@ -12,7 +12,17 @@ struct CollectionSheet: View {
   
   @EnvironmentObject var app: AppEnvironment
   
-  let collection: Collection
+  private var collectionId: UUID {
+    app.navigation.activeCollectionId
+  }
+  private var collection: Collection {
+    if collectionId == app.state.library.onRotation.id {
+      return app.state.library.onRotation
+    } else {
+      let collectionIndex = app.state.library.collections.firstIndex(where: { $0.id == collectionId })!
+      return app.state.library.collections[collectionIndex]
+    }
+  }
   
   var body: some View {
     VStack {
@@ -36,7 +46,7 @@ struct CollectionSheet: View {
           Button(action: {
             self.app.navigation.showCollectionOptions.toggle()
           }) {
-            Image(systemName: "square.and.pencil")
+            Image(systemName: "ellipsis")
           }
           .sheet(isPresented: $app.navigation.showCollectionOptions) {
             CollectionOptions(collectionId: self.collection.id)
@@ -50,7 +60,6 @@ struct CollectionSheet: View {
 //        .foregroundColor(Color(UIColor.systemFill))
       CollectionDetail(collection: collection)
     }
-    
   }
   
 }

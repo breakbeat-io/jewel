@@ -14,30 +14,42 @@ final class AppEnvironment: ObservableObject {
   
   static let global = AppEnvironment()
   
+  @Published var navigation: Navigation
   @Published private(set) var state: AppState {
     didSet {
       save()
     }
   }
-  @Published var navigation = Navigation()
   
   private init() {
+    
     if let savedState = UserDefaults.standard.object(forKey: "jewelState") as? Data {
       do {
-        state = try JSONDecoder().decode(AppState.self, from: savedState)
+        let decodedSavedState = try JSONDecoder().decode(AppState.self, from: savedState)
+        state = decodedSavedState
         print("💎 State > Loaded state")
+        
+        let onRotationId = decodedSavedState.library.onRotation.id
+        navigation = Navigation(onRotationId: onRotationId, activeCollectionId: onRotationId)
+        print("💎 Navigation > Initialised")
+        
         return
       } catch {
         print("💎 State > Error loading state: \(error)")
       }
     }
     
+    print("💎 State > No saved state found, creating new")
     let options = Options()
     let onRotationCollection = Collection(type: .userCollection, name: "On Rotation", curator: "A Music Lover")
     let library = Library(onRotation: onRotationCollection, collections: [Collection]())
-    let appState = AppState(options: options, library: library)
     
-    self.state = appState
+    state = AppState(options: options, library: library)
+    print("💎 State > New state created")
+    
+    let onRotationId = onRotationCollection.id
+    navigation = Navigation(onRotationId: onRotationId, activeCollectionId: onRotationId)
+    print("💎 Navigation > Initialised")
     
     migrateV1UserDefaults()
     

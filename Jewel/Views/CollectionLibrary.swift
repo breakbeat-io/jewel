@@ -12,12 +12,6 @@ struct CollectionLibrary: View {
   
   @EnvironmentObject var app: AppEnvironment
   
-  private var collectionSelected: Binding<Bool> {
-    Binding (
-      get: { self.app.navigation.selectedCollection != nil },
-      set: { _ = $0 }
-    )
-  }
   private var collections: [Collection] {
     app.state.library.collections
   }
@@ -44,12 +38,9 @@ struct CollectionLibrary: View {
         List(selection: $app.navigation.libraryEditSelection) {
           ForEach(collections) { collection in
             CollectionCard(collection: collection)
-              .sheet(isPresented: self.collectionSelected) {
-                CollectionSheet(collection: collection)
+              .sheet(isPresented: self.$app.navigation.showCollection) {
+                CollectionSheet()
                   .environmentObject(self.app)
-                  .onDisappear {
-                    self.app.navigation.selectedCollection = nil
-                }
             }
           }
           .onMove { (indexSet, index) in

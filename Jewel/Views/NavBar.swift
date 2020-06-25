@@ -39,17 +39,13 @@ struct HomeActionButtons: View {
   
   @EnvironmentObject var app: AppEnvironment
   
-  private var collectionId: UUID {
-    self.app.state.library.onRotation.id
-  }
-  
   var body: some View {
     HStack {
       Spacer()
       if app.navigation.listIsEditing {
         Button(action: {
           if self.app.navigation.selectedTab == .onrotation {
-            self.app.update(action: LibraryAction.removeSourcesFromCollection(sourceIds: self.app.navigation.collectionEditSelection, collectionId: self.collectionId))
+            self.app.update(action: LibraryAction.removeSourcesFromCollection(sourceIds: self.app.navigation.collectionEditSelection, collectionId: self.app.navigation.activeCollectionId))
             self.app.navigation.listIsEditing = false
             self.app.navigation.collectionEditSelection.removeAll()
           }
@@ -72,7 +68,8 @@ struct HomeActionButtons: View {
         if self.app.navigation.selectedTab == .library {
           Button(action: {
             self.app.update(action: LibraryAction.addUserCollection)
-            self.app.navigation.selectedCollection = self.app.state.library.collections.first?.id
+            self.app.navigation.activeCollectionId = self.app.state.library.collections.first!.id
+            self.app.navigation.showCollection = true
           }) {
             Image(systemName: "plus")
           }
@@ -91,10 +88,8 @@ struct HomeActionButtons: View {
             CollectionOptions(collectionId: self.app.state.library.onRotation.id)
               .environmentObject(self.app)
           } else {
-            if self.app.navigation.selectedCollection == nil {
-              LibraryOptions()
-                .environmentObject(self.app)
-            }
+            LibraryOptions()
+              .environmentObject(self.app)
           }
         }
       }

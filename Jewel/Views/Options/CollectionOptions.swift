@@ -101,7 +101,7 @@ struct CollectionOptions: View {
           .environmentObject(self.app),
         trailing:
         Button(action: {
-          if self.app.navigation.selectedCollection == nil {
+          if self.app.navigation.activeCollectionId == self.app.navigation.onRotationId {
             self.app.navigation.showHomeOptions = false
           } else {
             self.app.navigation.showCollectionOptions = false
