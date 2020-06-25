@@ -12,16 +12,7 @@ struct ShareSheetLoader: View {
   
   @EnvironmentObject var app: AppEnvironment
   
-  let collectionId: UUID
-  
-  private var collection: Collection? {
-    if collectionId == app.state.library.onRotation.id {
-      return app.state.library.onRotation
-    } else if let collectionIndex = app.state.library.collections.firstIndex(where: { $0.id == collectionId }) {
-      return app.state.library.collections[collectionIndex]
-    }
-    return nil
-  }
+  var collection: Collection
   
   var body: some View {
     Group {
@@ -56,10 +47,6 @@ struct ShareSheetLoader: View {
   }
   
   private func refreshShareLinks() {
-    
-    guard let collection = collection else {
-      return
-    }
     
     self.app.update(action: LibraryAction.shareLinkError(false, collectionId: collection.id))
     

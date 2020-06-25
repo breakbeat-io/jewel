@@ -40,7 +40,7 @@ struct CollectionOptions: View {
     NavigationView {
       Form {
         Section {
-          ShareCollectionButton(collectionId: collectionId)
+          ShareCollectionButton(collection: collection)
           if collection.id == app.state.library.onRotation.id {
             Button(action: {
               self.app.navigation.selectedTab = .library

@@ -32,29 +32,27 @@ struct ShareCollectionButton: View {
   
   @EnvironmentObject var app: AppEnvironment
   
-  var collectionId: UUID?
+  var collection: Collection
   
   @State private var showSharing: Bool = false
   
   private var isOnRotation: Bool {
-    self.collectionId == self.app.state.library.onRotation.id
+    self.collection.id == self.app.state.library.onRotation.id
   }
   
   var body: some View {
-    IfLet(collectionId) { collectionId in
-      Button(action: {
-        self.showSharing = true
-      }) {
-        HStack {
-          Image(systemName: "square.and.arrow.up")
-            .frame(width: Constants.optionsButtonIconWidth)
-          Text("Share \(self.isOnRotation ? "On Rotation" : "Collection")")
-        }
+    Button(action: {
+      self.showSharing = true
+    }) {
+      HStack {
+        Image(systemName: "square.and.arrow.up")
+          .frame(width: Constants.optionsButtonIconWidth)
+        Text("Share \(self.isOnRotation ? "On Rotation" : "Collection")")
       }
-      .sheet(isPresented: self.$showSharing) {
-        ShareSheetLoader(collectionId: collectionId)
-          .environmentObject(self.app)
-      }
+    }
+    .sheet(isPresented: self.$showSharing) {
+      ShareSheetLoader(collection: self.collection)
+        .environmentObject(self.app)
     }
   }
 }
