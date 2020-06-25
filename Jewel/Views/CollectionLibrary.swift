@@ -28,20 +28,20 @@ struct CollectionLibrary: View {
       Text("Collection Library")
         .font(.title)
         .fontWeight(.bold)
+        .padding([.top, .horizontal])
+      if collections.isEmpty {
+        VStack {
+          Spacer()
+          Image(systemName: "music.note.list")
+            .font(.system(size: 40))
+            .padding(.bottom)
+          Text("Collections you have saved or that people have shared with you will appear here.")
+            .multilineTextAlignment(.center)
+          Spacer()
+        }
         .padding()
-        if collections.isEmpty {
-          VStack {
-            Spacer()
-            Image(systemName: "music.note.list")
-              .font(.system(size: 40))
-              .padding(.bottom)
-            Text("Collections you have saved or that people have shared with you will appear here.")
-              .multilineTextAlignment(.center)
-            Spacer()
-          }
-          .padding()
-          .foregroundColor(Color.secondary)
-        } else {
+        .foregroundColor(Color.secondary)
+      } else {
         List(selection: $app.navigation.libraryEditSelection) {
           ForEach(collections) { collection in
             CollectionCard(collection: collection)
@@ -51,7 +51,7 @@ struct CollectionLibrary: View {
                   .onDisappear {
                     self.app.navigation.selectedCollection = nil
                 }
-              }
+            }
           }
           .onMove { (indexSet, index) in
             self.app.update(action: LibraryAction.moveSharedCollection(from: indexSet, to: index))
