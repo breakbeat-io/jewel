@@ -34,9 +34,9 @@ struct Home: View {
               .animation(.easeInOut)
           }
           if app.navigation.selectedTab == .library {
-              CollectionLibrary()
-                .transition(.move(edge: .trailing))
-                .animation(.easeInOut)
+            CollectionLibrary()
+              .transition(.move(edge: .trailing))
+              .animation(.easeInOut)
           }
         }
         .background(Color(UIColor.systemBackground))
