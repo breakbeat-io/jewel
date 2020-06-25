@@ -59,6 +59,23 @@ struct Settings: View {
   }
 }
 
+struct SettingsButton: View {
+  
+  @EnvironmentObject var app: AppEnvironment
+  
+  var body: some View {
+    Button(action: {
+      self.app.navigation.showSettings = true
+    }) {
+      Image(systemName: "gear")
+    }
+    .sheet(isPresented: $app.navigation.showSettings) {
+        Settings()
+          .environmentObject(self.app)
+    }
+  }
+}
+
 struct Footer: View {
   var body: some View {
     VStack {
