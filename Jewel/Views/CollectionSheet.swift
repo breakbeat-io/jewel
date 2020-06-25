@@ -55,9 +55,6 @@ struct CollectionSheet: View {
         }
       }
       .padding()
-//      Rectangle()
-//        .frame(height: 1.0, alignment: .bottom)
-//        .foregroundColor(Color(UIColor.systemFill))
       CollectionDetail(collection: collection)
     }
   }

@@ -27,7 +27,11 @@ struct Navigation {
   }
   
   var showSourceDetail: Bool = false
-  var showCollection: Bool = false
+  var showCollection: Bool = false {
+    didSet {
+      listIsEditing = false
+    }
+  }
   
   var showHomeOptions: Bool = false
   var showSettings: Bool = false
