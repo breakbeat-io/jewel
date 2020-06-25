@@ -9,16 +9,16 @@
 import SwiftUI
 import KingfisherSwiftUI
 
-struct AlbumCover: View {
+struct SourceCover: View {
   
-  let albumName: String
-  let albumArtist: String
-  var albumArtwork: URL?
+  let sourceName: String
+  let sourceArtist: String
+  var sourceArtwork: URL?
   
   var body: some View {
     VStack(alignment: .leading) {
-      IfLet(albumArtwork) { url in
-        KFImage(self.albumArtwork)
+      IfLet(sourceArtwork) { url in
+        KFImage(self.sourceArtwork)
           .placeholder {
             RoundedRectangle(cornerRadius: 4)
               .fill(Color(UIColor.secondarySystemBackground))
@@ -29,9 +29,9 @@ struct AlbumCover: View {
         .shadow(radius: 4)
       }
       Group {
-        Text(albumName)
+        Text(sourceName)
           .fontWeight(.bold)
-        Text(albumArtist)
+        Text(sourceArtist)
       }
       .font(.title)
       .lineLimit(1)
