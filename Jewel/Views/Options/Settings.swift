@@ -50,7 +50,6 @@ struct Settings: View {
         trailing:
         Button(action: {
           self.app.navigation.showSettings = false
-          self.app.navigation.showOptions = false
         }) {
           Text("Close")
         }
