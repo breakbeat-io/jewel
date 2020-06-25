@@ -41,9 +41,6 @@ func updateOptions(options: Options, action: OptionsAction) -> Options {
   case let .setPreferredPlatform(platform):
     newOptions.preferredMusicPlatform = platform
     
-  case .toggleDebugMode:
-    newOptions.debugMode.toggle()
-    
   case .reset:
     let domain = Bundle.main.bundleIdentifier!
     UserDefaults.standard.removePersistentDomain(forName: domain)

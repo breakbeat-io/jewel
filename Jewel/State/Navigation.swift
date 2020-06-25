@@ -9,6 +9,8 @@
 import Foundation
 
 struct Navigation {
+  
+  var showDebugMenu: Bool = false
 
   var selectedTab: Navigation.Tab = .onrotation {
     didSet {

@@ -15,7 +15,6 @@ protocol AppAction {
 
 enum OptionsAction: AppAction {
   case setPreferredPlatform(platform: Int)
-  case toggleDebugMode
   case firstTimeRun(_: Bool)
   case reset
   
@@ -23,8 +22,6 @@ enum OptionsAction: AppAction {
     switch self {
     case .setPreferredPlatform:
       return "\(type(of: self)): Setting preferred platform"
-    case .toggleDebugMode:
-      return "\(type(of: self)): Toggling debug mode"
     case .firstTimeRun:
       return "\(type(of: self)): Setting first time run"
     case .reset:

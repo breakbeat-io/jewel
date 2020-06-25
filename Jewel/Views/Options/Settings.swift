@@ -29,7 +29,7 @@ struct Settings: View {
               }
             }
           }
-          if app.state.options.debugMode {
+          if app.navigation.showDebugMenu {
             Button(action: {
               self.app.update(action: OptionsAction.reset)
             }) {
@@ -41,9 +41,9 @@ struct Settings: View {
         Spacer()
         Footer()
           .onTapGesture(count: 10) {
-            self.app.update(action: OptionsAction.toggleDebugMode)
-        }
-        .padding()
+            self.app.navigation.showDebugMenu.toggle()
+          }
+          .padding()
       }
       .navigationBarTitle("Settings", displayMode: .inline)
       .navigationBarItems(
