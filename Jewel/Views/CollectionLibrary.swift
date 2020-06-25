@@ -60,7 +60,7 @@ struct CollectionLibrary: View {
             self.app.update(action: LibraryAction.removeSharedCollection(slotIndexes: $0))
           }
         }
-        .environment(\.editMode, .constant(self.app.navigation.libraryIsEditing ? EditMode.active : EditMode.inactive))
+        .environment(\.editMode, .constant(self.app.navigation.listIsEditing ? EditMode.active : EditMode.inactive))
       }
     }
     .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)

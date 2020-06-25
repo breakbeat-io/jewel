@@ -14,7 +14,7 @@ struct Navigation {
 
   var selectedTab: Navigation.Tab = .onrotation {
     didSet {
-      stopEditing()
+      listIsEditing = false
       selectedCollection = nil
     }
   }
@@ -28,17 +28,11 @@ struct Navigation {
   var showOptions: Bool = false
   var showSettings: Bool = false
   
-  var collectionIsEditing: Bool = false
+  var listIsEditing: Bool = false
   var collectionEditSelection = Set<Int>()
-  var selectedCollection: UUID?
-  
-  var libraryIsEditing: Bool = false
   var libraryEditSelection = Set<UUID>()
   
-  mutating func stopEditing() {
-    collectionIsEditing = false
-    libraryIsEditing = false
-  }
+  var selectedCollection: UUID?
   
 }
 

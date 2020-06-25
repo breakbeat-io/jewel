@@ -25,7 +25,7 @@ struct NavBar: View {
             .tag(Navigation.Tab.library)
         }
         .pickerStyle(SegmentedPickerStyle())
-        ActionButtons()
+        HomeActionButtons()
       }
       .padding(.horizontal)
       Rectangle()
@@ -35,90 +35,68 @@ struct NavBar: View {
   }
 }
 
-struct ActionButtons: View {
+struct HomeActionButtons: View {
   
   @EnvironmentObject var app: AppEnvironment
   
   private var collectionId: UUID {
-    if app.navigation.selectedCollection != nil {
-      return app.navigation.selectedCollection!
-    } else {
-     return app.state.library.onRotation.id
-    }
-  }
-  
-  private var isEditing: Bool {
-    self.app.navigation.collectionIsEditing || self.app.navigation.libraryIsEditing
+    self.app.state.library.onRotation.id
   }
   
   var body: some View {
     HStack {
       Spacer()
-      if isEditing {
-        if self.app.navigation.collectionIsEditing {
-          Button(action: {
+      if app.navigation.listIsEditing {
+        Button(action: {
+          if self.app.navigation.selectedTab == .onrotation {
             self.app.update(action: LibraryAction.removeSourcesFromCollection(sourceIds: self.app.navigation.collectionEditSelection, collectionId: self.collectionId))
-            self.app.navigation.collectionIsEditing.toggle()
-            self.app.navigation.collectionEditSelection = Set<Int>()
-          }) {
-            Image(systemName: "trash")
+            self.app.navigation.listIsEditing = false
+            self.app.navigation.collectionEditSelection.removeAll()
           }
-          .padding(.trailing)
-          Button(action: {
-            self.app.navigation.collectionIsEditing.toggle()
-          }) {
-            Image(systemName: "checkmark")
-          }
-        }
-        
-        if app.navigation.selectedTab == .library && self.app.navigation.libraryIsEditing {
-          Button(action: {
+          
+          if self.app.navigation.selectedTab == .library {
             self.app.update(action: LibraryAction.removeSharedCollections(collectionIds: self.app.navigation.libraryEditSelection))
-            self.app.navigation.libraryIsEditing.toggle()
-            self.app.navigation.libraryEditSelection = Set<UUID>()
-          }) {
-            Image(systemName: "trash")
+            self.app.navigation.listIsEditing = false
+            self.app.navigation.libraryEditSelection.removeAll()
           }
-          .padding(.trailing)
-          Button(action: {
-            self.app.navigation.libraryIsEditing.toggle()
-          }) {
-            Image(systemName: "checkmark")
-          }
+        }) {
+          Image(systemName: "trash")
+        }
+        .padding(.trailing)
+        Button(action: {
+          self.app.navigation.listIsEditing.toggle()
+        }) {
+          Image(systemName: "checkmark")
         }
       } else {
-          if app.navigation.selectedTab == .library {
-            Button(action: {
-              self.app.update(action: LibraryAction.addUserCollection)
-            }) {
-              Image(systemName: "plus")
-            }
-            .padding(.leading)
-          } else {
-            Spacer()
-          }
+        if self.app.navigation.selectedTab == .library {
           Button(action: {
-            self.app.navigation.showOptions = true
+            self.app.update(action: LibraryAction.addUserCollection)
           }) {
-            Image(systemName: "ellipsis")
+            Image(systemName: "plus")
           }
           .padding(.leading)
-          .sheet(isPresented: self.$app.navigation.showOptions) {
-            if self.app.navigation.selectedTab == .onrotation {
-              CollectionOptions(collectionId: self.app.state.library.onRotation.id)
-                .environmentObject(self.app)
-            } else {
-              if self.app.navigation.selectedCollection == nil {
+        } else {
+          Spacer()
+        }
+        Button(action: {
+          self.app.navigation.showOptions = true
+        }) {
+          Image(systemName: "ellipsis")
+        }
+        .padding(.leading)
+        .sheet(isPresented: self.$app.navigation.showOptions) {
+          if self.app.navigation.selectedTab == .onrotation {
+            CollectionOptions(collectionId: self.app.state.library.onRotation.id)
+              .environmentObject(self.app)
+          } else {
+            if self.app.navigation.selectedCollection == nil {
               LibraryOptions()
                 .environmentObject(self.app)
-              } else {
-                CollectionOptions(collectionId: self.app.navigation.selectedCollection!)
-                .environmentObject(self.app)
-              }
             }
           }
+        }
       }
-      
     }
     .padding(.vertical)
     .frame(width: Constants.buttonWidth)

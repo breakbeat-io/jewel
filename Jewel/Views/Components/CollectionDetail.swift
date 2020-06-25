@@ -61,7 +61,7 @@ struct CollectionDetail: View {
             self.app.update(action: LibraryAction.removeSourceFromSlot(slotIndexes: $0, collectionId: self.collection.id))
           }
         }
-        .environment(\.editMode, .constant(self.app.navigation.collectionIsEditing ? EditMode.active : EditMode.inactive))
+        .environment(\.editMode, .constant(self.app.navigation.listIsEditing ? EditMode.active : EditMode.inactive))
       }
     }
     .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)

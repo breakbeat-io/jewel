@@ -17,7 +17,7 @@ struct LibraryOptions: View {
       Form {
         Section {
           Button(action: {
-            self.app.navigation.libraryIsEditing = true
+            self.app.navigation.listIsEditing = true
             self.app.navigation.showOptions = false
           }) {
             HStack {

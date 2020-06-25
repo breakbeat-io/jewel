@@ -56,7 +56,7 @@ struct CollectionOptions: View {
           }
           if collection.type == .userCollection {
             Button(action: {
-              self.app.navigation.collectionIsEditing = true
+              self.app.navigation.listIsEditing = true
               self.app.navigation.showOptions = false
             }) {
               HStack {
