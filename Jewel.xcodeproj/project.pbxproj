@@ -12,7 +12,6 @@
 		D22155822481114B00A1F04A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D22155812481114B00A1F04A /* Assets.xcassets */; };
 		D22155852481114B00A1F04A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D22155842481114B00A1F04A /* Preview Assets.xcassets */; };
 		D22155882481114B00A1F04A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D22155862481114B00A1F04A /* LaunchScreen.storyboard */; };
-		D22574A02482A71C004E83E1 /* ObservedAlbumDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = D225749F2482A71C004E83E1 /* ObservedAlbumDetail.swift */; };
 		D23197C22492DACD00C09977 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23197C12492DACD00C09977 /* Constants.swift */; };
 		D23C398C248FC63D00AD237E /* EmptyDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23C398B248FC63D00AD237E /* EmptyDetail.swift */; };
 		D23C398E248FD2DF00AD237E /* Welcome.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23C398D248FD2DF00AD237E /* Welcome.swift */; };
@@ -68,7 +67,6 @@
 		D22155842481114B00A1F04A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D22155872481114B00A1F04A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D22155892481114B00A1F04A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D225749F2482A71C004E83E1 /* ObservedAlbumDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservedAlbumDetail.swift; sourceTree = "<group>"; };
 		D23197C12492DACD00C09977 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		D23C398B248FC63D00AD237E /* EmptyDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyDetail.swift; sourceTree = "<group>"; };
 		D23C398D248FD2DF00AD237E /* Welcome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Welcome.swift; sourceTree = "<group>"; };
@@ -228,7 +226,6 @@
 				D2C3A0A824A01AEF00AA7266 /* NavBar.swift */,
 				D2C3A0A624A01ADE00AA7266 /* OnRotation.swift */,
 				D2C3A0AA24A0202100AA7266 /* CollectionLibrary.swift */,
-				D2F0E21F249A370A00EA3FA2 /* CollectionDetail.swift */,
 				D23C398B248FC63D00AD237E /* EmptyDetail.swift */,
 				D288174B248BEB0C00EB47C2 /* Sharing */,
 				D2B4FD8F248456940028D7A4 /* Options */,
@@ -288,7 +285,7 @@
 				D2D78592248AF2E900E0CC63 /* SourceCard.swift */,
 				D2F8D14B248A6451008C29C3 /* CollectionCard.swift */,
 				D2F8D14D248A666C008C29C3 /* CardArtworkComposite.swift */,
-				D225749F2482A71C004E83E1 /* ObservedAlbumDetail.swift */,
+				D2F0E21F249A370A00EA3FA2 /* CollectionDetail.swift */,
 				D28AD1B8248BB5D4009B584A /* AlbumDetail.swift */,
 				D2D7858E248A910A00E0CC63 /* AlbumCover.swift */,
 				D28AD1B6248BB148009B584A /* PlaybackLinks.swift */,
@@ -412,7 +409,6 @@
 				D2D7858F248A910A00E0CC63 /* AlbumCover.swift in Sources */,
 				D2C3A0A924A01AEF00AA7266 /* NavBar.swift in Sources */,
 				D23C398E248FD2DF00AD237E /* Welcome.swift in Sources */,
-				D22574A02482A71C004E83E1 /* ObservedAlbumDetail.swift in Sources */,
 				D2AC120B24859E2300C52D9E /* AddSourceCard.swift in Sources */,
 				D2C3A0A5249FFEFF00AA7266 /* Home.swift in Sources */,
 				D28AD1B5248BACB2009B584A /* PlaybackLink.swift in Sources */,
