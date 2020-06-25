@@ -72,6 +72,7 @@ struct HomeActionButtons: View {
         if self.app.navigation.selectedTab == .library {
           Button(action: {
             self.app.update(action: LibraryAction.addUserCollection)
+            self.app.navigation.selectedCollection = self.app.state.library.collections.first?.id
           }) {
             Image(systemName: "plus")
           }
