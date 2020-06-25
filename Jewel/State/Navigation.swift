@@ -25,8 +25,9 @@ struct Navigation {
   
   var showSourceDetail: Bool = false
   
-  var showOptions: Bool = false
+  var showHomeOptions: Bool = false
   var showSettings: Bool = false
+  var showCollectionOptions: Bool = false
   
   var listIsEditing: Bool = false
   var collectionEditSelection = Set<Int>()

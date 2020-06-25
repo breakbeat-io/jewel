@@ -81,12 +81,12 @@ struct HomeActionButtons: View {
           Spacer()
         }
         Button(action: {
-          self.app.navigation.showOptions = true
+          self.app.navigation.showHomeOptions = true
         }) {
           Image(systemName: "ellipsis")
         }
         .padding(.leading)
-        .sheet(isPresented: self.$app.navigation.showOptions) {
+        .sheet(isPresented: self.$app.navigation.showHomeOptions) {
           if self.app.navigation.selectedTab == .onrotation {
             CollectionOptions(collectionId: self.app.state.library.onRotation.id)
               .environmentObject(self.app)

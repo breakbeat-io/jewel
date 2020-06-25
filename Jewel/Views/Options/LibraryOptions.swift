@@ -18,7 +18,7 @@ struct LibraryOptions: View {
         Section {
           Button(action: {
             self.app.navigation.listIsEditing = true
-            self.app.navigation.showOptions = false
+            self.app.navigation.showHomeOptions = false
           }) {
             HStack {
               Image(systemName: "square.stack.3d.up")
@@ -37,7 +37,7 @@ struct LibraryOptions: View {
           .environmentObject(self.app),
         trailing:
         Button(action: {
-          self.app.navigation.showOptions = false
+          self.app.navigation.showHomeOptions = false
         }) {
           Text("Close")
         }
@@ -68,7 +68,7 @@ struct RecommendationsButton: View {
             message: Text("Every three months we publish a Collection of new and classic albums for you to listen to."),
             primaryButton: .cancel(Text("Cancel")),
             secondaryButton: .default(Text("Add").bold()) {
-              self.app.navigation.showOptions = false
+              self.app.navigation.showHomeOptions = false
               SharedCollectionManager.loadRecommendations()
         })
     }

@@ -12,7 +12,6 @@ struct CollectionLibrary: View {
   
   @EnvironmentObject var app: AppEnvironment
   
-  
   private var collectionSelected: Binding<Bool> {
     Binding (
       get: { self.app.navigation.selectedCollection != nil },
@@ -46,7 +45,7 @@ struct CollectionLibrary: View {
           ForEach(collections) { collection in
             CollectionCard(collection: collection)
               .sheet(isPresented: self.collectionSelected) {
-                CollectionDetail(collection: collection)
+                CollectionSheet(collection: collection)
                   .environmentObject(self.app)
                   .onDisappear {
                     self.app.navigation.selectedCollection = nil
