@@ -18,7 +18,9 @@ struct Home: View {
       set: { _ = $0 }
     )
   }
-  
+  private var overlayShowing: Bool {
+    app.state.options.firstTimeRun || receivedCollectionCued.wrappedValue
+  }
   var body: some View {
     ZStack {
       Color(UIColor.systemBackground)
@@ -41,8 +43,8 @@ struct Home: View {
         }
         .background(Color(UIColor.systemBackground))
       }
-      .disabled(app.state.options.firstTimeRun)
-      .blur(radius: app.state.options.firstTimeRun ? 10 : 0)
+      .disabled(overlayShowing)
+      .blur(radius: overlayShowing ? 10 : 0)
       if app.state.options.firstTimeRun {
         Welcome()
       }

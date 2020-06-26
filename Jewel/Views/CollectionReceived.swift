@@ -18,6 +18,7 @@ struct CollectionReceived: View {
               IfLet(app.state.library.cuedCollection) { cuedCollection in
                 VStack {
                   Text("Would you like to add the following collection to your Collection Library?")
+                    .foregroundColor(Color.secondary)
                     .padding(.bottom, 30)
                     .fixedSize(horizontal: false, vertical: true)
                   Rectangle()
@@ -63,6 +64,8 @@ struct CollectionReceivedButtons: View {
         self.app.navigation.selectedTab = .library
         SharedCollectionManager.expandShareableCollection(shareableCollection: self.app.state.library.cuedCollection!)
         self.app.update(action: LibraryAction.uncueSharedCollection)
+        self.app.navigation.activeCollectionId = self.app.state.library.collections.first!.id
+        self.app.navigation.showCollection = true
       }, label: {
         Text("Add")
           .fontWeight(.bold)

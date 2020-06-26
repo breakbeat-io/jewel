@@ -10,9 +10,6 @@ import SwiftUI
 
 struct Welcome: View {
   
-  @Environment(\.horizontalSizeClass) var horizontalSizeClass
-  @Environment(\.verticalSizeClass) var verticalSizeClass
-  
   @EnvironmentObject var app: AppEnvironment
   
   private let heading = "Welcome!"
@@ -36,6 +33,7 @@ struct Welcome: View {
                      })
             {
               Text(self.description)
+                .foregroundColor(Color.secondary)
             }
   }
 }
