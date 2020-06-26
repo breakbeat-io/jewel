@@ -37,7 +37,7 @@ struct CollectionReceived: View {
                       }
                       .frame(minWidth: 0, maxWidth: .infinity)
                       .padding()
-                      .background(Color(UIColor.secondarySystemBackground))
+                      .background(Color(UIColor.tertiarySystemBackground))
                       .cornerRadius(Constants.cardCornerRadius)
                       , alignment: .center)
                 }

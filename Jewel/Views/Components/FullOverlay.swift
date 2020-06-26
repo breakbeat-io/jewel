@@ -29,7 +29,7 @@ struct FullOverlay<Buttons: View, Content: View>: View {
     GeometryReader { geo in
       ZStack {
         Rectangle()
-          .fill(Color(.systemBackground))
+          .fill(Color(UIColor.secondarySystemBackground))
           .frame(width: self.responsiveWidth(viewWidth: geo.size.width), height: self.responsiveHeight(viewHeight: geo.size.height))
           .cornerRadius(20)
           .shadow(radius: 5)
@@ -49,10 +49,10 @@ struct FullOverlay<Buttons: View, Content: View>: View {
               }
               .padding(.horizontal)
               Rectangle()
-                .fill(LinearGradient(gradient: Gradient(colors: [Color(.systemBackground), Color(.systemBackground).opacity(0)]), startPoint: .top, endPoint: .bottom))
+                .fill(LinearGradient(gradient: Gradient(colors: [Color(UIColor.secondarySystemBackground), Color(UIColor.secondarySystemBackground).opacity(0)]), startPoint: .top, endPoint: .bottom))
                 .frame(height: 10)
               Rectangle()
-                .fill(LinearGradient(gradient: Gradient(colors: [Color(.systemBackground).opacity(0), Color(.systemBackground)]), startPoint: .top, endPoint: .bottom))
+                .fill(LinearGradient(gradient: Gradient(colors: [Color(UIColor.secondarySystemBackground).opacity(0), Color(UIColor.secondarySystemBackground)]), startPoint: .top, endPoint: .bottom))
                 .frame(height: 10)
                 .offset(y: geo.size.height - 10)
             }
