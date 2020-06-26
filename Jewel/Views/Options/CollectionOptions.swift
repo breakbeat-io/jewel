@@ -12,10 +12,8 @@ struct CollectionOptions: View {
   
   @EnvironmentObject private var app: AppEnvironment
   
-  let collectionId: UUID
-  
-  private var isOnRotation: Bool {
-    self.collectionId == self.app.state.library.onRotation.id
+  private var collectionId: UUID {
+    app.navigation.activeCollectionId
   }
   private var collection: Collection {
     if self.collectionId == self.app.state.library.onRotation.id {
@@ -23,6 +21,9 @@ struct CollectionOptions: View {
     } else {
       return self.app.state.library.collections.first(where: { $0.id == self.collectionId })!
     }
+  }
+  private var isOnRotation: Bool {
+    self.collectionId == self.app.state.library.onRotation.id
   }
   private var collectionEmpty: Bool {
     collection.slots.filter( { $0.source != nil }).count == 0
@@ -41,7 +42,7 @@ struct CollectionOptions: View {
       Form {
         Section {
           ShareCollectionButton(collection: collection)
-          if collection.id == app.state.library.onRotation.id {
+          if isOnRotation {
             Button(action: {
               self.app.navigation.selectedTab = .library
               self.app.navigation.showCollectionOptions = false
@@ -101,11 +102,7 @@ struct CollectionOptions: View {
           .environmentObject(self.app),
         trailing:
         Button(action: {
-          if self.app.navigation.activeCollectionId == self.app.navigation.onRotationId {
-            self.app.navigation.showCollectionOptions = false
-          } else {
-            self.app.navigation.showCollectionOptions = false
-          }
+          self.app.navigation.showCollectionOptions = false
         }) {
           Text("Close")
         }

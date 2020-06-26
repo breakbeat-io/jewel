@@ -13,8 +13,6 @@ struct Navigation {
   let onRotationId: UUID
   var activeCollectionId: UUID
   
-  var showDebugMenu: Bool = false
-
   var selectedTab: Navigation.Tab = .onRotation {
     didSet {
       collectionIsEditing = false
@@ -39,6 +37,7 @@ struct Navigation {
   var collectionEditSelection = Set<Int>()
   
   var showSettings: Bool = false
+  var showDebugMenu: Bool = false
   
 }
 

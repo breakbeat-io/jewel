@@ -49,7 +49,7 @@ struct CollectionSheet: View {
             Image(systemName: "ellipsis")
           }
           .sheet(isPresented: $app.navigation.showCollectionOptions) {
-            CollectionOptions(collectionId: self.collection.id)
+            CollectionOptions()
                 .environmentObject(self.app)
           }
         }

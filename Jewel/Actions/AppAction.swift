@@ -155,7 +155,7 @@ func updateLibrary(library: Library, action: LibraryAction) -> Library {
     
   case let .removeSharedCollection(slotIndexes):
     newLibrary.collections.remove(atOffsets: slotIndexes)
-  
+    
   case let .removeSharedCollections(collectionIds):
     for collectionId in collectionIds {
       newLibrary.collections.removeAll(where: { $0.id == collectionId} )

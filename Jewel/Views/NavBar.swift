@@ -70,7 +70,7 @@ struct OnRotationActionButtons: View {
         }
         .padding(.leading)
         .sheet(isPresented: self.$app.navigation.showCollectionOptions) {
-          CollectionOptions(collectionId: self.app.state.library.onRotation.id)
+          CollectionOptions()
             .environmentObject(self.app)
         }
       }
