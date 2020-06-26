@@ -44,8 +44,8 @@ class SharedCollectionManager {
     var shareableSlots = [ShareableSlot?]()
     
     for slot in collection.slots {
-      if let content = slot.album {
-        let slot = ShareableSlot(sourceProvider: SourceProvider.appleMusicAlbum, sourceRef: content.id)
+      if let source = slot.source {
+        let slot = ShareableSlot(sourceProvider: SourceProvider.appleMusicAlbum, sourceRef: source.id)
         shareableSlots.append(slot)
       } else {
         shareableSlots.append(nil)
@@ -69,11 +69,11 @@ class SharedCollectionManager {
   
   static func setShareLinks(for collection: Collection) {
     
-    AppEnvironment.global.update(action: LibraryAction.invalidateShareLinks)
+    AppEnvironment.global.update(action: LibraryAction.invalidateShareLinks(collectionId: collection.id))
     
     guard let longLink = generateLongLink(for: collection) else {
       print("💎 Share Links: > Could not create long link")
-      AppEnvironment.global.update(action: LibraryAction.shareLinkError(true))
+      AppEnvironment.global.update(action: LibraryAction.shareLinkError(true, collectionId: collection.id))
       return
     }
     
@@ -82,13 +82,13 @@ class SharedCollectionManager {
     let firebaseShortLinkBodyRaw = ["longDynamicLink": longDynamicLink]
     guard let firebaseShortLinkBodyRawJSON = try? JSONEncoder().encode(firebaseShortLinkBodyRaw) else {
       print("💎 Share Links: > Could not encode link to JSON")
-      AppEnvironment.global.update(action: LibraryAction.shareLinkError(true))
+      AppEnvironment.global.update(action: LibraryAction.shareLinkError(true, collectionId: collection.id))
       return
     }
     
     guard let firebaseApiKey = Bundle.main.infoDictionary?["FIREBASE_API_KEY"] as? String else {
       print ("No Firebase API key found!")
-      AppEnvironment.global.update(action: LibraryAction.shareLinkError(true))
+      AppEnvironment.global.update(action: LibraryAction.shareLinkError(true, collectionId: collection.id))
       return
     }
     
@@ -100,13 +100,13 @@ class SharedCollectionManager {
     let task = URLSession.shared.uploadTask(with: request, from: firebaseShortLinkBodyRawJSON) { data, response, error in
       if let error = error {
         print ("Firebase API threw error: \(error)")
-        AppEnvironment.global.update(action: LibraryAction.shareLinkError(true))
+        AppEnvironment.global.update(action: LibraryAction.shareLinkError(true, collectionId: collection.id))
         return
       }
       guard let response = response as? HTTPURLResponse,
         (200...299).contains(response.statusCode) else {
           print ("Firebase gave a server error")
-          AppEnvironment.global.update(action: LibraryAction.shareLinkError(true))
+          AppEnvironment.global.update(action: LibraryAction.shareLinkError(true, collectionId: collection.id))
           return
       }
       if let mimeType = response.mimeType,
@@ -116,16 +116,16 @@ class SharedCollectionManager {
           if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
             DispatchQueue.main.async {
               if let shortLink = json["shortLink"] as? String {
-                AppEnvironment.global.update(action: LibraryAction.setShareLinks(shareLinkLong: longLink, shareLinkShort: URL(string: shortLink)!))
+                AppEnvironment.global.update(action: LibraryAction.setShareLinks(shareLinkLong: longLink, shareLinkShort: URL(string: shortLink)!, collectionId: collection.id))
               } else {
                 print("💎 Share Links: > There was another error")
-                AppEnvironment.global.update(action: LibraryAction.shareLinkError(true))
+                AppEnvironment.global.update(action: LibraryAction.shareLinkError(true, collectionId: collection.id))
               }
             }
           }
         } catch let error as NSError {
           print("💎 Share Links: > Failed to load: \(error.localizedDescription)")
-          AppEnvironment.global.update(action: LibraryAction.shareLinkError(true))
+          AppEnvironment.global.update(action: LibraryAction.shareLinkError(true, collectionId: collection.id))
         }
       }
     }
@@ -147,9 +147,7 @@ class SharedCollectionManager {
   }
   
   static func expandShareableCollection(shareableCollection: ShareableCollection) {
-    var collection = Collection()
-    collection.name = shareableCollection.collectionName
-    collection.curator = shareableCollection.collectionCurator
+    let collection = Collection(type: .sharedCollection, name: shareableCollection.collectionName, curator: shareableCollection.collectionCurator)
     
     AppEnvironment.global.update(action: LibraryAction.addSharedCollection(collection: collection))
     

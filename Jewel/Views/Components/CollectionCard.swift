@@ -11,12 +11,14 @@ import KingfisherSwiftUI
 
 struct CollectionCard: View {
   
+  @EnvironmentObject var app: AppEnvironment
+  
   let collection: Collection
   
   private var collectionArtwork: [URL] {
     var artworkUrls = [URL]()
     for slot in collection.slots {
-      if let artworkUrl = slot.album?.attributes?.artwork.url(forWidth: 1000) {
+      if let artworkUrl = slot.source?.attributes?.artwork.url(forWidth: 1000) {
         artworkUrls.append(artworkUrl)
       }
     }
@@ -24,33 +26,46 @@ struct CollectionCard: View {
   }
   
   var body: some View {
-    Rectangle()
-      .foregroundColor(.clear)
-      .background(
-        CardArtworkComposite(images: collectionArtwork)
-    )
-      .cornerRadius(4)
-      .overlay(
-        VStack(alignment: .leading) {
-          Text(collection.name)
-            .font(.callout)
-            .fontWeight(.bold)
-            .foregroundColor(.white)
-            .padding(.top, 4)
-            .padding(.horizontal, 6)
-            .lineLimit(1)
-          Text(collection.curator)
-            .font(.footnote)
-            .foregroundColor(.white)
-            .padding(.horizontal, 6)
-            .padding(.bottom, 4)
-            .lineLimit(1)
+    Button(action: {
+      self.app.navigation.activeCollectionId = self.collection.id
+      self.app.navigation.showCollection = true
+    }) {
+      ZStack(alignment: .bottom) {
+        Rectangle()
+          .foregroundColor(.clear)
+          .background(
+            CardArtworkComposite(images: collectionArtwork)
+        )
+          .cornerRadius(Constants.cardCornerRadius)
+          .frame(height: Constants.cardHeights.medium.rawValue)
+          .shadow(radius: 3)
+        HStack(alignment: .bottom) {
+          VStack(alignment: .leading, spacing: 0) {
+            Text(collection.name)
+              .font(.callout)
+              .fontWeight(.bold)
+              .foregroundColor(.white)
+              .padding(.top, 4)
+              .padding(.horizontal, 6)
+              .lineLimit(1)
+            Text(collection.curator)
+              .font(.footnote)
+              .foregroundColor(.white)
+              .lineLimit(1)
+              .padding(.horizontal, 6)
+              .padding(.bottom, 4)
+          }
+          .background(Color.black.opacity(0.8))
+          .cornerRadius(Constants.cardCornerRadius)
+          Spacer()
+          if collection.type == .userCollection {
+            Image(systemName: "person.circle")
+              .padding(4)
+              .foregroundColor(Color.black.opacity(0.8))
+          }
         }
-        .background(Color.black)
-        .cornerRadius(4)
         .padding(4)
-        , alignment: .bottomLeading)
-      .frame(height: Helpers.cardHeights.medium.rawValue)
-      .shadow(radius: 3)
+      }
+    }
   }
 }

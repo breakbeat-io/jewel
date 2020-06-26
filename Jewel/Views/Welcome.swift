@@ -13,7 +13,7 @@ struct Welcome: View {
   @Environment(\.horizontalSizeClass) var horizontalSizeClass
   @Environment(\.verticalSizeClass) var verticalSizeClass
   
-  @EnvironmentObject var environment: AppEnvironment
+  @EnvironmentObject var app: AppEnvironment
   
   private let heading = "Welcome!"
   private let description = """
@@ -30,9 +30,6 @@ struct Welcome: View {
   var body: some View {
     GeometryReader { geo in
       ZStack {
-        Rectangle()
-          .opacity(0.1) // hack to prevent clickthrough if set to 0
-          .edgesIgnoringSafeArea(.all)
         Rectangle()
           .fill(Color(.systemBackground))
           .frame(width: self.responsiveWidth(viewWidth: geo.size.width), height: self.responsiveHeight(viewHeight: geo.size.height))
@@ -63,7 +60,7 @@ struct Welcome: View {
             
           }
           Button(action: {
-            self.environment.update(action: OptionsAction.firstTimeRun(false))
+            self.app.update(action: OptionsAction.firstTimeRun(false))
           }) {
             Text(self.buttonLabel)
           }

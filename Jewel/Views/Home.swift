@@ -1,8 +1,8 @@
 //
-//  Home.swift
+//  NewHome.swift
 //  Listen Later
 //
-//  Created by Greg Hepworth on 04/06/2020.
+//  Created by Greg Hepworth on 21/06/2020.
 //  Copyright © 2020 Breakbeat Ltd. All rights reserved.
 //
 
@@ -10,65 +10,55 @@ import SwiftUI
 
 struct Home: View {
   
-  @EnvironmentObject var environment: AppEnvironment
+  @EnvironmentObject var app: AppEnvironment
   
-  @State private var isEditing: Bool = false
-  
-  private var selectedTab: Binding<String> {
-    Binding (
-      get: { self.environment.state.library.userCollectionActive ? "user" : "shared" },
-      set: { self.environment.update(action: LibraryAction.userCollectionActive($0 == "user" ? true : false )) }
-    )
-  }
   private var receivedCollectionCued: Binding<Bool> {
     Binding (
-      get: { self.environment.state.library.cuedCollection != nil },
+      get: { self.app.state.library.cuedCollection != nil },
       set: { _ = $0 }
     )
   }
   
   var body: some View {
     ZStack {
-      NavigationView {
-        TabView(selection: selectedTab) {
-          UserCollection(isEditing: self.$isEditing)
-            .tabItem {
-              Image(systemName: "music.house")
-                .imageScale(.medium)
-              Text(environment.state.library.userCollection.name)
+      Color(UIColor.systemBackground)
+        .edgesIgnoringSafeArea(.bottom)
+      Color(UIColor.secondarySystemBackground)
+        .edgesIgnoringSafeArea(.top)
+      VStack(spacing: 0) {
+        NavBar()
+        VStack {
+          if app.navigation.selectedTab == .onRotation {
+            OnRotation()
+              .transition(.move(edge: .leading))
+              .animation(.easeInOut)
           }
-          .tag("user")
-          SharedCollections(isEditing: self.$isEditing)
-            .tabItem {
-              Image(systemName: "rectangle.on.rectangle.angled")
-                .imageScale(.medium)
-              Text("Collection Library")
+          if app.navigation.selectedTab == .library {
+            CollectionLibrary()
+              .transition(.move(edge: .trailing))
+              .animation(.easeInOut)
           }
-          .tag("shared")
         }
-        .alert(isPresented: receivedCollectionCued) {
-          Alert(title: Text("Shared collection received."),
-                message: Text("Would you like to add \"\(environment.state.library.cuedCollection!.collectionName)\" by \"\(environment.state.library.cuedCollection!.collectionCurator)\" to your Shared Library?"),
-                primaryButton: .cancel(Text("Cancel")) {
-                  self.environment.update(action: LibraryAction.uncueSharedCollection)
-            },
-                secondaryButton: .default(Text("Add").bold()) {
-                  self.environment.update(action: LibraryAction.userCollectionActive(false))
-                  SharedCollectionManager.expandShareableCollection(shareableCollection: self.environment.state.library.cuedCollection!)
-                  self.environment.update(action: LibraryAction.uncueSharedCollection)
-            })
-        }
-        .navigationBarTitle(environment.state.library.userCollectionActive ? self.environment.state.library.userCollection.name : "Collection Library")
-        .navigationBarItems(
-          leading: UserCollectionButtons(),
-          trailing: LibraryButtons(isEditing: self.$isEditing)
-        )
-        EmptyDetail()
+        .background(Color(UIColor.systemBackground))
       }
-      .blur(radius: environment.state.options.firstTimeRun ? 10 : 0)
-      if environment.state.options.firstTimeRun {
+      .disabled(app.state.options.firstTimeRun)
+      .blur(radius: app.state.options.firstTimeRun ? 10 : 0)
+      if app.state.options.firstTimeRun {
         Welcome()
       }
+    }
+    .alert(isPresented: receivedCollectionCued) {
+      Alert(title: Text("Shared collection received."),
+            message: Text("Would you like to add \"\(app.state.library.cuedCollection!.collectionName)\" by \"\(app.state.library.cuedCollection!.collectionCurator)\" to your Shared Library?"),
+            primaryButton: .cancel(Text("Cancel")) {
+              self.app.update(action: LibraryAction.uncueSharedCollection)
+        },
+            secondaryButton: .default(Text("Add").bold()) {
+              self.app.navigation.selectedTab = .library
+              SharedCollectionManager.expandShareableCollection(shareableCollection: self.app.state.library.cuedCollection!)
+              self.app.update(action: LibraryAction.uncueSharedCollection)
+        }
+      )
     }
     .onAppear {
       UITableView.appearance().separatorStyle = .none

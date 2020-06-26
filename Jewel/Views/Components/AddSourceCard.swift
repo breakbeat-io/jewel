@@ -8,11 +8,12 @@
 
 import SwiftUI
 
-struct EmptySlotCard: View {
+struct AddSourceCard: View {
   
-  @EnvironmentObject var environment: AppEnvironment
+  @EnvironmentObject var app: AppEnvironment
   
   let slotIndex: Int
+  let collectionId: UUID
   
   @State private var showSearch: Bool = false
   
@@ -20,11 +21,8 @@ struct EmptySlotCard: View {
     Button(action: {
       self.showSearch = true
     }) {
-      RoundedRectangle(cornerRadius: 4)
-        .stroke(
-          Color.secondary,
-          style: StrokeStyle(lineWidth: 2, dash: [4, 6])
-      )
+      RoundedRectangle(cornerRadius: Constants.cardCornerRadius)
+        .foregroundColor(Color(UIColor.secondarySystemBackground))
         .overlay(
           Image(systemName: "plus")
             .font(.headline)
@@ -32,8 +30,8 @@ struct EmptySlotCard: View {
       )
     }
     .sheet(isPresented: $showSearch) {
-      SearchHome(slotIndex: self.slotIndex, showing: self.$showSearch)
-        .environmentObject(self.environment)
+      SearchHome(slotIndex: self.slotIndex, collectionId: self.collectionId, showing: self.$showSearch)
+        .environmentObject(self.app)
     }
   }
 }

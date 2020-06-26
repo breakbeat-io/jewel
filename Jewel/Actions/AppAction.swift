@@ -10,7 +10,7 @@ import Foundation
 import HMV
 
 func updateState(appState: AppState, action: AppAction) -> AppState {
-  print("💎 Update >  \(action.description)")
+  print("💎 Update > \(action.description)")
   
   var newAppState = appState
   
@@ -33,7 +33,6 @@ func updateState(appState: AppState, action: AppAction) -> AppState {
 }
 
 func updateOptions(options: Options, action: OptionsAction) -> Options {
-  print(action.description)
   
   var newOptions = options
   
@@ -41,9 +40,6 @@ func updateOptions(options: Options, action: OptionsAction) -> Options {
     
   case let .setPreferredPlatform(platform):
     newOptions.preferredMusicPlatform = platform
-    
-  case .toggleDebugMode:
-    newOptions.debugMode.toggle()
     
   case .reset:
     let domain = Bundle.main.bundleIdentifier!
@@ -60,46 +56,113 @@ func updateOptions(options: Options, action: OptionsAction) -> Options {
 
 func updateLibrary(library: Library, action: LibraryAction) -> Library {
   
+  func extractCollection(collectionId: UUID) -> Collection? {
+    if newLibrary.onRotation.id == collectionId {
+      return newLibrary.onRotation
+    } else if let collectionIndex = newLibrary.collections.firstIndex(where: { $0.id == collectionId }) {
+      return newLibrary.collections[collectionIndex]
+    }
+    return nil
+  }
+  
+  func commitCollection(collection: Collection) {
+    if collection.id == newLibrary.onRotation.id {
+      newLibrary.onRotation = collection
+    } else if let collectionIndex = newLibrary.collections.firstIndex(where: { $0.id == collection.id }) {
+      newLibrary.collections[collectionIndex] = collection
+    }
+  }
+  
   var newLibrary = library
   
   switch action {
     
-  case let .userCollectionActive(userCollectionActive):
-    newLibrary.userCollectionActive = userCollectionActive
-    
-  case let .setUserCollectionName(name):
-    newLibrary.userCollection.name = name
-    
-  case let .setUserCollectionCurator(curator):
-    newLibrary.userCollection.curator = curator
-    
-  case let .removeAlbumFromSlot(slotIndexes):
-    for i in slotIndexes {
-      newLibrary.userCollection.slots[i] = Slot()
+  case let .setCollectionName(name, collectionId):
+    if var collection = extractCollection(collectionId: collectionId) {
+      collection.name = name
+      commitCollection(collection: collection)
     }
     
-  case let .moveSlot(from, to):
-    newLibrary.userCollection.slots.move(fromOffsets: from, toOffset: to)
+  case let .setCollectionCurator(curator, collectionId):
+    if var collection = extractCollection(collectionId: collectionId) {
+      collection.curator = curator
+      commitCollection(collection: collection)
+    }
     
-  case .invalidateShareLinks:
-    newLibrary.userCollection.shareLinkLong = nil
-    newLibrary.userCollection.shareLinkShort = nil
+  case let .addSourceToSlot(source, slotIndex, collectionId):
+    if var collection = extractCollection(collectionId: collectionId) {
+      collection.slots[slotIndex].source = source
+      commitCollection(collection: collection)
+    }
     
-  case let .setShareLinks(shareLinkLong, shareLinkShort):
-    newLibrary.userCollection.shareLinkLong = shareLinkLong
-    newLibrary.userCollection.shareLinkShort = shareLinkShort
+  case let .removeSourceFromSlot(slotIndexes, collectionId):
+    if var collection = extractCollection(collectionId: collectionId) {
+      for i in slotIndexes {
+        collection.slots[i] = Slot()
+      }
+      commitCollection(collection: collection)
+    }
     
-  case let .shareLinkError(errorState):
-    newLibrary.userCollection.shareLinkError = errorState
+  case let .removeSourcesFromCollection(sourceIds, collectionId):
+    if var collection = extractCollection(collectionId: collectionId) {
+      for sourceId in sourceIds {
+        collection.slots[sourceId] = Slot()
+      }
+      commitCollection(collection: collection)
+    }
+    
+  case let .moveSlot(from, to, collectionId):
+    if var collection = extractCollection(collectionId: collectionId) {
+      collection.slots.move(fromOffsets: from, toOffset: to)
+      commitCollection(collection: collection)
+    }
+    
+  case let .invalidateShareLinks(collectionId):
+    if var collection = extractCollection(collectionId: collectionId) {
+      collection.shareLinkLong = nil
+      collection.shareLinkShort = nil
+      commitCollection(collection: collection)
+    }
+    
+  case let .setShareLinks(shareLinkLong, shareLinkShort, collectionId):
+    if var collection = extractCollection(collectionId: collectionId) {
+      collection.shareLinkLong = shareLinkLong
+      collection.shareLinkShort = shareLinkShort
+      commitCollection(collection: collection)
+    }
+    
+  case let .shareLinkError(errorState, collectionId):
+    if var collection = extractCollection(collectionId: collectionId) {
+      collection.shareLinkError = errorState
+      commitCollection(collection: collection)
+    }
+    
+  case let .saveOnRotation(collection):
+    let formatter = DateFormatter()
+    formatter.dateFormat = "MMM yyyy"
+    let dateString = formatter.string(from: Date())
+    var newCollection = collection
+    newCollection.id = UUID()
+    newCollection.name = "On Rotation — \(dateString)"
+    newLibrary.collections.insert(newCollection, at: 0)
+    
+  case .addUserCollection:
+    let newCollection = Collection(type: .userCollection, name: "New Collection", curator: "A Music Lover")
+    newLibrary.collections.insert(newCollection, at: 0)
     
   case let .addSharedCollection(collection):
-    newLibrary.sharedCollections.insert(collection, at: 0)
+    newLibrary.collections.insert(collection, at: 0)
     
   case let .removeSharedCollection(slotIndexes):
-    newLibrary.sharedCollections.remove(atOffsets: slotIndexes)
+    newLibrary.collections.remove(atOffsets: slotIndexes)
+    
+  case let .removeSharedCollections(collectionIds):
+    for collectionId in collectionIds {
+      newLibrary.collections.removeAll(where: { $0.id == collectionId} )
+    }
     
   case let .moveSharedCollection(from, to):
-    newLibrary.sharedCollections.move(fromOffsets: from, toOffset: to)
+    newLibrary.collections.move(fromOffsets: from, toOffset: to)
     
   case let .cueSharedCollection(shareableCollection):
     newLibrary.cuedCollection = shareableCollection
@@ -107,33 +170,19 @@ func updateLibrary(library: Library, action: LibraryAction) -> Library {
   case .uncueSharedCollection:
     newLibrary.cuedCollection = nil
     
-  case let .addAlbumToSlot(album, slotIndex, collectionId):
-    if newLibrary.userCollection.id == collectionId {
-      newLibrary.userCollection.slots[slotIndex].album = album
-    } else {
-      if let collectionIndex = newLibrary.sharedCollections.firstIndex(where: { $0.id == collectionId }) {
-        newLibrary.sharedCollections[collectionIndex].slots[slotIndex].album = album
-      }
-    }
-    
   case let .setPlatformLinks(baseUrl, platformLinks, collectionId):
-    if newLibrary.userCollection.id == collectionId {
-      let indices = newLibrary.userCollection.slots.enumerated().compactMap({ $1.album?.attributes?.url == baseUrl ? $0 : nil })
+    if var collection = extractCollection(collectionId: collectionId) {
+      let indices = collection.slots.enumerated().compactMap({ $1.source?.attributes?.url == baseUrl ? $0 : nil })
       for i in indices {
-        newLibrary.userCollection.slots[i].playbackLinks = platformLinks
+        collection.slots[i].playbackLinks = platformLinks
       }
-    } else {
-      if let collectionIndex = newLibrary.sharedCollections.firstIndex(where: { $0.id == collectionId }) {
-        let indices = newLibrary.sharedCollections[collectionIndex].slots.enumerated().compactMap({ $1.album?.attributes?.url == baseUrl ? $0 : nil })
-        for i in indices {
-          newLibrary.sharedCollections[collectionIndex].slots[i].playbackLinks = platformLinks
-        }
-      }
+      commitCollection(collection: collection)
     }
     
   }
   
   return newLibrary
+  
 }
 
 func updateSearch(search: Search, action: SearchAction) -> Search {

@@ -15,7 +15,6 @@ protocol AppAction {
 
 enum OptionsAction: AppAction {
   case setPreferredPlatform(platform: Int)
-  case toggleDebugMode
   case firstTimeRun(_: Bool)
   case reset
   
@@ -23,8 +22,6 @@ enum OptionsAction: AppAction {
     switch self {
     case .setPreferredPlatform:
       return "\(type(of: self)): Setting preferred platform"
-    case .toggleDebugMode:
-      return "\(type(of: self)): Toggling debug mode"
     case .firstTimeRun:
       return "\(type(of: self)): Setting first time run"
     case .reset:
@@ -34,18 +31,21 @@ enum OptionsAction: AppAction {
 }
 
 enum LibraryAction: AppAction {
-  case userCollectionActive(_: Bool)
-  case setUserCollectionName(name: String)
-  case setUserCollectionCurator(curator: String)
-  case addAlbumToSlot(album: Album, slotIndex: Int, collectionId: UUID)
-  case removeAlbumFromSlot(slotIndexes: IndexSet)
+  case setCollectionName(name: String, collectionId: UUID)
+  case setCollectionCurator(curator: String, collectionId: UUID)
+  case addSourceToSlot(source: AppleMusicAlbum, slotIndex: Int, collectionId: UUID)
+  case removeSourceFromSlot(slotIndexes: IndexSet, collectionId: UUID)
+  case removeSourcesFromCollection(sourceIds: Set<Int>, collectionId: UUID)
   case setPlatformLinks(baseUrl: URL, platformLinks: OdesliResponse, collectionId: UUID)
-  case moveSlot(from: IndexSet, to: Int)
-  case invalidateShareLinks
-  case setShareLinks(shareLinkLong: URL, shareLinkShort: URL)
-  case shareLinkError(_: Bool)
+  case moveSlot(from: IndexSet, to: Int, collectionId: UUID)
+  case invalidateShareLinks(collectionId: UUID)
+  case setShareLinks(shareLinkLong: URL, shareLinkShort: URL, collectionId: UUID)
+  case shareLinkError(_: Bool, collectionId: UUID)
+  case saveOnRotation(collection: Collection)
+  case addUserCollection
   case addSharedCollection(collection: Collection)
   case removeSharedCollection(slotIndexes: IndexSet)
+  case removeSharedCollections(collectionIds: Set<UUID>)
   case moveSharedCollection(from: IndexSet, to: Int)
   case cueSharedCollection(shareableCollection: SharedCollectionManager.ShareableCollection)
   case uncueSharedCollection
@@ -53,42 +53,49 @@ enum LibraryAction: AppAction {
   var description: String {
     switch self {
       
-    case .userCollectionActive:
-      return "\(type(of: self)): Setting user collection active state"
-    case .setUserCollectionName:
+    case .setCollectionName:
       return "\(type(of: self)): Setting user collection name"
-    case .setUserCollectionCurator:
+    case .setCollectionCurator:
       return "\(type(of: self)): Setting user collection curator"
-    case .addAlbumToSlot:
-      return "\(type(of: self)): Adding an album to a collection"
-    case .removeAlbumFromSlot:
-      return "\(type(of: self)): Removing an album from a collection"
+    case .addSourceToSlot:
+      return "\(type(of: self)): Adding a source to a collection"
+    case .removeSourceFromSlot:
+      return "\(type(of: self)): Removing an source from a collection"
+    case .removeSourcesFromCollection:
+      return "\(type(of: self)): Removing some sources from a collection"
     case .setPlatformLinks:
-      return "\(type(of: self)): Setting platform links for an album"
+      return "\(type(of: self)): Setting platform links for an source"
     case .moveSlot:
-      return "\(type(of: self)): Moving an albums slot"
+      return "\(type(of: self)): Moving a sources slot"
     case .invalidateShareLinks:
       return "\(type(of: self)): Invalidating share links"
     case .setShareLinks:
       return "\(type(of: self)): Setting share links"
     case .shareLinkError:
       return "\(type(of: self)): Setting the share link error"
+    case .saveOnRotation:
+      return "\(type(of: self)): Saving current On Rotation to Library"
+    case .addUserCollection:
+      return "\(type(of: self)): Adding a user collection to the Library"
     case .addSharedCollection:
       return "\(type(of: self)): Adding a shared collection to the library"
     case .removeSharedCollection:
       return "\(type(of: self)): Removing a shared collection from the library"
+    case .removeSharedCollections:
+      return "\(type(of: self)): Removing some shared collections from the library"
     case .moveSharedCollection:
       return "\(type(of: self)): Moving a shared collections position"
     case .cueSharedCollection:
       return "\(type(of: self)): Cueing a shared collection"
     case .uncueSharedCollection:
       return "\(type(of: self)): Uncueing a shared collection"
+      
     }
   }
 }
 
 enum SearchAction: AppAction {
-  case populateSearchResults(results: [Album])
+  case populateSearchResults(results: [AppleMusicAlbum])
   case removeSearchResults
   
   var description: String {

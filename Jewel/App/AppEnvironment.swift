@@ -14,6 +14,7 @@ final class AppEnvironment: ObservableObject {
   
   static let global = AppEnvironment()
   
+  @Published var navigation: Navigation
   @Published private(set) var state: AppState {
     didSet {
       save()
@@ -21,21 +22,34 @@ final class AppEnvironment: ObservableObject {
   }
   
   private init() {
+    
     if let savedState = UserDefaults.standard.object(forKey: "jewelState") as? Data {
       do {
-        state = try JSONDecoder().decode(AppState.self, from: savedState)
+        let decodedSavedState = try JSONDecoder().decode(AppState.self, from: savedState)
+        state = decodedSavedState
         print("💎 State > Loaded state")
+        
+        let onRotationId = decodedSavedState.library.onRotation.id
+        navigation = Navigation(onRotationId: onRotationId, activeCollectionId: onRotationId)
+        print("💎 Navigation > Initialised")
+        
         return
       } catch {
         print("💎 State > Error loading state: \(error)")
       }
     }
     
+    print("💎 State > No saved state found, creating new")
     let options = Options()
-    let library = Library(userCollection: Collection(), sharedCollections: [Collection]())
-    let appState = AppState(options: options, library: library)
+    let onRotationCollection = Collection(type: .userCollection, name: "On Rotation", curator: "A Music Lover")
+    let library = Library(onRotation: onRotationCollection, collections: [Collection]())
     
-    self.state = appState
+    state = AppState(options: options, library: library)
+    print("💎 State > New state created")
+    
+    let onRotationId = onRotationCollection.id
+    navigation = Navigation(onRotationId: onRotationId, activeCollectionId: onRotationId)
+    print("💎 Navigation > Initialised")
     
     migrateV1UserDefaults()
     
@@ -58,15 +72,15 @@ final class AppEnvironment: ObservableObject {
     
     if let v1CollectionName = UserDefaults.standard.string(forKey: "collectionName") {
       print("💎 State Migration > v1.0 Collection Name found ... migrating.")
-      state.library.userCollection.name = v1CollectionName
+      state.library.onRotation.name = v1CollectionName
       UserDefaults.standard.removeObject(forKey: "collectionName")
     }
     
     if let savedCollection = UserDefaults.standard.dictionary(forKey: "savedCollection") {
       print("💎 State Migration > v1.0 Saved Collection found ... migrating.")
-      for slotIndex in 0..<state.library.userCollection.slots.count {
-        if let albumId = savedCollection[String(slotIndex)] {
-          RecordStore.purchase(album: albumId as! String, forSlot: slotIndex, inCollection: state.library.userCollection.id)
+      for slotIndex in 0..<state.library.onRotation.slots.count {
+        if let appleMusicAlbumId = savedCollection[String(slotIndex)] {
+          RecordStore.purchase(album: appleMusicAlbumId as! String, forSlot: slotIndex, inCollection: state.library.onRotation.id)
         }
       }
       UserDefaults.standard.removeObject(forKey: "savedCollection")
