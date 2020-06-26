@@ -38,10 +38,6 @@ struct CollectionLibrary: View {
         List(selection: $app.navigation.libraryEditSelection) {
           ForEach(collections) { collection in
             CollectionCard(collection: collection)
-              .sheet(isPresented: self.$app.navigation.showCollection) {
-                CollectionSheet()
-                  .environmentObject(self.app)
-            }
           }
           .onMove { (indexSet, index) in
             self.app.update(action: LibraryAction.moveSharedCollection(from: indexSet, to: index))
@@ -50,9 +46,13 @@ struct CollectionLibrary: View {
             self.app.update(action: LibraryAction.removeSharedCollection(slotIndexes: $0))
           }
         }
-        .environment(\.editMode, .constant(self.app.navigation.listIsEditing ? EditMode.active : EditMode.inactive))
+        .environment(\.editMode, .constant(self.app.navigation.libraryIsEditing ? EditMode.active : EditMode.inactive))
       }
     }
     .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
+      .sheet(isPresented: self.$app.navigation.showCollection) {
+        CollectionSheet()
+          .environmentObject(self.app)
+    }
   }
 }

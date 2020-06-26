@@ -28,7 +28,7 @@ struct Home: View {
       VStack(spacing: 0) {
         NavBar()
         VStack {
-          if app.navigation.selectedTab == .onrotation {
+          if app.navigation.selectedTab == .onRotation {
             OnRotation()
               .transition(.move(edge: .leading))
               .animation(.easeInOut)

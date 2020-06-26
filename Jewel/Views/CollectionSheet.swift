@@ -28,17 +28,17 @@ struct CollectionSheet: View {
     VStack {
       HStack {
         Spacer()
-        if app.navigation.listIsEditing {
+        if app.navigation.collectionIsEditing {
           Button(action: {
             self.app.update(action: LibraryAction.removeSourcesFromCollection(sourceIds: self.app.navigation.collectionEditSelection, collectionId: self.collection.id))
-              self.app.navigation.listIsEditing = false
+              self.app.navigation.collectionIsEditing = false
               self.app.navigation.collectionEditSelection.removeAll()
           }) {
             Image(systemName: "trash")
           }
           .padding(.trailing)
           Button(action: {
-            self.app.navigation.listIsEditing.toggle()
+            self.app.navigation.collectionIsEditing.toggle()
           }) {
             Image(systemName: "checkmark")
           }
@@ -56,6 +56,9 @@ struct CollectionSheet: View {
       }
       .padding()
       CollectionDetail(collection: collection)
+    }
+    .onDisappear {
+      self.app.navigation.collectionIsEditing = false
     }
   }
   

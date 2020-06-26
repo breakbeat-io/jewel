@@ -44,7 +44,7 @@ struct CollectionOptions: View {
           if collection.id == app.state.library.onRotation.id {
             Button(action: {
               self.app.navigation.selectedTab = .library
-              self.app.navigation.showHomeOptions = false
+              self.app.navigation.showCollectionOptions = false
               self.app.update(action: LibraryAction.saveOnRotation(collection: self.app.state.library.onRotation))
             }) {
               HStack {
@@ -56,8 +56,8 @@ struct CollectionOptions: View {
           }
           if collection.type == .userCollection {
             Button(action: {
-              self.app.navigation.listIsEditing = true
-              self.app.navigation.showHomeOptions = false
+              self.app.navigation.collectionIsEditing = true
+              self.app.navigation.showCollectionOptions = false
             }) {
               HStack {
                 Image(systemName: "square.stack.3d.up")
@@ -76,7 +76,7 @@ struct CollectionOptions: View {
               collectionName.wrappedValue,
               text: collectionName,
               onCommit: {
-                self.app.navigation.showHomeOptions = false
+                self.app.navigation.showCollectionOptions = false
             }
             ).foregroundColor(.accentColor)
           }
@@ -87,7 +87,7 @@ struct CollectionOptions: View {
               collectionCurator.wrappedValue,
               text: collectionCurator,
               onCommit: {
-                self.app.navigation.showHomeOptions = false
+                self.app.navigation.showCollectionOptions = false
             }
             ).foregroundColor(.accentColor)
           }
@@ -102,7 +102,7 @@ struct CollectionOptions: View {
         trailing:
         Button(action: {
           if self.app.navigation.activeCollectionId == self.app.navigation.onRotationId {
-            self.app.navigation.showHomeOptions = false
+            self.app.navigation.showCollectionOptions = false
           } else {
             self.app.navigation.showCollectionOptions = false
           }

@@ -20,12 +20,17 @@ struct NavBar: View {
           .frame(width: Constants.buttonWidth)
         Picker("Library", selection: $app.navigation.selectedTab) {
           Image(systemName: "music.house")
-            .tag(Navigation.Tab.onrotation)
+            .tag(Navigation.Tab.onRotation)
           Image(systemName: "rectangle.on.rectangle.angled")
             .tag(Navigation.Tab.library)
         }
         .pickerStyle(SegmentedPickerStyle())
-        HomeActionButtons()
+        if app.navigation.selectedTab == .onRotation {
+          OnRotationActionButtons()
+        } else {
+          LibraryActionButtons()
+        }
+        
       }
       .padding(.horizontal)
       Rectangle()
@@ -35,62 +40,85 @@ struct NavBar: View {
   }
 }
 
-struct HomeActionButtons: View {
+struct OnRotationActionButtons: View {
   
   @EnvironmentObject var app: AppEnvironment
   
   var body: some View {
     HStack {
       Spacer()
-      if app.navigation.listIsEditing {
+      if app.navigation.collectionIsEditing {
         Button(action: {
-          if self.app.navigation.selectedTab == .onrotation {
-            self.app.update(action: LibraryAction.removeSourcesFromCollection(sourceIds: self.app.navigation.collectionEditSelection, collectionId: self.app.navigation.activeCollectionId))
-            self.app.navigation.listIsEditing = false
-            self.app.navigation.collectionEditSelection.removeAll()
-          }
-          
-          if self.app.navigation.selectedTab == .library {
-            self.app.update(action: LibraryAction.removeSharedCollections(collectionIds: self.app.navigation.libraryEditSelection))
-            self.app.navigation.listIsEditing = false
-            self.app.navigation.libraryEditSelection.removeAll()
-          }
+          self.app.update(action: LibraryAction.removeSourcesFromCollection(sourceIds: self.app.navigation.collectionEditSelection, collectionId: self.app.navigation.activeCollectionId))
+          self.app.navigation.collectionIsEditing = false
+          self.app.navigation.collectionEditSelection.removeAll()
         }) {
           Image(systemName: "trash")
         }
         .padding(.trailing)
         Button(action: {
-          self.app.navigation.listIsEditing.toggle()
+          self.app.navigation.collectionIsEditing.toggle()
         }) {
           Image(systemName: "checkmark")
         }
       } else {
-        if self.app.navigation.selectedTab == .library {
-          Button(action: {
-            self.app.update(action: LibraryAction.addUserCollection)
-            self.app.navigation.activeCollectionId = self.app.state.library.collections.first!.id
-            self.app.navigation.showCollection = true
-          }) {
-            Image(systemName: "plus")
-          }
-          .padding(.leading)
-        } else {
-          Spacer()
-        }
+        Spacer()
         Button(action: {
-          self.app.navigation.showHomeOptions = true
+          self.app.navigation.showCollectionOptions = true
         }) {
           Image(systemName: "ellipsis")
         }
         .padding(.leading)
-        .sheet(isPresented: self.$app.navigation.showHomeOptions) {
-          if self.app.navigation.selectedTab == .onrotation {
-            CollectionOptions(collectionId: self.app.state.library.onRotation.id)
-              .environmentObject(self.app)
-          } else {
-            LibraryOptions()
-              .environmentObject(self.app)
-          }
+        .sheet(isPresented: self.$app.navigation.showCollectionOptions) {
+          CollectionOptions(collectionId: self.app.state.library.onRotation.id)
+            .environmentObject(self.app)
+        }
+      }
+    }
+    .padding(.vertical)
+    .frame(width: Constants.buttonWidth)
+  }
+}
+
+struct LibraryActionButtons: View {
+  
+  @EnvironmentObject var app: AppEnvironment
+  
+  var body: some View {
+    HStack {
+      Spacer()
+      if app.navigation.libraryIsEditing {
+        Button(action: {
+          self.app.update(action: LibraryAction.removeSharedCollections(collectionIds: self.app.navigation.libraryEditSelection))
+          self.app.navigation.libraryIsEditing = false
+          self.app.navigation.libraryEditSelection.removeAll()
+        }) {
+          Image(systemName: "trash")
+        }
+        .padding(.trailing)
+        Button(action: {
+          self.app.navigation.libraryIsEditing.toggle()
+        }) {
+          Image(systemName: "checkmark")
+        }
+      } else {
+        Button(action: {
+          self.app.update(action: LibraryAction.addUserCollection)
+          self.app.navigation.activeCollectionId = self.app.state.library.collections.first!.id
+          self.app.navigation.showCollection = true
+        }) {
+          Image(systemName: "plus")
+        }
+        .padding(.leading)
+        Button(action: {
+          self.app.navigation.showLibraryOptions = true
+        }) {
+          Image(systemName: "ellipsis")
+        }
+        .padding(.leading)
+        .sheet(isPresented: self.$app.navigation.showLibraryOptions) {
+          LibraryOptions()
+            .environmentObject(self.app)
         }
       }
     }

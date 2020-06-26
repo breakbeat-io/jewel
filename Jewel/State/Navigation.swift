@@ -15,31 +15,30 @@ struct Navigation {
   
   var showDebugMenu: Bool = false
 
-  var selectedTab: Navigation.Tab = .onrotation {
+  var selectedTab: Navigation.Tab = .onRotation {
     didSet {
-      listIsEditing = false
+      collectionIsEditing = false
+      libraryIsEditing = false
       activeCollectionId = onRotationId
     }
   }
   enum Tab: String {
-    case onrotation = "On Rotation"
+    case onRotation = "On Rotation"
     case library = "Collection Library"
   }
   
   var showSourceDetail: Bool = false
-  var showCollection: Bool = false {
-    didSet {
-      listIsEditing = false
-    }
-  }
+  var showCollection: Bool = false
   
-  var showHomeOptions: Bool = false
-  var showSettings: Bool = false
-  var showCollectionOptions: Bool = false
-  
-  var listIsEditing: Bool = false
-  var collectionEditSelection = Set<Int>()
+  var showLibraryOptions: Bool = false
+  var libraryIsEditing: Bool = false
   var libraryEditSelection = Set<UUID>()
+  
+  var showCollectionOptions: Bool = false  
+  var collectionIsEditing: Bool = false
+  var collectionEditSelection = Set<Int>()
+  
+  var showSettings: Bool = false
   
 }
 

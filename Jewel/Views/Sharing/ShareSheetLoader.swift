@@ -40,7 +40,7 @@ struct ShareSheetLoader: View {
       self.refreshShareLinks()
     }
     .onDisappear() {
-      self.app.navigation.showHomeOptions = false
+      self.app.navigation.showCollectionOptions = false
     }
   }
   
