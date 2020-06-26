@@ -18,6 +18,7 @@ struct NavBar: View {
         Spacer()
           .padding(.vertical)
           .frame(width: Constants.buttonWidth)
+        Spacer()
         Picker("Library", selection: $app.navigation.selectedTab) {
           Image(systemName: "music.house")
             .tag(Navigation.Tab.onRotation)
@@ -25,6 +26,8 @@ struct NavBar: View {
             .tag(Navigation.Tab.library)
         }
         .pickerStyle(SegmentedPickerStyle())
+        .frame(maxWidth: 300)
+        Spacer()
         if app.navigation.selectedTab == .onRotation {
           OnRotationActionButtons()
         } else {
