@@ -12,14 +12,27 @@ struct AlbumDetail: View {
   
   @Environment(\.horizontalSizeClass) var horizontalSizeClass
   
+  @EnvironmentObject var app: AppEnvironment
+  
   let slot: Slot
   
   var body: some View {
-    ScrollView {
-      if horizontalSizeClass == .compact {
-        Compact(slot: slot)
-      } else {
-        Regular(slot: slot)
+    VStack {
+      HStack {
+        Spacer()
+        Button(action: {
+          self.app.navigation.showSourceDetail = false
+        }) {
+          Text("Close")
+        }
+      }
+      .padding([.top, .horizontal])
+      ScrollView {
+        if horizontalSizeClass == .compact {
+          Compact(slot: slot)
+        } else {
+          Regular(slot: slot)
+        }
       }
     }
   }

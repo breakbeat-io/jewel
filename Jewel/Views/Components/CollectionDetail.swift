@@ -48,6 +48,7 @@ struct CollectionDetail: View {
                     SourceCard(sourceName: attributes.name, sourceArtist: attributes.artistName, sourceArtwork: attributes.artwork.url(forWidth: 1000))
                       .sheet(isPresented: self.$app.navigation.showSourceDetail) {
                         AlbumDetail(slot: self.slots[slotIndex])
+                          .environmentObject(self.app)
                     }
                   }
                 } else if self.editable {
