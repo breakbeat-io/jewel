@@ -48,13 +48,19 @@ struct CollectionSheet: View {
           }) {
             Image(systemName: "ellipsis")
           }
+          .padding()
+          Button(action: {
+            self.app.navigation.showCollection = false
+          }) {
+            Text("Close")
+          }
           .sheet(isPresented: $app.navigation.showCollectionOptions) {
             CollectionOptions()
                 .environmentObject(self.app)
           }
         }
       }
-      .padding()
+      .padding([.top, .horizontal])
       CollectionDetail(collection: collection)
     }
     .onDisappear {
