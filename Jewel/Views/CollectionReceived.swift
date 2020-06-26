@@ -13,7 +13,7 @@ struct CollectionReceived: View {
   @EnvironmentObject var app: AppEnvironment
   
   var body: some View {
-    Overlay(heading: "Shared Collection Received",
+    FullOverlay(heading: "Shared Collection Received",
             buttons: CollectionReceivedButtons()) {
               IfLet(app.state.library.cuedCollection) { cuedCollection in
                 VStack {

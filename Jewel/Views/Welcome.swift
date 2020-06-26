@@ -28,7 +28,7 @@ struct Welcome: View {
   private let buttonLabel = "Start My Collection"
   
   var body: some View {
-    Overlay(heading: heading,
+    FullOverlay(heading: heading,
             buttons: Button(action: {
                        self.app.update(action: OptionsAction.firstTimeRun(false))
                      }) {

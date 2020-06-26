@@ -37,7 +37,7 @@
 		D2945E1C249C0FC100AE6CA5 /* Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2945E1B249C0FC100AE6CA5 /* Navigation.swift */; };
 		D2945E1E249C249C00AE6CA5 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2945E1D249C249C00AE6CA5 /* Settings.swift */; };
 		D29CB1C524A631EB0051BA96 /* CollectionReceived.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29CB1C424A631EB0051BA96 /* CollectionReceived.swift */; };
-		D29CB1C724A632520051BA96 /* Overlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29CB1C624A632520051BA96 /* Overlay.swift */; };
+		D29CB1C724A632520051BA96 /* FullOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29CB1C624A632520051BA96 /* FullOverlay.swift */; };
 		D2A449CC249BAECE006E0A12 /* LibraryOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A449CB249BAECE006E0A12 /* LibraryOptions.swift */; };
 		D2AB8467248113EB008B57F9 /* AppActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AB8466248113EB008B57F9 /* AppActions.swift */; };
 		D2AB84692481148D008B57F9 /* AppAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AB84682481148D008B57F9 /* AppAction.swift */; };
@@ -94,7 +94,7 @@
 		D2945E1B249C0FC100AE6CA5 /* Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigation.swift; sourceTree = "<group>"; };
 		D2945E1D249C249C00AE6CA5 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		D29CB1C424A631EB0051BA96 /* CollectionReceived.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionReceived.swift; sourceTree = "<group>"; };
-		D29CB1C624A632520051BA96 /* Overlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Overlay.swift; sourceTree = "<group>"; };
+		D29CB1C624A632520051BA96 /* FullOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullOverlay.swift; sourceTree = "<group>"; };
 		D2A449CB249BAECE006E0A12 /* LibraryOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryOptions.swift; sourceTree = "<group>"; };
 		D2AB8466248113EB008B57F9 /* AppActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppActions.swift; sourceTree = "<group>"; };
 		D2AB84682481148D008B57F9 /* AppAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAction.swift; sourceTree = "<group>"; };
@@ -289,7 +289,7 @@
 			isa = PBXGroup;
 			children = (
 				D249259A2481455A0011F409 /* IfLet.swift */,
-				D29CB1C624A632520051BA96 /* Overlay.swift */,
+				D29CB1C624A632520051BA96 /* FullOverlay.swift */,
 				D2AC120A24859E2300C52D9E /* AddSourceCard.swift */,
 				D2D78592248AF2E900E0CC63 /* SourceCard.swift */,
 				D2F8D14B248A6451008C29C3 /* CollectionCard.swift */,
@@ -399,7 +399,7 @@
 				D2492587248117710011F409 /* AppState.swift in Sources */,
 				D2D78591248AED2900E0CC63 /* AlternativePlaybackLinks.swift in Sources */,
 				D221557E2481114A00A1F04A /* SceneDelegate.swift in Sources */,
-				D29CB1C724A632520051BA96 /* Overlay.swift in Sources */,
+				D29CB1C724A632520051BA96 /* FullOverlay.swift in Sources */,
 				D23197C22492DACD00C09977 /* Constants.swift in Sources */,
 				D2C810EE24A4FF47003D9B59 /* CollectionSheet.swift in Sources */,
 				D2C3A0AB24A0202100AA7266 /* CollectionLibrary.swift in Sources */,
