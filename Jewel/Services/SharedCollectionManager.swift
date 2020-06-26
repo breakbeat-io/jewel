@@ -138,6 +138,7 @@ class SharedCollectionManager {
       if let receivedCollectionEncoded = Data(base64Encoded: (params!.first(where: { $0.name == "c" })?.value!)!) {
         do {
           let shareableCollection = try JSONDecoder().decode(ShareableCollection.self, from: receivedCollectionEncoded)
+          AppEnvironment.global.navigation = Navigation(onRotationId: AppEnvironment.global.navigation.onRotationId, activeCollectionId: AppEnvironment.global.navigation.activeCollectionId)
           AppEnvironment.global.update(action: LibraryAction.cueSharedCollection(shareableCollection: shareableCollection))
         } catch {
           print("💎 Shared Collection > Could not decode received collection: \(error)")

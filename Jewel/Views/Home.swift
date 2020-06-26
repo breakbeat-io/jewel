@@ -31,12 +31,12 @@ struct Home: View {
           if app.navigation.selectedTab == .onRotation {
             OnRotation()
               .transition(.move(edge: .leading))
-              .animation(.easeInOut)
+              .animation(.easeOut)
           }
           if app.navigation.selectedTab == .library {
             CollectionLibrary()
               .transition(.move(edge: .trailing))
-              .animation(.easeInOut)
+              .animation(.easeOut)
           }
         }
         .background(Color(UIColor.systemBackground))
@@ -46,19 +46,9 @@ struct Home: View {
       if app.state.options.firstTimeRun {
         Welcome()
       }
-    }
-    .alert(isPresented: receivedCollectionCued) {
-      Alert(title: Text("Shared collection received."),
-            message: Text("Would you like to add \"\(app.state.library.cuedCollection!.collectionName)\" by \"\(app.state.library.cuedCollection!.collectionCurator)\" to your Shared Library?"),
-            primaryButton: .cancel(Text("Cancel")) {
-              self.app.update(action: LibraryAction.uncueSharedCollection)
-        },
-            secondaryButton: .default(Text("Add").bold()) {
-              self.app.navigation.selectedTab = .library
-              SharedCollectionManager.expandShareableCollection(shareableCollection: self.app.state.library.cuedCollection!)
-              self.app.update(action: LibraryAction.uncueSharedCollection)
-        }
-      )
+      if self.receivedCollectionCued.wrappedValue {
+        CollectionReceived()
+      }
     }
     .onAppear {
       UITableView.appearance().separatorStyle = .none

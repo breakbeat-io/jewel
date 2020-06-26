@@ -28,71 +28,14 @@ struct Welcome: View {
   private let buttonLabel = "Start My Collection"
   
   var body: some View {
-    GeometryReader { geo in
-      ZStack {
-        Rectangle()
-          .fill(Color(.systemBackground))
-          .frame(width: self.responsiveWidth(viewWidth: geo.size.width), height: self.responsiveHeight(viewHeight: geo.size.height))
-          .cornerRadius(20)
-          .shadow(radius: 5)
-        VStack(alignment: .leading, spacing: 0) {
-          Text(self.heading)
-            .font(.title)
-            .padding(.top, 50)
-            .padding(.bottom, 5)
-            .frame(maxWidth: .infinity, alignment: .center)
-          ZStack(alignment: .top) {
-            GeometryReader { geo in
-              ScrollView {
-                Text(self.description)
-                  .frame(maxWidth: .infinity)
-                  .padding(.vertical, 5)
-              }
-              .padding(.horizontal)
-              Rectangle()
-                .fill(LinearGradient(gradient: Gradient(colors: [Color(.systemBackground), Color(.systemBackground).opacity(0)]), startPoint: .top, endPoint: .bottom))
-                .frame(height: 10)
-              Rectangle()
-                .fill(LinearGradient(gradient: Gradient(colors: [Color(.systemBackground).opacity(0), Color(.systemBackground)]), startPoint: .top, endPoint: .bottom))
-                .frame(height: 10)
-                .offset(y: geo.size.height - 10)
+    Overlay(heading: heading,
+            buttons: Button(action: {
+                       self.app.update(action: OptionsAction.firstTimeRun(false))
+                     }) {
+                       Text(self.buttonLabel)
+                     })
+            {
+              Text(self.description)
             }
-            
-          }
-          Button(action: {
-            self.app.update(action: OptionsAction.firstTimeRun(false))
-          }) {
-            Text(self.buttonLabel)
-          }
-          .frame(maxWidth: .infinity, alignment: .center)
-          .padding()
-        }
-        .frame(width: self.responsiveWidth(viewWidth: geo.size.width), height: self.responsiveHeight(viewHeight: geo.size.height))
-        Image("primary-logo")
-          .resizable()
-          .frame(width: 75, height: 75)
-          .cornerRadius(5)
-          .shadow(radius: 3)
-          .offset(y: -(self.responsiveHeight(viewHeight: geo.size.height)/2))
-      }
-    }
-  }
-  
-  private func responsiveWidth(viewWidth: CGFloat) -> CGFloat {
-    if horizontalSizeClass == .compact {
-      return viewWidth * 0.8
-    } else {
-      return 400
-    }
-  }
-  
-  private func responsiveHeight(viewHeight: CGFloat) -> CGFloat {
-    if verticalSizeClass == .compact {
-      return viewHeight - 85
-    } else if horizontalSizeClass == .compact {
-      return viewHeight * 0.7
-    } else {
-      return 450
-    }
   }
 }
