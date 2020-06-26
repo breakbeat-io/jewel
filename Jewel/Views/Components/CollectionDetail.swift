@@ -71,7 +71,7 @@ struct CollectionDetail: View {
           .environment(\.editMode, .constant(self.app.navigation.collectionIsEditing ? EditMode.active : EditMode.inactive))
         }
       }
-      .frame(maxWidth: horizontalSizeClass == .regular ? Constants.regularMaxWidth : .infinity)
+      .frame(maxWidth: horizontalSizeClass == .regular && !app.navigation.showCollection ? Constants.regularMaxWidth : .infinity)
       if horizontalSizeClass == .regular {
         Spacer()
       }
