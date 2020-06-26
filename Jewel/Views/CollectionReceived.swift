@@ -13,14 +13,38 @@ struct CollectionReceived: View {
   @EnvironmentObject var app: AppEnvironment
   
   var body: some View {
-    Overlay(heading: "Shared collection received.",
+    Overlay(heading: "Shared Collection Received",
             buttons: CollectionReceivedButtons()) {
               IfLet(app.state.library.cuedCollection) { cuedCollection in
-                Text("Would you like to add \"\(cuedCollection.collectionName)\" by \"\(cuedCollection.collectionCurator)\" to your Shared Library?")
+                VStack {
+                  Text("Would you like to add the following collection to your Collection Library?")
+                    .padding(.bottom, 30)
+                    .fixedSize(horizontal: false, vertical: true)
+                  Rectangle()
+                    .padding()
+                    .foregroundColor(.clear)
+                    .cornerRadius(Constants.cardCornerRadius)
+                    .overlay(
+                      VStack {
+                        Text(cuedCollection.collectionName)
+                          .font(.title)
+                          .fontWeight(.bold)
+                        Text("by \(cuedCollection.collectionCurator)")
+                          .font(.subheadline)
+                          .fontWeight(.light)
+                          .foregroundColor(.secondary)
+                      }
+                      .frame(minWidth: 0, maxWidth: .infinity)
+                      .padding()
+                      .background(Color(UIColor.secondarySystemBackground))
+                      .cornerRadius(Constants.cardCornerRadius)
+                      , alignment: .center)
+                }
               }
     }
   }
 }
+
 
 struct CollectionReceivedButtons: View {
   
@@ -41,6 +65,7 @@ struct CollectionReceivedButtons: View {
         self.app.update(action: LibraryAction.uncueSharedCollection)
       }, label: {
         Text("Add")
+          .fontWeight(.bold)
       })
       Spacer()
     }
