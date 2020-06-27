@@ -28,19 +28,17 @@ struct CollectionDetail: View {
       if horizontalSizeClass == .regular {
         Spacer()
       }
-      VStack(alignment: .leading) {
-        VStack(alignment: .leading) {
-          Text(collection.name)
-            .font(.title)
-            .fontWeight(.bold)
-          Text("by \(collection.curator)")
-            .font(.subheadline)
-            .fontWeight(.light)
-            .foregroundColor(.secondary)
-        }
-        .padding([.top, .horizontal])
-        GeometryReader { geo in
-          List(selection: self.$app.navigation.collectionEditSelection) {
+      GeometryReader { geo in
+        List(selection: self.$app.navigation.collectionEditSelection) {
+          VStack(alignment: .leading) {
+            Text(self.collection.name)
+              .font(.title)
+              .fontWeight(.bold)
+              .padding(.top)
+            Text("by \(self.collection.curator)")
+              .font(.subheadline)
+              .fontWeight(.light)
+              .foregroundColor(.secondary)
             ForEach(self.slots.indices, id: \.self) { slotIndex in
               Group {
                 if self.slots[slotIndex].source != nil {
