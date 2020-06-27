@@ -43,6 +43,7 @@ struct CollectionLibrary: View {
         } else {
           ForEach(collections) { collection in
             CollectionCard(collection: collection)
+              .frame(height: Constants.cardHeights.medium.rawValue)
           }
           .onMove { (indexSet, index) in
             self.app.update(action: LibraryAction.moveSharedCollection(from: indexSet, to: index))
