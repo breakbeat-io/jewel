@@ -28,50 +28,51 @@ struct CollectionDetail: View {
       if horizontalSizeClass == .regular {
         Spacer()
       }
-      GeometryReader { geo in
-        List(selection: self.$app.navigation.collectionEditSelection) {
-          VStack(alignment: .leading) {
-            Text(self.collection.name)
-              .font(.title)
-              .fontWeight(.bold)
-              .padding(.top)
-            Text("by \(self.collection.curator)")
-              .font(.subheadline)
-              .fontWeight(.light)
-              .foregroundColor(.secondary)
-            ForEach(self.slots.indices, id: \.self) { slotIndex in
-              Group {
-                if self.slots[slotIndex].source != nil {
-                  IfLet(self.slots[slotIndex].source?.attributes) { attributes in
-                    Button(action: {
-                      self.app.navigation.activeSlotIndex = slotIndex
-                      self.app.navigation.showSourceDetail = true
-                    }) {
-                      SourceCard(sourceName: attributes.name, sourceArtist: attributes.artistName, sourceArtwork: attributes.artwork.url(forWidth: 1000))
-                    }
-                  }
-                } else if self.editable {
-                  AddSourceCardButton(slotIndex: slotIndex, collectionId: self.collection.id)
-                    .deleteDisabled(true)
-                } else {
-                  RoundedRectangle(cornerRadius: Constants.cardCornerRadius)
-                    .fill(Color(UIColor.secondarySystemBackground))
+      List(selection: self.$app.navigation.collectionEditSelection) {
+        VStack(alignment: .leading) {
+          Text(self.collection.name)
+            .font(.title)
+            .fontWeight(.bold)
+            .padding(.top)
+          Text("by \(self.collection.curator)")
+            .font(.subheadline)
+            .fontWeight(.light)
+            .foregroundColor(.secondary)
+        }
+        ForEach(self.slots.indices, id: \.self) { slotIndex in
+          Group {
+            if self.slots[slotIndex].source != nil {
+              IfLet(self.slots[slotIndex].source?.attributes) { attributes in
+                Button(action: {
+                  self.app.navigation.activeSlotIndex = slotIndex
+                  self.app.navigation.showSourceDetail = true
+                }) {
+                  SourceCard(sourceName: attributes.name, sourceArtist: attributes.artistName, sourceArtwork: attributes.artwork.url(forWidth: 1000))
                 }
               }
-              .deleteDisabled(!self.editable)
-              .frame(height: Constants.cardHeightFor(viewHeight: geo.size.height))
-            }
-            .onMove { (indexSet, index) in
-              self.app.update(action: LibraryAction.moveSlot(from: indexSet, to: index, collectionId: self.collection.id))
-            }
-            .onDelete {
-              self.app.update(action: LibraryAction.removeSourceFromSlot(slotIndexes: $0, collectionId: self.collection.id))
+            } else if self.editable {
+              AddSourceCardButton(slotIndex: slotIndex, collectionId: self.collection.id)
+                .deleteDisabled(true)
+            } else {
+              RoundedRectangle(cornerRadius: Constants.cardCornerRadius)
+                .fill(Color(UIColor.secondarySystemBackground))
             }
           }
-          .environment(\.editMode, .constant(self.app.navigation.collectionIsEditing ? EditMode.active : EditMode.inactive))
+          .deleteDisabled(!self.editable)
+          .frame(height: Constants.cardHeightFor(viewHeight: Constants.cardHeights.medium.rawValue))
         }
+        .onMove { (indexSet, index) in
+          self.app.update(action: LibraryAction.moveSlot(from: indexSet, to: index, collectionId: self.collection.id))
+        }
+        .onDelete {
+          self.app.update(action: LibraryAction.removeSourceFromSlot(slotIndexes: $0, collectionId: self.collection.id))
+        }
+          
       }
-      .frame(maxWidth: horizontalSizeClass == .regular && !app.navigation.showCollection ? Constants.regularMaxWidth : .infinity)
+      .environment(\.editMode, .constant(self.app.navigation.collectionIsEditing ? EditMode.active : EditMode.inactive))
+        .frame(maxWidth: horizontalSizeClass == .regular && !app.navigation.showCollection ? Constants.regularMaxWidth : .infinity)
+
+      
       if horizontalSizeClass == .regular {
         Spacer()
       }

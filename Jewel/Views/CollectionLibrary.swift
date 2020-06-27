@@ -23,11 +23,11 @@ struct CollectionLibrary: View {
       if horizontalSizeClass == .regular {
         Spacer()
       }
-      VStack(alignment: .leading) {
+      List(selection: $app.navigation.libraryEditSelection) {
         Text("Collection Library")
           .font(.title)
           .fontWeight(.bold)
-          .padding([.top, .horizontal])
+          .padding(.top)
         if collections.isEmpty {
           VStack {
             Spacer()
@@ -41,20 +41,18 @@ struct CollectionLibrary: View {
           .padding()
           .foregroundColor(Color.secondary)
         } else {
-          List(selection: $app.navigation.libraryEditSelection) {
-            ForEach(collections) { collection in
-              CollectionCard(collection: collection)
-            }
-            .onMove { (indexSet, index) in
-              self.app.update(action: LibraryAction.moveSharedCollection(from: indexSet, to: index))
-            }
-            .onDelete {
-              self.app.update(action: LibraryAction.removeSharedCollection(slotIndexes: $0))
-            }
+          ForEach(collections) { collection in
+            CollectionCard(collection: collection)
           }
-          .environment(\.editMode, .constant(self.app.navigation.libraryIsEditing ? EditMode.active : EditMode.inactive))
+          .onMove { (indexSet, index) in
+            self.app.update(action: LibraryAction.moveSharedCollection(from: indexSet, to: index))
+          }
+          .onDelete {
+            self.app.update(action: LibraryAction.removeSharedCollection(slotIndexes: $0))
+          }
         }
       }
+      .environment(\.editMode, .constant(self.app.navigation.libraryIsEditing ? EditMode.active : EditMode.inactive))
       .frame(maxWidth: horizontalSizeClass == .regular ? Constants.regularMaxWidth : .infinity)
       if horizontalSizeClass == .regular {
         Spacer()
