@@ -54,6 +54,7 @@ struct CollectionDetail: View {
                   }
                 } else if self.editable {
                   AddSourceCardButton(slotIndex: slotIndex, collectionId: self.collection.id)
+                    .deleteDisabled(true)
                 } else {
                   RoundedRectangle(cornerRadius: Constants.cardCornerRadius)
                     .fill(Color(UIColor.secondarySystemBackground))
