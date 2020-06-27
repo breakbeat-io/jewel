@@ -47,7 +47,7 @@ struct Settings: View {
       }
       .navigationBarTitle("Settings", displayMode: .inline)
       .navigationBarItems(
-        trailing:
+        leading:
         Button(action: {
           self.app.navigation.showSettings = false
         }) {

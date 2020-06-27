@@ -52,12 +52,13 @@ struct AlternativePlaybackLinks: View {
         }.padding(.vertical)
       }
       .navigationBarTitle("Play in ...", displayMode: .inline)
-      .navigationBarItems(trailing:
-        Button(action: {
-          self.showing = false
-        }) {
-          Text("Close")
-        }
+      .navigationBarItems(
+        leading:
+          Button(action: {
+            self.showing = false
+          }) {
+            Text("Close")
+          }
       )
     }
     .navigationViewStyle(StackNavigationViewStyle())

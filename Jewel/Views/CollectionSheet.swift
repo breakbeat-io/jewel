@@ -27,6 +27,11 @@ struct CollectionSheet: View {
   var body: some View {
     VStack {
       HStack {
+        Button(action: {
+          self.app.navigation.showCollection = false
+        }) {
+          Text("Close")
+        }
         Spacer()
         if app.navigation.collectionIsEditing {
           Button(action: {
@@ -36,7 +41,6 @@ struct CollectionSheet: View {
           }) {
             Image(systemName: "trash")
           }
-          .padding(.trailing)
           Button(action: {
             self.app.navigation.collectionIsEditing.toggle()
           }) {
@@ -47,12 +51,6 @@ struct CollectionSheet: View {
             self.app.navigation.showCollectionOptions.toggle()
           }) {
             Image(systemName: "ellipsis")
-          }
-          .padding()
-          Button(action: {
-            self.app.navigation.showCollection = false
-          }) {
-            Text("Close")
           }
           .sheet(isPresented: $app.navigation.showCollectionOptions) {
             CollectionOptions()

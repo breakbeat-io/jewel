@@ -33,14 +33,14 @@ struct LibraryOptions: View {
       .navigationBarTitle("Library Options", displayMode: .inline)
       .navigationBarItems(
         leading:
-        SettingsButton()
-          .environmentObject(self.app),
+          Button(action: {
+            self.app.navigation.showLibraryOptions = false
+          }) {
+            Text("Close")
+          },
         trailing:
-        Button(action: {
-          self.app.navigation.showLibraryOptions = false
-        }) {
-          Text("Close")
-        }
+          SettingsButton()
+            .environmentObject(self.app)
       )
     }
     .navigationViewStyle(StackNavigationViewStyle())

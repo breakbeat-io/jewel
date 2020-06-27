@@ -26,12 +26,12 @@ struct AlbumDetail: View {
   var body: some View {
     VStack {
       HStack {
-        Spacer()
         Button(action: {
           self.app.navigation.showSourceDetail = false
         }) {
           Text("Close")
         }
+        Spacer()
       }
       .padding([.top, .horizontal])
       ScrollView {

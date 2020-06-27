@@ -98,14 +98,14 @@ struct CollectionOptions: View {
       .navigationBarTitle("\(isOnRotation ? "On Rotation" : "Collection") Options", displayMode: .inline)
       .navigationBarItems(
         leading:
-        SettingsButton()
-          .environmentObject(self.app),
+          Button(action: {
+            self.app.navigation.showCollectionOptions = false
+          }) {
+            Text("Close")
+          },
         trailing:
-        Button(action: {
-          self.app.navigation.showCollectionOptions = false
-        }) {
-          Text("Close")
-        }
+          SettingsButton()
+            .environmentObject(self.app)
       )
       
     }
