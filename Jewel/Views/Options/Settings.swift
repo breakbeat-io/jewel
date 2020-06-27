@@ -26,15 +26,17 @@ struct Settings: View {
     NavigationView {
       VStack {
         Form {
-          HStack {
-            Text("Curator")
-            TextField(
-              curator.wrappedValue,
-              text: curator,
-              onCommit: {
-                self.app.navigation.showSettings = false
+          Section(footer: Text("Use this Curator name when sharing your On Rotation collection and when creating new collections.")) {
+            HStack {
+              Text("Curator")
+              TextField(
+                curator.wrappedValue,
+                text: curator,
+                onCommit: {
+                  self.app.navigation.showSettings = false
+              }
+              ).foregroundColor(.accentColor)
             }
-            ).foregroundColor(.accentColor)
           }
           Section(footer: Text("Use this service for playback if available, otherwise use Apple Music.")) {
             Picker(selection: preferredMusicPlatform, label: Text("Playback Service")) {
@@ -91,6 +93,7 @@ struct SettingsButton: View {
         self.app.navigation.showSettings = true
       }) {
         Image(systemName: "gear")
+          .foregroundColor(Color(UIColor.secondaryLabel))
       }
       Spacer()
     }

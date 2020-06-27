@@ -105,7 +105,6 @@ struct CollectionOptions: View {
           Text("Close")
         }
       )
-      
     }
     .navigationViewStyle(StackNavigationViewStyle())
   }
