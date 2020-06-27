@@ -14,12 +14,15 @@ protocol AppAction {
 }
 
 enum OptionsAction: AppAction {
-  case setPreferredPlatform(platform: Int)
   case firstTimeRun(_: Bool)
+  case setDefaultCurator(curator: String)
+  case setPreferredPlatform(platform: Int)
   case reset
   
   var description: String {
     switch self {
+    case .setDefaultCurator:
+      return "\(type(of: self)): Setting curator name"
     case .setPreferredPlatform:
       return "\(type(of: self)): Setting preferred platform"
     case .firstTimeRun:

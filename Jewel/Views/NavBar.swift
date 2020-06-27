@@ -15,9 +15,7 @@ struct NavBar: View {
   var body: some View {
     VStack {
       HStack {
-        Spacer()
-          .padding(.vertical)
-          .frame(width: Constants.buttonWidth)
+        SettingsButton()
         Spacer()
         Picker("Library", selection: $app.navigation.selectedTab) {
           Image(systemName: "music.house")

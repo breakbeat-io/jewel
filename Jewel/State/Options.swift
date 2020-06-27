@@ -10,5 +10,6 @@ import Foundation
 
 struct Options: Codable {
   var preferredMusicPlatform: Int = 0
+  var defaultCurator: String = "A Music Lover"
   var firstTimeRun: Bool = true
 }

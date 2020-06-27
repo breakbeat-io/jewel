@@ -51,6 +51,7 @@ struct Home: View {
       if self.receivedCollectionCued.wrappedValue {
         CollectionReceived()
       }
+      
     }
     .onAppear {
       UITableView.appearance().separatorStyle = .none

@@ -38,6 +38,12 @@ func updateOptions(options: Options, action: OptionsAction) -> Options {
   
   switch action {
     
+  case let .firstTimeRun(firstTimeRunState):
+    newOptions.firstTimeRun = firstTimeRunState
+    
+  case let .setDefaultCurator(curator):
+    newOptions.defaultCurator = curator
+    
   case let .setPreferredPlatform(platform):
     newOptions.preferredMusicPlatform = platform
     
@@ -46,9 +52,7 @@ func updateOptions(options: Options, action: OptionsAction) -> Options {
     UserDefaults.standard.removePersistentDomain(forName: domain)
     UserDefaults.standard.synchronize()
     exit(1)
-    
-  case let .firstTimeRun(firstTimeRunState):
-    newOptions.firstTimeRun = firstTimeRunState
+
   }
   
   return newOptions
@@ -141,7 +145,7 @@ func updateLibrary(library: Library, action: LibraryAction) -> Library {
     newLibrary.collections.insert(newCollection, at: 0)
     
   case .addUserCollection:
-    let newCollection = Collection(type: .userCollection, name: "New Collection", curator: "A Music Lover")
+    let newCollection = Collection(type: .userCollection, name: "New Collection", curator: AppEnvironment.global.state.options.defaultCurator)
     newLibrary.collections.insert(newCollection, at: 0)
     
   case let .addSharedCollection(collection):

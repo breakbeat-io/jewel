@@ -12,6 +12,10 @@ struct Settings: View {
   
   @EnvironmentObject private var app: AppEnvironment
   
+  private var curator: Binding<String> { Binding (
+    get: { self.app.state.options.defaultCurator },
+    set: { self.app.update(action: OptionsAction.setDefaultCurator(curator: $0))}
+    )}
   private var preferredMusicPlatform: Binding<Int> { Binding (
     get: { self.app.state.options.preferredMusicPlatform },
     set: { self.app.update(action: OptionsAction.setPreferredPlatform(platform: $0)) }
@@ -22,6 +26,16 @@ struct Settings: View {
     NavigationView {
       VStack {
         Form {
+          HStack {
+            Text("Curator")
+            TextField(
+              curator.wrappedValue,
+              text: curator,
+              onCommit: {
+                self.app.navigation.showSettings = false
+            }
+            ).foregroundColor(.accentColor)
+          }
           Section(footer: Text("Use this service for playback if available, otherwise use Apple Music.")) {
             Picker(selection: preferredMusicPlatform, label: Text("Playback Service")) {
               ForEach(0 ..< OdesliPlatform.allCases.count, id: \.self) {
@@ -72,11 +86,16 @@ struct SettingsButton: View {
   @EnvironmentObject var app: AppEnvironment
   
   var body: some View {
-    Button(action: {
-      self.app.navigation.showSettings = true
-    }) {
-      Image(systemName: "gear")
+    HStack {
+      Button(action: {
+        self.app.navigation.showSettings = true
+      }) {
+        Image(systemName: "gear")
+      }
+      Spacer()
     }
+    .padding(.vertical)
+    .frame(width: Constants.buttonWidth)
     .sheet(isPresented: $app.navigation.showSettings) {
         Settings()
           .environmentObject(self.app)

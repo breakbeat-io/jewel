@@ -22,18 +22,32 @@ struct Welcome: View {
 
   Build a Collection Library of your and your friends collections for easy play back later!
   """
-  private let buttonLabel = "Start My Collection"
+  private let startCollectionLabel = "Start My Collection"
+  private let setCuratorNameLabel = "Set my Curator Name"
   
   var body: some View {
     FullOverlay(heading: heading,
-            buttons: Button(action: {
-                       self.app.update(action: OptionsAction.firstTimeRun(false))
-                     }) {
-                       Text(self.buttonLabel)
-                     })
-            {
-              Text(self.description)
-                .foregroundColor(Color.secondary)
-            }
+                buttons:
+      VStack {
+        Button(action: {
+          self.app.update(action: OptionsAction.firstTimeRun(false))
+          self.app.navigation.showSettings = true
+        }) {
+          Text(self.setCuratorNameLabel)
+            .fontWeight(.light)
+        }
+        Divider()
+          .padding(.bottom, 4)
+        Button(action: {
+          self.app.update(action: OptionsAction.firstTimeRun(false))
+        }) {
+          Text(self.startCollectionLabel)
+            .fontWeight(.bold)
+        }
+      })
+    {
+      Text(self.description)
+        .foregroundColor(Color.secondary)
+    }
   }
 }

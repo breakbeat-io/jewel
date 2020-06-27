@@ -70,8 +70,8 @@ struct CollectionOptions: View {
         }
         .disabled(self.collectionEmpty)
         
-        Section {
-          if !isOnRotation {
+        if !isOnRotation {
+          Section {
             HStack {
               Text("Collection Name")
               TextField(
@@ -82,31 +82,28 @@ struct CollectionOptions: View {
               }
               ).foregroundColor(.accentColor)
             }
-          }
-          HStack {
-            Text("Curator")
-            TextField(
-              collectionCurator.wrappedValue,
-              text: collectionCurator,
-              onCommit: {
-                self.app.navigation.showCollectionOptions = false
+            HStack {
+              Text("Curator")
+              TextField(
+                collectionCurator.wrappedValue,
+                text: collectionCurator,
+                onCommit: {
+                  self.app.navigation.showCollectionOptions = false
+              }
+              ).foregroundColor(.accentColor)
             }
-            ).foregroundColor(.accentColor)
           }
+          .disabled(collection.type != .userCollection)
         }
-        .disabled(collection.type != .userCollection)
       }
       .navigationBarTitle("\(isOnRotation ? "On Rotation" : "Collection") Options", displayMode: .inline)
       .navigationBarItems(
         leading:
-          Button(action: {
-            self.app.navigation.showCollectionOptions = false
-          }) {
-            Text("Close")
-          },
-        trailing:
-          SettingsButton()
-            .environmentObject(self.app)
+        Button(action: {
+          self.app.navigation.showCollectionOptions = false
+        }) {
+          Text("Close")
+        }
       )
       
     }

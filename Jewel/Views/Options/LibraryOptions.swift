@@ -37,10 +37,7 @@ struct LibraryOptions: View {
             self.app.navigation.showLibraryOptions = false
           }) {
             Text("Close")
-          },
-        trailing:
-          SettingsButton()
-            .environmentObject(self.app)
+          }
       )
     }
     .navigationViewStyle(StackNavigationViewStyle())
