@@ -53,7 +53,7 @@ struct CollectionDetail: View {
                     }
                   }
                 } else if self.editable {
-                  AddSourceCard(slotIndex: slotIndex, collectionId: self.collection.id)
+                  AddSourceCardButton(slotIndex: slotIndex, collectionId: self.collection.id)
                 } else {
                   RoundedRectangle(cornerRadius: Constants.cardCornerRadius)
                     .fill(Color(UIColor.secondarySystemBackground))

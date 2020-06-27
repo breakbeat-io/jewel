@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct AddSourceCard: View {
+struct AddSourceCardButton: View {
   
   @EnvironmentObject var app: AppEnvironment
   
