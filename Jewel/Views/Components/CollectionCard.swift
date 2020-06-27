@@ -61,7 +61,7 @@ struct CollectionCard: View {
           if collection.type == .userCollection {
             Image(systemName: "person.circle")
               .padding(4)
-              .foregroundColor(Color.black.opacity(0.8))
+              .foregroundColor(Color.white.opacity(0.8))
           }
         }
         .padding(4)
