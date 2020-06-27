@@ -14,34 +14,23 @@ struct CollectionReceived: View {
   
   var body: some View {
     FullOverlay(heading: "Shared Collection Received",
-            buttons: CollectionReceivedButtons()) {
-              IfLet(app.state.library.cuedCollection) { cuedCollection in
-                VStack {
-                  Text("Would you like to add the following collection to your Collection Library?")
-                    .foregroundColor(Color.secondary)
-                    .padding(.bottom, 30)
-                    .fixedSize(horizontal: false, vertical: true)
-                  Rectangle()
-                    .padding()
-                    .foregroundColor(.clear)
-                    .cornerRadius(Constants.cardCornerRadius)
-                    .overlay(
-                      VStack {
+                buttons: CollectionReceivedButtons()) {
+                  IfLet(app.state.library.cuedCollection) { cuedCollection in
+                    VStack {
+                      Text("Would you like to add the following collection to your Collection Library?")
+                        .foregroundColor(Color.secondary)
+                        .padding(.bottom, 30)
+                      Group {
                         Text(cuedCollection.collectionName)
-                          .font(.title)
-                          .fontWeight(.bold)
+                          .font(.headline)
                         Text("by \(cuedCollection.collectionCurator)")
                           .font(.subheadline)
-                          .fontWeight(.light)
                           .foregroundColor(.secondary)
                       }
-                      .frame(minWidth: 0, maxWidth: .infinity)
-                      .padding()
-                      .background(Color(UIColor.tertiarySystemBackground))
-                      .cornerRadius(Constants.cardCornerRadius)
-                      , alignment: .center)
-                }
-              }
+                      .multilineTextAlignment(.center)
+                      .padding(.bottom)
+                    }
+                  }
     }
   }
 }
