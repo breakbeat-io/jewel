@@ -25,41 +25,18 @@ struct CollectionSheet: View {
   }
   
   var body: some View {
-    VStack {
-      HStack {
-        Button(action: {
-          self.app.navigation.showCollection = false
-        }) {
-          Text("Close")
-        }
-        Spacer()
-        if app.navigation.collectionIsEditing {
-          Button(action: {
-            self.app.update(action: LibraryAction.removeSourcesFromCollection(sourceIds: self.app.navigation.collectionEditSelection, collectionId: self.collection.id))
-              self.app.navigation.collectionIsEditing = false
-              self.app.navigation.collectionEditSelection.removeAll()
-          }) {
-            Image(systemName: "trash")
-          }
-          Button(action: {
-            self.app.navigation.collectionIsEditing.toggle()
-          }) {
-            Image(systemName: "checkmark")
-          }
-        } else {
-          Button(action: {
-            self.app.navigation.showCollectionOptions.toggle()
-          }) {
-            Image(systemName: "ellipsis")
-          }
-          .sheet(isPresented: $app.navigation.showCollectionOptions) {
-            CollectionOptions()
-                .environmentObject(self.app)
-          }
-        }
-      }
-      .padding([.top, .horizontal])
+    NavigationView {
       CollectionDetail(collection: collection)
+        .navigationBarTitle("", displayMode: .inline)
+        .navigationBarItems(
+          leading: Button(action: {
+              self.app.navigation.showCollection = false
+            }) {
+              Text("Close")
+            },
+          trailing:
+            CollectionActionButtons()
+      )
     }
     .onDisappear {
       self.app.navigation.collectionIsEditing = false

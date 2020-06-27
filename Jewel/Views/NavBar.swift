@@ -27,7 +27,7 @@ struct NavBar: View {
         .frame(maxWidth: 300)
         Spacer()
         if app.navigation.selectedTab == .onRotation {
-          OnRotationActionButtons()
+          CollectionActionButtons()
         } else {
           LibraryActionButtons()
         }
@@ -41,7 +41,7 @@ struct NavBar: View {
   }
 }
 
-struct OnRotationActionButtons: View {
+struct CollectionActionButtons: View {
   
   @EnvironmentObject var app: AppEnvironment
   

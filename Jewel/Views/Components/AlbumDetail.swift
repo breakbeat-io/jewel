@@ -24,16 +24,7 @@ struct AlbumDetail: View {
   }
   
   var body: some View {
-    VStack {
-      HStack {
-        Button(action: {
-          self.app.navigation.showSourceDetail = false
-        }) {
-          Text("Close")
-        }
-        Spacer()
-      }
-      .padding([.top, .horizontal])
+    NavigationView {
       ScrollView {
         if horizontalSizeClass == .compact {
           Compact(slot: slot)
@@ -41,6 +32,12 @@ struct AlbumDetail: View {
           Regular(slot: slot)
         }
       }
+      .navigationBarTitle("", displayMode: .inline)
+    .navigationBarItems(leading: Button(action: {
+      self.app.navigation.showSourceDetail = false
+    }) {
+      Text("Close")
+    })
     }
   }
   
