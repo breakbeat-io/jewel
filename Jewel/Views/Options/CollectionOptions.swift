@@ -71,17 +71,18 @@ struct CollectionOptions: View {
         .disabled(self.collectionEmpty)
         
         Section {
-          HStack {
-            Text("Collection Name")
-            TextField(
-              collectionName.wrappedValue,
-              text: collectionName,
-              onCommit: {
-                self.app.navigation.showCollectionOptions = false
+          if !isOnRotation {
+            HStack {
+              Text("Collection Name")
+              TextField(
+                collectionName.wrappedValue,
+                text: collectionName,
+                onCommit: {
+                  self.app.navigation.showCollectionOptions = false
+              }
+              ).foregroundColor(.accentColor)
             }
-            ).foregroundColor(.accentColor)
           }
-          .disabled(isOnRotation)
           HStack {
             Text("Curator")
             TextField(

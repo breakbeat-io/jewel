@@ -25,10 +25,11 @@ struct SearchHome: View {
       }
       .navigationBarTitle("Search")
       .navigationBarItems(
-        trailing: Button(action: {
+        leading: Button(action: {
+          self.app.update(action: SearchAction.removeSearchResults)
           self.showing = false
         }) {
-          Text("Cancel")
+          Text("Close")
         }
       )
     }

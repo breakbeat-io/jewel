@@ -66,8 +66,8 @@ struct RecommendationsButton: View {
     .alert(isPresented: $showLoadRecommendationsAlert) {
       Alert(title: Text("Add our current Recommended Collection?"),
             message: Text("Every three months we publish a Collection of new and classic albums for you to listen to."),
-            primaryButton: .cancel(Text("Cancel")),
-            secondaryButton: .default(Text("Add").bold()) {
+            primaryButton: .default(Text("Cancel")),
+            secondaryButton: .default(Text("Add").fontWeight(.bold)) {
               self.app.navigation.showLibraryOptions = false
               SharedCollectionManager.loadRecommendations()
         })
