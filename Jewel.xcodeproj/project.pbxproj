@@ -54,6 +54,8 @@
 		D2D7858F248A910A00E0CC63 /* SourceCover.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D7858E248A910A00E0CC63 /* SourceCover.swift */; };
 		D2D78591248AED2900E0CC63 /* AlternativePlaybackLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D78590248AED2900E0CC63 /* AlternativePlaybackLinks.swift */; };
 		D2D78593248AF2E900E0CC63 /* SourceCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D78592248AF2E900E0CC63 /* SourceCard.swift */; };
+		D2DB0FCD24A7782B006A5835 /* RecordStore+Screenshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2DB0FC924A7782B006A5835 /* RecordStore+Screenshots.swift */; };
+		D2DB0FCE24A7782B006A5835 /* screenshotAlbums.json in Resources */ = {isa = PBXBuildFile; fileRef = D2DB0FCA24A7782B006A5835 /* screenshotAlbums.json */; };
 		D2F0E220249A370A00EA3FA2 /* CollectionDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F0E21F249A370A00EA3FA2 /* CollectionDetail.swift */; };
 		D2F8D14C248A6451008C29C3 /* CollectionCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F8D14B248A6451008C29C3 /* CollectionCard.swift */; };
 		D2F8D14E248A666C008C29C3 /* CardArtworkComposite.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F8D14D248A666C008C29C3 /* CardArtworkComposite.swift */; };
@@ -111,6 +113,8 @@
 		D2D7858E248A910A00E0CC63 /* SourceCover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceCover.swift; sourceTree = "<group>"; };
 		D2D78590248AED2900E0CC63 /* AlternativePlaybackLinks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlternativePlaybackLinks.swift; sourceTree = "<group>"; };
 		D2D78592248AF2E900E0CC63 /* SourceCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceCard.swift; sourceTree = "<group>"; };
+		D2DB0FC924A7782B006A5835 /* RecordStore+Screenshots.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RecordStore+Screenshots.swift"; sourceTree = "<group>"; };
+		D2DB0FCA24A7782B006A5835 /* screenshotAlbums.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = screenshotAlbums.json; sourceTree = "<group>"; };
 		D2F0E21F249A370A00EA3FA2 /* CollectionDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionDetail.swift; sourceTree = "<group>"; };
 		D2F8D14B248A6451008C29C3 /* CollectionCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCard.swift; sourceTree = "<group>"; };
 		D2F8D14D248A666C008C29C3 /* CardArtworkComposite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardArtworkComposite.swift; sourceTree = "<group>"; };
@@ -256,6 +260,7 @@
 		D2AC120524859D3800C52D9E /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				D2DB0FB824A777D8006A5835 /* Screenshots */,
 				D23197C12492DACD00C09977 /* Constants.swift */,
 				D2B4FD94248458300028D7A4 /* Extensions.swift */,
 			);
@@ -280,6 +285,15 @@
 				D2A449CB249BAECE006E0A12 /* LibraryOptions.swift */,
 			);
 			path = Options;
+			sourceTree = "<group>";
+		};
+		D2DB0FB824A777D8006A5835 /* Screenshots */ = {
+			isa = PBXGroup;
+			children = (
+				D2DB0FC924A7782B006A5835 /* RecordStore+Screenshots.swift */,
+				D2DB0FCA24A7782B006A5835 /* screenshotAlbums.json */,
+			);
+			path = Screenshots;
 			sourceTree = "<group>";
 		};
 		D2F8D162248A7E1A008C29C3 /* Components */ = {
@@ -369,6 +383,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2DB0FCE24A7782B006A5835 /* screenshotAlbums.json in Resources */,
 				D22155882481114B00A1F04A /* LaunchScreen.storyboard in Resources */,
 				D22155852481114B00A1F04A /* Preview Assets.xcassets in Resources */,
 				D27FB8202486B46D0014C05D /* fa-brands.otf in Resources */,
@@ -424,6 +439,7 @@
 				D29CB1C524A631EB0051BA96 /* CollectionReceived.swift in Sources */,
 				D2881748248BE81400EB47C2 /* SharedCollectionManager.swift in Sources */,
 				D2F8D166248A7E42008C29C3 /* DiscTrackList.swift in Sources */,
+				D2DB0FCD24A7782B006A5835 /* RecordStore+Screenshots.swift in Sources */,
 				D2AB84692481148D008B57F9 /* AppAction.swift in Sources */,
 				D2F8D14E248A666C008C29C3 /* CardArtworkComposite.swift in Sources */,
 				D2945E1C249C0FC100AE6CA5 /* Navigation.swift in Sources */,

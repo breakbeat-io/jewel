@@ -30,11 +30,19 @@ struct Settings: View {
             }
           }
           if app.navigation.showDebugMenu {
-            Button(action: {
-              self.app.update(action: OptionsAction.reset)
-            }) {
-              Text("Reset Jewel")
-                .foregroundColor(.red)
+            Section(header: Text("Debug")) {
+              Button(action: {
+                RecordStore.loadScreenshotCollection()
+                self.app.navigation.showSettings = false
+              }) {
+                Text("Load Screenshot Data")
+              }
+              Button(action: {
+                self.app.update(action: OptionsAction.reset)
+              }) {
+                Text("Reset Jewel")
+                  .foregroundColor(.red)
+              }
             }
           }
         }

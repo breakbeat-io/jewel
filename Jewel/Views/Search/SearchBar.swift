@@ -21,7 +21,11 @@ struct SearchBar: View {
         "Search Apple Music",
         text: $searchTerm,
         onCommit: {
-          RecordStore.browse(for: self.searchTerm)
+          if self.app.navigation.showDebugMenu {
+            RecordStore.exampleSearch()
+          } else {
+            RecordStore.browse(for: self.searchTerm)
+          }
       }
       ).foregroundColor(.primary)
         .keyboardType(.webSearch)
