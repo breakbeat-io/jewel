@@ -40,7 +40,6 @@ enum LibraryAction: AppAction {
   case moveSlot(from: IndexSet, to: Int, collectionId: UUID)
   case invalidateShareLinks(collectionId: UUID)
   case setShareLinks(shareLinkLong: URL, shareLinkShort: URL, collectionId: UUID)
-  case shareLinkError(_: Bool, collectionId: UUID)
   case saveOnRotation(collection: Collection)
   case addUserCollection
   case addSharedCollection(collection: Collection)
@@ -71,8 +70,6 @@ enum LibraryAction: AppAction {
       return "\(type(of: self)): Invalidating share links"
     case .setShareLinks:
       return "\(type(of: self)): Setting share links"
-    case .shareLinkError:
-      return "\(type(of: self)): Setting the share link error"
     case .saveOnRotation:
       return "\(type(of: self)): Saving current On Rotation to Library"
     case .addUserCollection:

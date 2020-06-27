@@ -24,7 +24,7 @@ struct ShareSheetLoader: View {
             .padding()
             .multilineTextAlignment(.center)
         }
-      } else if collection.shareLinkError {
+      } else if app.navigation.shareLinkError {
         VStack {
           Image(systemName: "exclamationmark.triangle")
             .font(.largeTitle)
@@ -46,7 +46,7 @@ struct ShareSheetLoader: View {
   
   private func refreshShareLinks() {
     
-    self.app.update(action: LibraryAction.shareLinkError(false, collectionId: collection.id))
+    self.app.navigation.shareLinkError = false
     
     let newLongLink = SharedCollectionManager.generateLongLink(for: collection)
     

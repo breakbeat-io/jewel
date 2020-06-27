@@ -13,7 +13,6 @@ struct Navigation {
   let onRotationId: UUID
   var activeCollectionId: UUID
   var activeSlotIndex: Int = 0
-  //slot: self.slots[slotIndex]
   
   var onRotationActive: Bool {
     onRotationId == activeCollectionId
@@ -41,6 +40,8 @@ struct Navigation {
   var showCollectionOptions: Bool = false  
   var collectionIsEditing: Bool = false
   var collectionEditSelection = Set<Int>()
+  
+  var shareLinkError = false
   
   var showSettings: Bool = false
   var showDebugMenu: Bool = false

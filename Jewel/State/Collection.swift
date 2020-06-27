@@ -25,7 +25,6 @@ struct Collection: Identifiable, Codable {
   
   var shareLinkLong: URL?
   var shareLinkShort: URL?
-  var shareLinkError = false
   
   enum CodingKeys: CodingKey {
     case id

@@ -131,12 +131,6 @@ func updateLibrary(library: Library, action: LibraryAction) -> Library {
       commitCollection(collection: collection)
     }
     
-  case let .shareLinkError(errorState, collectionId):
-    if var collection = extractCollection(collectionId: collectionId) {
-      collection.shareLinkError = errorState
-      commitCollection(collection: collection)
-    }
-    
   case let .saveOnRotation(collection):
     let formatter = DateFormatter()
     formatter.dateFormat = "MMM yyyy"
