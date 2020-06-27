@@ -14,7 +14,14 @@ struct AlbumDetail: View {
   
   @EnvironmentObject var app: AppEnvironment
   
-  let slot: Slot
+  private var slot: Slot {
+    if app.navigation.onRotationActive {
+      return app.state.library.onRotation.slots[app.navigation.activeSlotIndex]
+    } else {
+      let collectionIndex = app.state.library.collections.firstIndex(where: { $0.id == app.navigation.activeCollectionId })!
+      return app.state.library.collections[collectionIndex].slots[app.navigation.activeSlotIndex]
+    }
+  }
   
   var body: some View {
     VStack {

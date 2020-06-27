@@ -12,6 +12,12 @@ struct Navigation {
   
   let onRotationId: UUID
   var activeCollectionId: UUID
+  var activeSlotIndex: Int = 0
+  //slot: self.slots[slotIndex]
+  
+  var onRotationActive: Bool {
+    onRotationId == activeCollectionId
+  }
   
   var selectedTab: Navigation.Tab = .onRotation {
     didSet {

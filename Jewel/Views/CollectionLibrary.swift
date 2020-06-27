@@ -61,9 +61,9 @@ struct CollectionLibrary: View {
       }
     }
     .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
-      .sheet(isPresented: self.$app.navigation.showCollection) {
-        CollectionSheet()
-          .environmentObject(self.app)
+    .sheet(isPresented: self.$app.navigation.showCollection) {
+      CollectionSheet()
+        .environmentObject(self.app)
     }
   }
 }

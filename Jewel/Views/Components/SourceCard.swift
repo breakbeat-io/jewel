@@ -13,12 +13,14 @@ struct SourceCard: View {
   
   @EnvironmentObject var app: AppEnvironment
   
+  let slotIndex: Int
   let sourceName: String
   let sourceArtist: String
   var sourceArtwork: URL?
   
   var body: some View {
     Button(action: {
+      self.app.navigation.activeSlotIndex = self.slotIndex
       self.app.navigation.showSourceDetail = true
     }) {
       Rectangle()
