@@ -45,7 +45,12 @@ struct CollectionDetail: View {
               Group {
                 if self.slots[slotIndex].source != nil {
                   IfLet(self.slots[slotIndex].source?.attributes) { attributes in
-                    SourceCard(slotIndex: slotIndex, sourceName: attributes.name, sourceArtist: attributes.artistName, sourceArtwork: attributes.artwork.url(forWidth: 1000))
+                    Button(action: {
+                      self.app.navigation.activeSlotIndex = slotIndex
+                      self.app.navigation.showSourceDetail = true
+                    }) {
+                      SourceCard(sourceName: attributes.name, sourceArtist: attributes.artistName, sourceArtwork: attributes.artwork.url(forWidth: 1000))
+                    }
                   }
                 } else if self.editable {
                   AddSourceCard(slotIndex: slotIndex, collectionId: self.collection.id)
