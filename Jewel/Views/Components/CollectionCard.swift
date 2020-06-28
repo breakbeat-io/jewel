@@ -35,7 +35,7 @@ struct CollectionCard: View {
           .foregroundColor(.clear)
           .background(
             CardArtworkComposite(images: collectionArtwork)
-        )
+          )
           .cornerRadius(Constants.cardCornerRadius)
           .shadow(radius: 3)
         HStack(alignment: .bottom) {

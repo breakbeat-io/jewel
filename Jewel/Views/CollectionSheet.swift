@@ -26,16 +26,16 @@ struct CollectionSheet: View {
       CollectionDetail(collection: collection)
         .navigationBarTitle("", displayMode: .inline)
         .navigationBarItems(
-          leading: Button(action: {
-              self.app.navigation.showCollection = false
-            }) {
-              Text("Close")
-            },
-          trailing:
-            CollectionActionButtons()
+          leading:
+          Button(action: {
+            self.app.navigation.showCollection = false
+          }) {
+            Text("Close")
+          },
+          trailing: CollectionActionButtons()
       )
     }
-      .navigationViewStyle(StackNavigationViewStyle())
+    .navigationViewStyle(StackNavigationViewStyle())
     .onDisappear {
       self.app.navigation.collectionIsEditing = false
     }

@@ -52,7 +52,7 @@ func updateOptions(options: Options, action: OptionsAction) -> Options {
     UserDefaults.standard.removePersistentDomain(forName: domain)
     UserDefaults.standard.synchronize()
     exit(1)
-
+    
   }
   
   return newOptions

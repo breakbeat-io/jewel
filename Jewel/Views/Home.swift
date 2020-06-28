@@ -21,6 +21,7 @@ struct Home: View {
   private var overlayShowing: Bool {
     app.state.options.firstTimeRun || receivedCollectionCued.wrappedValue
   }
+  
   var body: some View {
     ZStack {
       Color(UIColor.systemBackground)
@@ -59,7 +60,6 @@ struct Home: View {
       if self.receivedCollectionCued.wrappedValue {
         CollectionReceived()
       }
-      
     }
     .onAppear {
       UITableView.appearance().separatorStyle = .none

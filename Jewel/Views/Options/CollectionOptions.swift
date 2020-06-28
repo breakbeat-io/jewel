@@ -11,38 +11,34 @@ import SwiftUI
 struct CollectionOptions: View {
   
   @EnvironmentObject private var app: AppEnvironment
-  
-  private var collectionId: UUID {
-    app.navigation.activeCollectionId
-  }
+
   private var collection: Collection {
-    if self.collectionId == self.app.state.library.onRotation.id {
+    if app.navigation.onRotationActive {
       return self.app.state.library.onRotation
     } else {
-      return self.app.state.library.collections.first(where: { $0.id == self.collectionId })!
+      return self.app.state.library.collections.first(where: { $0.id == self.app.navigation.activeCollectionId })!
     }
-  }
-  private var isOnRotation: Bool {
-    self.collectionId == self.app.state.library.onRotation.id
   }
   private var collectionEmpty: Bool {
     collection.slots.filter( { $0.source != nil }).count == 0
   }
   private var collectionName: Binding<String> { Binding (
     get: { self.collection.name },
-    set: { self.app.update(action: LibraryAction.setCollectionName(name: $0, collectionId: self.collectionId))}
+    set: { self.app.update(action: LibraryAction.setCollectionName(name: $0, collectionId: self.app.navigation.activeCollectionId))}
     )}
   private var collectionCurator: Binding<String> { Binding (
     get: { self.collection.curator },
-    set: { self.app.update(action: LibraryAction.setCollectionCurator(curator: $0, collectionId: self.collectionId))}
+    set: { self.app.update(action: LibraryAction.setCollectionCurator(curator: $0, collectionId: self.app.navigation.activeCollectionId))}
     )}
   
   var body: some View {
     NavigationView {
       Form {
         Section {
+          
           ShareCollectionButton(collection: collection)
-          if isOnRotation {
+          
+          if app.navigation.onRotationActive {
             Button(action: {
               self.app.navigation.selectedTab = .library
               self.app.navigation.showCollectionOptions = false
@@ -63,14 +59,14 @@ struct CollectionOptions: View {
               HStack {
                 Image(systemName: "square.stack.3d.up")
                   .frame(width: Constants.optionsButtonIconWidth)
-                Text("Reorder \(isOnRotation ? "On Rotation" : "Collection")")
+                Text("Reorder \(app.navigation.onRotationActive ? "On Rotation" : "Collection")")
               }
             }
           }
         }
         .disabled(self.collectionEmpty)
         
-        if !isOnRotation {
+        if !app.navigation.onRotationActive {
           Section {
             HStack {
               Text("Collection Name")
@@ -96,7 +92,8 @@ struct CollectionOptions: View {
           .disabled(collection.type != .userCollection)
         }
       }
-      .navigationBarTitle("\(isOnRotation ? "On Rotation" : "Collection") Options", displayMode: .inline)
+      
+      .navigationBarTitle("\(app.navigation.onRotationActive ? "On Rotation" : "Collection") Options", displayMode: .inline)
       .navigationBarItems(
         leading:
         Button(action: {
@@ -117,11 +114,7 @@ struct ShareCollectionButton: View {
   var collection: Collection
   
   @State private var showSharing: Bool = false
-  
-  private var isOnRotation: Bool {
-    self.collection.id == self.app.state.library.onRotation.id
-  }
-  
+
   var body: some View {
     Button(action: {
       self.showSharing = true
@@ -129,7 +122,7 @@ struct ShareCollectionButton: View {
       HStack {
         Image(systemName: "square.and.arrow.up")
           .frame(width: Constants.optionsButtonIconWidth)
-        Text("Share \(self.isOnRotation ? "On Rotation" : "Collection")")
+        Text("Share \(self.app.navigation.onRotationActive ? "On Rotation" : "Collection")")
       }
     }
     .sheet(isPresented: self.$showSharing) {

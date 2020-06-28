@@ -26,8 +26,8 @@ struct SearchBar: View {
           } else {
             RecordStore.browse(for: self.searchTerm)
           }
-      }
-      ).foregroundColor(.primary)
+      })
+        .foregroundColor(.primary)
         .keyboardType(.webSearch)
       Button(action: {
         self.searchTerm = ""

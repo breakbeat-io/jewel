@@ -31,7 +31,6 @@ struct NavBar: View {
         } else {
           LibraryActionButtons()
         }
-        
       }
       .padding(.horizontal)
       Rectangle()

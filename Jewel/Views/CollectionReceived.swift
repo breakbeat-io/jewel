@@ -13,24 +13,23 @@ struct CollectionReceived: View {
   @EnvironmentObject var app: AppEnvironment
   
   var body: some View {
-    FullOverlay(heading: "Shared Collection Received",
-                buttons: CollectionReceivedButtons()) {
-                  IfLet(app.state.library.cuedCollection) { cuedCollection in
-                    VStack {
-                      Text("Would you like to add the following collection to your Collection Library?")
-                        .foregroundColor(Color.secondary)
-                        .padding(.bottom, 30)
-                      Group {
-                        Text(cuedCollection.collectionName)
-                          .font(.headline)
-                        Text("by \(cuedCollection.collectionCurator)")
-                          .font(.subheadline)
-                          .foregroundColor(.secondary)
-                      }
-                      .multilineTextAlignment(.center)
-                      .padding(.bottom)
-                    }
-                  }
+    FullOverlay(heading: "Shared Collection Received", buttons: CollectionReceivedButtons()) {
+      IfLet(app.state.library.cuedCollection) { cuedCollection in
+        VStack {
+          Text("Would you like to add the following collection to your Collection Library?")
+            .foregroundColor(Color.secondary)
+            .padding(.bottom, 30)
+          Group {
+            Text(cuedCollection.collectionName)
+              .font(.headline)
+            Text("by \(cuedCollection.collectionCurator)")
+              .font(.subheadline)
+              .foregroundColor(.secondary)
+          }
+          .multilineTextAlignment(.center)
+          .padding(.bottom)
+        }
+      }
     }
   }
 }

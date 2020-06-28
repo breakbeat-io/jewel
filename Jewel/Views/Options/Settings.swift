@@ -100,8 +100,8 @@ struct SettingsButton: View {
     .padding(.vertical)
     .frame(width: Constants.buttonWidth)
     .sheet(isPresented: $app.navigation.showSettings) {
-        Settings()
-          .environmentObject(self.app)
+      Settings()
+        .environmentObject(self.app)
     }
   }
 }

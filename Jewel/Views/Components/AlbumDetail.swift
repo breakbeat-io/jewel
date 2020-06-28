@@ -33,11 +33,14 @@ struct AlbumDetail: View {
         }
       }
       .navigationBarTitle("", displayMode: .inline)
-    .navigationBarItems(leading: Button(action: {
-      self.app.navigation.showSourceDetail = false
-    }) {
-      Text("Close")
-    })
+      .navigationBarItems(
+        leading:
+        Button(action: {
+          self.app.navigation.showSourceDetail = false
+        }) {
+          Text("Close")
+        }
+      )
     }
     .navigationViewStyle(StackNavigationViewStyle())
   }
@@ -50,8 +53,8 @@ struct AlbumDetail: View {
       VStack {
         IfLet(slot.source?.attributes) { attributes in
           SourceCover(sourceName: attributes.name,
-                     sourceArtist: attributes.artistName,
-                     sourceArtwork: attributes.artwork.url(forWidth: 1000))
+                      sourceArtist: attributes.artistName,
+                      sourceArtwork: attributes.artwork.url(forWidth: 1000))
           PlaybackLinks(baseUrl: attributes.url,
                         playbackLinks: self.slot.playbackLinks)
             .padding(.bottom)
@@ -75,8 +78,8 @@ struct AlbumDetail: View {
         IfLet(slot.source?.attributes) { attributes in
           VStack {
             SourceCover(sourceName: attributes.name,
-                       sourceArtist: attributes.artistName,
-                       sourceArtwork: attributes.artwork.url(forWidth: 1000))
+                        sourceArtist: attributes.artistName,
+                        sourceArtwork: attributes.artwork.url(forWidth: 1000))
             PlaybackLinks(baseUrl: attributes.url,
                           playbackLinks: self.slot.playbackLinks)
               .padding(.bottom)

@@ -71,12 +71,9 @@ struct CollectionDetail: View {
         .onDelete {
           self.app.update(action: LibraryAction.removeSourceFromSlot(slotIndexes: $0, collectionId: self.collection.id))
         }
-        
       }
       .environment(\.editMode, .constant(self.app.navigation.collectionIsEditing ? EditMode.active : EditMode.inactive))
       .frame(maxWidth: self.horizontalSizeClass == .regular && !self.app.navigation.showCollection ? Constants.regularMaxWidth : .infinity)
-      
-      
       if self.horizontalSizeClass == .regular {
         Spacer()
       }
