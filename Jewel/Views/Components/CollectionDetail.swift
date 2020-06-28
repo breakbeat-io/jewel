@@ -61,6 +61,7 @@ struct CollectionDetail: View {
             }
             .frame(height: Constants.cardHeightFor(viewHeight: self.app.navigation.detailViewHeight))
             .deleteDisabled(!self.editable)
+            .moveDisabled(!self.editable)
           }
           .onMove { (indexSet, index) in
             self.app.update(action: LibraryAction.moveSlot(from: indexSet, to: index, collectionId: self.collection.id))
