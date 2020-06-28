@@ -38,6 +38,7 @@ struct CollectionSheet: View {
             CollectionActionButtons()
       )
     }
+      .navigationViewStyle(StackNavigationViewStyle())
     .onDisappear {
       self.app.navigation.collectionIsEditing = false
     }

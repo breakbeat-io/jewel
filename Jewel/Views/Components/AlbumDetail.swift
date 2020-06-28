@@ -39,6 +39,7 @@ struct AlbumDetail: View {
       Text("Close")
     })
     }
+    .navigationViewStyle(StackNavigationViewStyle())
   }
   
   struct Compact: View {
