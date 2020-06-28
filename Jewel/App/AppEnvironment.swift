@@ -41,7 +41,7 @@ final class AppEnvironment: ObservableObject {
     
     print("💎 State > No saved state found, creating new")
     let options = Options()
-    let onRotationCollection = Collection(type: .userCollection, name: "On Rotation", curator: options.defaultCurator)
+    let onRotationCollection = Collection(type: .userCollection, name: Navigation.Tab.onRotation.rawValue, curator: options.defaultCurator)
     let library = Library(onRotation: onRotationCollection, collections: [Collection]())
     
     state = AppState(options: options, library: library)
@@ -70,9 +70,8 @@ final class AppEnvironment: ObservableObject {
   
   private func migrateV1UserDefaults() {
     
-    if let v1CollectionName = UserDefaults.standard.string(forKey: "collectionName") {
-      print("💎 State Migration > v1.0 Collection Name found ... migrating.")
-      state.library.onRotation.name = v1CollectionName
+    if UserDefaults.standard.string(forKey: "collectionName") != nil {
+      print("💎 State Migration > v1.0 Collection Name found ... deleting.")
       UserDefaults.standard.removeObject(forKey: "collectionName")
     }
     

@@ -141,7 +141,7 @@ func updateLibrary(library: Library, action: LibraryAction) -> Library {
     let dateString = formatter.string(from: Date())
     var newCollection = collection
     newCollection.id = UUID()
-    newCollection.name = "On Rotation — \(dateString)"
+    newCollection.name = "My On Rotation — \(dateString)"
     newLibrary.collections.insert(newCollection, at: 0)
     
   case .addUserCollection:

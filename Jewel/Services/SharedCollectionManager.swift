@@ -52,8 +52,12 @@ class SharedCollectionManager {
       }
     }
     
+    let formatter = DateFormatter()
+    formatter.dateFormat = "MMM yyyy"
+    let dateString = formatter.string(from: Date())
+    
     let shareableCollection = ShareableCollection(
-      collectionName: collection.name == "My Collection" ? "\(collection.curator)'s Collection" : collection.name,
+      collectionName: collection.name == Navigation.Tab.onRotation.rawValue ? "\(collection.curator)'s On Rotation - \(dateString)" : collection.name,
       collectionCurator: collection.curator,
       collection: shareableSlots
     )

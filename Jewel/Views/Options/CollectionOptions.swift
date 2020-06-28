@@ -59,7 +59,7 @@ struct CollectionOptions: View {
               HStack {
                 Image(systemName: "square.stack.3d.up")
                   .frame(width: Constants.optionsButtonIconWidth)
-                Text("Reorder \(app.navigation.onRotationActive ? "On Rotation" : "Collection")")
+                Text("Reorder \(app.navigation.onRotationActive ? Navigation.Tab.onRotation.rawValue : "Collection")")
               }
             }
           }
@@ -93,7 +93,7 @@ struct CollectionOptions: View {
         }
       }
       
-      .navigationBarTitle("\(app.navigation.onRotationActive ? "On Rotation" : "Collection") Options", displayMode: .inline)
+      .navigationBarTitle("\(app.navigation.onRotationActive ? Navigation.Tab.onRotation.rawValue : "Collection") Options", displayMode: .inline)
       .navigationBarItems(
         leading:
         Button(action: {
@@ -122,7 +122,7 @@ struct ShareCollectionButton: View {
       HStack {
         Image(systemName: "square.and.arrow.up")
           .frame(width: Constants.optionsButtonIconWidth)
-        Text("Share \(self.app.navigation.onRotationActive ? "On Rotation" : "Collection")")
+        Text("Share \(self.app.navigation.onRotationActive ? Navigation.Tab.onRotation.rawValue : "Collection")")
       }
     }
     .sheet(isPresented: self.$showSharing) {
