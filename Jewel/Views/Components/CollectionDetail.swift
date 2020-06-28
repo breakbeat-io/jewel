@@ -22,6 +22,9 @@ struct CollectionDetail: View {
   private var editable: Bool {
     collection.type == .userCollection ? true : false
   }
+  private var collectionEmpty: Bool {
+    collection.slots.filter( { $0.source != nil }).count == 0
+  }
   
   var body: some View {
     HStack {
@@ -82,6 +85,14 @@ struct CollectionDetail: View {
     .sheet(isPresented: self.$app.navigation.showSourceDetail) {
       AlbumDetail()
         .environmentObject(self.app)
+    }
+    .onDisappear {
+      if !self.app.navigation.onRotationActive && self.collectionEmpty {
+        self.app.navigation.activeCollectionId = self.app.navigation.onRotationId
+        if let collectionIndex = self.app.state.library.collections.firstIndex(where: { $0.id == self.collection.id }) {
+          self.app.update(action: LibraryAction.removeSharedCollection(slotIndexes: IndexSet([collectionIndex])))
+        }
+      }
     }
   }
 }

@@ -12,14 +12,11 @@ struct CollectionSheet: View {
   
   @EnvironmentObject var app: AppEnvironment
   
-  private var collectionId: UUID {
-    app.navigation.activeCollectionId
-  }
   private var collection: Collection {
-    if collectionId == app.state.library.onRotation.id {
+    if app.navigation.onRotationActive {
       return app.state.library.onRotation
     } else {
-      let collectionIndex = app.state.library.collections.firstIndex(where: { $0.id == collectionId })!
+      let collectionIndex = app.state.library.collections.firstIndex(where: { $0.id == app.navigation.activeCollectionId })!
       return app.state.library.collections[collectionIndex]
     }
   }
