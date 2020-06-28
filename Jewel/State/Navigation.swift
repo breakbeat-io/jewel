@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 struct Navigation {
   
@@ -46,6 +47,6 @@ struct Navigation {
   var showSettings: Bool = false
   var showDebugMenu: Bool = false
   
+  var detailViewHeight: CGFloat = 812
+  
 }
-
-
