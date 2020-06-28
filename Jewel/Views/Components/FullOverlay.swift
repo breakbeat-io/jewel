@@ -36,6 +36,7 @@ struct FullOverlay<Buttons: View, Content: View>: View {
         VStack(alignment: .leading, spacing: 0) {
           Text(self.heading)
             .font(.title)
+            .padding(.horizontal)
             .padding(.top, 50)
             .padding(.bottom, 5)
             .frame(maxWidth: .infinity, alignment: .center)
