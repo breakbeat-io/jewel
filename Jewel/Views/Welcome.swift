@@ -14,13 +14,13 @@ struct Welcome: View {
   
   private let heading = "Welcome!"
   private let description = """
-  Listen Later is a place to store albums you want to listen to later.
+  Listen Later is a place to store music you want to listen to later.
 
-  Add and remove albums from any of 8 slots as you think of them, and they'll be there waiting for you when you're ready to listen!
+  Update albums in the On Rotation collection as you think of them so they're waiting for you when you're ready to listen.
 
-  Send your collection to friends and find out what they're listening to by asking them to send their collection to you.
+  Create and share Collections with friends and find out what they're listening to when they share collections with you.
 
-  Build a Collection Library of your and your friends collections for easy play back later!
+  Save it all to build a Library of Collections for any mood or event!
   """
   private let startCollectionLabel = "Start My Collection"
   private let setCuratorNameLabel = "Set my Curator Name"
