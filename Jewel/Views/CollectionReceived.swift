@@ -19,15 +19,20 @@ struct CollectionReceived: View {
           Text("Would you like to add the following collection to your Collection Library?")
             .foregroundColor(Color.secondary)
             .padding(.bottom, 30)
-          Group {
+          VStack {
             Text(cuedCollection.collectionName)
               .font(.headline)
+              .padding(.bottom)
             Text("by \(cuedCollection.collectionCurator)")
               .font(.subheadline)
               .foregroundColor(.secondary)
           }
           .multilineTextAlignment(.center)
-          .padding(.bottom)
+          .padding()
+          .overlay(
+            RoundedRectangle(cornerRadius: 4)
+              .stroke(Color.secondary, lineWidth: 1)
+          )
         }
       }
     }
