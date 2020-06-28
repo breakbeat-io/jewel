@@ -24,69 +24,64 @@ struct CollectionDetail: View {
   }
   
   var body: some View {
-    GeometryReader { geo in
-      HStack {
-        if self.horizontalSizeClass == .regular {
-          Spacer()
+    HStack {
+      if self.horizontalSizeClass == .regular {
+        Spacer()
+      }
+      List(selection: self.$app.navigation.collectionEditSelection) {
+        VStack(alignment: .leading) {
+          Text(self.collection.name)
+            .font(.title)
+            .fontWeight(.bold)
+            .padding(.top)
+          Text("by \(self.collection.curator)")
+            .font(.subheadline)
+            .fontWeight(.light)
+            .foregroundColor(.secondary)
         }
-        List(selection: self.$app.navigation.collectionEditSelection) {
-          VStack(alignment: .leading) {
-            Text(self.collection.name)
-              .font(.title)
-              .fontWeight(.bold)
-              .padding(.top)
-            Text("by \(self.collection.curator)")
-              .font(.subheadline)
-              .fontWeight(.light)
-              .foregroundColor(.secondary)
-          }
-          ForEach(self.slots.indices, id: \.self) { slotIndex in
-            Group {
-              if self.slots[slotIndex].source != nil {
-                IfLet(self.slots[slotIndex].source?.attributes) { attributes in
-                  Button(action: {
-                    self.app.navigation.activeSlotIndex = slotIndex
-                    self.app.navigation.showSourceDetail = true
-                  }) {
-                    SourceCard(sourceName: attributes.name, sourceArtist: attributes.artistName, sourceArtwork: attributes.artwork.url(forWidth: 1000))
-                  }
+        ForEach(self.slots.indices, id: \.self) { slotIndex in
+          Group {
+            if self.slots[slotIndex].source != nil {
+              IfLet(self.slots[slotIndex].source?.attributes) { attributes in
+                Button(action: {
+                  self.app.navigation.activeSlotIndex = slotIndex
+                  self.app.navigation.showSourceDetail = true
+                }) {
+                  SourceCard(sourceName: attributes.name, sourceArtist: attributes.artistName, sourceArtwork: attributes.artwork.url(forWidth: 1000))
                 }
-              } else if self.editable {
-                AddSourceCardButton(slotIndex: slotIndex, collectionId: self.collection.id)
-                  .deleteDisabled(true)
-              } else {
-                RoundedRectangle(cornerRadius: Constants.cardCornerRadius)
-                  .fill(Color(UIColor.secondarySystemBackground))
               }
+            } else if self.editable {
+              AddSourceCardButton(slotIndex: slotIndex, collectionId: self.collection.id)
+                .deleteDisabled(true)
+            } else {
+              RoundedRectangle(cornerRadius: Constants.cardCornerRadius)
+                .fill(Color(UIColor.secondarySystemBackground))
             }
-            .frame(height: Constants.cardHeightFor(viewHeight: self.app.navigation.detailViewHeight))
-            .deleteDisabled(!self.editable)
-            .moveDisabled(!self.editable)
           }
-          .onMove { (indexSet, index) in
-            self.app.update(action: LibraryAction.moveSlot(from: indexSet, to: index, collectionId: self.collection.id))
-          }
-          .onDelete {
-            self.app.update(action: LibraryAction.removeSourceFromSlot(slotIndexes: $0, collectionId: self.collection.id))
-          }
-          
+          .frame(height: self.app.navigation.cardHeight)
+          .deleteDisabled(!self.editable)
+          .moveDisabled(!self.editable)
         }
-        .environment(\.editMode, .constant(self.app.navigation.collectionIsEditing ? EditMode.active : EditMode.inactive))
-        .frame(maxWidth: self.horizontalSizeClass == .regular && !self.app.navigation.showCollection ? Constants.regularMaxWidth : .infinity)
-        
-        
-        if self.horizontalSizeClass == .regular {
-          Spacer()
+        .onMove { (indexSet, index) in
+          self.app.update(action: LibraryAction.moveSlot(from: indexSet, to: index, collectionId: self.collection.id))
         }
+        .onDelete {
+          self.app.update(action: LibraryAction.removeSourceFromSlot(slotIndexes: $0, collectionId: self.collection.id))
+        }
+        
       }
-      .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
-      .sheet(isPresented: self.$app.navigation.showSourceDetail) {
-        AlbumDetail()
-          .environmentObject(self.app)
+      .environment(\.editMode, .constant(self.app.navigation.collectionIsEditing ? EditMode.active : EditMode.inactive))
+      .frame(maxWidth: self.horizontalSizeClass == .regular && !self.app.navigation.showCollection ? Constants.regularMaxWidth : .infinity)
+      
+      
+      if self.horizontalSizeClass == .regular {
+        Spacer()
       }
-      .onAppear {
-        self.app.navigation.detailViewHeight = geo.size.height
-      }
+    }
+    .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
+    .sheet(isPresented: self.$app.navigation.showSourceDetail) {
+      AlbumDetail()
+        .environmentObject(self.app)
     }
   }
 }
