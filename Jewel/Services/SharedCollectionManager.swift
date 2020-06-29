@@ -52,12 +52,19 @@ class SharedCollectionManager {
       }
     }
     
-    let formatter = DateFormatter()
-    formatter.dateFormat = "MMM yyyy"
-    let dateString = formatter.string(from: Date())
+    var collectionShareName = collection.name
+    
+    if collection.name == Navigation.Tab.onRotation.rawValue {
+      let formatter = DateFormatter()
+      formatter.dateFormat = "MMM yyyy"
+      let dateString = formatter.string(from: Date())
+      collectionShareName = "\(collection.curator)'s On Rotation - \(dateString)"
+    }  else if collection.name.starts(with: "My ") {
+      collectionShareName = collection.name.replaceFirstOccurrence(of: "My ", with: "\(collection.curator)'s ")
+    }
     
     let shareableCollection = ShareableCollection(
-      collectionName: collection.name == Navigation.Tab.onRotation.rawValue ? "\(collection.curator)'s On Rotation - \(dateString)" : collection.name,
+      collectionName: collectionShareName,
       collectionCurator: collection.curator,
       collection: shareableSlots
     )
