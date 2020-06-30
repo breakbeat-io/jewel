@@ -13,10 +13,10 @@ struct CollectionSheet: View {
   @EnvironmentObject var app: AppEnvironment
   
   private var collection: Collection {
-    if app.navigation.onRotationActive {
+    if app.state.navigation.onRotationActive {
       return app.state.library.onRotation
     } else {
-      let collectionIndex = app.state.library.collections.firstIndex(where: { $0.id == app.navigation.activeCollectionId })!
+      let collectionIndex = app.state.library.collections.firstIndex(where: { $0.id == app.state.navigation.activeCollectionId })!
       return app.state.library.collections[collectionIndex]
     }
   }
@@ -28,7 +28,7 @@ struct CollectionSheet: View {
         .navigationBarItems(
           leading:
           Button(action: {
-            self.app.navigation.showCollection = false
+            self.app.update(action: NavigationAction.showCollection(false))
           }) {
             Text("Close")
           },
@@ -37,7 +37,7 @@ struct CollectionSheet: View {
     }
     .navigationViewStyle(StackNavigationViewStyle())
     .onDisappear {
-      self.app.navigation.collectionIsEditing = false
+      self.app.update(action: NavigationAction.editCollection(false))
     }
   }
   

@@ -179,8 +179,8 @@
 		D24925922481409D0011F409 /* Actions */ = {
 			isa = PBXGroup;
 			children = (
-				D2AB84682481148D008B57F9 /* AppAction.swift */,
 				D2AB8466248113EB008B57F9 /* AppActions.swift */,
+				D2AB84682481148D008B57F9 /* AppAction.swift */,
 			);
 			path = Actions;
 			sourceTree = "<group>";

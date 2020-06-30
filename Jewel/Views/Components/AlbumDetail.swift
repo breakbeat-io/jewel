@@ -15,11 +15,11 @@ struct AlbumDetail: View {
   @EnvironmentObject var app: AppEnvironment
   
   private var slot: Slot {
-    if app.navigation.onRotationActive {
-      return app.state.library.onRotation.slots[app.navigation.activeSlotIndex]
+    if app.state.navigation.onRotationActive {
+      return app.state.library.onRotation.slots[app.state.navigation.activeSlotIndex]
     } else {
-      let collectionIndex = app.state.library.collections.firstIndex(where: { $0.id == app.navigation.activeCollectionId })!
-      return app.state.library.collections[collectionIndex].slots[app.navigation.activeSlotIndex]
+      let collectionIndex = app.state.library.collections.firstIndex(where: { $0.id == app.state.navigation.activeCollectionId })!
+      return app.state.library.collections[collectionIndex].slots[app.state.navigation.activeSlotIndex]
     }
   }
   
@@ -36,7 +36,7 @@ struct AlbumDetail: View {
       .navigationBarItems(
         leading:
         Button(action: {
-          self.app.navigation.showSourceDetail = false
+          self.app.update(action: NavigationAction.showSourceDetail(false))
         }) {
           Text("Close")
         }

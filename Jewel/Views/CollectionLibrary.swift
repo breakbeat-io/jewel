@@ -23,7 +23,7 @@ struct CollectionLibrary: View {
       if self.horizontalSizeClass == .regular {
         Spacer()
       }
-      List(selection: self.$app.navigation.libraryEditSelection) {
+      List(selection: self.$app.state.navigation.libraryEditSelection) {
         Text("Collection Library")
           .font(.title)
           .fontWeight(.bold)
@@ -43,7 +43,7 @@ struct CollectionLibrary: View {
         } else {
           ForEach(self.collections) { collection in
             CollectionCard(collection: collection)
-              .frame(height: self.app.navigation.cardHeight)
+              .frame(height: self.app.state.navigation.cardHeight)
           }
           .onMove { (indexSet, index) in
             self.app.update(action: LibraryAction.moveSharedCollection(from: indexSet, to: index))
@@ -53,14 +53,14 @@ struct CollectionLibrary: View {
           }
         }
       }
-      .environment(\.editMode, .constant(self.app.navigation.libraryIsEditing ? EditMode.active : EditMode.inactive))
+      .environment(\.editMode, .constant(self.app.state.navigation.libraryIsEditing ? EditMode.active : EditMode.inactive))
       .frame(maxWidth: self.horizontalSizeClass == .regular ? Constants.regularMaxWidth : .infinity)
       if self.horizontalSizeClass == .regular {
         Spacer()
       }
     }
     .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
-    .sheet(isPresented: self.$app.navigation.showCollection) {
+    .sheet(isPresented: self.$app.state.navigation.showCollection) {
       CollectionSheet()
         .environmentObject(self.app)
     }

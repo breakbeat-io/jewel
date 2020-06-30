@@ -16,6 +16,9 @@ func updateState(appState: AppState, action: AppAction) -> AppState {
   
   switch action {
     
+  case is NavigationAction:
+    newAppState.navigation = updateNavigation(navigation: newAppState.navigation, action: action as! NavigationAction)
+    
   case is OptionsAction:
     newAppState.options = updateOptions(options: newAppState.options, action: action as! OptionsAction)
     
@@ -31,6 +34,59 @@ func updateState(appState: AppState, action: AppAction) -> AppState {
   
   return newAppState
 }
+
+
+func updateNavigation(navigation: Navigation, action: NavigationAction) -> Navigation {
+  
+  var newNavigation = navigation
+  
+  switch action {
+    
+  case let .switchTab(toTab):
+    newNavigation.selectedTab = toTab
+  
+  case let .setActiveCollectionId(collectionId):
+    newNavigation.activeCollectionId = collectionId
+  
+  case let .showSettings(showSettingsState):
+    newNavigation.showSettings = showSettingsState
+
+  case let .showCollection(showCollectionState):
+    newNavigation.showCollection = showCollectionState
+    
+  case let .editCollection(editCollectionState):
+    newNavigation.collectionIsEditing = editCollectionState
+  
+  case let .showCollectionOptions(showCollectionOptionsState):
+    newNavigation.showCollectionOptions = showCollectionOptionsState
+  
+  case let .editLibrary(editLibraryState):
+    newNavigation.libraryIsEditing = editLibraryState
+  
+  case let .showLibraryOptions(showLibraryOptionsState):
+    newNavigation.showLibraryOptions = showLibraryOptionsState
+    
+  case let .showSourceDetail(showSourceDetailState):
+    newNavigation.showSourceDetail = showSourceDetailState
+  
+  case let .shareLinkError(shareLinkErrorState):
+    newNavigation.shareLinkError = shareLinkErrorState
+    
+  case let .setDetailViewHeight(viewHeight):
+    newNavigation.detailViewHeight = viewHeight
+  
+  case .reset:
+    newNavigation = Navigation(onRotationId: newNavigation.onRotationId, activeCollectionId: newNavigation.activeCollectionId)
+    
+  case .toggleDebug:
+    newNavigation.showDebugMenu.toggle()
+  
+  }
+  
+  return newNavigation
+  
+}
+
 
 func updateOptions(options: Options, action: OptionsAction) -> Options {
   

@@ -17,7 +17,7 @@ struct NavBar: View {
       HStack {
         SettingsButton()
         Spacer()
-        Picker("Library", selection: $app.navigation.selectedTab) {
+        Picker("Library", selection: $app.state.navigation.selectedTab) {
           Image(systemName: "music.house")
             .tag(Navigation.Tab.onRotation)
           Image(systemName: "rectangle.on.rectangle.angled")
@@ -26,7 +26,7 @@ struct NavBar: View {
         .pickerStyle(SegmentedPickerStyle())
         .frame(maxWidth: 300)
         Spacer()
-        if app.navigation.selectedTab == .onRotation {
+        if app.state.navigation.selectedTab == .onRotation {
           CollectionActionButtons()
         } else {
           LibraryActionButtons()
@@ -47,29 +47,29 @@ struct CollectionActionButtons: View {
   var body: some View {
     HStack {
       Spacer()
-      if app.navigation.collectionIsEditing {
+      if app.state.navigation.collectionIsEditing {
         Button(action: {
-          self.app.update(action: LibraryAction.removeSourcesFromCollection(sourceIds: self.app.navigation.collectionEditSelection, collectionId: self.app.navigation.activeCollectionId))
-          self.app.navigation.collectionIsEditing = false
-          self.app.navigation.collectionEditSelection.removeAll()
+          self.app.update(action: LibraryAction.removeSourcesFromCollection(sourceIds: self.app.state.navigation.collectionEditSelection, collectionId: self.app.state.navigation.activeCollectionId!))
+          self.app.update(action: NavigationAction.editCollection(false))
+          self.app.state.navigation.collectionEditSelection.removeAll()
         }) {
           Image(systemName: "trash")
         }
         .padding(.trailing)
         Button(action: {
-          self.app.navigation.collectionIsEditing.toggle()
+          self.app.update(action: NavigationAction.editCollection(false))
         }) {
           Image(systemName: "checkmark")
         }
       } else {
         Spacer()
         Button(action: {
-          self.app.navigation.showCollectionOptions = true
+          self.app.update(action: NavigationAction.showCollectionOptions(true))
         }) {
           Image(systemName: "ellipsis")
         }
         .padding(.leading)
-        .sheet(isPresented: self.$app.navigation.showCollectionOptions) {
+        .sheet(isPresented: self.$app.state.navigation.showCollectionOptions) {
           CollectionOptions()
             .environmentObject(self.app)
         }
@@ -87,36 +87,36 @@ struct LibraryActionButtons: View {
   var body: some View {
     HStack {
       Spacer()
-      if app.navigation.libraryIsEditing {
+      if app.state.navigation.libraryIsEditing {
         Button(action: {
-          self.app.update(action: LibraryAction.removeSharedCollections(collectionIds: self.app.navigation.libraryEditSelection))
-          self.app.navigation.libraryIsEditing = false
-          self.app.navigation.libraryEditSelection.removeAll()
+          self.app.update(action: LibraryAction.removeSharedCollections(collectionIds: self.app.state.navigation.libraryEditSelection))
+          self.app.update(action: NavigationAction.editLibrary(false))
+          self.app.state.navigation.libraryEditSelection.removeAll()
         }) {
           Image(systemName: "trash")
         }
         .padding(.trailing)
         Button(action: {
-          self.app.navigation.libraryIsEditing.toggle()
+          self.app.update(action: NavigationAction.editLibrary(false))
         }) {
           Image(systemName: "checkmark")
         }
       } else {
         Button(action: {
           self.app.update(action: LibraryAction.addUserCollection)
-          self.app.navigation.activeCollectionId = self.app.state.library.collections.first!.id
-          self.app.navigation.showCollection = true
+          self.app.state.navigation.activeCollectionId = self.app.state.library.collections.first!.id
+          self.app.update(action: NavigationAction.showCollection(true))
         }) {
           Image(systemName: "plus")
         }
         .padding(.leading)
         Button(action: {
-          self.app.navigation.showLibraryOptions = true
+          self.app.update(action: NavigationAction.showLibraryOptions(true))
         }) {
           Image(systemName: "ellipsis")
         }
         .padding(.leading)
-        .sheet(isPresented: self.$app.navigation.showLibraryOptions) {
+        .sheet(isPresented: self.$app.state.navigation.showLibraryOptions) {
           LibraryOptions()
             .environmentObject(self.app)
         }

@@ -7,10 +7,59 @@
 //
 
 import Foundation
+import SwiftUI
 import HMV
 
 protocol AppAction {
   var description: String { get }
+}
+
+enum NavigationAction: AppAction {
+  
+  case switchTab(to: Navigation.Tab)
+  case setActiveCollectionId(collectionId: UUID)
+  case showSettings(_: Bool)
+  case showCollection(_: Bool)
+  case editCollection(_: Bool)
+  case showCollectionOptions(_: Bool)
+  case editLibrary(_: Bool)
+  case showLibraryOptions(_: Bool)
+  case showSourceDetail(_: Bool)
+  case shareLinkError(_: Bool)
+  case setDetailViewHeight(viewHeight: CGFloat)
+  case reset
+  case toggleDebug
+  
+  var description: String {
+    switch self {
+    case .switchTab:
+      return "\(type(of: self)): Switching tabs"
+    case .setActiveCollectionId:
+      return "\(type(of: self)): Setting active collection"
+    case .showSettings:
+      return "\(type(of: self)): Showing/hiding settings"
+    case .showCollection:
+      return "\(type(of: self)): Showing/hiding collection"
+    case .editCollection:
+      return "\(type(of: self)): Editing collection"
+    case .showCollectionOptions:
+      return "\(type(of: self)): Showing/hiding collection options"
+    case .editLibrary:
+      return "\(type(of: self)): Editing library"
+    case .showLibraryOptions:
+      return "\(type(of: self)): Showing/hiding library options"
+    case .showSourceDetail:
+      return "\(type(of: self)): Showing/hiding source detail"
+    case .shareLinkError:
+      return "\(type(of: self)): Setting share link error"
+    case .setDetailViewHeight:
+      return "\(type(of: self)): Setting view height"
+    case .reset:
+      return "\(type(of: self)): Resetting navigation to defaults"
+    case .toggleDebug:
+      return "\(type(of: self)): Toggling debug"
+    }
+  }
 }
 
 enum OptionsAction: AppAction {

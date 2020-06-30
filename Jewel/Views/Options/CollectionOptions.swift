@@ -13,10 +13,10 @@ struct CollectionOptions: View {
   @EnvironmentObject private var app: AppEnvironment
 
   private var collection: Collection {
-    if app.navigation.onRotationActive {
+    if app.state.navigation.onRotationActive {
       return self.app.state.library.onRotation
     } else {
-      return self.app.state.library.collections.first(where: { $0.id == self.app.navigation.activeCollectionId })!
+      return self.app.state.library.collections.first(where: { $0.id == self.app.state.navigation.activeCollectionId })!
     }
   }
   private var collectionEmpty: Bool {
@@ -24,11 +24,11 @@ struct CollectionOptions: View {
   }
   private var collectionName: Binding<String> { Binding (
     get: { self.collection.name },
-    set: { self.app.update(action: LibraryAction.setCollectionName(name: $0, collectionId: self.app.navigation.activeCollectionId))}
+    set: { self.app.update(action: LibraryAction.setCollectionName(name: $0, collectionId: self.app.state.navigation.activeCollectionId!))}
     )}
   private var collectionCurator: Binding<String> { Binding (
     get: { self.collection.curator },
-    set: { self.app.update(action: LibraryAction.setCollectionCurator(curator: $0, collectionId: self.app.navigation.activeCollectionId))}
+    set: { self.app.update(action: LibraryAction.setCollectionCurator(curator: $0, collectionId: self.app.state.navigation.activeCollectionId!))}
     )}
   
   var body: some View {
@@ -38,10 +38,10 @@ struct CollectionOptions: View {
           
           ShareCollectionButton(collection: collection)
           
-          if app.navigation.onRotationActive {
+          if app.state.navigation.onRotationActive {
             Button(action: {
-              self.app.navigation.selectedTab = .library
-              self.app.navigation.showCollectionOptions = false
+              self.app.update(action: NavigationAction.switchTab(to: .library))
+              self.app.update(action: NavigationAction.showCollectionOptions(false))
               self.app.update(action: LibraryAction.saveOnRotation(collection: self.app.state.library.onRotation))
             }) {
               HStack {
@@ -53,20 +53,20 @@ struct CollectionOptions: View {
           }
           if collection.type == .userCollection {
             Button(action: {
-              self.app.navigation.collectionIsEditing = true
-              self.app.navigation.showCollectionOptions = false
+              self.app.update(action: NavigationAction.editCollection(true))
+              self.app.update(action: NavigationAction.showCollectionOptions(false))
             }) {
               HStack {
                 Image(systemName: "square.stack.3d.up")
                   .frame(width: Constants.optionsButtonIconWidth)
-                Text("Reorder \(app.navigation.onRotationActive ? Navigation.Tab.onRotation.rawValue : "Collection")")
+                Text("Reorder \(app.state.navigation.onRotationActive ? Navigation.Tab.onRotation.rawValue : "Collection")")
               }
             }
           }
         }
         .disabled(self.collectionEmpty)
         
-        if !app.navigation.onRotationActive {
+        if !app.state.navigation.onRotationActive {
           Section {
             HStack {
               Text("Collection Name")
@@ -74,7 +74,7 @@ struct CollectionOptions: View {
                 collectionName.wrappedValue,
                 text: collectionName,
                 onCommit: {
-                  self.app.navigation.showCollectionOptions = false
+                  self.app.update(action: NavigationAction.showCollectionOptions(false))
               }
               ).foregroundColor(.accentColor)
             }
@@ -84,7 +84,7 @@ struct CollectionOptions: View {
                 collectionCurator.wrappedValue,
                 text: collectionCurator,
                 onCommit: {
-                  self.app.navigation.showCollectionOptions = false
+                  self.app.update(action: NavigationAction.showCollectionOptions(false))
               }
               ).foregroundColor(.accentColor)
             }
@@ -93,11 +93,11 @@ struct CollectionOptions: View {
         }
       }
       
-      .navigationBarTitle("\(app.navigation.onRotationActive ? Navigation.Tab.onRotation.rawValue : "Collection") Options", displayMode: .inline)
+      .navigationBarTitle("\(app.state.navigation.onRotationActive ? Navigation.Tab.onRotation.rawValue : "Collection") Options", displayMode: .inline)
       .navigationBarItems(
         leading:
         Button(action: {
-          self.app.navigation.showCollectionOptions = false
+          self.app.update(action: NavigationAction.showCollectionOptions(false))
         }) {
           Text("Close")
         }
@@ -122,7 +122,7 @@ struct ShareCollectionButton: View {
       HStack {
         Image(systemName: "square.and.arrow.up")
           .frame(width: Constants.optionsButtonIconWidth)
-        Text("Share \(self.app.navigation.onRotationActive ? Navigation.Tab.onRotation.rawValue : "Collection")")
+        Text("Share \(self.app.state.navigation.onRotationActive ? Navigation.Tab.onRotation.rawValue : "Collection")")
       }
     }
     .sheet(isPresented: self.$showSharing) {

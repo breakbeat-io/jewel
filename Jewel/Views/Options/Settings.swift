@@ -14,7 +14,7 @@ struct Settings: View {
   
   private var curator: Binding<String> { Binding (
     get: { self.app.state.library.onRotation.curator },
-    set: { self.app.update(action: LibraryAction.setCollectionCurator(curator: $0, collectionId: self.app.navigation.onRotationId))}
+    set: { self.app.update(action: LibraryAction.setCollectionCurator(curator: $0, collectionId: self.app.state.navigation.onRotationId!))}
     )}
   private var preferredMusicPlatform: Binding<Int> { Binding (
     get: { self.app.state.options.preferredMusicPlatform },
@@ -33,7 +33,7 @@ struct Settings: View {
                 curator.wrappedValue,
                 text: curator,
                 onCommit: {
-                  self.app.navigation.showSettings = false
+                  self.app.update(action: NavigationAction.showSettings(false))
               }
               ).foregroundColor(.accentColor)
             }
@@ -45,11 +45,11 @@ struct Settings: View {
               }
             }
           }
-          if app.navigation.showDebugMenu {
+          if app.state.navigation.showDebugMenu {
             Section(header: Text("Debug")) {
               Button(action: {
                 RecordStore.loadScreenshotCollection()
-                self.app.navigation.showSettings = false
+                self.app.update(action: NavigationAction.showSettings(false))
               }) {
                 Text("Load Screenshot Data")
               }
@@ -65,7 +65,7 @@ struct Settings: View {
         Spacer()
         Footer()
           .onTapGesture(count: 10) {
-            self.app.navigation.showDebugMenu.toggle()
+            self.app.update(action: NavigationAction.toggleDebug)
           }
           .padding()
       }
@@ -73,7 +73,7 @@ struct Settings: View {
       .navigationBarItems(
         leading:
         Button(action: {
-          self.app.navigation.showSettings = false
+          self.app.update(action: NavigationAction.showSettings(false))
         }) {
           Text("Close")
         }
@@ -90,7 +90,7 @@ struct SettingsButton: View {
   var body: some View {
     HStack {
       Button(action: {
-        self.app.navigation.showSettings = true
+        self.app.update(action: NavigationAction.showSettings(true))
       }) {
         Image(systemName: "gear")
           .foregroundColor(Color(UIColor.secondaryLabel))
@@ -99,7 +99,7 @@ struct SettingsButton: View {
     }
     .padding(.vertical)
     .frame(width: Constants.buttonWidth)
-    .sheet(isPresented: $app.navigation.showSettings) {
+    .sheet(isPresented: $app.state.navigation.showSettings) {
       Settings()
         .environmentObject(self.app)
     }

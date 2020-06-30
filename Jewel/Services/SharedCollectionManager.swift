@@ -84,7 +84,7 @@ class SharedCollectionManager {
     
     guard let longLink = generateLongLink(for: collection) else {
       print("💎 Share Links: > Could not create long link")
-      AppEnvironment.global.navigation.shareLinkError = true
+      AppEnvironment.global.update(action: NavigationAction.shareLinkError(true))
       return
     }
     
@@ -93,13 +93,13 @@ class SharedCollectionManager {
     let firebaseShortLinkBodyRaw = ["longDynamicLink": longDynamicLink]
     guard let firebaseShortLinkBodyRawJSON = try? JSONEncoder().encode(firebaseShortLinkBodyRaw) else {
       print("💎 Share Links: > Could not encode link to JSON")
-      AppEnvironment.global.navigation.shareLinkError = true
+      AppEnvironment.global.update(action: NavigationAction.shareLinkError(true))
       return
     }
     
     guard let firebaseApiKey = Bundle.main.infoDictionary?["FIREBASE_API_KEY"] as? String else {
       print ("No Firebase API key found!")
-      AppEnvironment.global.navigation.shareLinkError = true
+      AppEnvironment.global.update(action: NavigationAction.shareLinkError(true))
       return
     }
     
@@ -111,13 +111,13 @@ class SharedCollectionManager {
     let task = URLSession.shared.uploadTask(with: request, from: firebaseShortLinkBodyRawJSON) { data, response, error in
       if let error = error {
         print ("Firebase API threw error: \(error)")
-        AppEnvironment.global.navigation.shareLinkError = true
+        AppEnvironment.global.update(action: NavigationAction.shareLinkError(true))
         return
       }
       guard let response = response as? HTTPURLResponse,
         (200...299).contains(response.statusCode) else {
           print ("Firebase gave a server error")
-          AppEnvironment.global.navigation.shareLinkError = true
+          AppEnvironment.global.update(action: NavigationAction.shareLinkError(true))
           return
       }
       if let mimeType = response.mimeType,
@@ -130,13 +130,13 @@ class SharedCollectionManager {
                 AppEnvironment.global.update(action: LibraryAction.setShareLinks(shareLinkLong: longLink, shareLinkShort: URL(string: shortLink)!, collectionId: collection.id))
               } else {
                 print("💎 Share Links: > There was another error")
-                AppEnvironment.global.navigation.shareLinkError = true
+                AppEnvironment.global.update(action: NavigationAction.shareLinkError(true))
               }
             }
           }
         } catch let error as NSError {
           print("💎 Share Links: > Failed to load: \(error.localizedDescription)")
-          AppEnvironment.global.navigation.shareLinkError = true
+          AppEnvironment.global.update(action: NavigationAction.shareLinkError(true))
         }
       }
     }
@@ -149,7 +149,7 @@ class SharedCollectionManager {
       if let receivedCollectionEncoded = Data(base64Encoded: (params!.first(where: { $0.name == "c" })?.value!)!) {
         do {
           let shareableCollection = try JSONDecoder().decode(ShareableCollection.self, from: receivedCollectionEncoded)
-          AppEnvironment.global.navigation = Navigation(onRotationId: AppEnvironment.global.navigation.onRotationId, activeCollectionId: AppEnvironment.global.navigation.activeCollectionId)
+          AppEnvironment.global.update(action: NavigationAction.reset)
           AppEnvironment.global.update(action: LibraryAction.cueSharedCollection(shareableCollection: shareableCollection))
         } catch {
           print("💎 Shared Collection > Could not decode received collection: \(error)")

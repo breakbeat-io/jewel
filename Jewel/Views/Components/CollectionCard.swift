@@ -27,8 +27,8 @@ struct CollectionCard: View {
   
   var body: some View {
     Button(action: {
-      self.app.navigation.activeCollectionId = self.collection.id
-      self.app.navigation.showCollection = true
+      self.app.update(action: NavigationAction.setActiveCollectionId(collectionId: self.collection.id))
+      self.app.update(action: NavigationAction.showCollection(true))
     }) {
       ZStack(alignment: .bottom) {
         Rectangle()

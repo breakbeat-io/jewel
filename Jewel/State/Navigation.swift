@@ -11,8 +11,8 @@ import SwiftUI
 
 struct Navigation {
   
-  let onRotationId: UUID
-  var activeCollectionId: UUID
+  var onRotationId: UUID?
+  var activeCollectionId: UUID?
   var activeSlotIndex: Int = 0
   
   var onRotationActive: Bool {

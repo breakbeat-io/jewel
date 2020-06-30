@@ -9,6 +9,9 @@
 import Foundation
 
 struct AppState: Codable {
+  
+  var navigation = Navigation()
+  
   var options: Options
   var library: Library
   var search = Search()

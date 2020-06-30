@@ -21,7 +21,7 @@ struct SearchBar: View {
         "Search Apple Music",
         text: $searchTerm,
         onCommit: {
-          if self.app.navigation.showDebugMenu {
+          if self.app.state.navigation.showDebugMenu {
             RecordStore.exampleSearch()
           } else {
             RecordStore.browse(for: self.searchTerm)

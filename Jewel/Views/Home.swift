@@ -32,20 +32,20 @@ struct Home: View {
         NavBar()
         GeometryReader { geo in
           VStack {
-            if self.app.navigation.selectedTab == .onRotation {
+            if self.app.state.navigation.selectedTab == .onRotation {
               OnRotation()
                 .transition(.move(edge: .leading))
                 .animation(.easeOut)
                 .onAppear {
-                  self.app.navigation.detailViewHeight = geo.size.height
+                  self.app.update(action: NavigationAction.setDetailViewHeight(viewHeight: geo.size.height))
                 }
             }
-            if self.app.navigation.selectedTab == .library {
+            if self.app.state.navigation.selectedTab == .library {
               CollectionLibrary()
                 .transition(.move(edge: .trailing))
                 .animation(.easeOut)
                 .onAppear {
-                  self.app.navigation.detailViewHeight = geo.size.height
+                  self.app.update(action: NavigationAction.setDetailViewHeight(viewHeight: geo.size.height))
                 }
             }
           }

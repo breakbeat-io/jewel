@@ -54,11 +54,11 @@ struct CollectionReceivedButtons: View {
       })
       Spacer()
       Button(action: {
-        self.app.navigation.selectedTab = .library
+        self.app.update(action: NavigationAction.switchTab(to: .library))
         SharedCollectionManager.expandShareableCollection(shareableCollection: self.app.state.library.cuedCollection!)
         self.app.update(action: LibraryAction.uncueSharedCollection)
-        self.app.navigation.activeCollectionId = self.app.state.library.collections.first!.id
-        self.app.navigation.showCollection = true
+        self.app.update(action: NavigationAction.setActiveCollectionId(collectionId: self.app.state.library.collections.first!.id))
+        self.app.update(action: NavigationAction.showCollection(true))
       }, label: {
         Text("Add")
           .fontWeight(.bold)

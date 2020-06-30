@@ -31,7 +31,7 @@ struct Welcome: View {
       VStack {
         Button(action: {
           self.app.update(action: OptionsAction.firstTimeRun(false))
-          self.app.navigation.showSettings = true
+          self.app.update(action: NavigationAction.showSettings(true))
         }) {
           Text(self.setCuratorNameLabel)
             .fontWeight(.light)

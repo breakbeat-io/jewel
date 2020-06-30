@@ -14,7 +14,6 @@ final class AppEnvironment: ObservableObject {
   
   static let global = AppEnvironment()
   
-  @Published var navigation: Navigation
   @Published private(set) var state: AppState {
     didSet {
       save()
@@ -30,7 +29,8 @@ final class AppEnvironment: ObservableObject {
         print("💎 State > Loaded state")
         
         let onRotationId = decodedSavedState.library.onRotation.id
-        navigation = Navigation(onRotationId: onRotationId, activeCollectionId: onRotationId)
+        state.navigation.onRotationId = onRotationId
+        state.navigation.activeCollectionId = onRotationId
         print("💎 Navigation > Initialised")
         
         return
@@ -48,7 +48,8 @@ final class AppEnvironment: ObservableObject {
     print("💎 State > New state created")
     
     let onRotationId = onRotationCollection.id
-    navigation = Navigation(onRotationId: onRotationId, activeCollectionId: onRotationId)
+    state.navigation.onRotationId = onRotationId
+    state.navigation.activeCollectionId = onRotationId
     print("💎 Navigation > Initialised")
     
     migrateV1UserDefaults()
