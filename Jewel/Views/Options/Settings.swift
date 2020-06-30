@@ -13,8 +13,8 @@ struct Settings: View {
   @EnvironmentObject private var app: AppEnvironment
   
   private var curator: Binding<String> { Binding (
-    get: { self.app.state.options.defaultCurator },
-    set: { self.app.update(action: OptionsAction.setDefaultCurator(curator: $0))}
+    get: { self.app.state.library.onRotation.curator },
+    set: { self.app.update(action: LibraryAction.setCollectionCurator(curator: $0, collectionId: self.app.navigation.onRotationId))}
     )}
   private var preferredMusicPlatform: Binding<Int> { Binding (
     get: { self.app.state.options.preferredMusicPlatform },

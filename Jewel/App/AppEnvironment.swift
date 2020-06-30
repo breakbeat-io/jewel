@@ -41,7 +41,7 @@ final class AppEnvironment: ObservableObject {
     
     print("💎 State > No saved state found, creating new")
     let options = Options()
-    let onRotationCollection = Collection(type: .userCollection, name: Navigation.Tab.onRotation.rawValue, curator: options.defaultCurator)
+    let onRotationCollection = Collection(type: .userCollection, name: Navigation.Tab.onRotation.rawValue, curator: "A Music Lover")
     let library = Library(onRotation: onRotationCollection, collections: [Collection]())
     
     state = AppState(options: options, library: library)

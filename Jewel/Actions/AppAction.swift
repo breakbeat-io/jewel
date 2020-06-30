@@ -41,9 +41,6 @@ func updateOptions(options: Options, action: OptionsAction) -> Options {
   case let .firstTimeRun(firstTimeRunState):
     newOptions.firstTimeRun = firstTimeRunState
     
-  case let .setDefaultCurator(curator):
-    newOptions.defaultCurator = curator
-    
   case let .setPreferredPlatform(platform):
     newOptions.preferredMusicPlatform = platform
     
@@ -145,7 +142,7 @@ func updateLibrary(library: Library, action: LibraryAction) -> Library {
     newLibrary.collections.insert(newCollection, at: 0)
     
   case .addUserCollection:
-    let newCollection = Collection(type: .userCollection, name: "New Collection", curator: AppEnvironment.global.state.options.defaultCurator)
+    let newCollection = Collection(type: .userCollection, name: "New Collection", curator: newLibrary.onRotation.curator)
     newLibrary.collections.insert(newCollection, at: 0)
     
   case let .addSharedCollection(collection):
