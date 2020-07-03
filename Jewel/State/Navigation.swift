@@ -33,6 +33,7 @@ struct Navigation {
   
   var showSearch: Bool = false
   var showSharing: Bool = false
+  var showLoadRecommendationsAlert: Bool = false
   
   var showSourceDetail: Bool = false
   var showAlternativeLinks: Bool = false

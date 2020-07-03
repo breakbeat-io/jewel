@@ -34,6 +34,7 @@ enum NavigationAction: AppAction {
   case showSourceDetail(_: Bool)
   case showAlternativeLinks(_: Bool)
   case shareLinkError(_: Bool)
+  case showLoadRecommendationsAlert(_: Bool)
   case setDetailViewHeight(viewHeight: CGFloat)
   case reset
   case toggleDebug
@@ -76,6 +77,8 @@ enum NavigationAction: AppAction {
       return "\(type(of: self)): Showing/hiding alternative links"
     case .shareLinkError:
       return "\(type(of: self)): Setting share link error"
+    case .showLoadRecommendationsAlert:
+      return "\(type(of: self)): Showing/hiding load recommendations alert"
     case .setDetailViewHeight:
       return "\(type(of: self)): Setting view height"
     case .reset:

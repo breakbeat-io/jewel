@@ -48,11 +48,14 @@ struct RecommendationsButton: View {
   
   @EnvironmentObject var app: AppEnvironment
   
-  @State private var showLoadRecommendationsAlert = false
+  private var showLoadRecommendationsAlert: Binding<Bool> { Binding (
+    get: { self.app.state.navigation.showLoadRecommendationsAlert },
+    set: { self.app.update(action: NavigationAction.showLoadRecommendationsAlert($0))}
+  )}
   
   var body: some View {
     Button(action: {
-      self.showLoadRecommendationsAlert = true
+      self.app.update(action: NavigationAction.showLoadRecommendationsAlert(true))
     }) {
       HStack {
         Image(systemName: "square.and.arrow.down")
@@ -60,7 +63,7 @@ struct RecommendationsButton: View {
         Text("Load Recommendations")
       }
     }
-    .alert(isPresented: $showLoadRecommendationsAlert) {
+    .alert(isPresented: showLoadRecommendationsAlert) {
       Alert(title: Text("Add our current Recommended Collection?"),
             message: Text("Every three months we publish a Collection of new and classic albums for you to listen to."),
             primaryButton: .default(Text("Cancel")),

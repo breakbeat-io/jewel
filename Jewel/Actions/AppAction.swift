@@ -96,6 +96,9 @@ func updateNavigation(navigation: Navigation, action: NavigationAction) -> Navig
   case let .shareLinkError(shareLinkErrorState):
     newNavigation.shareLinkError = shareLinkErrorState
     
+  case let .showLoadRecommendationsAlert(loadRecommendationsAlertState):
+    newNavigation.showLoadRecommendationsAlert = loadRecommendationsAlertState
+    
   case let .setDetailViewHeight(viewHeight):
     newNavigation.detailViewHeight = viewHeight
   
