@@ -14,10 +14,8 @@ struct SearchResults: View {
   
   @EnvironmentObject var app: AppEnvironment
   
-  let slotIndex: Int
   let collectionId: UUID
-  
-  @Binding var showing: Bool
+  let slotIndex: Int
   
   private var searchResults: [AppleMusicAlbum]? {
     app.state.search.results
@@ -50,7 +48,7 @@ struct SearchResults: View {
             Button(action: {
               RecordStore.purchase(album: appleMusicAlbums[i].id, forSlot: self.slotIndex, inCollection: self.collectionId)
               self.app.update(action: SearchAction.removeSearchResults)
-              self.showing = false
+              self.app.update(action: NavigationAction.showSearch(false))
             }, label:{
               Image(systemName: "plus.circle")
                 .padding()

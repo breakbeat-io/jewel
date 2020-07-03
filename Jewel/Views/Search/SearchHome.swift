@@ -12,23 +12,22 @@ struct SearchHome: View {
   
   @EnvironmentObject private var app: AppEnvironment
   
-  let slotIndex: Int
   let collectionId: UUID
-  @Binding var showing: Bool
+  let slotIndex: Int
   
   var body: some View {
     NavigationView {
       VStack{
         SearchBar()
         Spacer()
-        SearchResults(slotIndex: slotIndex, collectionId: collectionId, showing: self.$showing)
+        SearchResults(collectionId: collectionId, slotIndex: slotIndex)
       }
       .navigationBarTitle("Search")
       .navigationBarItems(
         leading:
         Button(action: {
           self.app.update(action: SearchAction.removeSearchResults)
-          self.showing = false
+          self.app.update(action: NavigationAction.showSearch(false))
         }) {
           Text("Close")
         }

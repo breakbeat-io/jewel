@@ -15,11 +15,14 @@ struct AddSourceCardButton: View {
   let slotIndex: Int
   let collectionId: UUID
   
-  @State private var showSearch: Bool = false
+  private var showSearch: Binding<Bool> { Binding (
+    get: { self.app.state.navigation.showSearch },
+    set: { self.app.update(action: NavigationAction.showSearch($0))}
+  )}
   
   var body: some View {
     Button(action: {
-      self.showSearch = true
+      self.app.update(action: NavigationAction.showSearch(true))
     }) {
       RoundedRectangle(cornerRadius: Constants.cardCornerRadius)
         .foregroundColor(Color(UIColor.secondarySystemBackground))
@@ -29,8 +32,8 @@ struct AddSourceCardButton: View {
             .foregroundColor(Color.secondary)
       )
     }
-    .sheet(isPresented: $showSearch) {
-      SearchHome(slotIndex: self.slotIndex, collectionId: self.collectionId, showing: self.$showSearch)
+    .sheet(isPresented: showSearch) {
+      SearchHome(collectionId: self.collectionId, slotIndex: self.slotIndex)
         .environmentObject(self.app)
     }
   }
