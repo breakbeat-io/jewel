@@ -30,7 +30,7 @@ struct Welcome: View {
                 buttons:
       VStack {
         Button(action: {
-          self.app.update(action: OptionsAction.firstTimeRun(false))
+          self.app.update(action: SettingsAction.firstTimeRun(false))
           self.app.update(action: NavigationAction.showSettings(true))
         }) {
           Text(self.setCuratorNameLabel)
@@ -39,7 +39,7 @@ struct Welcome: View {
         Divider()
           .padding(.bottom, 4)
         Button(action: {
-          self.app.update(action: OptionsAction.firstTimeRun(false))
+          self.app.update(action: SettingsAction.firstTimeRun(false))
         }) {
           Text(self.startCollectionLabel)
             .fontWeight(.bold)

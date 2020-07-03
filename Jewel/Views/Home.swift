@@ -19,7 +19,7 @@ struct Home: View {
     )
   }
   private var overlayShowing: Bool {
-    app.state.options.firstTimeRun || receivedCollectionCued.wrappedValue
+    app.state.settings.firstTimeRun || receivedCollectionCued.wrappedValue
   }
   
   var body: some View {
@@ -54,7 +54,7 @@ struct Home: View {
       }
       .disabled(overlayShowing)
       .blur(radius: overlayShowing ? 10 : 0)
-      if app.state.options.firstTimeRun {
+      if app.state.settings.firstTimeRun {
         Welcome()
       }
       if self.receivedCollectionCued.wrappedValue {

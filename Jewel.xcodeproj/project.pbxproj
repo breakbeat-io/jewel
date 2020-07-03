@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D20CE85724AF7A4600039202 /* NavigationActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20CE85624AF7A4600039202 /* NavigationActions.swift */; };
+		D20CE85924AF7AA500039202 /* SettingsActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20CE85824AF7AA500039202 /* SettingsActions.swift */; };
+		D20CE85B24AF7AD100039202 /* LibraryActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20CE85A24AF7AD100039202 /* LibraryActions.swift */; };
+		D20CE85D24AF7AEA00039202 /* SearchActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20CE85C24AF7AEA00039202 /* SearchActions.swift */; };
 		D221557C2481114A00A1F04A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D221557B2481114A00A1F04A /* AppDelegate.swift */; };
 		D221557E2481114A00A1F04A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D221557D2481114A00A1F04A /* SceneDelegate.swift */; };
 		D22155822481114B00A1F04A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D22155812481114B00A1F04A /* Assets.xcassets */; };
@@ -24,7 +28,7 @@
 		D24925A424814CB60011F409 /* RecordStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24925A324814CB60011F409 /* RecordStore.swift */; };
 		D24C80D124899D0C00EFACD8 /* Library.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24C80D024899D0C00EFACD8 /* Library.swift */; };
 		D27FB80E24868AF60014C05D /* Odesli.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27FB80D24868AF60014C05D /* Odesli.swift */; };
-		D27FB81024868B320014C05D /* Options.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27FB80F24868B320014C05D /* Options.swift */; };
+		D27FB81024868B320014C05D /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27FB80F24868B320014C05D /* Settings.swift */; };
 		D27FB812248693AF0014C05D /* Slot.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27FB811248693AF0014C05D /* Slot.swift */; };
 		D27FB8202486B46D0014C05D /* fa-brands.otf in Resources */ = {isa = PBXBuildFile; fileRef = D27FB81F2486B46D0014C05D /* fa-brands.otf */; };
 		D2881748248BE81400EB47C2 /* SharedCollectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2881747248BE81400EB47C2 /* SharedCollectionManager.swift */; };
@@ -34,12 +38,11 @@
 		D28AD1B7248BB148009B584A /* PlaybackLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28AD1B6248BB148009B584A /* PlaybackLinks.swift */; };
 		D28AD1B9248BB5D4009B584A /* AlbumDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28AD1B8248BB5D4009B584A /* AlbumDetail.swift */; };
 		D2945E1C249C0FC100AE6CA5 /* Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2945E1B249C0FC100AE6CA5 /* Navigation.swift */; };
-		D2945E1E249C249C00AE6CA5 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2945E1D249C249C00AE6CA5 /* Settings.swift */; };
+		D2945E1E249C249C00AE6CA5 /* SettingsHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2945E1D249C249C00AE6CA5 /* SettingsHome.swift */; };
 		D29CB1C524A631EB0051BA96 /* CollectionReceived.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29CB1C424A631EB0051BA96 /* CollectionReceived.swift */; };
 		D29CB1C724A632520051BA96 /* FullOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29CB1C624A632520051BA96 /* FullOverlay.swift */; };
 		D2A449CC249BAECE006E0A12 /* LibraryOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A449CB249BAECE006E0A12 /* LibraryOptions.swift */; };
-		D2AB8467248113EB008B57F9 /* AppActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AB8466248113EB008B57F9 /* AppActions.swift */; };
-		D2AB84692481148D008B57F9 /* AppAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AB84682481148D008B57F9 /* AppAction.swift */; };
+		D2AB8467248113EB008B57F9 /* AppAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AB8466248113EB008B57F9 /* AppAction.swift */; };
 		D2AB846B2481159D008B57F9 /* AppEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AB846A2481159D008B57F9 /* AppEnvironment.swift */; };
 		D2AC120B24859E2300C52D9E /* AddSourceCardButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AC120A24859E2300C52D9E /* AddSourceCardButton.swift */; };
 		D2AC12102485A65D00C52D9E /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AC120F2485A65D00C52D9E /* Collection.swift */; };
@@ -64,6 +67,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D20CE85624AF7A4600039202 /* NavigationActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationActions.swift; sourceTree = "<group>"; };
+		D20CE85824AF7AA500039202 /* SettingsActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsActions.swift; sourceTree = "<group>"; };
+		D20CE85A24AF7AD100039202 /* LibraryActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryActions.swift; sourceTree = "<group>"; };
+		D20CE85C24AF7AEA00039202 /* SearchActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchActions.swift; sourceTree = "<group>"; };
 		D22155782481114A00A1F04A /* Listen Later.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Listen Later.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D221557B2481114A00A1F04A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D221557D2481114A00A1F04A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -81,7 +88,7 @@
 		D24925A324814CB60011F409 /* RecordStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordStore.swift; sourceTree = "<group>"; };
 		D24C80D024899D0C00EFACD8 /* Library.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Library.swift; sourceTree = "<group>"; };
 		D27FB80D24868AF60014C05D /* Odesli.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Odesli.swift; sourceTree = "<group>"; };
-		D27FB80F24868B320014C05D /* Options.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Options.swift; sourceTree = "<group>"; };
+		D27FB80F24868B320014C05D /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		D27FB811248693AF0014C05D /* Slot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Slot.swift; sourceTree = "<group>"; };
 		D27FB81F2486B46D0014C05D /* fa-brands.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fa-brands.otf"; sourceTree = "<group>"; };
 		D2881747248BE81400EB47C2 /* SharedCollectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedCollectionManager.swift; sourceTree = "<group>"; };
@@ -92,12 +99,11 @@
 		D28AD1B6248BB148009B584A /* PlaybackLinks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackLinks.swift; sourceTree = "<group>"; };
 		D28AD1B8248BB5D4009B584A /* AlbumDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumDetail.swift; sourceTree = "<group>"; };
 		D2945E1B249C0FC100AE6CA5 /* Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigation.swift; sourceTree = "<group>"; };
-		D2945E1D249C249C00AE6CA5 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		D2945E1D249C249C00AE6CA5 /* SettingsHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHome.swift; sourceTree = "<group>"; };
 		D29CB1C424A631EB0051BA96 /* CollectionReceived.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionReceived.swift; sourceTree = "<group>"; };
 		D29CB1C624A632520051BA96 /* FullOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullOverlay.swift; sourceTree = "<group>"; };
 		D2A449CB249BAECE006E0A12 /* LibraryOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryOptions.swift; sourceTree = "<group>"; };
-		D2AB8466248113EB008B57F9 /* AppActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppActions.swift; sourceTree = "<group>"; };
-		D2AB84682481148D008B57F9 /* AppAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAction.swift; sourceTree = "<group>"; };
+		D2AB8466248113EB008B57F9 /* AppAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAction.swift; sourceTree = "<group>"; };
 		D2AB846A2481159D008B57F9 /* AppEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnvironment.swift; sourceTree = "<group>"; };
 		D2AC120A24859E2300C52D9E /* AddSourceCardButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSourceCardButton.swift; sourceTree = "<group>"; };
 		D2AC120E2485A20400C52D9E /* secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = secrets.xcconfig; sourceTree = "<group>"; };
@@ -179,8 +185,11 @@
 		D24925922481409D0011F409 /* Actions */ = {
 			isa = PBXGroup;
 			children = (
-				D2AB8466248113EB008B57F9 /* AppActions.swift */,
-				D2AB84682481148D008B57F9 /* AppAction.swift */,
+				D2AB8466248113EB008B57F9 /* AppAction.swift */,
+				D20CE85624AF7A4600039202 /* NavigationActions.swift */,
+				D20CE85824AF7AA500039202 /* SettingsActions.swift */,
+				D20CE85A24AF7AD100039202 /* LibraryActions.swift */,
+				D20CE85C24AF7AEA00039202 /* SearchActions.swift */,
 			);
 			path = Actions;
 			sourceTree = "<group>";
@@ -200,7 +209,7 @@
 			children = (
 				D2492586248117710011F409 /* AppState.swift */,
 				D2945E1B249C0FC100AE6CA5 /* Navigation.swift */,
-				D27FB80F24868B320014C05D /* Options.swift */,
+				D27FB80F24868B320014C05D /* Settings.swift */,
 				D24C80D024899D0C00EFACD8 /* Library.swift */,
 				D2AC12112485A67000C52D9E /* Search.swift */,
 				D2AC120F2485A65D00C52D9E /* Collection.swift */,
@@ -280,7 +289,7 @@
 		D2B4FD8F248456940028D7A4 /* Options */ = {
 			isa = PBXGroup;
 			children = (
-				D2945E1D249C249C00AE6CA5 /* Settings.swift */,
+				D2945E1D249C249C00AE6CA5 /* SettingsHome.swift */,
 				D2B4FD90248456B20028D7A4 /* CollectionOptions.swift */,
 				D2A449CB249BAECE006E0A12 /* LibraryOptions.swift */,
 			);
@@ -399,12 +408,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				D2492597248142660011F409 /* SearchBar.swift in Sources */,
+				D20CE85924AF7AA500039202 /* SettingsActions.swift in Sources */,
 				D249259B2481455A0011F409 /* IfLet.swift in Sources */,
 				D27FB812248693AF0014C05D /* Slot.swift in Sources */,
 				D27FB80E24868AF60014C05D /* Odesli.swift in Sources */,
 				D28AD1B9248BB5D4009B584A /* AlbumDetail.swift in Sources */,
 				D221557C2481114A00A1F04A /* AppDelegate.swift in Sources */,
-				D2945E1E249C249C00AE6CA5 /* Settings.swift in Sources */,
+				D2945E1E249C249C00AE6CA5 /* SettingsHome.swift in Sources */,
 				D288174D248BEDAA00EB47C2 /* ShareSheetLoader.swift in Sources */,
 				D2AC12122485A67000C52D9E /* Search.swift in Sources */,
 				D2492587248117710011F409 /* AppState.swift in Sources */,
@@ -412,15 +422,18 @@
 				D221557E2481114A00A1F04A /* SceneDelegate.swift in Sources */,
 				D29CB1C724A632520051BA96 /* FullOverlay.swift in Sources */,
 				D23197C22492DACD00C09977 /* Constants.swift in Sources */,
+				D20CE85B24AF7AD100039202 /* LibraryActions.swift in Sources */,
 				D2C810EE24A4FF47003D9B59 /* CollectionSheet.swift in Sources */,
 				D2C3A0AB24A0202100AA7266 /* CollectionLibrary.swift in Sources */,
 				D2D78593248AF2E900E0CC63 /* SourceCard.swift in Sources */,
 				D2492599248143720011F409 /* SearchResults.swift in Sources */,
 				D249258F24811A650011F409 /* SearchHome.swift in Sources */,
+				D20CE85724AF7A4600039202 /* NavigationActions.swift in Sources */,
 				D2F8D14C248A6451008C29C3 /* CollectionCard.swift in Sources */,
 				D28AD1B7248BB148009B584A /* PlaybackLinks.swift in Sources */,
 				D2F0E220249A370A00EA3FA2 /* CollectionDetail.swift in Sources */,
 				D24C80D124899D0C00EFACD8 /* Library.swift in Sources */,
+				D20CE85D24AF7AEA00039202 /* SearchActions.swift in Sources */,
 				D2AB846B2481159D008B57F9 /* AppEnvironment.swift in Sources */,
 				D2C3A0A724A01ADE00AA7266 /* OnRotation.swift in Sources */,
 				D2A449CC249BAECE006E0A12 /* LibraryOptions.swift in Sources */,
@@ -435,16 +448,15 @@
 				D2C3A0A5249FFEFF00AA7266 /* Home.swift in Sources */,
 				D28AD1B5248BACB2009B584A /* PlaybackLink.swift in Sources */,
 				D288174A248BEABF00EB47C2 /* ShareSheet.swift in Sources */,
-				D2AB8467248113EB008B57F9 /* AppActions.swift in Sources */,
+				D2AB8467248113EB008B57F9 /* AppAction.swift in Sources */,
 				D29CB1C524A631EB0051BA96 /* CollectionReceived.swift in Sources */,
 				D2881748248BE81400EB47C2 /* SharedCollectionManager.swift in Sources */,
 				D2F8D166248A7E42008C29C3 /* DiscTrackList.swift in Sources */,
 				D2DB0FCD24A7782B006A5835 /* RecordStore+Screenshots.swift in Sources */,
-				D2AB84692481148D008B57F9 /* AppAction.swift in Sources */,
 				D2F8D14E248A666C008C29C3 /* CardArtworkComposite.swift in Sources */,
 				D2945E1C249C0FC100AE6CA5 /* Navigation.swift in Sources */,
 				D24925A424814CB60011F409 /* RecordStore.swift in Sources */,
-				D27FB81024868B320014C05D /* Options.swift in Sources */,
+				D27FB81024868B320014C05D /* Settings.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

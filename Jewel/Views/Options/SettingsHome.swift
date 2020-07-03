@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct Settings: View {
+struct SettingsHome: View {
   
   @EnvironmentObject private var app: AppEnvironment
 
@@ -17,8 +17,8 @@ struct Settings: View {
     set: { self.app.update(action: LibraryAction.setCollectionCurator(curator: $0, collectionId: self.app.state.navigation.onRotationId!))}
     )}
   private var preferredMusicPlatform: Binding<Int> { Binding (
-    get: { self.app.state.options.preferredMusicPlatform },
-    set: { self.app.update(action: OptionsAction.setPreferredPlatform(platform: $0)) }
+    get: { self.app.state.settings.preferredMusicPlatform },
+    set: { self.app.update(action: SettingsAction.setPreferredPlatform(platform: $0)) }
     )
   }
   
@@ -54,7 +54,7 @@ struct Settings: View {
                 Text("Load Screenshot Data")
               }
               Button(action: {
-                self.app.update(action: OptionsAction.reset)
+                self.app.update(action: SettingsAction.reset)
               }) {
                 Text("Reset Jewel")
                   .foregroundColor(.red)
@@ -105,7 +105,7 @@ struct SettingsButton: View {
     .padding(.vertical)
     .frame(width: Constants.buttonWidth)
     .sheet(isPresented: showSettings) {
-      Settings()
+      SettingsHome()
         .environmentObject(self.app)
     }
   }
