@@ -59,7 +59,7 @@ struct CollectionActionButtons: View {
       Spacer()
       if app.state.navigation.collectionIsEditing {
         Button(action: {
-          self.app.update(action: LibraryAction.removeSourcesFromCollection(sourceIds: self.app.state.navigation.collectionEditSelection, collectionId: self.app.state.navigation.activeCollectionId!))
+          self.app.update(action: LibraryAction.removeSourcesFromCollection(slotIndexes: self.app.state.navigation.collectionEditSelection, collectionId: self.app.state.navigation.activeCollectionId!))
           self.app.update(action: NavigationAction.editCollection(false))
           self.app.update(action: NavigationAction.clearCollectionEditSelection)
         }) {

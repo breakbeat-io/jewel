@@ -110,56 +110,72 @@ enum LibraryAction: AppAction {
   case setCollectionName(name: String, collectionId: UUID)
   case setCollectionCurator(curator: String, collectionId: UUID)
   case addSourceToSlot(source: AppleMusicAlbum, slotIndex: Int, collectionId: UUID)
-  case removeSourceFromSlot(slotIndexes: IndexSet, collectionId: UUID)
-  case removeSourcesFromCollection(sourceIds: Set<Int>, collectionId: UUID)
+  case removeSourceFromSlot(slotIndex: Int, collectionId: UUID)
+  case removeSourcesFromCollection(slotIndexes: Set<Int>, collectionId: UUID)
   case setPlatformLinks(baseUrl: URL, platformLinks: OdesliResponse, collectionId: UUID)
-  case moveSlot(from: IndexSet, to: Int, collectionId: UUID)
+  case moveSlot(from: Int, to: Int, collectionId: UUID)
   case invalidateShareLinks(collectionId: UUID)
   case setShareLinks(shareLinkLong: URL, shareLinkShort: URL, collectionId: UUID)
   case saveOnRotation(collection: Collection)
   case addUserCollection
   case addSharedCollection(collection: Collection)
-  case removeSharedCollection(slotIndexes: IndexSet)
+  case removeSharedCollection(libraryIndex: Int)
   case removeSharedCollections(collectionIds: Set<UUID>)
-  case moveSharedCollection(from: IndexSet, to: Int)
+  case moveSharedCollection(from: Int, to: Int)
   case cueSharedCollection(shareableCollection: SharedCollectionManager.ShareableCollection)
   case uncueSharedCollection
   
   var description: String {
     switch self {
       
-    case .setCollectionName:
-      return "\(type(of: self)): Setting user collection name"
-    case .setCollectionCurator:
-      return "\(type(of: self)): Setting user collection curator"
-    case .addSourceToSlot:
-      return "\(type(of: self)): Adding a source to a collection"
-    case .removeSourceFromSlot:
-      return "\(type(of: self)): Removing an source from a collection"
-    case .removeSourcesFromCollection:
-      return "\(type(of: self)): Removing some sources from a collection"
-    case .setPlatformLinks:
-      return "\(type(of: self)): Setting platform links for an source"
-    case .moveSlot:
-      return "\(type(of: self)): Moving a sources slot"
-    case .invalidateShareLinks:
-      return "\(type(of: self)): Invalidating share links"
-    case .setShareLinks:
-      return "\(type(of: self)): Setting share links"
+    case .setCollectionName(let name, _):
+      return "\(type(of: self)): Setting user collection name to \(name)"
+      
+    case .setCollectionCurator(let curator, _):
+      return "\(type(of: self)): Setting user collection curator to \(curator)"
+      
+    case .addSourceToSlot(let source, let slotIndex, let collectionId):
+      return "\(type(of: self)): Adding AppleMusicAlbum \(source.id) to slot \(slotIndex) in collection \(collectionId)"
+      
+    case .removeSourceFromSlot(let slotIndex, let collectionId):
+      return "\(type(of: self)): Removing source in slot \(slotIndex) from collection \(collectionId)"
+      
+    case .removeSourcesFromCollection(let slotIndexes, let collectionId):
+      return "\(type(of: self)): Removing sources in slots \(slotIndexes) from collection \(collectionId)"
+      
+    case .setPlatformLinks(let baseUrl, _, let collectionId):
+      return "\(type(of: self)): Setting platform links for any source with \(baseUrl) in \(collectionId)"
+      
+    case .moveSlot(let slotIndex, let position, let collectionId):
+      return "\(type(of: self)): Moving slot \(slotIndex) to position \(position) in \(collectionId)"
+      
+    case .invalidateShareLinks(let collectionId):
+      return "\(type(of: self)): Invalidating share links for \(collectionId)"
+      
+    case .setShareLinks(_, _, let collectionId):
+      return "\(type(of: self)): Setting share links for \(collectionId)"
+      
     case .saveOnRotation:
       return "\(type(of: self)): Saving current On Rotation to Library"
+      
     case .addUserCollection:
-      return "\(type(of: self)): Adding a user collection to the Library"
+      return "\(type(of: self)): Creating a user collection in the Library"
+      
     case .addSharedCollection:
       return "\(type(of: self)): Adding a shared collection to the library"
-    case .removeSharedCollection:
-      return "\(type(of: self)): Removing a shared collection from the library"
-    case .removeSharedCollections:
-      return "\(type(of: self)): Removing some shared collections from the library"
-    case .moveSharedCollection:
-      return "\(type(of: self)): Moving a shared collections position"
+      
+    case .removeSharedCollection(let libraryIndex):
+      return "\(type(of: self)): Removing collection in position \(libraryIndex) from the Library"
+      
+    case .removeSharedCollections(let collectionIds):
+      return "\(type(of: self)): Removing collections with IDs \(collectionIds) from the library"
+      
+    case .moveSharedCollection(let libraryIndex, let position):
+      return "\(type(of: self)): Moving collection \(libraryIndex) to position \(position) in the Library"
+      
     case .cueSharedCollection:
       return "\(type(of: self)): Cueing a shared collection"
+      
     case .uncueSharedCollection:
       return "\(type(of: self)): Uncueing a shared collection"
       

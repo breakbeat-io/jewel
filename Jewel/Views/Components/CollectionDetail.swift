@@ -73,11 +73,11 @@ struct CollectionDetail: View {
           .deleteDisabled(!self.editable)
           .moveDisabled(!self.editable)
         }
-        .onMove { (indexSet, index) in
-          self.app.update(action: LibraryAction.moveSlot(from: indexSet, to: index, collectionId: self.collection.id))
+        .onMove { (from, to) in
+          self.app.update(action: LibraryAction.moveSlot(from: from.first!, to: to, collectionId: self.collection.id))
         }
         .onDelete {
-          self.app.update(action: LibraryAction.removeSourceFromSlot(slotIndexes: $0, collectionId: self.collection.id))
+          self.app.update(action: LibraryAction.removeSourceFromSlot(slotIndex: $0.first!, collectionId: self.collection.id))
         }
       }
       .environment(\.editMode, .constant(self.app.state.navigation.collectionIsEditing ? EditMode.active : EditMode.inactive))
@@ -94,8 +94,8 @@ struct CollectionDetail: View {
     .onDisappear {
       if !self.app.state.navigation.onRotationActive && self.collectionEmpty {
         self.app.update(action: NavigationAction.setActiveCollectionId(collectionId: self.app.state.navigation.onRotationId!))
-        if let collectionIndex = self.app.state.library.collections.firstIndex(where: { $0.id == self.collection.id }) {
-          self.app.update(action: LibraryAction.removeSharedCollection(slotIndexes: IndexSet([collectionIndex])))
+        if let libraryIndex = self.app.state.library.collections.firstIndex(where: { $0.id == self.collection.id }) {
+          self.app.update(action: LibraryAction.removeSharedCollection(libraryIndex: libraryIndex))
         }
       }
     }

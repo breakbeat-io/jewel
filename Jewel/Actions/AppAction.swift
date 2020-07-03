@@ -181,25 +181,23 @@ func updateLibrary(library: Library, action: LibraryAction) -> Library {
       commitCollection(collection: collection)
     }
     
-  case let .removeSourceFromSlot(slotIndexes, collectionId):
+  case let .removeSourceFromSlot(slotIndex, collectionId):
     if var collection = extractCollection(collectionId: collectionId) {
-      for i in slotIndexes {
-        collection.slots[i] = Slot()
-      }
+      collection.slots[slotIndex] = Slot()
       commitCollection(collection: collection)
     }
     
-  case let .removeSourcesFromCollection(sourceIds, collectionId):
+  case let .removeSourcesFromCollection(slotIndexes, collectionId):
     if var collection = extractCollection(collectionId: collectionId) {
-      for sourceId in sourceIds {
-        collection.slots[sourceId] = Slot()
+      for slotIndex in slotIndexes {
+        collection.slots[slotIndex] = Slot()
       }
       commitCollection(collection: collection)
     }
     
   case let .moveSlot(from, to, collectionId):
     if var collection = extractCollection(collectionId: collectionId) {
-      collection.slots.move(fromOffsets: from, toOffset: to)
+      collection.slots.move(fromOffsets: IndexSet([from]), toOffset: to)
       commitCollection(collection: collection)
     }
     
@@ -233,8 +231,8 @@ func updateLibrary(library: Library, action: LibraryAction) -> Library {
   case let .addSharedCollection(collection):
     newLibrary.collections.insert(collection, at: 0)
     
-  case let .removeSharedCollection(slotIndexes):
-    newLibrary.collections.remove(atOffsets: slotIndexes)
+  case let .removeSharedCollection(slotIndex):
+    newLibrary.collections.remove(at: slotIndex)
     
   case let .removeSharedCollections(collectionIds):
     for collectionId in collectionIds {
@@ -242,7 +240,7 @@ func updateLibrary(library: Library, action: LibraryAction) -> Library {
     }
     
   case let .moveSharedCollection(from, to):
-    newLibrary.collections.move(fromOffsets: from, toOffset: to)
+    newLibrary.collections.move(fromOffsets: IndexSet([from]), toOffset: to)
     
   case let .cueSharedCollection(shareableCollection):
     newLibrary.cuedCollection = shareableCollection

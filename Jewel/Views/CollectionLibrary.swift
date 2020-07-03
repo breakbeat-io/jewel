@@ -54,11 +54,11 @@ struct CollectionLibrary: View {
             CollectionCard(collection: collection)
               .frame(height: self.app.state.navigation.cardHeight)
           }
-          .onMove { (indexSet, index) in
-            self.app.update(action: LibraryAction.moveSharedCollection(from: indexSet, to: index))
+          .onMove { (from, to) in
+            self.app.update(action: LibraryAction.moveSharedCollection(from: from.first!, to: to))
           }
           .onDelete {
-            self.app.update(action: LibraryAction.removeSharedCollection(slotIndexes: $0))
+            self.app.update(action: LibraryAction.removeSharedCollection(libraryIndex: $0.first!))
           }
         }
       }
