@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import os.log
 import UIKit
 import HMV
 
@@ -26,31 +27,31 @@ final class AppEnvironment: ObservableObject {
       do {
         let decodedSavedState = try JSONDecoder().decode(AppState.self, from: savedState)
         state = decodedSavedState
-        print("💎 State > Loaded state")
+        os_log("💎 State > Loaded state")
         
         let onRotationId = decodedSavedState.library.onRotation.id
         state.navigation.onRotationId = onRotationId
         state.navigation.activeCollectionId = onRotationId
-        print("💎 Navigation > Initialised")
+        os_log("💎 Navigation > Initialised")
         
         return
       } catch {
-        print("💎 State > Error loading state: \(error)")
+        os_log("💎 State > Error loading state: %s", error.localizedDescription)
       }
     }
     
-    print("💎 State > No saved state found, creating new")
+    os_log("💎 State > No saved state found, creating new")
     let options = Options()
     let onRotationCollection = Collection(type: .userCollection, name: Navigation.Tab.onRotation.rawValue, curator: "A Music Lover")
     let library = Library(onRotation: onRotationCollection, collections: [Collection]())
     
     state = AppState(options: options, library: library)
-    print("💎 State > New state created")
+    os_log("💎 State > New state created")
     
     let onRotationId = onRotationCollection.id
     state.navigation.onRotationId = onRotationId
     state.navigation.activeCollectionId = onRotationId
-    print("💎 Navigation > Initialised")
+    os_log("💎 Navigation > Initialised")
     
     migrateV1UserDefaults()
     
@@ -65,19 +66,19 @@ final class AppEnvironment: ObservableObject {
       let encodedState = try JSONEncoder().encode(state)
       UserDefaults.standard.set(encodedState, forKey: "jewelState")
     } catch {
-      print("💎 State > Error saving state: \(error)")
+      os_log("💎 State > Error saving state: %s", error.localizedDescription)
     }
   }
   
   private func migrateV1UserDefaults() {
     
     if UserDefaults.standard.string(forKey: "collectionName") != nil {
-      print("💎 State Migration > v1.0 Collection Name found ... deleting.")
+      os_log("💎 State Migration > v1.0 Collection Name found ... deleting.")
       UserDefaults.standard.removeObject(forKey: "collectionName")
     }
     
     if let savedCollection = UserDefaults.standard.dictionary(forKey: "savedCollection") {
-      print("💎 State Migration > v1.0 Saved Collection found ... migrating.")
+      os_log("💎 State Migration > v1.0 Saved Collection found ... migrating.")
       for slotIndex in 0..<state.library.onRotation.slots.count {
         if let appleMusicAlbumId = savedCollection[String(slotIndex)] {
           RecordStore.purchase(album: appleMusicAlbumId as! String, forSlot: slotIndex, inCollection: state.library.onRotation.id)

@@ -7,10 +7,11 @@
 //
 
 import Foundation
+import os.log
 import HMV
 
 func updateState(appState: AppState, action: AppAction) -> AppState {
-  print("💎 Update > \(action.description)")
+  os_log("💎 Update > %s", action.description)
   
   var newAppState = appState
   

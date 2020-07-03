@@ -6,6 +6,7 @@
 //  Copyright © 2020 Breakbeat Ltd. All rights reserved.
 //
 
+import os.log
 import SwiftUI
 
 struct ShareSheetLoader: View {
@@ -51,11 +52,11 @@ struct ShareSheetLoader: View {
     let newLongLink = SharedCollectionManager.generateLongLink(for: collection)
     
     if collection.shareLinkLong == nil || newLongLink != collection.shareLinkLong {
-      print("💎 Share Links: > Creating new Links")
+      os_log("💎 Share Links: > Creating new Links")
       SharedCollectionManager.setShareLinks(for: collection)
       return
     }
     
-    print("💎 Share Links: > Reusing existing links")
+    os_log("💎 Share Links: > Reusing existing links")
   }
 }

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import os.log
 import HMV
 
 extension RecordStore {
@@ -33,7 +34,7 @@ extension RecordStore {
         let album = try decoder.decode(ResponseRoot<Album>.self, from: data)
         return album
       } catch {
-        print("error:\(error)")
+        os_log("💎 Screenshot Generator > Error: %s", error.localizedDescription)
       }
     }
     return nil

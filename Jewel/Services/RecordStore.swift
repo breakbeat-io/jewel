@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import os.log
 import HMV
 
 class RecordStore {
@@ -25,7 +26,7 @@ class RecordStore {
       }
       
       if let error = error {
-        print(error.localizedDescription)
+        os_log("💎 Record Store > Browse error: %s", error.localizedDescription)
         // TODO: create another action to show an error in search results.
       }
     }
@@ -42,7 +43,7 @@ class RecordStore {
         }
         
         if let error = error {
-          print(error.localizedDescription)
+          os_log("💎 Record Store > Purchase error: %s", error.localizedDescription)
           // TODO: create another action to show an error in album add.
         }
       }
@@ -50,14 +51,14 @@ class RecordStore {
   }
   
   static func alternativeSuppliers(for baseUrl: URL, inCollection collectionId: UUID) {
-    print("💎 Platform Links > Populating links for \(baseUrl.absoluteString)")
+    os_log("💎 Platform Links > Populating links for %s", baseUrl.absoluteString)
     
     let request = URLRequest(url: URL(string: "https://api.song.link/v1-alpha.1/links?url=\(baseUrl.absoluteString)")!)
     
     URLSession.shared.dataTask(with: request) { data, response, error in
       if let response = response as? HTTPURLResponse {
         if response.statusCode != 200 {
-          print(response.statusCode)
+          os_log("💎 Platform Links > Unexepcted URL response code: %s", response.statusCode)
         }
       }
       
@@ -72,7 +73,7 @@ class RecordStore {
       }
       
       if let error = error {
-        print("💎 Platform Links > Error getting playbackLinks: \(error.localizedDescription)")
+        os_log("💎 Platform Links > Error getting playbackLinks: %s", error.localizedDescription)
       }
       
     }.resume()
