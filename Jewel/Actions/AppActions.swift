@@ -96,10 +96,10 @@ enum OptionsAction: AppAction {
   
   var description: String {
     switch self {
-    case .setPreferredPlatform:
-      return "\(type(of: self)): Setting preferred platform"
-    case .firstTimeRun:
-      return "\(type(of: self)): Setting first time run"
+    case .setPreferredPlatform(let platformId):
+      return "\(type(of: self)): Setting preferred platform to ID: \(platformId)"
+    case .firstTimeRun(let firstTime):
+      return "\(type(of: self)): \(firstTime ? "Setting to" : "Clearing") first time run"
     case .reset:
       return "\(type(of: self)): Performing reset"
     }
