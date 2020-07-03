@@ -23,8 +23,8 @@ struct CollectionDetail: View {
   private var showSheet: Binding<Bool> { Binding (
     get: { self.app.state.navigation.showSourceDetail || self.app.state.navigation.showSearch },
     set: {
-      self.app.update(action: NavigationAction.showSourceDetail($0))
-      self.app.update(action: NavigationAction.showSearch($0))
+      self.app.state.navigation.showSourceDetail ? self.app.update(action: NavigationAction.showSourceDetail($0)) : ()
+      self.app.state.navigation.showSearch ? self.app.update(action: NavigationAction.showSearch($0)) : ()
     }
   )}
   private var slots: [Slot] {
