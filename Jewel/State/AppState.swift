@@ -16,8 +16,8 @@ struct AppState: Codable {
   var library: Library
   var search = Search()
   
-  enum CodingKeys: CodingKey {
-    case settings
+  enum CodingKeys: String, CodingKey {
+    case settings = "options" //renamed this mid-release which would break previously saved states - in a future release should be migrated to "settings"
     case library
   }
 }
