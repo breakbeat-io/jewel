@@ -89,7 +89,7 @@ struct SettingsButton: View {
   
   private var showSettings: Binding<Bool> { Binding (
     get: { self.app.state.navigation.showSettings },
-    set: { self.app.update(action: NavigationAction.showSettings($0))}
+    set: { self.app.state.navigation.showSettings ? self.app.update(action: NavigationAction.showSettings($0)) : () }
   )}
   
   var body: some View {

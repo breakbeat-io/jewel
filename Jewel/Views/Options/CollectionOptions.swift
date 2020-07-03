@@ -113,7 +113,7 @@ struct ShareCollectionButton: View {
   
   private var showSharing: Binding<Bool> { Binding (
     get: { self.app.state.navigation.showSharing },
-    set: { self.app.update(action: NavigationAction.showSharing($0))}
+    set: { self.app.state.navigation.showSharing ? self.app.update(action: NavigationAction.showSharing($0)) : () }
     )}
   
   var collection: Collection

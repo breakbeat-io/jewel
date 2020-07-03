@@ -20,7 +20,7 @@ struct CollectionLibrary: View {
   )}
   private var showCollection: Binding<Bool> { Binding (
     get: { self.app.state.navigation.showCollection },
-    set: { self.app.update(action: NavigationAction.showCollection($0))}
+    set: { self.app.state.navigation.showCollection ? self.app.update(action: NavigationAction.showCollection($0)) : () }
   )}
   
   private var collections: [Collection] {

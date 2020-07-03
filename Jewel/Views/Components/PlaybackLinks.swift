@@ -26,7 +26,7 @@ struct PlaybackLinks: View {
   
   private var showAlternativeLinks: Binding<Bool> { Binding (
     get: { self.app.state.navigation.showAlternativeLinks },
-    set: { self.app.update(action: NavigationAction.showAlternativeLinks($0))}
+    set: { self.app.state.navigation.showAlternativeLinks ? self.app.update(action: NavigationAction.showAlternativeLinks($0)) : () }
   )}
   
   var body: some View {

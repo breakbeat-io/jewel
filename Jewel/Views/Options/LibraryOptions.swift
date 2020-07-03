@@ -50,7 +50,7 @@ struct RecommendationsButton: View {
   
   private var showLoadRecommendationsAlert: Binding<Bool> { Binding (
     get: { self.app.state.navigation.showLoadRecommendationsAlert },
-    set: { self.app.update(action: NavigationAction.showLoadRecommendationsAlert($0))}
+    set: { self.app.state.navigation.showLoadRecommendationsAlert ? self.app.update(action: NavigationAction.showLoadRecommendationsAlert($0)) : () }
   )}
   
   var body: some View {
