@@ -21,6 +21,7 @@ enum NavigationAction: AppAction {
   case setActiveSlotIndex(slotIndex: Int)
   case showSettings(_: Bool)
   case showSearch(_: Bool)
+  case showSharing(_: Bool)
   case showCollection(_: Bool)
   case editCollection(_: Bool)
   case showCollectionOptions(_: Bool)
@@ -49,6 +50,8 @@ enum NavigationAction: AppAction {
       return "\(type(of: self)): Showing/hiding settings"
     case .showSearch:
       return "\(type(of: self)): Showing/hiding search"
+    case .showSharing:
+      return "\(type(of: self)): Showing/hiding sharing"
     case .showCollection:
       return "\(type(of: self)): Showing/hiding collection"
     case .editCollection:

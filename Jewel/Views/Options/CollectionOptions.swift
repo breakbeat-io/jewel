@@ -111,13 +111,16 @@ struct ShareCollectionButton: View {
   
   @EnvironmentObject var app: AppEnvironment
   
-  var collection: Collection
+  private var showSharing: Binding<Bool> { Binding (
+    get: { self.app.state.navigation.showSharing },
+    set: { self.app.update(action: NavigationAction.showSharing($0))}
+    )}
   
-  @State private var showSharing: Bool = false
+  var collection: Collection
 
   var body: some View {
     Button(action: {
-      self.showSharing = true
+      self.app.update(action: NavigationAction.showSharing(true))
     }) {
       HStack {
         Image(systemName: "square.and.arrow.up")
@@ -125,7 +128,7 @@ struct ShareCollectionButton: View {
         Text("Share \(self.app.state.navigation.onRotationActive ? Navigation.Tab.onRotation.rawValue : "Collection")")
       }
     }
-    .sheet(isPresented: self.$showSharing) {
+    .sheet(isPresented: showSharing) {
       ShareSheetLoader(collection: self.collection)
         .environmentObject(self.app)
     }

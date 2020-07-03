@@ -56,6 +56,9 @@ func updateNavigation(navigation: Navigation, action: NavigationAction) -> Navig
     
   case let .showSearch(showSearchState):
     newNavigation.showSearch = showSearchState
+    
+  case let .showSharing(showSharingState):
+    newNavigation.showSharing = showSharingState
 
   case let .showCollection(showCollectionState):
     newNavigation.showCollection = showCollectionState
