@@ -20,9 +20,12 @@ struct CollectionDetail: View {
     get: { self.app.state.navigation.collectionEditSelection },
     set: { self.app.update(action: NavigationAction.setCollectionEditSelection(editSelection: $0))}
   )}
-  private var showSourceDetail: Binding<Bool> { Binding (
-    get: { self.app.state.navigation.showSourceDetail },
-    set: { self.app.update(action: NavigationAction.showSourceDetail($0))}
+  private var showSheet: Binding<Bool> { Binding (
+    get: { self.app.state.navigation.showSourceDetail || self.app.state.navigation.showSearch },
+    set: {
+      self.app.update(action: NavigationAction.showSourceDetail($0))
+      self.app.update(action: NavigationAction.showSearch($0))
+    }
   )}
   private var slots: [Slot] {
     collection.slots
@@ -87,9 +90,14 @@ struct CollectionDetail: View {
       }
     }
     .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
-    .sheet(isPresented: showSourceDetail) {
-      AlbumDetail()
-        .environmentObject(self.app)
+    .sheet(isPresented: showSheet) {
+      if self.app.state.navigation.showSourceDetail {
+        AlbumDetail()
+          .environmentObject(self.app)
+      } else if self.app.state.navigation.showSearch {
+        SearchHome()
+          .environmentObject(self.app)
+      }
     }
     .onDisappear {
       if !self.app.state.navigation.onRotationActive && self.collectionEmpty {

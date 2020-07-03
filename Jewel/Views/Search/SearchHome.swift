@@ -12,15 +12,12 @@ struct SearchHome: View {
   
   @EnvironmentObject private var app: AppEnvironment
   
-  let collectionId: UUID
-  let slotIndex: Int
-  
   var body: some View {
     NavigationView {
       VStack{
         SearchBar()
         Spacer()
-        SearchResults(collectionId: collectionId, slotIndex: slotIndex)
+        SearchResults(collectionId: app.state.navigation.activeCollectionId!, slotIndex: app.state.navigation.activeSlotIndex)
       }
       .navigationBarTitle("Search")
       .navigationBarItems(
