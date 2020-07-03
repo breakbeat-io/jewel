@@ -10,6 +10,8 @@ import SwiftUI
 
 struct PlaybackLinks: View {
   
+  @EnvironmentObject var app: AppEnvironment
+  
   let baseUrl: URL
   let playbackLinks: OdesliResponse?
   
@@ -22,7 +24,10 @@ struct PlaybackLinks: View {
     }
   }
   
-  @State private var showAlternativeLinks = false
+  private var showAlternativeLinks: Binding<Bool> { Binding (
+    get: { self.app.state.navigation.showAlternativeLinks },
+    set: { self.app.update(action: NavigationAction.showAlternativeLinks($0))}
+  )}
   
   var body: some View {
     IfLet(playbackLink.url) { url in
@@ -32,14 +37,14 @@ struct PlaybackLinks: View {
           HStack {
             Spacer()
             Button(action: {
-              self.showAlternativeLinks.toggle()
+              self.app.update(action: NavigationAction.showAlternativeLinks(true))
             }) {
               Image(systemName: "link")
                 .foregroundColor(.secondary)
             }
-            .sheet(isPresented: self.$showAlternativeLinks) {
-              AlternativePlaybackLinks(playbackLinks: playbackLinks,
-                                       showing: self.$showAlternativeLinks)
+            .sheet(isPresented: self.showAlternativeLinks) {
+              AlternativePlaybackLinks(playbackLinks: playbackLinks)
+                .environmentObject(self.app)
             }
             .padding()
           }

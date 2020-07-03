@@ -10,9 +10,9 @@ import SwiftUI
 
 struct AlternativePlaybackLinks: View {
   
-  let playbackLinks: OdesliResponse
+  @EnvironmentObject var app: AppEnvironment
   
-  @Binding var showing: Bool
+  let playbackLinks: OdesliResponse
   
   private var availablePlatforms: [OdesliPlatform] {
     OdesliPlatform.allCases.filter { playbackLinks.linksByPlatform[$0.rawValue] != nil }
@@ -55,7 +55,7 @@ struct AlternativePlaybackLinks: View {
       .navigationBarItems(
         leading:
           Button(action: {
-            self.showing = false
+            self.app.update(action: NavigationAction.showAlternativeLinks(false))
           }) {
             Text("Close")
           }

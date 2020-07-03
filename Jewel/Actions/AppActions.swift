@@ -31,6 +31,7 @@ enum NavigationAction: AppAction {
   case setLibraryEditSelection(editSelection: Set<UUID>)
   case clearLibraryEditSelection
   case showSourceDetail(_: Bool)
+  case showAlternativeLinks(_: Bool)
   case shareLinkError(_: Bool)
   case setDetailViewHeight(viewHeight: CGFloat)
   case reset
@@ -68,6 +69,8 @@ enum NavigationAction: AppAction {
       return "\(type(of: self)): Clearing library edit selection"
     case .showSourceDetail:
       return "\(type(of: self)): Showing/hiding source detail"
+    case .showAlternativeLinks:
+      return "\(type(of: self)): Showing/hiding alternative links"
     case .shareLinkError:
       return "\(type(of: self)): Setting share link error"
     case .setDetailViewHeight:

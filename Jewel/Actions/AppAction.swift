@@ -87,6 +87,9 @@ func updateNavigation(navigation: Navigation, action: NavigationAction) -> Navig
   case let .showSourceDetail(showSourceDetailState):
     newNavigation.showSourceDetail = showSourceDetailState
   
+  case let .showAlternativeLinks(showAlternativeLinksState):
+    newNavigation.showAlternativeLinks = showAlternativeLinksState
+  
   case let .shareLinkError(shareLinkErrorState):
     newNavigation.shareLinkError = shareLinkErrorState
     

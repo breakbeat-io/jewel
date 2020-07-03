@@ -34,6 +34,8 @@ struct Navigation {
   var showSearch: Bool = false
   
   var showSourceDetail: Bool = false
+  var showAlternativeLinks: Bool = false
+  
   var showCollection: Bool = false
   
   var showLibraryOptions: Bool = false
