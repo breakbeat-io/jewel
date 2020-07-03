@@ -18,12 +18,17 @@ enum NavigationAction: AppAction {
   
   case switchTab(to: Navigation.Tab)
   case setActiveCollectionId(collectionId: UUID)
+  case setActiveSlotIndex(slotIndex: Int)
   case showSettings(_: Bool)
   case showCollection(_: Bool)
   case editCollection(_: Bool)
   case showCollectionOptions(_: Bool)
+  case setCollectionEditSelection(editSelection: Set<Int>)
+  case clearCollectionEditSelection
   case editLibrary(_: Bool)
   case showLibraryOptions(_: Bool)
+  case setLibraryEditSelection(editSelection: Set<UUID>)
+  case clearLibraryEditSelection
   case showSourceDetail(_: Bool)
   case shareLinkError(_: Bool)
   case setDetailViewHeight(viewHeight: CGFloat)
@@ -36,6 +41,8 @@ enum NavigationAction: AppAction {
       return "\(type(of: self)): Switching tabs"
     case .setActiveCollectionId:
       return "\(type(of: self)): Setting active collection"
+    case .setActiveSlotIndex:
+      return "\(type(of: self)): Setting active slot"
     case .showSettings:
       return "\(type(of: self)): Showing/hiding settings"
     case .showCollection:
@@ -44,10 +51,18 @@ enum NavigationAction: AppAction {
       return "\(type(of: self)): Editing collection"
     case .showCollectionOptions:
       return "\(type(of: self)): Showing/hiding collection options"
+    case .setCollectionEditSelection:
+      return "\(type(of: self)): Setting collection edit selection"
+    case .clearCollectionEditSelection:
+      return "\(type(of: self)): Clearing collection edit selection"
     case .editLibrary:
       return "\(type(of: self)): Editing library"
     case .showLibraryOptions:
       return "\(type(of: self)): Showing/hiding library options"
+    case .setLibraryEditSelection:
+      return "\(type(of: self)): Setting library edit selection"
+    case .clearLibraryEditSelection:
+      return "\(type(of: self)): Clearing library edit selection"
     case .showSourceDetail:
       return "\(type(of: self)): Showing/hiding source detail"
     case .shareLinkError:

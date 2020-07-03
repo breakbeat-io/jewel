@@ -12,12 +12,17 @@ struct NavBar: View {
   
   @EnvironmentObject var app: AppEnvironment
   
+  private var selectedTab: Binding<Navigation.Tab> { Binding (
+    get: { self.app.state.navigation.selectedTab },
+    set: { self.app.update(action: NavigationAction.switchTab(to: $0))}
+  )}
+  
   var body: some View {
     VStack {
       HStack {
         SettingsButton()
         Spacer()
-        Picker("Library", selection: $app.state.navigation.selectedTab) {
+        Picker("Library", selection: selectedTab) {
           Image(systemName: "music.house")
             .tag(Navigation.Tab.onRotation)
           Image(systemName: "rectangle.on.rectangle.angled")
@@ -44,6 +49,11 @@ struct CollectionActionButtons: View {
   
   @EnvironmentObject var app: AppEnvironment
   
+  private var showCollectionOptions: Binding<Bool> { Binding (
+    get: { self.app.state.navigation.showCollectionOptions },
+    set: { self.app.update(action: NavigationAction.showCollectionOptions($0))}
+  )}
+  
   var body: some View {
     HStack {
       Spacer()
@@ -51,7 +61,7 @@ struct CollectionActionButtons: View {
         Button(action: {
           self.app.update(action: LibraryAction.removeSourcesFromCollection(sourceIds: self.app.state.navigation.collectionEditSelection, collectionId: self.app.state.navigation.activeCollectionId!))
           self.app.update(action: NavigationAction.editCollection(false))
-          self.app.state.navigation.collectionEditSelection.removeAll()
+          self.app.update(action: NavigationAction.clearCollectionEditSelection)
         }) {
           Image(systemName: "trash")
         }
@@ -69,7 +79,7 @@ struct CollectionActionButtons: View {
           Image(systemName: "ellipsis")
         }
         .padding(.leading)
-        .sheet(isPresented: self.$app.state.navigation.showCollectionOptions) {
+        .sheet(isPresented: showCollectionOptions) {
           CollectionOptions()
             .environmentObject(self.app)
         }
@@ -84,6 +94,11 @@ struct LibraryActionButtons: View {
   
   @EnvironmentObject var app: AppEnvironment
   
+  private var showLibraryOptions: Binding<Bool> { Binding (
+    get: { self.app.state.navigation.showLibraryOptions },
+    set: { self.app.update(action: NavigationAction.showLibraryOptions($0))}
+  )}
+  
   var body: some View {
     HStack {
       Spacer()
@@ -91,7 +106,7 @@ struct LibraryActionButtons: View {
         Button(action: {
           self.app.update(action: LibraryAction.removeSharedCollections(collectionIds: self.app.state.navigation.libraryEditSelection))
           self.app.update(action: NavigationAction.editLibrary(false))
-          self.app.state.navigation.libraryEditSelection.removeAll()
+          self.app.update(action: NavigationAction.clearLibraryEditSelection)
         }) {
           Image(systemName: "trash")
         }
@@ -104,7 +119,7 @@ struct LibraryActionButtons: View {
       } else {
         Button(action: {
           self.app.update(action: LibraryAction.addUserCollection)
-          self.app.state.navigation.activeCollectionId = self.app.state.library.collections.first!.id
+          self.app.update(action: NavigationAction.setActiveCollectionId(collectionId: self.app.state.library.collections.first!.id))
           self.app.update(action: NavigationAction.showCollection(true))
         }) {
           Image(systemName: "plus")
@@ -116,7 +131,7 @@ struct LibraryActionButtons: View {
           Image(systemName: "ellipsis")
         }
         .padding(.leading)
-        .sheet(isPresented: self.$app.state.navigation.showLibraryOptions) {
+        .sheet(isPresented: showLibraryOptions) {
           LibraryOptions()
             .environmentObject(self.app)
         }

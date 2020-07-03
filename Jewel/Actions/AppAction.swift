@@ -47,6 +47,9 @@ func updateNavigation(navigation: Navigation, action: NavigationAction) -> Navig
   
   case let .setActiveCollectionId(collectionId):
     newNavigation.activeCollectionId = collectionId
+    
+  case let .setActiveSlotIndex(slotIndex):
+    newNavigation.activeSlotIndex = slotIndex
   
   case let .showSettings(showSettingsState):
     newNavigation.showSettings = showSettingsState
@@ -59,12 +62,24 @@ func updateNavigation(navigation: Navigation, action: NavigationAction) -> Navig
   
   case let .showCollectionOptions(showCollectionOptionsState):
     newNavigation.showCollectionOptions = showCollectionOptionsState
+    
+  case let .setCollectionEditSelection(editSelection):
+    newNavigation.collectionEditSelection = editSelection
   
+  case .clearCollectionEditSelection:
+    newNavigation.collectionEditSelection.removeAll()
+    
   case let .editLibrary(editLibraryState):
     newNavigation.libraryIsEditing = editLibraryState
   
   case let .showLibraryOptions(showLibraryOptionsState):
     newNavigation.showLibraryOptions = showLibraryOptionsState
+    
+  case let .setLibraryEditSelection(editSelection):
+    newNavigation.libraryEditSelection = editSelection
+  
+  case .clearLibraryEditSelection:
+    newNavigation.libraryEditSelection.removeAll()
     
   case let .showSourceDetail(showSourceDetailState):
     newNavigation.showSourceDetail = showSourceDetailState

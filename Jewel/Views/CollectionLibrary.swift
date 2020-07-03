@@ -14,6 +14,15 @@ struct CollectionLibrary: View {
   
   @EnvironmentObject var app: AppEnvironment
   
+  private var libraryEditSelection: Binding<Set<UUID>> { Binding (
+    get: { self.app.state.navigation.libraryEditSelection },
+    set: { self.app.update(action: NavigationAction.setLibraryEditSelection(editSelection: $0))}
+  )}
+  private var showCollection: Binding<Bool> { Binding (
+    get: { self.app.state.navigation.showCollection },
+    set: { self.app.update(action: NavigationAction.showCollection($0))}
+  )}
+  
   private var collections: [Collection] {
     app.state.library.collections
   }
@@ -23,7 +32,7 @@ struct CollectionLibrary: View {
       if self.horizontalSizeClass == .regular {
         Spacer()
       }
-      List(selection: self.$app.state.navigation.libraryEditSelection) {
+      List(selection: libraryEditSelection) {
         Text("Collection Library")
           .font(.title)
           .fontWeight(.bold)
@@ -60,7 +69,7 @@ struct CollectionLibrary: View {
       }
     }
     .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
-    .sheet(isPresented: self.$app.state.navigation.showCollection) {
+    .sheet(isPresented: showCollection) {
       CollectionSheet()
         .environmentObject(self.app)
     }

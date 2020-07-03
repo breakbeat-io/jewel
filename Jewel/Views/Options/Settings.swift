@@ -11,7 +11,7 @@ import SwiftUI
 struct Settings: View {
   
   @EnvironmentObject private var app: AppEnvironment
-  
+
   private var curator: Binding<String> { Binding (
     get: { self.app.state.library.onRotation.curator },
     set: { self.app.update(action: LibraryAction.setCollectionCurator(curator: $0, collectionId: self.app.state.navigation.onRotationId!))}
@@ -87,6 +87,11 @@ struct SettingsButton: View {
   
   @EnvironmentObject var app: AppEnvironment
   
+  private var showSettings: Binding<Bool> { Binding (
+    get: { self.app.state.navigation.showSettings },
+    set: { self.app.update(action: NavigationAction.showSettings($0))}
+  )}
+  
   var body: some View {
     HStack {
       Button(action: {
@@ -99,7 +104,7 @@ struct SettingsButton: View {
     }
     .padding(.vertical)
     .frame(width: Constants.buttonWidth)
-    .sheet(isPresented: $app.state.navigation.showSettings) {
+    .sheet(isPresented: showSettings) {
       Settings()
         .environmentObject(self.app)
     }

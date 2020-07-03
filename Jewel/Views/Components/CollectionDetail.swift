@@ -16,6 +16,14 @@ struct CollectionDetail: View {
   
   var collection: Collection
   
+  private var collectionEditSelection: Binding<Set<Int>> { Binding (
+    get: { self.app.state.navigation.collectionEditSelection },
+    set: { self.app.update(action: NavigationAction.setCollectionEditSelection(editSelection: $0))}
+  )}
+  private var showSourceDetail: Binding<Bool> { Binding (
+    get: { self.app.state.navigation.showSourceDetail },
+    set: { self.app.update(action: NavigationAction.showSourceDetail($0))}
+  )}
   private var slots: [Slot] {
     collection.slots
   }
@@ -31,7 +39,7 @@ struct CollectionDetail: View {
       if self.horizontalSizeClass == .regular {
         Spacer()
       }
-      List(selection: self.$app.state.navigation.collectionEditSelection) {
+      List(selection: collectionEditSelection) {
         VStack(alignment: .leading) {
           Text(self.collection.name)
             .font(.title)
@@ -47,7 +55,7 @@ struct CollectionDetail: View {
             if self.slots[slotIndex].source != nil {
               IfLet(self.slots[slotIndex].source?.attributes) { attributes in
                 Button(action: {
-                  self.app.state.navigation.activeSlotIndex = slotIndex
+                  self.app.update(action: NavigationAction.setActiveSlotIndex(slotIndex: slotIndex))
                   self.app.update(action: NavigationAction.showSourceDetail(true))
                 }) {
                   SourceCard(sourceName: attributes.name, sourceArtist: attributes.artistName, sourceArtwork: attributes.artwork.url(forWidth: 1000))
@@ -79,13 +87,13 @@ struct CollectionDetail: View {
       }
     }
     .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
-    .sheet(isPresented: self.$app.state.navigation.showSourceDetail) {
+    .sheet(isPresented: showSourceDetail) {
       AlbumDetail()
         .environmentObject(self.app)
     }
     .onDisappear {
       if !self.app.state.navigation.onRotationActive && self.collectionEmpty {
-        self.app.update(action: NavigationAction.setActiveCollectionId(collectionId: self.app.state.navigation.onRotationId))
+        self.app.update(action: NavigationAction.setActiveCollectionId(collectionId: self.app.state.navigation.onRotationId!))
         if let collectionIndex = self.app.state.library.collections.firstIndex(where: { $0.id == self.collection.id }) {
           self.app.update(action: LibraryAction.removeSharedCollection(slotIndexes: IndexSet([collectionIndex])))
         }
