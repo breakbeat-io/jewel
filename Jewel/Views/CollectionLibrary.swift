@@ -55,10 +55,10 @@ struct CollectionLibrary: View {
               .frame(height: self.app.state.navigation.cardHeight)
           }
           .onMove { (from, to) in
-            self.app.update(action: LibraryAction.moveSharedCollection(from: from.first!, to: to))
+            self.app.update(action: LibraryAction.moveCollection(from: from.first!, to: to))
           }
           .onDelete {
-            self.app.update(action: LibraryAction.removeSharedCollection(libraryIndex: $0.first!))
+            self.app.update(action: LibraryAction.removeCollection(libraryIndex: $0.first!))
           }
         }
       }

@@ -95,7 +95,7 @@ struct CollectionDetail: View {
       if !self.app.state.navigation.onRotationActive && self.collectionEmpty {
         self.app.update(action: NavigationAction.setActiveCollectionId(collectionId: self.app.state.navigation.onRotationId!))
         if let libraryIndex = self.app.state.library.collections.firstIndex(where: { $0.id == self.collection.id }) {
-          self.app.update(action: LibraryAction.removeSharedCollection(libraryIndex: libraryIndex))
+          self.app.update(action: LibraryAction.removeCollection(libraryIndex: libraryIndex))
         }
       }
     }

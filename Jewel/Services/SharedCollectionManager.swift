@@ -162,7 +162,7 @@ class SharedCollectionManager {
   static func expandShareableCollection(shareableCollection: ShareableCollection) {
     let collection = Collection(type: .sharedCollection, name: shareableCollection.collectionName, curator: shareableCollection.collectionCurator)
     
-    AppEnvironment.global.update(action: LibraryAction.addSharedCollection(collection: collection))
+    AppEnvironment.global.update(action: LibraryAction.addCollection(collection: collection))
     
     for (index, slot) in shareableCollection.collection.enumerated() {
       if slot?.sourceProvider == SourceProvider.appleMusicAlbum {

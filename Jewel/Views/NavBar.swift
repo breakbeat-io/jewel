@@ -104,7 +104,7 @@ struct LibraryActionButtons: View {
       Spacer()
       if app.state.navigation.libraryIsEditing {
         Button(action: {
-          self.app.update(action: LibraryAction.removeSharedCollections(collectionIds: self.app.state.navigation.libraryEditSelection))
+          self.app.update(action: LibraryAction.removeCollections(collectionIds: self.app.state.navigation.libraryEditSelection))
           self.app.update(action: NavigationAction.editLibrary(false))
           self.app.update(action: NavigationAction.clearLibraryEditSelection)
         }) {
@@ -118,7 +118,7 @@ struct LibraryActionButtons: View {
         }
       } else {
         Button(action: {
-          self.app.update(action: LibraryAction.addUserCollection)
+          self.app.update(action: LibraryAction.createCollection)
           self.app.update(action: NavigationAction.setActiveCollectionId(collectionId: self.app.state.library.collections.first!.id))
           self.app.update(action: NavigationAction.showCollection(true))
         }) {

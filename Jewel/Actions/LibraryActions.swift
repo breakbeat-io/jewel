@@ -92,22 +92,22 @@ func updateLibrary(library: Library, action: LibraryAction) -> Library {
     newCollection.name = "My \(Navigation.Tab.onRotation.rawValue) — \(dateString)"
     newLibrary.collections.insert(newCollection, at: 0)
     
-  case .addUserCollection:
+  case .createCollection:
     let newCollection = Collection(type: .userCollection, name: "New Collection", curator: newLibrary.onRotation.curator)
     newLibrary.collections.insert(newCollection, at: 0)
     
-  case let .addSharedCollection(collection):
+  case let .addCollection(collection):
     newLibrary.collections.insert(collection, at: 0)
     
-  case let .removeSharedCollection(slotIndex):
+  case let .removeCollection(slotIndex):
     newLibrary.collections.remove(at: slotIndex)
     
-  case let .removeSharedCollections(collectionIds):
+  case let .removeCollections(collectionIds):
     for collectionId in collectionIds {
       newLibrary.collections.removeAll(where: { $0.id == collectionId} )
     }
     
-  case let .moveSharedCollection(from, to):
+  case let .moveCollection(from, to):
     newLibrary.collections.move(fromOffsets: IndexSet([from]), toOffset: to)
     
   case let .cueSharedCollection(shareableCollection):
@@ -143,11 +143,11 @@ enum LibraryAction: AppAction {
   case invalidateShareLinks(collectionId: UUID)
   case setShareLinks(shareLinkLong: URL, shareLinkShort: URL, collectionId: UUID)
   case saveOnRotation(collection: Collection)
-  case addUserCollection
-  case addSharedCollection(collection: Collection)
-  case removeSharedCollection(libraryIndex: Int)
-  case removeSharedCollections(collectionIds: Set<UUID>)
-  case moveSharedCollection(from: Int, to: Int)
+  case createCollection
+  case addCollection(collection: Collection)
+  case removeCollection(libraryIndex: Int)
+  case removeCollections(collectionIds: Set<UUID>)
+  case moveCollection(from: Int, to: Int)
   case cueSharedCollection(shareableCollection: SharedCollectionManager.ShareableCollection)
   case uncueSharedCollection
   
@@ -184,19 +184,19 @@ enum LibraryAction: AppAction {
     case .saveOnRotation:
       return "\(type(of: self)): Saving current On Rotation to Library"
       
-    case .addUserCollection:
+    case .createCollection:
       return "\(type(of: self)): Creating a user collection in the Library"
       
-    case .addSharedCollection:
+    case .addCollection:
       return "\(type(of: self)): Adding a shared collection to the library"
       
-    case .removeSharedCollection(let libraryIndex):
+    case .removeCollection(let libraryIndex):
       return "\(type(of: self)): Removing collection in position \(libraryIndex) from the Library"
       
-    case .removeSharedCollections(let collectionIds):
+    case .removeCollections(let collectionIds):
       return "\(type(of: self)): Removing collections with IDs \(collectionIds) from the library"
       
-    case .moveSharedCollection(let libraryIndex, let position):
+    case .moveCollection(let libraryIndex, let position):
       return "\(type(of: self)): Moving collection \(libraryIndex) to position \(position) in the Library"
       
     case .cueSharedCollection:
