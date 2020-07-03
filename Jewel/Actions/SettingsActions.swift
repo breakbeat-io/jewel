@@ -40,7 +40,7 @@ enum SettingsAction: AppAction {
   var description: String {
     switch self {
     case .setPreferredPlatform(let platformId):
-      return "\(type(of: self)): Setting preferred platform to ID: \(platformId)"
+      return "\(type(of: self)): Setting preferred platform to \(OdesliPlatform.allCases[platformId].friendlyName)"
     case .firstTimeRun(let firstTime):
       return "\(type(of: self)): \(firstTime ? "Setting to" : "Clearing") first time run"
     case .reset:
