@@ -41,46 +41,46 @@ enum NavigationAction: AppAction {
   
   var description: String {
     switch self {
-    case .switchTab:
-      return "\(type(of: self)): Switching tabs"
-    case .setActiveCollectionId:
-      return "\(type(of: self)): Setting active collection"
-    case .setActiveSlotIndex:
-      return "\(type(of: self)): Setting active slot"
-    case .showSettings:
-      return "\(type(of: self)): Showing/hiding settings"
-    case .showSearch:
-      return "\(type(of: self)): Showing/hiding search"
-    case .showSharing:
-      return "\(type(of: self)): Showing/hiding sharing"
-    case .showCollection:
-      return "\(type(of: self)): Showing/hiding collection"
-    case .editCollection:
-      return "\(type(of: self)): Editing collection"
-    case .showCollectionOptions:
-      return "\(type(of: self)): Showing/hiding collection options"
+    case .switchTab(let tab):
+      return "\(type(of: self)): Switching to \(tab.rawValue) tab"
+    case .setActiveCollectionId(let collectionId):
+      return "\(type(of: self)): Setting active collection to \(collectionId)"
+    case .setActiveSlotIndex(let slotId):
+      return "\(type(of: self)): Setting active slot to \(slotId)"
+    case .showSettings(let showing):
+      return "\(type(of: self)): \(showing ? "Showing" : "Closing") settings"
+    case .showSearch(let showing):
+      return "\(type(of: self)): \(showing ? "Showing" : "Closing") search"
+    case .showSharing(let showing):
+      return "\(type(of: self)): \(showing ? "Showing" : "Closing") sharing"
+    case .showCollection(let showing):
+      return "\(type(of: self)): \(showing ? "Showing" : "Closing") collection"
+    case .editCollection(let editing):
+      return "\(type(of: self)): \(editing ? "Editing" : "Finished editing") collection"
+    case .showCollectionOptions(let showing):
+      return "\(type(of: self)): \(showing ? "Showing" : "Closing") collection options"
     case .setCollectionEditSelection:
       return "\(type(of: self)): Setting collection edit selection"
     case .clearCollectionEditSelection:
       return "\(type(of: self)): Clearing collection edit selection"
-    case .editLibrary:
-      return "\(type(of: self)): Editing library"
-    case .showLibraryOptions:
-      return "\(type(of: self)): Showing/hiding library options"
+    case .editLibrary(let editing):
+      return "\(type(of: self)): \(editing ? "Editing" : "Finished editing") library"
+    case .showLibraryOptions(let showing):
+      return "\(type(of: self)): \(showing ? "Showing" : "Closing") library options"
     case .setLibraryEditSelection:
       return "\(type(of: self)): Setting library edit selection"
     case .clearLibraryEditSelection:
       return "\(type(of: self)): Clearing library edit selection"
-    case .showSourceDetail:
-      return "\(type(of: self)): Showing/hiding source detail"
-    case .showAlternativeLinks:
-      return "\(type(of: self)): Showing/hiding alternative links"
-    case .shareLinkError:
-      return "\(type(of: self)): Setting share link error"
-    case .showLoadRecommendationsAlert:
-      return "\(type(of: self)): Showing/hiding load recommendations alert"
-    case .setDetailViewHeight:
-      return "\(type(of: self)): Setting view height"
+    case .showSourceDetail(let showing):
+      return "\(type(of: self)): \(showing ? "Showing" : "Closing") source detail"
+    case .showAlternativeLinks(let showing):
+      return "\(type(of: self)): \(showing ? "Showing" : "Closing") alternative links"
+    case .shareLinkError(let error):
+      return "\(type(of: self)): \(error ? "Setting a" : "Clearing any") share link error"
+    case .showLoadRecommendationsAlert(let showing):
+      return "\(type(of: self)): \(showing ? "Showing" : "Closing") load recommendations alert"
+    case .setDetailViewHeight(let height):
+      return "\(type(of: self)): Setting view height to \(height)"
     case .reset:
       return "\(type(of: self)): Resetting navigation to defaults"
     case .toggleDebug:

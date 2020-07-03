@@ -11,7 +11,6 @@ import os.log
 import HMV
 
 func updateState(appState: AppState, action: AppAction) -> AppState {
-  os_log("💎 Update > %s", action.description)
   
   var newAppState = appState
   
@@ -32,6 +31,8 @@ func updateState(appState: AppState, action: AppAction) -> AppState {
   default: break
     
   }
+  
+  os_log("💎 State Update > %s", action.description)
   
   return newAppState
 }
