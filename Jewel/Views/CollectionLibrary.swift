@@ -20,7 +20,7 @@ struct CollectionLibrary: View {
     )}
   private var showCollection: Binding<Bool> { Binding (
     get: { self.app.state.navigation.showCollection },
-    set: { self.app.state.navigation.showCollection ? self.app.update(action: NavigationAction.showCollection($0)) : () }
+    set: { if self.app.state.navigation.showCollection { self.app.update(action: NavigationAction.showCollection($0)) } }
     )}
   
   private var collections: [Collection] {
@@ -75,7 +75,9 @@ struct CollectionLibrary: View {
           .environmentObject(self.app)
       }
       .onAppear {
-        self.app.update(action: NavigationAction.setLibraryViewHeight(viewHeight: geo.size.height))
+        if geo.size.height != self.app.state.navigation.libraryViewHeight {
+          self.app.update(action: NavigationAction.setLibraryViewHeight(viewHeight: geo.size.height))
+        }
       }
     }
   }

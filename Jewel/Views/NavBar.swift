@@ -51,7 +51,7 @@ struct CollectionActionButtons: View {
   
   private var showCollectionOptions: Binding<Bool> { Binding (
     get: { self.app.state.navigation.showCollectionOptions },
-    set: { self.app.state.navigation.showCollectionOptions ? self.app.update(action: NavigationAction.showCollectionOptions($0)) : () }
+    set: { if self.app.state.navigation.showCollectionOptions { self.app.update(action: NavigationAction.showCollectionOptions($0)) } }
   )}
   
   var body: some View {
@@ -96,7 +96,7 @@ struct LibraryActionButtons: View {
   
   private var showLibraryOptions: Binding<Bool> { Binding (
     get: { self.app.state.navigation.showLibraryOptions },
-    set: { self.app.state.navigation.showLibraryOptions ? self.app.update(action: NavigationAction.showLibraryOptions($0)) : () }
+    set: { if self.app.state.navigation.showLibraryOptions { self.app.update(action: NavigationAction.showLibraryOptions($0)) } }
   )}
   
   var body: some View {

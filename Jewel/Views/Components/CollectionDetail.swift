@@ -23,8 +23,8 @@ struct CollectionDetail: View {
   private var showSheet: Binding<Bool> { Binding (
     get: { self.app.state.navigation.showSourceDetail || self.app.state.navigation.showSearch },
     set: {
-      self.app.state.navigation.showSourceDetail ? self.app.update(action: NavigationAction.showSourceDetail($0)) : ()
-      self.app.state.navigation.showSearch ? self.app.update(action: NavigationAction.showSearch($0)) : ()
+      if self.app.state.navigation.showSourceDetail { self.app.update(action: NavigationAction.showSourceDetail($0)) }
+      if self.app.state.navigation.showSearch { self.app.update(action: NavigationAction.showSearch($0)) }
   }
     )}
   private var slots: [Slot] {
@@ -101,7 +101,9 @@ struct CollectionDetail: View {
         }
       }
       .onAppear {
-        self.app.update(action: NavigationAction.setCollectionViewHeight(viewHeight: geo.size.height))
+        if geo.size.height != self.app.state.navigation.collectionViewHeight {
+          self.app.update(action: NavigationAction.setCollectionViewHeight(viewHeight: geo.size.height))
+        }
       }
       .onDisappear {
         if !self.app.state.navigation.onRotationActive && self.collectionEmpty {
