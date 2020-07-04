@@ -30,27 +30,19 @@ struct Home: View {
         .edgesIgnoringSafeArea(.top)
       VStack(spacing: 0) {
         NavBar()
-        GeometryReader { geo in
-          VStack {
-            if self.app.state.navigation.selectedTab == .onRotation {
-              OnRotation()
-                .transition(.move(edge: .leading))
-                .animation(.easeOut)
-                .onAppear {
-                  self.app.update(action: NavigationAction.setDetailViewHeight(viewHeight: geo.size.height))
-                }
-            }
-            if self.app.state.navigation.selectedTab == .library {
-              CollectionLibrary()
-                .transition(.move(edge: .trailing))
-                .animation(.easeOut)
-                .onAppear {
-                  self.app.update(action: NavigationAction.setDetailViewHeight(viewHeight: geo.size.height))
-                }
-            }
+        VStack {
+          if self.app.state.navigation.selectedTab == .onRotation {
+            OnRotation()
+              .transition(.move(edge: .leading))
+              .animation(.easeOut)
           }
-          .background(Color(UIColor.systemBackground))
+          if self.app.state.navigation.selectedTab == .library {
+            CollectionLibrary()
+              .transition(.move(edge: .trailing))
+              .animation(.easeOut)
+          }
         }
+        .background(Color(UIColor.systemBackground))
       }
       .disabled(overlayShowing)
       .blur(radius: overlayShowing ? 10 : 0)

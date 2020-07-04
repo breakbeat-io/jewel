@@ -73,7 +73,7 @@ func updateNavigation(navigation: Navigation, action: NavigationAction) -> Navig
     newNavigation.showLoadRecommendationsAlert = loadRecommendationsAlertState
     
   case let .setDetailViewHeight(viewHeight):
-    newNavigation.detailViewHeight = viewHeight
+    newNavigation.collectionViewHeight = viewHeight
   
   case .reset:
     newNavigation = Navigation(onRotationId: newNavigation.onRotationId, activeCollectionId: newNavigation.activeCollectionId)

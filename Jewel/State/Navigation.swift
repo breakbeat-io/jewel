@@ -53,12 +53,12 @@ struct Navigation {
   var showSettings: Bool = false
   var showDebugMenu: Bool = false
   
-  var detailViewHeight: CGFloat = 812
+  var collectionViewHeight: CGFloat = 812
   var cardHeight: CGFloat {
-    if detailViewHeight < 696 {
+    if collectionViewHeight < 696 {
       return 61
     } else {
-     return (self.detailViewHeight - 200) / 8
+     return (self.collectionViewHeight - 200) / 8
     }
   }
 }
