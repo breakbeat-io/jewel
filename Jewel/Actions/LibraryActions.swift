@@ -100,12 +100,12 @@ func updateLibrary(library: Library, action: LibraryAction) -> Library {
     newLibrary.collections.insert(collection, at: 0)
     
   case let .duplicateCollection(collection):
-    var duplictedCollection = collection
-    duplictedCollection.id = UUID()
-    duplictedCollection.type = .userCollection
-    duplictedCollection.name = "Copy of \(collection.name)"
-    duplictedCollection.curator = newLibrary.onRotation.curator
-    newLibrary.collections.insert(duplictedCollection, at: 0)
+    var duplicatedCollection = collection
+    duplicatedCollection.id = UUID()
+    duplicatedCollection.type = .userCollection
+    duplicatedCollection.name = "Copy of \(collection.name)"
+    duplicatedCollection.curator = newLibrary.onRotation.curator
+    newLibrary.collections.insert(duplicatedCollection, at: 0)
     
   case let .removeCollection(slotIndex):
     newLibrary.collections.remove(at: slotIndex)
