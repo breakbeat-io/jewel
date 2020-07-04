@@ -53,12 +53,16 @@ struct Navigation {
   var showSettings: Bool = false
   var showDebugMenu: Bool = false
   
-  var collectionViewHeight: CGFloat = 812
-  var cardHeight: CGFloat {
-    if collectionViewHeight < 696 {
-      return 61
-    } else {
-     return (self.collectionViewHeight - 200) / 8
-    }
+  var libraryViewHeight: CGFloat = 812
+  var collectionCardHeight: CGFloat {
+    let height = (self.libraryViewHeight - 200) / 8
+    return height < 61 ? 61 : height
   }
+  
+  var collectionViewHeight: CGFloat = 812
+  var albumCardHeight: CGFloat {
+    let height = (self.collectionViewHeight - 200) / 8
+    return height < 61 ? 61 : height
+  }
+  
 }

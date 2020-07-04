@@ -73,7 +73,7 @@ struct CollectionDetail: View {
                   .fill(Color(UIColor.secondarySystemBackground))
               }
             }
-            .frame(height: self.app.state.navigation.cardHeight)
+            .frame(height: self.app.state.navigation.albumCardHeight)
             .deleteDisabled(!self.editable)
             .moveDisabled(!self.editable)
           }
@@ -101,7 +101,7 @@ struct CollectionDetail: View {
         }
       }
       .onAppear {
-        self.app.update(action: NavigationAction.setDetailViewHeight(viewHeight: geo.size.height))
+        self.app.update(action: NavigationAction.setCollectionViewHeight(viewHeight: geo.size.height))
       }
       .onDisappear {
         if !self.app.state.navigation.onRotationActive && self.collectionEmpty {

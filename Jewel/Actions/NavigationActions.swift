@@ -72,8 +72,11 @@ func updateNavigation(navigation: Navigation, action: NavigationAction) -> Navig
   case let .showLoadRecommendationsAlert(loadRecommendationsAlertState):
     newNavigation.showLoadRecommendationsAlert = loadRecommendationsAlertState
     
-  case let .setDetailViewHeight(viewHeight):
+  case let .setCollectionViewHeight(viewHeight):
     newNavigation.collectionViewHeight = viewHeight
+  
+  case let .setLibraryViewHeight(viewHeight):
+  newNavigation.libraryViewHeight = viewHeight
   
   case .reset:
     newNavigation = Navigation(onRotationId: newNavigation.onRotationId, activeCollectionId: newNavigation.activeCollectionId)
@@ -108,7 +111,8 @@ enum NavigationAction: AppAction {
   case showAlternativeLinks(_: Bool)
   case shareLinkError(_: Bool)
   case showLoadRecommendationsAlert(_: Bool)
-  case setDetailViewHeight(viewHeight: CGFloat)
+  case setCollectionViewHeight(viewHeight: CGFloat)
+  case setLibraryViewHeight(viewHeight: CGFloat)
   case reset
   case toggleDebug
   
@@ -152,8 +156,10 @@ enum NavigationAction: AppAction {
       return "\(type(of: self)): \(error ? "Setting a" : "Clearing any") share link error"
     case .showLoadRecommendationsAlert(let showing):
       return "\(type(of: self)): \(showing ? "Showing" : "Closing") load recommendations alert"
-    case .setDetailViewHeight(let height):
-      return "\(type(of: self)): Setting view height to \(height)"
+    case .setCollectionViewHeight(let height):
+      return "\(type(of: self)): Setting collection view height to \(height)"
+    case .setLibraryViewHeight(let height):
+      return "\(type(of: self)): Setting library view height to \(height)"
     case .reset:
       return "\(type(of: self)): Resetting navigation to defaults"
     case .toggleDebug:

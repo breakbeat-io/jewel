@@ -17,61 +17,66 @@ struct CollectionLibrary: View {
   private var libraryEditSelection: Binding<Set<UUID>> { Binding (
     get: { self.app.state.navigation.libraryEditSelection },
     set: { self.app.update(action: NavigationAction.setLibraryEditSelection(editSelection: $0))}
-  )}
+    )}
   private var showCollection: Binding<Bool> { Binding (
     get: { self.app.state.navigation.showCollection },
     set: { self.app.state.navigation.showCollection ? self.app.update(action: NavigationAction.showCollection($0)) : () }
-  )}
+    )}
   
   private var collections: [Collection] {
     app.state.library.collections
   }
   
   var body: some View {
-    HStack {
-      if self.horizontalSizeClass == .regular {
-        Spacer()
-      }
-      List(selection: libraryEditSelection) {
-        Text("Collection Library")
-          .font(.title)
-          .fontWeight(.bold)
-          .padding(.top)
-        if self.collections.isEmpty {
-          VStack {
-            Spacer()
-            Image(systemName: "music.note.list")
-              .font(.system(size: 40))
-              .padding(.bottom)
-            Text("Collections you have saved or that people have shared with you will appear here.")
-              .multilineTextAlignment(.center)
-            Spacer()
-          }
-          .padding()
-          .foregroundColor(Color.secondary)
-        } else {
-          ForEach(self.collections) { collection in
-            CollectionCard(collection: collection)
-              .frame(height: self.app.state.navigation.cardHeight)
-          }
-          .onMove { (from, to) in
-            self.app.update(action: LibraryAction.moveCollection(from: from.first!, to: to))
-          }
-          .onDelete {
-            self.app.update(action: LibraryAction.removeCollection(libraryIndex: $0.first!))
+    GeometryReader { geo in
+      HStack {
+        if self.horizontalSizeClass == .regular {
+          Spacer()
+        }
+        List(selection: self.libraryEditSelection) {
+          Text("Collection Library")
+            .font(.title)
+            .fontWeight(.bold)
+            .padding(.top)
+          if self.collections.isEmpty {
+            VStack {
+              Spacer()
+              Image(systemName: "music.note.list")
+                .font(.system(size: 40))
+                .padding(.bottom)
+              Text("Collections you have saved or that people have shared with you will appear here.")
+                .multilineTextAlignment(.center)
+              Spacer()
+            }
+            .padding()
+            .foregroundColor(Color.secondary)
+          } else {
+            ForEach(self.collections) { collection in
+              CollectionCard(collection: collection)
+                .frame(height: self.app.state.navigation.collectionCardHeight)
+            }
+            .onMove { (from, to) in
+              self.app.update(action: LibraryAction.moveCollection(from: from.first!, to: to))
+            }
+            .onDelete {
+              self.app.update(action: LibraryAction.removeCollection(libraryIndex: $0.first!))
+            }
           }
         }
+        .environment(\.editMode, .constant(self.app.state.navigation.libraryIsEditing ? EditMode.active : EditMode.inactive))
+        .frame(maxWidth: self.horizontalSizeClass == .regular ? Constants.regularMaxWidth : .infinity)
+        if self.horizontalSizeClass == .regular {
+          Spacer()
+        }
       }
-      .environment(\.editMode, .constant(self.app.state.navigation.libraryIsEditing ? EditMode.active : EditMode.inactive))
-      .frame(maxWidth: self.horizontalSizeClass == .regular ? Constants.regularMaxWidth : .infinity)
-      if self.horizontalSizeClass == .regular {
-        Spacer()
+      .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
+      .sheet(isPresented: self.showCollection) {
+        CollectionSheet()
+          .environmentObject(self.app)
       }
-    }
-    .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
-    .sheet(isPresented: showCollection) {
-      CollectionSheet()
-        .environmentObject(self.app)
+      .onAppear {
+        self.app.update(action: NavigationAction.setLibraryViewHeight(viewHeight: geo.size.height))
+      }
     }
   }
 }
