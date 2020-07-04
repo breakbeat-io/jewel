@@ -99,6 +99,9 @@ func updateLibrary(library: Library, action: LibraryAction) -> Library {
   case let .addCollection(collection):
     newLibrary.collections.insert(collection, at: 0)
     
+  case let .copyCollection(collectionId):
+    print("Copying collection placeholder")
+    
   case let .removeCollection(slotIndex):
     newLibrary.collections.remove(at: slotIndex)
     
@@ -145,6 +148,7 @@ enum LibraryAction: AppAction {
   case saveOnRotation(collection: Collection)
   case createCollection
   case addCollection(collection: Collection)
+  case copyCollection(collectionId: UUID)
   case removeCollection(libraryIndex: Int)
   case removeCollections(collectionIds: Set<UUID>)
   case moveCollection(from: Int, to: Int)
@@ -189,6 +193,9 @@ enum LibraryAction: AppAction {
       
     case .addCollection:
       return "\(type(of: self)): Adding a shared collection to the library"
+      
+    case .copyCollection(let collectionId):
+      return "\(type(of: self)): Making a copy of collection \(collectionId)"
       
     case .removeCollection(let libraryIndex):
       return "\(type(of: self)): Removing collection in position \(libraryIndex) from the Library"
