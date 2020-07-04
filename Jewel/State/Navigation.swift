@@ -55,13 +55,16 @@ struct Navigation {
   
   var libraryViewHeight: CGFloat = 812
   var collectionCardHeight: CGFloat {
-    let height = (self.libraryViewHeight - 200) / 8
-    return height < 61 ? 61 : height
+    cardHeightFor(libraryViewHeight)
   }
   
   var collectionViewHeight: CGFloat = 812
   var albumCardHeight: CGFloat {
-    let height = (self.collectionViewHeight - 200) / 8
+    cardHeightFor(collectionViewHeight)
+  }
+  
+  private func cardHeightFor(_ viewHeight: CGFloat) -> CGFloat {
+    let height = (viewHeight - 200) / 8
     return height < 61 ? 61 : height
   }
   
