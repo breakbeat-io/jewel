@@ -11,7 +11,7 @@ import SwiftUI
 struct CollectionOptions: View {
   
   @EnvironmentObject private var app: AppEnvironment
-
+  
   private var collection: Collection {
     if app.state.navigation.onRotationActive {
       return self.app.state.library.onRotation
@@ -50,6 +50,16 @@ struct CollectionOptions: View {
                 Text("Add to my Collection Library")
               }
             }
+          } else {
+            Button(action: {
+              self.app.update(action: LibraryAction.copyCollection(collectionId: self.collection.id))
+            }) {
+              HStack {
+                Image(systemName: "doc.on.doc")
+                  .frame(width: Constants.optionsButtonIconWidth)
+                Text("Duplicate Collection")
+              }
+            }
           }
           if collection.type == .userCollection {
             Button(action: {
@@ -65,7 +75,6 @@ struct CollectionOptions: View {
           }
         }
         .disabled(self.collectionEmpty)
-        
         if !app.state.navigation.onRotationActive {
           Section {
             HStack {
@@ -92,7 +101,7 @@ struct CollectionOptions: View {
           .disabled(collection.type != .userCollection)
         }
       }
-      
+        
       .navigationBarTitle("\(app.state.navigation.onRotationActive ? Navigation.Tab.onRotation.rawValue : "Collection") Options", displayMode: .inline)
       .navigationBarItems(
         leading:
@@ -117,7 +126,7 @@ struct ShareCollectionButton: View {
     )}
   
   var collection: Collection
-
+  
   var body: some View {
     Button(action: {
       self.app.update(action: NavigationAction.showSharing(true))
