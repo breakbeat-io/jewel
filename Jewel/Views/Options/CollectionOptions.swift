@@ -52,7 +52,9 @@ struct CollectionOptions: View {
             }
           } else {
             Button(action: {
-              self.app.update(action: LibraryAction.copyCollection(collectionId: self.collection.id))
+              self.app.update(action: LibraryAction.duplicateCollection(collection: self.collection))
+              self.app.update(action: NavigationAction.showCollectionOptions(false))
+              self.app.update(action: NavigationAction.showCollection(false))
             }) {
               HStack {
                 Image(systemName: "doc.on.doc")
