@@ -85,11 +85,11 @@ func updateLibrary(library: Library, action: LibraryAction) -> Library {
     
   case let .saveOnRotation(collection):
     let formatter = DateFormatter()
-    formatter.dateFormat = "MMM yyyy"
+    formatter.dateFormat = "MMM ''yy"
     let dateString = formatter.string(from: Date())
     var newCollection = collection
     newCollection.id = UUID()
-    newCollection.name = "My \(Navigation.Tab.onRotation.rawValue) — \(dateString)"
+    newCollection.name = "My \(Navigation.Tab.onRotation.rawValue) (\(dateString))"
     newLibrary.collections.insert(newCollection, at: 0)
     
   case .createCollection:
