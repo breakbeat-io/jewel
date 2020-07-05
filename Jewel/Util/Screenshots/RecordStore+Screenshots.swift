@@ -13,7 +13,7 @@ import HMV
 extension RecordStore {
   
   static func loadScreenshotCollection() {
-    let albums = getScreenshotAlbums()
+    let albums = getScreenshotData(forView: "Collection")
     for slotIndex in 0..<albums!.data!.count {
       AppEnvironment.global.update(action: LibraryAction.addSourceToSlot(source: albums!.data![slotIndex],
                                                                          slotIndex: slotIndex,
@@ -22,12 +22,12 @@ extension RecordStore {
   }
 
   static func exampleSearch() {
-    let albums = getScreenshotAlbums()
+    let albums = getScreenshotData(forView: "Search")
     AppEnvironment.global.update(action: SearchAction.populateSearchResults(results: (albums?.data!)!))
   }
   
-  static private func getScreenshotAlbums() -> ResponseRoot<Album>? {
-    if let url = Bundle.main.url(forResource: "screenshotAlbums", withExtension: "json") {
+  static private func getScreenshotData(forView: String) -> ResponseRoot<Album>? {
+    if let url = Bundle.main.url(forResource: "screenshot" + forView, withExtension: "json") {
       do {
         let data = try Data(contentsOf: url)
         let decoder = JSONDecoder()
