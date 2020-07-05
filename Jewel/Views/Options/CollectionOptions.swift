@@ -22,13 +22,17 @@ struct CollectionOptions: View {
   private var collectionEmpty: Bool {
     collection.slots.filter( { $0.source != nil }).count == 0
   }
+  
+  @State private var newCollectionName: String = ""
   private var collectionName: Binding<String> { Binding (
     get: { self.collection.name },
-    set: { self.app.update(action: LibraryAction.setCollectionName(name: $0, collectionId: self.app.state.navigation.activeCollectionId!))}
+    set: { self.newCollectionName = $0 }
     )}
+  
+  @State private var newCollectionCurator: String = ""
   private var collectionCurator: Binding<String> { Binding (
     get: { self.collection.curator },
-    set: { self.app.update(action: LibraryAction.setCollectionCurator(curator: $0, collectionId: self.app.state.navigation.activeCollectionId!))}
+    set: { self.newCollectionCurator = $0 }
     )}
   
   var body: some View {
@@ -84,8 +88,10 @@ struct CollectionOptions: View {
               TextField(
                 collectionName.wrappedValue,
                 text: collectionName,
-                onCommit: {
-                  self.app.update(action: NavigationAction.showCollectionOptions(false))
+                onEditingChanged: { _ in
+                  if !self.newCollectionName.isEmpty && self.newCollectionName != self.collection.name {
+                    self.app.update(action: LibraryAction.setCollectionName(name: self.newCollectionName.trimmingCharacters(in: .whitespaces), collectionId: self.collection.id))
+                  }
               }
               ).foregroundColor(.accentColor)
             }
@@ -94,8 +100,10 @@ struct CollectionOptions: View {
               TextField(
                 collectionCurator.wrappedValue,
                 text: collectionCurator,
-                onCommit: {
-                  self.app.update(action: NavigationAction.showCollectionOptions(false))
+                onEditingChanged: { _ in
+                  if !self.newCollectionCurator.isEmpty && self.newCollectionCurator != self.collection.curator {
+                    self.app.update(action: LibraryAction.setCollectionCurator(curator: self.newCollectionCurator.trimmingCharacters(in: .whitespaces), collectionId: self.collection.id))
+                  }
               }
               ).foregroundColor(.accentColor)
             }

@@ -11,10 +11,12 @@ import SwiftUI
 struct SettingsHome: View {
   
   @EnvironmentObject private var app: AppEnvironment
+  
+  @State private var newCurator: String = ""
 
   private var curator: Binding<String> { Binding (
     get: { self.app.state.library.onRotation.curator },
-    set: { self.app.update(action: LibraryAction.setCollectionCurator(curator: $0, collectionId: self.app.state.navigation.onRotationId!))}
+    set: { self.newCurator = $0 }
     )}
   private var preferredMusicPlatform: Binding<Int> { Binding (
     get: { self.app.state.settings.preferredMusicPlatform },
@@ -32,9 +34,11 @@ struct SettingsHome: View {
               TextField(
                 curator.wrappedValue,
                 text: curator,
-                onCommit: {
-                  self.app.update(action: NavigationAction.showSettings(false))
-              }
+                onEditingChanged: { _ in
+                  if !self.newCurator.isEmpty && self.newCurator != self.app.state.library.onRotation.curator {
+                    self.app.update(action: LibraryAction.setCollectionCurator(curator: self.newCurator.trimmingCharacters(in: .whitespaces), collectionId: self.app.state.navigation.onRotationId!))
+                  }
+                }
               ).foregroundColor(.accentColor)
             }
           }
