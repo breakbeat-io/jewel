@@ -40,7 +40,9 @@ struct CollectionOptions: View {
       Form {
         Section {
           
+          #if !targetEnvironment(macCatalyst)
           ShareCollectionButton(collection: collection)
+          #endif
           
           if app.state.navigation.onRotationActive {
             Button(action: {
