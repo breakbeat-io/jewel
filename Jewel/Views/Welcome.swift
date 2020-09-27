@@ -29,18 +29,18 @@ struct Welcome: View {
     RichAlert(heading: heading,
                 buttons:
       VStack {
-        Button(action: {
+        Button {
           self.app.update(action: SettingsAction.firstTimeRun(false))
           self.app.update(action: NavigationAction.showSettings(true))
-        }) {
+        } label: {
           Text(self.setCuratorNameLabel)
             .fontWeight(.light)
         }
         Divider()
           .padding(.bottom, 4)
-        Button(action: {
+        Button {
           self.app.update(action: SettingsAction.firstTimeRun(false))
-        }) {
+        } label: {
           Text(self.startCollectionLabel)
             .fontWeight(.bold)
         }

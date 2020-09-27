@@ -29,10 +29,10 @@ struct SearchBar: View {
       })
         .foregroundColor(.primary)
         .keyboardType(.webSearch)
-      Button(action: {
+      Button {
         self.searchTerm = ""
         self.app.update(action: SearchAction.removeSearchResults)
-      }) {
+      } label: {
         Image(systemName: "xmark.circle.fill")
           .opacity(searchTerm == "" ? 0 : 1)
       }

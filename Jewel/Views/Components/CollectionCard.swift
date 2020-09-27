@@ -26,10 +26,10 @@ struct CollectionCard: View {
   }
   
   var body: some View {
-    Button(action: {
+    Button {
       self.app.update(action: NavigationAction.setActiveCollectionId(collectionId: self.collection.id))
       self.app.update(action: NavigationAction.showCollection(true))
-    }) {
+    } label: {
       ZStack(alignment: .bottom) {
         Rectangle()
           .foregroundColor(.clear)

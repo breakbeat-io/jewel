@@ -36,9 +36,9 @@ struct PlaybackLinks: View {
         IfLet(self.playbackLinks) { playbackLinks in
           HStack {
             Spacer()
-            Button(action: {
+            Button {
               self.app.update(action: NavigationAction.showAlternativeLinks(true))
-            }) {
+            } label: {
               Image(systemName: "link")
                 .foregroundColor(.secondary)
             }

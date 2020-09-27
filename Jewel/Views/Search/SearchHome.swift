@@ -22,10 +22,10 @@ struct SearchHome: View {
       .navigationBarTitle("Search")
       .navigationBarItems(
         leading:
-        Button(action: {
+        Button {
           self.app.update(action: SearchAction.removeSearchResults)
           self.app.update(action: NavigationAction.showSearch(false))
-        }) {
+        } label: {
           Text("Close")
         }
       )

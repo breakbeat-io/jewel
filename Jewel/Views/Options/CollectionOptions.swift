@@ -45,11 +45,11 @@ struct CollectionOptions: View {
           #endif
           
           if app.state.navigation.onRotationActive {
-            Button(action: {
+            Button {
               self.app.update(action: NavigationAction.switchTab(to: .library))
               self.app.update(action: NavigationAction.showCollectionOptions(false))
               self.app.update(action: LibraryAction.saveOnRotation(collection: self.app.state.library.onRotation))
-            }) {
+            } label: {
               HStack {
                 Image(systemName: "arrow.right.square")
                   .frame(width: Constants.optionsButtonIconWidth)
@@ -57,11 +57,11 @@ struct CollectionOptions: View {
               }
             }
           } else {
-            Button(action: {
+            Button {
               self.app.update(action: LibraryAction.duplicateCollection(collection: self.collection))
               self.app.update(action: NavigationAction.showCollectionOptions(false))
               self.app.update(action: NavigationAction.showCollection(false))
-            }) {
+            } label: {
               HStack {
                 Image(systemName: "doc.on.doc")
                   .frame(width: Constants.optionsButtonIconWidth)
@@ -70,10 +70,10 @@ struct CollectionOptions: View {
             }
           }
           if collection.type == .userCollection {
-            Button(action: {
+            Button {
               self.app.update(action: NavigationAction.editCollection(true))
               self.app.update(action: NavigationAction.showCollectionOptions(false))
-            }) {
+            } label: {
               HStack {
                 Image(systemName: "square.stack.3d.up")
                   .frame(width: Constants.optionsButtonIconWidth)
@@ -117,9 +117,9 @@ struct CollectionOptions: View {
       .navigationBarTitle("\(app.state.navigation.onRotationActive ? Navigation.Tab.onRotation.rawValue : "Collection") Options", displayMode: .inline)
       .navigationBarItems(
         leading:
-        Button(action: {
+        Button {
           self.app.update(action: NavigationAction.showCollectionOptions(false))
-        }) {
+        } label: {
           Text("Close")
         }
       )
@@ -140,9 +140,9 @@ struct ShareCollectionButton: View {
   var collection: Collection
   
   var body: some View {
-    Button(action: {
+    Button {
       self.app.update(action: NavigationAction.showSharing(true))
-    }) {
+    } label: {
       HStack {
         Image(systemName: "square.and.arrow.up")
           .frame(width: Constants.optionsButtonIconWidth)

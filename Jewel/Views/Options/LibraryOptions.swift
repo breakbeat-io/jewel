@@ -16,10 +16,10 @@ struct LibraryOptions: View {
     NavigationView {
       Form {
         Section {
-          Button(action: {
+          Button {
             self.app.update(action: NavigationAction.editLibrary(true))
             self.app.update(action: NavigationAction.showLibraryOptions(false))
-          }) {
+          } label: {
             HStack {
               Image(systemName: "square.stack.3d.up")
                 .frame(width: Constants.optionsButtonIconWidth)
@@ -33,9 +33,9 @@ struct LibraryOptions: View {
       .navigationBarTitle("Library Options", displayMode: .inline)
       .navigationBarItems(
         leading:
-        Button(action: {
+        Button {
           self.app.update(action: NavigationAction.showLibraryOptions(false))
-        }) {
+        } label: {
           Text("Close")
         }
       )
@@ -54,9 +54,9 @@ struct RecommendationsButton: View {
   )}
   
   var body: some View {
-    Button(action: {
+    Button {
       self.app.update(action: NavigationAction.showLoadRecommendationsAlert(true))
-    }) {
+    } label: {
       HStack {
         Image(systemName: "square.and.arrow.down")
           .frame(width: Constants.optionsButtonIconWidth)

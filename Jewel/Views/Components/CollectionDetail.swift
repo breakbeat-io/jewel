@@ -58,10 +58,10 @@ struct CollectionDetail: View {
             Group {
               if self.slots[slotIndex].source != nil {
                 IfLet(self.slots[slotIndex].source?.attributes) { attributes in
-                  Button(action: {
+                  Button {
                     self.app.update(action: NavigationAction.setActiveSlotIndex(slotIndex: slotIndex))
                     self.app.update(action: NavigationAction.showSourceDetail(true))
-                  }) {
+                  } label: {
                     SourceCard(sourceName: attributes.name, sourceArtist: attributes.artistName, sourceArtwork: attributes.artwork.url(forWidth: 1000))
                   }
                 }

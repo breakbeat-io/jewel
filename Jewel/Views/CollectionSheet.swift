@@ -27,9 +27,9 @@ struct CollectionSheet: View {
         .navigationBarTitle("", displayMode: .inline)
         .navigationBarItems(
           leading:
-          Button(action: {
+          Button {
             self.app.update(action: NavigationAction.showCollection(false))
-          }) {
+          } label: {
             Text("Close")
           },
           trailing: CollectionActionButtons()

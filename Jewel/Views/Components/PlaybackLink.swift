@@ -14,9 +14,9 @@ struct PlaybackLink: View {
   let platformName: String
   
   var body: some View {
-    Button(action: {
+    Button {
       UIApplication.shared.open(self.url)
-    }) {
+    } label: {
       HStack {
         Image(systemName: "play.fill")
           .font(.headline)

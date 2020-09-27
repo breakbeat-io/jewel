@@ -35,9 +35,9 @@ struct AlbumDetail: View {
       .navigationBarTitle("", displayMode: .inline)
       .navigationBarItems(
         leading:
-        Button(action: {
+        Button {
           self.app.update(action: NavigationAction.showSourceDetail(false))
-        }) {
+        } label: {
           Text("Close")
         }
       )

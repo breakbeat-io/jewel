@@ -16,12 +16,11 @@ struct AddSourceCardButton: View {
   let collectionId: UUID
   
   var body: some View {
-    Button(action: {
+    Button {
       self.app.update(action: NavigationAction.setActiveCollectionId(collectionId: self.collectionId))
       self.app.update(action: NavigationAction.setActiveSlotIndex(slotIndex: self.slotIndex))
       self.app.update(action: NavigationAction.showSearch(true))
-      
-    }) {
+    } label: {
       RoundedRectangle(cornerRadius: Constants.cardCornerRadius)
         .foregroundColor(Color(UIColor.secondarySystemBackground))
         .overlay(

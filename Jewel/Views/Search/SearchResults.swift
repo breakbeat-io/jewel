@@ -45,14 +45,14 @@ struct SearchResults: View {
                 .lineLimit(1)
             }
             Spacer()
-            Button(action: {
+            Button {
               RecordStore.purchase(album: appleMusicAlbums[i].id, forSlot: self.slotIndex, inCollection: self.collectionId)
               self.app.update(action: SearchAction.removeSearchResults)
               self.app.update(action: NavigationAction.showSearch(false))
-            }, label:{
+            } label: {
               Image(systemName: "plus.circle")
                 .padding()
-            })
+            }
           }
         }
       }
