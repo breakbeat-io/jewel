@@ -12,13 +12,6 @@ import os.log
 @main
 struct JewelApp: App {
   
-  init() {
-    let appleMusicApiToken = Bundle.main.infoDictionary?["APPLE_MUSIC_API_TOKEN"] as! String
-    if appleMusicApiToken == "" {
-      fatalError("No Apple Music API Token Found!")
-    }
-  }
-  
   var body: some Scene {
     WindowGroup {
       Home()

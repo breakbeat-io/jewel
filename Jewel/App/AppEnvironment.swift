@@ -23,6 +23,11 @@ final class AppEnvironment: ObservableObject {
   
   private init() {
     
+    let appleMusicApiToken = Bundle.main.infoDictionary?["APPLE_MUSIC_API_TOKEN"] as! String
+    if appleMusicApiToken == "" {
+      fatalError("No Apple Music API Token Found!")
+    }
+    
     if let savedState = UserDefaults.standard.object(forKey: "jewelState") as? Data {
       do {
         let decodedSavedState = try JSONDecoder().decode(AppState.self, from: savedState)
