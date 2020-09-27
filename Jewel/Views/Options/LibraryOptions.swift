@@ -16,17 +16,6 @@ struct LibraryOptions: View {
     NavigationView {
       Form {
         Section {
-          Button {
-            self.app.update(action: NavigationAction.editLibrary(true))
-            self.app.update(action: NavigationAction.showLibraryOptions(false))
-          } label: {
-            HStack {
-              Image(systemName: "square.stack.3d.up")
-                .frame(width: Constants.optionsButtonIconWidth)
-              Text("Reorder Library")
-            }
-          }
-          .disabled(app.state.library.collections.isEmpty)
           RecommendationsButton()
         }
       }

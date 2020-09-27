@@ -47,6 +47,7 @@ struct AlbumDetail: View {
             self.app.update(action: NavigationAction.showSourceDetail(false))
           } label: {
             Image(systemName: "eject")
+            //shouldn't be possible if not a suser collectioN!
           }
       )
     }

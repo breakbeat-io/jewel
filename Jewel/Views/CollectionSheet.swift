@@ -36,9 +36,6 @@ struct CollectionSheet: View {
       )
     }
     .navigationViewStyle(StackNavigationViewStyle())
-    .onDisappear {
-      if self.app.state.navigation.collectionIsEditing { self.app.update(action: NavigationAction.editCollection(false)) }
-    }
   }
   
 }

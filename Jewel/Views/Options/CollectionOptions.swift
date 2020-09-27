@@ -69,18 +69,6 @@ struct CollectionOptions: View {
               }
             }
           }
-          if collection.type == .userCollection {
-            Button {
-              self.app.update(action: NavigationAction.editCollection(true))
-              self.app.update(action: NavigationAction.showCollectionOptions(false))
-            } label: {
-              HStack {
-                Image(systemName: "square.stack.3d.up")
-                  .frame(width: Constants.optionsButtonIconWidth)
-                Text("Reorder \(app.state.navigation.onRotationActive ? Navigation.Tab.onRotation.rawValue : "Collection")")
-              }
-            }
-          }
         }
         .disabled(self.collectionEmpty)
         if !app.state.navigation.onRotationActive {

@@ -55,20 +55,6 @@ func updateLibrary(library: Library, action: LibraryAction) -> Library {
       commitCollection(collection: collection)
     }
     
-  case let .removeSourcesFromCollection(slotIndexes, collectionId):
-    if var collection = extractCollection(collectionId: collectionId) {
-      for slotIndex in slotIndexes {
-        collection.slots[slotIndex] = Slot()
-      }
-      commitCollection(collection: collection)
-    }
-    
-  case let .moveSlot(from, to, collectionId):
-    if var collection = extractCollection(collectionId: collectionId) {
-      collection.slots.move(fromOffsets: IndexSet([from]), toOffset: to)
-      commitCollection(collection: collection)
-    }
-    
   case let .invalidateShareLinks(collectionId):
     if var collection = extractCollection(collectionId: collectionId) {
       collection.shareLinkLong = nil
@@ -110,14 +96,6 @@ func updateLibrary(library: Library, action: LibraryAction) -> Library {
   case let .removeCollection(slotIndex):
     newLibrary.collections.remove(at: slotIndex)
     
-  case let .removeCollections(collectionIds):
-    for collectionId in collectionIds {
-      newLibrary.collections.removeAll(where: { $0.id == collectionId} )
-    }
-    
-  case let .moveCollection(from, to):
-    newLibrary.collections.move(fromOffsets: IndexSet([from]), toOffset: to)
-    
   case let .cueSharedCollection(shareableCollection):
     newLibrary.cuedCollection = shareableCollection
     
@@ -145,9 +123,7 @@ enum LibraryAction: AppAction {
   case setCollectionCurator(curator: String, collectionId: UUID)
   case addSourceToSlot(source: AppleMusicAlbum, slotIndex: Int, collectionId: UUID)
   case removeSourceFromSlot(slotIndex: Int, collectionId: UUID)
-  case removeSourcesFromCollection(slotIndexes: Set<Int>, collectionId: UUID)
   case setPlatformLinks(baseUrl: URL, platformLinks: OdesliResponse, collectionId: UUID)
-  case moveSlot(from: Int, to: Int, collectionId: UUID)
   case invalidateShareLinks(collectionId: UUID)
   case setShareLinks(shareLinkLong: URL, shareLinkShort: URL, collectionId: UUID)
   case saveOnRotation(collection: Collection)
@@ -155,8 +131,6 @@ enum LibraryAction: AppAction {
   case addCollection(collection: Collection)
   case duplicateCollection(collection: Collection)
   case removeCollection(libraryIndex: Int)
-  case removeCollections(collectionIds: Set<UUID>)
-  case moveCollection(from: Int, to: Int)
   case cueSharedCollection(shareableCollection: SharedCollectionManager.ShareableCollection)
   case uncueSharedCollection
   
@@ -175,14 +149,8 @@ enum LibraryAction: AppAction {
     case .removeSourceFromSlot(let slotIndex, let collectionId):
       return "\(type(of: self)): Removing source in slot \(slotIndex) from collection \(collectionId)"
       
-    case .removeSourcesFromCollection(let slotIndexes, let collectionId):
-      return "\(type(of: self)): Removing sources in slots \(slotIndexes) from collection \(collectionId)"
-      
     case .setPlatformLinks(let baseUrl, _, let collectionId):
       return "\(type(of: self)): Setting platform links for any source with \(baseUrl) in \(collectionId)"
-      
-    case .moveSlot(let slotIndex, let position, let collectionId):
-      return "\(type(of: self)): Moving slot \(slotIndex) to position \(position) in \(collectionId)"
       
     case .invalidateShareLinks(let collectionId):
       return "\(type(of: self)): Invalidating share links for \(collectionId)"
@@ -204,12 +172,6 @@ enum LibraryAction: AppAction {
       
     case .removeCollection(let libraryIndex):
       return "\(type(of: self)): Removing collection in position \(libraryIndex) from the Library"
-      
-    case .removeCollections(let collectionIds):
-      return "\(type(of: self)): Removing collections with IDs \(collectionIds) from the library"
-      
-    case .moveCollection(let libraryIndex, let position):
-      return "\(type(of: self)): Moving collection \(libraryIndex) to position \(position) in the Library"
       
     case .cueSharedCollection:
       return "\(type(of: self)): Cueing a shared collection"

@@ -15,11 +15,7 @@ struct CollectionDetail: View {
   @EnvironmentObject var app: AppEnvironment
   
   var collection: Collection
-  
-  private var collectionEditSelection: Binding<Set<Int>> { Binding (
-    get: { self.app.state.navigation.collectionEditSelection },
-    set: { self.app.update(action: NavigationAction.setCollectionEditSelection(editSelection: $0))}
-    )}
+
   private var showSheet: Binding<Bool> { Binding (
     get: { self.app.state.navigation.showSourceDetail || self.app.state.navigation.showSearch },
     set: {
@@ -68,15 +64,12 @@ struct CollectionDetail: View {
                 }
               } else if self.editable {
                 AddSourceCardButton(slotIndex: slotIndex, collectionId: self.collection.id)
-                  .deleteDisabled(true)
               } else {
                 RoundedRectangle(cornerRadius: Constants.cardCornerRadius)
                   .fill(Color(UIColor.secondarySystemBackground))
               }
             }
             .frame(height: self.app.state.navigation.albumCardHeight)
-            .deleteDisabled(!self.editable)
-            .moveDisabled(!self.editable)
           }
         }
         .padding(.horizontal)
