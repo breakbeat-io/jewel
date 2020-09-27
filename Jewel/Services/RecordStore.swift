@@ -34,19 +34,20 @@ class RecordStore {
   
   static func purchase(album appleMusicAlbumId: String, forSlot slotIndex: Int, inCollection collectionId: UUID) {
     RecordStore.appleMusic.album(id: appleMusicAlbumId, completion: { appleMusicAlbum, error in
-      if let appleMusicAlbum = appleMusicAlbum {
+      if let album = appleMusicAlbum {
         DispatchQueue.main.async {
-          AppEnvironment.global.update(action: LibraryAction.addSourceToSlot(source: appleMusicAlbum, slotIndex: slotIndex, collectionId: collectionId))
-          if let baseUrl = appleMusicAlbum.attributes?.url {
+          AppEnvironment.global.update(action: LibraryAction.addSourceToSlot(source: album, slotIndex: slotIndex, collectionId: collectionId))
+          if let baseUrl = album.attributes?.url {
             RecordStore.alternativeSuppliers(for: baseUrl, inCollection: collectionId)
           }
         }
-        
-        if let error = error {
-          os_log("💎 Record Store > Purchase error: %s", error.localizedDescription)
-          // TODO: create another action to show an error in album add.
-        }
       }
+      
+      if let error = error {
+        os_log("💎 Record Store > Purchase error: %s", String(describing: error))
+        // TODO: create another action to show an error in album add.
+      }
+      
     })
   }
   
