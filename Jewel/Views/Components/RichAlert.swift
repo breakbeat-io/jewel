@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct FullOverlay<Buttons: View, Content: View>: View {
+struct RichAlert<Buttons: View, Content: View>: View {
   
   @Environment(\.horizontalSizeClass) var horizontalSizeClass
   @Environment(\.verticalSizeClass) var verticalSizeClass

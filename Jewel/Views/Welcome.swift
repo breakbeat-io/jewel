@@ -26,7 +26,7 @@ struct Welcome: View {
   private let setCuratorNameLabel = "Set my Curator Name"
   
   var body: some View {
-    FullOverlay(heading: heading,
+    RichAlert(heading: heading,
                 buttons:
       VStack {
         Button(action: {
