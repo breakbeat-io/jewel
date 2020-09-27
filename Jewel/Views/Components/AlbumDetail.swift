@@ -35,11 +35,19 @@ struct AlbumDetail: View {
       .navigationBarTitle("", displayMode: .inline)
       .navigationBarItems(
         leading:
-        Button {
-          self.app.update(action: NavigationAction.showSourceDetail(false))
-        } label: {
-          Text("Close")
-        }
+          Button {
+            self.app.update(action: NavigationAction.showSourceDetail(false))
+          } label: {
+            Text("Close")
+              .fontWeight(.light)
+          },
+        trailing:
+          Button {
+            self.app.update(action: LibraryAction.removeSourceFromSlot(slotIndex: app.state.navigation.activeSlotIndex, collectionId: app.state.navigation.activeCollectionId!))
+            self.app.update(action: NavigationAction.showSourceDetail(false))
+          } label: {
+            Image(systemName: "eject")
+          }
       )
     }
     .navigationViewStyle(StackNavigationViewStyle())

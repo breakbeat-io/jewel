@@ -43,7 +43,7 @@ struct CollectionDetail: View {
         if self.horizontalSizeClass == .regular {
           Spacer()
         }
-        List(selection: self.collectionEditSelection) {
+        ScrollView {
           VStack(alignment: .leading) {
             Text(self.collection.name)
               .font(.title)
@@ -54,6 +54,7 @@ struct CollectionDetail: View {
               .fontWeight(.light)
               .foregroundColor(.secondary)
           }
+          .frame(minWidth: 0, maxWidth: .infinity, alignment: .topLeading)
           ForEach(self.slots.indices, id: \.self) { slotIndex in
             Group {
               if self.slots[slotIndex].source != nil {
@@ -77,14 +78,8 @@ struct CollectionDetail: View {
             .deleteDisabled(!self.editable)
             .moveDisabled(!self.editable)
           }
-          .onMove { (from, to) in
-            self.app.update(action: LibraryAction.moveSlot(from: from.first!, to: to, collectionId: self.collection.id))
-          }
-          .onDelete {
-            self.app.update(action: LibraryAction.removeSourceFromSlot(slotIndex: $0.first!, collectionId: self.collection.id))
-          }
         }
-        .environment(\.editMode, .constant(self.app.state.navigation.collectionIsEditing ? EditMode.active : EditMode.inactive))
+        .padding(.horizontal)
         .frame(maxWidth: self.horizontalSizeClass == .regular && !self.app.state.navigation.showCollection ? Constants.regularMaxWidth : .infinity)
         if self.horizontalSizeClass == .regular {
           Spacer()
