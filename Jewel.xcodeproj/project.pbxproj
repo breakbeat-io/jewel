@@ -11,8 +11,6 @@
 		D20CE85924AF7AA500039202 /* SettingsActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20CE85824AF7AA500039202 /* SettingsActions.swift */; };
 		D20CE85B24AF7AD100039202 /* LibraryActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20CE85A24AF7AD100039202 /* LibraryActions.swift */; };
 		D20CE85D24AF7AEA00039202 /* SearchActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20CE85C24AF7AEA00039202 /* SearchActions.swift */; };
-		D221557C2481114A00A1F04A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D221557B2481114A00A1F04A /* AppDelegate.swift */; };
-		D221557E2481114A00A1F04A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D221557D2481114A00A1F04A /* SceneDelegate.swift */; };
 		D22155822481114B00A1F04A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D22155812481114B00A1F04A /* Assets.xcassets */; };
 		D22155852481114B00A1F04A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D22155842481114B00A1F04A /* Preview Assets.xcassets */; };
 		D22155882481114B00A1F04A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D22155862481114B00A1F04A /* LaunchScreen.storyboard */; };
@@ -26,6 +24,7 @@
 		D24925A224814AD60011F409 /* HMV in Frameworks */ = {isa = PBXBuildFile; productRef = D24925A124814AD60011F409 /* HMV */; };
 		D24925A424814CB60011F409 /* RecordStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24925A324814CB60011F409 /* RecordStore.swift */; };
 		D24C80D124899D0C00EFACD8 /* Library.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24C80D024899D0C00EFACD8 /* Library.swift */; };
+		D2603DFF252083EA00B79311 /* JewelApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2603DFE252083EA00B79311 /* JewelApp.swift */; };
 		D2668D4924B1DBB0002922F4 /* screenshotSearch.json in Resources */ = {isa = PBXBuildFile; fileRef = D2668D4824B1DBB0002922F4 /* screenshotSearch.json */; };
 		D27FB80E24868AF60014C05D /* Odesli.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27FB80D24868AF60014C05D /* Odesli.swift */; };
 		D27FB81024868B320014C05D /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27FB80F24868B320014C05D /* Settings.swift */; };
@@ -73,8 +72,6 @@
 		D20CE85A24AF7AD100039202 /* LibraryActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryActions.swift; sourceTree = "<group>"; };
 		D20CE85C24AF7AEA00039202 /* SearchActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchActions.swift; sourceTree = "<group>"; };
 		D22155782481114A00A1F04A /* Listen Later.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Listen Later.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D221557B2481114A00A1F04A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		D221557D2481114A00A1F04A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		D22155812481114B00A1F04A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D22155842481114B00A1F04A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D22155872481114B00A1F04A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -88,6 +85,7 @@
 		D249259A2481455A0011F409 /* IfLet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IfLet.swift; sourceTree = "<group>"; };
 		D24925A324814CB60011F409 /* RecordStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordStore.swift; sourceTree = "<group>"; };
 		D24C80D024899D0C00EFACD8 /* Library.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Library.swift; sourceTree = "<group>"; };
+		D2603DFE252083EA00B79311 /* JewelApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JewelApp.swift; sourceTree = "<group>"; };
 		D2668D4824B1DBB0002922F4 /* screenshotSearch.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = screenshotSearch.json; sourceTree = "<group>"; };
 		D27FB80D24868AF60014C05D /* Odesli.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Odesli.swift; sourceTree = "<group>"; };
 		D27FB80F24868B320014C05D /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
@@ -259,8 +257,7 @@
 			isa = PBXGroup;
 			children = (
 				D22155892481114B00A1F04A /* Info.plist */,
-				D221557B2481114A00A1F04A /* AppDelegate.swift */,
-				D221557D2481114A00A1F04A /* SceneDelegate.swift */,
+				D2603DFE252083EA00B79311 /* JewelApp.swift */,
 				D2AB846A2481159D008B57F9 /* AppEnvironment.swift */,
 				D288174E248D148E00EB47C2 /* Listen Later.entitlements */,
 				D2AC120E2485A20400C52D9E /* secrets.xcconfig */,
@@ -417,13 +414,11 @@
 				D27FB812248693AF0014C05D /* Slot.swift in Sources */,
 				D27FB80E24868AF60014C05D /* Odesli.swift in Sources */,
 				D28AD1B9248BB5D4009B584A /* AlbumDetail.swift in Sources */,
-				D221557C2481114A00A1F04A /* AppDelegate.swift in Sources */,
 				D2945E1E249C249C00AE6CA5 /* SettingsHome.swift in Sources */,
 				D288174D248BEDAA00EB47C2 /* ShareSheetLoader.swift in Sources */,
 				D2AC12122485A67000C52D9E /* Search.swift in Sources */,
 				D2492587248117710011F409 /* AppState.swift in Sources */,
 				D2D78591248AED2900E0CC63 /* AlternativePlaybackLinks.swift in Sources */,
-				D221557E2481114A00A1F04A /* SceneDelegate.swift in Sources */,
 				D29CB1C724A632520051BA96 /* FullOverlay.swift in Sources */,
 				D23197C22492DACD00C09977 /* Constants.swift in Sources */,
 				D20CE85B24AF7AD100039202 /* LibraryActions.swift in Sources */,
@@ -450,6 +445,7 @@
 				D23C398E248FD2DF00AD237E /* Welcome.swift in Sources */,
 				D2AC120B24859E2300C52D9E /* AddSourceCardButton.swift in Sources */,
 				D2C3A0A5249FFEFF00AA7266 /* Home.swift in Sources */,
+				D2603DFF252083EA00B79311 /* JewelApp.swift in Sources */,
 				D28AD1B5248BACB2009B584A /* PlaybackLink.swift in Sources */,
 				D288174A248BEABF00EB47C2 /* ShareSheet.swift in Sources */,
 				D2AB8467248113EB008B57F9 /* AppAction.swift in Sources */,
