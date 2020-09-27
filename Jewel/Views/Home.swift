@@ -53,8 +53,5 @@ struct Home: View {
         CollectionReceived()
       }
     }
-    .onAppear {
-      UITableView.appearance().separatorStyle = .none
-    }
   }
 }

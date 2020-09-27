@@ -7,7 +7,6 @@
 //
 
 import SwiftUI
-import os.log
 
 @main
 struct JewelApp: App {
