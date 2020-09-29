@@ -93,8 +93,8 @@ func updateLibrary(library: Library, action: LibraryAction) -> Library {
     duplicatedCollection.curator = newLibrary.onRotation.curator
     newLibrary.collections.insert(duplicatedCollection, at: 0)
     
-  case let .removeCollection(slotIndex):
-    newLibrary.collections.remove(at: slotIndex)
+  case let .removeCollection(collectionId):
+    newLibrary.collections.removeAll(where: { $0.id == collectionId })
     
   case let .cueSharedCollection(shareableCollection):
     newLibrary.cuedCollection = shareableCollection
@@ -130,7 +130,7 @@ enum LibraryAction: AppAction {
   case createCollection
   case addCollection(collection: Collection)
   case duplicateCollection(collection: Collection)
-  case removeCollection(libraryIndex: Int)
+  case removeCollection(collectionId: UUID)
   case cueSharedCollection(shareableCollection: SharedCollectionManager.ShareableCollection)
   case uncueSharedCollection
   
@@ -170,8 +170,8 @@ enum LibraryAction: AppAction {
     case .duplicateCollection(let collection):
       return "\(type(of: self)): Making a copy of collection \(collection.id)"
       
-    case .removeCollection(let libraryIndex):
-      return "\(type(of: self)): Removing collection in position \(libraryIndex) from the Library"
+    case .removeCollection(let collectionId):
+      return "\(type(of: self)): Removing collection \(collectionId) from the Library"
       
     case .cueSharedCollection:
       return "\(type(of: self)): Cueing a shared collection"

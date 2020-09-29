@@ -12,30 +12,34 @@ struct CollectionSheet: View {
   
   @EnvironmentObject var app: AppEnvironment
   
-  private var collection: Collection {
+  private var collection: Collection? {
     if app.state.navigation.onRotationActive {
       return app.state.library.onRotation
     } else {
-      let collectionIndex = app.state.library.collections.firstIndex(where: { $0.id == app.state.navigation.activeCollectionId })!
-      return app.state.library.collections[collectionIndex]
+      if let collectionIndex = app.state.library.collections.firstIndex(where: { $0.id == app.state.navigation.activeCollectionId }) {
+        return app.state.library.collections[collectionIndex]
+      }
+      return nil
     }
   }
   
   var body: some View {
     NavigationView {
-      CollectionDetail(collection: collection)
-        .navigationBarTitle("", displayMode: .inline)
-        .navigationBarItems(
-          leading:
-          Button {
-            self.app.update(action: NavigationAction.showCollection(false))
-          } label: {
-            Text("Close")
-          },
-          trailing: CollectionActionButtons()
-      )
+      IfLet(self.collection) { collection in // this IfLet has to be inside the NavigationView else the sheet isn't dismissed on removeCollection in CollectionOptions ¯\_(ツ)_/¯
+        CollectionDetail(collection: collection)
+          .navigationBarTitle("", displayMode: .inline)
+          .navigationBarItems(
+            leading:
+              Button {
+                self.app.update(action: NavigationAction.showCollection(false))
+              } label: {
+                Text("Close")
+              },
+            trailing: CollectionActionButtons()
+          )
+      }
+      .navigationViewStyle(StackNavigationViewStyle())
     }
-    .navigationViewStyle(StackNavigationViewStyle())
   }
   
 }

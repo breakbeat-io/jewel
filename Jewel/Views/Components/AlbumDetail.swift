@@ -39,14 +39,14 @@ struct AlbumDetail: View {
             self.app.update(action: NavigationAction.showSourceDetail(false))
           } label: {
             Text("Close")
-              .fontWeight(.light)
           },
         trailing:
           Button {
             self.app.update(action: LibraryAction.removeSourceFromSlot(slotIndex: app.state.navigation.activeSlotIndex, collectionId: app.state.navigation.activeCollectionId!))
             self.app.update(action: NavigationAction.showSourceDetail(false))
           } label: {
-            Image(systemName: "eject")
+            Text(Image(systemName: "eject"))
+              .foregroundColor(.red)
             //shouldn't be possible if not a suser collectioN!
           }
       )
