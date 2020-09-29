@@ -85,7 +85,7 @@ struct CollectionOptions: View {
                   Text("Delete Collection")
                     .font(.body)
                 }
-                .foregroundColor(.red)
+                .foregroundColor(self.collectionEmpty ? nil : .red)
               }
             }
           }
