@@ -39,6 +39,7 @@ struct AlbumDetail: View {
             self.app.update(action: NavigationAction.showSourceDetail(false))
           } label: {
             Text("Close")
+              .font(.body)
           },
         trailing:
           Button {
@@ -46,6 +47,7 @@ struct AlbumDetail: View {
             self.app.update(action: NavigationAction.showSourceDetail(false))
           } label: {
             Text(Image(systemName: "eject"))
+              .font(.body)
               .foregroundColor(.red)
             //shouldn't be possible if not a suser collectioN!
           }

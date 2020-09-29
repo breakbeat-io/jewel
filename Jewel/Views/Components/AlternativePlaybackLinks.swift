@@ -58,6 +58,7 @@ struct AlternativePlaybackLinks: View {
             self.app.update(action: NavigationAction.showAlternativeLinks(false))
           } label: {
             Text("Close")
+              .font(.body)
           }
       )
     }

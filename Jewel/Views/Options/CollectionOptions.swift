@@ -52,9 +52,11 @@ struct CollectionOptions: View {
                 self.app.update(action: LibraryAction.saveOnRotation(collection: self.app.state.library.onRotation))
               } label: {
                 HStack {
-                  Image(systemName: "arrow.right.square")
+                  Text(Image(systemName: "arrow.right.square"))
+                    .font(.body)
                     .frame(width: Constants.optionsButtonIconWidth)
                   Text("Add to my Collection Library")
+                    .font(.body)
                 }
               }
             } else {
@@ -64,9 +66,11 @@ struct CollectionOptions: View {
                 self.app.update(action: NavigationAction.showCollection(false))
               } label: {
                 HStack {
-                  Image(systemName: "doc.on.doc")
+                  Text(Image(systemName: "doc.on.doc"))
+                    .font(.body)
                     .frame(width: Constants.optionsButtonIconWidth)
                   Text("Duplicate Collection")
+                    .font(.body)
                 }
               }
               Button {
@@ -75,10 +79,13 @@ struct CollectionOptions: View {
                 self.app.update(action: NavigationAction.showCollection(false))
               } label: {
                 HStack {
-                  Image(systemName: "delete.left")
+                  Text(Image(systemName: "delete.left"))
+                    .font(.body)
                     .frame(width: Constants.optionsButtonIconWidth)
                   Text("Delete Collection")
+                    .font(.body)
                 }
+                .foregroundColor(.red)
               }
             }
           }
@@ -87,6 +94,7 @@ struct CollectionOptions: View {
             Section {
               HStack {
                 Text("Collection Name")
+                  .font(.body)
                 TextField(
                   collectionName.wrappedValue,
                   text: collectionName,
@@ -95,10 +103,13 @@ struct CollectionOptions: View {
                       self.app.update(action: LibraryAction.setCollectionName(name: self.newCollectionName.trimmingCharacters(in: .whitespaces), collectionId: collection.id))
                     }
                   }
-                ).foregroundColor(.accentColor)
+                )
+                .font(.body)
+                .foregroundColor(.accentColor)
               }
               HStack {
                 Text("Curator")
+                  .font(.body)
                 TextField(
                   collectionCurator.wrappedValue,
                   text: collectionCurator,
@@ -107,7 +118,9 @@ struct CollectionOptions: View {
                       self.app.update(action: LibraryAction.setCollectionCurator(curator: self.newCollectionCurator.trimmingCharacters(in: .whitespaces), collectionId: collection.id))
                     }
                   }
-                ).foregroundColor(.accentColor)
+                )
+                .font(.body)
+                .foregroundColor(.accentColor)
               }
             }
             .disabled(collection.type != .userCollection)
@@ -120,6 +133,7 @@ struct CollectionOptions: View {
               self.app.update(action: NavigationAction.showCollectionOptions(false))
             } label: {
               Text("Close")
+                .font(.body)
             }
         )
       }
@@ -127,6 +141,8 @@ struct CollectionOptions: View {
     }
   }
 }
+
+
 
 struct ShareCollectionButton: View {
   
@@ -144,9 +160,11 @@ struct ShareCollectionButton: View {
       self.app.update(action: NavigationAction.showSharing(true))
     } label: {
       HStack {
-        Image(systemName: "square.and.arrow.up")
+        Text(Image(systemName: "square.and.arrow.up"))
+          .font(.body)
           .frame(width: Constants.optionsButtonIconWidth)
         Text("Share \(self.app.state.navigation.onRotationActive ? Navigation.Tab.onRotation.rawValue : "Collection")")
+          .font(.body)
       }
     }
     .sheet(isPresented: showSharing) {

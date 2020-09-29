@@ -80,6 +80,7 @@ struct SettingsHome: View {
           self.app.update(action: NavigationAction.showSettings(false))
         } label: {
           Text("Close")
+            .font(.body)
         }
       )
     }
@@ -101,7 +102,8 @@ struct SettingsButton: View {
       Button {
         self.app.update(action: NavigationAction.showSettings(true))
       } label: {
-        Image(systemName: "gear")
+        Text(Image(systemName: "gear"))
+          .font(.body)
           .foregroundColor(Color(UIColor.secondaryLabel))
       }
       Spacer()

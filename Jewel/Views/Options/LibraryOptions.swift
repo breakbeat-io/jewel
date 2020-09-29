@@ -26,6 +26,7 @@ struct LibraryOptions: View {
           self.app.update(action: NavigationAction.showLibraryOptions(false))
         } label: {
           Text("Close")
+            .font(.body)
         }
       )
     }
@@ -47,9 +48,11 @@ struct RecommendationsButton: View {
       self.app.update(action: NavigationAction.showLoadRecommendationsAlert(true))
     } label: {
       HStack {
-        Image(systemName: "square.and.arrow.down")
+        Text(Image(systemName: "square.and.arrow.down"))
+          .font(.body)
           .frame(width: Constants.optionsButtonIconWidth)
         Text("Load Recommendations")
+          .font(.body)
       }
     }
     .alert(isPresented: showLoadRecommendationsAlert) {

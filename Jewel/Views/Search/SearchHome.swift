@@ -27,6 +27,7 @@ struct SearchHome: View {
           self.app.update(action: NavigationAction.showSearch(false))
         } label: {
           Text("Close")
+            .font(.body)
         }
       )
     }

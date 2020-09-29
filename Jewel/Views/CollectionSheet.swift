@@ -34,6 +34,7 @@ struct CollectionSheet: View {
                 self.app.update(action: NavigationAction.showCollection(false))
               } label: {
                 Text("Close")
+                  .font(.body)
               },
             trailing: CollectionActionButtons()
           )

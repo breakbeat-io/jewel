@@ -60,7 +60,8 @@ struct CollectionActionButtons: View {
       Button {
         self.app.update(action: NavigationAction.showCollectionOptions(true))
       } label: {
-        Image(systemName: "ellipsis")
+        Text(Image(systemName: "ellipsis"))
+          .font(.body)
       }
       .padding(.leading)
       .sheet(isPresented: showCollectionOptions) {
@@ -90,13 +91,14 @@ struct LibraryActionButtons: View {
         self.app.update(action: NavigationAction.setActiveCollectionId(collectionId: self.app.state.library.collections.first!.id))
         self.app.update(action: NavigationAction.showCollection(true))
       } label: {
-        Image(systemName: "plus")
+        Text(Image(systemName: "plus"))
+          .font(.body)
       }
-      .padding(.leading)
       Button {
         self.app.update(action: NavigationAction.showLibraryOptions(true))
       } label: {
-        Image(systemName: "ellipsis")
+        Text(Image(systemName: "ellipsis"))
+          .font(.body)
       }
       .padding(.leading)
       .sheet(isPresented: showLibraryOptions) {
