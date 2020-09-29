@@ -24,9 +24,9 @@ struct AddSourceCardButton: View {
       RoundedRectangle(cornerRadius: Constants.cardCornerRadius)
         .foregroundColor(Color(UIColor.secondarySystemBackground))
         .overlay(
-          Image(systemName: "plus")
+          Text(Image(systemName: "plus"))
             .font(.headline)
-            .foregroundColor(Color.secondary)
+            .foregroundColor(.secondary)
       )
     }
   }

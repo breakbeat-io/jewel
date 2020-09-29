@@ -50,8 +50,9 @@ struct SearchResults: View {
               self.app.update(action: SearchAction.removeSearchResults)
               self.app.update(action: NavigationAction.showSearch(false))
             } label: {
-              Image(systemName: "plus.circle")
+              Text(Image(systemName: "plus"))
                 .padding()
+                .foregroundColor(.secondary)
             }
           }
         }

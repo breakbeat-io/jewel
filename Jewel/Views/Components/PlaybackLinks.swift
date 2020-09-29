@@ -39,7 +39,7 @@ struct PlaybackLinks: View {
             Button {
               self.app.update(action: NavigationAction.showAlternativeLinks(true))
             } label: {
-              Image(systemName: "link")
+              Text(Image(systemName: "link"))
                 .foregroundColor(.secondary)
             }
             .sheet(isPresented: self.showAlternativeLinks) {

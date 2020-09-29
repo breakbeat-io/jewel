@@ -16,7 +16,7 @@ struct SearchBar: View {
   
   var body: some View {
     HStack {
-      Image(systemName: "magnifyingglass")
+      Text(Image(systemName: "magnifyingglass"))
       TextField(
         "Search releases",
         text: $searchTerm,
@@ -33,7 +33,7 @@ struct SearchBar: View {
         self.searchTerm = ""
         self.app.update(action: SearchAction.removeSearchResults)
       } label: {
-        Image(systemName: "xmark.circle.fill")
+        Text(Image(systemName: "xmark.circle.fill"))
           .opacity(searchTerm == "" ? 0 : 1)
       }
     }
