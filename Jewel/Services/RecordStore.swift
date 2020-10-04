@@ -26,7 +26,7 @@ class RecordStore {
       }
       
       if let error = error {
-        os_log("💎 Record Store > Browse error: %s", error.localizedDescription)
+        os_log("💎 Record Store > Browse error: %s", String(describing: error))
         // TODO: create another action to show an error in search results.
       }
     }
