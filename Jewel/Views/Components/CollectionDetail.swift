@@ -15,11 +15,7 @@ struct CollectionDetail: View {
   @EnvironmentObject var app: AppEnvironment
   
   var collection: Collection
-  
-  private var collectionEditSelection: Binding<Set<Int>> { Binding (
-    get: { self.app.state.navigation.collectionEditSelection },
-    set: { self.app.update(action: NavigationAction.setCollectionEditSelection(editSelection: $0))}
-    )}
+
   private var showSheet: Binding<Bool> { Binding (
     get: { self.app.state.navigation.showSourceDetail || self.app.state.navigation.showSearch },
     set: {
@@ -43,7 +39,7 @@ struct CollectionDetail: View {
         if self.horizontalSizeClass == .regular {
           Spacer()
         }
-        List(selection: self.collectionEditSelection) {
+        ScrollView {
           VStack(alignment: .leading) {
             Text(self.collection.name)
               .font(.title)
@@ -54,37 +50,29 @@ struct CollectionDetail: View {
               .fontWeight(.light)
               .foregroundColor(.secondary)
           }
+          .frame(minWidth: 0, maxWidth: .infinity, alignment: .topLeading)
           ForEach(self.slots.indices, id: \.self) { slotIndex in
             Group {
               if self.slots[slotIndex].source != nil {
                 IfLet(self.slots[slotIndex].source?.attributes) { attributes in
-                  Button(action: {
+                  Button {
                     self.app.update(action: NavigationAction.setActiveSlotIndex(slotIndex: slotIndex))
                     self.app.update(action: NavigationAction.showSourceDetail(true))
-                  }) {
+                  } label: {
                     SourceCard(sourceName: attributes.name, sourceArtist: attributes.artistName, sourceArtwork: attributes.artwork.url(forWidth: 1000))
                   }
                 }
               } else if self.editable {
                 AddSourceCardButton(slotIndex: slotIndex, collectionId: self.collection.id)
-                  .deleteDisabled(true)
               } else {
                 RoundedRectangle(cornerRadius: Constants.cardCornerRadius)
                   .fill(Color(UIColor.secondarySystemBackground))
               }
             }
             .frame(height: self.app.state.navigation.albumCardHeight)
-            .deleteDisabled(!self.editable)
-            .moveDisabled(!self.editable)
-          }
-          .onMove { (from, to) in
-            self.app.update(action: LibraryAction.moveSlot(from: from.first!, to: to, collectionId: self.collection.id))
-          }
-          .onDelete {
-            self.app.update(action: LibraryAction.removeSourceFromSlot(slotIndex: $0.first!, collectionId: self.collection.id))
           }
         }
-        .environment(\.editMode, .constant(self.app.state.navigation.collectionIsEditing ? EditMode.active : EditMode.inactive))
+        .padding(.horizontal)
         .frame(maxWidth: self.horizontalSizeClass == .regular && !self.app.state.navigation.showCollection ? Constants.regularMaxWidth : .infinity)
         if self.horizontalSizeClass == .regular {
           Spacer()
@@ -108,9 +96,7 @@ struct CollectionDetail: View {
       .onDisappear {
         if !self.app.state.navigation.onRotationActive && self.collectionEmpty {
           self.app.update(action: NavigationAction.setActiveCollectionId(collectionId: self.app.state.navigation.onRotationId!))
-          if let libraryIndex = self.app.state.library.collections.firstIndex(where: { $0.id == self.collection.id }) {
-            self.app.update(action: LibraryAction.removeCollection(libraryIndex: libraryIndex))
-          }
+          self.app.update(action: LibraryAction.removeCollection(collectionId: self.collection.id))
         }
       }
     }

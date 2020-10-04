@@ -23,9 +23,9 @@ struct AlternativePlaybackLinks: View {
       VStack {
         List(availablePlatforms, id: \.self) { platform in
           IfLet(self.playbackLinks.linksByPlatform[platform.rawValue]) { platformLink in
-            Button(action: {
+            Button {
               UIApplication.shared.open(platformLink.url)
-            }) {
+            } label: {
               HStack {
                 Group {
                   if platform.iconRef != nil {
@@ -43,9 +43,9 @@ struct AlternativePlaybackLinks: View {
             }
           }
         }
-        Button(action: {
+        Button {
           UIApplication.shared.open(URL(string: "https://odesli.co")!)
-        }) {
+        } label: {
           Text("Platform links powered by Songlink")
             .foregroundColor(.secondary)
             .font(.footnote)
@@ -54,10 +54,11 @@ struct AlternativePlaybackLinks: View {
       .navigationBarTitle("Play in ...", displayMode: .inline)
       .navigationBarItems(
         leading:
-          Button(action: {
+          Button {
             self.app.update(action: NavigationAction.showAlternativeLinks(false))
-          }) {
+          } label: {
             Text("Close")
+              .font(.body)
           }
       )
     }

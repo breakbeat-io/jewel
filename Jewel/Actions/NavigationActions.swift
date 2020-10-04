@@ -35,30 +35,12 @@ func updateNavigation(navigation: Navigation, action: NavigationAction) -> Navig
 
   case let .showCollection(showCollectionState):
     newNavigation.showCollection = showCollectionState
-    
-  case let .editCollection(editCollectionState):
-    newNavigation.collectionIsEditing = editCollectionState
   
   case let .showCollectionOptions(showCollectionOptionsState):
     newNavigation.showCollectionOptions = showCollectionOptionsState
-    
-  case let .setCollectionEditSelection(editSelection):
-    newNavigation.collectionEditSelection = editSelection
-  
-  case .clearCollectionEditSelection:
-    newNavigation.collectionEditSelection.removeAll()
-    
-  case let .editLibrary(editLibraryState):
-    newNavigation.libraryIsEditing = editLibraryState
   
   case let .showLibraryOptions(showLibraryOptionsState):
     newNavigation.showLibraryOptions = showLibraryOptionsState
-    
-  case let .setLibraryEditSelection(editSelection):
-    newNavigation.libraryEditSelection = editSelection
-  
-  case .clearLibraryEditSelection:
-    newNavigation.libraryEditSelection.removeAll()
     
   case let .showSourceDetail(showSourceDetailState):
     newNavigation.showSourceDetail = showSourceDetailState
@@ -99,14 +81,8 @@ enum NavigationAction: AppAction {
   case showSearch(_: Bool)
   case showSharing(_: Bool)
   case showCollection(_: Bool)
-  case editCollection(_: Bool)
   case showCollectionOptions(_: Bool)
-  case setCollectionEditSelection(editSelection: Set<Int>)
-  case clearCollectionEditSelection
-  case editLibrary(_: Bool)
   case showLibraryOptions(_: Bool)
-  case setLibraryEditSelection(editSelection: Set<UUID>)
-  case clearLibraryEditSelection
   case showSourceDetail(_: Bool)
   case showAlternativeLinks(_: Bool)
   case shareLinkError(_: Bool)
@@ -132,22 +108,10 @@ enum NavigationAction: AppAction {
       return "\(type(of: self)): \(showing ? "Showing" : "Closing") sharing"
     case .showCollection(let showing):
       return "\(type(of: self)): \(showing ? "Showing" : "Closing") collection"
-    case .editCollection(let editing):
-      return "\(type(of: self)): \(editing ? "Editing" : "Finished editing") collection"
     case .showCollectionOptions(let showing):
       return "\(type(of: self)): \(showing ? "Showing" : "Closing") collection options"
-    case .setCollectionEditSelection:
-      return "\(type(of: self)): Setting collection edit selection"
-    case .clearCollectionEditSelection:
-      return "\(type(of: self)): Clearing collection edit selection"
-    case .editLibrary(let editing):
-      return "\(type(of: self)): \(editing ? "Editing" : "Finished editing") library"
     case .showLibraryOptions(let showing):
       return "\(type(of: self)): \(showing ? "Showing" : "Closing") library options"
-    case .setLibraryEditSelection:
-      return "\(type(of: self)): Setting library edit selection"
-    case .clearLibraryEditSelection:
-      return "\(type(of: self)): Clearing library edit selection"
     case .showSourceDetail(let showing):
       return "\(type(of: self)): \(showing ? "Showing" : "Closing") source detail"
     case .showAlternativeLinks(let showing):

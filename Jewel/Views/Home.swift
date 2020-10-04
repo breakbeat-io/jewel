@@ -18,7 +18,7 @@ struct Home: View {
       set: { _ = $0 }
     )
   }
-  private var overlayShowing: Bool {
+  private var showingRichAlert: Bool {
     app.state.settings.firstTimeRun || receivedCollectionCued.wrappedValue
   }
   
@@ -44,17 +44,14 @@ struct Home: View {
         }
         .background(Color(UIColor.systemBackground))
       }
-      .disabled(overlayShowing)
-      .blur(radius: overlayShowing ? 10 : 0)
+      .disabled(showingRichAlert)
+      .blur(radius: showingRichAlert ? 10 : 0)
       if app.state.settings.firstTimeRun {
         Welcome()
       }
       if self.receivedCollectionCued.wrappedValue {
         CollectionReceived()
       }
-    }
-    .onAppear {
-      UITableView.appearance().separatorStyle = .none
     }
   }
 }

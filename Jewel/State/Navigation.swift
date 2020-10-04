@@ -21,8 +21,6 @@ struct Navigation {
   
   var selectedTab: Navigation.Tab = .onRotation {
     didSet {
-      collectionIsEditing = false
-      libraryIsEditing = false
       activeCollectionId = onRotationId
     }
   }
@@ -39,14 +37,9 @@ struct Navigation {
   var showAlternativeLinks: Bool = false
   
   var showCollection: Bool = false
+  var showCollectionOptions: Bool = false
   
   var showLibraryOptions: Bool = false
-  var libraryIsEditing: Bool = false
-  var libraryEditSelection = Set<UUID>()
-  
-  var showCollectionOptions: Bool = false  
-  var collectionIsEditing: Bool = false
-  var collectionEditSelection = Set<Int>()
   
   var shareLinkError = false
   

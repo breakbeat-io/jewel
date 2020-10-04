@@ -13,11 +13,7 @@ struct CollectionLibrary: View {
   @Environment(\.horizontalSizeClass) var horizontalSizeClass
   
   @EnvironmentObject var app: AppEnvironment
-  
-  private var libraryEditSelection: Binding<Set<UUID>> { Binding (
-    get: { self.app.state.navigation.libraryEditSelection },
-    set: { self.app.update(action: NavigationAction.setLibraryEditSelection(editSelection: $0))}
-    )}
+
   private var showCollection: Binding<Bool> { Binding (
     get: { self.app.state.navigation.showCollection },
     set: { if self.app.state.navigation.showCollection { self.app.update(action: NavigationAction.showCollection($0)) } }
@@ -33,21 +29,21 @@ struct CollectionLibrary: View {
         if self.horizontalSizeClass == .regular {
           Spacer()
         }
-        List(selection: self.libraryEditSelection) {
+        ScrollView {
           Text("Collection Library")
             .font(.title)
             .fontWeight(.bold)
+            .frame(minWidth: 0, maxWidth: .infinity, alignment: .topLeading)
             .padding(.top)
           if self.collections.isEmpty {
             VStack {
-              Spacer()
               Image(systemName: "music.note.list")
                 .font(.system(size: 40))
                 .padding(.bottom)
               Text("Collections you have saved or that people have shared with you will appear here.")
                 .multilineTextAlignment(.center)
-              Spacer()
             }
+            .frame(minWidth: 0, maxWidth: .infinity, alignment: .topLeading)
             .padding()
             .foregroundColor(Color.secondary)
           } else {
@@ -55,15 +51,9 @@ struct CollectionLibrary: View {
               CollectionCard(collection: collection)
                 .frame(height: self.app.state.navigation.collectionCardHeight)
             }
-            .onMove { (from, to) in
-              self.app.update(action: LibraryAction.moveCollection(from: from.first!, to: to))
-            }
-            .onDelete {
-              self.app.update(action: LibraryAction.removeCollection(libraryIndex: $0.first!))
-            }
           }
         }
-        .environment(\.editMode, .constant(self.app.state.navigation.libraryIsEditing ? EditMode.active : EditMode.inactive))
+        .padding(.horizontal)
         .frame(maxWidth: self.horizontalSizeClass == .regular ? Constants.regularMaxWidth : .infinity)
         if self.horizontalSizeClass == .regular {
           Spacer()

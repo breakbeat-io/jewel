@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct FullOverlay<Buttons: View, Content: View>: View {
+struct RichAlert<Buttons: View, Content: View>: View {
   
   @Environment(\.horizontalSizeClass) var horizontalSizeClass
   @Environment(\.verticalSizeClass) var verticalSizeClass
@@ -71,6 +71,10 @@ struct FullOverlay<Buttons: View, Content: View>: View {
           .shadow(radius: 3)
           .offset(y: -(self.responsiveHeight(viewHeight: geo.size.height)/2))
       }
+      .offset(
+        x: (geo.size.width - responsiveWidth(viewWidth: geo.size.width)) / 2,
+        y: (geo.size.height - responsiveHeight(viewHeight: geo.size.height)) / 2
+      )
     }
   }
   
@@ -92,4 +96,21 @@ struct FullOverlay<Buttons: View, Content: View>: View {
     }
   }
   
+}
+
+struct RichAlert_Previews: PreviewProvider {
+  static var previews: some View {
+    RichAlert(
+      heading: "Test Rich Alert",
+      buttons:
+        VStack {
+          Button("Button 1") {}
+          Divider()
+            .padding(.bottom, 4)
+          Button("Button 2") {}
+        })
+    {
+      Text("Lorem Ipsum")
+    }
+  }
 }

@@ -16,9 +16,9 @@ struct SearchBar: View {
   
   var body: some View {
     HStack {
-      Image(systemName: "magnifyingglass")
+      Text(Image(systemName: "magnifyingglass"))
       TextField(
-        "Search Apple Music",
+        "Search music",
         text: $searchTerm,
         onCommit: {
           if self.app.state.navigation.showDebugMenu {
@@ -29,11 +29,11 @@ struct SearchBar: View {
       })
         .foregroundColor(.primary)
         .keyboardType(.webSearch)
-      Button(action: {
+      Button {
         self.searchTerm = ""
         self.app.update(action: SearchAction.removeSearchResults)
-      }) {
-        Image(systemName: "xmark.circle.fill")
+      } label: {
+        Text(Image(systemName: "xmark.circle.fill"))
           .opacity(searchTerm == "" ? 0 : 1)
       }
     }

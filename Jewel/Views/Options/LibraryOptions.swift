@@ -16,27 +16,17 @@ struct LibraryOptions: View {
     NavigationView {
       Form {
         Section {
-          Button(action: {
-            self.app.update(action: NavigationAction.editLibrary(true))
-            self.app.update(action: NavigationAction.showLibraryOptions(false))
-          }) {
-            HStack {
-              Image(systemName: "square.stack.3d.up")
-                .frame(width: Constants.optionsButtonIconWidth)
-              Text("Reorder Library")
-            }
-          }
-          .disabled(app.state.library.collections.isEmpty)
           RecommendationsButton()
         }
       }
       .navigationBarTitle("Library Options", displayMode: .inline)
       .navigationBarItems(
         leading:
-        Button(action: {
+        Button {
           self.app.update(action: NavigationAction.showLibraryOptions(false))
-        }) {
+        } label: {
           Text("Close")
+            .font(.body)
         }
       )
     }
@@ -54,13 +44,15 @@ struct RecommendationsButton: View {
   )}
   
   var body: some View {
-    Button(action: {
+    Button {
       self.app.update(action: NavigationAction.showLoadRecommendationsAlert(true))
-    }) {
+    } label: {
       HStack {
-        Image(systemName: "square.and.arrow.down")
+        Text(Image(systemName: "square.and.arrow.down"))
+          .font(.body)
           .frame(width: Constants.optionsButtonIconWidth)
         Text("Load Recommendations")
+          .font(.body)
       }
     }
     .alert(isPresented: showLoadRecommendationsAlert) {

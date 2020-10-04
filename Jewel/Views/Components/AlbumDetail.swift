@@ -14,13 +14,16 @@ struct AlbumDetail: View {
   
   @EnvironmentObject var app: AppEnvironment
   
-  private var slot: Slot {
+  private var collection: Collection {
     if app.state.navigation.onRotationActive {
-      return app.state.library.onRotation.slots[app.state.navigation.activeSlotIndex]
+      return app.state.library.onRotation
     } else {
-      let collectionIndex = app.state.library.collections.firstIndex(where: { $0.id == app.state.navigation.activeCollectionId })!
-      return app.state.library.collections[collectionIndex].slots[app.state.navigation.activeSlotIndex]
+      return app.state.library.collections.first(where: { $0.id == app.state.navigation.activeCollectionId })!
     }
+  }
+  
+  private var slot: Slot {
+    self.collection.slots[app.state.navigation.activeSlotIndex]
   }
   
   var body: some View {
@@ -35,11 +38,23 @@ struct AlbumDetail: View {
       .navigationBarTitle("", displayMode: .inline)
       .navigationBarItems(
         leading:
-        Button(action: {
-          self.app.update(action: NavigationAction.showSourceDetail(false))
-        }) {
-          Text("Close")
-        }
+          Button {
+            self.app.update(action: NavigationAction.showSourceDetail(false))
+          } label: {
+            Text("Close")
+              .font(.body)
+          },
+        trailing:
+          self.collection.type == .userCollection ?
+            Button {
+              self.app.update(action: LibraryAction.removeSourceFromSlot(slotIndex: app.state.navigation.activeSlotIndex, collectionId: app.state.navigation.activeCollectionId!))
+              self.app.update(action: NavigationAction.showSourceDetail(false))
+            } label: {
+              Text(Image(systemName: "eject"))
+                .font(.body)
+                .foregroundColor(.red)
+            }
+          : nil
       )
     }
     .navigationViewStyle(StackNavigationViewStyle())

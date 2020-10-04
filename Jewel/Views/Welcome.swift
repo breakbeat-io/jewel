@@ -14,33 +14,33 @@ struct Welcome: View {
   
   private let heading = "Welcome!"
   private let description = """
-  Listen Later is a place to store music you want to listen to later.
+  Listen Later is a reminders list for music you want to listen to later.
 
-  Update albums in the On Rotation collection as you think of them so they're waiting for you when you're ready to listen.
+  Add and remove albums from your 'On Rotation' collection so they're waiting for you when you're ready to listen.
 
-  Create and share Collections with friends and find out what they're listening to when they share collections with you.
+  Create Collections of albums for any mood or event, and share everything with your friends.
 
-  Save it all to build a Library of Collections for any mood or event!
+  Save it all to your Library to build a set of Collections for every eventuality!
   """
   private let startCollectionLabel = "Start My Collection"
   private let setCuratorNameLabel = "Set my Curator Name"
   
   var body: some View {
-    FullOverlay(heading: heading,
+    RichAlert(heading: heading,
                 buttons:
       VStack {
-        Button(action: {
+        Button {
           self.app.update(action: SettingsAction.firstTimeRun(false))
           self.app.update(action: NavigationAction.showSettings(true))
-        }) {
+        } label: {
           Text(self.setCuratorNameLabel)
             .fontWeight(.light)
         }
         Divider()
           .padding(.bottom, 4)
-        Button(action: {
+        Button {
           self.app.update(action: SettingsAction.firstTimeRun(false))
-        }) {
+        } label: {
           Text(self.startCollectionLabel)
             .fontWeight(.bold)
         }

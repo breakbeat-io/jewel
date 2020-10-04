@@ -51,15 +51,15 @@ struct SettingsHome: View {
           }
           if app.state.navigation.showDebugMenu {
             Section(header: Text("Debug")) {
-              Button(action: {
+              Button {
                 RecordStore.loadScreenshotCollection()
                 self.app.update(action: NavigationAction.showSettings(false))
-              }) {
+              } label: {
                 Text("Load Screenshot Data")
               }
-              Button(action: {
+              Button {
                 self.app.update(action: SettingsAction.reset)
-              }) {
+              } label: {
                 Text("Reset Jewel")
                   .foregroundColor(.red)
               }
@@ -76,10 +76,11 @@ struct SettingsHome: View {
       .navigationBarTitle("Settings", displayMode: .inline)
       .navigationBarItems(
         leading:
-        Button(action: {
+        Button {
           self.app.update(action: NavigationAction.showSettings(false))
-        }) {
+        } label: {
           Text("Close")
+            .font(.body)
         }
       )
     }
@@ -98,10 +99,11 @@ struct SettingsButton: View {
   
   var body: some View {
     HStack {
-      Button(action: {
+      Button {
         self.app.update(action: NavigationAction.showSettings(true))
-      }) {
-        Image(systemName: "gear")
+      } label: {
+        Text(Image(systemName: "gear"))
+          .font(.body)
           .foregroundColor(Color(UIColor.secondaryLabel))
       }
       Spacer()

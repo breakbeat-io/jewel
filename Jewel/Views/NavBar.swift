@@ -57,32 +57,16 @@ struct CollectionActionButtons: View {
   var body: some View {
     HStack {
       Spacer()
-      if app.state.navigation.collectionIsEditing {
-        Button(action: {
-          self.app.update(action: LibraryAction.removeSourcesFromCollection(slotIndexes: self.app.state.navigation.collectionEditSelection, collectionId: self.app.state.navigation.activeCollectionId!))
-          self.app.update(action: NavigationAction.editCollection(false))
-          self.app.update(action: NavigationAction.clearCollectionEditSelection)
-        }) {
-          Image(systemName: "trash")
-        }
-        .padding(.trailing)
-        Button(action: {
-          self.app.update(action: NavigationAction.editCollection(false))
-        }) {
-          Image(systemName: "checkmark")
-        }
-      } else {
-        Spacer()
-        Button(action: {
-          self.app.update(action: NavigationAction.showCollectionOptions(true))
-        }) {
-          Image(systemName: "ellipsis")
-        }
-        .padding(.leading)
-        .sheet(isPresented: showCollectionOptions) {
-          CollectionOptions()
-            .environmentObject(self.app)
-        }
+      Button {
+        self.app.update(action: NavigationAction.showCollectionOptions(true))
+      } label: {
+        Text(Image(systemName: "ellipsis"))
+          .font(.body)
+      }
+      .padding(.leading)
+      .sheet(isPresented: showCollectionOptions) {
+        CollectionOptions()
+          .environmentObject(self.app)
       }
     }
     .padding(.vertical)
@@ -102,39 +86,24 @@ struct LibraryActionButtons: View {
   var body: some View {
     HStack {
       Spacer()
-      if app.state.navigation.libraryIsEditing {
-        Button(action: {
-          self.app.update(action: LibraryAction.removeCollections(collectionIds: self.app.state.navigation.libraryEditSelection))
-          self.app.update(action: NavigationAction.editLibrary(false))
-          self.app.update(action: NavigationAction.clearLibraryEditSelection)
-        }) {
-          Image(systemName: "trash")
-        }
-        .padding(.trailing)
-        Button(action: {
-          self.app.update(action: NavigationAction.editLibrary(false))
-        }) {
-          Image(systemName: "checkmark")
-        }
-      } else {
-        Button(action: {
-          self.app.update(action: LibraryAction.createCollection)
-          self.app.update(action: NavigationAction.setActiveCollectionId(collectionId: self.app.state.library.collections.first!.id))
-          self.app.update(action: NavigationAction.showCollection(true))
-        }) {
-          Image(systemName: "plus")
-        }
-        .padding(.leading)
-        Button(action: {
-          self.app.update(action: NavigationAction.showLibraryOptions(true))
-        }) {
-          Image(systemName: "ellipsis")
-        }
-        .padding(.leading)
-        .sheet(isPresented: showLibraryOptions) {
-          LibraryOptions()
-            .environmentObject(self.app)
-        }
+      Button {
+        self.app.update(action: LibraryAction.createCollection)
+        self.app.update(action: NavigationAction.setActiveCollectionId(collectionId: self.app.state.library.collections.first!.id))
+        self.app.update(action: NavigationAction.showCollection(true))
+      } label: {
+        Text(Image(systemName: "plus"))
+          .font(.body)
+      }
+      Button {
+        self.app.update(action: NavigationAction.showLibraryOptions(true))
+      } label: {
+        Text(Image(systemName: "ellipsis"))
+          .font(.body)
+      }
+      .padding(.leading)
+      .sheet(isPresented: showLibraryOptions) {
+        LibraryOptions()
+          .environmentObject(self.app)
       }
     }
     .padding(.vertical)
