@@ -18,7 +18,7 @@ struct SearchBar: View {
     HStack {
       Text(Image(systemName: "magnifyingglass"))
       TextField(
-        "Search releases",
+        "Search music",
         text: $searchTerm,
         onCommit: {
           if self.app.state.navigation.showDebugMenu {
