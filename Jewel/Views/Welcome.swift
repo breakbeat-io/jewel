@@ -14,13 +14,13 @@ struct Welcome: View {
   
   private let heading = "Welcome!"
   private let description = """
-  Listen Later is a reminders list for music you want to listen to later.
+  Listen Later is a reminder and album curation app for your music.
 
-  Add and remove albums from your 'On Rotation' collection so they're waiting for you when you're ready to listen.
+  Use your On Rotation collection to quickly store albums as you remember them to listen to soon.
 
-  Create Collections of albums for any mood or event, and share everything with your friends.
+  Create Collections to curate a set of albums that represent a theme or time you don't want to forget.
 
-  Save it all to your Library to build a set of Collections for every eventuality!
+  Share everything with your freinds, and keep it all in your Library so you will always remember your favourite music!
   """
   private let startCollectionLabel = "Start My Collection"
   private let setCuratorNameLabel = "Set my Curator Name"
