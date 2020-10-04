@@ -22,6 +22,7 @@ struct ShareSheetLoader: View {
           Image(systemName: "square.and.arrow.up")
             .font(.largeTitle)
           Text("Creating shareable link ...")
+            .font(.body)
             .padding()
             .multilineTextAlignment(.center)
         }
