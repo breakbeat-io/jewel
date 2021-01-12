@@ -102,7 +102,7 @@
 		D2945E1D249C249C00AE6CA5 /* SettingsHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHome.swift; sourceTree = "<group>"; };
 		D29CB1C424A631EB0051BA96 /* CollectionReceived.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionReceived.swift; sourceTree = "<group>"; };
 		D29CB1C624A632520051BA96 /* RichAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RichAlert.swift; sourceTree = "<group>"; };
-		D2A12C2025AE5CE300ABD1C8 /* secrets.xcconfig.sample.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = secrets.xcconfig.sample.xcconfig; sourceTree = "<group>"; };
+		D2A12C2025AE5CE300ABD1C8 /* secrets.xcconfig.sample */ = {isa = PBXFileReference; lastKnownFileType = text; path = secrets.xcconfig.sample; sourceTree = "<group>"; };
 		D2A12C2325AE656000ABD1C8 /* pre-actions.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "pre-actions.sh"; sourceTree = "<group>"; };
 		D2A12C2625AE677400ABD1C8 /* createAppleMusicAPIToken.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = createAppleMusicAPIToken.sh; path = build/createAppleMusicAPIToken.sh; sourceTree = SOURCE_ROOT; };
 		D2A449CB249BAECE006E0A12 /* LibraryOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryOptions.swift; sourceTree = "<group>"; };
@@ -274,7 +274,7 @@
 				D2AB846A2481159D008B57F9 /* AppEnvironment.swift */,
 				D288174E248D148E00EB47C2 /* Listen Later.entitlements */,
 				D2AC120E2485A20400C52D9E /* secrets.xcconfig */,
-				D2A12C2025AE5CE300ABD1C8 /* secrets.xcconfig.sample.xcconfig */,
+				D2A12C2025AE5CE300ABD1C8 /* secrets.xcconfig.sample */,
 			);
 			path = App;
 			sourceTree = "<group>";
