@@ -6,7 +6,7 @@
         "repositoryURL": "https://github.com/hepto/HMV",
         "state": {
           "branch": "master",
-          "revision": "cfc4a2ddfd0fd10959807441957a9afc562a9c26",
+          "revision": "b6d2b7539d43425541239bddb61c94460611ede6",
           "version": null
         }
       },
@@ -15,8 +15,8 @@
         "repositoryURL": "https://github.com/onevcat/Kingfisher",
         "state": {
           "branch": null,
-          "revision": "2d795b521934b02357fec781b33e2c407655eebb",
-          "version": "5.15.4"
+          "revision": "2a10bf41da75599a9f8e872dbd44fe0155a2e00c",
+          "version": "5.15.8"
         }
       }
     ]
