@@ -74,7 +74,7 @@ class SharedCollectionManager {
       let shareableCollectionJson = try JSONEncoder().encode(shareableCollection)
       return URL(string: "https://listenlater.link/s/?c=\(shareableCollectionJson.base64EncodedString())")!
     } catch {
-      os_log("%s", error.localizedDescription)
+      os_log("💎 Share Links > Error encoding collection: %s", error.localizedDescription)
       return nil
     }
   }
@@ -84,7 +84,7 @@ class SharedCollectionManager {
     AppEnvironment.global.update(action: LibraryAction.invalidateShareLinks(collectionId: collection.id))
     
     guard let longLink = generateLongLink(for: collection) else {
-      os_log("💎 Share Links: > Could not create long link")
+      os_log("💎 Share Links > Could not create long link")
       AppEnvironment.global.update(action: NavigationAction.shareLinkError(true))
       return
     }
@@ -93,55 +93,63 @@ class SharedCollectionManager {
     
     let firebaseShortLinkBodyRaw = ["longDynamicLink": longDynamicLink]
     guard let firebaseShortLinkBodyRawJSON = try? JSONEncoder().encode(firebaseShortLinkBodyRaw) else {
-      os_log("💎 Share Links: > Could not encode link to JSON")
+      os_log("💎 Share Links > Could not encode link to JSON")
       AppEnvironment.global.update(action: NavigationAction.shareLinkError(true))
       return
     }
     
-    guard let firebaseApiKey = Bundle.main.infoDictionary?["FIREBASE_API_KEY"] as? String else {
-      os_log ("No Firebase API key found!")
-      AppEnvironment.global.update(action: NavigationAction.shareLinkError(true))
-      return
-    }
-    
+    let firebaseApiKey = Bundle.main.infoDictionary?["FIREBASE_API_KEY"] as! String
     let firebaseRestUrl = URL(string: "https://firebasedynamiclinks.googleapis.com/v1/shortLinks?key=\(firebaseApiKey)")!
     var request = URLRequest(url: firebaseRestUrl)
     request.httpMethod = "POST"
     request.setValue("application/json", forHTTPHeaderField: "Content-Type")
     
-    let task = URLSession.shared.uploadTask(with: request, from: firebaseShortLinkBodyRawJSON) { data, response, error in
-      if let error = error {
-        os_log ("Firebase API threw error: %s", error.localizedDescription)
-        AppEnvironment.global.update(action: NavigationAction.shareLinkError(true))
-        return
-      }
-      guard let response = response as? HTTPURLResponse,
-        (200...299).contains(response.statusCode) else {
-          os_log ("Firebase gave a server error")
-          AppEnvironment.global.update(action: NavigationAction.shareLinkError(true))
-          return
-      }
-      if let mimeType = response.mimeType,
-        mimeType == "application/json",
-        let data = data {
-        do {
-          if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
-            DispatchQueue.main.async {
-              if let shortLink = json["shortLink"] as? String {
-                AppEnvironment.global.update(action: LibraryAction.setShareLinks(shareLinkLong: longLink, shareLinkShort: URL(string: shortLink)!, collectionId: collection.id))
-              } else {
-                os_log("💎 Share Links: > There was another error")
-                AppEnvironment.global.update(action: NavigationAction.shareLinkError(true))
-              }
-            }
+    URLSession.shared.uploadTask(with: request, from: firebaseShortLinkBodyRawJSON) { data, response, error in
+      
+      if let data = data, let response = response as? HTTPURLResponse {
+        
+        if !(200...299).contains(response.statusCode) {
+          os_log("💎 Share Links > Firebase API Error: %s", data.base64EncodedString().base64Decoded()!)
+          DispatchQueue.main.async {
+            AppEnvironment.global.update(action: NavigationAction.shareLinkError(true))
           }
-        } catch let error as NSError {
-          os_log("💎 Share Links: > Failed to load: %s", error.localizedDescription)
+          return
+        }
+        
+        if response.mimeType == "application/json" {
+          do {
+            if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
+              DispatchQueue.main.async {
+                if let shortLink = json["shortLink"] as? String {
+                  AppEnvironment.global.update(action: LibraryAction.setShareLinks(shareLinkLong: longLink, shareLinkShort: URL(string: shortLink)!, collectionId: collection.id))
+                } else {
+                  os_log("💎 Share Links > There was an error")
+                  AppEnvironment.global.update(action: NavigationAction.shareLinkError(true))
+                }
+              }
+              return
+            }
+          } catch let error as NSError {
+            os_log("💎 Share Links > Failed to load: %s", error.localizedDescription)
+            DispatchQueue.main.async {
+              AppEnvironment.global.update(action: NavigationAction.shareLinkError(true))
+            }
+            return
+          }
+        }
+        
+      }
+      
+      if let error = error {
+        os_log("💎 Share Links > There was an error: %s", error.localizedDescription)
+        DispatchQueue.main.async {
           AppEnvironment.global.update(action: NavigationAction.shareLinkError(true))
         }
+        return
       }
-    }
-    task.resume()
+      
+    }.resume()
+    
   }
   
   static func cueReceivedCollection(receivedCollectionUrl: URL) {
@@ -179,8 +187,8 @@ class SharedCollectionManager {
         if let decodedResponse = try? JSONDecoder().decode(ShareableCollection.self, from: data) {
           DispatchQueue.main.async {
             expandShareableCollection(shareableCollection: decodedResponse)
-            return
           }
+          return
         }
       }
       
