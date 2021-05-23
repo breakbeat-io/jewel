@@ -98,8 +98,7 @@ class SharedCollectionManager {
       return
     }
     
-    let firebaseApiKey = Bundle.main.infoDictionary?["FIREBASE_API_KEY"] as! String
-    let firebaseRestUrl = URL(string: "https://firebasedynamiclinks.googleapis.com/v1/shortLinks?key=\(firebaseApiKey)")!
+    let firebaseRestUrl = URL(string: "https://firebasedynamiclinks.googleapis.com/v1/shortLinks?key=\(Secrets.firebaseAPIKey)")!
     var request = URLRequest(url: firebaseRestUrl)
     request.httpMethod = "POST"
     request.setValue("application/json", forHTTPHeaderField: "Content-Type")

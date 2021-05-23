@@ -14,6 +14,8 @@
 		D22155822481114B00A1F04A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D22155812481114B00A1F04A /* Assets.xcassets */; };
 		D22155852481114B00A1F04A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D22155842481114B00A1F04A /* Preview Assets.xcassets */; };
 		D22155882481114B00A1F04A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D22155862481114B00A1F04A /* LaunchScreen.storyboard */; };
+		D225FA7A265B026900B69AEF /* Secrets.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = D225FA79265B026900B69AEF /* Secrets.generated.swift */; };
+		D225FA7B265B035100B69AEF /* generateSecrets.sh in Resources */ = {isa = PBXBuildFile; fileRef = D225FA77265AFD9F00B69AEF /* generateSecrets.sh */; };
 		D23197C22492DACD00C09977 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23197C12492DACD00C09977 /* Constants.swift */; };
 		D23C398E248FD2DF00AD237E /* Welcome.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23C398D248FD2DF00AD237E /* Welcome.swift */; };
 		D2492587248117710011F409 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2492586248117710011F409 /* AppState.swift */; };
@@ -76,6 +78,10 @@
 		D22155842481114B00A1F04A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D22155872481114B00A1F04A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D22155892481114B00A1F04A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D225FA75265AF4C900B69AEF /* Secrets.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = Secrets.stencil; sourceTree = "<group>"; };
+		D225FA77265AFD9F00B69AEF /* generateSecrets.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = generateSecrets.sh; sourceTree = "<group>"; };
+		D225FA79265B026900B69AEF /* Secrets.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Secrets.generated.swift; sourceTree = "<group>"; };
+		D225FA7E265B075300B69AEF /* tools */ = {isa = PBXFileReference; lastKnownFileType = folder; path = tools; sourceTree = "<group>"; };
 		D23197C12492DACD00C09977 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		D23C398D248FD2DF00AD237E /* Welcome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Welcome.swift; sourceTree = "<group>"; };
 		D2492586248117710011F409 /* AppState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
@@ -103,8 +109,6 @@
 		D29CB1C424A631EB0051BA96 /* CollectionReceived.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionReceived.swift; sourceTree = "<group>"; };
 		D29CB1C624A632520051BA96 /* RichAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RichAlert.swift; sourceTree = "<group>"; };
 		D2A12C2025AE5CE300ABD1C8 /* secrets.xcconfig.sample */ = {isa = PBXFileReference; lastKnownFileType = text; path = secrets.xcconfig.sample; sourceTree = "<group>"; };
-		D2A12C2325AE656000ABD1C8 /* pre-actions.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "pre-actions.sh"; sourceTree = "<group>"; };
-		D2A12C2625AE677400ABD1C8 /* createAppleMusicAPIToken.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = createAppleMusicAPIToken.sh; path = build/createAppleMusicAPIToken.sh; sourceTree = SOURCE_ROOT; };
 		D2A449CB249BAECE006E0A12 /* LibraryOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryOptions.swift; sourceTree = "<group>"; };
 		D2AB8466248113EB008B57F9 /* AppAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAction.swift; sourceTree = "<group>"; };
 		D2AB846A2481159D008B57F9 /* AppEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnvironment.swift; sourceTree = "<group>"; };
@@ -148,7 +152,7 @@
 			isa = PBXGroup;
 			children = (
 				D221557A2481114A00A1F04A /* Jewel */,
-				D2A12C2225AE653C00ABD1C8 /* build */,
+				D225FA7E265B075300B69AEF /* tools */,
 				D22155792481114A00A1F04A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -184,6 +188,18 @@
 				D22155842481114B00A1F04A /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		D225FA78265B022500B69AEF /* Secrets */ = {
+			isa = PBXGroup;
+			children = (
+				D225FA79265B026900B69AEF /* Secrets.generated.swift */,
+				D225FA75265AF4C900B69AEF /* Secrets.stencil */,
+				D2A12C2025AE5CE300ABD1C8 /* secrets.xcconfig.sample */,
+				D2AC120E2485A20400C52D9E /* secrets.xcconfig */,
+				D225FA77265AFD9F00B69AEF /* generateSecrets.sh */,
+			);
+			path = Secrets;
 			sourceTree = "<group>";
 		};
 		D24925922481409D0011F409 /* Actions */ = {
@@ -239,15 +255,6 @@
 			path = Sharing;
 			sourceTree = "<group>";
 		};
-		D2A12C2225AE653C00ABD1C8 /* build */ = {
-			isa = PBXGroup;
-			children = (
-				D2A12C2325AE656000ABD1C8 /* pre-actions.sh */,
-				D2A12C2625AE677400ABD1C8 /* createAppleMusicAPIToken.sh */,
-			);
-			path = build;
-			sourceTree = "<group>";
-		};
 		D2AB846C2481168C008B57F9 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -269,12 +276,11 @@
 		D2AC120424859D1C00C52D9E /* App */ = {
 			isa = PBXGroup;
 			children = (
+				D225FA78265B022500B69AEF /* Secrets */,
 				D22155892481114B00A1F04A /* Info.plist */,
 				D2603DFE252083EA00B79311 /* JewelApp.swift */,
 				D2AB846A2481159D008B57F9 /* AppEnvironment.swift */,
 				D288174E248D148E00EB47C2 /* Listen Later.entitlements */,
-				D2AC120E2485A20400C52D9E /* secrets.xcconfig */,
-				D2A12C2025AE5CE300ABD1C8 /* secrets.xcconfig.sample */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -347,6 +353,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D221558C2481114B00A1F04A /* Build configuration list for PBXNativeTarget "Listen Later" */;
 			buildPhases = (
+				D225FA76265AF56C00B69AEF /* ShellScript */,
 				D22155742481114A00A1F04A /* Sources */,
 				D22155752481114A00A1F04A /* Frameworks */,
 				D22155762481114A00A1F04A /* Resources */,
@@ -407,6 +414,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D2DB0FCE24A7782B006A5835 /* screenshotCollection.json in Resources */,
+				D225FA7B265B035100B69AEF /* generateSecrets.sh in Resources */,
 				D22155882481114B00A1F04A /* LaunchScreen.storyboard in Resources */,
 				D22155852481114B00A1F04A /* Preview Assets.xcassets in Resources */,
 				D27FB8202486B46D0014C05D /* fa-brands.otf in Resources */,
@@ -416,6 +424,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		D225FA76265AF56C00B69AEF /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "$PROJECT_DIR/Jewel/App/Secrets/generateSecrets.sh\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D22155742481114A00A1F04A /* Sources */ = {
@@ -466,6 +495,7 @@
 				D29CB1C524A631EB0051BA96 /* CollectionReceived.swift in Sources */,
 				D2881748248BE81400EB47C2 /* SharedCollectionManager.swift in Sources */,
 				D2F8D166248A7E42008C29C3 /* DiscTrackList.swift in Sources */,
+				D225FA7A265B026900B69AEF /* Secrets.generated.swift in Sources */,
 				D2DB0FCD24A7782B006A5835 /* RecordStore+Screenshots.swift in Sources */,
 				D2F8D14E248A666C008C29C3 /* CardArtworkComposite.swift in Sources */,
 				D2945E1C249C0FC100AE6CA5 /* Navigation.swift in Sources */,

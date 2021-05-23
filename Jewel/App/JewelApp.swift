@@ -26,9 +26,7 @@ struct JewelApp: App {
   }
   
   private func checkKeys() {
-    
-    let appleMusicApiToken = Bundle.main.infoDictionary?["APPLE_MUSIC_API_TOKEN"] as! String
-    if appleMusicApiToken == "" {
+    if Secrets.appleMusicAPIToken.isEmpty {
       fatalError("""
 ==========
 No Apple Music API Token Found! [APPLE_MUSIC_API_TOKEN]
@@ -40,8 +38,7 @@ pre-action createAppleMusicAPIToken.sh
 """)
     }
     
-    let firebaseApiKey = Bundle.main.infoDictionary?["FIREBASE_API_KEY"] as! String
-    if firebaseApiKey == "" {
+    if Secrets.firebaseAPIKey.isEmpty {
       fatalError("""
 ==========
 No Firebase API Key Found! [FIREBASE_API_KEY]
