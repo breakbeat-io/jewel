@@ -14,8 +14,8 @@
 		D22155822481114B00A1F04A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D22155812481114B00A1F04A /* Assets.xcassets */; };
 		D22155852481114B00A1F04A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D22155842481114B00A1F04A /* Preview Assets.xcassets */; };
 		D22155882481114B00A1F04A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D22155862481114B00A1F04A /* LaunchScreen.storyboard */; };
-		D225FA7A265B026900B69AEF /* Secrets.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = D225FA79265B026900B69AEF /* Secrets.generated.swift */; };
 		D225FA7B265B035100B69AEF /* generateSecrets.sh in Resources */ = {isa = PBXBuildFile; fileRef = D225FA77265AFD9F00B69AEF /* generateSecrets.sh */; };
+		D225FA80265B0CD100B69AEF /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = D225FA7F265B0CD100B69AEF /* Secrets.swift */; };
 		D23197C22492DACD00C09977 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23197C12492DACD00C09977 /* Constants.swift */; };
 		D23C398E248FD2DF00AD237E /* Welcome.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23C398D248FD2DF00AD237E /* Welcome.swift */; };
 		D2492587248117710011F409 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2492586248117710011F409 /* AppState.swift */; };
@@ -80,8 +80,8 @@
 		D22155892481114B00A1F04A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D225FA75265AF4C900B69AEF /* Secrets.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = Secrets.stencil; sourceTree = "<group>"; };
 		D225FA77265AFD9F00B69AEF /* generateSecrets.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = generateSecrets.sh; sourceTree = "<group>"; };
-		D225FA79265B026900B69AEF /* Secrets.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Secrets.generated.swift; sourceTree = "<group>"; };
 		D225FA7E265B075300B69AEF /* tools */ = {isa = PBXFileReference; lastKnownFileType = folder; path = tools; sourceTree = "<group>"; };
+		D225FA7F265B0CD100B69AEF /* Secrets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		D23197C12492DACD00C09977 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		D23C398D248FD2DF00AD237E /* Welcome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Welcome.swift; sourceTree = "<group>"; };
 		D2492586248117710011F409 /* AppState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
@@ -193,11 +193,11 @@
 		D225FA78265B022500B69AEF /* Secrets */ = {
 			isa = PBXGroup;
 			children = (
-				D225FA79265B026900B69AEF /* Secrets.generated.swift */,
-				D225FA75265AF4C900B69AEF /* Secrets.stencil */,
-				D2A12C2025AE5CE300ABD1C8 /* secrets.xcconfig.sample */,
-				D2AC120E2485A20400C52D9E /* secrets.xcconfig */,
+				D225FA7F265B0CD100B69AEF /* Secrets.swift */,
 				D225FA77265AFD9F00B69AEF /* generateSecrets.sh */,
+				D225FA75265AF4C900B69AEF /* Secrets.stencil */,
+				D2AC120E2485A20400C52D9E /* secrets.xcconfig */,
+				D2A12C2025AE5CE300ABD1C8 /* secrets.xcconfig.sample */,
 			);
 			path = Secrets;
 			sourceTree = "<group>";
@@ -492,10 +492,10 @@
 				D28AD1B5248BACB2009B584A /* PlaybackLink.swift in Sources */,
 				D288174A248BEABF00EB47C2 /* ShareSheet.swift in Sources */,
 				D2AB8467248113EB008B57F9 /* AppAction.swift in Sources */,
+				D225FA80265B0CD100B69AEF /* Secrets.swift in Sources */,
 				D29CB1C524A631EB0051BA96 /* CollectionReceived.swift in Sources */,
 				D2881748248BE81400EB47C2 /* SharedCollectionManager.swift in Sources */,
 				D2F8D166248A7E42008C29C3 /* DiscTrackList.swift in Sources */,
-				D225FA7A265B026900B69AEF /* Secrets.generated.swift in Sources */,
 				D2DB0FCD24A7782B006A5835 /* RecordStore+Screenshots.swift in Sources */,
 				D2F8D14E248A666C008C29C3 /* CardArtworkComposite.swift in Sources */,
 				D2945E1C249C0FC100AE6CA5 /* Navigation.swift in Sources */,

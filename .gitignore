@@ -1,7 +1,7 @@
 # Jewel specific
 
 secrets.xcconfig
-Secrets.generated.swift
+Secrets.swift
 
 
 .DS_Store
