@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D209A1F8265C48CC00583A16 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = D209A1F7265C48CC00583A16 /* Kingfisher */; };
 		D20CE85724AF7A4600039202 /* NavigationActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20CE85624AF7A4600039202 /* NavigationActions.swift */; };
 		D20CE85924AF7AA500039202 /* SettingsActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20CE85824AF7AA500039202 /* SettingsActions.swift */; };
 		D20CE85B24AF7AD100039202 /* LibraryActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20CE85A24AF7AD100039202 /* LibraryActions.swift */; };
@@ -50,7 +51,6 @@
 		D2AC12122485A67000C52D9E /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AC12112485A67000C52D9E /* Search.swift */; };
 		D2B4FD91248456B20028D7A4 /* CollectionOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B4FD90248456B20028D7A4 /* CollectionOptions.swift */; };
 		D2B4FD95248458300028D7A4 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B4FD94248458300028D7A4 /* Extensions.swift */; };
-		D2C32F8525207CA000302CEE /* KingfisherSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = D2C32F8425207CA000302CEE /* KingfisherSwiftUI */; };
 		D2C3A0A5249FFEFF00AA7266 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C3A0A4249FFEFF00AA7266 /* Home.swift */; };
 		D2C3A0A724A01ADE00AA7266 /* OnRotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C3A0A624A01ADE00AA7266 /* OnRotation.swift */; };
 		D2C3A0A924A01AEF00AA7266 /* NavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C3A0A824A01AEF00AA7266 /* NavBar.swift */; };
@@ -140,7 +140,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D2C32F8525207CA000302CEE /* KingfisherSwiftUI in Frameworks */,
+				D209A1F8265C48CC00583A16 /* Kingfisher in Frameworks */,
 				D24925A224814AD60011F409 /* HMV in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -365,7 +365,7 @@
 			name = "Listen Later";
 			packageProductDependencies = (
 				D24925A124814AD60011F409 /* HMV */,
-				D2C32F8425207CA000302CEE /* KingfisherSwiftUI */,
+				D209A1F7265C48CC00583A16 /* Kingfisher */,
 			);
 			productName = Jewel;
 			productReference = D22155782481114A00A1F04A /* Listen Later.app */;
@@ -397,7 +397,7 @@
 			mainGroup = D221556F2481114A00A1F04A;
 			packageReferences = (
 				D24925A024814AD60011F409 /* XCRemoteSwiftPackageReference "HMV" */,
-				D2C32F8325207CA000302CEE /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				D209A1F6265C48CC00583A16 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = D22155792481114A00A1F04A /* Products */;
 			projectDirPath = "";
@@ -710,6 +710,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		D209A1F6265C48CC00583A16 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.3.0;
+			};
+		};
 		D24925A024814AD60011F409 /* XCRemoteSwiftPackageReference "HMV" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/hepto/HMV";
@@ -718,26 +726,18 @@
 				kind = branch;
 			};
 		};
-		D2C32F8325207CA000302CEE /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/onevcat/Kingfisher";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.15.4;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		D209A1F7265C48CC00583A16 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D209A1F6265C48CC00583A16 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
 		D24925A124814AD60011F409 /* HMV */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = D24925A024814AD60011F409 /* XCRemoteSwiftPackageReference "HMV" */;
 			productName = HMV;
-		};
-		D2C32F8425207CA000302CEE /* KingfisherSwiftUI */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = D2C32F8325207CA000302CEE /* XCRemoteSwiftPackageReference "Kingfisher" */;
-			productName = KingfisherSwiftUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
