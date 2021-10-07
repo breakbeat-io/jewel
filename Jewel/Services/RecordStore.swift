@@ -77,7 +77,3 @@ class RecordStore {
     }.resume()
   }
 }
-
-extension HMV {
-  
-}
