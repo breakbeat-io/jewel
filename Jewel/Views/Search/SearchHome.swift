@@ -23,7 +23,6 @@ struct SearchHome: View {
       .navigationBarItems(
         leading:
         Button {
-          self.app.update(action: SearchAction.removeSearchResults)
           self.app.update(action: NavigationAction.showSearch(false))
         } label: {
           Text("Close")
@@ -32,5 +31,8 @@ struct SearchHome: View {
       )
     }
     .navigationViewStyle(StackNavigationViewStyle())
+    .onDisappear {
+      self.app.update(action: SearchAction.removeSearchResults)
+    }
   }
 }
