@@ -15,8 +15,6 @@
 		D22155822481114B00A1F04A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D22155812481114B00A1F04A /* Assets.xcassets */; };
 		D22155852481114B00A1F04A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D22155842481114B00A1F04A /* Preview Assets.xcassets */; };
 		D22155882481114B00A1F04A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D22155862481114B00A1F04A /* LaunchScreen.storyboard */; };
-		D225FA7B265B035100B69AEF /* generateSecrets.sh in Resources */ = {isa = PBXBuildFile; fileRef = D225FA77265AFD9F00B69AEF /* generateSecrets.sh */; };
-		D225FA80265B0CD100B69AEF /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = D225FA7F265B0CD100B69AEF /* Secrets.swift */; };
 		D23197C22492DACD00C09977 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23197C12492DACD00C09977 /* Constants.swift */; };
 		D23C398E248FD2DF00AD237E /* Welcome.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23C398D248FD2DF00AD237E /* Welcome.swift */; };
 		D2492587248117710011F409 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2492586248117710011F409 /* AppState.swift */; };
@@ -28,6 +26,8 @@
 		D24925A424814CB60011F409 /* RecordStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24925A324814CB60011F409 /* RecordStore.swift */; };
 		D24C80D124899D0C00EFACD8 /* Library.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24C80D024899D0C00EFACD8 /* Library.swift */; };
 		D2603DFF252083EA00B79311 /* JewelApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2603DFE252083EA00B79311 /* JewelApp.swift */; };
+		D262E881270C352C002C6BD8 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = D262E880270C34E8002C6BD8 /* Secrets.swift */; };
+		D262E885270C3A2C002C6BD8 /* SwiftJWT in Frameworks */ = {isa = PBXBuildFile; productRef = D262E884270C3A2C002C6BD8 /* SwiftJWT */; };
 		D2668D4924B1DBB0002922F4 /* screenshotSearch.json in Resources */ = {isa = PBXBuildFile; fileRef = D2668D4824B1DBB0002922F4 /* screenshotSearch.json */; };
 		D27FB80E24868AF60014C05D /* Odesli.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27FB80D24868AF60014C05D /* Odesli.swift */; };
 		D27FB81024868B320014C05D /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27FB80F24868B320014C05D /* Settings.swift */; };
@@ -78,10 +78,6 @@
 		D22155842481114B00A1F04A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D22155872481114B00A1F04A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D22155892481114B00A1F04A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D225FA75265AF4C900B69AEF /* Secrets.stencil */ = {isa = PBXFileReference; lastKnownFileType = text; path = Secrets.stencil; sourceTree = "<group>"; };
-		D225FA77265AFD9F00B69AEF /* generateSecrets.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = generateSecrets.sh; sourceTree = "<group>"; };
-		D225FA7E265B075300B69AEF /* tools */ = {isa = PBXFileReference; lastKnownFileType = folder; path = tools; sourceTree = "<group>"; };
-		D225FA7F265B0CD100B69AEF /* Secrets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		D23197C12492DACD00C09977 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		D23C398D248FD2DF00AD237E /* Welcome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Welcome.swift; sourceTree = "<group>"; };
 		D2492586248117710011F409 /* AppState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
@@ -92,6 +88,8 @@
 		D24925A324814CB60011F409 /* RecordStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordStore.swift; sourceTree = "<group>"; };
 		D24C80D024899D0C00EFACD8 /* Library.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Library.swift; sourceTree = "<group>"; };
 		D2603DFE252083EA00B79311 /* JewelApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JewelApp.swift; sourceTree = "<group>"; };
+		D262E880270C34E8002C6BD8 /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
+		D262E882270C3684002C6BD8 /* Secrets.README */ = {isa = PBXFileReference; lastKnownFileType = text; path = Secrets.README; sourceTree = "<group>"; };
 		D2668D4824B1DBB0002922F4 /* screenshotSearch.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = screenshotSearch.json; sourceTree = "<group>"; };
 		D27FB80D24868AF60014C05D /* Odesli.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Odesli.swift; sourceTree = "<group>"; };
 		D27FB80F24868B320014C05D /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
@@ -108,12 +106,10 @@
 		D2945E1D249C249C00AE6CA5 /* SettingsHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHome.swift; sourceTree = "<group>"; };
 		D29CB1C424A631EB0051BA96 /* CollectionReceived.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionReceived.swift; sourceTree = "<group>"; };
 		D29CB1C624A632520051BA96 /* RichAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RichAlert.swift; sourceTree = "<group>"; };
-		D2A12C2025AE5CE300ABD1C8 /* secrets.xcconfig.sample */ = {isa = PBXFileReference; lastKnownFileType = text; path = secrets.xcconfig.sample; sourceTree = "<group>"; };
 		D2A449CB249BAECE006E0A12 /* LibraryOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryOptions.swift; sourceTree = "<group>"; };
 		D2AB8466248113EB008B57F9 /* AppAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAction.swift; sourceTree = "<group>"; };
 		D2AB846A2481159D008B57F9 /* AppEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnvironment.swift; sourceTree = "<group>"; };
 		D2AC120A24859E2300C52D9E /* AddSourceCardButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSourceCardButton.swift; sourceTree = "<group>"; };
-		D2AC120E2485A20400C52D9E /* secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = secrets.xcconfig; sourceTree = "<group>"; };
 		D2AC120F2485A65D00C52D9E /* Collection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
 		D2AC12112485A67000C52D9E /* Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Search.swift; sourceTree = "<group>"; };
 		D2B4FD90248456B20028D7A4 /* CollectionOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionOptions.swift; sourceTree = "<group>"; };
@@ -142,6 +138,7 @@
 			files = (
 				D209A1F8265C48CC00583A16 /* Kingfisher in Frameworks */,
 				D24925A224814AD60011F409 /* HMV in Frameworks */,
+				D262E885270C3A2C002C6BD8 /* SwiftJWT in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -152,7 +149,6 @@
 			isa = PBXGroup;
 			children = (
 				D221557A2481114A00A1F04A /* Jewel */,
-				D225FA7E265B075300B69AEF /* tools */,
 				D22155792481114A00A1F04A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -188,18 +184,6 @@
 				D22155842481114B00A1F04A /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		D225FA78265B022500B69AEF /* Secrets */ = {
-			isa = PBXGroup;
-			children = (
-				D225FA7F265B0CD100B69AEF /* Secrets.swift */,
-				D225FA77265AFD9F00B69AEF /* generateSecrets.sh */,
-				D225FA75265AF4C900B69AEF /* Secrets.stencil */,
-				D2AC120E2485A20400C52D9E /* secrets.xcconfig */,
-				D2A12C2025AE5CE300ABD1C8 /* secrets.xcconfig.sample */,
-			);
-			path = Secrets;
 			sourceTree = "<group>";
 		};
 		D24925922481409D0011F409 /* Actions */ = {
@@ -276,10 +260,11 @@
 		D2AC120424859D1C00C52D9E /* App */ = {
 			isa = PBXGroup;
 			children = (
-				D225FA78265B022500B69AEF /* Secrets */,
 				D22155892481114B00A1F04A /* Info.plist */,
 				D2603DFE252083EA00B79311 /* JewelApp.swift */,
 				D2AB846A2481159D008B57F9 /* AppEnvironment.swift */,
+				D262E880270C34E8002C6BD8 /* Secrets.swift */,
+				D262E882270C3684002C6BD8 /* Secrets.README */,
 				D288174E248D148E00EB47C2 /* Listen Later.entitlements */,
 			);
 			path = App;
@@ -353,7 +338,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D221558C2481114B00A1F04A /* Build configuration list for PBXNativeTarget "Listen Later" */;
 			buildPhases = (
-				D225FA76265AF56C00B69AEF /* ShellScript */,
 				D22155742481114A00A1F04A /* Sources */,
 				D22155752481114A00A1F04A /* Frameworks */,
 				D22155762481114A00A1F04A /* Resources */,
@@ -366,6 +350,7 @@
 			packageProductDependencies = (
 				D24925A124814AD60011F409 /* HMV */,
 				D209A1F7265C48CC00583A16 /* Kingfisher */,
+				D262E884270C3A2C002C6BD8 /* SwiftJWT */,
 			);
 			productName = Jewel;
 			productReference = D22155782481114A00A1F04A /* Listen Later.app */;
@@ -398,6 +383,7 @@
 			packageReferences = (
 				D24925A024814AD60011F409 /* XCRemoteSwiftPackageReference "HMV" */,
 				D209A1F6265C48CC00583A16 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				D262E883270C3A2C002C6BD8 /* XCRemoteSwiftPackageReference "Swift-JWT" */,
 			);
 			productRefGroup = D22155792481114A00A1F04A /* Products */;
 			projectDirPath = "";
@@ -414,7 +400,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D2DB0FCE24A7782B006A5835 /* screenshotCollection.json in Resources */,
-				D225FA7B265B035100B69AEF /* generateSecrets.sh in Resources */,
 				D22155882481114B00A1F04A /* LaunchScreen.storyboard in Resources */,
 				D22155852481114B00A1F04A /* Preview Assets.xcassets in Resources */,
 				D27FB8202486B46D0014C05D /* fa-brands.otf in Resources */,
@@ -424,27 +409,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		D225FA76265AF56C00B69AEF /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "$PROJECT_DIR/Jewel/App/Secrets/generateSecrets.sh\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D22155742481114A00A1F04A /* Sources */ = {
@@ -492,7 +456,7 @@
 				D28AD1B5248BACB2009B584A /* PlaybackLink.swift in Sources */,
 				D288174A248BEABF00EB47C2 /* ShareSheet.swift in Sources */,
 				D2AB8467248113EB008B57F9 /* AppAction.swift in Sources */,
-				D225FA80265B0CD100B69AEF /* Secrets.swift in Sources */,
+				D262E881270C352C002C6BD8 /* Secrets.swift in Sources */,
 				D29CB1C524A631EB0051BA96 /* CollectionReceived.swift in Sources */,
 				D2881748248BE81400EB47C2 /* SharedCollectionManager.swift in Sources */,
 				D2F8D166248A7E42008C29C3 /* DiscTrackList.swift in Sources */,
@@ -520,7 +484,6 @@
 /* Begin XCBuildConfiguration section */
 		D221558A2481114B00A1F04A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D2AC120E2485A20400C52D9E /* secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -582,7 +545,6 @@
 		};
 		D221558B2481114B00A1F04A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D2AC120E2485A20400C52D9E /* secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -715,7 +677,7 @@
 			repositoryURL = "https://github.com/onevcat/Kingfisher";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 6.3.0;
+				minimumVersion = 7.0.0;
 			};
 		};
 		D24925A024814AD60011F409 /* XCRemoteSwiftPackageReference "HMV" */ = {
@@ -724,6 +686,14 @@
 			requirement = {
 				branch = master;
 				kind = branch;
+			};
+		};
+		D262E883270C3A2C002C6BD8 /* XCRemoteSwiftPackageReference "Swift-JWT" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Kitura/Swift-JWT";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.6.200;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -738,6 +708,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D24925A024814AD60011F409 /* XCRemoteSwiftPackageReference "HMV" */;
 			productName = HMV;
+		};
+		D262E884270C3A2C002C6BD8 /* SwiftJWT */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D262E883270C3A2C002C6BD8 /* XCRemoteSwiftPackageReference "Swift-JWT" */;
+			productName = SwiftJWT;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

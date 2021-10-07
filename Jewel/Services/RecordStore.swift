@@ -11,7 +11,7 @@ import os.log
 import HMV
 
 class RecordStore {
-  static let appleMusic = HMV(storefront: .unitedKingdom, developerToken: Secrets.appleMusicAPIToken)
+  static let appleMusic = HMV(storefront: .unitedKingdom, developerToken: Secrets.appleMusicDeveloperToken)
   
   private init() { }
   
