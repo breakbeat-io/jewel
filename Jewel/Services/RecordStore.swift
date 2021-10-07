@@ -11,12 +11,9 @@ import os.log
 import HMV
 
 class RecordStore {
-  static let appleMusic = HMV(storefront: .unitedKingdom, developerToken: Secrets.appleMusicDeveloperToken)
-  
-  private init() { }
   
   static func browse(for searchTerm: String) {
-    RecordStore.appleMusic.search(term: searchTerm, limit: 20, types: [.albums]) { results, error in
+    HMV(storefront: .unitedKingdom, developerToken: Secrets.appleMusicDeveloperToken).search(term: searchTerm, limit: 20, types: [.albums]) { results, error in
       if let results = results {
         DispatchQueue.main.async {
           if let results = results.albums?.data {
@@ -33,7 +30,7 @@ class RecordStore {
   }
   
   static func purchase(album appleMusicAlbumId: String, forSlot slotIndex: Int, inCollection collectionId: UUID) {
-    RecordStore.appleMusic.album(id: appleMusicAlbumId, completion: { appleMusicAlbum, error in
+    HMV(storefront: .unitedKingdom, developerToken: Secrets.appleMusicDeveloperToken).album(id: appleMusicAlbumId, completion: { appleMusicAlbum, error in
       if let album = appleMusicAlbum {
         DispatchQueue.main.async {
           AppEnvironment.global.update(action: LibraryAction.addSourceToSlot(source: album, slotIndex: slotIndex, collectionId: collectionId))
@@ -79,4 +76,8 @@ class RecordStore {
       
     }.resume()
   }
+}
+
+extension HMV {
+  
 }
