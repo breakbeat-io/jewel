@@ -54,12 +54,12 @@ struct CollectionDetail: View {
           ForEach(self.slots.indices, id: \.self) { slotIndex in
             Group {
               if self.slots[slotIndex].source != nil {
-                IfLet(self.slots[slotIndex].source?.attributes) { attributes in
+                IfLet(self.slots[slotIndex].source) { album in
                   Button {
                     self.app.update(action: NavigationAction.setActiveSlotIndex(slotIndex: slotIndex))
                     self.app.update(action: NavigationAction.showSourceDetail(true))
                   } label: {
-                    SourceCard(sourceName: attributes.name, sourceArtist: attributes.artistName, sourceArtwork: attributes.artwork.url(forWidth: 1000))
+                    SourceCard(sourceName: album.title, sourceArtist: album.artistName, sourceArtwork: album.artwork?.url(width: 1000, height: 1000))
                   }
                 }
               } else if self.editable {

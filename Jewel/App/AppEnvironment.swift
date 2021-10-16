@@ -9,7 +9,6 @@
 import Foundation
 import os.log
 import UIKit
-import HMV
 
 final class AppEnvironment: ObservableObject {
   
@@ -57,7 +56,7 @@ final class AppEnvironment: ObservableObject {
     
   }
   
-  public func update(action: AppAction) {
+  @MainActor public func update(action: AppAction) {
     state = updateState(appState: state, action: action)
   }
   
@@ -81,7 +80,9 @@ final class AppEnvironment: ObservableObject {
       os_log("💎 State Migration > v1.0 Saved Collection found ... migrating.")
       for slotIndex in 0..<state.library.onRotation.slots.count {
         if let appleMusicAlbumId = savedCollection[String(slotIndex)] {
-          RecordStore.purchase(album: appleMusicAlbumId as! String, forSlot: slotIndex, inCollection: state.library.onRotation.id)
+          Task {
+            await RecordStore.purchase(album: appleMusicAlbumId as! String, forSlot: slotIndex, inCollection: state.library.onRotation.id)
+          }
         }
       }
       UserDefaults.standard.removeObject(forKey: "savedCollection")

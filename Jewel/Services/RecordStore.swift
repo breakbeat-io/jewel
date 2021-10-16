@@ -8,44 +8,45 @@
 
 import Foundation
 import os.log
-import HMV
+import MusicKit
+
+enum RecordStoreError: Error {
+  case searchError(String)
+  case purchaseError(String)
+}
 
 class RecordStore {
   
-  static func browse(for searchTerm: String) {
-    HMV(storefront: .unitedKingdom, developerToken: Secrets.appleMusicDeveloperToken).search(term: searchTerm, limit: 20, types: [.albums]) { results, error in
-      if let results = results {
-        DispatchQueue.main.async {
-          if let results = results.albums?.data {
-            AppEnvironment.global.update(action: SearchAction.populateSearchResults(results: results))
-          }
-        }
-      }
+  static func search(for searchTerm: String) async {
+    do {
+      var searchRequest = MusicCatalogSearchRequest(term: searchTerm, types: [Album.self])
+      searchRequest.limit = 20
       
-      if let error = error {
-        os_log("💎 Record Store > Browse error: %s", String(describing: error))
-        // TODO: create another action to show an error in search results.
-      }
+      let searchResponse = try await searchRequest.response()
+      
+      await AppEnvironment.global.update(action: SearchAction.populateSearchResults(results: searchResponse.albums))
+    } catch {
+      os_log("💎 Record Store > Browse error: %s", String(describing: error))
     }
   }
   
-  static func purchase(album appleMusicAlbumId: String, forSlot slotIndex: Int, inCollection collectionId: UUID) {
-    HMV(storefront: .unitedKingdom, developerToken: Secrets.appleMusicDeveloperToken).album(id: appleMusicAlbumId, completion: { appleMusicAlbum, error in
-      if let album = appleMusicAlbum {
-        DispatchQueue.main.async {
-          AppEnvironment.global.update(action: LibraryAction.addSourceToSlot(source: album, slotIndex: slotIndex, collectionId: collectionId))
-          if let baseUrl = album.attributes?.url {
-            RecordStore.alternativeSuppliers(for: baseUrl, inCollection: collectionId)
-          }
-        }
+  static func purchase(album appleMusicAlbumId: String, forSlot slotIndex: Int, inCollection collectionId: UUID) async {
+    do {
+      let resourceRequest = MusicCatalogResourceRequest<Album>(matching: \.id, equalTo: MusicItemID(rawValue: appleMusicAlbumId))
+      let resourceResponse = try await resourceRequest.response()
+      
+      guard let album = resourceResponse.items.first else {
+        throw RecordStoreError.purchaseError("Unable to find Album with ID \(appleMusicAlbumId)")
       }
       
-      if let error = error {
-        os_log("💎 Record Store > Purchase error: %s", String(describing: error))
-        // TODO: create another action to show an error in album add.
+      await AppEnvironment.global.update(action: LibraryAction.addSourceToSlot(source: album, slotIndex: slotIndex, collectionId: collectionId))
+      if let baseUrl = album.url {
+        RecordStore.alternativeSuppliers(for: baseUrl, inCollection: collectionId)
       }
       
-    })
+    } catch {
+      os_log("💎 Record Store > Purchase error: %s", String(describing: error))
+    }
   }
   
   static func alternativeSuppliers(for baseUrl: URL, inCollection collectionId: UUID) {

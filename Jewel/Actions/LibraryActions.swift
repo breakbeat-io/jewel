@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import MusicKit
 
 func updateLibrary(library: Library, action: LibraryAction) -> Library {
   
@@ -104,7 +105,7 @@ func updateLibrary(library: Library, action: LibraryAction) -> Library {
     
   case let .setPlatformLinks(baseUrl, platformLinks, collectionId):
     if var collection = extractCollection(collectionId: collectionId) {
-      let indices = collection.slots.enumerated().compactMap({ $1.source?.attributes?.url == baseUrl ? $0 : nil })
+      let indices = collection.slots.enumerated().compactMap({ $1.source?.url == baseUrl ? $0 : nil })
       for i in indices {
         collection.slots[i].playbackLinks = platformLinks
       }
@@ -121,7 +122,7 @@ enum LibraryAction: AppAction {
   
   case setCollectionName(name: String, collectionId: UUID)
   case setCollectionCurator(curator: String, collectionId: UUID)
-  case addSourceToSlot(source: AppleMusicAlbum, slotIndex: Int, collectionId: UUID)
+  case addSourceToSlot(source: Album, slotIndex: Int, collectionId: UUID)
   case removeSourceFromSlot(slotIndex: Int, collectionId: UUID)
   case setPlatformLinks(baseUrl: URL, platformLinks: OdesliResponse, collectionId: UUID)
   case invalidateShareLinks(collectionId: UUID)

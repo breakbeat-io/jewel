@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import MusicKit
 
 struct Home: View {
   
@@ -51,6 +52,13 @@ struct Home: View {
       }
       if self.receivedCollectionCued.wrappedValue {
         CollectionReceived()
+      }
+    }
+    .onAppear {
+      if MusicAuthorization.currentStatus != .authorized {
+        Task {
+          _ = await MusicAuthorization.request()
+        }
       }
     }
   }

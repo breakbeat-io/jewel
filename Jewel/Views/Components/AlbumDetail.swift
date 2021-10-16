@@ -66,16 +66,16 @@ struct AlbumDetail: View {
     
     var body: some View {
       VStack {
-        IfLet(slot.source?.attributes) { attributes in
-          SourceCover(sourceName: attributes.name,
-                      sourceArtist: attributes.artistName,
-                      sourceArtwork: attributes.artwork.url(forWidth: 1000))
-          PlaybackLinks(baseUrl: attributes.url,
+        IfLet(slot.source) { album in
+          SourceCover(sourceName: album.title,
+                      sourceArtist: album.artistName,
+                      sourceArtwork: album.artwork?.url(width: 1000, height: 1000))
+          PlaybackLinks(baseUrl: album.url!,
                         playbackLinks: self.slot.playbackLinks)
             .padding(.bottom)
-          IfLet(self.slot.source?.relationships?.tracks.data) { tracks in
+          IfLet(album.tracks) { tracks in
             TrackList(tracks: tracks,
-                      sourceArtist: attributes.artistName
+                      sourceArtist: album.artistName
             )
           }
         }
@@ -90,19 +90,19 @@ struct AlbumDetail: View {
     
     var body: some View {
       HStack(alignment: .top) {
-        IfLet(slot.source?.attributes) { attributes in
+        IfLet(slot.source) { album in
           VStack {
-            SourceCover(sourceName: attributes.name,
-                        sourceArtist: attributes.artistName,
-                        sourceArtwork: attributes.artwork.url(forWidth: 1000))
-            PlaybackLinks(baseUrl: attributes.url,
+            SourceCover(sourceName: album.title,
+                        sourceArtist: album.artistName,
+                        sourceArtwork: album.artwork?.url(width: 1000, height: 1000))
+            PlaybackLinks(baseUrl: album.url!,
                           playbackLinks: self.slot.playbackLinks)
               .padding(.bottom)
           }
           VStack {
-            IfLet(self.slot.source?.relationships?.tracks.data) { tracks in
+            IfLet(album.tracks) { tracks in
               TrackList(tracks: tracks,
-                        sourceArtist: attributes.artistName
+                        sourceArtist: album.artistName
               )
             }
             Spacer()

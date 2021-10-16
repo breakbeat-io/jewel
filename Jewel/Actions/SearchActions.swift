@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import MusicKit
 
 func updateSearch(search: Search, action: SearchAction) -> Search {
   
@@ -28,7 +29,7 @@ func updateSearch(search: Search, action: SearchAction) -> Search {
 
 enum SearchAction: AppAction {
   
-  case populateSearchResults(results: [AppleMusicAlbum])
+  case populateSearchResults(results: MusicItemCollection<Album>)
   case removeSearchResults
   
   var description: String {

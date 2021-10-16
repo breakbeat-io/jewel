@@ -16,7 +16,9 @@ struct JewelApp: App {
       Home()
         .environmentObject(AppEnvironment.global)
         .onOpenURL { url in
-          SharedCollectionManager.cueReceivedCollection(receivedCollectionUrl: url)
+          Task {
+            await SharedCollectionManager.cueReceivedCollection(receivedCollectionUrl: url)
+          }
         }
     }
   }

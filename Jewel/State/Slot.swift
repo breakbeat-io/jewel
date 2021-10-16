@@ -7,12 +7,10 @@
 //
 
 import Foundation
-import HMV
+import MusicKit
 
 struct Slot: Identifiable, Codable {
   var id = UUID()
-  var source: AppleMusicAlbum?
+  var source: Album?
   var playbackLinks: OdesliResponse?
 }
-
-typealias AppleMusicAlbum = Album
