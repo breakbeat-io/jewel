@@ -7,7 +7,6 @@
 //
 
 import SwiftUI
-import Kingfisher
 
 struct SourceCard: View {
   
@@ -20,14 +19,14 @@ struct SourceCard: View {
       .foregroundColor(.clear)
       .background(
         IfLet(sourceArtwork) { url in
-          KFImage(url)
-            .placeholder {
-              RoundedRectangle(cornerRadius: Constants.cardCornerRadius)
-                .fill(Color(UIColor.secondarySystemBackground))
+          AsyncImage(url: url) { image in
+            image
+              .renderingMode(.original)
+              .resizable()
+              .scaledToFill()
+          } placeholder: {
+              ProgressView()
           }
-          .renderingMode(.original)
-          .resizable()
-          .scaledToFill()
       })
       .cornerRadius(Constants.cardCornerRadius)
       .overlay(

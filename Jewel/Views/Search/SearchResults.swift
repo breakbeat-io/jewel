@@ -8,7 +8,6 @@
 
 import SwiftUI
 import MusicKit
-import Kingfisher
 
 struct SearchResults: View {
   
@@ -26,14 +25,14 @@ struct SearchResults: View {
       List(0..<appleMusicAlbums.count, id: \.self) { i in
         IfLet(appleMusicAlbums[i]) { album in
           HStack {
-            KFImage(album.artwork?.url(width: 50, height: 50))
-              .placeholder {
-                RoundedRectangle(cornerRadius: Constants.cardCornerRadius)
-                  .fill(Color(UIColor.secondarySystemBackground))
+            AsyncImage(url: album.artwork?.url(width: 50, height: 50)) { image in
+              image
+                .renderingMode(.original)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+            } placeholder: {
+                ProgressView()
             }
-            .renderingMode(.original)
-            .resizable()
-            .aspectRatio(contentMode: .fit)
             .cornerRadius(Constants.cardCornerRadius)
             .frame(width: 50)
             VStack(alignment: .leading) {

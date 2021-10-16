@@ -7,7 +7,6 @@
 //
 
 import SwiftUI
-import Kingfisher
 
 struct CardArtworkComposite: View {
   
@@ -20,14 +19,14 @@ struct CardArtworkComposite: View {
           Rectangle()
             .foregroundColor(.clear)
             .background(
-              KFImage(image)
-                .placeholder {
-                  RoundedRectangle(cornerRadius: Constants.cardCornerRadius)
-                    .fill(Color(UIColor.secondarySystemBackground))
+              AsyncImage(url: image) { image in
+                image
+                  .renderingMode(.original)
+                  .resizable()
+                  .scaledToFill()
+              } placeholder: {
+                  ProgressView()
               }
-              .renderingMode(.original)
-              .resizable()
-              .scaledToFill()
             )
             .clipped()
         }

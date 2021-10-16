@@ -3,11 +3,10 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D209A1F8265C48CC00583A16 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = D209A1F7265C48CC00583A16 /* Kingfisher */; };
 		D20CE85724AF7A4600039202 /* NavigationActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20CE85624AF7A4600039202 /* NavigationActions.swift */; };
 		D20CE85924AF7AA500039202 /* SettingsActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20CE85824AF7AA500039202 /* SettingsActions.swift */; };
 		D20CE85B24AF7AD100039202 /* LibraryActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20CE85A24AF7AD100039202 /* LibraryActions.swift */; };
@@ -134,7 +133,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D209A1F8265C48CC00583A16 /* Kingfisher in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -344,7 +342,6 @@
 			);
 			name = "Listen Later";
 			packageProductDependencies = (
-				D209A1F7265C48CC00583A16 /* Kingfisher */,
 			);
 			productName = Jewel;
 			productReference = D22155782481114A00A1F04A /* Listen Later.app */;
@@ -375,7 +372,6 @@
 			);
 			mainGroup = D221556F2481114A00A1F04A;
 			packageReferences = (
-				D209A1F6265C48CC00583A16 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = D22155792481114A00A1F04A /* Products */;
 			projectDirPath = "";
@@ -662,25 +658,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		D209A1F6265C48CC00583A16 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/onevcat/Kingfisher";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 7.0.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		D209A1F7265C48CC00583A16 /* Kingfisher */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = D209A1F6265C48CC00583A16 /* XCRemoteSwiftPackageReference "Kingfisher" */;
-			productName = Kingfisher;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = D22155702481114A00A1F04A /* Project object */;
 }
