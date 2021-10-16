@@ -52,29 +52,22 @@ class RecordStore {
   static func alternativeSuppliers(for baseUrl: URL, inCollection collectionId: UUID) {
     os_log("💎 Platform Links > Populating links for %s", baseUrl.absoluteString)
     
-    let request = URLRequest(url: URL(string: "https://api.song.link/v1-alpha.1/links?url=\(baseUrl.absoluteString)")!)
-    
-    URLSession.shared.dataTask(with: request) { data, response, error in
-      if let response = response as? HTTPURLResponse {
+    Task {
+      do {
+        let (data, response) = try await URLSession.shared.data(from: URL(string: "https://api.song.link/v1-alpha.1/links?url=\(baseUrl.absoluteString)")!) as! (Data, HTTPURLResponse)
+        
         if response.statusCode != 200 {
           os_log("💎 Platform Links > Unexepcted URL response code: %s", response.statusCode)
         }
-      }
-      
-      if let data = data {
+        
         if let decodedResponse = try? JSONDecoder().decode(OdesliResponse.self, from: data) {
-          DispatchQueue.main.async {
-            AppEnvironment.global.update(action: LibraryAction.setPlatformLinks(baseUrl: baseUrl, platformLinks: decodedResponse, collectionId: collectionId))
-          }
-          
+          await AppEnvironment.global.update(action: LibraryAction.setPlatformLinks(baseUrl: baseUrl, platformLinks: decodedResponse, collectionId: collectionId))
           return
         }
-      }
-      
-      if let error = error {
+        
+      } catch {
         os_log("💎 Platform Links > Error getting playbackLinks: %s", error.localizedDescription)
       }
-      
-    }.resume()
+    }
   }
 }
