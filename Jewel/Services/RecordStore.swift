@@ -39,22 +39,11 @@ class RecordStore {
         throw RecordStoreError.purchaseError("Unable to find Album with ID \(appleMusicAlbumId)")
       }
       
-      let detailedAlbum = try await album.with([.tracks])
-      
-      var songs: [Song] = []
-      if let tracks = detailedAlbum.tracks {
-        for track in tracks {
-          let resourceRequest = MusicCatalogResourceRequest<Song>(matching: \.id, equalTo: track.id)
-          let resourceResponse = try! await resourceRequest.response()
-          if let song = resourceResponse.items.first {
-            songs.append(song)
-          }
-        }
-      }
-      
-      let source = FullAppleAlbum(album: detailedAlbum, songs: songs)
+      let source = FullAppleAlbum(album: album)
       
       await AppEnvironment.global.update(action: LibraryAction.addSourceToSlot(source: source, slotIndex: slotIndex, collectionId: collectionId))
+      
+      RecordStore.getSongs(album: album, forSlot: slotIndex, inCollection: collectionId)
       
       if let baseUrl = album.url {
         RecordStore.alternativeSuppliers(for: baseUrl, inCollection: collectionId)
@@ -62,6 +51,42 @@ class RecordStore {
       
     } catch {
       os_log("💎 Record Store > Purchase error: %s", String(describing: error))
+    }
+  }
+  
+  static func getSongs(album: Album, forSlot slotIndex: Int, inCollection collectionId: UUID) {
+    Task {
+      do {
+        let detailedAlbum = try await album.with([.tracks])
+        if let tracks = detailedAlbum.tracks {
+          var songs = [Song]()
+          
+          songs = try await withThrowingTaskGroup(of: Song?.self) { taskGroup in
+            var songResults = [Song]()
+            for track in tracks {
+              taskGroup.addTask {
+                let resourceRequest = MusicCatalogResourceRequest<Song>(matching: \.id, equalTo: track.id)
+                let resourceResponse = try await resourceRequest.response()
+                return resourceResponse.items.first
+              }
+            }
+            
+            for try await song in taskGroup {
+              guard let song = song else { break }
+              songResults.append(song)
+            }
+            
+            return songResults.sorted{ $0.trackNumber ?? 0 < $1.trackNumber ?? 0}
+          }
+          
+          let source = FullAppleAlbum(album: detailedAlbum, songs: songs)
+          
+          await AppEnvironment.global.update(action: LibraryAction.addSourceToSlot(source: source, slotIndex: slotIndex, collectionId: collectionId))
+        }
+        
+      } catch {
+        os_log("💎 Record Store > Song error: %s", String(describing: error))
+      }
     }
   }
   

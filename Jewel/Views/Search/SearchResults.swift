@@ -47,9 +47,9 @@ struct SearchResults: View {
             Button {
               Task {
                 await RecordStore.purchase(album: album.id.rawValue, forSlot: self.slotIndex, inCollection: self.collectionId)
-                self.app.update(action: SearchAction.removeSearchResults)
-                self.app.update(action: NavigationAction.showSearch(false))
               }
+              self.app.update(action: SearchAction.removeSearchResults)
+              self.app.update(action: NavigationAction.showSearch(false))
             } label: {
               Text(Image(systemName: "plus"))
                 .padding()
