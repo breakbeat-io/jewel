@@ -7,10 +7,9 @@
 //
 
 import Foundation
-import MusicKit
 
 struct Slot: Identifiable, Codable {
   var id = UUID()
-  var source: Album?
+  var source: FullAppleAlbum?
   var playbackLinks: OdesliResponse?
 }

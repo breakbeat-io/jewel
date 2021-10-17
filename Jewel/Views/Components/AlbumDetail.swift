@@ -66,15 +66,15 @@ struct AlbumDetail: View {
     
     var body: some View {
       VStack {
-        IfLet(slot.source) { album in
+        IfLet(slot.source?.album) { album in
           SourceCover(sourceName: album.title,
                       sourceArtist: album.artistName,
                       sourceArtwork: album.artwork?.url(width: 1000, height: 1000))
           PlaybackLinks(baseUrl: album.url!,
                         playbackLinks: self.slot.playbackLinks)
             .padding(.bottom)
-          IfLet(album.tracks) { tracks in
-            TrackList(tracks: tracks,
+          IfLet(slot.source?.songs) { songs in
+            SongList(songs: songs,
                       sourceArtist: album.artistName
             )
           }
@@ -90,7 +90,7 @@ struct AlbumDetail: View {
     
     var body: some View {
       HStack(alignment: .top) {
-        IfLet(slot.source) { album in
+        IfLet(slot.source?.album) { album in
           VStack {
             SourceCover(sourceName: album.title,
                         sourceArtist: album.artistName,
@@ -100,8 +100,8 @@ struct AlbumDetail: View {
               .padding(.bottom)
           }
           VStack {
-            IfLet(album.tracks) { tracks in
-              TrackList(tracks: tracks,
+            IfLet(slot.source?.songs) { songs in
+              SongList(songs: songs,
                         sourceArtist: album.artistName
               )
             }

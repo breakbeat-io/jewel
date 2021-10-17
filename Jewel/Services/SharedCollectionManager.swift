@@ -46,7 +46,7 @@ class SharedCollectionManager {
     
     for slot in collection.slots {
       if let source = slot.source {
-        let slot = ShareableSlot(sourceProvider: SourceProvider.appleMusicAlbum, sourceRef: source.id.rawValue)
+        let slot = ShareableSlot(sourceProvider: SourceProvider.appleMusicAlbum, sourceRef: source.album.id.rawValue)
         shareableSlots.append(slot)
       } else {
         shareableSlots.append(nil)
