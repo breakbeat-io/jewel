@@ -43,7 +43,7 @@ class RecordStore {
       
       await AppEnvironment.global.update(action: LibraryAction.addSourceToSlot(source: source, slotIndex: slotIndex, collectionId: collectionId))
       
-      RecordStore.getSongs(album: album, forSlot: slotIndex, inCollection: collectionId)
+      RecordStore.getSongs(album: album, inCollection: collectionId)
       
       if let baseUrl = album.url {
         RecordStore.alternativeSuppliers(for: baseUrl, inCollection: collectionId)
@@ -54,7 +54,7 @@ class RecordStore {
     }
   }
   
-  static func getSongs(album: Album, forSlot slotIndex: Int, inCollection collectionId: UUID) {
+  static func getSongs(album: Album, inCollection collectionId: UUID) {
     Task {
       do {
         let detailedAlbum = try await album.with([.tracks])
@@ -79,9 +79,7 @@ class RecordStore {
             return songResults.sorted{ $0.trackNumber ?? 0 < $1.trackNumber ?? 0}
           }
           
-          let source = FullAppleAlbum(album: detailedAlbum, songs: songs)
-          
-          await AppEnvironment.global.update(action: LibraryAction.addSourceToSlot(source: source, slotIndex: slotIndex, collectionId: collectionId))
+          await AppEnvironment.global.update(action: LibraryAction.addSongsToAlbum(albumId: album.id, songs: songs, collectionId: collectionId))
         }
         
       } catch {

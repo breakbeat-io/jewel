@@ -50,6 +50,16 @@ func updateLibrary(library: Library, action: LibraryAction) -> Library {
       commitCollection(collection: collection)
     }
     
+  case let .addSongsToAlbum(albumId, songs, collectionId):
+    if var collection = extractCollection(collectionId: collectionId) {
+      for i in collection.slots.indices {
+        if collection.slots[i].source?.album.id == albumId {
+          collection.slots[i].source?.songs = songs
+        }
+      }
+      commitCollection(collection: collection)
+    }
+    
   case let .removeSourceFromSlot(slotIndex, collectionId):
     if var collection = extractCollection(collectionId: collectionId) {
       collection.slots[slotIndex] = Slot()
@@ -123,6 +133,7 @@ enum LibraryAction: AppAction {
   case setCollectionName(name: String, collectionId: UUID)
   case setCollectionCurator(curator: String, collectionId: UUID)
   case addSourceToSlot(source: FullAppleAlbum, slotIndex: Int, collectionId: UUID)
+  case addSongsToAlbum(albumId: MusicItemID, songs: [Song], collectionId: UUID)
   case removeSourceFromSlot(slotIndex: Int, collectionId: UUID)
   case setPlatformLinks(baseUrl: URL, platformLinks: OdesliResponse, collectionId: UUID)
   case invalidateShareLinks(collectionId: UUID)
@@ -146,6 +157,9 @@ enum LibraryAction: AppAction {
       
     case .addSourceToSlot(let source, let slotIndex, let collectionId):
       return "\(type(of: self)): Adding AppleMusicAlbum \(source.album.id) to slot \(slotIndex) in collection \(collectionId)"
+      
+    case .addSongsToAlbum(let albumId, _, let collectionId):
+      return "\(type(of: self)): Adding songs to Album with ID \(albumId) in collection \(collectionId)"
       
     case .removeSourceFromSlot(let slotIndex, let collectionId):
       return "\(type(of: self)): Removing source in slot \(slotIndex) from collection \(collectionId)"
