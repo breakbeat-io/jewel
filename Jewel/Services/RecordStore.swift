@@ -79,7 +79,7 @@ class RecordStore {
             return songResults.sorted{ $0.trackNumber ?? 0 < $1.trackNumber ?? 0}
           }
           
-          await AppEnvironment.global.update(action: LibraryAction.addSongsToAlbum(albumId: album.id, songs: songs, collectionId: collectionId))
+          await AppEnvironment.global.update(action: LibraryAction.addSongsToAlbum(songs: songs, albumId: album.id, collectionId: collectionId))
         }
         
       } catch {
