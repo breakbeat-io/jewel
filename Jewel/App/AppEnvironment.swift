@@ -22,7 +22,7 @@ final class AppEnvironment: ObservableObject {
   
   private init() {
     
-    if let savedState = UserDefaults.standard.object(forKey: "jewelState") as? Data {
+    if let savedState = UserDefaults.standard.object(forKey: "JewelAppState_V2") as? Data {
       do {
         let decodedSavedState = try JSONDecoder().decode(AppState.self, from: savedState)
         state = decodedSavedState
@@ -63,7 +63,7 @@ final class AppEnvironment: ObservableObject {
   private func save() {
     do {
       let encodedState = try JSONEncoder().encode(state)
-      UserDefaults.standard.set(encodedState, forKey: "jewelState")
+      UserDefaults.standard.set(encodedState, forKey: "JewelAppState_V2")
     } catch {
       os_log("💎 State > Error saving state: %s", error.localizedDescription)
     }
