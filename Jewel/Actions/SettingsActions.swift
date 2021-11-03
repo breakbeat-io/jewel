@@ -21,9 +21,9 @@ func updateSettings(settings: Settings, action: SettingsAction) -> Settings {
     newSettings.preferredMusicPlatform = platform
     
   case .reset:
-    let domain = Bundle.main.bundleIdentifier!
-    UserDefaults.standard.removePersistentDomain(forName: domain)
-    UserDefaults.standard.synchronize()
+    if let domain = Bundle.main.bundleIdentifier {
+      UserDefaults.standard.removePersistentDomain(forName: domain)
+    }
     exit(1)
     
   }
