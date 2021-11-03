@@ -43,6 +43,8 @@ struct SourceCover: View {
         } placeholder: {
           ProgressView()
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .aspectRatio(1, contentMode: .fill)
         .cornerRadius(4)
         .shadow(radius: 4)
 #endif
