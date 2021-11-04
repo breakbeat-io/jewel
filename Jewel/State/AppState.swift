@@ -39,18 +39,16 @@ extension AppState {
     guard let savedState = UserDefaults.standard.object(forKey: "JewelAppState_V2") as? Data else { return nil }
     
     os_log("💎 State > Found a current saved state")
-    var state: AppState
     do {
-      state = try JSONDecoder().decode(AppState.self, from: savedState)
+      var state = try JSONDecoder().decode(AppState.self, from: savedState)
       state.navigation.onRotationId = state.library.onRotation.id
       state.navigation.activeCollectionId = state.library.onRotation.id
+      os_log("💎 State > Loaded a current saved state")
+      return state
     } catch {
       os_log("💎 State > Error loading a current saved state: %s", error.localizedDescription)
       return nil
     }
-    
-    os_log("💎 State > Loaded a current saved state")
-    return state
     
   }
   
