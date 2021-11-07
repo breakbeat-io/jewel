@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import MusicKit
 
 func updateLibrary(library: Library, action: LibraryAction) -> Library {
   
@@ -46,6 +47,16 @@ func updateLibrary(library: Library, action: LibraryAction) -> Library {
   case let .addSourceToSlot(source, slotIndex, collectionId):
     if var collection = extractCollection(collectionId: collectionId) {
       collection.slots[slotIndex].source = source
+      commitCollection(collection: collection)
+    }
+    
+  case let .addSongsToAlbum(songs, albumId, collectionId):
+    if var collection = extractCollection(collectionId: collectionId) {
+      for i in collection.slots.indices {
+        if collection.slots[i].source?.album.id == albumId {
+          collection.slots[i].source?.songs = songs
+        }
+      }
       commitCollection(collection: collection)
     }
     
@@ -104,7 +115,7 @@ func updateLibrary(library: Library, action: LibraryAction) -> Library {
     
   case let .setPlatformLinks(baseUrl, platformLinks, collectionId):
     if var collection = extractCollection(collectionId: collectionId) {
-      let indices = collection.slots.enumerated().compactMap({ $1.source?.attributes?.url == baseUrl ? $0 : nil })
+      let indices = collection.slots.enumerated().compactMap({ $1.source?.album.url == baseUrl ? $0 : nil })
       for i in indices {
         collection.slots[i].playbackLinks = platformLinks
       }
@@ -121,7 +132,8 @@ enum LibraryAction: AppAction {
   
   case setCollectionName(name: String, collectionId: UUID)
   case setCollectionCurator(curator: String, collectionId: UUID)
-  case addSourceToSlot(source: AppleMusicAlbum, slotIndex: Int, collectionId: UUID)
+  case addSourceToSlot(source: FullAppleAlbum, slotIndex: Int, collectionId: UUID)
+  case addSongsToAlbum(songs: [Song], albumId: MusicItemID, collectionId: UUID)
   case removeSourceFromSlot(slotIndex: Int, collectionId: UUID)
   case setPlatformLinks(baseUrl: URL, platformLinks: OdesliResponse, collectionId: UUID)
   case invalidateShareLinks(collectionId: UUID)
@@ -144,7 +156,10 @@ enum LibraryAction: AppAction {
       return "\(type(of: self)): Setting user collection curator to \(curator)"
       
     case .addSourceToSlot(let source, let slotIndex, let collectionId):
-      return "\(type(of: self)): Adding AppleMusicAlbum \(source.id) to slot \(slotIndex) in collection \(collectionId)"
+      return "\(type(of: self)): Adding AppleMusicAlbum \(source.album.id) to slot \(slotIndex) in collection \(collectionId)"
+      
+    case .addSongsToAlbum(_, let albumId, let collectionId):
+      return "\(type(of: self)): Adding songs to Album with ID \(albumId) in collection \(collectionId)"
       
     case .removeSourceFromSlot(let slotIndex, let collectionId):
       return "\(type(of: self)): Removing source in slot \(slotIndex) from collection \(collectionId)"

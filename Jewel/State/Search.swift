@@ -7,8 +7,8 @@
 //
 
 import Foundation
-import HMV
+import MusicKit
 
 struct Search: Codable {
-  var results: [AppleMusicAlbum]?
+  var results: MusicItemCollection<Album>?
 }

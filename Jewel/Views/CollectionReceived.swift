@@ -54,11 +54,13 @@ struct CollectionReceivedButtons: View {
       }
       Spacer()
       Button {
-        self.app.update(action: NavigationAction.switchTab(to: .library))
-        SharedCollectionManager.expandShareableCollection(shareableCollection: self.app.state.library.cuedCollection!)
-        self.app.update(action: LibraryAction.uncueSharedCollection)
-        self.app.update(action: NavigationAction.setActiveCollectionId(collectionId: self.app.state.library.collections.first!.id))
-        self.app.update(action: NavigationAction.showCollection(true))
+        Task {
+          self.app.update(action: NavigationAction.switchTab(to: .library))
+          await SharedCollectionManager.expandShareableCollection(shareableCollection: self.app.state.library.cuedCollection!)
+          self.app.update(action: LibraryAction.uncueSharedCollection)
+          self.app.update(action: NavigationAction.setActiveCollectionId(collectionId: self.app.state.library.collections.first!.id))
+          self.app.update(action: NavigationAction.showCollection(true))
+        }
       } label: {
         Text("Add")
           .fontWeight(.bold)

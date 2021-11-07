@@ -60,8 +60,10 @@ struct RecommendationsButton: View {
             message: Text("Every three months we publish a Collection of new and classic albums for you to listen to."),
             primaryButton: .default(Text("Cancel")),
             secondaryButton: .default(Text("Add").fontWeight(.bold)) {
-              self.app.update(action: NavigationAction.showLibraryOptions(false))
-              SharedCollectionManager.loadRecommendations()
+              Task {
+                self.app.update(action: NavigationAction.showLibraryOptions(false))
+                await SharedCollectionManager.loadRecommendations()
+              }
         })
     }
   }

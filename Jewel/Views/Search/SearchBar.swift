@@ -22,9 +22,11 @@ struct SearchBar: View {
         text: $searchTerm,
         onCommit: {
           if self.app.state.navigation.showDebugMenu {
-            RecordStore.exampleSearch()
+//            RecordStore.exampleSearch()
           } else {
-            RecordStore.browse(for: self.searchTerm)
+            Task {
+              await RecordStore.search(for: self.searchTerm)
+            }
           }
       })
         .foregroundColor(.primary)

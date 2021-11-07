@@ -7,7 +7,6 @@
 //
 
 import SwiftUI
-import Kingfisher
 
 struct CollectionCard: View {
   
@@ -18,7 +17,7 @@ struct CollectionCard: View {
   private var collectionArtwork: [URL] {
     var artworkUrls = [URL]()
     for slot in collection.slots {
-      if let artworkUrl = slot.source?.attributes?.artwork.url(forWidth: 1000) {
+      if let artworkUrl = slot.source?.album.artwork?.url(width: 1000, height: 1000) {
         artworkUrls.append(artworkUrl)
       }
     }

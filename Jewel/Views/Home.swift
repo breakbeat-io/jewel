@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import MusicKit
 
 struct Home: View {
   

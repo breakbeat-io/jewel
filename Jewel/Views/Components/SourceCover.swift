@@ -7,7 +7,6 @@
 //
 
 import SwiftUI
-import Kingfisher
 
 struct SourceCover: View {
   
@@ -21,32 +20,34 @@ struct SourceCover: View {
         // macCatalyst uses a fixed sized sheet regardless of window size, so
         // need to fix the frame size for the Image to avoid it consuming the
         // whole window, and then center it.
-        #if targetEnvironment(macCatalyst)
+#if targetEnvironment(macCatalyst)
         HStack() {
           Spacer()
-          KFImage(self.sourceArtwork)
-            .placeholder {
-              RoundedRectangle(cornerRadius: 4)
-                .fill(Color(UIColor.secondarySystemBackground))
-            }
-            .resizable()
-            .aspectRatio(contentMode: .fit)
-            .frame(height: 300)
-            .cornerRadius(4)
-            .shadow(radius: 4)
-          Spacer()
-        }
-        #else
-        KFImage(self.sourceArtwork)
-          .placeholder {
-            RoundedRectangle(cornerRadius: 4)
-              .fill(Color(UIColor.secondarySystemBackground))
+          AsyncImage(url: self.sourceArtwork) { image in
+            image
+              .resizable()
+              .aspectRatio(contentMode: .fit)
+          } placeholder: {
+            ProgressView()
           }
-          .resizable()
-          .aspectRatio(contentMode: .fit)
+          .frame(height: 300)
           .cornerRadius(4)
           .shadow(radius: 4)
-        #endif
+          Spacer()
+        }
+#else
+        AsyncImage(url: self.sourceArtwork) { image in
+          image
+            .resizable()
+            .aspectRatio(contentMode: .fit)
+        } placeholder: {
+          ProgressView()
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .aspectRatio(1, contentMode: .fill)
+        .cornerRadius(4)
+        .shadow(radius: 4)
+#endif
       }
       Group {
         Text(sourceName)

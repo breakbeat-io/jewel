@@ -52,7 +52,7 @@ struct SettingsHome: View {
           if app.state.navigation.showDebugMenu {
             Section(header: Text("Debug")) {
               Button {
-                RecordStore.loadScreenshotCollection()
+//                RecordStore.loadScreenshotCollection()
                 self.app.update(action: NavigationAction.showSettings(false))
               } label: {
                 Text("Load Screenshot Data")
