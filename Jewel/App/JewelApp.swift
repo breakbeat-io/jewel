@@ -7,19 +7,26 @@
 //
 
 import SwiftUI
+import MusicKit
 
 @main
 struct JewelApp: App {
   
+  @State var appleMusicAuthorizationStatus = MusicAuthorization.currentStatus
+  
   var body: some Scene {
     WindowGroup {
-      Home()
-        .environmentObject(AppEnvironment.global)
-        .onOpenURL { url in
-          Task {
-            await SharedCollectionManager.cueReceivedCollection(receivedCollectionUrl: url)
+      if appleMusicAuthorizationStatus != .authorized {
+        AppleMusicAuthorization(appleMusicAuthorizationStatus: $appleMusicAuthorizationStatus)
+      } else {
+        Home()
+          .environmentObject(AppEnvironment.global)
+          .onOpenURL { url in
+            Task {
+              await SharedCollectionManager.cueReceivedCollection(receivedCollectionUrl: url)
+            }
           }
-        }
+      }
     }
   }
   

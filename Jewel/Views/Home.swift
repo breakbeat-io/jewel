@@ -54,12 +54,5 @@ struct Home: View {
         CollectionReceived()
       }
     }
-    .onAppear {
-      if MusicAuthorization.currentStatus != .authorized {
-        Task {
-          _ = await MusicAuthorization.request()
-        }
-      }
-    }
   }
 }

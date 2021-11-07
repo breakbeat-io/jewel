@@ -26,6 +26,7 @@
 		D24C80D124899D0C00EFACD8 /* Library.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24C80D024899D0C00EFACD8 /* Library.swift */; };
 		D2603DFF252083EA00B79311 /* JewelApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2603DFE252083EA00B79311 /* JewelApp.swift */; };
 		D262E881270C352C002C6BD8 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = D262E880270C34E8002C6BD8 /* Secrets.swift */; };
+		D26672FC2738765F007A5193 /* AppleMusicAuthorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26672FB2738765F007A5193 /* AppleMusicAuthorization.swift */; };
 		D2668D4924B1DBB0002922F4 /* screenshotSearch.json in Resources */ = {isa = PBXBuildFile; fileRef = D2668D4824B1DBB0002922F4 /* screenshotSearch.json */; };
 		D26A2C6727316A92008B6C42 /* AppStateV1.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26A2C6627316A92008B6C42 /* AppStateV1.swift */; };
 		D27FB80E24868AF60014C05D /* Odesli.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27FB80D24868AF60014C05D /* Odesli.swift */; };
@@ -90,6 +91,7 @@
 		D2603DFE252083EA00B79311 /* JewelApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JewelApp.swift; sourceTree = "<group>"; };
 		D262E880270C34E8002C6BD8 /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		D262E882270C3684002C6BD8 /* Secrets.README */ = {isa = PBXFileReference; lastKnownFileType = text; path = Secrets.README; sourceTree = "<group>"; };
+		D26672FB2738765F007A5193 /* AppleMusicAuthorization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMusicAuthorization.swift; sourceTree = "<group>"; };
 		D2668D4824B1DBB0002922F4 /* screenshotSearch.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = screenshotSearch.json; sourceTree = "<group>"; };
 		D26A2C6627316A92008B6C42 /* AppStateV1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStateV1.swift; sourceTree = "<group>"; };
 		D27FB80D24868AF60014C05D /* Odesli.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Odesli.swift; sourceTree = "<group>"; };
@@ -243,6 +245,7 @@
 			isa = PBXGroup;
 			children = (
 				D2C3A0A4249FFEFF00AA7266 /* Home.swift */,
+				D26672FB2738765F007A5193 /* AppleMusicAuthorization.swift */,
 				D23C398D248FD2DF00AD237E /* Welcome.swift */,
 				D29CB1C424A631EB0051BA96 /* CollectionReceived.swift */,
 				D2C3A0A824A01AEF00AA7266 /* NavBar.swift */,
@@ -452,6 +455,7 @@
 				D28AD1B5248BACB2009B584A /* PlaybackLink.swift in Sources */,
 				D288174A248BEABF00EB47C2 /* ShareSheet.swift in Sources */,
 				D2AB8467248113EB008B57F9 /* AppAction.swift in Sources */,
+				D26672FC2738765F007A5193 /* AppleMusicAuthorization.swift in Sources */,
 				D262E881270C352C002C6BD8 /* Secrets.swift in Sources */,
 				D29CB1C524A631EB0051BA96 /* CollectionReceived.swift in Sources */,
 				D2881748248BE81400EB47C2 /* SharedCollectionManager.swift in Sources */,
