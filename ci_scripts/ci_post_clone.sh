@@ -12,6 +12,6 @@ set -euo pipefail
 
 cat > $CI_WORKSPACE/Jewel/App/Secrets.swift << EOF
 struct Secrets {
-  static var firebaseAPIKey = $FIREBASE_API_KEY
+  static var firebaseAPIKey = "$FIREBASE_API_KEY"
 }
 EOF
