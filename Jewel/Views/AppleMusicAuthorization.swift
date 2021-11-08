@@ -17,19 +17,19 @@ struct AppleMusicAuthorization: View {
   
   var body: some View {
     VStack {
-      Image("primary-logo")
+      Image("applemusic-icon")
         .resizable()
         .frame(width: 75, height: 75)
         .cornerRadius(5)
         .shadow(radius: 3)
         .padding(.bottom)
-      authorizationStatement
+      Text(authorizationStatement)
         .font(.title2)
         .multilineTextAlignment(.center)
         .padding([.horizontal, .bottom])
       if appleMusicAuthorizationStatus == .notDetermined || appleMusicAuthorizationStatus == .denied {
         if let action = action {
-          action.text
+          Text(action.text)
             .foregroundColor(.secondary)
             .font(.title3)
             .multilineTextAlignment(.center)
@@ -41,22 +41,20 @@ struct AppleMusicAuthorization: View {
     }
   }
   
-  private var authorizationStatement: Text {
+  private var authorizationStatement: String {
     switch appleMusicAuthorizationStatus {
     case .restricted:
-      return Text("Listen Later cannot be used on this device because usage of ")
-      + Text(Image(systemName: "applelogo")) + Text(" Music is restricted.")
+      return "Listen Later cannot be used on this device because usage of Apple Music is restricted."
     default:
-      return Text("Listen Later uses the ")
-      + Text(Image(systemName: "applelogo")) + Text(" Music catalogue to browse and save music.")
+      return "Listen Later uses the Apple Music catalogue to browse and save music."
     }
   }
   
-  private var action: (text: Text, button: Button<Text>)? {
+  private var action: (text: String, button: Button<Text>)? {
     switch appleMusicAuthorizationStatus {
     case .notDetermined:
       return (
-        Text("Please authorize Listen Later to access Apple Music."),
+        "Please authorize access to Apple Music to continue.",
         Button {
           Task {
             appleMusicAuthorizationStatus = await MusicAuthorization.request()
@@ -67,7 +65,7 @@ struct AppleMusicAuthorization: View {
       )
     case .denied:
       return (
-        Text("Please allow Listen Later to access\n") + Text(Image(systemName: "applelogo")) + Text(" Music in Settings."),
+        "Please allow access to Apple Music in Settings.",
         Button {
           if let settingsURL = URL(string: UIApplication.openSettingsURLString) {
             openURL(settingsURL)

@@ -25,7 +25,7 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppleMusicUsageDescription</key>
-	<string>We use Apple Music to search for Albums</string>
+	<string>We use the Apple Music catalogue to browse and save music.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>fa-brands.otf</string>
