@@ -117,6 +117,7 @@
 		D2AC12112485A67000C52D9E /* Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Search.swift; sourceTree = "<group>"; };
 		D2B4FD90248456B20028D7A4 /* CollectionOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionOptions.swift; sourceTree = "<group>"; };
 		D2B4FD94248458300028D7A4 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		D2BFE4A92739C92C00F15372 /* ci_post_clone.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = ci_post_clone.sh; sourceTree = "<group>"; };
 		D2C3A0A4249FFEFF00AA7266 /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
 		D2C3A0A624A01ADE00AA7266 /* OnRotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnRotation.swift; sourceTree = "<group>"; };
 		D2C3A0A824A01AEF00AA7266 /* NavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavBar.swift; sourceTree = "<group>"; };
@@ -149,6 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				D221557A2481114A00A1F04A /* Jewel */,
+				D2BFE4A82739C8E900F15372 /* ci_scripts */,
 				D22155792481114A00A1F04A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -301,6 +303,14 @@
 				D2A449CB249BAECE006E0A12 /* LibraryOptions.swift */,
 			);
 			path = Options;
+			sourceTree = "<group>";
+		};
+		D2BFE4A82739C8E900F15372 /* ci_scripts */ = {
+			isa = PBXGroup;
+			children = (
+				D2BFE4A92739C92C00F15372 /* ci_post_clone.sh */,
+			);
+			path = ci_scripts;
 			sourceTree = "<group>";
 		};
 		D2DB0FB824A777D8006A5835 /* Screenshots */ = {
