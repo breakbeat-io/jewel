@@ -8,6 +8,7 @@
 
 import Foundation
 import os.log
+import MusicKit
 
 struct AppState: Codable {
   
@@ -81,7 +82,10 @@ extension AppState {
       for slotIndex in 0..<AppEnvironment.global.state.library.onRotation.slots.count {
         if let appleMusicAlbumId = savedCollection[String(slotIndex)] {
           Task {
-            await RecordStore.purchase(album: appleMusicAlbumId as! String, forSlot: slotIndex, inCollection: AppEnvironment.global.state.library.onRotation.id)
+            async let album = RecordStore.getAlbum(withId: MusicItemID(rawValue: appleMusicAlbumId as! String))
+            if let album = await album {
+              await AppEnvironment.global.update(action: LibraryAction.addSourceToSlot(source: album, slotIndex: slotIndex, collectionId: AppEnvironment.global.state.library.onRotation.id))
+            }
           }
         }
       }
@@ -112,7 +116,10 @@ extension AppState {
         
         for (slotIndex, slot) in v1State.library.onRotation.slots.enumerated() {
           if let source = slot.source {
-              await RecordStore.purchase(album: source.id.rawValue, forSlot: slotIndex, inCollection: AppEnvironment.global.state.library.onRotation.id)
+            async let album = RecordStore.getAlbum(withId: source.id)
+            if let album = await album {
+              await AppEnvironment.global.update(action: LibraryAction.addSourceToSlot(source: album, slotIndex: slotIndex, collectionId: AppEnvironment.global.state.library.onRotation.id))
+            }
           }
         }
         
@@ -122,17 +129,20 @@ extension AppState {
           await AppEnvironment.global.update(action: LibraryAction.addCollection(collection: newCollection))
           for (slotIndex, slot) in oldCollection.slots.enumerated() {
             if let source = slot.source {
-                await RecordStore.purchase(album: source.id.rawValue, forSlot: slotIndex, inCollection: newCollection.id)
+              async let album = RecordStore.getAlbum(withId: source.id)
+              if let album = await album {
+                await AppEnvironment.global.update(action: LibraryAction.addSourceToSlot(source: album, slotIndex: slotIndex, collectionId: newCollection.id))
+              }
             }
           }
         }
         
         os_log("💎 State Migration > v1 Migration complete")
-      }      
+      }
     } catch {
       os_log("💎 State Migration > Error decoding v1 saved state: %s", error.localizedDescription)
     }
-
+    
     // By now, I've either migrated to v2 or failed, but in either case there is nothing I can do with the original state, so let's remove it so migration isn't attempted again.
     os_log("💎 State Migration > Removing v1 saved state")
     UserDefaults.standard.removeObject(forKey: "jewelState")

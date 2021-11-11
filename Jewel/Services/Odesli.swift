@@ -48,6 +48,8 @@ enum OdesliApiProvider: String, Codable, CaseIterable {
   case napster
   case yandex
   case spinrilla
+  case audius
+  case bandcamp
 }
 
 enum OdesliPlatform: String, Codable, CaseIterable {
@@ -67,6 +69,8 @@ enum OdesliPlatform: String, Codable, CaseIterable {
   case napster
   case yandex
   case spinrilla
+  case audius
+  case bandcamp
   
   var friendlyName: String {
     switch self {
@@ -102,6 +106,10 @@ enum OdesliPlatform: String, Codable, CaseIterable {
       return "Yandex"
     case .spinrilla:
       return "Spinrilla"
+    case .audius:
+      return "Audius"
+    case .bandcamp:
+      return "Bandcamp"
     }
   }
   
@@ -124,7 +132,7 @@ enum OdesliPlatform: String, Codable, CaseIterable {
     case .pandora:
       return nil
     case .deezer:
-      return nil
+      return "\u{e077}"
     case .tidal:
       return nil
     case .amazonStore:
@@ -139,6 +147,10 @@ enum OdesliPlatform: String, Codable, CaseIterable {
       return "\u{f413}"
     case .spinrilla:
       return nil
+    case .audius:
+      return nil
+    case .bandcamp:
+      return "\u{f2d5}"
     }
   }
   

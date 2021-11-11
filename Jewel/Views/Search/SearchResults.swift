@@ -46,10 +46,13 @@ struct SearchResults: View {
             Spacer()
             Button {
               Task {
-                await RecordStore.purchase(album: album.id.rawValue, forSlot: self.slotIndex, inCollection: self.collectionId)
+                async let album = RecordStore.getAlbum(withId: album.id)
+                if let album = await album {
+                  app.update(action: LibraryAction.addSourceToSlot(source: album, slotIndex: slotIndex, collectionId: collectionId))
+                }
               }
-              self.app.update(action: SearchAction.removeSearchResults)
-              self.app.update(action: NavigationAction.showSearch(false))
+              app.update(action: SearchAction.removeSearchResults)
+              app.update(action: NavigationAction.showSearch(false))
             } label: {
               Text(Image(systemName: "plus"))
                 .padding()

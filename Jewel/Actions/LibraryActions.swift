@@ -113,11 +113,11 @@ func updateLibrary(library: Library, action: LibraryAction) -> Library {
   case .uncueSharedCollection:
     newLibrary.cuedCollection = nil
     
-  case let .setPlatformLinks(baseUrl, platformLinks, collectionId):
+  case let .setPlaybackLinks(baseUrl, playbackLinks, collectionId):
     if var collection = extractCollection(collectionId: collectionId) {
       let indices = collection.slots.enumerated().compactMap({ $1.source?.album.url == baseUrl ? $0 : nil })
       for i in indices {
-        collection.slots[i].playbackLinks = platformLinks
+        collection.slots[i].playbackLinks = playbackLinks
       }
       commitCollection(collection: collection)
     }
@@ -132,10 +132,10 @@ enum LibraryAction: AppAction {
   
   case setCollectionName(name: String, collectionId: UUID)
   case setCollectionCurator(curator: String, collectionId: UUID)
-  case addSourceToSlot(source: FullAppleAlbum, slotIndex: Int, collectionId: UUID)
+  case addSourceToSlot(source: Source, slotIndex: Int, collectionId: UUID)
   case addSongsToAlbum(songs: [Song], albumId: MusicItemID, collectionId: UUID)
   case removeSourceFromSlot(slotIndex: Int, collectionId: UUID)
-  case setPlatformLinks(baseUrl: URL, platformLinks: OdesliResponse, collectionId: UUID)
+  case setPlaybackLinks(baseUrl: URL, playbackLinks: OdesliResponse, collectionId: UUID)
   case invalidateShareLinks(collectionId: UUID)
   case setShareLinks(shareLinkLong: URL, shareLinkShort: URL, collectionId: UUID)
   case saveOnRotation(collection: Collection)
@@ -164,7 +164,7 @@ enum LibraryAction: AppAction {
     case .removeSourceFromSlot(let slotIndex, let collectionId):
       return "\(type(of: self)): Removing source in slot \(slotIndex) from collection \(collectionId)"
       
-    case .setPlatformLinks(let baseUrl, _, let collectionId):
+    case .setPlaybackLinks(let baseUrl, _, let collectionId):
       return "\(type(of: self)): Setting platform links for any source with \(baseUrl) in \(collectionId)"
       
     case .invalidateShareLinks(let collectionId):

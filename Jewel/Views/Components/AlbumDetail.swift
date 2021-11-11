@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import MusicKit
 
 struct AlbumDetail: View {
   
@@ -46,18 +47,23 @@ struct AlbumDetail: View {
           },
         trailing:
           self.collection.type == .userCollection ?
-            Button {
-              self.app.update(action: LibraryAction.removeSourceFromSlot(slotIndex: app.state.navigation.activeSlotIndex, collectionId: app.state.navigation.activeCollectionId!))
-              self.app.update(action: NavigationAction.showSourceDetail(false))
-            } label: {
-              Text(Image(systemName: "eject"))
-                .font(.body)
-                .foregroundColor(.red)
-            }
-          : nil
+        Button {
+          self.app.update(action: LibraryAction.removeSourceFromSlot(slotIndex: app.state.navigation.activeSlotIndex, collectionId: app.state.navigation.activeCollectionId!))
+          self.app.update(action: NavigationAction.showSourceDetail(false))
+        } label: {
+          Text(Image(systemName: "eject"))
+            .font(.body)
+            .foregroundColor(.red)
+        }
+        : nil
       )
     }
     .navigationViewStyle(StackNavigationViewStyle())
+    .onAppear{
+      if slot.source != nil {
+        completeSource(source: slot.source!, inSlot: slot, inCollection: collection.id)
+      }
+    }
   }
   
   struct Compact: View {
@@ -74,9 +80,7 @@ struct AlbumDetail: View {
                         playbackLinks: self.slot.playbackLinks)
             .padding(.bottom)
           IfLet(slot.source?.songs) { songs in
-            SongList(songs: songs,
-                      sourceArtist: album.artistName
-            )
+            SongList(songs: songs, sourceArtist: album.artistName)
           }
         }
       }
@@ -101,9 +105,7 @@ struct AlbumDetail: View {
           }
           VStack {
             IfLet(slot.source?.songs) { songs in
-              SongList(songs: songs,
-                        sourceArtist: album.artistName
-              )
+              SongList(songs: songs, sourceArtist: album.artistName)
             }
             Spacer()
           }
@@ -113,4 +115,25 @@ struct AlbumDetail: View {
     }
   }
   
+  private func completeSource(source: Source, inSlot slotId: Slot, inCollection collectionId: UUID) {
+    if slot.source?.songs == nil  {
+      Task {
+        async let songs = RecordStore.getSongs(for: source.album)
+        if let songs = await songs {
+          AppEnvironment.global.update(action: LibraryAction.addSongsToAlbum(songs: songs, albumId: source.album.id, collectionId: collectionId))
+        }
+      }
+    }
+    
+    if slot.playbackLinks == nil {
+      if let baseUrl = source.album.url {
+        Task {
+          async let playbackLinks = RecordStore.getPlaybackLinks(for: baseUrl)
+          if let playbackLinks = await playbackLinks {
+            AppEnvironment.global.update(action: LibraryAction.setPlaybackLinks(baseUrl: baseUrl, playbackLinks: playbackLinks, collectionId: collectionId))
+          }
+        }
+      }
+    }
+  }
 }

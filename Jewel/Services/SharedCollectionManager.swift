@@ -8,6 +8,7 @@
 
 import Foundation
 import os.log
+import MusicKit
 
 class SharedCollectionManager {
   
@@ -160,7 +161,10 @@ class SharedCollectionManager {
     
     for (index, slot) in shareableCollection.collection.enumerated() {
       if slot?.sourceProvider == SourceProvider.appleMusicAlbum {
-        await RecordStore.purchase(album: slot!.sourceRef, forSlot: index, inCollection: collection.id)
+        async let album = RecordStore.getAlbum(withId: MusicItemID(rawValue: slot!.sourceRef))
+        if let album = await album {
+          await AppEnvironment.global.update(action: LibraryAction.addSourceToSlot(source: album, slotIndex: index, collectionId: collection.id))
+        }
       }
     }
   }

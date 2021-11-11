@@ -25,7 +25,10 @@ struct SearchBar: View {
 //            RecordStore.exampleSearch()
           } else {
             Task {
-              await RecordStore.search(for: self.searchTerm)
+              async let searchResults = RecordStore.search(for: self.searchTerm)
+              if let searchResults = await searchResults {
+                app.update(action: SearchAction.populateSearchResults(results: searchResults))
+              }
             }
           }
       })

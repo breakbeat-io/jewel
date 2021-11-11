@@ -9,7 +9,7 @@
 import Foundation
 import MusicKit
 
-struct FullAppleAlbum: Codable {
+struct Source: Codable {
   var album: Album
   var songs: [Song]?
 }
