@@ -24,29 +24,32 @@ struct PlaybackLinks: View {
     }
   }
   
-  private var showAlternativeLinks: Binding<Bool> { Binding (
-    get: { self.app.state.navigation.showAlternativeLinks },
-    set: { if self.app.state.navigation.showAlternativeLinks { self.app.update(action: NavigationAction.showAlternativeLinks($0)) } }
+  private var showPlaybackLinks: Binding<Bool> { Binding (
+    get: { self.app.state.navigation.showPlaybackLinks },
+    set: { if self.app.state.navigation.showPlaybackLinks { self.app.update(action: NavigationAction.showPlaybackLinks($0)) } }
   )}
   
   var body: some View {
     IfLet(playbackLink.url) { url in
       ZStack {
         PlaybackLink(url: url, platformName: self.playbackLink.name)
-        IfLet(self.playbackLinks) { playbackLinks in
-          HStack {
-            Spacer()
+        HStack {
+          Spacer()
+          if let playbackLinks = playbackLinks {
             Button {
-              self.app.update(action: NavigationAction.showAlternativeLinks(true))
+              app.update(action: NavigationAction.showPlaybackLinks(true))
             } label: {
               Text(Image(systemName: "link"))
                 .foregroundColor(.secondary)
             }
-            .sheet(isPresented: self.showAlternativeLinks) {
+            .sheet(isPresented: showPlaybackLinks) {
               AlternativePlaybackLinks(playbackLinks: playbackLinks)
                 .environmentObject(self.app)
             }
             .padding()
+          } else if app.state.navigation.gettingPlaybackLinks {
+            ProgressView()
+              .padding()
           }
         }
       }

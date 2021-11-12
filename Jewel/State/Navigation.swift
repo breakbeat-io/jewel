@@ -34,7 +34,11 @@ struct Navigation {
   var showLoadRecommendationsAlert: Bool = false
   
   var showSourceDetail: Bool = false
-  var showAlternativeLinks: Bool = false
+  var showPlaybackLinks: Bool = false
+  
+  var gettingSongs: Bool = false
+  var gettingPlaybackLinks: Bool = false
+  var gettingSearchResults: Bool = false
   
   var showCollection: Bool = false
   var showCollectionOptions: Bool = false

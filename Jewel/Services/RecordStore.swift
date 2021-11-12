@@ -10,9 +10,13 @@ import Foundation
 import os.log
 import MusicKit
 
+enum RecordStoreError: Error {
+  case NotFound(MusicItemID)
+}
+
 class RecordStore {
   
-  static func search(for searchTerm: String) async -> MusicItemCollection<Album>? {
+  static func search(for searchTerm: String) async throws -> MusicItemCollection<Album> {
     os_log("💎 Record Store > Searching for '\(searchTerm)'")
     do {
       var searchRequest = MusicCatalogSearchRequest(term: searchTerm, types: [Album.self])
@@ -20,11 +24,11 @@ class RecordStore {
       return try await searchRequest.response().albums
     } catch {
       os_log("💎 Record Store > Search error: %s", String(describing: error))
-      return nil
+      throw error
     }
   }
   
-  static func getAlbum(withId appleMusicAlbumId: MusicItemID) async -> Source? {
+  static func getAlbum(withId appleMusicAlbumId: MusicItemID) async throws -> Source {
     os_log("💎 Record Store > Getting Album with ID \(appleMusicAlbumId.rawValue)")
     do {
       let resourceRequest = MusicCatalogResourceRequest<Album>(matching: \.id, equalTo: appleMusicAlbumId)
@@ -32,18 +36,18 @@ class RecordStore {
       
       guard let album = resourceResponse.items.first else {
         os_log("💎 Record Store > Get album error: Unable to find Album with ID \(appleMusicAlbumId)")
-        return nil
+        throw RecordStoreError.NotFound(appleMusicAlbumId)
       }
       
       return Source(album: album)
       
     } catch {
       os_log("💎 Record Store > Get album error: %s", String(describing: error))
-      return nil
+      throw error
     }
   }
   
-  static func getSongs(for album: Album) async -> [Song]? {
+  static func getSongs(for album: Album) async throws -> [Song] {
     os_log("💎 Record Store > Getting Songs for \(album.id) '\(album.title)'")
     do {
       var songs = [Song]()
@@ -62,12 +66,12 @@ class RecordStore {
       return songs.sorted{ $0.trackNumber ?? 0 < $1.trackNumber ?? 0}
       
     } catch {
-      os_log("💎 Record Store > Song error: %s", String(describing: error))
-      return nil
+      os_log("💎 Record Store > Getting Songs error: %s", String(describing: error))
+      throw error
     }
   }
   
-  static func getPlaybackLinks(for baseUrl: URL) async -> OdesliResponse? {
+  static func getPlaybackLinks(for baseUrl: URL) async throws -> OdesliResponse {
     os_log("💎 Playback Links > Populating links for %s", baseUrl.absoluteString)
     do {
       let (data, response) = try await URLSession.shared.data(from: URL(string: "https://api.song.link/v1-alpha.1/links?url=\(baseUrl.absoluteString)")!) as! (Data, HTTPURLResponse)
@@ -81,7 +85,7 @@ class RecordStore {
       
     } catch {
       os_log("💎 Playback Links > Error getting playbackLinks: %s", error.localizedDescription)
-      return nil
+      throw error
     }
   }
 }

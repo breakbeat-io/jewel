@@ -45,8 +45,17 @@ func updateNavigation(navigation: Navigation, action: NavigationAction) -> Navig
   case let .showSourceDetail(showSourceDetailState):
     newNavigation.showSourceDetail = showSourceDetailState
   
-  case let .showAlternativeLinks(showAlternativeLinksState):
-    newNavigation.showAlternativeLinks = showAlternativeLinksState
+  case let .showPlaybackLinks(showPlaybackLinksState):
+    newNavigation.showPlaybackLinks = showPlaybackLinksState
+  
+  case let .gettingSongs(gettingSongsState):
+    newNavigation.gettingSongs = gettingSongsState
+    
+  case let .gettingPlaybackLinks(gettingPlaybackLinksState):
+    newNavigation.gettingPlaybackLinks = gettingPlaybackLinksState
+    
+  case let .gettingSearchResults(gettingSearchResultsState):
+    newNavigation.gettingSearchResults = gettingSearchResultsState
   
   case let .shareLinkError(shareLinkErrorState):
     newNavigation.shareLinkError = shareLinkErrorState
@@ -84,7 +93,10 @@ enum NavigationAction: AppAction {
   case showCollectionOptions(_: Bool)
   case showLibraryOptions(_: Bool)
   case showSourceDetail(_: Bool)
-  case showAlternativeLinks(_: Bool)
+  case showPlaybackLinks(_: Bool)
+  case gettingSongs(_: Bool)
+  case gettingPlaybackLinks(_: Bool)
+  case gettingSearchResults(_: Bool)
   case shareLinkError(_: Bool)
   case showLoadRecommendationsAlert(_: Bool)
   case setCollectionViewHeight(viewHeight: CGFloat)
@@ -114,8 +126,14 @@ enum NavigationAction: AppAction {
       return "\(type(of: self)): \(showing ? "Showing" : "Closing") library options"
     case .showSourceDetail(let showing):
       return "\(type(of: self)): \(showing ? "Showing" : "Closing") source detail"
-    case .showAlternativeLinks(let showing):
+    case .showPlaybackLinks(let showing):
       return "\(type(of: self)): \(showing ? "Showing" : "Closing") alternative links"
+    case .gettingSongs(let showing):
+      return "\(type(of: self)): \(showing ? "Showing" : "Hiding") songs spinner"
+    case .gettingPlaybackLinks(let showing):
+      return "\(type(of: self)): \(showing ? "Showing" : "Hiding") playback links spinner"
+    case .gettingSearchResults(let showing):
+      return "\(type(of: self)): \(showing ? "Showing" : "Closing") search spinner"
     case .shareLinkError(let error):
       return "\(type(of: self)): \(error ? "Setting a" : "Clearing any") share link error"
     case .showLoadRecommendationsAlert(let showing):

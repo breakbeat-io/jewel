@@ -21,7 +21,7 @@ struct SearchResults: View {
   }
   
   var body: some View {
-    IfLet(searchResults) { appleMusicAlbums in
+    if let appleMusicAlbums = searchResults {
       List(0..<appleMusicAlbums.count, id: \.self) { i in
         IfLet(appleMusicAlbums[i]) { album in
           HStack {
@@ -47,9 +47,7 @@ struct SearchResults: View {
             Button {
               Task {
                 async let album = RecordStore.getAlbum(withId: album.id)
-                if let album = await album {
-                  app.update(action: LibraryAction.addSourceToSlot(source: album, slotIndex: slotIndex, collectionId: collectionId))
-                }
+                try? await app.update(action: LibraryAction.addSourceToSlot(source: album, slotIndex: slotIndex, collectionId: collectionId))
               }
               app.update(action: SearchAction.removeSearchResults)
               app.update(action: NavigationAction.showSearch(false))
@@ -60,6 +58,10 @@ struct SearchResults: View {
             }
           }
         }
+      }
+    } else {
+      if app.state.navigation.gettingSearchResults {
+        ProgressView()
       }
     }
   }

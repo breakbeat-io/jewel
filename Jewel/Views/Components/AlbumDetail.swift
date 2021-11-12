@@ -68,6 +68,8 @@ struct AlbumDetail: View {
   
   struct Compact: View {
     
+    @EnvironmentObject var app: AppEnvironment
+    
     let slot: Slot
     
     var body: some View {
@@ -79,8 +81,10 @@ struct AlbumDetail: View {
           PlaybackLinks(baseUrl: album.url!,
                         playbackLinks: self.slot.playbackLinks)
             .padding(.bottom)
-          IfLet(slot.source?.songs) { songs in
+          if let songs = slot.source?.songs {
             SongList(songs: songs, sourceArtist: album.artistName)
+          } else if app.state.navigation.gettingSongs {
+            ProgressView()
           }
         }
       }
@@ -89,6 +93,8 @@ struct AlbumDetail: View {
   }
   
   struct Regular: View {
+    
+    @EnvironmentObject var app: AppEnvironment
     
     let slot: Slot
     
@@ -104,8 +110,10 @@ struct AlbumDetail: View {
               .padding(.bottom)
           }
           VStack {
-            IfLet(slot.source?.songs) { songs in
+            if let songs = slot.source?.songs {
               SongList(songs: songs, sourceArtist: album.artistName)
+            } else if app.state.navigation.gettingSongs {
+              ProgressView()
             }
             Spacer()
           }
@@ -118,20 +126,20 @@ struct AlbumDetail: View {
   private func completeSource(source: Source, inSlot slotId: Slot, inCollection collectionId: UUID) {
     if slot.source?.songs == nil  {
       Task {
+        app.update(action: NavigationAction.gettingSongs(true))
         async let songs = RecordStore.getSongs(for: source.album)
-        if let songs = await songs {
-          AppEnvironment.global.update(action: LibraryAction.addSongsToAlbum(songs: songs, albumId: source.album.id, collectionId: collectionId))
-        }
+        try? await app.update(action: LibraryAction.addSongsToAlbum(songs: songs, albumId: source.album.id, collectionId: collectionId))
+        app.update(action: NavigationAction.gettingSongs(false))
       }
     }
     
     if slot.playbackLinks == nil {
       if let baseUrl = source.album.url {
         Task {
+          app.update(action: NavigationAction.gettingPlaybackLinks(true))
           async let playbackLinks = RecordStore.getPlaybackLinks(for: baseUrl)
-          if let playbackLinks = await playbackLinks {
-            AppEnvironment.global.update(action: LibraryAction.setPlaybackLinks(baseUrl: baseUrl, playbackLinks: playbackLinks, collectionId: collectionId))
-          }
+          try? await app.update(action: LibraryAction.setPlaybackLinks(baseUrl: baseUrl, playbackLinks: playbackLinks, collectionId: collectionId))
+          app.update(action: NavigationAction.gettingPlaybackLinks(false))
         }
       }
     }

@@ -55,7 +55,7 @@ struct AlternativePlaybackLinks: View {
       .navigationBarItems(
         leading:
           Button {
-            self.app.update(action: NavigationAction.showAlternativeLinks(false))
+            self.app.update(action: NavigationAction.showPlaybackLinks(false))
           } label: {
             Text("Close")
               .font(.body)

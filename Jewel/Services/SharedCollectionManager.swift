@@ -162,9 +162,7 @@ class SharedCollectionManager {
     for (index, slot) in shareableCollection.collection.enumerated() {
       if slot?.sourceProvider == SourceProvider.appleMusicAlbum {
         async let album = RecordStore.getAlbum(withId: MusicItemID(rawValue: slot!.sourceRef))
-        if let album = await album {
-          await AppEnvironment.global.update(action: LibraryAction.addSourceToSlot(source: album, slotIndex: index, collectionId: collection.id))
-        }
+        try? await AppEnvironment.global.update(action: LibraryAction.addSourceToSlot(source: album, slotIndex: index, collectionId: collection.id))
       }
     }
   }
