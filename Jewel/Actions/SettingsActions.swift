@@ -33,7 +33,7 @@ func updateSettings(settings: Settings, action: SettingsAction) -> Settings {
 
 enum SettingsAction: AppAction {
   
-  case firstTimeRun(_: Bool)
+  case firstTimeRun(Bool)
   case setPreferredPlatform(platform: Int)
   case reset
   
