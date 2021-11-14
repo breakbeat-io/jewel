@@ -47,7 +47,7 @@ struct SearchResults: View {
             Button {
               Task {
                 async let album = RecordStore.getAlbum(withId: album.id)
-                try? await app.update(action: LibraryAction.addSourceToSlot(source: album, slotIndex: slotIndex, collectionId: collectionId))
+                try? await app.update(action: LibraryAction.addAlbumToSlot(album: album, slotIndex: slotIndex, collectionId: collectionId))
               }
               app.update(action: SearchAction.removeSearchResults)
               app.update(action: NavigationAction.showSearch(false))

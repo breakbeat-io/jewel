@@ -20,7 +20,7 @@ struct CollectionOptions: View {
     }
   }
   private var collectionEmpty: Bool {
-    collection?.slots.filter( { $0.source != nil }).count == 0
+    collection?.slots.filter( { $0.album != nil }).count == 0
   }
   
   @State private var newCollectionName: String = ""

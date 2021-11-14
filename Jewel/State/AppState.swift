@@ -84,7 +84,7 @@ extension AppState {
           Task {
             do {
               async let album = RecordStore.getAlbum(withId: MusicItemID(rawValue: appleMusicAlbumId as! String))
-              try await AppEnvironment.global.update(action: LibraryAction.addSourceToSlot(source: album, slotIndex: slotIndex, collectionId: AppEnvironment.global.state.library.onRotation.id))
+              try await AppEnvironment.global.update(action: LibraryAction.addAlbumToSlot(album: album, slotIndex: slotIndex, collectionId: AppEnvironment.global.state.library.onRotation.id))
             } catch {
               os_log("💎 State Migration > Unable to migrate v0 Saved Collection: \(error.localizedDescription)")
             }
@@ -119,7 +119,7 @@ extension AppState {
         for (slotIndex, slot) in v1State.library.onRotation.slots.enumerated() {
           if let source = slot.source {
             async let album = RecordStore.getAlbum(withId: source.id)
-            try await AppEnvironment.global.update(action: LibraryAction.addSourceToSlot(source: album, slotIndex: slotIndex, collectionId: AppEnvironment.global.state.library.onRotation.id))
+            try await AppEnvironment.global.update(action: LibraryAction.addAlbumToSlot(album: album, slotIndex: slotIndex, collectionId: AppEnvironment.global.state.library.onRotation.id))
           }
         }
         
@@ -130,7 +130,7 @@ extension AppState {
           for (slotIndex, slot) in oldCollection.slots.enumerated() {
             if let source = slot.source {
               async let album = RecordStore.getAlbum(withId: source.id)
-              try await AppEnvironment.global.update(action: LibraryAction.addSourceToSlot(source: album, slotIndex: slotIndex, collectionId: newCollection.id))
+              try await AppEnvironment.global.update(action: LibraryAction.addAlbumToSlot(album: album, slotIndex: slotIndex, collectionId: newCollection.id))
             }
           }
         }

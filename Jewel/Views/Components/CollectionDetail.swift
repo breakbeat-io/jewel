@@ -30,7 +30,7 @@ struct CollectionDetail: View {
     collection.type == .userCollection ? true : false
   }
   private var collectionEmpty: Bool {
-    collection.slots.filter( { $0.source != nil }).count == 0
+    collection.slots.filter( { $0.album != nil }).count == 0
   }
   
   var body: some View {
@@ -53,8 +53,8 @@ struct CollectionDetail: View {
           .frame(minWidth: 0, maxWidth: .infinity, alignment: .topLeading)
           ForEach(self.slots.indices, id: \.self) { slotIndex in
             Group {
-              if self.slots[slotIndex].source != nil {
-                IfLet(self.slots[slotIndex].source?.album) { album in
+              if self.slots[slotIndex].album != nil {
+                IfLet(self.slots[slotIndex].album) { album in
                   Button {
                     self.app.update(action: NavigationAction.setActiveSlotIndex(slotIndex: slotIndex))
                     self.app.update(action: NavigationAction.showSourceDetail(true))
