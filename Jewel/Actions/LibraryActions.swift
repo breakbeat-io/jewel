@@ -148,10 +148,10 @@ enum LibraryAction: AppAction {
       return "\(type(of: self)): Adding AppleMusicAlbum \(album.id) to slot \(slotIndex) in collection \(collectionId)"
       
     case .removeAlbumFromSlot(let slotIndex, let collectionId):
-      return "\(type(of: self)): Removing source in slot \(slotIndex) from collection \(collectionId)"
+      return "\(type(of: self)): Removing album in slot \(slotIndex) from collection \(collectionId)"
       
     case .setPlaybackLinks(let baseUrl, _, let collectionId):
-      return "\(type(of: self)): Setting platform links for any source with \(baseUrl) in \(collectionId)"
+      return "\(type(of: self)): Setting platform links for any album with \(baseUrl) in \(collectionId)"
       
     case .invalidateShareLinks(let collectionId):
       return "\(type(of: self)): Invalidating share links for \(collectionId)"
