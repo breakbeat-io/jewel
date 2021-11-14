@@ -46,8 +46,8 @@ class SharedCollectionManager {
     var shareableSlots = [ShareableSlot?]()
     
     for slot in collection.slots {
-      if let source = slot.source {
-        let slot = ShareableSlot(sourceProvider: SourceProvider.appleMusicAlbum, sourceRef: source.album.id.rawValue)
+      if let album = slot.album {
+        let slot = ShareableSlot(sourceProvider: SourceProvider.appleMusicAlbum, sourceRef: album.id.rawValue)
         shareableSlots.append(slot)
       } else {
         shareableSlots.append(nil)
@@ -162,7 +162,7 @@ class SharedCollectionManager {
     for (index, slot) in shareableCollection.collection.enumerated() {
       if slot?.sourceProvider == SourceProvider.appleMusicAlbum {
         async let album = RecordStore.getAlbum(withId: MusicItemID(rawValue: slot!.sourceRef))
-        try? await AppEnvironment.global.update(action: LibraryAction.addSourceToSlot(source: album, slotIndex: index, collectionId: collection.id))
+        try? await AppEnvironment.global.update(action: LibraryAction.addAlbumToSlot(album: album, slotIndex: index, collectionId: collection.id))
       }
     }
   }

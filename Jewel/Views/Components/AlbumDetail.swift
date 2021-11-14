@@ -48,7 +48,7 @@ struct AlbumDetail: View {
         trailing:
           self.collection.type == .userCollection ?
         Button {
-          self.app.update(action: LibraryAction.removeSourceFromSlot(slotIndex: app.state.navigation.activeSlotIndex, collectionId: app.state.navigation.activeCollectionId!))
+          self.app.update(action: LibraryAction.removeAlbumFromSlot(slotIndex: app.state.navigation.activeSlotIndex, collectionId: app.state.navigation.activeCollectionId!))
           self.app.update(action: NavigationAction.showSourceDetail(false))
         } label: {
           Text(Image(systemName: "eject"))
@@ -59,11 +59,6 @@ struct AlbumDetail: View {
       )
     }
     .navigationViewStyle(StackNavigationViewStyle())
-    .onAppear{
-      if slot.source != nil {
-        completeSource(source: slot.source!, inSlot: slot, inCollection: collection.id)
-      }
-    }
   }
   
   struct Compact: View {
@@ -74,18 +69,14 @@ struct AlbumDetail: View {
     
     var body: some View {
       VStack {
-        IfLet(slot.source?.album) { album in
+        IfLet(slot.album) { album in
           SourceCover(sourceName: album.title,
                       sourceArtist: album.artistName,
                       sourceArtwork: album.artwork?.url(width: 1000, height: 1000))
           PlaybackLinks(baseUrl: album.url!,
                         playbackLinks: self.slot.playbackLinks)
             .padding(.bottom)
-          if let songs = slot.source?.songs {
-            SongList(songs: songs, sourceArtist: album.artistName)
-          } else if app.state.navigation.gettingSongs {
-            ProgressView()
-          }
+//          SongList(songs: songs, sourceArtist: album.artistName)
         }
       }
       .padding()
@@ -100,7 +91,7 @@ struct AlbumDetail: View {
     
     var body: some View {
       HStack(alignment: .top) {
-        IfLet(slot.source?.album) { album in
+        IfLet(slot.album) { album in
           VStack {
             SourceCover(sourceName: album.title,
                         sourceArtist: album.artistName,
@@ -110,11 +101,7 @@ struct AlbumDetail: View {
               .padding(.bottom)
           }
           VStack {
-            if let songs = slot.source?.songs {
-              SongList(songs: songs, sourceArtist: album.artistName)
-            } else if app.state.navigation.gettingSongs {
-              ProgressView()
-            }
+//            SongList(songs: songs, sourceArtist: album.artistName)
             Spacer()
           }
         }
@@ -123,25 +110,25 @@ struct AlbumDetail: View {
     }
   }
   
-  private func completeSource(source: Source, inSlot slotId: Slot, inCollection collectionId: UUID) {
-    if slot.source?.songs == nil  {
-      Task {
-        app.update(action: NavigationAction.gettingSongs(true))
-        async let songs = RecordStore.getSongs(for: source.album)
-        try? await app.update(action: LibraryAction.addSongsToAlbum(songs: songs, albumId: source.album.id, collectionId: collectionId))
-        app.update(action: NavigationAction.gettingSongs(false))
-      }
-    }
-    
-    if slot.playbackLinks == nil {
-      if let baseUrl = source.album.url {
-        Task {
-          app.update(action: NavigationAction.gettingPlaybackLinks(true))
-          async let playbackLinks = RecordStore.getPlaybackLinks(for: baseUrl)
-          try? await app.update(action: LibraryAction.setPlaybackLinks(baseUrl: baseUrl, playbackLinks: playbackLinks, collectionId: collectionId))
-          app.update(action: NavigationAction.gettingPlaybackLinks(false))
-        }
-      }
-    }
-  }
+//  private func completeSource(album: Album, inSlot slotId: Slot, inCollection collectionId: UUID) {
+////    if slot.album?.songs == nil  {
+////      Task {
+////        app.update(action: NavigationAction.gettingSongs(true))
+////        async let songs = RecordStore.getSongs(for: album.album)
+////        try? await app.update(action: LibraryAction.addSongsToAlbum(songs: songs, albumId: album.album.id, collectionId: collectionId))
+////        app.update(action: NavigationAction.gettingSongs(false))
+////      }
+////    }
+//    
+//    if slot.playbackLinks == nil {
+//      if let baseUrl = album.url {
+//        Task {
+//          app.update(action: NavigationAction.gettingPlaybackLinks(true))
+//          async let playbackLinks = RecordStore.getPlaybackLinks(for: baseUrl)
+//          try? await app.update(action: LibraryAction.setPlaybackLinks(baseUrl: baseUrl, playbackLinks: playbackLinks, collectionId: collectionId))
+//          app.update(action: NavigationAction.gettingPlaybackLinks(false))
+//        }
+//      }
+//    }
+//  }
 }
