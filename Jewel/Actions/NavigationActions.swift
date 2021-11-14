@@ -42,8 +42,8 @@ func updateNavigation(navigation: Navigation, action: NavigationAction) -> Navig
   case let .showLibraryOptions(showLibraryOptionsState):
     newNavigation.showLibraryOptions = showLibraryOptionsState
     
-  case let .showSourceDetail(showSourceDetailState):
-    newNavigation.showSourceDetail = showSourceDetailState
+  case let .showAlbumDetail(showAlbumDetailState):
+    newNavigation.showAlbumDetail = showAlbumDetailState
   
   case let .showPlaybackLinks(showPlaybackLinksState):
     newNavigation.showPlaybackLinks = showPlaybackLinksState
@@ -89,7 +89,7 @@ enum NavigationAction: AppAction {
   case showCollection(Bool)
   case showCollectionOptions(Bool)
   case showLibraryOptions(Bool)
-  case showSourceDetail(Bool)
+  case showAlbumDetail(Bool)
   case showPlaybackLinks(Bool)
   case gettingPlaybackLinks(Bool)
   case gettingSearchResults(Bool)
@@ -120,8 +120,8 @@ enum NavigationAction: AppAction {
       return "\(type(of: self)): \(showing ? "Showing" : "Closing") collection options"
     case .showLibraryOptions(let showing):
       return "\(type(of: self)): \(showing ? "Showing" : "Closing") library options"
-    case .showSourceDetail(let showing):
-      return "\(type(of: self)): \(showing ? "Showing" : "Closing") source detail"
+    case .showAlbumDetail(let showing):
+      return "\(type(of: self)): \(showing ? "Showing" : "Closing") album detail"
     case .showPlaybackLinks(let showing):
       return "\(type(of: self)): \(showing ? "Showing" : "Closing") alternative links"
     case .gettingPlaybackLinks(let showing):

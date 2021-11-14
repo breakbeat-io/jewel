@@ -33,7 +33,7 @@ struct Navigation {
   var showSharing: Bool = false
   var showLoadRecommendationsAlert: Bool = false
   
-  var showSourceDetail: Bool = false
+  var showAlbumDetail: Bool = false
   var showPlaybackLinks: Bool = false
   
   var gettingPlaybackLinks: Bool = false

@@ -40,7 +40,7 @@ struct AlbumDetail: View {
       .navigationBarItems(
         leading:
           Button {
-            self.app.update(action: NavigationAction.showSourceDetail(false))
+            self.app.update(action: NavigationAction.showAlbumDetail(false))
           } label: {
             Text("Close")
               .font(.body)
@@ -49,7 +49,7 @@ struct AlbumDetail: View {
           self.collection.type == .userCollection ?
         Button {
           self.app.update(action: LibraryAction.removeAlbumFromSlot(slotIndex: app.state.navigation.activeSlotIndex, collectionId: app.state.navigation.activeCollectionId!))
-          self.app.update(action: NavigationAction.showSourceDetail(false))
+          self.app.update(action: NavigationAction.showAlbumDetail(false))
         } label: {
           Text(Image(systemName: "eject"))
             .font(.body)

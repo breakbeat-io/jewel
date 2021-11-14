@@ -17,9 +17,9 @@ struct CollectionDetail: View {
   var collection: Collection
 
   private var showSheet: Binding<Bool> { Binding (
-    get: { self.app.state.navigation.showSourceDetail || self.app.state.navigation.showSearch },
+    get: { self.app.state.navigation.showAlbumDetail || self.app.state.navigation.showSearch },
     set: {
-      if self.app.state.navigation.showSourceDetail { self.app.update(action: NavigationAction.showSourceDetail($0)) }
+      if self.app.state.navigation.showAlbumDetail { self.app.update(action: NavigationAction.showAlbumDetail($0)) }
       if self.app.state.navigation.showSearch { self.app.update(action: NavigationAction.showSearch($0)) }
   }
     )}
@@ -57,7 +57,7 @@ struct CollectionDetail: View {
                 if let album = self.slots[slotIndex].album {
                   Button {
                     self.app.update(action: NavigationAction.setActiveSlotIndex(slotIndex: slotIndex))
-                    self.app.update(action: NavigationAction.showSourceDetail(true))
+                    self.app.update(action: NavigationAction.showAlbumDetail(true))
                   } label: {
                     SourceCard(sourceName: album.title, sourceArtist: album.artistName, sourceArtwork: album.artwork?.url(width: 1000, height: 1000))
                   }
@@ -80,7 +80,7 @@ struct CollectionDetail: View {
       }
       .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
       .sheet(isPresented: self.showSheet) {
-        if self.app.state.navigation.showSourceDetail {
+        if self.app.state.navigation.showAlbumDetail {
           AlbumDetail()
             .environmentObject(self.app)
         } else if self.app.state.navigation.showSearch {
