@@ -18,8 +18,7 @@ struct SourceCard: View {
     Rectangle()
       .foregroundColor(.clear)
       .background(
-        IfLet(sourceArtwork) { url in
-          AsyncImage(url: url) { image in
+          AsyncImage(url: sourceArtwork) { image in
             image
               .renderingMode(.original)
               .resizable()
@@ -27,7 +26,7 @@ struct SourceCard: View {
           } placeholder: {
               ProgressView()
           }
-      })
+      )
       .cornerRadius(Constants.cardCornerRadius)
       .overlay(
         VStack(alignment: .leading) {

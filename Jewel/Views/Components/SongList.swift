@@ -20,7 +20,7 @@ struct SongList: View {
 
   var body: some View {
     VStack(alignment: .leading) {
-      IfLet(discCount) { discCount in
+      if let discCount = discCount {
         ForEach(1..<discCount + 1, id: \.self) { discNumber in
           DiscSongList(
             discNumber: discNumber,

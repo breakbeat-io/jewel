@@ -16,7 +16,6 @@ struct SourceCover: View {
   
   var body: some View {
     VStack(alignment: .leading) {
-      IfLet(sourceArtwork) { url in
         // macCatalyst uses a fixed sized sheet regardless of window size, so
         // need to fix the frame size for the Image to avoid it consuming the
         // whole window, and then center it.
@@ -48,7 +47,6 @@ struct SourceCover: View {
         .cornerRadius(4)
         .shadow(radius: 4)
 #endif
-      }
       Group {
         Text(sourceName)
           .fontWeight(.bold)

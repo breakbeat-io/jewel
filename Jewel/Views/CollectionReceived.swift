@@ -14,7 +14,7 @@ struct CollectionReceived: View {
   
   var body: some View {
     RichAlert(heading: "Shared Collection Received", buttons: CollectionReceivedButtons()) {
-      IfLet(app.state.library.cuedCollection) { cuedCollection in
+      if let cuedCollection = app.state.library.cuedCollection {
         VStack {
           Text("Would you like to add the following collection to your Collection Library?")
             .foregroundColor(Color.secondary)

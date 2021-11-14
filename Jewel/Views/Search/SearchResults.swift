@@ -23,7 +23,7 @@ struct SearchResults: View {
   var body: some View {
     if let appleMusicAlbums = searchResults {
       List(0..<appleMusicAlbums.count, id: \.self) { i in
-        IfLet(appleMusicAlbums[i]) { album in
+        if let album = appleMusicAlbums[i] {
           HStack {
             AsyncImage(url: album.artwork?.url(width: 50, height: 50)) { image in
               image

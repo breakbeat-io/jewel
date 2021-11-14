@@ -69,7 +69,7 @@ struct AlbumDetail: View {
     
     var body: some View {
       VStack {
-        IfLet(slot.album) { album in
+        if let album = slot.album {
           SourceCover(sourceName: album.title,
                       sourceArtist: album.artistName,
                       sourceArtwork: album.artwork?.url(width: 1000, height: 1000))
@@ -91,7 +91,7 @@ struct AlbumDetail: View {
     
     var body: some View {
       HStack(alignment: .top) {
-        IfLet(slot.album) { album in
+        if let album = slot.album {
           VStack {
             SourceCover(sourceName: album.title,
                         sourceArtist: album.artistName,
@@ -105,8 +105,9 @@ struct AlbumDetail: View {
             Spacer()
           }
         }
-        .padding()
+        
       }
+      .padding()
     }
   }
   

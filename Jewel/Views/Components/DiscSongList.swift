@@ -44,7 +44,7 @@ struct DiscSongList: View {
             }
           }
           Spacer()
-          IfLet(song.durationString) { duration in
+          if let duration = song.durationString {
             Text(duration)
               .font(.footnote)
               .opacity(0.7)

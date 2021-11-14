@@ -36,7 +36,7 @@ struct CollectionOptions: View {
   )}
   
   var body: some View {
-    IfLet(self.collection) { collection in // this IfLet has to be outside the NavigationView else LibraryAction.removeCollection creates an exception ¯\_(ツ)_/¯
+    if let collection = collection { // this if has to be outside the NavigationView else LibraryAction.removeCollection creates an exception ¯\_(ツ)_/¯
       NavigationView {
         Form {
           Section {

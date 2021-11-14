@@ -25,7 +25,7 @@ struct CollectionSheet: View {
   
   var body: some View {
     NavigationView {
-      IfLet(self.collection) { collection in // this IfLet has to be inside the NavigationView else the sheet isn't dismissed on removeCollection in CollectionOptions ¯\_(ツ)_/¯
+      if let collection = collection { // this IfLet has to be inside the NavigationView else the sheet isn't dismissed on removeCollection in CollectionOptions ¯\_(ツ)_/¯
         CollectionDetail(collection: collection)
           .navigationBarTitle("", displayMode: .inline)
           .navigationBarItems(
@@ -38,8 +38,8 @@ struct CollectionSheet: View {
               },
             trailing: CollectionActionButtons()
           )
+          .navigationViewStyle(StackNavigationViewStyle())
       }
-      .navigationViewStyle(StackNavigationViewStyle())
     }
   }
   
