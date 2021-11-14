@@ -31,10 +31,11 @@ class RecordStore {
   static func getAlbum(withId appleMusicAlbumId: MusicItemID) async throws -> Album {
     os_log("💎 Record Store > Getting Album with ID \(appleMusicAlbumId.rawValue)")
     do {
-      let resourceRequest = MusicCatalogResourceRequest<Album>(matching: \.id, equalTo: appleMusicAlbumId)
-      let resourceResponse = try await resourceRequest.response()
+      var albumRequest = MusicCatalogResourceRequest<Album>(matching: \.id, equalTo: appleMusicAlbumId)
+      albumRequest.properties = [.tracks]
+      let albumResponse = try await albumRequest.response()
       
-      guard let album = resourceResponse.items.first else {
+      guard let album = albumResponse.items.first else {
         os_log("💎 Record Store > Get album error: Unable to find Album with ID \(appleMusicAlbumId)")
         throw RecordStoreError.NotFound(appleMusicAlbumId)
       }
@@ -46,30 +47,6 @@ class RecordStore {
       throw error
     }
   }
-  
-//  static func getSongs(for album: Album) async throws -> [Song] {
-//    os_log("💎 Record Store > Getting Songs for \(album.id) '\(album.title)'")
-//    do {
-//      var songs = [Song]()
-//      let detailedAlbum = try await album.with([.tracks])
-//      
-//      if let tracks = detailedAlbum.tracks {
-//        // iterate through the tracks instead of spawning a taskgroup as that was causing a rate limit
-//        for track in tracks {
-//          let resourceRequest = MusicCatalogResourceRequest<Song>(matching: \.id, equalTo: track.id)
-//          async let resourceResponse = resourceRequest.response()
-//          guard let song = try await resourceResponse.items.first else { break }
-//          songs.append(song)
-//        }
-//      }
-//      
-//      return songs.sorted{ $0.trackNumber ?? 0 < $1.trackNumber ?? 0}
-//      
-//    } catch {
-//      os_log("💎 Record Store > Getting Songs error: %s", String(describing: error))
-//      throw error
-//    }
-//  }
   
   static func getPlaybackLinks(for baseUrl: URL) async throws -> OdesliResponse {
     os_log("💎 Playback Links > Populating links for %s", baseUrl.absoluteString)
