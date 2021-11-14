@@ -14,7 +14,7 @@ struct DiscSongList: View {
   let discNumber: Int
   let discSongs: [Song]
   let showDiscNumber: Bool
-  let sourceArtist: String
+  let albumArtistName: String
   
   var body: some View {
     VStack(alignment: .leading) {
@@ -35,7 +35,7 @@ struct DiscSongList: View {
               .font(.callout)
               .fontWeight(.medium)
               .lineLimit(1)
-            if song.artistName != self.sourceArtist {
+            if song.artistName != albumArtistName {
               Text(song.artistName)
                 .font(.callout)
                 .fontWeight(.light)

@@ -15,7 +15,7 @@ extension RecordStore {
 //  static func loadScreenshotCollection() {
 //    let albums = getScreenshotData(forView: "Collection")
 //    for slotIndex in 0..<albums!.data!.count {
-//      AppEnvironment.global.update(action: LibraryAction.addSourceToSlot(source: albums!.data![slotIndex],
+//      AppEnvironment.global.update(action: LibraryAction.addAlbumToSlot(album: albums!.data![slotIndex],
 //                                                                         slotIndex: slotIndex,
 //                                                                         collectionId: AppEnvironment.global.state.library.onRotation.id))
 //    }

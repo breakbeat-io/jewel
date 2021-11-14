@@ -8,17 +8,17 @@
 
 import SwiftUI
 
-struct SourceCard: View {
+struct AlbumCard: View {
   
-  let sourceName: String
-  let sourceArtist: String
-  var sourceArtwork: URL?
+  let albumTitle: String
+  let albumArtistName: String
+  var albumArtwork: URL?
   
   var body: some View {
     Rectangle()
       .foregroundColor(.clear)
       .background(
-          AsyncImage(url: sourceArtwork) { image in
+          AsyncImage(url: albumArtwork) { image in
             image
               .renderingMode(.original)
               .resizable()
@@ -30,14 +30,14 @@ struct SourceCard: View {
       .cornerRadius(Constants.cardCornerRadius)
       .overlay(
         VStack(alignment: .leading) {
-          Text(sourceName)
+          Text(albumTitle)
             .font(.callout)
             .fontWeight(.bold)
             .foregroundColor(.white)
             .padding(.top, 4)
             .padding(.horizontal, 6)
             .lineLimit(1)
-          Text(sourceArtist)
+          Text(albumArtistName)
             .font(.footnote)
             .foregroundColor(.white)
             .padding(.horizontal, 6)

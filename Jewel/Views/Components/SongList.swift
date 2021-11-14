@@ -12,7 +12,7 @@ import MusicKit
 struct SongList: View {
   
   let songs: [Song]
-  let sourceArtist: String
+  let albumArtistName: String
 
   private var discCount: Int? {
     songs.map { $0.discNumber ?? 1 }.max()
@@ -26,7 +26,7 @@ struct SongList: View {
             discNumber: discNumber,
             discSongs: self.songs.filter { $0.discNumber == discNumber },
             showDiscNumber: (discCount > 1) ? true : false,
-            sourceArtist: self.sourceArtist
+            albumArtistName: self.albumArtistName
           )
         }
       }
