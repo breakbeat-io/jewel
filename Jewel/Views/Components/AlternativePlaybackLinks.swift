@@ -22,7 +22,7 @@ struct AlternativePlaybackLinks: View {
     NavigationView {
       VStack {
         List(availablePlatforms, id: \.self) { platform in
-          IfLet(self.playbackLinks.linksByPlatform[platform.rawValue]) { platformLink in
+          if let platformLink = playbackLinks.linksByPlatform[platform.rawValue] {
             Button {
               UIApplication.shared.open(platformLink.url)
             } label: {

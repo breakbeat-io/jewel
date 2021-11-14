@@ -54,7 +54,7 @@ struct CollectionDetail: View {
           ForEach(self.slots.indices, id: \.self) { slotIndex in
             Group {
               if self.slots[slotIndex].album != nil {
-                IfLet(self.slots[slotIndex].album) { album in
+                if let album = self.slots[slotIndex].album {
                   Button {
                     self.app.update(action: NavigationAction.setActiveSlotIndex(slotIndex: slotIndex))
                     self.app.update(action: NavigationAction.showSourceDetail(true))

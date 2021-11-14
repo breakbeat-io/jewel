@@ -20,7 +20,6 @@
 		D249258F24811A650011F409 /* SearchHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = D249258E24811A650011F409 /* SearchHome.swift */; };
 		D2492597248142660011F409 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2492596248142660011F409 /* SearchBar.swift */; };
 		D2492599248143720011F409 /* SearchResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2492598248143720011F409 /* SearchResults.swift */; };
-		D249259B2481455A0011F409 /* IfLet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D249259A2481455A0011F409 /* IfLet.swift */; };
 		D24925A424814CB60011F409 /* RecordStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24925A324814CB60011F409 /* RecordStore.swift */; };
 		D24C80D124899D0C00EFACD8 /* Library.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24C80D024899D0C00EFACD8 /* Library.swift */; };
 		D2603DFF252083EA00B79311 /* JewelApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2603DFE252083EA00B79311 /* JewelApp.swift */; };
@@ -83,7 +82,6 @@
 		D249258E24811A650011F409 /* SearchHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHome.swift; sourceTree = "<group>"; };
 		D2492596248142660011F409 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		D2492598248143720011F409 /* SearchResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResults.swift; sourceTree = "<group>"; };
-		D249259A2481455A0011F409 /* IfLet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IfLet.swift; sourceTree = "<group>"; };
 		D24925A324814CB60011F409 /* RecordStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordStore.swift; sourceTree = "<group>"; };
 		D24C80D024899D0C00EFACD8 /* Library.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Library.swift; sourceTree = "<group>"; };
 		D2603DFE252083EA00B79311 /* JewelApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JewelApp.swift; sourceTree = "<group>"; };
@@ -323,7 +321,6 @@
 		D2F8D162248A7E1A008C29C3 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				D249259A2481455A0011F409 /* IfLet.swift */,
 				D29CB1C624A632520051BA96 /* RichAlert.swift */,
 				D2AC120A24859E2300C52D9E /* AddSourceCardButton.swift */,
 				D2D78592248AF2E900E0CC63 /* SourceCard.swift */,
@@ -421,7 +418,6 @@
 			files = (
 				D2492597248142660011F409 /* SearchBar.swift in Sources */,
 				D20CE85924AF7AA500039202 /* SettingsActions.swift in Sources */,
-				D249259B2481455A0011F409 /* IfLet.swift in Sources */,
 				D27FB812248693AF0014C05D /* Slot.swift in Sources */,
 				D27FB80E24868AF60014C05D /* Odesli.swift in Sources */,
 				D28AD1B9248BB5D4009B584A /* AlbumDetail.swift in Sources */,

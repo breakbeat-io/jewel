@@ -30,7 +30,7 @@ struct PlaybackLinks: View {
   )}
   
   var body: some View {
-    IfLet(playbackLink.url) { url in
+    if let url = playbackLink.url {
       ZStack {
         PlaybackLink(url: url, platformName: self.playbackLink.name)
         HStack {
