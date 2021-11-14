@@ -9,10 +9,10 @@
 import SwiftUI
 import MusicKit
 
-struct DiscSongList: View {
+struct DiscTrackList: View {
   
   let discNumber: Int
-  let discSongs: [Song]
+  let discTracks: [Song]
   let showDiscNumber: Bool
   let albumArtistName: String
   
@@ -23,7 +23,7 @@ struct DiscSongList: View {
           .fontWeight(.bold)
           .padding(.vertical)
       }
-      ForEach(discSongs) { song in
+      ForEach(discTracks) { song in
         HStack {
           Text(String(song.trackNumber ?? 0))
             .font(.footnote)

@@ -61,13 +61,12 @@ struct AlbumDetail: View {
     .navigationViewStyle(StackNavigationViewStyle())
     .onAppear {
       if slot.playbackLinks == nil {
-        if let baseUrl = slot.album?.url {
-          Task {
-            app.update(action: NavigationAction.gettingPlaybackLinks(true))
-            async let playbackLinks = RecordStore.getPlaybackLinks(for: baseUrl)
-            try? await app.update(action: LibraryAction.setPlaybackLinks(baseUrl: baseUrl, playbackLinks: playbackLinks, collectionId: collection.id))
-            app.update(action: NavigationAction.gettingPlaybackLinks(false))
-          }
+        guard let baseUrl = slot.album?.url else { return }
+        Task {
+          app.update(action: NavigationAction.gettingPlaybackLinks(true))
+          async let playbackLinks = RecordStore.getPlaybackLinks(for: baseUrl)
+          try? await app.update(action: LibraryAction.setPlaybackLinks(baseUrl: baseUrl, playbackLinks: playbackLinks, collectionId: collection.id))
+          app.update(action: NavigationAction.gettingPlaybackLinks(false))
         }
       }
     }
@@ -88,7 +87,9 @@ struct AlbumDetail: View {
           PlaybackLinks(baseUrl: album.url!,
                         playbackLinks: slot.playbackLinks)
             .padding(.bottom)
-//          SongList(songs: songs, albumArtistName: album.artistName)
+          if let tracks = album.tracks {
+            TrackList(tracks: tracks, albumArtistName: album.artistName)
+          }
         }
       }
       .padding()
@@ -113,7 +114,9 @@ struct AlbumDetail: View {
               .padding(.bottom)
           }
           VStack {
-//            SongList(songs: songs, albumArtistName: album.artistName)
+            if let tracks = album.tracks {
+              TrackList(tracks: tracks, albumArtistName: album.artistName)
+            }
             Spacer()
           }
         }

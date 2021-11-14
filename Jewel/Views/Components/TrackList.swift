@@ -9,10 +9,20 @@
 import SwiftUI
 import MusicKit
 
-struct SongList: View {
+struct TrackList: View {
   
-  let songs: [Song]
+  let tracks: MusicItemCollection<Track>
   let albumArtistName: String
+  
+  private var songs: [Song] {
+    var songs = [Song]()
+    tracks.forEach { track in
+      if case .song(let song) = track {
+        songs.append(song)
+      }
+    }
+    return songs
+  }
 
   private var discCount: Int? {
     songs.map { $0.discNumber ?? 1 }.max()
@@ -22,9 +32,9 @@ struct SongList: View {
     VStack(alignment: .leading) {
       if let discCount = discCount {
         ForEach(1..<discCount + 1, id: \.self) { discNumber in
-          DiscSongList(
+          DiscTrackList(
             discNumber: discNumber,
-            discSongs: songs.filter { $0.discNumber == discNumber },
+            discTracks: songs.filter { $0.discNumber == discNumber },
             showDiscNumber: (discCount > 1) ? true : false,
             albumArtistName: albumArtistName
           )
