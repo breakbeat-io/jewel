@@ -59,11 +59,11 @@ struct CollectionDetail: View {
                     self.app.update(action: NavigationAction.setActiveSlotIndex(slotIndex: slotIndex))
                     self.app.update(action: NavigationAction.showAlbumDetail(true))
                   } label: {
-                    SourceCard(sourceName: album.title, sourceArtist: album.artistName, sourceArtwork: album.artwork?.url(width: 1000, height: 1000))
+                    AlbumCard(albumTitle: album.title, albumArtistName: album.artistName, albumArtwork: album.artwork?.url(width: 1000, height: 1000))
                   }
                 }
               } else if self.editable {
-                AddSourceCardButton(slotIndex: slotIndex, collectionId: self.collection.id)
+                AddAlbumCardButton(slotIndex: slotIndex, collectionId: self.collection.id)
               } else {
                 RoundedRectangle(cornerRadius: Constants.cardCornerRadius)
                   .fill(Color(UIColor.secondarySystemBackground))

@@ -8,11 +8,11 @@
 
 import SwiftUI
 
-struct SourceCover: View {
+struct AlbumCover: View {
   
-  let sourceName: String
-  let sourceArtist: String
-  var sourceArtwork: URL?
+  let albumTitle: String
+  let albumArtistName: String
+  var albumArtwork: URL?
   
   var body: some View {
     VStack(alignment: .leading) {
@@ -22,7 +22,7 @@ struct SourceCover: View {
 #if targetEnvironment(macCatalyst)
         HStack() {
           Spacer()
-          AsyncImage(url: self.sourceArtwork) { image in
+          AsyncImage(url: self.albumArtwork) { image in
             image
               .resizable()
               .aspectRatio(contentMode: .fit)
@@ -35,7 +35,7 @@ struct SourceCover: View {
           Spacer()
         }
 #else
-        AsyncImage(url: self.sourceArtwork) { image in
+        AsyncImage(url: self.albumArtwork) { image in
           image
             .resizable()
             .aspectRatio(contentMode: .fit)
@@ -48,9 +48,9 @@ struct SourceCover: View {
         .shadow(radius: 4)
 #endif
       Group {
-        Text(sourceName)
+        Text(albumTitle)
           .fontWeight(.bold)
-        Text(sourceArtist)
+        Text(albumArtistName)
       }
       .font(.title)
       .lineLimit(1)

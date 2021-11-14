@@ -70,13 +70,13 @@ struct AlbumDetail: View {
     var body: some View {
       VStack {
         if let album = slot.album {
-          SourceCover(sourceName: album.title,
-                      sourceArtist: album.artistName,
-                      sourceArtwork: album.artwork?.url(width: 1000, height: 1000))
+          AlbumCover(albumTitle: album.title,
+                      albumArtistName: album.artistName,
+                      albumArtwork: album.artwork?.url(width: 1000, height: 1000))
           PlaybackLinks(baseUrl: album.url!,
                         playbackLinks: self.slot.playbackLinks)
             .padding(.bottom)
-//          SongList(songs: songs, sourceArtist: album.artistName)
+//          SongList(songs: songs, albumArtistName: album.artistName)
         }
       }
       .padding()
@@ -93,15 +93,15 @@ struct AlbumDetail: View {
       HStack(alignment: .top) {
         if let album = slot.album {
           VStack {
-            SourceCover(sourceName: album.title,
-                        sourceArtist: album.artistName,
-                        sourceArtwork: album.artwork?.url(width: 1000, height: 1000))
+            AlbumCover(albumTitle: album.title,
+                        albumArtistName: album.artistName,
+                        albumArtwork: album.artwork?.url(width: 1000, height: 1000))
             PlaybackLinks(baseUrl: album.url!,
                           playbackLinks: self.slot.playbackLinks)
               .padding(.bottom)
           }
           VStack {
-//            SongList(songs: songs, sourceArtist: album.artistName)
+//            SongList(songs: songs, albumArtistName: album.artistName)
             Spacer()
           }
         }
@@ -111,7 +111,7 @@ struct AlbumDetail: View {
     }
   }
   
-//  private func completeSource(album: Album, inSlot slotId: Slot, inCollection collectionId: UUID) {
+//  private func completeAlbum(album: Album, inSlot slotId: Slot, inCollection collectionId: UUID) {
 ////    if slot.album?.songs == nil  {
 ////      Task {
 ////        app.update(action: NavigationAction.gettingSongs(true))

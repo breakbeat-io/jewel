@@ -12,7 +12,7 @@ import MusicKit
 
 class SharedCollectionManager {
   
-  enum SourceProvider: String, Codable {
+  enum AlbumProvider: String, Codable {
     case appleMusicAlbum
   }
   
@@ -33,12 +33,12 @@ class SharedCollectionManager {
   }
   
   struct ShareableSlot: Codable {
-    let sourceProvider: SourceProvider
-    let sourceRef: String
+    let albumProvider: AlbumProvider
+    let albumRef: String
     
     enum CodingKeys: String, CodingKey {
-      case sourceProvider = "sp"
-      case sourceRef = "sr"
+      case albumProvider = "sp"
+      case albumRef = "sr"
     }
   }
   
@@ -47,7 +47,7 @@ class SharedCollectionManager {
     
     for slot in collection.slots {
       if let album = slot.album {
-        let slot = ShareableSlot(sourceProvider: SourceProvider.appleMusicAlbum, sourceRef: album.id.rawValue)
+        let slot = ShareableSlot(albumProvider: AlbumProvider.appleMusicAlbum, albumRef: album.id.rawValue)
         shareableSlots.append(slot)
       } else {
         shareableSlots.append(nil)
@@ -160,8 +160,8 @@ class SharedCollectionManager {
     await AppEnvironment.global.update(action: LibraryAction.addCollection(collection: collection))
     
     for (index, slot) in shareableCollection.collection.enumerated() {
-      if slot?.sourceProvider == SourceProvider.appleMusicAlbum {
-        async let album = RecordStore.getAlbum(withId: MusicItemID(rawValue: slot!.sourceRef))
+      if slot?.albumProvider == AlbumProvider.appleMusicAlbum {
+        async let album = RecordStore.getAlbum(withId: MusicItemID(rawValue: slot!.albumRef))
         try? await AppEnvironment.global.update(action: LibraryAction.addAlbumToSlot(album: album, slotIndex: index, collectionId: collection.id))
       }
     }
