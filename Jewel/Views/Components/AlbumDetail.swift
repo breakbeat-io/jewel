@@ -59,6 +59,18 @@ struct AlbumDetail: View {
       )
     }
     .navigationViewStyle(StackNavigationViewStyle())
+    .onAppear {
+      if slot.playbackLinks == nil {
+        if let baseUrl = slot.album?.url {
+          Task {
+            app.update(action: NavigationAction.gettingPlaybackLinks(true))
+            async let playbackLinks = RecordStore.getPlaybackLinks(for: baseUrl)
+            try? await app.update(action: LibraryAction.setPlaybackLinks(baseUrl: baseUrl, playbackLinks: playbackLinks, collectionId: collection.id))
+            app.update(action: NavigationAction.gettingPlaybackLinks(false))
+          }
+        }
+      }
+    }
   }
   
   struct Compact: View {
@@ -111,25 +123,4 @@ struct AlbumDetail: View {
     }
   }
   
-//  private func completeAlbum(album: Album, inSlot slotId: Slot, inCollection collectionId: UUID) {
-////    if slot.album?.songs == nil  {
-////      Task {
-////        app.update(action: NavigationAction.gettingSongs(true))
-////        async let songs = RecordStore.getSongs(for: album.album)
-////        try? await app.update(action: LibraryAction.addSongsToAlbum(songs: songs, albumId: album.album.id, collectionId: collectionId))
-////        app.update(action: NavigationAction.gettingSongs(false))
-////      }
-////    }
-//    
-//    if slot.playbackLinks == nil {
-//      if let baseUrl = album.url {
-//        Task {
-//          app.update(action: NavigationAction.gettingPlaybackLinks(true))
-//          async let playbackLinks = RecordStore.getPlaybackLinks(for: baseUrl)
-//          try? await app.update(action: LibraryAction.setPlaybackLinks(baseUrl: baseUrl, playbackLinks: playbackLinks, collectionId: collectionId))
-//          app.update(action: NavigationAction.gettingPlaybackLinks(false))
-//        }
-//      }
-//    }
-//  }
 }
