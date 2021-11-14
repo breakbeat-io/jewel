@@ -26,7 +26,6 @@ final class AppEnvironment: ObservableObject {
     } else {
       os_log("💎 State > No current saved state found, creating new")
       state = AppState.createNewState()
-      AppState.migrate()
     }
   }
   

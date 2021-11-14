@@ -13,4 +13,10 @@ struct Slot: Identifiable, Codable {
   var id = UUID()
   var album: Album?
   var playbackLinks: OdesliResponse?
+  
+  enum CodingKeys: String, CodingKey {
+    case id
+    case album = "source"
+    case playbackLinks
+  }
 }

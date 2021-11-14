@@ -26,7 +26,6 @@
 		D262E881270C352C002C6BD8 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = D262E880270C34E8002C6BD8 /* Secrets.swift */; };
 		D26672FC2738765F007A5193 /* AppleMusicAuthorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26672FB2738765F007A5193 /* AppleMusicAuthorization.swift */; };
 		D2668D4924B1DBB0002922F4 /* screenshotSearch.json in Resources */ = {isa = PBXBuildFile; fileRef = D2668D4824B1DBB0002922F4 /* screenshotSearch.json */; };
-		D26A2C6727316A92008B6C42 /* AppStateV1.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26A2C6627316A92008B6C42 /* AppStateV1.swift */; };
 		D27FB80E24868AF60014C05D /* Odesli.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27FB80D24868AF60014C05D /* Odesli.swift */; };
 		D27FB81024868B320014C05D /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27FB80F24868B320014C05D /* Settings.swift */; };
 		D27FB812248693AF0014C05D /* Slot.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27FB811248693AF0014C05D /* Slot.swift */; };
@@ -89,7 +88,6 @@
 		D262E882270C3684002C6BD8 /* Secrets.README */ = {isa = PBXFileReference; lastKnownFileType = text; path = Secrets.README; sourceTree = "<group>"; };
 		D26672FB2738765F007A5193 /* AppleMusicAuthorization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMusicAuthorization.swift; sourceTree = "<group>"; };
 		D2668D4824B1DBB0002922F4 /* screenshotSearch.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = screenshotSearch.json; sourceTree = "<group>"; };
-		D26A2C6627316A92008B6C42 /* AppStateV1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStateV1.swift; sourceTree = "<group>"; };
 		D27FB80D24868AF60014C05D /* Odesli.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Odesli.swift; sourceTree = "<group>"; };
 		D27FB80F24868B320014C05D /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		D27FB811248693AF0014C05D /* Slot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Slot.swift; sourceTree = "<group>"; };
@@ -210,7 +208,6 @@
 			isa = PBXGroup;
 			children = (
 				D2492586248117710011F409 /* AppState.swift */,
-				D26A2C6627316A92008B6C42 /* AppStateV1.swift */,
 				D2945E1B249C0FC100AE6CA5 /* Navigation.swift */,
 				D27FB80F24868B320014C05D /* Settings.swift */,
 				D24C80D024899D0C00EFACD8 /* Library.swift */,
@@ -423,7 +420,6 @@
 				D28AD1B9248BB5D4009B584A /* AlbumDetail.swift in Sources */,
 				D2945E1E249C249C00AE6CA5 /* SettingsHome.swift in Sources */,
 				D288174D248BEDAA00EB47C2 /* ShareSheetLoader.swift in Sources */,
-				D26A2C6727316A92008B6C42 /* AppStateV1.swift in Sources */,
 				D2AC12122485A67000C52D9E /* Search.swift in Sources */,
 				D2492587248117710011F409 /* AppState.swift in Sources */,
 				D2D78591248AED2900E0CC63 /* AlternativePlaybackLinks.swift in Sources */,
