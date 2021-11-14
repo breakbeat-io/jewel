@@ -31,7 +31,7 @@ struct CollectionSheet: View {
           .navigationBarItems(
             leading:
               Button {
-                self.app.update(action: NavigationAction.showCollection(false))
+                app.update(action: NavigationAction.showCollection(false))
               } label: {
                 Text("Close")
                   .font(.body)

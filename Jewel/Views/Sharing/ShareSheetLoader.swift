@@ -39,10 +39,10 @@ struct ShareSheetLoader: View {
       }
     }
     .onAppear {
-      self.refreshShareLinks()
+      refreshShareLinks()
     }
     .onDisappear() {
-      self.app.update(action: NavigationAction.showCollectionOptions(false))
+      app.update(action: NavigationAction.showCollectionOptions(false))
     }
   }
   

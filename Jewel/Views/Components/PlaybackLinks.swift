@@ -25,14 +25,14 @@ struct PlaybackLinks: View {
   }
   
   private var showPlaybackLinks: Binding<Bool> { Binding (
-    get: { self.app.state.navigation.showPlaybackLinks },
-    set: { if self.app.state.navigation.showPlaybackLinks { self.app.update(action: NavigationAction.showPlaybackLinks($0)) } }
+    get: { app.state.navigation.showPlaybackLinks },
+    set: { if app.state.navigation.showPlaybackLinks { app.update(action: NavigationAction.showPlaybackLinks($0)) } }
   )}
   
   var body: some View {
     if let url = playbackLink.url {
       ZStack {
-        PlaybackLink(url: url, platformName: self.playbackLink.name)
+        PlaybackLink(url: url, platformName: playbackLink.name)
         HStack {
           Spacer()
           if let playbackLinks = playbackLinks {
@@ -44,7 +44,7 @@ struct PlaybackLinks: View {
             }
             .sheet(isPresented: showPlaybackLinks) {
               AlternativePlaybackLinks(playbackLinks: playbackLinks)
-                .environmentObject(self.app)
+                .environmentObject(app)
             }
             .padding()
           } else if app.state.navigation.gettingPlaybackLinks {

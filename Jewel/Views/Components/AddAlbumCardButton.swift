@@ -17,9 +17,9 @@ struct AddAlbumCardButton: View {
   
   var body: some View {
     Button {
-      self.app.update(action: NavigationAction.setActiveCollectionId(collectionId: self.collectionId))
-      self.app.update(action: NavigationAction.setActiveSlotIndex(slotIndex: self.slotIndex))
-      self.app.update(action: NavigationAction.showSearch(true))
+      app.update(action: NavigationAction.setActiveCollectionId(collectionId: collectionId))
+      app.update(action: NavigationAction.setActiveSlotIndex(slotIndex: slotIndex))
+      app.update(action: NavigationAction.showSearch(true))
     } label: {
       RoundedRectangle(cornerRadius: Constants.cardCornerRadius)
         .foregroundColor(Color(UIColor.secondarySystemBackground))

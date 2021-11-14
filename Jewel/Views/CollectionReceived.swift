@@ -48,18 +48,18 @@ struct CollectionReceivedButtons: View {
     HStack {
       Spacer()
       Button {
-        self.app.update(action: LibraryAction.uncueSharedCollection)
+        app.update(action: LibraryAction.uncueSharedCollection)
       } label: {
         Text("Cancel")
       }
       Spacer()
       Button {
         Task {
-          self.app.update(action: NavigationAction.switchTab(to: .library))
-          await SharedCollectionManager.expandShareableCollection(shareableCollection: self.app.state.library.cuedCollection!)
-          self.app.update(action: LibraryAction.uncueSharedCollection)
-          self.app.update(action: NavigationAction.setActiveCollectionId(collectionId: self.app.state.library.collections.first!.id))
-          self.app.update(action: NavigationAction.showCollection(true))
+          app.update(action: NavigationAction.switchTab(to: .library))
+          await SharedCollectionManager.expandShareableCollection(shareableCollection: app.state.library.cuedCollection!)
+          app.update(action: LibraryAction.uncueSharedCollection)
+          app.update(action: NavigationAction.setActiveCollectionId(collectionId: app.state.library.collections.first!.id))
+          app.update(action: NavigationAction.showCollection(true))
         }
       } label: {
         Text("Add")

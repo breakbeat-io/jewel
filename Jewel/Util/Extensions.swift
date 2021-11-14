@@ -33,8 +33,8 @@ extension Bundle {
 extension String {
   
   func replaceFirstOccurrence(of target: String, with replacement: String) -> String {
-    guard let range = self.range(of: target) else { return self }
-    return self.replacingCharacters(in: range, with: replacement)
+    guard let range = range(of: target) else { return self }
+    return replacingCharacters(in: range, with: replacement)
   }
   
   func base64Encoded() -> String? {

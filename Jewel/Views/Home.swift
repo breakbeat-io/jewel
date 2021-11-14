@@ -15,7 +15,7 @@ struct Home: View {
   
   private var receivedCollectionCued: Binding<Bool> {
     Binding (
-      get: { self.app.state.library.cuedCollection != nil },
+      get: { app.state.library.cuedCollection != nil },
       set: { _ = $0 }
     )
   }
@@ -32,12 +32,12 @@ struct Home: View {
       VStack(spacing: 0) {
         NavBar()
         VStack {
-          if self.app.state.navigation.selectedTab == .onRotation {
+          if app.state.navigation.selectedTab == .onRotation {
             OnRotation()
               .transition(.move(edge: .leading))
               .animation(.easeOut)
           }
-          if self.app.state.navigation.selectedTab == .library {
+          if app.state.navigation.selectedTab == .library {
             CollectionLibrary()
               .transition(.move(edge: .trailing))
               .animation(.easeOut)
@@ -50,7 +50,7 @@ struct Home: View {
       if app.state.settings.firstTimeRun {
         Welcome()
       }
-      if self.receivedCollectionCued.wrappedValue {
+      if receivedCollectionCued.wrappedValue {
         CollectionReceived()
       }
     }

@@ -17,10 +17,10 @@ struct CollectionDetail: View {
   var collection: Collection
 
   private var showSheet: Binding<Bool> { Binding (
-    get: { self.app.state.navigation.showAlbumDetail || self.app.state.navigation.showSearch },
+    get: { app.state.navigation.showAlbumDetail || app.state.navigation.showSearch },
     set: {
-      if self.app.state.navigation.showAlbumDetail { self.app.update(action: NavigationAction.showAlbumDetail($0)) }
-      if self.app.state.navigation.showSearch { self.app.update(action: NavigationAction.showSearch($0)) }
+      if app.state.navigation.showAlbumDetail { app.update(action: NavigationAction.showAlbumDetail($0)) }
+      if app.state.navigation.showSearch { app.update(action: NavigationAction.showSearch($0)) }
   }
     )}
   private var slots: [Slot] {
@@ -36,67 +36,67 @@ struct CollectionDetail: View {
   var body: some View {
     GeometryReader { geo in
       HStack {
-        if self.horizontalSizeClass == .regular {
+        if horizontalSizeClass == .regular {
           Spacer()
         }
         ScrollView {
           VStack(alignment: .leading) {
-            Text(self.collection.name)
+            Text(collection.name)
               .font(.title)
               .fontWeight(.bold)
               .padding(.top)
-            Text("by \(self.collection.curator)")
+            Text("by \(collection.curator)")
               .font(.subheadline)
               .fontWeight(.light)
               .foregroundColor(.secondary)
           }
           .frame(minWidth: 0, maxWidth: .infinity, alignment: .topLeading)
-          ForEach(self.slots.indices, id: \.self) { slotIndex in
+          ForEach(slots.indices, id: \.self) { slotIndex in
             Group {
-              if self.slots[slotIndex].album != nil {
-                if let album = self.slots[slotIndex].album {
+              if slots[slotIndex].album != nil {
+                if let album = slots[slotIndex].album {
                   Button {
-                    self.app.update(action: NavigationAction.setActiveSlotIndex(slotIndex: slotIndex))
-                    self.app.update(action: NavigationAction.showAlbumDetail(true))
+                    app.update(action: NavigationAction.setActiveSlotIndex(slotIndex: slotIndex))
+                    app.update(action: NavigationAction.showAlbumDetail(true))
                   } label: {
                     AlbumCard(albumTitle: album.title, albumArtistName: album.artistName, albumArtwork: album.artwork?.url(width: 1000, height: 1000))
                   }
                 }
-              } else if self.editable {
-                AddAlbumCardButton(slotIndex: slotIndex, collectionId: self.collection.id)
+              } else if editable {
+                AddAlbumCardButton(slotIndex: slotIndex, collectionId: collection.id)
               } else {
                 RoundedRectangle(cornerRadius: Constants.cardCornerRadius)
                   .fill(Color(UIColor.secondarySystemBackground))
               }
             }
-            .frame(height: self.app.state.navigation.albumCardHeight)
+            .frame(height: app.state.navigation.albumCardHeight)
           }
         }
         .padding(.horizontal)
-        .frame(maxWidth: self.horizontalSizeClass == .regular && !self.app.state.navigation.showCollection ? Constants.regularMaxWidth : .infinity)
-        if self.horizontalSizeClass == .regular {
+        .frame(maxWidth: horizontalSizeClass == .regular && !app.state.navigation.showCollection ? Constants.regularMaxWidth : .infinity)
+        if horizontalSizeClass == .regular {
           Spacer()
         }
       }
       .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
-      .sheet(isPresented: self.showSheet) {
-        if self.app.state.navigation.showAlbumDetail {
+      .sheet(isPresented: showSheet) {
+        if app.state.navigation.showAlbumDetail {
           AlbumDetail()
-            .environmentObject(self.app)
-        } else if self.app.state.navigation.showSearch {
+            .environmentObject(app)
+        } else if app.state.navigation.showSearch {
           SearchHome()
-            .environmentObject(self.app)
+            .environmentObject(app)
         }
       }
       .onAppear {
-        if geo.size.height != self.app.state.navigation.collectionViewHeight {
-          self.app.update(action: NavigationAction.setCollectionViewHeight(viewHeight: geo.size.height))
+        if geo.size.height != app.state.navigation.collectionViewHeight {
+          app.update(action: NavigationAction.setCollectionViewHeight(viewHeight: geo.size.height))
         }
       }
       .onDisappear {
-        if !self.app.state.navigation.onRotationActive && self.collectionEmpty {
-          self.app.update(action: NavigationAction.setActiveCollectionId(collectionId: self.app.state.navigation.onRotationId!))
-          self.app.update(action: LibraryAction.removeCollection(collectionId: self.collection.id))
+        if !app.state.navigation.onRotationActive && collectionEmpty {
+          app.update(action: NavigationAction.setActiveCollectionId(collectionId: app.state.navigation.onRotationId!))
+          app.update(action: LibraryAction.removeCollection(collectionId: collection.id))
         }
       }
     }

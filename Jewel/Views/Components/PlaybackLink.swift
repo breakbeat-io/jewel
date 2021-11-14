@@ -15,12 +15,12 @@ struct PlaybackLink: View {
   
   var body: some View {
     Button {
-      UIApplication.shared.open(self.url)
+      UIApplication.shared.open(url)
     } label: {
       HStack {
         Image(systemName: "play.fill")
           .font(.headline)
-        Text("Play in \(self.platformName)")
+        Text("Play in \(platformName)")
           .font(.headline)
       }
       .padding()

@@ -13,8 +13,8 @@ struct NavBar: View {
   @EnvironmentObject var app: AppEnvironment
   
   private var selectedTab: Binding<Navigation.Tab> { Binding (
-    get: { self.app.state.navigation.selectedTab },
-    set: { self.app.update(action: NavigationAction.switchTab(to: $0))}
+    get: { app.state.navigation.selectedTab },
+    set: { app.update(action: NavigationAction.switchTab(to: $0))}
   )}
   
   var body: some View {
@@ -50,15 +50,15 @@ struct CollectionActionButtons: View {
   @EnvironmentObject var app: AppEnvironment
   
   private var showCollectionOptions: Binding<Bool> { Binding (
-    get: { self.app.state.navigation.showCollectionOptions },
-    set: { if self.app.state.navigation.showCollectionOptions { self.app.update(action: NavigationAction.showCollectionOptions($0)) } }
+    get: { app.state.navigation.showCollectionOptions },
+    set: { if app.state.navigation.showCollectionOptions { app.update(action: NavigationAction.showCollectionOptions($0)) } }
   )}
   
   var body: some View {
     HStack {
       Spacer()
       Button {
-        self.app.update(action: NavigationAction.showCollectionOptions(true))
+        app.update(action: NavigationAction.showCollectionOptions(true))
       } label: {
         Text(Image(systemName: "ellipsis"))
           .font(.body)
@@ -66,7 +66,7 @@ struct CollectionActionButtons: View {
       .padding(.leading)
       .sheet(isPresented: showCollectionOptions) {
         CollectionOptions()
-          .environmentObject(self.app)
+          .environmentObject(app)
       }
     }
     .padding(.vertical)
@@ -79,23 +79,23 @@ struct LibraryActionButtons: View {
   @EnvironmentObject var app: AppEnvironment
   
   private var showLibraryOptions: Binding<Bool> { Binding (
-    get: { self.app.state.navigation.showLibraryOptions },
-    set: { if self.app.state.navigation.showLibraryOptions { self.app.update(action: NavigationAction.showLibraryOptions($0)) } }
+    get: { app.state.navigation.showLibraryOptions },
+    set: { if app.state.navigation.showLibraryOptions { app.update(action: NavigationAction.showLibraryOptions($0)) } }
   )}
   
   var body: some View {
     HStack {
       Spacer()
       Button {
-        self.app.update(action: LibraryAction.createCollection)
-        self.app.update(action: NavigationAction.setActiveCollectionId(collectionId: self.app.state.library.collections.first!.id))
-        self.app.update(action: NavigationAction.showCollection(true))
+        app.update(action: LibraryAction.createCollection)
+        app.update(action: NavigationAction.setActiveCollectionId(collectionId: app.state.library.collections.first!.id))
+        app.update(action: NavigationAction.showCollection(true))
       } label: {
         Text(Image(systemName: "plus"))
           .font(.body)
       }
       Button {
-        self.app.update(action: NavigationAction.showLibraryOptions(true))
+        app.update(action: NavigationAction.showLibraryOptions(true))
       } label: {
         Text(Image(systemName: "ellipsis"))
           .font(.body)
@@ -103,7 +103,7 @@ struct LibraryActionButtons: View {
       .padding(.leading)
       .sheet(isPresented: showLibraryOptions) {
         LibraryOptions()
-          .environmentObject(self.app)
+          .environmentObject(app)
       }
     }
     .padding(.vertical)
