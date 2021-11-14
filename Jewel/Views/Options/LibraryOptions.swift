@@ -23,7 +23,7 @@ struct LibraryOptions: View {
       .navigationBarItems(
         leading:
         Button {
-          self.app.update(action: NavigationAction.showLibraryOptions(false))
+          app.update(action: NavigationAction.showLibraryOptions(false))
         } label: {
           Text("Close")
             .font(.body)
@@ -39,13 +39,13 @@ struct RecommendationsButton: View {
   @EnvironmentObject var app: AppEnvironment
   
   private var showLoadRecommendationsAlert: Binding<Bool> { Binding (
-    get: { self.app.state.navigation.showLoadRecommendationsAlert },
-    set: { if self.app.state.navigation.showLoadRecommendationsAlert { self.app.update(action: NavigationAction.showLoadRecommendationsAlert($0)) } }
+    get: { app.state.navigation.showLoadRecommendationsAlert },
+    set: { if app.state.navigation.showLoadRecommendationsAlert { app.update(action: NavigationAction.showLoadRecommendationsAlert($0)) } }
   )}
   
   var body: some View {
     Button {
-      self.app.update(action: NavigationAction.showLoadRecommendationsAlert(true))
+      app.update(action: NavigationAction.showLoadRecommendationsAlert(true))
     } label: {
       HStack {
         Text(Image(systemName: "square.and.arrow.down"))
@@ -61,7 +61,7 @@ struct RecommendationsButton: View {
             primaryButton: .default(Text("Cancel")),
             secondaryButton: .default(Text("Add").fontWeight(.bold)) {
               Task {
-                self.app.update(action: NavigationAction.showLibraryOptions(false))
+                app.update(action: NavigationAction.showLibraryOptions(false))
                 await SharedCollectionManager.loadRecommendations()
               }
         })

@@ -15,12 +15,12 @@ struct SettingsHome: View {
   @State private var newCurator: String = ""
 
   private var curator: Binding<String> { Binding (
-    get: { self.app.state.library.onRotation.curator },
-    set: { self.newCurator = $0 }
+    get: { app.state.library.onRotation.curator },
+    set: { newCurator = $0 }
     )}
   private var preferredMusicPlatform: Binding<Int> { Binding (
-    get: { self.app.state.settings.preferredMusicPlatform },
-    set: { self.app.update(action: SettingsAction.setPreferredPlatform(platform: $0)) }
+    get: { app.state.settings.preferredMusicPlatform },
+    set: { app.update(action: SettingsAction.setPreferredPlatform(platform: $0)) }
     )
   }
   
@@ -35,8 +35,8 @@ struct SettingsHome: View {
                 curator.wrappedValue,
                 text: curator,
                 onEditingChanged: { _ in
-                  if !self.newCurator.isEmpty && self.newCurator != self.app.state.library.onRotation.curator {
-                    self.app.update(action: LibraryAction.setCollectionCurator(curator: self.newCurator.trimmingCharacters(in: .whitespaces), collectionId: self.app.state.navigation.onRotationId!))
+                  if !newCurator.isEmpty && newCurator != app.state.library.onRotation.curator {
+                    app.update(action: LibraryAction.setCollectionCurator(curator: newCurator.trimmingCharacters(in: .whitespaces), collectionId: app.state.navigation.onRotationId!))
                   }
                 }
               ).foregroundColor(.accentColor)
@@ -53,12 +53,12 @@ struct SettingsHome: View {
             Section(header: Text("Debug")) {
               Button {
 //                RecordStore.loadScreenshotCollection()
-                self.app.update(action: NavigationAction.showSettings(false))
+                app.update(action: NavigationAction.showSettings(false))
               } label: {
                 Text("Load Screenshot Data")
               }
               Button {
-                self.app.update(action: SettingsAction.reset)
+                app.update(action: SettingsAction.reset)
               } label: {
                 Text("Reset Jewel")
                   .foregroundColor(.red)
@@ -69,7 +69,7 @@ struct SettingsHome: View {
         Spacer()
         Footer()
           .onTapGesture(count: 10) {
-            self.app.update(action: NavigationAction.toggleDebug)
+            app.update(action: NavigationAction.toggleDebug)
           }
           .padding()
       }
@@ -77,7 +77,7 @@ struct SettingsHome: View {
       .navigationBarItems(
         leading:
         Button {
-          self.app.update(action: NavigationAction.showSettings(false))
+          app.update(action: NavigationAction.showSettings(false))
         } label: {
           Text("Close")
             .font(.body)
@@ -93,14 +93,14 @@ struct SettingsButton: View {
   @EnvironmentObject var app: AppEnvironment
   
   private var showSettings: Binding<Bool> { Binding (
-    get: { self.app.state.navigation.showSettings },
-    set: { if self.app.state.navigation.showSettings { self.app.update(action: NavigationAction.showSettings($0)) } }
+    get: { app.state.navigation.showSettings },
+    set: { if app.state.navigation.showSettings { app.update(action: NavigationAction.showSettings($0)) } }
   )}
   
   var body: some View {
     HStack {
       Button {
-        self.app.update(action: NavigationAction.showSettings(true))
+        app.update(action: NavigationAction.showSettings(true))
       } label: {
         Text(Image(systemName: "gear"))
           .font(.body)
@@ -112,7 +112,7 @@ struct SettingsButton: View {
     .frame(width: Constants.buttonWidth)
     .sheet(isPresented: showSettings) {
       SettingsHome()
-        .environmentObject(self.app)
+        .environmentObject(app)
     }
   }
 }

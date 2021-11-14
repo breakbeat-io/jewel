@@ -30,11 +30,11 @@ struct RichAlert<Buttons: View, Content: View>: View {
       ZStack {
         Rectangle()
           .fill(Color(UIColor.secondarySystemBackground))
-          .frame(width: self.responsiveWidth(viewWidth: geo.size.width), height: self.responsiveHeight(viewHeight: geo.size.height))
+          .frame(width: responsiveWidth(viewWidth: geo.size.width), height: responsiveHeight(viewHeight: geo.size.height))
           .cornerRadius(20)
           .shadow(radius: 5)
         VStack(alignment: .leading, spacing: 0) {
-          Text(self.heading)
+          Text(heading)
             .font(.title)
             .padding(.horizontal)
             .padding(.top, 50)
@@ -44,7 +44,7 @@ struct RichAlert<Buttons: View, Content: View>: View {
           ZStack(alignment: .top) {
             GeometryReader { geo in
               ScrollView {
-                self.content
+                content
                   .frame(maxWidth: .infinity)
                   .padding(.vertical, 5)
               }
@@ -59,17 +59,17 @@ struct RichAlert<Buttons: View, Content: View>: View {
             }
             
           }
-          self.buttons
+          buttons
           .frame(maxWidth: .infinity, alignment: .center)
           .padding()
         }
-        .frame(width: self.responsiveWidth(viewWidth: geo.size.width), height: self.responsiveHeight(viewHeight: geo.size.height))
+        .frame(width: responsiveWidth(viewWidth: geo.size.width), height: responsiveHeight(viewHeight: geo.size.height))
         Image("primary-logo")
           .resizable()
           .frame(width: 75, height: 75)
           .cornerRadius(5)
           .shadow(radius: 3)
-          .offset(y: -(self.responsiveHeight(viewHeight: geo.size.height)/2))
+          .offset(y: -(responsiveHeight(viewHeight: geo.size.height)/2))
       }
       .offset(
         x: (geo.size.width - responsiveWidth(viewWidth: geo.size.width)) / 2,

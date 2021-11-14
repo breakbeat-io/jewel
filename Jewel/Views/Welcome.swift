@@ -30,23 +30,23 @@ struct Welcome: View {
                 buttons:
       VStack {
         Button {
-          self.app.update(action: SettingsAction.firstTimeRun(false))
-          self.app.update(action: NavigationAction.showSettings(true))
+          app.update(action: SettingsAction.firstTimeRun(false))
+          app.update(action: NavigationAction.showSettings(true))
         } label: {
-          Text(self.setCuratorNameLabel)
+          Text(setCuratorNameLabel)
             .fontWeight(.light)
         }
         Divider()
           .padding(.bottom, 4)
         Button {
-          self.app.update(action: SettingsAction.firstTimeRun(false))
+          app.update(action: SettingsAction.firstTimeRun(false))
         } label: {
-          Text(self.startCollectionLabel)
+          Text(startCollectionLabel)
             .fontWeight(.bold)
         }
       })
     {
-      Text(self.description)
+      Text(description)
         .foregroundColor(Color.secondary)
     }
   }

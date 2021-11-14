@@ -15,8 +15,8 @@ struct CollectionLibrary: View {
   @EnvironmentObject var app: AppEnvironment
 
   private var showCollection: Binding<Bool> { Binding (
-    get: { self.app.state.navigation.showCollection },
-    set: { if self.app.state.navigation.showCollection { self.app.update(action: NavigationAction.showCollection($0)) } }
+    get: { app.state.navigation.showCollection },
+    set: { if app.state.navigation.showCollection { app.update(action: NavigationAction.showCollection($0)) } }
     )}
   
   private var collections: [Collection] {
@@ -26,7 +26,7 @@ struct CollectionLibrary: View {
   var body: some View {
     GeometryReader { geo in
       HStack {
-        if self.horizontalSizeClass == .regular {
+        if horizontalSizeClass == .regular {
           Spacer()
         }
         ScrollView {
@@ -35,7 +35,7 @@ struct CollectionLibrary: View {
             .fontWeight(.bold)
             .frame(minWidth: 0, maxWidth: .infinity, alignment: .topLeading)
             .padding(.top)
-          if self.collections.isEmpty {
+          if collections.isEmpty {
             VStack {
               Image(systemName: "music.note.list")
                 .font(.system(size: 40))
@@ -47,26 +47,26 @@ struct CollectionLibrary: View {
             .padding()
             .foregroundColor(Color.secondary)
           } else {
-            ForEach(self.collections) { collection in
+            ForEach(collections) { collection in
               CollectionCard(collection: collection)
-                .frame(height: self.app.state.navigation.collectionCardHeight)
+                .frame(height: app.state.navigation.collectionCardHeight)
             }
           }
         }
         .padding(.horizontal)
-        .frame(maxWidth: self.horizontalSizeClass == .regular ? Constants.regularMaxWidth : .infinity)
-        if self.horizontalSizeClass == .regular {
+        .frame(maxWidth: horizontalSizeClass == .regular ? Constants.regularMaxWidth : .infinity)
+        if horizontalSizeClass == .regular {
           Spacer()
         }
       }
       .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
-      .sheet(isPresented: self.showCollection) {
+      .sheet(isPresented: showCollection) {
         CollectionSheet()
-          .environmentObject(self.app)
+          .environmentObject(app)
       }
       .onAppear {
-        if geo.size.height != self.app.state.navigation.libraryViewHeight {
-          self.app.update(action: NavigationAction.setLibraryViewHeight(viewHeight: geo.size.height))
+        if geo.size.height != app.state.navigation.libraryViewHeight {
+          app.update(action: NavigationAction.setLibraryViewHeight(viewHeight: geo.size.height))
         }
       }
     }

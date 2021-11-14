@@ -24,7 +24,7 @@ struct AlbumDetail: View {
   }
   
   private var slot: Slot {
-    self.collection.slots[app.state.navigation.activeSlotIndex]
+    collection.slots[app.state.navigation.activeSlotIndex]
   }
   
   var body: some View {
@@ -40,16 +40,16 @@ struct AlbumDetail: View {
       .navigationBarItems(
         leading:
           Button {
-            self.app.update(action: NavigationAction.showAlbumDetail(false))
+            app.update(action: NavigationAction.showAlbumDetail(false))
           } label: {
             Text("Close")
               .font(.body)
           },
         trailing:
-          self.collection.type == .userCollection ?
+          collection.type == .userCollection ?
         Button {
-          self.app.update(action: LibraryAction.removeAlbumFromSlot(slotIndex: app.state.navigation.activeSlotIndex, collectionId: app.state.navigation.activeCollectionId!))
-          self.app.update(action: NavigationAction.showAlbumDetail(false))
+          app.update(action: LibraryAction.removeAlbumFromSlot(slotIndex: app.state.navigation.activeSlotIndex, collectionId: app.state.navigation.activeCollectionId!))
+          app.update(action: NavigationAction.showAlbumDetail(false))
         } label: {
           Text(Image(systemName: "eject"))
             .font(.body)
@@ -74,7 +74,7 @@ struct AlbumDetail: View {
                       albumArtistName: album.artistName,
                       albumArtwork: album.artwork?.url(width: 1000, height: 1000))
           PlaybackLinks(baseUrl: album.url!,
-                        playbackLinks: self.slot.playbackLinks)
+                        playbackLinks: slot.playbackLinks)
             .padding(.bottom)
 //          SongList(songs: songs, albumArtistName: album.artistName)
         }
@@ -97,7 +97,7 @@ struct AlbumDetail: View {
                         albumArtistName: album.artistName,
                         albumArtwork: album.artwork?.url(width: 1000, height: 1000))
             PlaybackLinks(baseUrl: album.url!,
-                          playbackLinks: self.slot.playbackLinks)
+                          playbackLinks: slot.playbackLinks)
               .padding(.bottom)
           }
           VStack {

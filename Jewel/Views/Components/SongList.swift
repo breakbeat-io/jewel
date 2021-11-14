@@ -24,9 +24,9 @@ struct SongList: View {
         ForEach(1..<discCount + 1, id: \.self) { discNumber in
           DiscSongList(
             discNumber: discNumber,
-            discSongs: self.songs.filter { $0.discNumber == discNumber },
+            discSongs: songs.filter { $0.discNumber == discNumber },
             showDiscNumber: (discCount > 1) ? true : false,
-            albumArtistName: self.albumArtistName
+            albumArtistName: albumArtistName
           )
         }
       }

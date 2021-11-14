@@ -21,12 +21,12 @@ struct SearchBar: View {
         "Search music",
         text: $searchTerm,
         onCommit: {
-          if self.app.state.navigation.showDebugMenu {
+          if app.state.navigation.showDebugMenu {
 //            RecordStore.exampleSearch()
           } else {
             Task {
               app.update(action: NavigationAction.gettingSearchResults(true))
-              async let searchResults = RecordStore.search(for: self.searchTerm)
+              async let searchResults = RecordStore.search(for: searchTerm)
               try? await app.update(action: SearchAction.populateSearchResults(results: searchResults))
               app.update(action: NavigationAction.gettingSearchResults(false))
             }
@@ -35,8 +35,8 @@ struct SearchBar: View {
         .foregroundColor(.primary)
         .keyboardType(.webSearch)
       Button {
-        self.searchTerm = ""
-        self.app.update(action: SearchAction.removeSearchResults)
+        searchTerm = ""
+        app.update(action: SearchAction.removeSearchResults)
       } label: {
         Text(Image(systemName: "xmark.circle.fill"))
           .opacity(searchTerm == "" ? 0 : 1)

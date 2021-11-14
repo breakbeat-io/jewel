@@ -22,7 +22,7 @@ struct AlbumCover: View {
 #if targetEnvironment(macCatalyst)
         HStack() {
           Spacer()
-          AsyncImage(url: self.albumArtwork) { image in
+          AsyncImage(url: albumArtwork) { image in
             image
               .resizable()
               .aspectRatio(contentMode: .fit)
@@ -35,7 +35,7 @@ struct AlbumCover: View {
           Spacer()
         }
 #else
-        AsyncImage(url: self.albumArtwork) { image in
+        AsyncImage(url: albumArtwork) { image in
           image
             .resizable()
             .aspectRatio(contentMode: .fit)
