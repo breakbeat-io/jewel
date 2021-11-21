@@ -47,6 +47,9 @@ struct PlaybackLinks: View {
                 .environmentObject(app)
             }
             .padding()
+          } else if app.state.navigation.gettingPlaybackLinks {
+            ProgressView()
+              .padding()
           }
         }
       }

@@ -36,6 +36,7 @@ struct Navigation {
   var showAlbumDetail: Bool = false
   var showPlaybackLinks: Bool = false
   
+  var gettingPlaybackLinks: Bool = false
   var gettingSearchResults: Bool = false
   
   var showCollection: Bool = false

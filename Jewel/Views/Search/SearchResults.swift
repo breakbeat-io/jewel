@@ -31,7 +31,7 @@ struct SearchResults: View {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
             } placeholder: {
-                ProgressView()
+              ProgressView()
             }
             .cornerRadius(Constants.cardCornerRadius)
             .frame(width: 50)
@@ -56,10 +56,8 @@ struct SearchResults: View {
           }
         }
       }
-    } else {
-      if app.state.navigation.gettingSearchResults {
-        ProgressView()
-      }
+    } else if app.state.navigation.gettingSearchResults {
+      ProgressView()
     }
   }
   
@@ -69,8 +67,10 @@ struct SearchResults: View {
       try? await app.update(action: LibraryAction.addAlbumToSlot(album: album, slotIndex: slotIndex, collectionId: collectionId))
       
       if let baseUrl = try? await album.url {
+        app.update(action: NavigationAction.gettingPlaybackLinks(true))
         async let playbackLinks = RecordStore.getPlaybackLinks(for: baseUrl)
         try? app.update(action: LibraryAction.setPlaybackLinks(baseUrl: baseUrl, playbackLinks: await playbackLinks, collectionId: collectionId))
+        app.update(action: NavigationAction.gettingPlaybackLinks(false))
       }
     }
   }
