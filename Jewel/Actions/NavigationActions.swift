@@ -48,9 +48,6 @@ func updateNavigation(navigation: Navigation, action: NavigationAction) -> Navig
   case let .showPlaybackLinks(showPlaybackLinksState):
     newNavigation.showPlaybackLinks = showPlaybackLinksState
     
-  case let .gettingPlaybackLinks(gettingPlaybackLinksState):
-    newNavigation.gettingPlaybackLinks = gettingPlaybackLinksState
-    
   case let .gettingSearchResults(gettingSearchResultsState):
     newNavigation.gettingSearchResults = gettingSearchResultsState
   
@@ -91,7 +88,6 @@ enum NavigationAction: AppAction {
   case showLibraryOptions(Bool)
   case showAlbumDetail(Bool)
   case showPlaybackLinks(Bool)
-  case gettingPlaybackLinks(Bool)
   case gettingSearchResults(Bool)
   case shareLinkError(Bool)
   case showLoadRecommendationsAlert(Bool)
@@ -124,8 +120,6 @@ enum NavigationAction: AppAction {
       return "\(type(of: self)): \(showing ? "Showing" : "Closing") album detail"
     case .showPlaybackLinks(let showing):
       return "\(type(of: self)): \(showing ? "Showing" : "Closing") alternative links"
-    case .gettingPlaybackLinks(let showing):
-      return "\(type(of: self)): \(showing ? "Showing" : "Hiding") playback links spinner"
     case .gettingSearchResults(let showing):
       return "\(type(of: self)): \(showing ? "Showing" : "Closing") search spinner"
     case .shareLinkError(let error):

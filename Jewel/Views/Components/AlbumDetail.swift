@@ -59,17 +59,6 @@ struct AlbumDetail: View {
       )
     }
     .navigationViewStyle(StackNavigationViewStyle())
-    .onAppear {
-      if slot.playbackLinks == nil {
-        guard let baseUrl = slot.album?.url else { return }
-        Task {
-          app.update(action: NavigationAction.gettingPlaybackLinks(true))
-          async let playbackLinks = RecordStore.getPlaybackLinks(for: baseUrl)
-          try? await app.update(action: LibraryAction.setPlaybackLinks(baseUrl: baseUrl, playbackLinks: playbackLinks, collectionId: collection.id))
-          app.update(action: NavigationAction.gettingPlaybackLinks(false))
-        }
-      }
-    }
   }
   
   struct Compact: View {

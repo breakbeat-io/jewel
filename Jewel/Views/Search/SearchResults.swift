@@ -45,10 +45,7 @@ struct SearchResults: View {
             }
             Spacer()
             Button {
-              Task {
-                async let album = RecordStore.getAlbum(withId: album.id)
-                try? await app.update(action: LibraryAction.addAlbumToSlot(album: album, slotIndex: slotIndex, collectionId: collectionId))
-              }
+              addAlbum(withId: album.id)
               app.update(action: SearchAction.removeSearchResults)
               app.update(action: NavigationAction.showSearch(false))
             } label: {
@@ -62,6 +59,18 @@ struct SearchResults: View {
     } else {
       if app.state.navigation.gettingSearchResults {
         ProgressView()
+      }
+    }
+  }
+  
+  private func addAlbum(withId albumId: MusicItemID) {
+    Task {
+      async let album = RecordStore.getAlbum(withId: albumId)
+      try? await app.update(action: LibraryAction.addAlbumToSlot(album: album, slotIndex: slotIndex, collectionId: collectionId))
+      
+      if let baseUrl = try? await album.url {
+        async let playbackLinks = RecordStore.getPlaybackLinks(for: baseUrl)
+        try? app.update(action: LibraryAction.setPlaybackLinks(baseUrl: baseUrl, playbackLinks: await playbackLinks, collectionId: collectionId))
       }
     }
   }
