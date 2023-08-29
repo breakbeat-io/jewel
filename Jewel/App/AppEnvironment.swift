@@ -16,16 +16,16 @@ final class AppEnvironment: ObservableObject {
   
   @Published private(set) var state: AppState {
     didSet {
-      AppState.save(state)
+      StateManager.save(state, key: "jewelState")
     }
   }
   
   private init() {
-    if let savedState = AppState.loadSavedState() {
+    if let savedState = StateManager.loadSavedState("jewelState") {
       state = savedState
     } else {
       os_log("💎 State > No current saved state found, creating new")
-      state = AppState.createNewState()
+      state = StateManager.createNewState()
     }
   }
   
