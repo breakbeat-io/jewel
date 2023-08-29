@@ -25,7 +25,9 @@ struct AppState: Codable {
   
   static func save(_ state: AppState) {
     do {
-      let encodedState = try JSONEncoder().encode(state)
+      let encoder = JSONEncoder()
+      encoder.keyEncodingStrategy = .convertToSnakeCase
+      let encodedState = try encoder.encode(state)
       UserDefaults.standard.set(encodedState, forKey: "jewelState")
     } catch {
       os_log("💎 State > Error saving state: %s", error.localizedDescription)
@@ -38,7 +40,9 @@ struct AppState: Codable {
     
     os_log("💎 State > Found a current saved state")
     do {
-      var state = try JSONDecoder().decode(AppState.self, from: savedState)
+      let decoder = JSONDecoder()
+      decoder.keyDecodingStrategy = .convertFromSnakeCase
+      var state = try decoder.decode(AppState.self, from: savedState)
       state.navigation.onRotationId = state.library.onRotation.id
       state.navigation.activeCollectionId = state.library.onRotation.id
       os_log("💎 State > Loaded a current saved state")
