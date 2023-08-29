@@ -9,6 +9,6 @@
 import Foundation
 
 struct Settings: Codable {
-  var preferredMusicPlatform: Int = 0
+  var preferredMusicPlatform: OdesliPlatform = .appleMusic
   var firstTimeRun: Bool = true
 }

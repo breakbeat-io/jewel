@@ -16,11 +16,11 @@ struct PlaybackLinks: View {
   let playbackLinks: OdesliResponse?
   
   private var playbackLink: (name: String, url: URL?) {
-    let preferredProvider = OdesliPlatform.allCases[AppEnvironment.global.state.settings.preferredMusicPlatform]
-    if let providerLink = playbackLinks?.linksByPlatform[preferredProvider.rawValue] {
-      return (preferredProvider.friendlyName, providerLink.url)
+    let preferredMusicPlatform = AppEnvironment.global.state.settings.preferredMusicPlatform
+    if let musicPlatformLink = playbackLinks?.linksByPlatform[preferredMusicPlatform.rawValue] {
+      return (String(describing: preferredMusicPlatform), musicPlatformLink.url)
     } else {
-      return (OdesliPlatform.appleMusic.friendlyName, baseUrl)
+      return (String(describing: OdesliPlatform.appleMusic), baseUrl)
     }
   }
   

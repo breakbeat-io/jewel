@@ -34,13 +34,13 @@ func updateSettings(settings: Settings, action: SettingsAction) -> Settings {
 enum SettingsAction: AppAction {
   
   case firstTimeRun(Bool)
-  case setPreferredPlatform(platform: Int)
+  case setPreferredPlatform(platform: OdesliPlatform)
   case reset
   
   var description: String {
     switch self {
-    case .setPreferredPlatform(let platformId):
-      return "\(type(of: self)): Setting preferred platform to \(OdesliPlatform.allCases[platformId].friendlyName)"
+    case .setPreferredPlatform(let platform):
+      return "\(type(of: self)): Setting preferred platform to \(String(describing: platform))"
     case .firstTimeRun(let firstTime):
       return "\(type(of: self)): \(firstTime ? "Setting to" : "Clearing") first time run"
     case .reset:

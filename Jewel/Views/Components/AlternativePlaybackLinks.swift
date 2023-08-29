@@ -37,7 +37,7 @@ struct AlternativePlaybackLinks: View {
                 }
                 .frame(width: 40, alignment: .center)
                 .foregroundColor(.secondary)
-                Text(platform.friendlyName)
+                Text(String(describing: platform))
                   .foregroundColor(.primary)
               }
             }

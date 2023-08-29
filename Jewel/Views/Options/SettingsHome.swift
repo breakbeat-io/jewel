@@ -18,7 +18,7 @@ struct SettingsHome: View {
     get: { app.state.library.onRotation.curator },
     set: { newCurator = $0 }
     )}
-  private var preferredMusicPlatform: Binding<Int> { Binding (
+  private var preferredMusicPlatform: Binding<OdesliPlatform> { Binding (
     get: { app.state.settings.preferredMusicPlatform },
     set: { app.update(action: SettingsAction.setPreferredPlatform(platform: $0)) }
     )
@@ -43,9 +43,9 @@ struct SettingsHome: View {
             }
           }
           Section(footer: Text("Use this service for playback if available, otherwise use Apple Music.")) {
-            Picker(selection: preferredMusicPlatform, label: Text("Playback Service")) {
-              ForEach(0 ..< OdesliPlatform.allCases.count, id: \.self) {
-                Text(OdesliPlatform.allCases[$0].friendlyName)
+            Picker("Playback Service", selection: preferredMusicPlatform) {
+              ForEach(OdesliPlatform.allCases) { platform in
+                Text(String(describing: platform))
               }
             }
           }

@@ -35,24 +35,7 @@ struct OdesliEntity: Codable {
   let platforms: [OdesliPlatform]
 }
 
-enum OdesliApiProvider: String, Codable, CaseIterable {
-  case spotify
-  case itunes
-  case youtube
-  case google
-  case pandora
-  case deezer
-  case tidal
-  case amazon
-  case soundcloud
-  case napster
-  case yandex
-  case spinrilla
-  case audius
-  case bandcamp
-}
-
-enum OdesliPlatform: String, Codable, CaseIterable {
+enum OdesliPlatform: String, Codable, CaseIterable, Identifiable, CustomStringConvertible {
   case appleMusic
   case itunes
   case spotify
@@ -70,9 +53,13 @@ enum OdesliPlatform: String, Codable, CaseIterable {
   case yandex
   case spinrilla
   case audius
-  case bandcamp
+  case audiomack
+  case anghami
+  case boomplay
   
-  var friendlyName: String {
+  var id: Self { self }
+  
+  var description: String {
     switch self {
     case .appleMusic:
       return "Apple Music"
@@ -108,8 +95,12 @@ enum OdesliPlatform: String, Codable, CaseIterable {
       return "Spinrilla"
     case .audius:
       return "Audius"
-    case .bandcamp:
-      return "Bandcamp"
+    case .audiomack:
+      return "Audiomack"
+    case .anghami:
+      return "Anghami"
+    case .boomplay:
+      return "Boomplay"
     }
   }
   
@@ -129,12 +120,8 @@ enum OdesliPlatform: String, Codable, CaseIterable {
       return "\u{f1a0}"
     case .googleStore:
       return "\u{f3ab}"
-    case .pandora:
-      return nil
     case .deezer:
       return "\u{e077}"
-    case .tidal:
-      return nil
     case .amazonStore:
       return "\u{f270}"
     case .amazonMusic:
@@ -145,14 +132,28 @@ enum OdesliPlatform: String, Codable, CaseIterable {
       return "\u{f3d2}"
     case .yandex:
       return "\u{f413}"
-    case .spinrilla:
+    default:
       return nil
-    case .audius:
-      return nil
-    case .bandcamp:
-      return "\u{f2d5}"
     }
   }
   
 }
 
+enum OdesliApiProvider: String, Codable, CaseIterable {
+  case itunes
+  case spotify
+  case youtube
+  case google
+  case pandora
+  case deezer
+  case tidal
+  case amazon
+  case soundcloud
+  case napster
+  case yandex
+  case spinrilla
+  case audius
+  case audiomack
+  case anghami
+  case boomplay
+}
