@@ -40,7 +40,7 @@ struct CollectionLibrary: View {
               Image(systemName: "music.note.list")
                 .font(.system(size: 40))
                 .padding(.bottom)
-              Text("Collections you have saved will appear here.")
+              Text("Collections you have saved or created will appear here.")
                 .multilineTextAlignment(.center)
             }
             .padding()

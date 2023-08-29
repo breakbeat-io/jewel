@@ -90,7 +90,7 @@ struct RichAlert<Buttons: View, Content: View>: View {
     if verticalSizeClass == .compact {
       return viewHeight - 85
     } else if horizontalSizeClass == .compact {
-      return viewHeight * 0.8
+      return viewHeight * 0.55
     } else {
       return 500
     }
