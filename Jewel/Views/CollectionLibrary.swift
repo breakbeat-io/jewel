@@ -30,7 +30,7 @@ struct CollectionLibrary: View {
           Spacer()
         }
         ScrollView {
-          Text("Collection Library")
+          Text("Collections")
             .font(.title)
             .fontWeight(.bold)
             .frame(minWidth: 0, maxWidth: .infinity, alignment: .topLeading)
@@ -40,10 +40,9 @@ struct CollectionLibrary: View {
               Image(systemName: "music.note.list")
                 .font(.system(size: 40))
                 .padding(.bottom)
-              Text("Collections you have saved or that people have shared with you will appear here.")
+              Text("Collections you have saved will appear here.")
                 .multilineTextAlignment(.center)
             }
-            .frame(minWidth: 0, maxWidth: .infinity, alignment: .topLeading)
             .padding()
             .foregroundColor(Color.secondary)
           } else {

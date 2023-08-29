@@ -13,16 +13,6 @@ struct Home: View {
   
   @EnvironmentObject var app: AppEnvironment
   
-  private var receivedCollectionCued: Binding<Bool> {
-    Binding (
-      get: { app.state.library.cuedCollection != nil },
-      set: { _ = $0 }
-    )
-  }
-  private var showingRichAlert: Bool {
-    app.state.settings.firstTimeRun || receivedCollectionCued.wrappedValue
-  }
-  
   var body: some View {
     ZStack {
       Color(UIColor.systemBackground)
@@ -45,13 +35,10 @@ struct Home: View {
         }
         .background(Color(UIColor.systemBackground))
       }
-      .disabled(showingRichAlert)
-      .blur(radius: showingRichAlert ? 10 : 0)
+      .disabled(app.state.settings.firstTimeRun)
+      .blur(radius: app.state.settings.firstTimeRun ? 10 : 0)
       if app.state.settings.firstTimeRun {
         Welcome()
-      }
-      if receivedCollectionCued.wrappedValue {
-        CollectionReceived()
       }
     }
   }

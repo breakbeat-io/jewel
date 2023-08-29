@@ -46,16 +46,14 @@ struct AlbumDetail: View {
               .font(.body)
           },
         trailing:
-          collection.type == .userCollection ?
-        Button {
-          app.update(action: LibraryAction.removeAlbumFromSlot(slotIndex: app.state.navigation.activeSlotIndex, collectionId: app.state.navigation.activeCollectionId!))
-          app.update(action: NavigationAction.showAlbumDetail(false))
-        } label: {
-          Text(Image(systemName: "eject"))
-            .font(.body)
-            .foregroundColor(.red)
-        }
-        : nil
+          Button {
+            app.update(action: LibraryAction.removeAlbumFromSlot(slotIndex: app.state.navigation.activeSlotIndex, collectionId: app.state.navigation.activeCollectionId!))
+            app.update(action: NavigationAction.showAlbumDetail(false))
+          } label: {
+            Text(Image(systemName: "eject"))
+              .font(.body)
+              .foregroundColor(.red)
+          }
       )
     }
     .navigationViewStyle(StackNavigationViewStyle())

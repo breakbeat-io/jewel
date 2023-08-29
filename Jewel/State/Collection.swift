@@ -10,9 +10,7 @@ import Foundation
 
 struct Collection: Identifiable, Codable {
   var id = UUID()
-  var type: CollectionType
   var name: String
-  var curator: String
   var slots: [Slot] = {
     var tmpSlots = [Slot]()
     for _ in 0..<8 {
@@ -22,21 +20,9 @@ struct Collection: Identifiable, Codable {
     return tmpSlots
   }()
   
-  var shareLinkLong: URL?
-  var shareLinkShort: URL?
-  
   enum CodingKeys: CodingKey {
     case id
     case name
-    case type
-    case curator
     case slots
-    case shareLinkLong
-    case shareLinkShort
   }
-}
-
-enum CollectionType: String, Codable {
-  case userCollection
-  case sharedCollection
 }

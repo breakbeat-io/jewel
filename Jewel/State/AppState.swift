@@ -52,7 +52,7 @@ struct AppState: Codable {
   
   static func createNewState() -> AppState {
     os_log("💎 State > Creating a new state")
-    let onRotationCollection = Collection(type: .userCollection, name: Navigation.Tab.onRotation.rawValue, curator: "A Music Lover")
+    let onRotationCollection = Collection(name: Navigation.Tab.onRotation.rawValue)
     let library = Library(onRotation: onRotationCollection, collections: [Collection]())
     var state = AppState(settings: Settings(), library: library)
     state.navigation.onRotationId = onRotationCollection.id

@@ -62,6 +62,7 @@ struct CollectionActionButtons: View {
       } label: {
         Text(Image(systemName: "ellipsis"))
           .font(.body)
+          .foregroundColor(Color(UIColor.secondaryLabel))
       }
       .padding(.leading)
       .sheet(isPresented: showCollectionOptions) {
@@ -78,11 +79,6 @@ struct LibraryActionButtons: View {
   
   @EnvironmentObject var app: AppEnvironment
   
-  private var showLibraryOptions: Binding<Bool> { Binding (
-    get: { app.state.navigation.showLibraryOptions },
-    set: { if app.state.navigation.showLibraryOptions { app.update(action: NavigationAction.showLibraryOptions($0)) } }
-  )}
-  
   var body: some View {
     HStack {
       Spacer()
@@ -93,17 +89,7 @@ struct LibraryActionButtons: View {
       } label: {
         Text(Image(systemName: "plus"))
           .font(.body)
-      }
-      Button {
-        app.update(action: NavigationAction.showLibraryOptions(true))
-      } label: {
-        Text(Image(systemName: "ellipsis"))
-          .font(.body)
-      }
-      .padding(.leading)
-      .sheet(isPresented: showLibraryOptions) {
-        LibraryOptions()
-          .environmentObject(app)
+          .foregroundColor(Color(UIColor.secondaryLabel))
       }
     }
     .padding(.vertical)

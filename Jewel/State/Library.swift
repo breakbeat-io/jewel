@@ -11,9 +11,7 @@ import Foundation
 struct Library: Codable {
   
   var onRotation: Collection
-  
   var collections: [Collection]
-  var cuedCollection: SharedCollectionManager.ShareableCollection?
   
   enum CodingKeys: CodingKey {
     case onRotation

@@ -29,22 +29,11 @@ struct CollectionOptions: View {
     set: { newCollectionName = $0 }
   )}
   
-  @State private var newCollectionCurator: String = ""
-  private var collectionCurator: Binding<String> { Binding (
-    get: { collection?.curator ?? ""},
-    set: { newCollectionCurator = $0 }
-  )}
-  
   var body: some View {
     if let collection = collection { // this if has to be outside the NavigationView else LibraryAction.removeCollection creates an exception ¯\_(ツ)_/¯
       NavigationView {
         Form {
           Section {
-            
-            #if !targetEnvironment(macCatalyst)
-            ShareCollectionButton(collection: collection)
-            #endif
-            
             if app.state.navigation.onRotationActive {
               Button {
                 app.update(action: NavigationAction.switchTab(to: .library))
@@ -55,7 +44,7 @@ struct CollectionOptions: View {
                   Text(Image(systemName: "arrow.right.square"))
                     .font(.body)
                     .frame(width: Constants.optionsButtonIconWidth)
-                  Text("Add to my Collection Library")
+                  Text("Save to Collections")
                     .font(.body)
                 }
               }
@@ -107,23 +96,7 @@ struct CollectionOptions: View {
                 .font(.body)
                 .foregroundColor(.accentColor)
               }
-              HStack {
-                Text("Curator")
-                  .font(.body)
-                TextField(
-                  collectionCurator.wrappedValue,
-                  text: collectionCurator,
-                  onEditingChanged: { _ in
-                    if !newCollectionCurator.isEmpty && newCollectionCurator != collection.curator {
-                      app.update(action: LibraryAction.setCollectionCurator(curator: newCollectionCurator.trimmingCharacters(in: .whitespaces), collectionId: collection.id))
-                    }
-                  }
-                )
-                .font(.body)
-                .foregroundColor(.accentColor)
-              }
             }
-            .disabled(collection.type != .userCollection)
           }
         }
         .navigationBarTitle("\(app.state.navigation.onRotationActive ? Navigation.Tab.onRotation.rawValue : "Collection") Options", displayMode: .inline)
@@ -141,36 +114,3 @@ struct CollectionOptions: View {
     }
   }
 }
-
-
-
-struct ShareCollectionButton: View {
-  
-  @EnvironmentObject var app: AppEnvironment
-  
-  private var showSharing: Binding<Bool> { Binding (
-    get: { app.state.navigation.showSharing },
-    set: { if app.state.navigation.showSharing { app.update(action: NavigationAction.showSharing($0)) } }
-  )}
-  
-  var collection: Collection
-  
-  var body: some View {
-    Button {
-      app.update(action: NavigationAction.showSharing(true))
-    } label: {
-      HStack {
-        Text(Image(systemName: "square.and.arrow.up"))
-          .font(.body)
-          .frame(width: Constants.optionsButtonIconWidth)
-        Text("Share \(app.state.navigation.onRotationActive ? Navigation.Tab.onRotation.rawValue : "Collection")")
-          .font(.body)
-      }
-    }
-    .sheet(isPresented: showSharing) {
-      ShareSheetLoader(collection: collection)
-        .environmentObject(app)
-    }
-  }
-}
-

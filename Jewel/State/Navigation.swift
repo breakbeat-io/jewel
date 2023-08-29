@@ -26,12 +26,10 @@ struct Navigation {
   }
   enum Tab: String {
     case onRotation = "On Rotation"
-    case library = "Collection Library"
+    case library = "Collections"
   }
   
   var showSearch: Bool = false
-  var showSharing: Bool = false
-  var showLoadRecommendationsAlert: Bool = false
   
   var showAlbumDetail: Bool = false
   var showPlaybackLinks: Bool = false
@@ -43,8 +41,6 @@ struct Navigation {
   var showCollectionOptions: Bool = false
   
   var showLibraryOptions: Bool = false
-  
-  var shareLinkError = false
   
   var showSettings: Bool = false
   var showDebugMenu: Bool = false

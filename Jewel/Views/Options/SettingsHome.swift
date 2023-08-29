@@ -11,13 +11,7 @@ import SwiftUI
 struct SettingsHome: View {
   
   @EnvironmentObject private var app: AppEnvironment
-  
-  @State private var newCurator: String = ""
 
-  private var curator: Binding<String> { Binding (
-    get: { app.state.library.onRotation.curator },
-    set: { newCurator = $0 }
-    )}
   private var preferredMusicPlatform: Binding<OdesliPlatform> { Binding (
     get: { app.state.settings.preferredMusicPlatform },
     set: { app.update(action: SettingsAction.setPreferredPlatform(platform: $0)) }
@@ -28,20 +22,6 @@ struct SettingsHome: View {
     NavigationView {
       VStack {
         Form {
-          Section(footer: Text("Use this Curator name when sharing your On Rotation collection and when creating new collections.")) {
-            HStack {
-              Text("Curator")
-              TextField(
-                curator.wrappedValue,
-                text: curator,
-                onEditingChanged: { _ in
-                  if !newCurator.isEmpty && newCurator != app.state.library.onRotation.curator {
-                    app.update(action: LibraryAction.setCollectionCurator(curator: newCurator.trimmingCharacters(in: .whitespaces), collectionId: app.state.navigation.onRotationId!))
-                  }
-                }
-              ).foregroundColor(.accentColor)
-            }
-          }
           Section(footer: Text("Use this service for playback if available, otherwise use Apple Music.")) {
             Picker("Playback Service", selection: preferredMusicPlatform) {
               ForEach(OdesliPlatform.allCases) { platform in

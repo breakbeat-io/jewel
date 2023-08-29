@@ -29,9 +29,6 @@ func updateNavigation(navigation: Navigation, action: NavigationAction) -> Navig
     
   case let .showSearch(showSearchState):
     newNavigation.showSearch = showSearchState
-    
-  case let .showSharing(showSharingState):
-    newNavigation.showSharing = showSharingState
 
   case let .showCollection(showCollectionState):
     newNavigation.showCollection = showCollectionState
@@ -53,12 +50,6 @@ func updateNavigation(navigation: Navigation, action: NavigationAction) -> Navig
   
   case let .gettingSearchResults(gettingSearchResultsState):
     newNavigation.gettingSearchResults = gettingSearchResultsState
-  
-  case let .shareLinkError(shareLinkErrorState):
-    newNavigation.shareLinkError = shareLinkErrorState
-    
-  case let .showLoadRecommendationsAlert(loadRecommendationsAlertState):
-    newNavigation.showLoadRecommendationsAlert = loadRecommendationsAlertState
     
   case let .setCollectionViewHeight(viewHeight):
     newNavigation.collectionViewHeight = viewHeight
@@ -85,7 +76,6 @@ enum NavigationAction: AppAction {
   case setActiveSlotIndex(slotIndex: Int)
   case showSettings(Bool)
   case showSearch(Bool)
-  case showSharing(Bool)
   case showCollection(Bool)
   case showCollectionOptions(Bool)
   case showLibraryOptions(Bool)
@@ -93,8 +83,6 @@ enum NavigationAction: AppAction {
   case showPlaybackLinks(Bool)
   case gettingPlaybackLinks(Bool)
   case gettingSearchResults(Bool)
-  case shareLinkError(Bool)
-  case showLoadRecommendationsAlert(Bool)
   case setCollectionViewHeight(viewHeight: CGFloat)
   case setLibraryViewHeight(viewHeight: CGFloat)
   case reset
@@ -112,8 +100,6 @@ enum NavigationAction: AppAction {
       return "\(type(of: self)): \(showing ? "Showing" : "Closing") settings"
     case .showSearch(let showing):
       return "\(type(of: self)): \(showing ? "Showing" : "Closing") search"
-    case .showSharing(let showing):
-      return "\(type(of: self)): \(showing ? "Showing" : "Closing") sharing"
     case .showCollection(let showing):
       return "\(type(of: self)): \(showing ? "Showing" : "Closing") collection"
     case .showCollectionOptions(let showing):
@@ -128,10 +114,6 @@ enum NavigationAction: AppAction {
       return "\(type(of: self)): \(showing ? "Showing" : "Hiding") playback links spinner"
     case .gettingSearchResults(let showing):
       return "\(type(of: self)): \(showing ? "Showing" : "Closing") search spinner"
-    case .shareLinkError(let error):
-      return "\(type(of: self)): \(error ? "Setting a" : "Clearing any") share link error"
-    case .showLoadRecommendationsAlert(let showing):
-      return "\(type(of: self)): \(showing ? "Showing" : "Closing") load recommendations alert"
     case .setCollectionViewHeight(let height):
       return "\(type(of: self)): Setting collection view height to \(height)"
     case .setLibraryViewHeight(let height):

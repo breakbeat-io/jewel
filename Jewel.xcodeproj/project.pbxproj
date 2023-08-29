@@ -23,24 +23,18 @@
 		D24925A424814CB60011F409 /* RecordStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24925A324814CB60011F409 /* RecordStore.swift */; };
 		D24C80D124899D0C00EFACD8 /* Library.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24C80D024899D0C00EFACD8 /* Library.swift */; };
 		D2603DFF252083EA00B79311 /* JewelApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2603DFE252083EA00B79311 /* JewelApp.swift */; };
-		D262E881270C352C002C6BD8 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = D262E880270C34E8002C6BD8 /* Secrets.swift */; };
 		D26672FC2738765F007A5193 /* AppleMusicAuthorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = D26672FB2738765F007A5193 /* AppleMusicAuthorization.swift */; };
 		D2668D4924B1DBB0002922F4 /* screenshotSearch.json in Resources */ = {isa = PBXBuildFile; fileRef = D2668D4824B1DBB0002922F4 /* screenshotSearch.json */; };
 		D27FB80E24868AF60014C05D /* Odesli.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27FB80D24868AF60014C05D /* Odesli.swift */; };
 		D27FB81024868B320014C05D /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27FB80F24868B320014C05D /* Settings.swift */; };
 		D27FB812248693AF0014C05D /* Slot.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27FB811248693AF0014C05D /* Slot.swift */; };
 		D27FB8202486B46D0014C05D /* fa-brands.otf in Resources */ = {isa = PBXBuildFile; fileRef = D27FB81F2486B46D0014C05D /* fa-brands.otf */; };
-		D2881748248BE81400EB47C2 /* SharedCollectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2881747248BE81400EB47C2 /* SharedCollectionManager.swift */; };
-		D288174A248BEABF00EB47C2 /* ShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2881749248BEABF00EB47C2 /* ShareSheet.swift */; };
-		D288174D248BEDAA00EB47C2 /* ShareSheetLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D288174C248BEDAA00EB47C2 /* ShareSheetLoader.swift */; };
 		D28AD1B5248BACB2009B584A /* PlaybackLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28AD1B4248BACB2009B584A /* PlaybackLink.swift */; };
 		D28AD1B7248BB148009B584A /* PlaybackLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28AD1B6248BB148009B584A /* PlaybackLinks.swift */; };
 		D28AD1B9248BB5D4009B584A /* AlbumDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28AD1B8248BB5D4009B584A /* AlbumDetail.swift */; };
 		D2945E1C249C0FC100AE6CA5 /* Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2945E1B249C0FC100AE6CA5 /* Navigation.swift */; };
 		D2945E1E249C249C00AE6CA5 /* SettingsHome.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2945E1D249C249C00AE6CA5 /* SettingsHome.swift */; };
-		D29CB1C524A631EB0051BA96 /* CollectionReceived.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29CB1C424A631EB0051BA96 /* CollectionReceived.swift */; };
 		D29CB1C724A632520051BA96 /* RichAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = D29CB1C624A632520051BA96 /* RichAlert.swift */; };
-		D2A449CC249BAECE006E0A12 /* LibraryOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A449CB249BAECE006E0A12 /* LibraryOptions.swift */; };
 		D2AB8467248113EB008B57F9 /* AppAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AB8466248113EB008B57F9 /* AppAction.swift */; };
 		D2AB846B2481159D008B57F9 /* AppEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AB846A2481159D008B57F9 /* AppEnvironment.swift */; };
 		D2AC120B24859E2300C52D9E /* AddAlbumCardButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2AC120A24859E2300C52D9E /* AddAlbumCardButton.swift */; };
@@ -84,26 +78,19 @@
 		D24925A324814CB60011F409 /* RecordStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordStore.swift; sourceTree = "<group>"; };
 		D24C80D024899D0C00EFACD8 /* Library.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Library.swift; sourceTree = "<group>"; };
 		D2603DFE252083EA00B79311 /* JewelApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JewelApp.swift; sourceTree = "<group>"; };
-		D262E880270C34E8002C6BD8 /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
-		D262E882270C3684002C6BD8 /* Secrets.README */ = {isa = PBXFileReference; lastKnownFileType = text; path = Secrets.README; sourceTree = "<group>"; };
 		D26672FB2738765F007A5193 /* AppleMusicAuthorization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMusicAuthorization.swift; sourceTree = "<group>"; };
 		D2668D4824B1DBB0002922F4 /* screenshotSearch.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = screenshotSearch.json; sourceTree = "<group>"; };
 		D27FB80D24868AF60014C05D /* Odesli.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Odesli.swift; sourceTree = "<group>"; };
 		D27FB80F24868B320014C05D /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		D27FB811248693AF0014C05D /* Slot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Slot.swift; sourceTree = "<group>"; };
 		D27FB81F2486B46D0014C05D /* fa-brands.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fa-brands.otf"; sourceTree = "<group>"; };
-		D2881747248BE81400EB47C2 /* SharedCollectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedCollectionManager.swift; sourceTree = "<group>"; };
-		D2881749248BEABF00EB47C2 /* ShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheet.swift; sourceTree = "<group>"; };
-		D288174C248BEDAA00EB47C2 /* ShareSheetLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheetLoader.swift; sourceTree = "<group>"; };
 		D288174E248D148E00EB47C2 /* Listen Later.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Listen Later.entitlements"; sourceTree = "<group>"; };
 		D28AD1B4248BACB2009B584A /* PlaybackLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackLink.swift; sourceTree = "<group>"; };
 		D28AD1B6248BB148009B584A /* PlaybackLinks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackLinks.swift; sourceTree = "<group>"; };
 		D28AD1B8248BB5D4009B584A /* AlbumDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumDetail.swift; sourceTree = "<group>"; };
 		D2945E1B249C0FC100AE6CA5 /* Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigation.swift; sourceTree = "<group>"; };
 		D2945E1D249C249C00AE6CA5 /* SettingsHome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHome.swift; sourceTree = "<group>"; };
-		D29CB1C424A631EB0051BA96 /* CollectionReceived.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionReceived.swift; sourceTree = "<group>"; };
 		D29CB1C624A632520051BA96 /* RichAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RichAlert.swift; sourceTree = "<group>"; };
-		D2A449CB249BAECE006E0A12 /* LibraryOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryOptions.swift; sourceTree = "<group>"; };
 		D2AB8466248113EB008B57F9 /* AppAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAction.swift; sourceTree = "<group>"; };
 		D2AB846A2481159D008B57F9 /* AppEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnvironment.swift; sourceTree = "<group>"; };
 		D2AC120A24859E2300C52D9E /* AddAlbumCardButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAlbumCardButton.swift; sourceTree = "<group>"; };
@@ -226,27 +213,16 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
-		D288174B248BEB0C00EB47C2 /* Sharing */ = {
-			isa = PBXGroup;
-			children = (
-				D288174C248BEDAA00EB47C2 /* ShareSheetLoader.swift */,
-				D2881749248BEABF00EB47C2 /* ShareSheet.swift */,
-			);
-			path = Sharing;
-			sourceTree = "<group>";
-		};
 		D2AB846C2481168C008B57F9 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				D2C3A0A4249FFEFF00AA7266 /* Home.swift */,
 				D26672FB2738765F007A5193 /* AppleMusicAuthorization.swift */,
 				D23C398D248FD2DF00AD237E /* Welcome.swift */,
-				D29CB1C424A631EB0051BA96 /* CollectionReceived.swift */,
 				D2C3A0A824A01AEF00AA7266 /* NavBar.swift */,
 				D2C3A0A624A01ADE00AA7266 /* OnRotation.swift */,
 				D2C3A0AA24A0202100AA7266 /* CollectionLibrary.swift */,
 				D2C810ED24A4FF47003D9B59 /* CollectionSheet.swift */,
-				D288174B248BEB0C00EB47C2 /* Sharing */,
 				D2B4FD8F248456940028D7A4 /* Options */,
 				D24925932481410F0011F409 /* Search */,
 				D2F8D162248A7E1A008C29C3 /* Components */,
@@ -260,8 +236,6 @@
 				D22155892481114B00A1F04A /* Info.plist */,
 				D2603DFE252083EA00B79311 /* JewelApp.swift */,
 				D2AB846A2481159D008B57F9 /* AppEnvironment.swift */,
-				D262E880270C34E8002C6BD8 /* Secrets.swift */,
-				D262E882270C3684002C6BD8 /* Secrets.README */,
 				D288174E248D148E00EB47C2 /* Listen Later.entitlements */,
 			);
 			path = App;
@@ -280,7 +254,6 @@
 		D2AC120D2485A1B700C52D9E /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				D2881747248BE81400EB47C2 /* SharedCollectionManager.swift */,
 				D24925A324814CB60011F409 /* RecordStore.swift */,
 				D27FB80D24868AF60014C05D /* Odesli.swift */,
 			);
@@ -292,7 +265,6 @@
 			children = (
 				D2945E1D249C249C00AE6CA5 /* SettingsHome.swift */,
 				D2B4FD90248456B20028D7A4 /* CollectionOptions.swift */,
-				D2A449CB249BAECE006E0A12 /* LibraryOptions.swift */,
 			);
 			path = Options;
 			sourceTree = "<group>";
@@ -419,7 +391,6 @@
 				D27FB80E24868AF60014C05D /* Odesli.swift in Sources */,
 				D28AD1B9248BB5D4009B584A /* AlbumDetail.swift in Sources */,
 				D2945E1E249C249C00AE6CA5 /* SettingsHome.swift in Sources */,
-				D288174D248BEDAA00EB47C2 /* ShareSheetLoader.swift in Sources */,
 				D2AC12122485A67000C52D9E /* Search.swift in Sources */,
 				D2492587248117710011F409 /* AppState.swift in Sources */,
 				D2D78591248AED2900E0CC63 /* AlternativePlaybackLinks.swift in Sources */,
@@ -439,7 +410,6 @@
 				D20CE85D24AF7AEA00039202 /* SearchActions.swift in Sources */,
 				D2AB846B2481159D008B57F9 /* AppEnvironment.swift in Sources */,
 				D2C3A0A724A01ADE00AA7266 /* OnRotation.swift in Sources */,
-				D2A449CC249BAECE006E0A12 /* LibraryOptions.swift in Sources */,
 				D2AC12102485A65D00C52D9E /* Collection.swift in Sources */,
 				D2B4FD95248458300028D7A4 /* Extensions.swift in Sources */,
 				D2B4FD91248456B20028D7A4 /* CollectionOptions.swift in Sources */,
@@ -451,12 +421,8 @@
 				D2C3A0A5249FFEFF00AA7266 /* Home.swift in Sources */,
 				D2603DFF252083EA00B79311 /* JewelApp.swift in Sources */,
 				D28AD1B5248BACB2009B584A /* PlaybackLink.swift in Sources */,
-				D288174A248BEABF00EB47C2 /* ShareSheet.swift in Sources */,
 				D2AB8467248113EB008B57F9 /* AppAction.swift in Sources */,
 				D26672FC2738765F007A5193 /* AppleMusicAuthorization.swift in Sources */,
-				D262E881270C352C002C6BD8 /* Secrets.swift in Sources */,
-				D29CB1C524A631EB0051BA96 /* CollectionReceived.swift in Sources */,
-				D2881748248BE81400EB47C2 /* SharedCollectionManager.swift in Sources */,
 				D2F8D166248A7E42008C29C3 /* DiscTrackList.swift in Sources */,
 				D2DB0FCD24A7782B006A5835 /* RecordStore+Screenshots.swift in Sources */,
 				D2F8D14E248A666C008C29C3 /* CardArtworkComposite.swift in Sources */,

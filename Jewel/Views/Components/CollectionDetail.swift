@@ -26,9 +26,6 @@ struct CollectionDetail: View {
   private var slots: [Slot] {
     collection.slots
   }
-  private var editable: Bool {
-    collection.type == .userCollection ? true : false
-  }
   private var collectionEmpty: Bool {
     collection.slots.filter( { $0.album != nil }).count == 0
   }
@@ -40,17 +37,11 @@ struct CollectionDetail: View {
           Spacer()
         }
         ScrollView {
-          VStack(alignment: .leading) {
-            Text(collection.name)
-              .font(.title)
-              .fontWeight(.bold)
-              .padding(.top)
-            Text("by \(collection.curator)")
-              .font(.subheadline)
-              .fontWeight(.light)
-              .foregroundColor(.secondary)
-          }
-          .frame(minWidth: 0, maxWidth: .infinity, alignment: .topLeading)
+          Text(collection.name)
+            .font(.title)
+            .fontWeight(.bold)
+            .padding(.top)
+            .frame(minWidth: 0, maxWidth: .infinity, alignment: .topLeading)
           ForEach(slots.indices, id: \.self) { slotIndex in
             Group {
               if slots[slotIndex].album != nil {
@@ -62,11 +53,8 @@ struct CollectionDetail: View {
                     AlbumCard(albumTitle: album.title, albumArtistName: album.artistName, albumArtwork: album.artwork?.url(width: 1000, height: 1000))
                   }
                 }
-              } else if editable {
-                AddAlbumCardButton(slotIndex: slotIndex, collectionId: collection.id)
               } else {
-                RoundedRectangle(cornerRadius: Constants.cardCornerRadius)
-                  .fill(Color(UIColor.secondarySystemBackground))
+                AddAlbumCardButton(slotIndex: slotIndex, collectionId: collection.id)
               }
             }
             .frame(height: app.state.navigation.albumCardHeight)

@@ -38,29 +38,16 @@ struct CollectionCard: View {
           .cornerRadius(Constants.cardCornerRadius)
           .shadow(radius: 3)
         HStack(alignment: .bottom) {
-          VStack(alignment: .leading, spacing: 0) {
-            Text(collection.name)
-              .font(.callout)
-              .fontWeight(.bold)
-              .foregroundColor(.white)
-              .padding(.top, 4)
-              .padding(.horizontal, 6)
-              .lineLimit(1)
-            Text(collection.curator)
-              .font(.footnote)
-              .foregroundColor(.white)
-              .lineLimit(1)
-              .padding(.horizontal, 6)
-              .padding(.bottom, 4)
-          }
-          .background(Color.black.opacity(0.8))
-          .cornerRadius(Constants.cardCornerRadius)
+          Text(collection.name)
+            .font(.callout)
+            .fontWeight(.bold)
+            .foregroundColor(.white)
+            .padding(.vertical, 4)
+            .padding(.horizontal, 6)
+            .lineLimit(1)
+            .background(Color.black.opacity(0.8))
+            .cornerRadius(Constants.cardCornerRadius)
           Spacer()
-          if collection.type == .userCollection {
-            Image(systemName: "person.circle")
-              .padding(4)
-              .foregroundColor(Color.white.opacity(0.8))
-          }
         }
         .padding(4)
       }

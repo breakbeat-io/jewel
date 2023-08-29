@@ -16,34 +16,20 @@ struct Welcome: View {
   private let description = """
   Listen Later is a reminder and album curation app for your music.
 
-  Use your On Rotation collection to quickly store albums as you remember them to listen to soon.
+  Add music to your On Rotation collection as a reminder to listen later.
 
-  Create Collections to curate a set of albums that represent a theme or time you don't want to forget.
-
-  Share everything with your freinds, and keep it all in your Library so you will always remember your favourite music!
+  Save as a Collection to curate sets of albums that represent a theme or time you don't want to forget.
   """
   private let startCollectionLabel = "Start My Collection"
-  private let setCuratorNameLabel = "Set my Curator Name"
   
   var body: some View {
     RichAlert(heading: heading,
-                buttons:
-      VStack {
-        Button {
-          app.update(action: SettingsAction.firstTimeRun(false))
-          app.update(action: NavigationAction.showSettings(true))
-        } label: {
-          Text(setCuratorNameLabel)
-            .fontWeight(.light)
-        }
-        Divider()
-          .padding(.bottom, 4)
-        Button {
-          app.update(action: SettingsAction.firstTimeRun(false))
-        } label: {
-          Text(startCollectionLabel)
-            .fontWeight(.bold)
-        }
+              buttons:
+      Button {
+        app.update(action: SettingsAction.firstTimeRun(false))
+      } label: {
+        Text(startCollectionLabel)
+          .fontWeight(.bold)
       })
     {
       Text(description)
