@@ -29,7 +29,7 @@ struct AlbumDetail: View {
   
   var body: some View {
     NavigationView {
-      ScrollView {
+      Group {
         if horizontalSizeClass == .compact {
           Compact(slot: slot)
         } else {
@@ -66,21 +66,24 @@ struct AlbumDetail: View {
     let slot: Slot
     
     var body: some View {
-      VStack {
-        if let album = slot.album {
-          AlbumCover(albumTitle: album.title,
-                      albumArtistName: album.artistName,
-                      albumArtwork: album.artwork?.url(width: 1000, height: 1000))
-          PlaybackLinks(baseUrl: album.url!,
-                        playbackLinks: slot.playbackLinks)
+      ScrollView {
+        VStack {
+          if let album = slot.album {
+            AlbumCover(albumTitle: album.title,
+                       albumArtistName: album.artistName,
+                       albumArtwork: album.artwork?.url(width: 1000, height: 1000))
+            PlaybackLinks(baseUrl: album.url!,
+                          playbackLinks: slot.playbackLinks)
             .padding(.bottom)
-          if let tracks = album.tracks {
-            TrackList(tracks: tracks, albumArtistName: album.artistName)
+            if let tracks = album.tracks {
+              TrackList(tracks: tracks, albumArtistName: album.artistName)
+            }
           }
         }
+        .padding()
       }
-      .padding()
     }
+    
   }
   
   struct Regular: View {
@@ -94,23 +97,29 @@ struct AlbumDetail: View {
         if let album = slot.album {
           VStack {
             AlbumCover(albumTitle: album.title,
-                        albumArtistName: album.artistName,
-                        albumArtwork: album.artwork?.url(width: 1000, height: 1000))
+                       albumArtistName: album.artistName,
+                       albumArtwork: album.artwork?.url(width: 1000, height: 1000))
             PlaybackLinks(baseUrl: album.url!,
                           playbackLinks: slot.playbackLinks)
-              .padding(.bottom)
+            .padding(.bottom)
           }
-          VStack {
-            if let tracks = album.tracks {
-              TrackList(tracks: tracks, albumArtistName: album.artistName)
+          .scaledToFit()
+          .frame(minWidth: 0, maxWidth: .infinity)
+          ScrollView {
+            VStack {
+              if let tracks = album.tracks {
+                TrackList(tracks: tracks, albumArtistName: album.artistName)
+              }
+              Spacer()
             }
-            Spacer()
           }
+          .frame(minWidth: 0, maxWidth: .infinity)
         }
         
       }
       .padding()
     }
+    
   }
-  
 }
+
