@@ -33,6 +33,25 @@ struct CollectionOptions: View {
     if let collection = collection { // this if has to be outside the NavigationView else LibraryAction.removeCollection creates an exception ¯\_(ツ)_/¯
       NavigationView {
         Form {
+          if !app.state.navigation.onRotationActive {
+            Section {
+              HStack {
+                Text("Collection Name")
+                  .font(.body)
+                TextField(
+                  collectionName.wrappedValue,
+                  text: collectionName,
+                  onEditingChanged: { _ in
+                    if !newCollectionName.isEmpty && newCollectionName != collection.name {
+                      app.update(action: LibraryAction.setCollectionName(name: newCollectionName.trimmingCharacters(in: .whitespaces), collectionId: collection.id))
+                    }
+                  }
+                )
+                .font(.body)
+                .foregroundColor(.accentColor)
+              }
+            }
+          }
           Section {
             if app.state.navigation.onRotationActive {
               Button {
@@ -79,25 +98,6 @@ struct CollectionOptions: View {
             }
           }
           .disabled(collectionEmpty)
-          if !app.state.navigation.onRotationActive {
-            Section {
-              HStack {
-                Text("Collection Name")
-                  .font(.body)
-                TextField(
-                  collectionName.wrappedValue,
-                  text: collectionName,
-                  onEditingChanged: { _ in
-                    if !newCollectionName.isEmpty && newCollectionName != collection.name {
-                      app.update(action: LibraryAction.setCollectionName(name: newCollectionName.trimmingCharacters(in: .whitespaces), collectionId: collection.id))
-                    }
-                  }
-                )
-                .font(.body)
-                .foregroundColor(.accentColor)
-              }
-            }
-          }
         }
         .navigationBarTitle("\(app.state.navigation.onRotationActive ? Navigation.Tab.onRotation.rawValue : "Collection") Options", displayMode: .inline)
         .navigationBarItems(
