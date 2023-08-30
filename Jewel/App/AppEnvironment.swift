@@ -16,17 +16,12 @@ final class AppEnvironment: ObservableObject {
   
   @Published private(set) var state: AppState {
     didSet {
-      StateManager.save(state, key: "jewelState")
+      StatePersitenceManager.save(state)
     }
   }
   
   private init() {
-    if let savedState = StateManager.loadSavedState("jewelState") {
-      state = savedState
-    } else {
-      os_log("💎 State > No current saved state found, creating new")
-      state = StateManager.createNewState()
-    }
+    state = StatePersitenceManager.load()
   }
   
   @MainActor public func update(action: AppAction) {
