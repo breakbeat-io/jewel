@@ -31,6 +31,9 @@ func updateState(appState: AppState, action: AppAction) -> AppState {
   case is SearchAction:
     newAppState.search = updateSearch(search: newAppState.search, action: action as! SearchAction)
     
+  case is DebugAction:
+    newAppState = debugUpdate(state: newAppState, action: action as! DebugAction)
+    
   default: break
     
   }
