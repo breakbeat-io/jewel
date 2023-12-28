@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1230"
+   LastUpgradeVersion = "1510"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "D22155772481114A00A1F04A"
-               BuildableName = "Listen Later.app"
-               BlueprintName = "Listen Later"
+               BuildableName = "Stacks.app"
+               BlueprintName = "Stacks"
                ReferencedContainer = "container:Jewel.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,8 +45,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D22155772481114A00A1F04A"
-            BuildableName = "Listen Later.app"
-            BlueprintName = "Listen Later"
+            BuildableName = "Stacks.app"
+            BlueprintName = "Stacks"
             ReferencedContainer = "container:Jewel.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -62,8 +62,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D22155772481114A00A1F04A"
-            BuildableName = "Listen Later.app"
-            BlueprintName = "Listen Later"
+            BuildableName = "Stacks.app"
+            BlueprintName = "Stacks"
             ReferencedContainer = "container:Jewel.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

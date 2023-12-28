@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -68,7 +68,7 @@
 		D20CE85C24AF7AEA00039202 /* SearchActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchActions.swift; sourceTree = "<group>"; };
 		D21C40732A9E9C0500BA01AF /* StatePersitenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatePersitenceManager.swift; sourceTree = "<group>"; };
 		D21C40752A9EA6E500BA01AF /* OldAppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OldAppState.swift; sourceTree = "<group>"; };
-		D22155782481114A00A1F04A /* Listen Later.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Listen Later.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D22155782481114A00A1F04A /* Stacks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stacks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D22155812481114B00A1F04A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D22155842481114B00A1F04A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D22155872481114B00A1F04A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -88,7 +88,7 @@
 		D27FB80F24868B320014C05D /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		D27FB811248693AF0014C05D /* Slot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Slot.swift; sourceTree = "<group>"; };
 		D27FB81F2486B46D0014C05D /* fa-brands.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fa-brands.otf"; sourceTree = "<group>"; };
-		D288174E248D148E00EB47C2 /* Listen Later.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Listen Later.entitlements"; sourceTree = "<group>"; };
+		D288174E248D148E00EB47C2 /* Jewel.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Jewel.entitlements; sourceTree = "<group>"; };
 		D28AD1B4248BACB2009B584A /* PlaybackLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackLink.swift; sourceTree = "<group>"; };
 		D28AD1B6248BB148009B584A /* PlaybackLinks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackLinks.swift; sourceTree = "<group>"; };
 		D28AD1B8248BB5D4009B584A /* AlbumDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumDetail.swift; sourceTree = "<group>"; };
@@ -141,7 +141,7 @@
 		D22155792481114A00A1F04A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D22155782481114A00A1F04A /* Listen Later.app */,
+				D22155782481114A00A1F04A /* Stacks.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -241,7 +241,7 @@
 				D22155892481114B00A1F04A /* Info.plist */,
 				D2603DFE252083EA00B79311 /* JewelApp.swift */,
 				D2AB846A2481159D008B57F9 /* AppEnvironment.swift */,
-				D288174E248D148E00EB47C2 /* Listen Later.entitlements */,
+				D288174E248D148E00EB47C2 /* Jewel.entitlements */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -306,9 +306,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		D22155772481114A00A1F04A /* Listen Later */ = {
+		D22155772481114A00A1F04A /* Stacks */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D221558C2481114B00A1F04A /* Build configuration list for PBXNativeTarget "Listen Later" */;
+			buildConfigurationList = D221558C2481114B00A1F04A /* Build configuration list for PBXNativeTarget "Stacks" */;
 			buildPhases = (
 				D22155742481114A00A1F04A /* Sources */,
 				D22155752481114A00A1F04A /* Frameworks */,
@@ -318,11 +318,11 @@
 			);
 			dependencies = (
 			);
-			name = "Listen Later";
+			name = Stacks;
 			packageProductDependencies = (
 			);
 			productName = Jewel;
-			productReference = D22155782481114A00A1F04A /* Listen Later.app */;
+			productReference = D22155782481114A00A1F04A /* Stacks.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -331,8 +331,9 @@
 		D22155702481114A00A1F04A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1150;
-				LastUpgradeCheck = 1200;
+				LastUpgradeCheck = 1510;
 				ORGANIZATIONNAME = "Breakbeat Ltd.";
 				TargetAttributes = {
 					D22155772481114A00A1F04A = {
@@ -355,7 +356,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D22155772481114A00A1F04A /* Listen Later */,
+				D22155772481114A00A1F04A /* Stacks */,
 			);
 		};
 /* End PBXProject section */
@@ -481,6 +482,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -542,6 +544,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -564,7 +567,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = "Jewel/App/Listen Later.entitlements";
+				CODE_SIGN_ENTITLEMENTS = Jewel/App/Jewel.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Jewel/Preview Content\"";
@@ -589,7 +592,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = "Jewel/App/Listen Later.entitlements";
+				CODE_SIGN_ENTITLEMENTS = Jewel/App/Jewel.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Jewel/Preview Content\"";
@@ -622,7 +625,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D221558C2481114B00A1F04A /* Build configuration list for PBXNativeTarget "Listen Later" */ = {
+		D221558C2481114B00A1F04A /* Build configuration list for PBXNativeTarget "Stacks" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D221558D2481114B00A1F04A /* Debug */,
