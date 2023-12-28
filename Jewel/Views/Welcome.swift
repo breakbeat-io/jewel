@@ -1,6 +1,6 @@
 //
 //  Welcome.swift
-//  Listen Later
+//  Stacks
 //
 //  Created by Greg Hepworth on 09/06/2020.
 //  Copyright © 2020 Breakbeat Ltd. All rights reserved.
@@ -14,7 +14,7 @@ struct Welcome: View {
   
   private let heading = "Welcome!"
   private let description = """
-  Listen Later is a reminder and album curation app for your music.
+  Stacks is a reminder and album curation app for your music.
 
   Add music to your On Rotation collection as a reminder to listen later.
 

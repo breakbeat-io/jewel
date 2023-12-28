@@ -1,6 +1,6 @@
 //
 //  AppleMusicAuthorization.swift
-//  Listen Later
+//  Stacks
 //
 //  Created by Greg Hepworth on 07/11/2021.
 //  Copyright © 2021 Breakbeat Ltd. All rights reserved.
@@ -44,9 +44,9 @@ struct AppleMusicAuthorization: View {
   private var authorizationStatement: String {
     switch appleMusicAuthorizationStatus {
     case .restricted:
-      return "Listen Later cannot be used on this device because usage of Apple Music is restricted."
+      return "Stacks cannot be used on this device because usage of Apple Music is restricted."
     default:
-      return "Listen Later uses the Apple Music catalogue to browse and save music."
+      return "Stacks uses the Apple Music catalogue to browse and save music."
     }
   }
   
