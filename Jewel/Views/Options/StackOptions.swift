@@ -8,44 +8,44 @@
 
 import SwiftUI
 
-struct CollectionOptions: View {
+struct StackOptions: View {
   
   @EnvironmentObject private var app: AppEnvironment
   
-  private var collection: Collection? {
+  private var stack: Stack? {
     if app.state.navigation.onRotationActive {
       return app.state.library.onRotation
     } else {
-      return app.state.library.collections.first(where: { $0.id == app.state.navigation.activeCollectionId })
+      return app.state.library.stacks.first(where: { $0.id == app.state.navigation.activeStackId })
     }
   }
-  private var collectionEmpty: Bool {
-    collection?.slots.filter( { $0.album != nil }).count == 0
+  private var stackEmpty: Bool {
+    stack?.slots.filter( { $0.album != nil }).count == 0
   }
   
-  @State private var newCollectionName: String = ""
+  @State private var newStackName: String = ""
   @FocusState private var nameFocussed: Bool
   
   var body: some View {
-    if let collection = collection { // this if has to be outside the NavigationView else LibraryAction.removeCollection creates an exception ¯\_(ツ)_/¯
+    if let stack = stack { // this if has to be outside the NavigationView else LibraryAction.removeStack creates an exception ¯\_(ツ)_/¯
       NavigationView {
         Form {
           if !app.state.navigation.onRotationActive {
             Section {
               HStack {
-                Text("Collection Name")
+                Text("Stack Name")
                   .font(.body)
                 TextField(
-                  collection.name,
-                  text: $newCollectionName
+                  stack.name,
+                  text: $newStackName
                 )
                 .focused($nameFocussed)
                 .onAppear {
-                  self.newCollectionName = collection.name
+                  self.newStackName = stack.name
                 }
                 .onChange(of: nameFocussed) { _ in
-                  if !newCollectionName.isEmpty && newCollectionName != collection.name {
-                    app.update(action: LibraryAction.setCollectionName(name: newCollectionName.trimmingCharacters(in: .whitespaces), collectionId: collection.id))
+                  if !newStackName.isEmpty && newStackName != stack.name {
+                    app.update(action: LibraryAction.setStackName(name: newStackName.trimmingCharacters(in: .whitespaces), stackId: stack.id))
                   }
                 }
                 .font(.body)
@@ -57,54 +57,54 @@ struct CollectionOptions: View {
             if app.state.navigation.onRotationActive {
               Button {
                 app.update(action: NavigationAction.switchTab(to: .library))
-                app.update(action: NavigationAction.showCollectionOptions(false))
-                app.update(action: LibraryAction.saveOnRotation(collection: app.state.library.onRotation))
+                app.update(action: NavigationAction.showStackOptions(false))
+                app.update(action: LibraryAction.saveOnRotation(stack: app.state.library.onRotation))
               } label: {
                 HStack {
                   Text(Image(systemName: "arrow.right.square"))
                     .font(.body)
                     .frame(width: Constants.optionsButtonIconWidth)
-                  Text("Save to Collections")
+                  Text("Save Stack")
                     .font(.body)
                 }
               }
             } else {
               Button {
-                app.update(action: LibraryAction.duplicateCollection(collection: collection))
-                app.update(action: NavigationAction.showCollectionOptions(false))
-                app.update(action: NavigationAction.showCollection(false))
+                app.update(action: LibraryAction.duplicateStack(stack: stack))
+                app.update(action: NavigationAction.showStackOptions(false))
+                app.update(action: NavigationAction.showStack(false))
               } label: {
                 HStack {
                   Text(Image(systemName: "doc.on.doc"))
                     .font(.body)
                     .frame(width: Constants.optionsButtonIconWidth)
-                  Text("Duplicate Collection")
+                  Text("Duplicate Stack")
                     .font(.body)
                 }
               }
               Button {
-                app.update(action: LibraryAction.removeCollection(collectionId: collection.id))
-                app.update(action: NavigationAction.showCollectionOptions(false))
-                app.update(action: NavigationAction.showCollection(false))
+                app.update(action: LibraryAction.removeStack(stackId: stack.id))
+                app.update(action: NavigationAction.showStackOptions(false))
+                app.update(action: NavigationAction.showStack(false))
               } label: {
                 HStack {
                   Text(Image(systemName: "delete.left"))
                     .font(.body)
                     .frame(width: Constants.optionsButtonIconWidth)
-                  Text("Delete Collection")
+                  Text("Delete Stack")
                     .font(.body)
                 }
-                .foregroundColor(collectionEmpty ? nil : .red)
+                .foregroundColor(stackEmpty ? nil : .red)
               }
             }
           }
-          .disabled(collectionEmpty)
+          .disabled(stackEmpty)
         }
-        .navigationBarTitle("\(app.state.navigation.onRotationActive ? Navigation.Tab.onRotation.rawValue : "Collection") Options", displayMode: .inline)
+        .navigationBarTitle("\(app.state.navigation.onRotationActive ? Navigation.Tab.onRotation.rawValue : "Stack") Options", displayMode: .inline)
         .navigationBarItems(
           leading:
             Button {
-              app.update(action: NavigationAction.showCollectionOptions(false))
+              app.update(action: NavigationAction.showStackOptions(false))
             } label: {
               Text("Close")
                 .font(.body)

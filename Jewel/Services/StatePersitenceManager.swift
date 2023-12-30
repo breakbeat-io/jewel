@@ -61,19 +61,19 @@ struct StatePersitenceManager {
       newState.settings.firstTimeRun = false
       newState.settings.preferredMusicPlatform = OdesliPlatform.allCases[oldState.settings.preferredMusicPlatform]
       
-      let newOnRotation = Collection(id: oldState.library.onRotation.id,
+      let newOnRotation = Stack(id: oldState.library.onRotation.id,
                                            name: oldState.library.onRotation.name,
                                            slots: oldState.library.onRotation.slots)
       newState.library.onRotation = newOnRotation
       
-      var newCollections = [Collection]()
-      for oldCollection in oldState.library.collections {
-        let newCollection = Collection(id: oldCollection.id,
+      var newStacks = [Stack]()
+      for oldCollection in oldState.library.collections {  // From v3.0 Collections were renamed Stacks
+        let newStack = Stack(id: oldCollection.id,
                                        name: oldCollection.name,
                                        slots: oldCollection.slots)
-        newCollections.append(newCollection)
+        newStacks.append(newStack)
       }
-      newState.library.collections = newCollections
+      newState.library.stacks = newStacks
       
       return newState
       
@@ -97,7 +97,7 @@ struct StatePersitenceManager {
       decoder.keyDecodingStrategy = .convertFromSnakeCase
       var state = try decoder.decode(AppState.self, from: savedState)
       state.navigation.onRotationId = state.library.onRotation.id
-      state.navigation.activeCollectionId = state.library.onRotation.id
+      state.navigation.activeStackId = state.library.onRotation.id
       os_log("💎 State > Loaded a current saved state")
       return state
     } catch {
@@ -110,11 +110,11 @@ struct StatePersitenceManager {
   static func newState() -> AppState {
     
     os_log("💎 State > Creating a new state")
-    let onRotationCollection = Collection(name: Navigation.Tab.onRotation.rawValue)
-    let library = Library(onRotation: onRotationCollection, collections: [Collection]())
+    let onRotationStack = Stack(name: Navigation.Tab.onRotation.rawValue)
+    let library = Library(onRotation: onRotationStack, stacks: [Stack]())
     var state = AppState(settings: Settings(), library: library)
-    state.navigation.onRotationId = onRotationCollection.id
-    state.navigation.activeCollectionId = onRotationCollection.id
+    state.navigation.onRotationId = onRotationStack.id
+    state.navigation.activeStackId = onRotationStack.id
     os_log("💎 State > Created a new state")
     return state
   }

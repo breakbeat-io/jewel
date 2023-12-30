@@ -10,11 +10,11 @@ import Foundation
 
 struct Library: Codable {
   
-  var onRotation: Collection
-  var collections: [Collection]
+  var onRotation: Stack
+  var stacks: [Stack]
   
   enum CodingKeys: CodingKey {
     case onRotation
-    case collections
+    case stacks
   }
 }

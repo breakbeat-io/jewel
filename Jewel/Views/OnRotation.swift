@@ -13,6 +13,6 @@ struct OnRotation: View {
   @EnvironmentObject var app: AppEnvironment
   
   var body: some View {
-    CollectionDetail(collection: app.state.library.onRotation)
+    StackDetail(stack: app.state.library.onRotation)
   }
 }
