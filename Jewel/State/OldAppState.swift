@@ -24,16 +24,16 @@ struct OldAppState: Codable {
   struct Navigation {
     
     var onRotationId: UUID?
-    var activeCollectionId: UUID?
+    var activeStackId: UUID?
     var activeSlotIndex: Int = 0
     
     var onRotationActive: Bool {
-      onRotationId == activeCollectionId
+      onRotationId == activeStackId
     }
     
     var selectedTab: Navigation.Tab = .onRotation {
       didSet {
-        activeCollectionId = onRotationId
+        activeStackId = onRotationId
       }
     }
     enum Tab: String {

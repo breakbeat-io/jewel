@@ -1,5 +1,5 @@
 //
-//  CollectionLibrary.swift
+//  StackLibrary.swift
 //  Stacks
 //
 //  Created by Greg Hepworth on 22/06/2020.
@@ -8,19 +8,19 @@
 
 import SwiftUI
 
-struct CollectionLibrary: View {
+struct StackLibrary: View {
   
   @Environment(\.horizontalSizeClass) var horizontalSizeClass
   
   @EnvironmentObject var app: AppEnvironment
 
-  private var showCollection: Binding<Bool> { Binding (
-    get: { app.state.navigation.showCollection },
-    set: { if app.state.navigation.showCollection { app.update(action: NavigationAction.showCollection($0)) } }
+  private var showStack: Binding<Bool> { Binding (
+    get: { app.state.navigation.showStack },
+    set: { if app.state.navigation.showStack { app.update(action: NavigationAction.showStack($0)) } }
     )}
   
-  private var collections: [Collection] {
-    app.state.library.collections
+  private var stacks: [Stack] {
+    app.state.library.stacks
   }
   
   var body: some View {
@@ -30,25 +30,25 @@ struct CollectionLibrary: View {
           Spacer()
         }
         ScrollView {
-          Text("Collections")
+          Text("Stacks")
             .font(.title)
             .fontWeight(.bold)
             .frame(minWidth: 0, maxWidth: .infinity, alignment: .topLeading)
             .padding(.top)
-          if collections.isEmpty {
+          if stacks.isEmpty {
             VStack {
               Image(systemName: "music.note.list")
                 .font(.system(size: 40))
                 .padding(.bottom)
-              Text("Collections you have saved or created will appear here.")
+              Text("Stacks you have saved or created will appear here.")
                 .multilineTextAlignment(.center)
             }
             .padding()
             .foregroundColor(Color.secondary)
           } else {
-            ForEach(collections) { collection in
-              CollectionCard(collection: collection)
-                .frame(height: app.state.navigation.collectionCardHeight)
+            ForEach(stacks) { stack in
+              StackCard(stack: stack)
+                .frame(height: app.state.navigation.stackCardHeight)
             }
           }
         }
@@ -59,8 +59,8 @@ struct CollectionLibrary: View {
         }
       }
       .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
-      .sheet(isPresented: showCollection) {
-        CollectionSheet()
+      .sheet(isPresented: showStack) {
+        StackSheet()
           .environmentObject(app)
       }
       .onAppear {

@@ -16,11 +16,11 @@ struct Welcome: View {
   private let description = """
   Stacks is a reminder and album curation app for your music.
 
-  Add music to your On Rotation collection as a reminder to listen later.
+  Add music to your On Rotation stack as a reminder to listen later.
 
-  Save as a Collection to curate sets of albums that represent a theme or time you don't want to forget.
+  Save Stacks to curate sets of albums that represent a theme or time you don't want to forget.
   """
-  private let startCollectionLabel = "Start My Collection"
+  private let startStackLabel = "Start Creating Stacks"
   
   var body: some View {
     RichAlert(heading: heading,
@@ -28,7 +28,7 @@ struct Welcome: View {
       Button {
         app.update(action: SettingsAction.firstTimeRun(false))
       } label: {
-        Text(startCollectionLabel)
+        Text(startStackLabel)
           .fontWeight(.bold)
       })
     {

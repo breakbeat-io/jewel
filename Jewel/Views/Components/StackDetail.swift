@@ -1,5 +1,5 @@
 //
-//  EditableAlbumList.swift
+//  StackDetail.swift
 //  Stacks
 //
 //  Created by Greg Hepworth on 17/06/2020.
@@ -8,13 +8,13 @@
 
 import SwiftUI
 
-struct CollectionDetail: View {
+struct StackDetail: View {
   
   @Environment(\.horizontalSizeClass) var horizontalSizeClass
   
   @EnvironmentObject var app: AppEnvironment
   
-  var collection: Collection
+  var stack: Stack
 
   private var showSheet: Binding<Bool> { Binding (
     get: { app.state.navigation.showAlbumDetail || app.state.navigation.showSearch },
@@ -24,10 +24,10 @@ struct CollectionDetail: View {
   }
     )}
   private var slots: [Slot] {
-    collection.slots
+    stack.slots
   }
-  private var collectionEmpty: Bool {
-    collection.slots.filter( { $0.album != nil }).count == 0
+  private var stackEmpty: Bool {
+    stack.slots.filter( { $0.album != nil }).count == 0
   }
   
   var body: some View {
@@ -37,7 +37,7 @@ struct CollectionDetail: View {
           Spacer()
         }
         ScrollView {
-          Text(collection.name)
+          Text(stack.name)
             .font(.title)
             .fontWeight(.bold)
             .padding(.top)
@@ -54,14 +54,14 @@ struct CollectionDetail: View {
                   }
                 }
               } else {
-                AddAlbumCardButton(slotIndex: slotIndex, collectionId: collection.id)
+                AddAlbumCardButton(slotIndex: slotIndex, stackId: stack.id)
               }
             }
             .frame(height: app.state.navigation.albumCardHeight)
           }
         }
         .padding(.horizontal)
-        .frame(maxWidth: horizontalSizeClass == .regular && !app.state.navigation.showCollection ? Constants.regularMaxWidth : .infinity)
+        .frame(maxWidth: horizontalSizeClass == .regular && !app.state.navigation.showStack ? Constants.regularMaxWidth : .infinity)
         if horizontalSizeClass == .regular {
           Spacer()
         }
@@ -77,14 +77,14 @@ struct CollectionDetail: View {
         }
       }
       .onAppear {
-        if geo.size.height != app.state.navigation.collectionViewHeight {
-          app.update(action: NavigationAction.setCollectionViewHeight(viewHeight: geo.size.height))
+        if geo.size.height != app.state.navigation.stackViewHeight {
+          app.update(action: NavigationAction.setStackViewHeight(viewHeight: geo.size.height))
         }
       }
       .onDisappear {
-        if !app.state.navigation.onRotationActive && collectionEmpty {
-          app.update(action: NavigationAction.setActiveCollectionId(collectionId: app.state.navigation.onRotationId!))
-          app.update(action: LibraryAction.removeCollection(collectionId: collection.id))
+        if !app.state.navigation.onRotationActive && stackEmpty {
+          app.update(action: NavigationAction.setActiveStackId(stackId: app.state.navigation.onRotationId!))
+          app.update(action: LibraryAction.removeStack(stackId: stack.id))
         }
       }
     }

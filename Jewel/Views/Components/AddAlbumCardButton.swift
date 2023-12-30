@@ -13,11 +13,11 @@ struct AddAlbumCardButton: View {
   @EnvironmentObject var app: AppEnvironment
   
   let slotIndex: Int
-  let collectionId: UUID
+  let stackId: UUID
   
   var body: some View {
     Button {
-      app.update(action: NavigationAction.setActiveCollectionId(collectionId: collectionId))
+      app.update(action: NavigationAction.setActiveStackId(stackId: stackId))
       app.update(action: NavigationAction.setActiveSlotIndex(slotIndex: slotIndex))
       app.update(action: NavigationAction.showSearch(true))
     } label: {

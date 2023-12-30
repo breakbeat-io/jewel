@@ -1,5 +1,5 @@
 //
-//  CollectionCard.swift
+//  StackCard.swift
 //  Stacks
 //
 //  Created by Greg Hepworth on 05/06/2020.
@@ -8,15 +8,15 @@
 
 import SwiftUI
 
-struct CollectionCard: View {
+struct StackCard: View {
   
   @EnvironmentObject var app: AppEnvironment
   
-  let collection: Collection
+  let stack: Stack
   
-  private var collectionArtwork: [URL] {
+  private var stackArtwork: [URL] {
     var artworkUrls = [URL]()
-    for slot in collection.slots {
+    for slot in stack.slots {
       if let artworkUrl = slot.album?.artwork?.url(width: 1000, height: 1000) {
         artworkUrls.append(artworkUrl)
       }
@@ -26,19 +26,19 @@ struct CollectionCard: View {
   
   var body: some View {
     Button {
-      app.update(action: NavigationAction.setActiveCollectionId(collectionId: collection.id))
-      app.update(action: NavigationAction.showCollection(true))
+      app.update(action: NavigationAction.setActiveStackId(stackId: stack.id))
+      app.update(action: NavigationAction.showStack(true))
     } label: {
       ZStack(alignment: .bottom) {
         Rectangle()
           .foregroundColor(.clear)
           .background(
-            CardArtworkComposite(images: collectionArtwork)
+            CardArtworkComposite(images: stackArtwork)
           )
           .cornerRadius(Constants.cardCornerRadius)
           .shadow(radius: 3)
         HStack(alignment: .bottom) {
-          Text(collection.name)
+          Text(stack.name)
             .font(.callout)
             .fontWeight(.bold)
             .foregroundColor(.white)

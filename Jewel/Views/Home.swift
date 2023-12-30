@@ -28,7 +28,7 @@ struct Home: View {
               .animation(.easeOut)
           }
           if app.state.navigation.selectedTab == .library {
-            CollectionLibrary()
+            StackLibrary()
               .transition(.move(edge: .trailing))
               .animation(.easeOut)
           }

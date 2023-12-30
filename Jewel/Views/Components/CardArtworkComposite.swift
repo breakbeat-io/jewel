@@ -1,5 +1,5 @@
 //
-//  CollectionArtworkComposite.swift
+//  CardArtworkComposite.swift
 //  Stacks
 //
 //  Created by Greg Hepworth on 05/06/2020.

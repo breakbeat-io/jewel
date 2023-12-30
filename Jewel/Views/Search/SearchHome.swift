@@ -16,7 +16,7 @@ struct SearchHome: View {
     NavigationView {
       VStack{
         SearchBar()
-        SearchResults(collectionId: app.state.navigation.activeCollectionId!, slotIndex: app.state.navigation.activeSlotIndex)
+        SearchResults(stackId: app.state.navigation.activeStackId!, slotIndex: app.state.navigation.activeSlotIndex)
         Spacer()
       }
       .navigationBarTitle("Search")
