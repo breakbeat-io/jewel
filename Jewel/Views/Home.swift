@@ -25,15 +25,14 @@ struct Home: View {
           if app.state.navigation.selectedTab == .onRotation {
             OnRotation()
               .transition(.move(edge: .leading))
-              .animation(.easeOut)
           }
           if app.state.navigation.selectedTab == .library {
             StackLibrary()
               .transition(.move(edge: .trailing))
-              .animation(.easeOut)
           }
         }
         .background(Color(UIColor.systemBackground))
+        .animation(.easeOut, value: app.state.navigation.selectedTab)
       }
       .disabled(app.state.settings.firstTimeRun)
       .blur(radius: app.state.settings.firstTimeRun ? 10 : 0)
