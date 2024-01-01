@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import os.log
 import UIKit
 
 final class AppEnvironment: ObservableObject {

@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import os.log
 
 protocol AppAction {
   var description: String { get }
@@ -38,7 +37,7 @@ func updateState(appState: AppState, action: AppAction) -> AppState {
     
   }
   
-  os_log("💎 State Update > %s", action.description)
+    JewelLogger.stateUpdate.info("💎 State Update > \(action.description)")
   
   return newAppState
 }
