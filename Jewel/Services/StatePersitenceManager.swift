@@ -72,6 +72,8 @@ struct StatePersitenceManager {
     fileprivate static func runMigrations() {
       migrateV2p0ToV2p1()
       migrateV2p1ToV3p0()
+      
+      UserDefaults.standard.synchronize()
     }
     
     private static func migrateV2p1ToV3p0() {
@@ -137,7 +139,9 @@ struct StatePersitenceManager {
         
       } catch {
         JewelLogger.persistence.debug("💎 Persistence > Error migrating a v2.1 state: \(error.localizedDescription)")
-        return
+        // Something's gone wrong and we haven't handled it, but now a new state will be created and take precedence
+        // so to avoid future problems we should remove the remnants of the old state.
+        UserDefaults.standard.removeObject(forKey: "jewelState_2_1")
       }
       
     }
@@ -207,6 +211,9 @@ struct StatePersitenceManager {
         
       } catch {
         JewelLogger.persistence.debug("💎 Persistence > Error migrating a v2.0 state: \(error.localizedDescription)")
+        // Something's gone wrong and we haven't handled it, but now a new state will be created and take precedence
+        // so to avoid future problems we should remove the remnants of the old state.
+        UserDefaults.standard.removeObject(forKey: "jewelState")
       }
       
     }
