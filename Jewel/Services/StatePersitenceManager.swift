@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import os.log
 
 struct StatePersitenceManager {
   
@@ -20,7 +19,7 @@ struct StatePersitenceManager {
       let encodedState = try encoder.encode(state)
       UserDefaults.standard.set(encodedState, forKey: stateVersionKey)
     } catch {
-      os_log("💎 State > Error saving state: %s", error.localizedDescription)
+      JewelLogger.persistence.debug("💎 Persistence > Error saving state: \(error.localizedDescription)")
     }
   }
   
@@ -32,19 +31,19 @@ struct StatePersitenceManager {
   
   private static func oldSavedState() -> AppState? {
     
-    os_log("💎 State > Looking for a pre-2.1.0 saved state")
+    JewelLogger.persistence.info("💎 Persistence > Looking for a pre-2.1.0 saved state")
     guard let oldSavedState = UserDefaults.standard.object(forKey: "jewelState") as? Data else {
-      os_log("💎 State > No pre-2.1.0 saved state found")
+      JewelLogger.persistence.info("💎 Persistence > No pre-2.1.0 saved state found")
       return nil
     }
     
-    os_log("💎 State > Found a pre-2.1.0 saved state, migrating")
+    JewelLogger.persistence.info("💎 Persistence > Found a pre-2.1.0 saved state, migrating")
     if let state = migrateOldSavedState(oldSavedState) {
-      os_log("💎 State > Migration successful, deleting pre-2.1.0 saved state")
+      JewelLogger.persistence.info("💎 Persistence > Migration successful, deleting pre-2.1.0 saved state")
       UserDefaults.standard.removeObject(forKey: "jewelState")
       return state
     } else {
-      os_log("💎 State > Migration failed")
+      JewelLogger.persistence.info("💎 Persistence > Migration failed")
       return nil
     }
     
@@ -78,30 +77,30 @@ struct StatePersitenceManager {
       return newState
       
     } catch {
-      os_log("💎 State > Error decoding a pre-2.1.0 state: %s", error.localizedDescription)
+      JewelLogger.persistence.debug("💎 Persistence > Error decoding a pre-2.1.0 state: \(error.localizedDescription)")
       return nil
     }
   }
   
   static func savedState() -> AppState? {
 
-    os_log("💎 State > Looking for a current saved state")
+    JewelLogger.persistence.info("💎 Persistence > Looking for a current saved state")
     guard let savedState = UserDefaults.standard.object(forKey: stateVersionKey) as? Data else {
-      os_log("💎 State > No current saved state found")
+      JewelLogger.persistence.info("💎 Persistence > No current saved state found")
       return nil
     }
     
-    os_log("💎 State > Found a current saved state")
+    JewelLogger.persistence.info("💎 Persistence > Found a current saved state")
     do {
       let decoder = JSONDecoder()
       decoder.keyDecodingStrategy = .convertFromSnakeCase
       var state = try decoder.decode(AppState.self, from: savedState)
       state.navigation.onRotationId = state.library.onRotation.id
       state.navigation.activeStackId = state.library.onRotation.id
-      os_log("💎 State > Loaded a current saved state")
+      JewelLogger.persistence.info("💎 Persistence > Loaded a current saved state")
       return state
     } catch {
-      os_log("💎 State > Error decoding a current saved state: %s", error.localizedDescription)
+      JewelLogger.persistence.debug("💎 Persistence > Error decoding a current saved state: \(error.localizedDescription)")
       return nil
     }
     
@@ -109,13 +108,13 @@ struct StatePersitenceManager {
   
   static func newState() -> AppState {
     
-    os_log("💎 State > Creating a new state")
+    JewelLogger.persistence.info("💎 Persistence > Creating a new state")
     let onRotationStack = Stack(name: Navigation.Tab.onRotation.rawValue)
     let library = Library(onRotation: onRotationStack, stacks: [Stack]())
     var state = AppState(settings: Settings(), library: library)
     state.navigation.onRotationId = onRotationStack.id
     state.navigation.activeStackId = onRotationStack.id
-    os_log("💎 State > Created a new state")
+    JewelLogger.persistence.info("💎 Persistence > Created a new state")
     return state
   }
   

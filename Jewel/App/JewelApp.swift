@@ -6,6 +6,7 @@
 //  Copyright © 2020 Breakbeat Ltd. All rights reserved.
 //
 
+import OSLog
 import SwiftUI
 import MusicKit
 
@@ -25,4 +26,11 @@ struct JewelApp: App {
     }
   }
   
+}
+
+struct JewelLogger {
+    static let persistence = Logger(subsystem: Bundle.main.bundleIdentifier!, category: "persistence")
+    static let stateUpdate = Logger(subsystem: Bundle.main.bundleIdentifier!, category: "stateUpdate")
+    static let recordStore = Logger(subsystem: Bundle.main.bundleIdentifier!, category: "recordStore")
+    static let debugAction = Logger(subsystem: Bundle.main.bundleIdentifier!, category: "debugAction")
 }

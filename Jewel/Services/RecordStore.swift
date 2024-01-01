@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import os.log
 import MusicKit
 
 enum RecordStoreError: Error {
@@ -17,51 +16,51 @@ enum RecordStoreError: Error {
 class RecordStore {
   
   static func search(for searchTerm: String) async throws -> MusicItemCollection<Album> {
-    os_log("💎 Record Store > Searching for '\(searchTerm)'")
+    JewelLogger.recordStore.info("💎 Record Store > Searching for '\(searchTerm)'")
     do {
       var searchRequest = MusicCatalogSearchRequest(term: searchTerm, types: [Album.self])
       searchRequest.limit = 20
       return try await searchRequest.response().albums
     } catch {
-      os_log("💎 Record Store > Search error: %s", String(describing: error))
+      JewelLogger.recordStore.debug("💎 Record Store > Search error: \(String(describing: error))")
       throw error
     }
   }
   
   static func getAlbum(withId appleMusicAlbumId: MusicItemID) async throws -> Album {
-    os_log("💎 Record Store > Getting Album with ID \(appleMusicAlbumId.rawValue)")
+    JewelLogger.recordStore.info("💎 Record Store > Getting Album with ID \(appleMusicAlbumId.rawValue)")
     do {
       var albumRequest = MusicCatalogResourceRequest<Album>(matching: \.id, equalTo: appleMusicAlbumId)
       albumRequest.properties = [.tracks]
       let albumResponse = try await albumRequest.response()
       
       guard let album = albumResponse.items.first else {
-        os_log("💎 Record Store > Get album error: Unable to find Album with ID \(appleMusicAlbumId)")
+        JewelLogger.recordStore.info("💎 Record Store > Unable to find Album with ID \(appleMusicAlbumId)")
         throw RecordStoreError.NotFound(appleMusicAlbumId)
       }
       
       return album
       
     } catch {
-      os_log("💎 Record Store > Get album error: %s", String(describing: error))
+      JewelLogger.recordStore.debug("💎 Record Store > Get album error: \(String(describing: error))")
       throw error
     }
   }
   
   static func getPlaybackLinks(for baseUrl: URL) async throws -> OdesliResponse {
-    os_log("💎 Playback Links > Populating links for %s", baseUrl.absoluteString)
+    JewelLogger.recordStore.info("💎 Playback Links > Populating links for \(baseUrl.absoluteString)")
     do {
       let (data, response) = try await URLSession.shared.data(from: URL(string: "https://api.song.link/v1-alpha.1/links?url=\(baseUrl.absoluteString)")!) as! (Data, HTTPURLResponse)
       
       if response.statusCode != 200 {
-        os_log("💎 Playback Links > Unexpected URL response code: %s", response.statusCode)
+        JewelLogger.recordStore.debug("💎 Playback Links > Unexpected URL response code: \(response.statusCode)")
       }
       
       let playbackLinks = try JSONDecoder().decode(OdesliResponse.self, from: data)
       return playbackLinks
       
     } catch {
-      os_log("💎 Playback Links > Error getting playbackLinks: %s", error.localizedDescription)
+      JewelLogger.recordStore.debug("💎 Playback Links > Error getting playbackLinks: \(error.localizedDescription)")
       throw error
     }
   }

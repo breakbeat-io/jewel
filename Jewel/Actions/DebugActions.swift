@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import os.log
 import MusicKit
 
 func debugUpdate(state: AppState, action: DebugAction) -> AppState {
@@ -25,7 +24,7 @@ func debugUpdate(state: AppState, action: DebugAction) -> AppState {
         let screenshotState = try decoder.decode(AppState.self, from: data)
         newState = screenshotState
       } catch {
-        os_log("💎 Screenshot Generator > Error with state: %s", error.localizedDescription)
+        JewelLogger.debugAction.debug("💎 Screenshot Generator > Error with state: \(error.localizedDescription)")
       }
     }
     
@@ -39,7 +38,7 @@ func debugUpdate(state: AppState, action: DebugAction) -> AppState {
         newState.search.results = searchResults
         
       } catch {
-        os_log("💎 Screenshot Generator > Error wtih search results: %s", error.localizedDescription)
+        JewelLogger.debugAction.debug("💎 Screenshot Generator > Error wtih search results: \(error.localizedDescription)")
       }
     }
 
