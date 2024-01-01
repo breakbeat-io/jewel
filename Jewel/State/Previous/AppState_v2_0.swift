@@ -11,6 +11,8 @@ import MusicKit
 
 struct AppState_v2_0: Codable {
   
+  static let versionKey = "jewelState"
+  
   var navigation = AppState_v2_0.Navigation()
   
   var settings: AppState_v2_0.Settings
