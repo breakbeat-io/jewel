@@ -1,5 +1,5 @@
 //
-//  OldAppState.swift
+//  AppStateV2p0.swift
 //  Stacks
 //
 //  Created by Greg Hepworth on 29/08/2023.
@@ -7,13 +7,14 @@
 //
 
 import Foundation
+import MusicKit
 
-struct OldAppState: Codable {
+struct AppStateV2p0: Codable {
   
-  var navigation = OldAppState.Navigation()
+  var navigation = AppStateV2p0.Navigation()
   
-  var settings: OldAppState.Settings
-  var library: OldAppState.Library
+  var settings: AppStateV2p0.Settings
+  var library: AppStateV2p0.Library
   var search = Search()
   
   enum CodingKeys: String, CodingKey {
@@ -85,10 +86,10 @@ struct OldAppState: Codable {
   
   struct Library: Codable {
     
-    var onRotation: OldAppState.Collection
+    var onRotation: AppStateV2p0.Collection
     
-    var collections: [OldAppState.Collection]
-    var cuedCollection: OldAppState.Library.SharedCollectionManager.ShareableCollection?
+    var collections: [AppStateV2p0.Collection]
+    var cuedCollection: AppStateV2p0.Library.SharedCollectionManager.ShareableCollection?
     
     class SharedCollectionManager {
       
@@ -97,7 +98,7 @@ struct OldAppState: Codable {
         let schemaVersion: Decimal = 1.1
         let collectionName: String
         let collectionCurator: String
-        let collection: [OldAppState.Library.SharedCollectionManager.ShareableSlot?]
+        let collection: [AppStateV2p0.Library.SharedCollectionManager.ShareableSlot?]
         
         enum CodingKeys: String, CodingKey {
           case schemaName = "sn"
@@ -109,7 +110,7 @@ struct OldAppState: Codable {
       }
       
       struct ShareableSlot: Codable {
-        let albumProvider: OldAppState.Library.SharedCollectionManager.ShareableSlot.AlbumProvider
+        let albumProvider: AppStateV2p0.Library.SharedCollectionManager.ShareableSlot.AlbumProvider
         let albumRef: String
         
         enum AlbumProvider: String, Codable {
@@ -126,13 +127,13 @@ struct OldAppState: Codable {
   
   struct Collection: Identifiable, Codable {
     var id = UUID()
-    var type: OldAppState.Collection.CollectionType
+    var type: AppStateV2p0.Collection.CollectionType
     var name: String
     var curator: String
-    var slots: [Slot] = {
-      var tmpSlots = [Slot]()
+    var slots: [AppStateV2p0.Slot] = {
+      var tmpSlots = [AppStateV2p0.Slot]()
       for _ in 0..<8 {
-        let slot = Slot()
+        let slot = AppStateV2p0.Slot()
         tmpSlots.append(slot)
       }
       return tmpSlots
@@ -144,6 +145,18 @@ struct OldAppState: Codable {
     enum CollectionType: String, Codable {
       case userCollection
       case sharedCollection
+    }
+  }
+  
+  struct Slot: Identifiable, Codable {
+    var id = UUID()
+    var album: Album?
+    var playbackLinks: OdesliResponse?
+    
+    enum CodingKeys: String, CodingKey {
+      case id
+      case album = "source"
+      case playbackLinks
     }
   }
   
