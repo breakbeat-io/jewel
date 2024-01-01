@@ -1,5 +1,5 @@
 //
-//  AppStateV2p0.swift
+//  AppState_v2_0.swift
 //  Stacks
 //
 //  Created by Greg Hepworth on 29/08/2023.
@@ -9,12 +9,12 @@
 import Foundation
 import MusicKit
 
-struct AppStateV2p0: Codable {
+struct AppState_v2_0: Codable {
   
-  var navigation = AppStateV2p0.Navigation()
+  var navigation = AppState_v2_0.Navigation()
   
-  var settings: AppStateV2p0.Settings
-  var library: AppStateV2p0.Library
+  var settings: AppState_v2_0.Settings
+  var library: AppState_v2_0.Library
   var search = Search()
   
   enum CodingKeys: String, CodingKey {
@@ -86,10 +86,10 @@ struct AppStateV2p0: Codable {
   
   struct Library: Codable {
     
-    var onRotation: AppStateV2p0.Collection
+    var onRotation: AppState_v2_0.Collection
     
-    var collections: [AppStateV2p0.Collection]
-    var cuedCollection: AppStateV2p0.Library.SharedCollectionManager.ShareableCollection?
+    var collections: [AppState_v2_0.Collection]
+    var cuedCollection: AppState_v2_0.Library.SharedCollectionManager.ShareableCollection?
     
     class SharedCollectionManager {
       
@@ -98,7 +98,7 @@ struct AppStateV2p0: Codable {
         let schemaVersion: Decimal = 1.1
         let collectionName: String
         let collectionCurator: String
-        let collection: [AppStateV2p0.Library.SharedCollectionManager.ShareableSlot?]
+        let collection: [AppState_v2_0.Library.SharedCollectionManager.ShareableSlot?]
         
         enum CodingKeys: String, CodingKey {
           case schemaName = "sn"
@@ -110,7 +110,7 @@ struct AppStateV2p0: Codable {
       }
       
       struct ShareableSlot: Codable {
-        let albumProvider: AppStateV2p0.Library.SharedCollectionManager.ShareableSlot.AlbumProvider
+        let albumProvider: AppState_v2_0.Library.SharedCollectionManager.ShareableSlot.AlbumProvider
         let albumRef: String
         
         enum AlbumProvider: String, Codable {
@@ -127,13 +127,13 @@ struct AppStateV2p0: Codable {
   
   struct Collection: Identifiable, Codable {
     var id = UUID()
-    var type: AppStateV2p0.Collection.CollectionType
+    var type: AppState_v2_0.Collection.CollectionType
     var name: String
     var curator: String
-    var slots: [AppStateV2p0.Slot] = {
-      var tmpSlots = [AppStateV2p0.Slot]()
+    var slots: [AppState_v2_0.Slot] = {
+      var tmpSlots = [AppState_v2_0.Slot]()
       for _ in 0..<8 {
-        let slot = AppStateV2p0.Slot()
+        let slot = AppState_v2_0.Slot()
         tmpSlots.append(slot)
       }
       return tmpSlots

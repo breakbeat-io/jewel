@@ -1,5 +1,5 @@
 //
-//  AppStateV2p1.swift
+//  AppState_v2_1.swift
 //  Stacks
 //
 //  Created by Greg Hepworth on 01/01/2024.
@@ -9,12 +9,12 @@
 import Foundation
 import MusicKit
 
-struct AppStateV2p1: Codable {
+struct AppState_v2_1: Codable {
   
-  var navigation = AppStateV2p1.Navigation()
+  var navigation = AppState_v2_1.Navigation()
   
-  var settings: AppStateV2p1.Settings
-  var library: AppStateV2p1.Library
+  var settings: AppState_v2_1.Settings
+  var library: AppState_v2_1.Library
   var search = Search()
   
   enum CodingKeys: String, CodingKey {
@@ -82,8 +82,8 @@ struct AppStateV2p1: Codable {
   
   struct Library: Codable {
     
-    var onRotation: AppStateV2p1.Collection
-    var collections: [AppStateV2p1.Collection]
+    var onRotation: AppState_v2_1.Collection
+    var collections: [AppState_v2_1.Collection]
     
     enum CodingKeys: CodingKey {
       case onRotation
@@ -94,10 +94,10 @@ struct AppStateV2p1: Codable {
   struct Collection: Identifiable, Codable {
     var id = UUID()
     var name: String
-    var slots: [AppStateV2p1.Slot] = {
-      var tmpSlots = [AppStateV2p1.Slot]()
+    var slots: [AppState_v2_1.Slot] = {
+      var tmpSlots = [AppState_v2_1.Slot]()
       for _ in 0..<8 {
-        let slot = AppStateV2p1.Slot()
+        let slot = AppState_v2_1.Slot()
         tmpSlots.append(slot)
       }
       return tmpSlots
