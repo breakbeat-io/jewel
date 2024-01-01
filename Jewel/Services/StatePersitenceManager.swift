@@ -10,14 +10,12 @@ import Foundation
 
 struct StatePersitenceManager {
   
-  private static let stateVersionKey = "jewelState_v3_0"
-  
   static func save(_ state: AppState) {
     do {
       let encoder = JSONEncoder()
       encoder.keyEncodingStrategy = .convertToSnakeCase
       let encodedState = try encoder.encode(state)
-      UserDefaults.standard.set(encodedState, forKey: stateVersionKey)
+      UserDefaults.standard.set(encodedState, forKey: AppState.versionKey)
     } catch {
       JewelLogger.persistence.debug("💎 Persistence > Error saving state: \(error.localizedDescription)")
     }
@@ -34,7 +32,7 @@ struct StatePersitenceManager {
   static func savedState() -> AppState? {
     
     JewelLogger.persistence.info("💎 Persistence > Looking for a current saved state")
-    guard let savedState = UserDefaults.standard.object(forKey: stateVersionKey) as? Data else {
+    guard let savedState = UserDefaults.standard.object(forKey: AppState.versionKey) as? Data else {
       JewelLogger.persistence.info("💎 Persistence > No current saved state found")
       return nil
     }
@@ -79,7 +77,7 @@ struct StatePersitenceManager {
     private static func migrate_v2_1_to_v3_0() {
       
       JewelLogger.persistence.info("💎 Persistence > Looking for a v2.1 saved state")
-      guard let v2_1_StateData = UserDefaults.standard.object(forKey: "jewelState_2_1") as? Data else {
+      guard let v2_1_StateData = UserDefaults.standard.object(forKey: AppState_v2_1.versionKey) as? Data else {
         JewelLogger.persistence.info("💎 Persistence > No v2.1 saved state found")
         return
       }
@@ -130,10 +128,10 @@ struct StatePersitenceManager {
         let encoder = JSONEncoder()
         encoder.keyEncodingStrategy = .convertToSnakeCase
         let encodedState = try encoder.encode(v3_0_State)
-        UserDefaults.standard.set(encodedState, forKey: stateVersionKey)
+        UserDefaults.standard.set(encodedState, forKey: AppState.versionKey)
         
         JewelLogger.persistence.info("💎 Persistence > Migration successful, deleting v2.1 saved state")
-        UserDefaults.standard.removeObject(forKey: "jewelState_2_1")
+        UserDefaults.standard.removeObject(forKey: AppState_v2_1.versionKey)
         
         UserDefaults.standard.synchronize()
         
@@ -141,7 +139,7 @@ struct StatePersitenceManager {
         JewelLogger.persistence.debug("💎 Persistence > Error migrating a v2.1 state: \(error.localizedDescription)")
         // Something's gone wrong and we haven't handled it, but now a new state will be created and take precedence
         // so to avoid future problems we should remove the remnants of the old state.
-        UserDefaults.standard.removeObject(forKey: "jewelState_2_1")
+        UserDefaults.standard.removeObject(forKey: AppState_v2_1.versionKey)
       }
       
     }
@@ -150,7 +148,7 @@ struct StatePersitenceManager {
       
       JewelLogger.persistence.info("💎 Persistence > Looking for a v2.0 saved state")
       
-      guard let v2_0_StateData = UserDefaults.standard.object(forKey: "jewelState") as? Data else {
+      guard let v2_0_StateData = UserDefaults.standard.object(forKey: AppState_v2_0.versionKey) as? Data else {
         JewelLogger.persistence.info("💎 Persistence > No v2.0 saved state found")
         return
       }
@@ -202,10 +200,10 @@ struct StatePersitenceManager {
         let encoder = JSONEncoder()
         encoder.keyEncodingStrategy = .convertToSnakeCase
         let encodedState = try encoder.encode(v2_1_State)
-        UserDefaults.standard.set(encodedState, forKey: "jewelState_2_1")
+        UserDefaults.standard.set(encodedState, forKey: AppState_v2_1.versionKey)
         
         JewelLogger.persistence.info("💎 Persistence > Migration successful, deleting v2.0 saved state")
-        UserDefaults.standard.removeObject(forKey: "jewelState")
+        UserDefaults.standard.removeObject(forKey: AppState_v2_0.versionKey)
         
         UserDefaults.standard.synchronize()
         
@@ -213,7 +211,7 @@ struct StatePersitenceManager {
         JewelLogger.persistence.debug("💎 Persistence > Error migrating a v2.0 state: \(error.localizedDescription)")
         // Something's gone wrong and we haven't handled it, but now a new state will be created and take precedence
         // so to avoid future problems we should remove the remnants of the old state.
-        UserDefaults.standard.removeObject(forKey: "jewelState")
+        UserDefaults.standard.removeObject(forKey: AppState_v2_0.versionKey)
       }
       
     }
