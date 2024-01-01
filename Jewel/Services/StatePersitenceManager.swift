@@ -10,7 +10,7 @@ import Foundation
 
 struct StatePersitenceManager {
   
-  private static let stateVersionKey = "jewelState_3_0"
+  private static let stateVersionKey = "jewelState_v3_0"
   
   static func save(_ state: AppState) {
     do {
@@ -32,7 +32,7 @@ struct StatePersitenceManager {
   }
   
   static func savedState() -> AppState? {
-
+    
     JewelLogger.persistence.info("💎 Persistence > Looking for a current saved state")
     guard let savedState = UserDefaults.standard.object(forKey: stateVersionKey) as? Data else {
       JewelLogger.persistence.info("💎 Persistence > No current saved state found")
@@ -70,16 +70,16 @@ struct StatePersitenceManager {
   struct StateMigrations {
     
     fileprivate static func runMigrations() {
-      migrateV2p0ToV2p1()
-      migrateV2p1ToV3p0()
+      migrate_v2_0_to_v2_1()
+      migrate_v2_1_to_v3_0()
       
       UserDefaults.standard.synchronize()
     }
     
-    private static func migrateV2p1ToV3p0() {
+    private static func migrate_v2_1_to_v3_0() {
       
       JewelLogger.persistence.info("💎 Persistence > Looking for a v2.1 saved state")
-      guard let v2p1StateData = UserDefaults.standard.object(forKey: "jewelState_2_1") as? Data else {
+      guard let v2_1_StateData = UserDefaults.standard.object(forKey: "jewelState_2_1") as? Data else {
         JewelLogger.persistence.info("💎 Persistence > No v2.1 saved state found")
         return
       }
@@ -89,47 +89,47 @@ struct StatePersitenceManager {
       do {
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
-        let v2p1State = try decoder.decode(AppStateV2p1.self, from: v2p1StateData)
+        let v2_1_State = try decoder.decode(AppState_v2_1.self, from: v2_1_StateData)
         
-        let v3p0Settings = Settings(preferredMusicPlatform: v2p1State.settings.preferredMusicPlatform, firstTimeRun: false)
+        let migratedSettings = Settings(preferredMusicPlatform: v2_1_State.settings.preferredMusicPlatform, firstTimeRun: false)
         
-        var v3p0OnRotationSlots = [Slot]()
-        for v2p1OnRotationSlot in v2p1State.library.onRotation.slots {
-          let v3p0OnRotationSlot = Slot(id: v2p1OnRotationSlot.id,
-                                        album: v2p1OnRotationSlot.album,
-                                        playbackLinks: v2p1OnRotationSlot.playbackLinks)
-          v3p0OnRotationSlots.append(v3p0OnRotationSlot)
+        var migratedOnRotationSlots = [Slot]()
+        for oldSlot in v2_1_State.library.onRotation.slots {
+          let migratedSlot = Slot(id: oldSlot.id,
+                                  album: oldSlot.album,
+                                  playbackLinks: oldSlot.playbackLinks)
+          migratedOnRotationSlots.append(migratedSlot)
         }
         
-        let v3p0OnRotationStack = Stack(id: v2p1State.library.onRotation.id,
-                                        name: v2p1State.library.onRotation.name,
-                                        slots: v3p0OnRotationSlots)
+        let migratedOnRotationStack = Stack(id: v2_1_State.library.onRotation.id,
+                                            name: v2_1_State.library.onRotation.name,
+                                            slots: migratedOnRotationSlots)
         
-        var v3p0Stacks = [Stack]()
-        for v2p1Collection in v2p1State.library.collections {
-          var v3p0StackSlots = [Slot]()
-          for v2p1CollectionSlot in v2p1Collection.slots {
-            let v3p0StackSlot = Slot(id: v2p1CollectionSlot.id,
-                                     album: v2p1CollectionSlot.album,
-                                     playbackLinks: v2p1CollectionSlot.playbackLinks)
-            v3p0StackSlots.append(v3p0StackSlot)
+        var migratedLibraryStacks = [Stack]()
+        for oldCollection in v2_1_State.library.collections {
+          var migratedCollectionSlots = [Slot]()
+          for oldSlot in oldCollection.slots {
+            let migratedSlot = Slot(id: oldSlot.id,
+                                    album: oldSlot.album,
+                                    playbackLinks: oldSlot.playbackLinks)
+            migratedCollectionSlots.append(migratedSlot)
           }
           
-          let v3p0Stack = Stack(id: v2p1Collection.id,
-                                name: v2p1Collection.name,
-                                slots: v3p0StackSlots)
-          v3p0Stacks.append(v3p0Stack)
+          let migratedStack = Stack(id: oldCollection.id,
+                                    name: oldCollection.name,
+                                    slots: migratedCollectionSlots)
+          migratedLibraryStacks.append(migratedStack)
         }
         
-        let v3p0Library = Library(onRotation: v3p0OnRotationStack,
-                                     stacks: v3p0Stacks)
+        let migratedLibrary = Library(onRotation: migratedOnRotationStack,
+                                      stacks: migratedLibraryStacks)
         
-        let v3p0State = AppState(settings: v3p0Settings,
-                                    library: v3p0Library)
+        let v3_0_State = AppState(settings: migratedSettings,
+                                  library: migratedLibrary)
         
         let encoder = JSONEncoder()
         encoder.keyEncodingStrategy = .convertToSnakeCase
-        let encodedState = try encoder.encode(v3p0State)
+        let encodedState = try encoder.encode(v3_0_State)
         UserDefaults.standard.set(encodedState, forKey: stateVersionKey)
         
         JewelLogger.persistence.info("💎 Persistence > Migration successful, deleting v2.1 saved state")
@@ -146,11 +146,11 @@ struct StatePersitenceManager {
       
     }
     
-    private static func migrateV2p0ToV2p1() {
+    private static func migrate_v2_0_to_v2_1() {
       
       JewelLogger.persistence.info("💎 Persistence > Looking for a v2.0 saved state")
       
-      guard let v2p0StateData = UserDefaults.standard.object(forKey: "jewelState") as? Data else {
+      guard let v2_0_StateData = UserDefaults.standard.object(forKey: "jewelState") as? Data else {
         JewelLogger.persistence.info("💎 Persistence > No v2.0 saved state found")
         return
       }
@@ -160,48 +160,48 @@ struct StatePersitenceManager {
       do {
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
-        let v2p0State = try decoder.decode(AppStateV2p0.self, from: v2p0StateData)
+        let v2_0_State = try decoder.decode(AppState_v2_0.self, from: v2_0_StateData)
         
-        let v2p1Settings = AppStateV2p1.Settings(preferredMusicPlatform: OdesliPlatform.allCases[v2p0State.settings.preferredMusicPlatform],
-                                                 firstTimeRun: false)
+        let migratedSettings = AppState_v2_1.Settings(preferredMusicPlatform: OdesliPlatform.allCases[v2_0_State.settings.preferredMusicPlatform],
+                                                      firstTimeRun: false)
         
-        var v2p1OnRotationSlots = [AppStateV2p1.Slot]()
-        for v2p0OnRotationSlot in v2p0State.library.onRotation.slots {
-          let v2p1OnRotationSlot = AppStateV2p1.Slot(id: v2p0OnRotationSlot.id,
-                                       album: v2p0OnRotationSlot.album,
-                                       playbackLinks: v2p0OnRotationSlot.playbackLinks)
-          v2p1OnRotationSlots.append(v2p1OnRotationSlot)
+        var migratedOnRotationSlots = [AppState_v2_1.Slot]()
+        for oldSlot in v2_0_State.library.onRotation.slots {
+          let migratedSlot = AppState_v2_1.Slot(id: oldSlot.id,
+                                                album: oldSlot.album,
+                                                playbackLinks: oldSlot.playbackLinks)
+          migratedOnRotationSlots.append(migratedSlot)
         }
-
-        let v2p1OnRotation = AppStateV2p1.Collection(id: v2p0State.library.onRotation.id,
-                                                    name: v2p0State.library.onRotation.name,
-                                                    slots: v2p1OnRotationSlots)
         
-        var v2p1Collections = [AppStateV2p1.Collection]()
-        for v2p0Collection in v2p0State.library.collections {
-          var v2p1CollectionSlots = [AppStateV2p1.Slot]()
-          for v2p0CollectionSlot in v2p0Collection.slots {
-            let v2p1CollectionSlot = AppStateV2p1.Slot(id: v2p0CollectionSlot.id,
-                                                       album: v2p0CollectionSlot.album,
-                                                       playbackLinks: v2p0CollectionSlot.playbackLinks)
-            v2p1CollectionSlots.append(v2p1CollectionSlot)
+        let migratedOnRotationCollection = AppState_v2_1.Collection(id: v2_0_State.library.onRotation.id,
+                                                                    name: v2_0_State.library.onRotation.name,
+                                                                    slots: migratedOnRotationSlots)
+        
+        var migratedLibraryCollections = [AppState_v2_1.Collection]()
+        for oldCollection in v2_0_State.library.collections {
+          var migratedCollectionSlots = [AppState_v2_1.Slot]()
+          for oldSlot in oldCollection.slots {
+            let migratedSlot = AppState_v2_1.Slot(id: oldSlot.id,
+                                                  album: oldSlot.album,
+                                                  playbackLinks: oldSlot.playbackLinks)
+            migratedCollectionSlots.append(migratedSlot)
           }
-          let v2p1Collection = AppStateV2p1.Collection(id: v2p0Collection.id,
-                                                       name: v2p0Collection.name,
-                                                       slots: v2p1CollectionSlots)
-          v2p1Collections.append(v2p1Collection)
+          let migratedCollection = AppState_v2_1.Collection(id: oldCollection.id,
+                                                            name: oldCollection.name,
+                                                            slots: migratedCollectionSlots)
+          migratedLibraryCollections.append(migratedCollection)
         }
         
-        let v2p1Library = AppStateV2p1.Library(onRotation: v2p1OnRotation,
-                                               collections: v2p1Collections)
-
-        let v2p1State = AppStateV2p1(settings: v2p1Settings,
-                                     library: v2p1Library)
+        let migratedLibrary = AppState_v2_1.Library(onRotation: migratedOnRotationCollection,
+                                                    collections: migratedLibraryCollections)
         
-
+        let v2_1_State = AppState_v2_1(settings: migratedSettings,
+                                       library: migratedLibrary)
+        
+        
         let encoder = JSONEncoder()
         encoder.keyEncodingStrategy = .convertToSnakeCase
-        let encodedState = try encoder.encode(v2p1State)
+        let encodedState = try encoder.encode(v2_1_State)
         UserDefaults.standard.set(encodedState, forKey: "jewelState_2_1")
         
         JewelLogger.persistence.info("💎 Persistence > Migration successful, deleting v2.0 saved state")
