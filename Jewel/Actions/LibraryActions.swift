@@ -9,87 +9,6 @@
 import Foundation
 import MusicKit
 
-func updateLibrary(library: Library, action: LibraryAction) -> Library {
-  
-  func extractStack(stackId: UUID) -> Stack? {
-    if newLibrary.onRotation.id == stackId {
-      return newLibrary.onRotation
-    } else if let stackIndex = newLibrary.stacks.firstIndex(where: { $0.id == stackId }) {
-      return newLibrary.stacks[stackIndex]
-    }
-    return nil
-  }
-  
-  func commitStack(stack: Stack) {
-    if stack.id == newLibrary.onRotation.id {
-      newLibrary.onRotation = stack
-    } else if let stackIndex = newLibrary.stacks.firstIndex(where: { $0.id == stack.id }) {
-      newLibrary.stacks[stackIndex] = stack
-    }
-  }
-  
-  var newLibrary = library
-  
-  switch action {
-    
-  case let .setStackName(name, stackId):
-    if var stack = extractStack(stackId: stackId) {
-      stack.name = name
-      commitStack(stack: stack)
-    }
-    
-  case let .addAlbumToSlot(album, slotIndex, stackId):
-    if var stack = extractStack(stackId: stackId) {
-      stack.slots[slotIndex].album = album
-      commitStack(stack: stack)
-    }
-    
-  case let .removeAlbumFromSlot(slotIndex, stackId):
-    if var stack = extractStack(stackId: stackId) {
-      stack.slots[slotIndex] = Slot()
-      commitStack(stack: stack)
-    }
-    
-  case let .saveOnRotation(stack):
-    let formatter = DateFormatter()
-    formatter.dateFormat = "dd MMM ''yy"
-    let dateString = formatter.string(from: Date())
-    var newStack = stack
-    newStack.id = UUID()
-    newStack.name = "\(Navigation.Tab.onRotation.rawValue) (\(dateString))"
-    newLibrary.stacks.insert(newStack, at: 0)
-    
-  case .createStack:
-    let newStack = Stack(name: "New Stack")
-    newLibrary.stacks.insert(newStack, at: 0)
-    
-  case let .addStack(stack):
-    newLibrary.stacks.insert(stack, at: 0)
-    
-  case let .duplicateStack(stack):
-    var duplicatedStack = stack
-    duplicatedStack.id = UUID()
-    duplicatedStack.name = "Copy of \(stack.name)"
-    newLibrary.stacks.insert(duplicatedStack, at: 0)
-    
-  case let .removeStack(stackId):
-    newLibrary.stacks.removeAll(where: { $0.id == stackId })
-    
-  case let .setPlaybackLinks(baseUrl, playbackLinks, stackId):
-    if var stack = extractStack(stackId: stackId) {
-      let indices = stack.slots.enumerated().compactMap({ $1.album?.url == baseUrl ? $0 : nil })
-      for i in indices {
-        stack.slots[i].playbackLinks = playbackLinks
-      }
-      commitStack(stack: stack)
-    }
-    
-  }
-  
-  return newLibrary
-  
-}
-
 enum LibraryAction: AppAction {
   
   case setStackName(name: String, stackId: UUID)
@@ -133,5 +52,86 @@ enum LibraryAction: AppAction {
       return "\(type(of: self)): Removing stack \(stackId) from the Library"
       
     }
+  }
+  
+  func update(state: AppState) -> AppState {
+    
+    var newState = state
+    
+    func extractStack(stackId: UUID) -> Stack? {
+      if newState.library.onRotation.id == stackId {
+        return newState.library.onRotation
+      } else if let stackIndex = newState.library.stacks.firstIndex(where: { $0.id == stackId }) {
+        return newState.library.stacks[stackIndex]
+      }
+      return nil
+    }
+    
+    func commitStack(stack: Stack) {
+      if stack.id == newState.library.onRotation.id {
+        newState.library.onRotation = stack
+      } else if let stackIndex = newState.library.stacks.firstIndex(where: { $0.id == stack.id }) {
+        newState.library.stacks[stackIndex] = stack
+      }
+    }
+    
+    switch self {
+      
+    case let .setStackName(name, stackId):
+      if var stack = extractStack(stackId: stackId) {
+        stack.name = name
+        commitStack(stack: stack)
+      }
+      
+    case let .addAlbumToSlot(album, slotIndex, stackId):
+      if var stack = extractStack(stackId: stackId) {
+        stack.slots[slotIndex].album = album
+        commitStack(stack: stack)
+      }
+      
+    case let .removeAlbumFromSlot(slotIndex, stackId):
+      if var stack = extractStack(stackId: stackId) {
+        stack.slots[slotIndex] = Slot()
+        commitStack(stack: stack)
+      }
+      
+    case let .saveOnRotation(stack):
+      let formatter = DateFormatter()
+      formatter.dateFormat = "dd MMM ''yy"
+      let dateString = formatter.string(from: Date())
+      var newStack = stack
+      newStack.id = UUID()
+      newStack.name = "\(Navigation.Tab.onRotation.rawValue) (\(dateString))"
+      newState.library.stacks.insert(newStack, at: 0)
+      
+    case .createStack:
+      let newStack = Stack(name: "New Stack")
+      newState.library.stacks.insert(newStack, at: 0)
+      
+    case let .addStack(stack):
+      newState.library.stacks.insert(stack, at: 0)
+      
+    case let .duplicateStack(stack):
+      var duplicatedStack = stack
+      duplicatedStack.id = UUID()
+      duplicatedStack.name = "Copy of \(stack.name)"
+      newState.library.stacks.insert(duplicatedStack, at: 0)
+      
+    case let .removeStack(stackId):
+      newState.library.stacks.removeAll(where: { $0.id == stackId })
+      
+    case let .setPlaybackLinks(baseUrl, playbackLinks, stackId):
+      if var stack = extractStack(stackId: stackId) {
+        let indices = stack.slots.enumerated().compactMap({ $1.album?.url == baseUrl ? $0 : nil })
+        for i in indices {
+          stack.slots[i].playbackLinks = playbackLinks
+        }
+        commitStack(stack: stack)
+      }
+      
+    }
+    
+    return newState
+    
   }
 }

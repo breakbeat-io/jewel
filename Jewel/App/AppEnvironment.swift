@@ -24,7 +24,9 @@ final class AppEnvironment: ObservableObject {
   }
   
   @MainActor public func update(action: AppAction) {
-    state = updateState(appState: state, action: action)
+    let newState = action.update(state: state)
+    JewelLogger.stateUpdate.info("💎 State Update > \(action.description)")
+    state = newState
   }
   
 }

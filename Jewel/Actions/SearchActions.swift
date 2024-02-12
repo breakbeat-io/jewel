@@ -9,24 +9,6 @@
 import Foundation
 import MusicKit
 
-func updateSearch(search: Search, action: SearchAction) -> Search {
-  
-  var newSearch = search
-  
-  switch action {
-    
-  case let .populateSearchResults(results):
-    newSearch.results = results
-    
-  case .removeSearchResults:
-    newSearch.results = nil
-    
-  }
-  
-  return newSearch
-}
-
-
 enum SearchAction: AppAction {
   
   case populateSearchResults(results: MusicItemCollection<Album>)
@@ -40,4 +22,22 @@ enum SearchAction: AppAction {
       return "\(type(of: self)): Removing search results"
     }
   }
+  
+  func update(state: AppState) -> AppState {
+    
+    var newState = state
+    
+    switch self {
+      
+    case let .populateSearchResults(results):
+      newState.search.results = results
+      
+    case .removeSearchResults:
+      newState.search.results = nil
+      
+    }
+    
+    return newState
+  }
+  
 }
