@@ -10,7 +10,7 @@ import Foundation
 
 protocol AppAction {
   var description: String { get }
-  func update(state: AppState) -> AppState
+  func update(_ state: AppState) -> AppState
 }
 
 
